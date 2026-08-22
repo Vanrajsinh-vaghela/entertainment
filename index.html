@@ -1,31 +1,40 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="hi" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Latest Hindi Movies, OTT Releases, Trailers & Entertainment News | Gujarat Fast Alert</title>
-
-  <meta name="description"
-    content="Latest Hindi movies, OTT releases, movie trailers, web series, Bollywood updates and entertainment news Hindi mein.">
-
+  <title>Gujarat Fast Alert - Latest Hindi OTT Releases, Movies & Web Series</title>
+  <meta name="description" content="Latest Hindi movies, OTT releases, web series, trailers aur streaming updates Hindi mein. Janiye kab aur kahan dekhein nayi releases.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#09090b">
 
-  <!-- Open Graph -->
+  <!-- Open Graph Meta Tags -->
   <meta property="og:type" content="website">
-  <meta property="og:title"
-    content="Gujarat Fast Alert Entertainment">
-  <meta property="og:description"
-    content="Latest Hindi Movies, OTT Releases, Trailers & Entertainment News">
-  <meta property="og:image"
-    content="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1200">
+  <meta property="og:title" content="Gujarat Fast Alert Entertainment">
+  <meta property="og:description" content="Latest Hindi OTT Releases, Movies & Streaming Updates">
+  <meta property="og:image" content="/images/mirzapur-3-ott.webp">
 
-  <!-- Tailwind -->
+  <!-- WebSite Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Gujarat Fast Alert Entertainment",
+    "url": "https://your-domain.pages.dev/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://your-domain.pages.dev/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           colors: {
@@ -42,2087 +51,401 @@
     html {
       scroll-behavior: smooth;
     }
-
     body {
-      background: #09090b;
+      background-color: #09090b;
     }
-
     .hide-scrollbar::-webkit-scrollbar {
       display: none;
     }
-
     .hide-scrollbar {
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
-
-    /* Slider */
     .slider-track {
       display: flex;
       height: 100%;
       transition: transform 0.55s ease-in-out;
     }
-
     .slide {
       min-width: 100%;
       height: 100%;
       position: relative;
     }
-
     .slide-image {
       transition: transform 5s linear;
     }
-
     .slide.active .slide-image {
       transform: scale(1.04);
     }
-
     .story-card {
       transition: transform .2s ease, border-color .2s ease;
     }
-
     .story-card:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px);
       border-color: #3f3f46;
     }
-
-    .story-card img {
-      transition: transform .3s ease;
-    }
-
-    .story-card:hover img {
-      transform: scale(1.04);
-    }
-
-    /* Mobile slider height */
     @media (max-width: 640px) {
       .hero-slider {
-        height: 520px;
+        height: 500px;
       }
     }
-
     @media (min-width: 641px) {
       .hero-slider {
-        height: 470px;
+        height: 440px;
       }
     }
   </style>
 </head>
 
+<body class="bg-bgmain text-white antialiased font-sans">
 
-<body class="bg-bgmain text-white antialiased">
+  <!-- ==================== HEADER ==================== -->
+  <header class="sticky top-0 z-50 bg-black/95 backdrop-blur border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="h-16 flex items-center justify-between gap-4">
+        
+        <!-- Logo -->
+        <a href="/" class="shrink-0">
+          <div class="text-xl md:text-2xl font-black tracking-tight">
+            <span class="text-brand">GUJARAT</span> FAST ALERT
+          </div>
+          <div class="text-[9px] text-slate-500 font-bold tracking-[0.22em] -mt-1">
+            ENTERTAINMENT
+          </div>
+        </a>
 
+        <!-- Category Badges / Filters -->
+        <nav class="hidden md:flex gap-2 text-xs font-bold">
+          <a href="#aaj-release" class="bg-brand px-3.5 py-1.5 rounded-full text-white">Aaj Ki Releases</a>
+          <a href="#netflix" class="bg-white/5 hover:bg-white/10 px-3.5 py-1.5 rounded-full">Netflix</a>
+          <a href="#prime" class="bg-white/5 hover:bg-white/10 px-3.5 py-1.5 rounded-full">Prime Video</a>
+          <a href="#jiocinema" class="bg-white/5 hover:bg-white/10 px-3.5 py-1.5 rounded-full">JioHotstar</a>
+          <a href="#upcoming" class="bg-white/5 hover:bg-white/10 px-3.5 py-1.5 rounded-full">Upcoming</a>
+        </nav>
 
-<!-- =========================================================
-     HEADER
-========================================================= -->
-
-<header class="sticky top-0 z-50 bg-black/95 backdrop-blur-xl border-b border-white/10">
-
-  <div class="max-w-7xl mx-auto px-4">
-
-    <div class="h-16 flex items-center gap-5">
-
-      <!-- LOGO -->
-
-      <a href="/" class="shrink-0">
-
-        <div class="text-xl md:text-2xl font-black tracking-tight">
-          <span class="text-brand">GUJARAT</span>
-          <span> FAST ALERT</span>
-        </div>
-
-        <div class="text-[9px] text-slate-500 font-bold tracking-[0.22em]">
-          ENTERTAINMENT
-        </div>
-
-      </a>
-
-
-      <!-- SEARCH -->
-
-      <div class="hidden md:block flex-1 max-w-xl mx-auto">
-
-        <div class="relative">
-
-          <input
-            type="search"
-            aria-label="Search entertainment"
-            placeholder="Movie, actor, trailer ya web series search karein..."
-            class="w-full bg-white/5 border border-white/10 rounded-full
-                   py-2.5 px-5 pl-11 text-sm
-                   placeholder:text-slate-500
-                   outline-none
-                   focus:border-brand
-                   focus:ring-1
-                   focus:ring-brand">
-
-          <span class="absolute left-4 top-2.5 text-slate-500">
-            🔍
-          </span>
-
-        </div>
-
+        <!-- Social Community CTA -->
+        <a href="https://t.me/" target="_blank" class="bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5">
+          <span>Telegram</span>
+        </a>
       </div>
 
-
-      <!-- MOBILE SEARCH -->
-
-      <button
-        type="button"
-        class="md:hidden ml-auto text-xl"
-        aria-label="Search">
-        🔍
-      </button>
-
+      <!-- Mobile Scrolling Nav -->
+      <div class="md:hidden flex gap-2 overflow-x-auto hide-scrollbar pb-3 text-xs font-bold border-t border-white/5 pt-2">
+        <a href="#aaj-release" class="shrink-0 bg-brand px-3 py-1 rounded-full text-white">Aaj Ki Releases</a>
+        <a href="#netflix" class="shrink-0 bg-white/5 px-3 py-1 rounded-full">Netflix</a>
+        <a href="#prime" class="shrink-0 bg-white/5 px-3 py-1 rounded-full">Prime Video</a>
+        <a href="#jiocinema" class="shrink-0 bg-white/5 px-3 py-1 rounded-full">JioHotstar</a>
+        <a href="#upcoming" class="shrink-0 bg-white/5 px-3 py-1 rounded-full">Upcoming</a>
+      </div>
     </div>
+  </header>
 
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="max-w-7xl mx-auto px-4 py-6 space-y-12">
 
-    <!-- NAV -->
+    <!-- Hero Slider (Top 3 Big Releases) -->
+    <section id="top-stories" class="hero-slider relative overflow-hidden rounded-3xl border border-white/10 bg-black touch-pan-y">
+      
+      <div id="sliderTrack" class="slider-track">
+        
+        <!-- Slide 1: Live Connected Article -->
+        <article class="slide active">
+          <img src="/images/mirzapur-3-ott.webp" alt="Mirzapur Season 3 OTT Release" class="slide-image absolute inset-0 w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-transparent"></div>
+          
+          <div class="relative z-10 h-full flex items-end">
+            <div class="p-6 md:p-10 max-w-2xl pb-16">
+              <div class="flex gap-2 mb-3">
+                <span class="bg-blue-600 text-white text-[10px] font-black px-2.5 py-1 rounded-md">PRIME VIDEO</span>
+                <span class="bg-white/10 text-[10px] font-bold px-2.5 py-1 rounded-md">TRENDING NOW</span>
+              </div>
+              <h1 class="text-2xl md:text-4xl font-black leading-tight text-white">
+                Mirzapur Season 3 OTT Release: Kab Aur Kahan Dekhein, Star Cast Aur Story
+              </h1>
+              <p class="mt-2 text-slate-300 text-xs md:text-sm line-clamp-2">
+                Munna Bhaiya ke ant ke baad Guddu Pandit aur Golu Gupta ka kabza ho chuka hai. Purvanchal ki siyasat ka naya chapter shuru.
+              </p>
+              <div class="mt-5">
+                <a href="/posts/mirzapur-3-ott-release.html" class="inline-block bg-white text-black font-black text-xs md:text-sm px-5 py-2.5 rounded-xl hover:bg-slate-200 transition">
+                  Puri Details Padhein &rarr;
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
 
-    <nav
-      class="flex gap-2 overflow-x-auto hide-scrollbar pb-3 text-xs font-bold">
+        <!-- Slide 2: Placeholder Release -->
+        <article class="slide">
+          <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=1600&auto=format&fit=crop&q=80" alt="Stree 2 OTT Update" class="slide-image absolute inset-0 w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-transparent"></div>
+          
+          <div class="relative z-10 h-full flex items-end">
+            <div class="p-6 md:p-10 max-w-2xl pb-16">
+              <div class="flex gap-2 mb-3">
+                <span class="bg-brand text-white text-[10px] font-black px-2.5 py-1 rounded-md">HOTSTAR / NETFLIX</span>
+                <span class="bg-white/10 text-[10px] font-bold px-2.5 py-1 rounded-md">BLOCKBUSTER</span>
+              </div>
+              <h2 class="text-2xl md:text-4xl font-black leading-tight text-white">
+                Stree 2 OTT Release Date: Kab Online Stream Hogi Ye Film?
+              </h2>
+              <p class="mt-2 text-slate-300 text-xs md:text-sm line-clamp-2">
+                Box office par dhoom machane ke baad OTT release ko lekar aayi badi update.
+              </p>
+              <div class="mt-5">
+                <a href="#" class="inline-block bg-white text-black font-black text-xs md:text-sm px-5 py-2.5 rounded-xl hover:bg-slate-200 transition">
+                  Update Dekhein &rarr;
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
 
-      <a
-        href="/"
-        class="shrink-0 bg-brand px-4 py-2 rounded-full">
-        Home
-      </a>
-
-      <a
-        href="#trending"
-        class="shrink-0 bg-white/5 hover:bg-white/10 px-4 py-2 rounded-full">
-        Trending
-      </a>
-
-      <a
-        href="#movies"
-        class="shrink-0 bg-white/5 hover:bg-white/10 px-4 py-2 rounded-full">
-        Movies
-      </a>
-
-      <a
-        href="#trailers"
-        class="shrink-0 bg-white/5 hover:bg-white/10 px-4 py-2 rounded-full">
-        Trailers
-      </a>
-
-      <a
-        href="#ott"
-        class="shrink-0 bg-white/5 hover:bg-white/10 px-4 py-2 rounded-full">
-        OTT
-      </a>
-
-      <a
-        href="#web-series"
-        class="shrink-0 bg-white/5 hover:bg-white/10 px-4 py-2 rounded-full">
-        Web Series
-      </a>
-
-      <a
-        href="#news"
-        class="shrink-0 bg-white/5 hover:bg-white/10 px-4 py-2 rounded-full">
-        Entertainment News
-      </a>
-
-    </nav>
-
-  </div>
-
-</header>
-
-
-
-<!-- =========================================================
-     MAIN
-========================================================= -->
-
-<main class="max-w-7xl mx-auto px-4 py-6 space-y-12">
-
-
-<!-- =========================================================
-     PAGE INTRO
-========================================================= -->
-
-<section>
-
-  <p class="text-brand text-xs font-black uppercase tracking-widest mb-2">
-    Hindi Entertainment
-  </p>
-
-  <h1 class="text-3xl md:text-5xl font-black leading-tight">
-    Latest Hindi Movies, OTT Releases,
-    Trailers & Entertainment News
-  </h1>
-
-  <p class="text-slate-400 mt-3 max-w-3xl text-sm md:text-base leading-relaxed">
-    Bollywood movies, new trailers, OTT releases, web series,
-    celebrity updates aur entertainment ki latest khabrein Hindi mein.
-  </p>
-
-</section>
-
-
-
-<!-- =========================================================
-     TOP STORIES — HERO SLIDER
-========================================================= -->
-
-<section
-  id="top-stories"
-  class="hero-slider relative overflow-hidden rounded-3xl
-         border border-white/10 bg-black
-         touch-pan-y"
-  aria-label="Top entertainment stories">
-
-
-  <!-- SLIDER TRACK -->
-
-  <div id="sliderTrack" class="slider-track">
-
-
-    <!-- =====================================================
-         SLIDE 1
-    ====================================================== -->
-
-    <article class="slide active">
-
-      <img
-        src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600&auto=format&fit=crop&q=85"
-        alt="Latest Hindi movie update"
-        class="slide-image absolute inset-0 w-full h-full object-cover"
-      >
-
-      <div class="absolute inset-0
-                  bg-gradient-to-r
-                  from-black via-black/85
-                  to-black/25">
       </div>
 
+      <!-- Slider Controls -->
+      <button id="prevSlide" type="button" aria-label="Previous" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 backdrop-blur border border-white/20 flex items-center justify-center text-lg z-20 hover:bg-black">&#8249;</button>
+      <button id="nextSlide" type="button" aria-label="Next" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 backdrop-blur border border-white/20 flex items-center justify-center text-lg z-20 hover:bg-black">&#8250;</button>
 
-      <div class="relative z-10 h-full flex items-end">
+      <!-- Slider Dots -->
+      <div id="sliderDots" class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
+        <button type="button" class="dot w-6 h-1.5 rounded-full bg-white"></button>
+        <button type="button" class="dot w-1.5 h-1.5 rounded-full bg-white/40"></button>
+      </div>
+    </section>
 
-        <div class="p-6 md:p-10 max-w-3xl pb-20">
-
-          <div class="flex flex-wrap gap-2 mb-4">
-
-            <span
-              class="bg-brand px-3 py-1.5 rounded-md
-                     text-[10px] font-black">
-              🔥 TOP STORY
-            </span>
-
-            <span
-              class="bg-white/10 backdrop-blur px-3 py-1.5
-                     rounded-md text-[10px] font-bold">
-              MOVIES
-            </span>
-
-          </div>
-
-
-          <h2
-            class="slide-title text-3xl md:text-5xl
-                   font-black leading-tight">
-            Aaj Ki Sabse Badi Movie Entertainment Update
-          </h2>
-
-
-          <p
-            class="mt-4 text-slate-300 text-sm md:text-base
-                   leading-relaxed max-w-2xl">
-            Latest movie announcement, release date, cast details
-            aur film se judi important update yahan padhein.
-          </p>
-
-
-          <div class="flex flex-wrap gap-3 mt-6">
-
-            <a
-              href="#"
-              class="bg-white text-black font-black text-sm
-                     px-5 py-3 rounded-xl
-                     hover:bg-slate-200">
-              Puri Khabar Padhein →
-            </a>
-
-            <span
-              class="bg-black/50 backdrop-blur
-                     px-4 py-3 rounded-xl
-                     text-xs text-slate-300">
-              Updated Today
-            </span>
-
-          </div>
-
+    <!-- ==================== AAJ KI RELEASES (GRID) ==================== -->
+    <section id="aaj-release">
+      <div class="flex items-end justify-between mb-4">
+        <div>
+          <p class="text-brand text-xs font-black uppercase tracking-widest">Streaming Updates</p>
+          <h2 class="text-xl md:text-2xl font-black">Aaj Release Hui / Trending</h2>
         </div>
-
       </div>
 
-    </article>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        
+        <!-- Post Card 1 (Connected) -->
+        <article class="story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between">
+          <a href="/posts/mirzapur-3-ott-release.html" class="block">
+            <div class="relative">
+              <img src="/images/mirzapur-3-ott.webp" alt="Mirzapur Season 3" class="w-full aspect-[16/9] object-cover">
+              <span class="absolute top-2 left-2 bg-blue-600 text-[9px] font-black px-2 py-0.5 rounded">PRIME</span>
+            </div>
+            <div class="p-3">
+              <h3 class="font-bold text-xs md:text-sm line-clamp-2 text-white hover:text-brand transition">
+                Mirzapur Season 3 OTT Release
+              </h3>
+              <p class="text-[11px] text-slate-400 mt-1">Crime Thriller • Hindi</p>
+              <p class="text-[10px] text-green-400 font-bold mt-2.5">Streaming Now</p>
+            </div>
+          </a>
+        </article>
 
+        <!-- Post Card 2 -->
+        <article class="story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between">
+          <a href="#" class="block">
+            <div class="relative">
+              <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=600&auto=format&fit=crop&q=80" alt="Sector 36" class="w-full aspect-[16/9] object-cover">
+              <span class="absolute top-2 left-2 bg-brand text-[9px] font-black px-2 py-0.5 rounded">NETFLIX</span>
+            </div>
+            <div class="p-3">
+              <h3 class="font-bold text-xs md:text-sm line-clamp-2 text-white hover:text-brand transition">
+                Sector 36 OTT Release Date & Story
+              </h3>
+              <p class="text-[11px] text-slate-400 mt-1">Suspense • Vikrant Massey</p>
+              <p class="text-[10px] text-green-400 font-bold mt-2.5">Streaming Now</p>
+            </div>
+          </a>
+        </article>
 
+        <!-- Post Card 3 -->
+        <article class="story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between">
+          <a href="#" class="block">
+            <div class="relative">
+              <img src="https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=600&auto=format&fit=crop&q=80" alt="Panchayat Season 3" class="w-full aspect-[16/9] object-cover">
+              <span class="absolute top-2 left-2 bg-blue-600 text-[9px] font-black px-2 py-0.5 rounded">PRIME</span>
+            </div>
+            <div class="p-3">
+              <h3 class="font-bold text-xs md:text-sm line-clamp-2 text-white hover:text-brand transition">
+                Panchayat Season 3 Full Episode Details
+              </h3>
+              <p class="text-[11px] text-slate-400 mt-1">Comedy • Jitendra Kumar</p>
+              <p class="text-[10px] text-green-400 font-bold mt-2.5">Streaming Now</p>
+            </div>
+          </a>
+        </article>
 
-    <!-- =====================================================
-         SLIDE 2
-    ====================================================== -->
+        <!-- Post Card 4 -->
+        <article class="story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between">
+          <a href="#" class="block">
+            <div class="relative">
+              <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&auto=format&fit=crop&q=80" alt="Asur Season 2" class="w-full aspect-[16/9] object-cover">
+              <span class="absolute top-2 left-2 bg-yellow-600 text-[9px] font-black px-2 py-0.5 rounded">JIOCINEMA</span>
+            </div>
+            <div class="p-3">
+              <h3 class="font-bold text-xs md:text-sm line-clamp-2 text-white hover:text-brand transition">
+                Asur Season 2: Kab Aur Kaise Dekhein Free
+              </h3>
+              <p class="text-[11px] text-slate-400 mt-1">Mythological Thriller</p>
+              <p class="text-[10px] text-green-400 font-bold mt-2.5">Streaming Now</p>
+            </div>
+          </a>
+        </article>
 
-    <article class="slide">
+        <!-- Post Card 5 -->
+        <article class="story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between">
+          <a href="#" class="block">
+            <div class="relative">
+              <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600&auto=format&fit=crop&q=80" alt="Upcoming OTT" class="w-full aspect-[16/9] object-cover">
+              <span class="absolute top-2 left-2 bg-purple-600 text-[9px] font-black px-2 py-0.5 rounded">HOTSTAR</span>
+            </div>
+            <div class="p-3">
+              <h3 class="font-bold text-xs md:text-sm line-clamp-2 text-white hover:text-brand transition">
+                Taaza Khabar Season 2 Release Update
+              </h3>
+              <p class="text-[11px] text-slate-400 mt-1">Drama • Bhuvan Bam</p>
+              <p class="text-[10px] text-yellow-400 font-bold mt-2.5">Coming Friday</p>
+            </div>
+          </a>
+        </article>
 
-      <img
-        src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1600&auto=format&fit=crop&q=85"
-        alt="Latest Hindi movie trailer"
-        class="slide-image absolute inset-0 w-full h-full object-cover"
-      >
-
-      <div class="absolute inset-0
-                  bg-gradient-to-r
-                  from-black via-black/85
-                  to-black/20">
       </div>
+    </section>
 
-
-      <div class="relative z-10 h-full flex items-end">
-
-        <div class="p-6 md:p-10 max-w-3xl pb-20">
-
-          <div class="flex gap-2 mb-4">
-
-            <span
-              class="bg-brand px-3 py-1.5 rounded-md
-                     text-[10px] font-black">
-              🎞️ NEW TRAILER
-            </span>
-
-            <span
-              class="bg-white/10 backdrop-blur px-3 py-1.5
-                     rounded-md text-[10px] font-bold">
-              TRAILERS
-            </span>
-
-          </div>
-
-
-          <h2
-            class="text-3xl md:text-5xl font-black leading-tight">
-            Nayi Hindi Movie Ka Trailer Hua Release
-          </h2>
-
-
-          <p
-            class="mt-4 text-slate-300 text-sm md:text-base
-                   leading-relaxed max-w-2xl">
-            Trailer mein kya khaas hai, film ki cast kaun hai
-            aur movie kab release hogi? Sabhi details dekhein.
-          </p>
-
-
-          <div class="flex flex-wrap gap-3 mt-6">
-
-            <a
-              href="#"
-              class="bg-white text-black font-black text-sm
-                     px-5 py-3 rounded-xl">
-              Trailer Details →
-            </a>
-
-          </div>
-
+    <!-- ==================== PLATFORM ROW ==================== -->
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div class="bg-card border border-white/10 rounded-2xl p-4 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-red-600/20 text-brand font-black flex items-center justify-center text-sm">N</div>
+        <div>
+          <h4 class="font-bold text-xs">Netflix Hindi</h4>
+          <p class="text-[10px] text-slate-400">All Latest Movies</p>
         </div>
-
       </div>
 
-    </article>
-
-
-
-    <!-- =====================================================
-         SLIDE 3
-    ====================================================== -->
-
-    <article class="slide">
-
-      <img
-        src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=1600&auto=format&fit=crop&q=85"
-        alt="Latest OTT release"
-        class="slide-image absolute inset-0 w-full h-full object-cover"
-      >
-
-      <div class="absolute inset-0
-                  bg-gradient-to-r
-                  from-black via-black/85
-                  to-black/20">
-      </div>
-
-
-      <div class="relative z-10 h-full flex items-end">
-
-        <div class="p-6 md:p-10 max-w-3xl pb-20">
-
-          <div class="flex gap-2 mb-4">
-
-            <span
-              class="bg-brand px-3 py-1.5 rounded-md
-                     text-[10px] font-black">
-              📺 OTT RELEASE
-            </span>
-
-            <span
-              class="bg-white/10 backdrop-blur px-3 py-1.5
-                     rounded-md text-[10px] font-bold">
-              OTT
-            </span>
-
-          </div>
-
-
-          <h2
-            class="text-3xl md:text-5xl font-black leading-tight">
-            Aaj OTT Par Kya Naya Release Hua?
-          </h2>
-
-
-          <p
-            class="mt-4 text-slate-300 text-sm md:text-base
-                   leading-relaxed max-w-2xl">
-            Netflix, Prime Video, JioHotstar aur doosre platforms
-            par aaj ki latest Hindi releases ki details dekhein.
-          </p>
-
-
-          <div class="flex flex-wrap gap-3 mt-6">
-
-            <a
-              href="#ott"
-              class="bg-white text-black font-black text-sm
-                     px-5 py-3 rounded-xl">
-              OTT Releases Dekhein →
-            </a>
-
-          </div>
-
+      <div class="bg-card border border-white/10 rounded-2xl p-4 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-blue-600/20 text-blue-400 font-black flex items-center justify-center text-sm">P</div>
+        <div>
+          <h4 class="font-bold text-xs">Prime Video</h4>
+          <p class="text-[10px] text-slate-400">Exclusive Series</p>
         </div>
-
       </div>
 
-    </article>
-
-
-
-    <!-- =====================================================
-         SLIDE 4
-    ====================================================== -->
-
-    <article class="slide">
-
-      <img
-        src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=1600&auto=format&fit=crop&q=85"
-        alt="Latest Bollywood entertainment news"
-        class="slide-image absolute inset-0 w-full h-full object-cover"
-      >
-
-      <div class="absolute inset-0
-                  bg-gradient-to-r
-                  from-black via-black/85
-                  to-black/20">
-      </div>
-
-
-      <div class="relative z-10 h-full flex items-end">
-
-        <div class="p-6 md:p-10 max-w-3xl pb-20">
-
-          <div class="flex gap-2 mb-4">
-
-            <span
-              class="bg-brand px-3 py-1.5 rounded-md
-                     text-[10px] font-black">
-              ⭐ TRENDING
-            </span>
-
-            <span
-              class="bg-white/10 backdrop-blur px-3 py-1.5
-                     rounded-md text-[10px] font-bold">
-              ENTERTAINMENT
-            </span>
-
-          </div>
-
-
-          <h2
-            class="text-3xl md:text-5xl font-black leading-tight">
-            Bollywood Se Aayi Aaj Ki Badi Entertainment News
-          </h2>
-
-
-          <p
-            class="mt-4 text-slate-300 text-sm md:text-base
-                   leading-relaxed max-w-2xl">
-            Actors, movies, upcoming projects aur entertainment
-            industry ki latest important updates Hindi mein.
-          </p>
-
-
-          <div class="flex flex-wrap gap-3 mt-6">
-
-            <a
-              href="#news"
-              class="bg-white text-black font-black text-sm
-                     px-5 py-3 rounded-xl">
-              Latest News →
-            </a>
-
-          </div>
-
+      <div class="bg-card border border-white/10 rounded-2xl p-4 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-yellow-600/20 text-yellow-400 font-black flex items-center justify-center text-sm">J</div>
+        <div>
+          <h4 class="font-bold text-xs">JioCinema</h4>
+          <p class="text-[10px] text-slate-400">Free Streaming</p>
         </div>
-
       </div>
 
-    </article>
-
-  </div>
-
-
-
-  <!-- PREVIOUS BUTTON -->
-
-  <button
-    id="prevSlide"
-    type="button"
-    aria-label="Previous story"
-    class="absolute left-4 top-1/2 -translate-y-1/2
-           w-11 h-11 rounded-full
-           bg-black/60 backdrop-blur
-           border border-white/20
-           hover:bg-black/80
-           flex items-center justify-center
-           text-xl z-20">
-    ‹
-  </button>
-
-
-  <!-- NEXT BUTTON -->
-
-  <button
-    id="nextSlide"
-    type="button"
-    aria-label="Next story"
-    class="absolute right-4 top-1/2 -translate-y-1/2
-           w-11 h-11 rounded-full
-           bg-black/60 backdrop-blur
-           border border-white/20
-           hover:bg-black/80
-           flex items-center justify-center
-           text-xl z-20">
-    ›
-  </button>
-
-
-
-  <!-- SLIDER DOTS -->
-
-  <div
-    id="sliderDots"
-    class="absolute bottom-5 left-1/2
-           -translate-x-1/2 z-20
-           flex items-center gap-2">
-
-    <button
-      type="button"
-      aria-label="Go to slide 1"
-      class="dot w-7 h-2 rounded-full bg-white">
-    </button>
-
-    <button
-      type="button"
-      aria-label="Go to slide 2"
-      class="dot w-2 h-2 rounded-full bg-white/40">
-    </button>
-
-    <button
-      type="button"
-      aria-label="Go to slide 3"
-      class="dot w-2 h-2 rounded-full bg-white/40">
-    </button>
-
-    <button
-      type="button"
-      aria-label="Go to slide 4"
-      class="dot w-2 h-2 rounded-full bg-white/40">
-    </button>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     TRENDING
-========================================================= -->
-
-<section id="trending">
-
-  <div class="flex items-end justify-between mb-5">
-
-    <div>
-
-      <p class="text-brand text-xs font-black uppercase tracking-widest">
-        What's Trending
-      </p>
-
-      <h2 class="text-2xl md:text-3xl font-black">
-        Trending Entertainment
-      </h2>
-
-    </div>
-
-    <a href="#" class="text-xs text-brand font-bold">
-      Sabhi →
-    </a>
-
-  </div>
-
-
-  <div class="grid md:grid-cols-3 gap-4">
-
-
-    <article
-      class="story-card bg-card border border-white/10
-             rounded-2xl overflow-hidden">
-
-      <div class="relative overflow-hidden">
-
-        <img
-          src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=900&auto=format&fit=crop&q=80"
-          alt="Latest movie entertainment news"
-          class="w-full h-52 object-cover">
-
-        <span
-          class="absolute top-3 left-3 bg-brand
-                 px-2 py-1 rounded text-[9px] font-black">
-          MOVIE
-        </span>
-
-      </div>
-
-      <div class="p-4">
-
-        <h3 class="font-black text-lg leading-snug">
-          Nayi Movie Ka First Look Hua Release,
-          Fans Mein Excitement
-        </h3>
-
-        <p class="text-xs text-slate-500 mt-3">
-          2 hours ago • Hindi Movies
-        </p>
-
-      </div>
-
-    </article>
-
-
-
-    <article
-      class="story-card bg-card border border-white/10
-             rounded-2xl overflow-hidden">
-
-      <div class="relative overflow-hidden">
-
-        <img
-          src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=900&auto=format&fit=crop&q=80"
-          alt="New OTT release"
-          class="w-full h-52 object-cover">
-
-        <span
-          class="absolute top-3 left-3 bg-blue-600
-                 px-2 py-1 rounded text-[9px] font-black">
-          OTT
-        </span>
-
-      </div>
-
-      <div class="p-4">
-
-        <h3 class="font-black text-lg leading-snug">
-          Is Week OTT Par Aa Rahi Hain
-          Ye Nayi Movies Aur Web Series
-        </h3>
-
-        <p class="text-xs text-slate-500 mt-3">
-          4 hours ago • OTT
-        </p>
-
-      </div>
-
-    </article>
-
-
-
-    <article
-      class="story-card bg-card border border-white/10
-             rounded-2xl overflow-hidden">
-
-      <div class="relative overflow-hidden">
-
-        <img
-          src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80"
-          alt="Latest movie trailer"
-          class="w-full h-52 object-cover">
-
-        <span
-          class="absolute top-3 left-3 bg-purple-600
-                 px-2 py-1 rounded text-[9px] font-black">
-          TRAILER
-        </span>
-
-      </div>
-
-      <div class="p-4">
-
-        <h3 class="font-black text-lg leading-snug">
-          Nayi Hindi Movie Ka Trailer Out,
-          Dekhein Kya Hai Khaas
-        </h3>
-
-        <p class="text-xs text-slate-500 mt-3">
-          6 hours ago • Trailers
-        </p>
-
-      </div>
-
-    </article>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     MOVIES
-========================================================= -->
-
-<section id="movies">
-
-  <div class="flex items-end justify-between mb-5">
-
-    <div>
-
-      <p class="text-brand text-xs font-black uppercase tracking-widest">
-        Cinema
-      </p>
-
-      <h2 class="text-2xl md:text-3xl font-black">
-        Latest Hindi Movies
-      </h2>
-
-    </div>
-
-    <a href="#" class="text-xs text-brand font-bold">
-      More Movies →
-    </a>
-
-  </div>
-
-
-  <div
-    class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-
-
-    <!-- MOVIE 1 -->
-
-    <article
-      class="story-card bg-card border border-white/10
-             rounded-2xl overflow-hidden">
-
-      <img
-        src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=600&auto=format&fit=crop&q=80"
-        alt="Latest Hindi movie"
-        class="w-full aspect-[2/3] object-cover">
-
-      <div class="p-3">
-
-        <h3 class="font-bold text-sm">
-          Latest Hindi Movie
-        </h3>
-
-        <p class="text-[11px] text-slate-500 mt-1">
-          Drama • Hindi
-        </p>
-
-        <p class="text-[10px] text-green-400 font-bold mt-3">
-          New Update
-        </p>
-
-      </div>
-
-    </article>
-
-
-    <!-- MOVIE 2 -->
-
-    <article
-      class="story-card bg-card border border-white/10
-             rounded-2xl overflow-hidden">
-
-      <img
-        src="https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=600&auto=format&fit=crop&q=80"
-        alt="Bollywood movie"
-        class="w-full aspect-[2/3] object-cover">
-
-      <div class="p-3">
-
-        <h3 class="font-bold text-sm">
-          Upcoming Bollywood Movie
-        </h3>
-
-        <p class="text-[11px] text-slate-500 mt-1">
-          Action • Hindi
-        </p>
-
-        <p class="text-[10px] text-yellow-400 font-bold mt-3">
-          Coming Soon
-        </p>
-
-      </div>
-
-    </article>
-
-
-    <!-- MOVIE 3 -->
-
-    <article
-      class="story-card bg-card border border-white/10
-             rounded-2xl overflow-hidden">
-
-      <img
-        src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&auto=format&fit=crop&q=80"
-        alt="New Hindi film"
-        class="w-full aspect-[2/3] object-cover">
-
-      <div class="p-3">
-
-        <h3 class="font-bold text-sm">
-          New Hindi Film
-        </h3>
-
-        <p class="text-[11px] text-slate-500 mt-1">
-          Thriller • Hindi
-        </p>
-
-        <p class="text-[10px] text-green-400 font-bold mt-3">
-          Latest
-        </p>
-
-      </div>
-
-    </article>
-
-
-    <!-- MOVIE 4 -->
-
-    <article
-      class="story-card bg-card border border-white/10
-             rounded-2xl overflow-hidden">
-
-      <img
-        src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=600&auto=format&fit=crop&q=80"
-        alt="New cinema release"
-        class="w-full aspect-[2/3] object-cover">
-
-      <div class="p-3">
-
-        <h3 class="font-bold text-sm">
-          New Cinema Release
-        </h3>
-
-        <p class="text-[11px] text-slate-500 mt-1">
-          Comedy • Hindi
-        </p>
-
-        <p class="text-[10px] text-green-400 font-bold mt-3">
-          Latest
-        </p>
-
-      </div>
-
-    </article>
-
-
-    <!-- MOVIE 5 -->
-
-    <article
-      class="story-card bg-card border border-white/10
-             rounded-2xl overflow-hidden">
-
-      <img
-        src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600&auto=format&fit=crop&q=80"
-        alt="New Bollywood release"
-        class="w-full aspect-[2/3] object-cover">
-
-      <div class="p-3">
-
-        <h3 class="font-bold text-sm">
-          New Bollywood Release
-        </h3>
-
-        <p class="text-[11px] text-slate-500 mt-1">
-          Romance • Hindi
-        </p>
-
-        <p class="text-[10px] text-green-400 font-bold mt-3">
-          Latest
-        </p>
-
-      </div>
-
-    </article>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     TRAILERS
-========================================================= -->
-
-<section id="trailers">
-
-  <div class="flex items-end justify-between mb-5">
-
-    <div>
-
-      <p class="text-brand text-xs font-black uppercase tracking-widest">
-        Watch
-      </p>
-
-      <h2 class="text-2xl md:text-3xl font-black">
-        Latest Movie Trailers
-      </h2>
-
-    </div>
-
-    <a href="#" class="text-xs text-brand font-bold">
-      All Trailers →
-    </a>
-
-  </div>
-
-
-  <div class="grid md:grid-cols-3 gap-4">
-
-
-    <article
-      class="story-card bg-card border border-white/10
-             rounded-2xl overflow-hidden">
-
-      <div class="relative">
-
-        <img
-          src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80"
-          alt="Hindi movie trailer"
-          class="w-full h-52 object-cover">
-
-        <div
-          class="absolute inset-0 flex items-center justify-center">
-
-          <div
-            class="w-14 h-14 bg-brand rounded-full
-                   flex items-center justify-center
-                   shadow-xl">
-            ▶
-          </div>
-
+      <div class="bg-card border border-white/10 rounded-2xl p-4 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-purple-600/20 text-purple-400 font-black flex items-center justify-center text-sm">H</div>
+        <div>
+          <h4 class="font-bold text-xs">Disney+ Hotstar</h4>
+          <p class="text-[10px] text-slate-400">Specials & Cinema</p>
         </div>
-
       </div>
+    </section>
 
-      <div class="p-4">
-
-        <span class="text-[10px] text-brand font-black">
-          TRAILER OUT
-        </span>
-
-        <h3 class="font-black text-lg mt-1">
-          New Hindi Movie Trailer Released
-        </h3>
-
-        <p class="text-xs text-slate-500 mt-2">
-          Watch trailer and know release date
+    <!-- ==================== FAQ ACCORDION ==================== -->
+    <section class="max-w-3xl space-y-3">
+      <h2 class="text-xl font-black">Frequently Asked Questions</h2>
+      
+      <details class="bg-card border border-white/10 rounded-xl p-4 cursor-pointer">
+        <summary class="font-bold text-sm">Aaj OTT par kaun si nayi Hindi movie release hui hai?</summary>
+        <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+          Netflix, Prime Video aur Hotstar par har hafte nayi Hindi films stream hoti hain. Aaj ki latest release list hamare 'Aaj Ki Releases' section mein updated rehti hai.
         </p>
+      </details>
 
-      </div>
-
-    </article>
-
-
-
-    <article
-      class="story-card bg-card border border-white/10
-             rounded-2xl overflow-hidden">
-
-      <div class="relative">
-
-        <img
-          src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=900&auto=format&fit=crop&q=80"
-          alt="Bollywood trailer"
-          class="w-full h-52 object-cover">
-
-        <div
-          class="absolute inset-0 flex items-center justify-center">
-
-          <div
-            class="w-14 h-14 bg-brand rounded-full
-                   flex items-center justify-center">
-            ▶
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="p-4">
-
-        <span class="text-[10px] text-brand font-black">
-          NEW TRAILER
-        </span>
-
-        <h3 class="font-black text-lg mt-1">
-          Bollywood Film Ka Trailer Dekhein
-        </h3>
-
-        <p class="text-xs text-slate-500 mt-2">
-          Cast, story and release details
+      <details class="bg-card border border-white/10 rounded-xl p-4 cursor-pointer">
+        <summary class="font-bold text-sm">OTT release dates kaise check karein?</summary>
+        <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+          Hamare platform par har aane wali Bollywood movie aur web series ka confirmed platform aur exact streaming date provide ki jaati hai.
         </p>
+      </details>
+    </section>
 
-      </div>
+  </main>
 
-    </article>
-
-
-
-    <article
-      class="story-card bg-card border border-white/10
-             rounded-2xl overflow-hidden">
-
-      <div class="relative">
-
-        <img
-          src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=900&auto=format&fit=crop&q=80"
-          alt="Upcoming movie trailer"
-          class="w-full h-52 object-cover">
-
-        <div
-          class="absolute inset-0 flex items-center justify-center">
-
-          <div
-            class="w-14 h-14 bg-brand rounded-full
-                   flex items-center justify-center">
-            ▶
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="p-4">
-
-        <span class="text-[10px] text-brand font-black">
-          UPCOMING
-        </span>
-
-        <h3 class="font-black text-lg mt-1">
-          Upcoming Movie Ka Trailer Aaya
-        </h3>
-
-        <p class="text-xs text-slate-500 mt-2">
-          Release date and latest update
-        </p>
-
-      </div>
-
-    </article>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     OTT
-========================================================= -->
-
-<section id="ott">
-
-  <div class="flex items-end justify-between mb-5">
-
-    <div>
-
-      <p class="text-brand text-xs font-black uppercase tracking-widest">
-        Streaming
-      </p>
-
-      <h2 class="text-2xl md:text-3xl font-black">
-        Latest OTT Releases
-      </h2>
-
-    </div>
-
-    <a href="#" class="text-xs text-brand font-bold">
-      All OTT →
-    </a>
-
-  </div>
-
-
-  <div class="space-y-3">
-
-
-    <article
-      class="bg-card border border-white/10
-             rounded-2xl p-4 flex gap-4 items-center">
-
-      <div
-        class="w-16 h-16 rounded-xl bg-red-600/20
-               flex items-center justify-center shrink-0">
-
-        <span class="text-red-500 font-black text-xs">
-          NETFLIX
-        </span>
-
-      </div>
-
-      <div class="flex-1">
-
-        <h3 class="font-black">
-          New Hindi Movie Netflix Par Release
-        </h3>
-
-        <p class="text-xs text-slate-500 mt-1">
-          Hindi • Movie • Streaming Now
-        </p>
-
-      </div>
-
-      <span class="hidden sm:block text-xs text-green-400 font-bold">
-        ● LIVE
-      </span>
-
-    </article>
-
-
-
-    <article
-      class="bg-card border border-white/10
-             rounded-2xl p-4 flex gap-4 items-center">
-
-      <div
-        class="w-16 h-16 rounded-xl bg-blue-600/20
-               flex items-center justify-center shrink-0">
-
-        <span class="text-blue-400 font-black text-[10px]">
-          PRIME
-        </span>
-
-      </div>
-
-      <div class="flex-1">
-
-        <h3 class="font-black">
-          Is Week Prime Video Par Ye Nayi Series
-        </h3>
-
-        <p class="text-xs text-slate-500 mt-1">
-          Web Series • Hindi • New Release
-        </p>
-
-      </div>
-
-      <span class="hidden sm:block text-xs text-yellow-400 font-bold">
-        NEW
-      </span>
-
-    </article>
-
-
-
-    <article
-      class="bg-card border border-white/10
-             rounded-2xl p-4 flex gap-4 items-center">
-
-      <div
-        class="w-16 h-16 rounded-xl bg-purple-600/20
-               flex items-center justify-center shrink-0">
-
-        <span class="text-purple-400 font-black text-[9px]">
-          JIOHOTSTAR
-        </span>
-
-      </div>
-
-      <div class="flex-1">
-
-        <h3 class="font-black">
-          Aaj Ki Nayi OTT Release Yahan Dekhein
-        </h3>
-
-        <p class="text-xs text-slate-500 mt-1">
-          Movie • Hindi • Streaming
-        </p>
-
-      </div>
-
-      <span class="hidden sm:block text-xs text-green-400 font-bold">
-        TODAY
-      </span>
-
-    </article>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     WEB SERIES
-========================================================= -->
-
-<section id="web-series">
-
-  <div class="flex items-end justify-between mb-5">
-
-    <div>
-
-      <p class="text-brand text-xs font-black uppercase tracking-widest">
-        Series
-      </p>
-
-      <h2 class="text-2xl md:text-3xl font-black">
-        New Hindi Web Series
-      </h2>
-
-    </div>
-
-    <a href="#" class="text-xs text-brand font-bold">
-      More Series →
-    </a>
-
-  </div>
-
-
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-
-
-    <article
-      class="story-card bg-card border border-white/10
-             rounded-2xl overflow-hidden">
-
-      <img
-        src="https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=700&auto=format&fit=crop&q=80"
-        alt="Hindi web series"
-        class="w-full aspect-video object-cover">
-
-      <div class="p-3">
-
-        <h3 class="font-bold text-sm">
-          New Hindi Web Series
-        </h3>
-
-        <p class="text-[11px] text-slate-500 mt-1">
-          Thriller • Season 1
-        </p>
-
-      </div>
-
-    </article>
-
-
-
-    <article
-      class="story-card bg-card border border-white/10
-             rounded-2xl overflow-hidden">
-
-      <img
-        src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=700&auto=format&fit=crop&q=80"
-        alt="New crime series"
-        class="w-full aspect-video object-cover">
-
-      <div class="p-3">
-
-        <h3 class="font-bold text-sm">
-          Latest Crime Series
-        </h3>
-
-        <p class="text-[11px] text-slate-500 mt-1">
-          Crime • Drama
-        </p>
-
-      </div>
-
-    </article>
-
-
-
-    <article
-      class="story-card bg-card border border-white/10
-             rounded-2xl overflow-hidden">
-
-      <img
-        src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=700&auto=format&fit=crop&q=80"
-        alt="Hindi comedy series"
-        class="w-full aspect-video object-cover">
-
-      <div class="p-3">
-
-        <h3 class="font-bold text-sm">
-          New Comedy Series
-        </h3>
-
-        <p class="text-[11px] text-slate-500 mt-1">
-          Comedy • Hindi
-        </p>
-
-      </div>
-
-    </article>
-
-
-
-    <article
-      class="story-card bg-card border border-white/10
-             rounded-2xl overflow-hidden">
-
-      <img
-        src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=700&auto=format&fit=crop&q=80"
-        alt="Upcoming Hindi web series"
-        class="w-full aspect-video object-cover">
-
-      <div class="p-3">
-
-        <h3 class="font-bold text-sm">
-          Upcoming Web Series
-        </h3>
-
-        <p class="text-[11px] text-slate-500 mt-1">
-          Drama • Upcoming
-        </p>
-
-      </div>
-
-    </article>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     ENTERTAINMENT NEWS
-========================================================= -->
-
-<section id="news">
-
-  <div class="flex items-end justify-between mb-5">
-
-    <div>
-
-      <p class="text-brand text-xs font-black uppercase tracking-widest">
-        Latest Updates
-      </p>
-
-      <h2 class="text-2xl md:text-3xl font-black">
-        Entertainment News
-      </h2>
-
-    </div>
-
-    <a href="#" class="text-xs text-brand font-bold">
-      All News →
-    </a>
-
-  </div>
-
-
-  <div class="grid md:grid-cols-2 gap-3">
-
-
-    <article
-      class="bg-card border border-white/10 rounded-2xl
-             p-4 flex gap-4">
-
-      <img
-        src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&auto=format&fit=crop&q=80"
-        alt="Bollywood entertainment news"
-        class="w-28 h-24 object-cover rounded-xl shrink-0">
-
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-white/10 mt-14 py-8 bg-black">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
       <div>
-
-        <span class="text-[9px] text-brand font-black">
-          BOLLYWOOD
-        </span>
-
-        <h3 class="font-bold text-sm mt-1 leading-snug">
-          Bollywood Ki Is Nayi Film Ko Lekar Aaya Bada Update
-        </h3>
-
-        <p class="text-[10px] text-slate-500 mt-2">
-          1 hour ago
-        </p>
-
+        <span class="font-black text-white">GUJARAT FAST ALERT</span> &copy; 2026. All Rights Reserved.
       </div>
-
-    </article>
-
-
-
-    <article
-      class="bg-card border border-white/10 rounded-2xl
-             p-4 flex gap-4">
-
-      <img
-        src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&auto=format&fit=crop&q=80"
-        alt="Celebrity entertainment news"
-        class="w-28 h-24 object-cover rounded-xl shrink-0">
-
-      <div>
-
-        <span class="text-[9px] text-brand font-black">
-          CELEBRITY
-        </span>
-
-        <h3 class="font-bold text-sm mt-1 leading-snug">
-          Popular Actor Ki Upcoming Film Par Naya Update
-        </h3>
-
-        <p class="text-[10px] text-slate-500 mt-2">
-          3 hours ago
-        </p>
-
+      <div class="flex gap-4">
+        <a href="/privacy-policy.html" class="hover:text-white">Privacy Policy</a>
+        <a href="/disclaimer.html" class="hover:text-white">Disclaimer</a>
+        <a href="/about.html" class="hover:text-white">About Us</a>
       </div>
-
-    </article>
-
-
-
-    <article
-      class="bg-card border border-white/10 rounded-2xl
-             p-4 flex gap-4">
-
-      <img
-        src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=400&auto=format&fit=crop&q=80"
-        alt="OTT entertainment news"
-        class="w-28 h-24 object-cover rounded-xl shrink-0">
-
-      <div>
-
-        <span class="text-[9px] text-brand font-black">
-          OTT
-        </span>
-
-        <h3 class="font-bold text-sm mt-1 leading-snug">
-          OTT Platform Par Aane Wali Nayi Series Ki Details
-        </h3>
-
-        <p class="text-[10px] text-slate-500 mt-2">
-          5 hours ago
-        </p>
-
-      </div>
-
-    </article>
-
-
-
-    <article
-      class="bg-card border border-white/10 rounded-2xl
-             p-4 flex gap-4">
-
-      <img
-        src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=400&auto=format&fit=crop&q=80"
-        alt="Movie entertainment news"
-        class="w-28 h-24 object-cover rounded-xl shrink-0">
-
-      <div>
-
-        <span class="text-[9px] text-brand font-black">
-          MOVIES
-        </span>
-
-        <h3 class="font-bold text-sm mt-1 leading-snug">
-          Nayi Movie Ki Release Date Ko Lekar Bada Announcement
-        </h3>
-
-        <p class="text-[10px] text-slate-500 mt-2">
-          7 hours ago
-        </p>
-
-      </div>
-
-    </article>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     EDITORIAL / WEEKEND
-========================================================= -->
-
-<section
-  class="rounded-3xl border border-brand/20
-         bg-gradient-to-br from-red-950/30 to-black
-         p-6 md:p-8">
-
-  <div class="max-w-3xl">
-
-    <span
-      class="text-brand text-xs font-black uppercase tracking-widest">
-      Editor's Picks
-    </span>
-
-    <h2 class="text-2xl md:text-3xl font-black mt-2">
-      Is Weekend Kya Dekhein?
-    </h2>
-
-    <p class="text-slate-400 text-sm mt-3 leading-relaxed">
-      New movies, OTT releases aur web series mein se
-      weekend watchlist ke liye kya choose karein?
-      Latest entertainment updates aur recommendations dekhein.
-    </p>
-
-    <a
-      href="#"
-      class="inline-block mt-5 bg-brand px-5 py-3
-             rounded-xl text-sm font-black">
-      Weekend Watchlist →
-    </a>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     FAQ
-========================================================= -->
-
-<section class="max-w-4xl">
-
-  <p class="text-brand text-xs font-black uppercase tracking-widest">
-    Help
-  </p>
-
-  <h2 class="text-2xl md:text-3xl font-black mt-1 mb-5">
-    Entertainment FAQ
-  </h2>
-
-
-  <div class="space-y-2">
-
-
-    <details
-      class="bg-card border border-white/10 rounded-xl p-4">
-
-      <summary class="font-bold cursor-pointer">
-        Aaj kaun si Hindi movies release hui hain?
-      </summary>
-
-      <p class="text-sm text-slate-400 mt-3 leading-relaxed">
-        Latest Hindi movie releases, theatrical updates aur
-        OTT releases ko category-wise dekha ja sakta hai.
-      </p>
-
-    </details>
-
-
-    <details
-      class="bg-card border border-white/10 rounded-xl p-4">
-
-      <summary class="font-bold cursor-pointer">
-        Naye movie trailers kahan milenge?
-      </summary>
-
-      <p class="text-sm text-slate-400 mt-3 leading-relaxed">
-        Latest Hindi movie trailers aur unse judi release
-        date aur cast information Trailers section mein milegi.
-      </p>
-
-    </details>
-
-
-    <details
-      class="bg-card border border-white/10 rounded-xl p-4">
-
-      <summary class="font-bold cursor-pointer">
-        OTT par nayi Hindi movies kaise dekhein?
-      </summary>
-
-      <p class="text-sm text-slate-400 mt-3 leading-relaxed">
-        OTT section mein movie ya web series ka streaming
-        platform aur release information di jayegi.
-      </p>
-
-    </details>
-
-  </div>
-
-</section>
-
-
-</main>
-
-
-
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-
-<footer class="border-t border-white/10 mt-14">
-
-  <div class="max-w-7xl mx-auto px-4 py-10">
-
-    <div class="grid md:grid-cols-3 gap-8">
-
-
-      <!-- BRAND -->
-
-      <div>
-
-        <div class="text-xl font-black">
-
-          <span class="text-brand">
-            GUJARAT
-          </span>
-
-          FAST ALERT
-
-        </div>
-
-        <p
-          class="text-[10px] text-slate-500
-                 font-bold tracking-[0.2em] mt-1">
-          ENTERTAINMENT
-        </p>
-
-        <p
-          class="text-xs text-slate-500 mt-4
-                 max-w-sm leading-relaxed">
-
-          Hindi movies, OTT releases, trailers,
-          web series aur entertainment news ki latest updates.
-
-        </p>
-
-      </div>
-
-
-      <!-- CATEGORIES -->
-
-      <div>
-
-        <h3 class="text-sm font-black mb-4">
-          Categories
-        </h3>
-
-        <div
-          class="grid grid-cols-2 gap-3
-                 text-xs text-slate-500">
-
-          <a href="#movies" class="hover:text-white">
-            Movies
-          </a>
-
-          <a href="#ott" class="hover:text-white">
-            OTT
-          </a>
-
-          <a href="#trailers" class="hover:text-white">
-            Trailers
-          </a>
-
-          <a href="#web-series" class="hover:text-white">
-            Web Series
-          </a>
-
-          <a href="#news" class="hover:text-white">
-            Entertainment News
-          </a>
-
-          <a href="#trending" class="hover:text-white">
-            Trending
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <!-- IMPORTANT LINKS -->
-
-      <div>
-
-        <h3 class="text-sm font-black mb-4">
-          Important Links
-        </h3>
-
-        <div class="space-y-3 text-xs text-slate-500">
-
-          <a href="#" class="block hover:text-white">
-            About Us
-          </a>
-
-          <a href="#" class="block hover:text-white">
-            Contact
-          </a>
-
-          <a href="#" class="block hover:text-white">
-            Privacy Policy
-          </a>
-
-          <a href="#" class="block hover:text-white">
-            Disclaimer
-          </a>
-
-        </div>
-
-      </div>
-
     </div>
+  </footer>
 
+  <!-- ==================== SLIDER SCRIPT ==================== -->
+  <script>
+    const track = document.getElementById("sliderTrack");
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const dots = Array.from(document.querySelectorAll(".dot"));
+    const prevButton = document.getElementById("prevSlide");
+    const nextButton = document.getElementById("nextSlide");
+    let currentSlide = 0;
+    let autoPlay;
 
-    <div
-      class="border-t border-white/10 mt-8 pt-5
-             flex flex-col md:flex-row
-             justify-between gap-3
-             text-[10px] text-slate-600">
-
-      <span>
-        © 2026 Gujarat Fast Alert Entertainment.
-        All Rights Reserved.
-      </span>
-
-      <span>
-        Hindi Entertainment • Movies • OTT • Trailers
-      </span>
-
-    </div>
-
-  </div>
-
-</footer>
-
-
-
-<!-- =========================================================
-     SLIDER JAVASCRIPT
-========================================================= -->
-
-<script>
-
-  const track = document.getElementById("sliderTrack");
-  const slides = Array.from(document.querySelectorAll(".slide"));
-  const dots = Array.from(document.querySelectorAll(".dot"));
-
-  const prevButton = document.getElementById("prevSlide");
-  const nextButton = document.getElementById("nextSlide");
-
-  let currentSlide = 0;
-  let autoPlay;
-
-  const AUTO_TIME = 5000;
-
-
-  /* ---------------------------------------------------------
-     UPDATE SLIDER
-  --------------------------------------------------------- */
-
-  function updateSlider() {
-
-    track.style.transform =
-      `translateX(-${currentSlide * 100}%)`;
-
-
-    slides.forEach((slide, index) => {
-
-      slide.classList.toggle(
-        "active",
-        index === currentSlide
-      );
-
-    });
-
-
-    dots.forEach((dot, index) => {
-
-      if (index === currentSlide) {
-
-        dot.classList.remove(
-          "w-2",
-          "bg-white/40"
-        );
-
-        dot.classList.add(
-          "w-7",
-          "bg-white"
-        );
-
-      } else {
-
-        dot.classList.remove(
-          "w-7",
-          "bg-white"
-        );
-
-        dot.classList.add(
-          "w-2",
-          "bg-white/40"
-        );
-
-      }
-
-    });
-
-  }
-
-
-  /* ---------------------------------------------------------
-     NEXT
-  --------------------------------------------------------- */
-
-  function nextSlide() {
-
-    currentSlide =
-      (currentSlide + 1) % slides.length;
-
-    updateSlider();
-
-  }
-
-
-  /* ---------------------------------------------------------
-     PREVIOUS
-  --------------------------------------------------------- */
-
-  function prevSlide() {
-
-    currentSlide =
-      (currentSlide - 1 + slides.length)
-      % slides.length;
-
-    updateSlider();
-
-  }
-
-
-  /* ---------------------------------------------------------
-     BUTTONS
-  --------------------------------------------------------- */
-
-  nextButton.addEventListener(
-    "click",
-    () => {
-
-      nextSlide();
-
-      restartAutoPlay();
-
+    function updateSlider() {
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+      slides.forEach((slide, i) => slide.classList.toggle("active", i === currentSlide));
+      dots.forEach((dot, i) => {
+        if (i === currentSlide) {
+          dot.classList.remove("w-1.5", "bg-white/40");
+          dot.classList.add("w-6", "bg-white");
+        } else {
+          dot.classList.remove("w-6", "bg-white");
+          dot.classList.add("w-1.5", "bg-white/40");
+        }
+      });
     }
-  );
 
-
-  prevButton.addEventListener(
-    "click",
-    () => {
-
-      prevSlide();
-
-      restartAutoPlay();
-
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      updateSlider();
     }
-  );
 
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      updateSlider();
+    }
 
-  /* ---------------------------------------------------------
-     DOTS
-  --------------------------------------------------------- */
+    nextButton.addEventListener("click", () => { nextSlide(); restartAutoPlay(); });
+    prevButton.addEventListener("click", () => { prevSlide(); restartAutoPlay(); });
 
-  dots.forEach((dot, index) => {
-
-    dot.addEventListener(
-      "click",
-      () => {
-
-        currentSlide = index;
-
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        currentSlide = i;
         updateSlider();
-
         restartAutoPlay();
+      });
+    });
 
-      }
-    );
+    function startAutoPlay() { autoPlay = setInterval(nextSlide, 5000); }
+    function stopAutoPlay() { clearInterval(autoPlay); }
+    function restartAutoPlay() { stopAutoPlay(); startAutoPlay(); }
 
-  });
+    const hero = document.getElementById("top-stories");
+    hero.addEventListener("mouseenter", stopAutoPlay);
+    hero.addEventListener("mouseleave", startAutoPlay);
 
-
-  /* ---------------------------------------------------------
-     AUTOPLAY
-  --------------------------------------------------------- */
-
-  function startAutoPlay() {
-
-    autoPlay = setInterval(
-      nextSlide,
-      AUTO_TIME
-    );
-
-  }
-
-
-  function stopAutoPlay() {
-
-    clearInterval(autoPlay);
-
-  }
-
-
-  function restartAutoPlay() {
-
-    stopAutoPlay();
-
-    startAutoPlay();
-
-  }
-
-
-  /* ---------------------------------------------------------
-     PAUSE ON DESKTOP HOVER
-  --------------------------------------------------------- */
-
-  const heroSlider =
-    document.getElementById("top-stories");
-
-
-  heroSlider.addEventListener(
-    "mouseenter",
-    stopAutoPlay
-  );
-
-
-  heroSlider.addEventListener(
-    "mouseleave",
-    startAutoPlay
-  );
-
-
-  /* ---------------------------------------------------------
-     MOBILE SWIPE
-  --------------------------------------------------------- */
-
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-
-  heroSlider.addEventListener(
-    "touchstart",
-    (event) => {
-
-      touchStartX =
-        event.changedTouches[0].screenX;
-
-      stopAutoPlay();
-
-    },
-    { passive: true }
-  );
-
-
-  heroSlider.addEventListener(
-    "touchend",
-    (event) => {
-
-      touchEndX =
-        event.changedTouches[0].screenX;
-
-      handleSwipe();
-
+    let startX = 0;
+    hero.addEventListener("touchstart", e => { startX = e.changedTouches[0].screenX; stopAutoPlay(); }, {passive: true});
+    hero.addEventListener("touchend", e => {
+      const diff = startX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 40) { diff > 0 ? nextSlide() : prevSlide(); }
       startAutoPlay();
+    }, {passive: true});
 
-    },
-    { passive: true }
-  );
-
-
-  function handleSwipe() {
-
-    const difference =
-      touchStartX - touchEndX;
-
-
-    if (Math.abs(difference) < 50) {
-      return;
-    }
-
-
-    if (difference > 0) {
-
-      nextSlide();
-
-    } else {
-
-      prevSlide();
-
-    }
-
-  }
-
-
-  /* ---------------------------------------------------------
-     KEYBOARD ACCESS
-  --------------------------------------------------------- */
-
-  document.addEventListener(
-    "keydown",
-    (event) => {
-
-      if (event.key === "ArrowRight") {
-
-        nextSlide();
-
-        restartAutoPlay();
-
-      }
-
-      if (event.key === "ArrowLeft") {
-
-        prevSlide();
-
-        restartAutoPlay();
-
-      }
-
-    }
-  );
-
-
-  /* ---------------------------------------------------------
-     START
-  --------------------------------------------------------- */
-
-  updateSlider();
-
-  startAutoPlay();
-
-</script>
-
+    updateSlider();
+    startAutoPlay();
+  </script>
 
 </body>
 </html>
