@@ -14,7 +14,7 @@
     <style>
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #0b0f19; 
+            background-color: #09090b; 
             color: #f8fafc; 
             -webkit-tap-highlight-color: transparent;
         }
@@ -24,19 +24,19 @@
         .ott-box {
             background-color: #111827;
             border: 1px solid #1f2937;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.7);
         }
 
         .ott-input {
-            background-color: #1e293b;
-            border: 1px solid #334155;
+            background-color: #18181b;
+            border: 1px solid #27272a;
             color: #f8fafc;
         }
         .ott-input:focus {
             outline: none;
             border-color: #e50914;
-            box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.2);
+            box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.25);
         }
 
         .tab-btn.active {
@@ -54,7 +54,7 @@
     <div class="w-full max-w-2xl mx-auto my-auto py-6">
 
         <!-- 🔒 SECURITY LOCK SCREEN -->
-        <div id="pinScreen" class="w-full ott-box p-6 md:p-8 text-center transition-all bg-slate-900 border border-slate-800">
+        <div id="pinScreen" class="w-full ott-box p-6 md:p-8 text-center transition-all bg-zinc-900 border border-zinc-800">
             <div class="inline-flex items-center justify-center w-16 h-16 bg-red-500/10 text-red-500 rounded-2xl text-3xl mb-4 border border-red-500/20">
                 🎬
             </div>
@@ -73,7 +73,7 @@
         <div id="mainAdminBox" class="w-full ott-box p-4 md:p-6 hidden">
             
             <!-- Header Profile -->
-            <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-5">
+            <div class="flex items-center justify-between border-b border-zinc-800 pb-4 mb-5">
                 <div class="flex items-center gap-3">
                     <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-red-600 to-amber-600 flex items-center justify-center text-white text-xl font-black shadow-md">
                         👑
@@ -81,17 +81,17 @@
                     <div>
                         <h2 class="text-base font-black text-white tracking-wide">Vanrajsinh OTT Master</h2>
                         <p class="text-[11px] text-emerald-400 font-bold flex items-center gap-1.5 mt-0.5">
-                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Cloudflare & GitHub Connected
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> 10-Slide Engine & Live Sync Active
                         </p>
                     </div>
                 </div>
-                <button onclick="toggleGithubConfig()" class="text-xs bg-slate-800 hover:bg-slate-700 text-red-400 font-bold px-3 py-2 rounded-lg border border-slate-700 transition">
+                <button onclick="toggleGithubConfig()" class="text-xs bg-zinc-800 hover:bg-zinc-700 text-red-400 font-bold px-3 py-2 rounded-lg border border-zinc-700 transition">
                     ⚙️ GitHub API
                 </button>
             </div>
 
-            <!-- GitHub Setup Block (Collapsible) -->
-            <div id="githubConfigBlock" class="mb-6 p-4 bg-slate-950/60 border border-red-900/40 rounded-xl space-y-3 hidden">
+            <!-- GitHub Setup Block -->
+            <div id="githubConfigBlock" class="mb-6 p-4 bg-black/60 border border-red-900/40 rounded-xl space-y-3 hidden">
                 <h4 class="text-xs font-black text-red-400 uppercase tracking-wider flex items-center gap-2">
                     <span>⚙️ GitHub Direct Sync Credentials</span>
                     <span class="text-[10px] text-slate-500 font-normal">(Local Storage mein save rahega)</span>
@@ -111,8 +111,8 @@
                 </button>
             </div>
 
-            <!-- Tabs Grid -->
-            <div class="grid grid-cols-4 gap-1.5 p-1.5 bg-slate-950 rounded-xl mb-6 border border-slate-800">
+            <!-- Tabs Navigation -->
+            <div class="grid grid-cols-4 gap-1.5 p-1.5 bg-black rounded-xl mb-6 border border-zinc-800">
                 <button class="tab-btn active text-[11px] md:text-xs font-bold py-2.5 rounded-lg text-slate-400 transition-all text-center" onclick="switchTab('post-tab', this)">📝 NEW OTT</button>
                 <button class="tab-btn text-[11px] md:text-xs font-bold py-2.5 rounded-lg text-slate-400 transition-all text-center" onclick="switchTab('manage-tab', this)">⚙️ MANAGE</button>
                 <button class="tab-btn text-[11px] md:text-xs font-bold py-2.5 rounded-lg text-slate-400 transition-all text-center" onclick="switchTab('settings-tab', this)">📢 CONFIG</button>
@@ -126,25 +126,24 @@
             <div id="post-tab" class="tab-content active space-y-4">
                 
                 <div class="bg-red-500/10 border-l-4 border-red-600 p-3 rounded-r-xl">
-                    <h3 id="form-action-title" class="text-xs font-black text-red-400 uppercase tracking-wider">🔥 Create & Publish OTT Article</h3>
+                    <h3 id="form-action-title" class="text-xs font-black text-red-400 uppercase tracking-wider">🔥 Create & Publish OTT Article (Slider & Grid Ready)</h3>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-bold text-slate-300 mb-1">1. Category:</label>
+                        <label class="block text-xs font-bold text-slate-300 mb-1">1. Target Feed Category:</label>
                         <select id="movieCategory" class="w-full p-3 ott-input rounded-xl text-xs font-bold">
-                            <option value="ott-movies">🎬 OTT Movies Release</option>
-                            <option value="web-series">📺 Web Series Updates</option>
+                            <option value="ott-movies">🎬 Main Feed (Homepage Top 10 Slider & Grid)</option>
+                            <option value="web-series">📺 Web Series Special</option>
                             <option value="trending-news">🔥 Trending News & Reviews</option>
-                            <option value="box-office">🎟️ Box Office to OTT</option>
                         </select>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold text-slate-300 mb-1">2. Platform & Badge:</label>
+                        <label class="block text-xs font-bold text-slate-300 mb-1">2. Platform Badge:</label>
                         <select id="moviePlatform" class="w-full p-3 ott-input rounded-xl text-xs font-bold">
-                            <option value="NETFLIX">Netflix</option>
                             <option value="PRIME VIDEO">Prime Video</option>
+                            <option value="NETFLIX">Netflix</option>
                             <option value="JIOHOTSTAR">JioHotstar</option>
                             <option value="JIOCINEMA">JioCinema</option>
                             <option value="SONYLIV">SonyLIV</option>
@@ -159,10 +158,10 @@
                 </div>
 
                 <!-- POSTER UPLOAD SECTION -->
-                <div class="p-3.5 bg-slate-950/60 border border-slate-800 rounded-xl space-y-2">
+                <div class="p-3.5 bg-black/60 border border-zinc-800 rounded-xl space-y-2">
                     <label class="block text-xs font-bold text-amber-400">🖼️ Featured Poster Upload (1200x675 px):</label>
                     <input type="file" id="posterFile" accept="image/*" class="w-full p-2.5 ott-input rounded-xl text-xs text-slate-400">
-                    <p class="text-[10px] text-slate-500">*Gallery se image select karo. Ye seedha GitHub ke <code class="text-red-400">/images/</code> folder mein upload ho jayegi.</p>
+                    <p class="text-[10px] text-slate-500">*Gallery se WebP/JPG photo select karo. Seedha GitHub <code class="text-red-400">/images/</code> mein chali jayegi.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -189,13 +188,13 @@
 
                 <!-- CONTENT BUILDER -->
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 mb-1">8. Kahani Kya Hai (AI Summary):</label>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">8. Kahani Kya Hai (AI Summary - Slider & Cards Preview):</label>
                     <textarea id="movieSummary" rows="3" placeholder="Movie ki short story yahan paste karein..." class="w-full p-3 ott-input rounded-xl text-xs leading-relaxed"></textarea>
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 mb-1">9. Kyun Dekhein (Why Watch / Review):</label>
-                    <textarea id="movieWhyWatch" rows="2" placeholder="Dekhne ke main highlights yahan paste karein..." class="w-full p-3 ott-input rounded-xl text-xs leading-relaxed"></textarea>
+                    <textarea id="movieWhyWatch" rows="2" placeholder="Dekhne ke main reasons & highlights..." class="w-full p-3 ott-input rounded-xl text-xs leading-relaxed"></textarea>
                 </div>
 
                 <input type="hidden" id="editingPostId" value="">
@@ -203,9 +202,9 @@
 
                 <div class="pt-2">
                     <button id="submitBtn" onclick="publishOttPost()" class="w-full py-4 bg-red-600 hover:bg-red-700 text-white font-extrabold rounded-xl text-xs tracking-wider shadow-lg shadow-red-600/30 transition">
-                        🔥 PUBLISH POST DIRECT TO GITHUB
+                        🔥 PUBLISH POST DIRECT TO GITHUB & HOMEPAGE
                     </button>
-                    <button id="cancelEditBtn" onclick="cancelEditing()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl text-xs tracking-wider mt-2 hidden">
+                    <button id="cancelEditBtn" onclick="cancelEditing()" class="w-full py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-bold rounded-xl text-xs tracking-wider mt-2 hidden">
                         CANCEL EDIT MODE
                     </button>
                 </div>
@@ -219,13 +218,13 @@
                 <div>
                     <label class="block text-xs font-bold text-slate-300 mb-1">Category select karein:</label>
                     <select id="manageCategory" onchange="loadCategoryPosts()" class="w-full p-3 ott-input rounded-xl text-xs font-bold">
-                        <option value="ott-movies">🎬 OTT Movies Release</option>
-                        <option value="web-series">📺 Web Series Updates</option>
+                        <option value="ott-movies">🎬 Main Feed (Homepage Top 10 Slider & Grid)</option>
+                        <option value="web-series">📺 Web Series Special</option>
                         <option value="trending-news">🔥 Trending News & Reviews</option>
                     </select>
                 </div>
                 
-                <div class="border border-slate-800 bg-slate-950 rounded-xl p-2 max-h-[350px] overflow-y-auto space-y-2 mt-2" id="postsList"></div>
+                <div class="border border-zinc-800 bg-black rounded-xl p-2 max-h-[350px] overflow-y-auto space-y-2 mt-2" id="postsList"></div>
             </div>
 
             <!-- 3. CONFIG SETTINGS TAB -->
@@ -235,12 +234,12 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 mb-1">📢 Top Breaking Ticker Alert:</label>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">📢 Top Breaking Ticker Alert (Live on index.html):</label>
                     <textarea id="headerNotice" rows="3" placeholder="Breaking: Mirzapur Season 3 streaming date confirmed..." class="w-full p-3 ott-input rounded-xl text-xs font-medium resize-none"></textarea>
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-300 mb-1">🌐 Website Brand Title:</label>
-                    <input type="text" id="siteTitleSetting" placeholder="Gujarat Fast Alert - OTT & Entertainment Desk" class="w-full p-3 ott-input rounded-xl text-xs font-medium">
+                    <input type="text" id="siteTitleSetting" placeholder="Gujarat Fast Alert - Latest Hindi OTT Releases, Movies & Web Series" class="w-full p-3 ott-input rounded-xl text-xs font-medium">
                 </div>
                 <button onclick="saveGlobalSettings()" class="w-full py-3.5 bg-red-600 hover:bg-red-700 text-white font-extrabold rounded-xl text-xs tracking-wider shadow-md transition">
                     💾 SAVE GLOBAL SETTINGS
@@ -252,10 +251,10 @@
                 <div class="bg-red-500/10 border-l-4 border-red-600 p-3 rounded-r-xl">
                     <h3 class="text-xs font-black text-red-400 uppercase tracking-wider">💻 Article Live Canvas Preview</h3>
                 </div>
-                <button onclick="updatePreviewFromFields()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-red-400 border border-slate-700 font-bold rounded-xl text-xs transition">
+                <button onclick="updatePreviewFromFields()" class="w-full py-2.5 bg-zinc-800 hover:bg-zinc-700 text-red-400 border border-zinc-700 font-bold rounded-xl text-xs transition">
                     🔄 Refresh Preview from Form Data
                 </button>
-                <iframe id="htmlPreviewFrame" class="w-full h-[380px] border border-slate-800 rounded-xl bg-black"></iframe>
+                <iframe id="htmlPreviewFrame" class="w-full h-[380px] border border-zinc-800 rounded-xl bg-black"></iframe>
             </div>
 
         </div>
@@ -263,7 +262,7 @@
     </div>
 
     <!-- FOOTER -->
-    <footer class="w-full py-4 text-center text-slate-500 text-xs border-t border-slate-900 mt-6">
+    <footer class="w-full py-4 text-center text-slate-500 text-xs border-t border-zinc-900 mt-6">
         <p class="font-bold text-slate-400">© 2026 Gujarat Fast Alert OTT Studio</p>
         <p class="text-[11px] text-slate-600">Managed by: <span class="text-amber-500">Vanrajsinh Vaghela</span></p>
     </footer>
@@ -342,7 +341,7 @@
 
         function buildPostHTML(title, slug, platform, status, genre, cast, summary, whyWatch, imgPath) {
             return `<!DOCTYPE html>
-<html lang="hi">
+<html lang="hi" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -427,7 +426,7 @@
             let imgPath = `/images/${cleanSlugName}.webp`;
 
             try {
-                // 1. Agar poster select kiya hai toh upload karo
+                // 1. Upload Poster
                 if (posterInput.files.length > 0) {
                     showStatus("⏳ 1/3. Uploading Poster image to GitHub (/images/)...");
                     const file = posterInput.files[0];
@@ -439,13 +438,13 @@
                     await commitToGithub(token, repo, `images/${imgFileName}`, base64Data.split(',')[1], `Add poster: ${imgFileName}`);
                 }
 
-                // 2. Generate HTML & Commit
+                // 2. Generate HTML & Commit Post
                 showStatus("⏳ 2/3. Generating SEO HTML Page in GitHub (/posts/)...");
                 const fullHtml = buildPostHTML(title, slug, platform, status, genre, cast, summary, whyWatch, imgPath);
                 await commitToGithub(token, repo, `posts/${slug}`, btoa(unescape(encodeURIComponent(fullHtml))), `Add post: ${slug}`);
 
-                // 3. Sync to Firebase
-                showStatus("⏳ 3/3. Syncing to Live Database...");
+                // 3. Sync to Firebase (for index.html Slider & Grid)
+                showStatus("⏳ 3/3. Syncing to Live Database (10-Slider & Grid)...");
                 const postObj = {
                     title,
                     platform,
@@ -466,7 +465,7 @@
                     cancelEditing();
                 } else {
                     await database.ref(`posts/${category}`).push().set(postObj);
-                    showStatus("🎉 SUCCESS! OTT Post Live ho gaya aur GitHub par publish ho chuka hai!");
+                    showStatus("🎉 SUCCESS! OTT Post Live ho gaya aur index.html par turant sync ho chuka hai!");
                     clearForm();
                 }
                 loadCategoryPosts();
@@ -529,7 +528,7 @@
                 Object.keys(data).reverse().forEach(key => {
                     const post = data[key];
                     const item = document.createElement('div');
-                    item.className = 'bg-slate-900 p-3 rounded-xl border border-slate-800 flex items-center justify-between gap-2 shadow-sm';
+                    item.className = 'bg-zinc-900 p-3 rounded-xl border border-zinc-800 flex items-center justify-between gap-2 shadow-sm';
                     item.innerHTML = `
                         <div class="text-xs font-bold text-slate-200">
                             ${post.title} <span class="bg-red-500/20 text-red-400 text-[9px] px-2 py-0.5 rounded font-black border border-red-500/30">${post.platform}</span>
@@ -548,7 +547,7 @@
             document.getElementById('editingPostId').value = id;
             document.getElementById('editingCategory').value = category;
             document.getElementById('movieCategory').value = category;
-            document.getElementById('moviePlatform').value = post.platform || 'NETFLIX';
+            document.getElementById('moviePlatform').value = post.platform || 'PRIME VIDEO';
             document.getElementById('movieTitle').value = post.title || '';
             document.getElementById('movieCast').value = post.cast || '';
             document.getElementById('movieGenre').value = post.genre || '';
@@ -567,8 +566,8 @@
             document.getElementById('editingPostId').value = '';
             document.getElementById('editingCategory').value = ''; 
             clearForm();
-            document.getElementById('form-action-title').innerText = "🔥 Create & Publish OTT Article";
-            document.getElementById('submitBtn').innerText = "🔥 PUBLISH POST DIRECT TO GITHUB";
+            document.getElementById('form-action-title').innerText = "🔥 Create & Publish OTT Article (Slider & Grid Ready)";
+            document.getElementById('submitBtn').innerText = "🔥 PUBLISH POST DIRECT TO GITHUB & HOMEPAGE";
             document.getElementById('cancelEditBtn').classList.add('hidden');
         }
 
