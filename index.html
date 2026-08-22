@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title id="siteTitle">Gujarat Fast Alert - Latest Hindi OTT Releases, Movies & Web Series</title>
-  <meta name="description" content="Latest Hindi movies, OTT releases, web series, trailers aur streaming updates Hindi mein.">
+  <title id="siteTitle">Gujarat Fast Alert - Latest Hindi OTT, Cinema & YouTube Series</title>
+  <meta name="description" content="Latest Hindi movies, Theatrical releases, OTT releases, YouTube viral web series, trailers aur streaming updates Hindi mein.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#09090b">
 
-  <!-- Open Graph Meta Tags -->
+  <!-- Open Graph Meta Tags for Discover -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Gujarat Fast Alert Entertainment">
   <meta property="og:description" content="Latest Hindi OTT Releases, Movies & Streaming Updates">
@@ -80,16 +80,26 @@
 
         <!-- Category Filters -->
         <nav class="hidden md:flex gap-2 text-xs font-bold">
-          <a href="#aaj-release" class="bg-brand px-3.5 py-1.5 rounded-full text-white">Aaj Ki Releases</a>
+          <a href="#aaj-release" class="bg-brand px-3.5 py-1.5 rounded-full text-white">🔥 All Trending</a>
+          <a href="#theatres" class="bg-white/5 hover:bg-white/10 px-3.5 py-1.5 rounded-full">Theatres</a>
+          <a href="#youtube" class="bg-white/5 hover:bg-white/10 px-3.5 py-1.5 rounded-full">YouTube Series</a>
           <a href="#netflix" class="bg-white/5 hover:bg-white/10 px-3.5 py-1.5 rounded-full">Netflix</a>
           <a href="#prime" class="bg-white/5 hover:bg-white/10 px-3.5 py-1.5 rounded-full">Prime Video</a>
-          <a href="#jiocinema" class="bg-white/5 hover:bg-white/10 px-3.5 py-1.5 rounded-full">JioHotstar</a>
         </nav>
 
         <!-- Direct Telegram Community CTA -->
         <a href="https://t.me/+rG_x3BDIdYliNTVl" target="_blank" rel="noopener noreferrer" class="bg-sky-600 hover:bg-sky-500 text-white text-xs font-black px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-lg shadow-sky-600/30 transition">
           <span>✈️ Join Telegram</span>
         </a>
+      </div>
+
+      <!-- Mobile Scrolling Filters -->
+      <div class="md:hidden flex gap-2 overflow-x-auto hide-scrollbar pb-3 text-[11px] font-bold border-t border-white/5 pt-2">
+        <a href="#aaj-release" class="shrink-0 bg-brand px-3 py-1 rounded-full text-white">🔥 All Releases</a>
+        <a href="#theatres" class="shrink-0 bg-amber-600/30 text-amber-300 border border-amber-500/40 px-3 py-1 rounded-full">🏛️ Theatres</a>
+        <a href="#youtube" class="shrink-0 bg-red-600/30 text-red-300 border border-red-500/40 px-3 py-1 rounded-full">🔴 YouTube</a>
+        <a href="#netflix" class="shrink-0 bg-white/5 px-3 py-1 rounded-full">Netflix</a>
+        <a href="#prime" class="shrink-0 bg-white/5 px-3 py-1 rounded-full">Prime Video</a>
       </div>
     </div>
   </header>
@@ -109,16 +119,16 @@
       <button id="prevSlide" type="button" aria-label="Previous" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 backdrop-blur border border-white/20 flex items-center justify-center text-lg z-20 hover:bg-black">&#8249;</button>
       <button id="nextSlide" type="button" aria-label="Next" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 backdrop-blur border border-white/20 flex items-center justify-center text-lg z-20 hover:bg-black">&#8250;</button>
 
-      <!-- Dots (Compact Multi-Dot Wrapper) -->
+      <!-- Dots Wrapper -->
       <div id="sliderDots" class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 max-w-[90%] overflow-x-auto hide-scrollbar px-2 py-1 bg-black/40 backdrop-blur-md rounded-full border border-white/10"></div>
     </section>
 
-    <!-- Aaj Ki Releases Grid -->
+    <!-- Streaming & Cinema Updates Grid -->
     <section id="aaj-release">
       <div class="flex items-end justify-between mb-4">
         <div>
-          <p class="text-brand text-xs font-black uppercase tracking-widest">Streaming Updates</p>
-          <h2 class="text-xl md:text-2xl font-black">Aaj Release Hui / Trending</h2>
+          <p class="text-brand text-xs font-black uppercase tracking-widest">Entertainment Desk</p>
+          <h2 class="text-xl md:text-2xl font-black">Aaj Release Hui / Trending Updates</h2>
         </div>
       </div>
 
@@ -127,23 +137,23 @@
       </div>
     </section>
 
-    <!-- Platform Categories -->
+    <!-- Platform Categories Row -->
     <section class="grid grid-cols-2 md:grid-cols-4 gap-3">
       <div class="bg-card border border-white/10 rounded-2xl p-4 flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-red-600/20 text-brand font-black flex items-center justify-center text-sm">N</div>
-        <div><h4 class="font-bold text-xs">Netflix Hindi</h4><p class="text-[10px] text-slate-400">All Latest Movies</p></div>
+        <div class="w-10 h-10 rounded-xl bg-amber-600/20 text-amber-400 font-black flex items-center justify-center text-base">🏛️</div>
+        <div><h4 class="font-bold text-xs">Theatres / Cinema</h4><p class="text-[10px] text-slate-400">Box Office Releases</p></div>
+      </div>
+      <div class="bg-card border border-white/10 rounded-2xl p-4 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-red-600/20 text-red-500 font-black flex items-center justify-center text-base">🔴</div>
+        <div><h4 class="font-bold text-xs">YouTube Dramas</h4><p class="text-[10px] text-slate-400">Viral Web Series</p></div>
+      </div>
+      <div class="bg-card border border-white/10 rounded-2xl p-4 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-orange-600/20 text-orange-400 font-black flex items-center justify-center text-xs font-black">MINI</div>
+        <div><h4 class="font-bold text-xs">Amazon MiniTV</h4><p class="text-[10px] text-slate-400">100% Free Shows</p></div>
       </div>
       <div class="bg-card border border-white/10 rounded-2xl p-4 flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-blue-600/20 text-blue-400 font-black flex items-center justify-center text-sm">P</div>
-        <div><h4 class="font-bold text-xs">Prime Video</h4><p class="text-[10px] text-slate-400">Exclusive Series</p></div>
-      </div>
-      <div class="bg-card border border-white/10 rounded-2xl p-4 flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-yellow-600/20 text-yellow-400 font-black flex items-center justify-center text-sm">J</div>
-        <div><h4 class="font-bold text-xs">JioCinema</h4><p class="text-[10px] text-slate-400">Free Streaming</p></div>
-      </div>
-      <div class="bg-card border border-white/10 rounded-2xl p-4 flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-purple-600/20 text-purple-400 font-black flex items-center justify-center text-sm">H</div>
-        <div><h4 class="font-bold text-xs">Disney+ Hotstar</h4><p class="text-[10px] text-slate-400">Specials & Cinema</p></div>
+        <div><h4 class="font-bold text-xs">Prime Video & Netflix</h4><p class="text-[10px] text-slate-400">Blockbusters</p></div>
       </div>
     </section>
 
@@ -174,6 +184,20 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
+    // Helper: Dynamic Color Badge for Discover CTR
+    function getPlatformStyle(platform) {
+      const p = (platform || '').toUpperCase();
+      if (p.includes('THEATRE') || p.includes('CINEMA')) return 'bg-amber-600 text-white';
+      if (p.includes('YOUTUBE')) return 'bg-red-600 text-white';
+      if (p.includes('MINITV')) return 'bg-orange-500 text-white';
+      if (p.includes('PRIME')) return 'bg-blue-600 text-white';
+      if (p.includes('HOTSTAR')) return 'bg-sky-600 text-white';
+      if (p.includes('JIOCINEMA')) return 'bg-yellow-600 text-white';
+      if (p.includes('SONYLIV')) return 'bg-indigo-600 text-white';
+      if (p.includes('ZEE5')) return 'bg-purple-600 text-white';
+      return 'bg-brand text-white';
+    }
+
     // 1. Load Live Settings
     db.ref('settings').on('value', snap => {
       const data = snap.val();
@@ -186,7 +210,7 @@
       }
     });
 
-    // 2. Load Live Posts into Slider (Top 10) & Grid (All)
+    // 2. Load Live Posts into Slider & Grid
     db.ref('posts/ott-movies').on('value', snap => {
       const data = snap.val();
       if(!data) return;
@@ -200,9 +224,10 @@
       dotsContainer.innerHTML = "";
       grid.innerHTML = "";
 
-      // Hero Slider - Top 10 Posts Setup
+      // Top 10 Hero Slider
       const top10 = posts.slice(0, 10);
       top10.forEach((post, i) => {
+        const badgeColor = getPlatformStyle(post.platform);
         const slide = document.createElement("article");
         slide.className = `slide ${i === 0 ? 'active' : ''}`;
         slide.innerHTML = `
@@ -211,7 +236,7 @@
           <div class="relative z-10 h-full flex items-end">
             <div class="p-6 md:p-10 max-w-2xl pb-16">
               <div class="flex gap-2 mb-3">
-                <span class="bg-brand text-white text-[10px] font-black px-2.5 py-1 rounded-md">${post.platform}</span>
+                <span class="${badgeColor} text-[10px] font-black px-2.5 py-1 rounded-md uppercase">${post.platform}</span>
                 <span class="bg-white/10 text-[10px] font-bold px-2.5 py-1 rounded-md">#${i + 1} TOP TRENDING</span>
               </div>
               <h1 class="text-2xl md:text-4xl font-black leading-tight text-white">${post.title}</h1>
@@ -232,13 +257,14 @@
 
       // Grid Cards (All Posts)
       posts.forEach(post => {
+        const badgeColor = getPlatformStyle(post.platform);
         const card = document.createElement("article");
         card.className = "story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between";
         card.innerHTML = `
           <a href="/posts/${post.link}" class="block">
             <div class="relative">
               <img src="${post.image}" alt="${post.title}" class="w-full aspect-[16/9] object-cover">
-              <span class="absolute top-2 left-2 bg-brand text-[9px] font-black px-2 py-0.5 rounded text-white">${post.platform}</span>
+              <span class="absolute top-2 left-2 ${badgeColor} text-[9px] font-black px-2 py-0.5 rounded uppercase">${post.platform}</span>
             </div>
             <div class="p-3">
               <h3 class="font-bold text-xs md:text-sm line-clamp-2 text-white hover:text-brand transition">${post.title}</h3>
