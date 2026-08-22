@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Gujarat Fast Alert - Latest Hindi OTT Releases, Movies & Web Series</title>
-  <meta name="description" content="Latest Hindi movies, OTT releases, web series, trailers aur streaming updates Hindi mein. Janiye kab aur kahan dekhein nayi releases.">
+  <title id="siteTitle">Gujarat Fast Alert - Latest Hindi OTT Releases, Movies & Web Series</title>
+  <meta name="description" content="Latest Hindi movies, OTT releases, web series, trailers aur streaming updates Hindi mein.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#09090b">
 
@@ -14,21 +14,6 @@
   <meta property="og:title" content="Gujarat Fast Alert Entertainment">
   <meta property="og:description" content="Latest Hindi OTT Releases, Movies & Streaming Updates">
   <meta property="og:image" content="/images/mirzapur-3-ott.webp">
-
-  <!-- WebSite Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Gujarat Fast Alert Entertainment",
-    "url": "https://your-domain.pages.dev/",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://your-domain.pages.dev/?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  }
-  </script>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -47,59 +32,37 @@
     }
   </script>
 
+  <!-- Firebase App & Database SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
-    body {
-      background-color: #09090b;
-    }
-    .hide-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-    .hide-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-    .slider-track {
-      display: flex;
-      height: 100%;
-      transition: transform 0.55s ease-in-out;
-    }
-    .slide {
-      min-width: 100%;
-      height: 100%;
-      position: relative;
-    }
-    .slide-image {
-      transition: transform 5s linear;
-    }
-    .slide.active .slide-image {
-      transform: scale(1.04);
-    }
-    .story-card {
-      transition: transform .2s ease, border-color .2s ease;
-    }
-    .story-card:hover {
-      transform: translateY(-3px);
-      border-color: #3f3f46;
-    }
-    @media (max-width: 640px) {
-      .hero-slider {
-        height: 500px;
-      }
-    }
-    @media (min-width: 641px) {
-      .hero-slider {
-        height: 440px;
-      }
-    }
+    html { scroll-behavior: smooth; }
+    body { background-color: #09090b; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .slider-track { display: flex; height: 100%; transition: transform 0.55s ease-in-out; }
+    .slide { min-width: 100%; height: 100%; position: relative; }
+    .slide-image { transition: transform 5s linear; }
+    .slide.active .slide-image { transform: scale(1.04); }
+    .story-card { transition: transform .2s ease, border-color .2s ease; }
+    .story-card:hover { transform: translateY(-3px); border-color: #3f3f46; }
+    @media (max-width: 640px) { .hero-slider { height: 480px; } }
+    @media (min-width: 641px) { .hero-slider { height: 440px; } }
   </style>
 </head>
 
 <body class="bg-bgmain text-white antialiased font-sans">
 
-  <!-- ==================== HEADER ==================== -->
+  <!-- Breaking Notice Ticker (Admin Synced) -->
+  <div id="tickerContainer" class="bg-red-950/80 border-b border-red-800 text-red-200 text-xs py-1.5 px-4 hidden">
+    <div class="max-w-7xl mx-auto flex items-center gap-2">
+      <span class="bg-brand text-white text-[9px] font-black px-2 py-0.5 rounded">ALERT</span>
+      <marquee id="tickerText" class="font-bold text-xs"></marquee>
+    </div>
+  </div>
+
+  <!-- Header -->
   <header class="sticky top-0 z-50 bg-black/95 backdrop-blur border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4">
       <div class="h-16 flex items-center justify-between gap-4">
@@ -114,106 +77,42 @@
           </div>
         </a>
 
-        <!-- Category Badges / Filters -->
+        <!-- Category Filters -->
         <nav class="hidden md:flex gap-2 text-xs font-bold">
           <a href="#aaj-release" class="bg-brand px-3.5 py-1.5 rounded-full text-white">Aaj Ki Releases</a>
           <a href="#netflix" class="bg-white/5 hover:bg-white/10 px-3.5 py-1.5 rounded-full">Netflix</a>
           <a href="#prime" class="bg-white/5 hover:bg-white/10 px-3.5 py-1.5 rounded-full">Prime Video</a>
           <a href="#jiocinema" class="bg-white/5 hover:bg-white/10 px-3.5 py-1.5 rounded-full">JioHotstar</a>
-          <a href="#upcoming" class="bg-white/5 hover:bg-white/10 px-3.5 py-1.5 rounded-full">Upcoming</a>
         </nav>
 
-        <!-- Social Community CTA -->
+        <!-- Community CTA -->
         <a href="https://t.me/" target="_blank" class="bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5">
           <span>Telegram</span>
         </a>
       </div>
-
-      <!-- Mobile Scrolling Nav -->
-      <div class="md:hidden flex gap-2 overflow-x-auto hide-scrollbar pb-3 text-xs font-bold border-t border-white/5 pt-2">
-        <a href="#aaj-release" class="shrink-0 bg-brand px-3 py-1 rounded-full text-white">Aaj Ki Releases</a>
-        <a href="#netflix" class="shrink-0 bg-white/5 px-3 py-1 rounded-full">Netflix</a>
-        <a href="#prime" class="shrink-0 bg-white/5 px-3 py-1 rounded-full">Prime Video</a>
-        <a href="#jiocinema" class="shrink-0 bg-white/5 px-3 py-1 rounded-full">JioHotstar</a>
-        <a href="#upcoming" class="shrink-0 bg-white/5 px-3 py-1 rounded-full">Upcoming</a>
-      </div>
     </div>
   </header>
 
-  <!-- ==================== MAIN CONTENT ==================== -->
+  <!-- Main Content -->
   <main class="max-w-7xl mx-auto px-4 py-6 space-y-12">
 
-    <!-- Hero Slider (Top 3 Big Releases) -->
+    <!-- Hero Slider (Top 10 Releases Auto Sync) -->
     <section id="top-stories" class="hero-slider relative overflow-hidden rounded-3xl border border-white/10 bg-black touch-pan-y">
-      
       <div id="sliderTrack" class="slider-track">
-        
-        <!-- Slide 1: Live Connected Article -->
-        <article class="slide active">
-          <img src="/images/mirzapur-3-ott.webp" alt="Mirzapur Season 3 OTT Release" class="slide-image absolute inset-0 w-full h-full object-cover">
-          <div class="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-transparent"></div>
-          
-          <div class="relative z-10 h-full flex items-end">
-            <div class="p-6 md:p-10 max-w-2xl pb-16">
-              <div class="flex gap-2 mb-3">
-                <span class="bg-blue-600 text-white text-[10px] font-black px-2.5 py-1 rounded-md">PRIME VIDEO</span>
-                <span class="bg-white/10 text-[10px] font-bold px-2.5 py-1 rounded-md">TRENDING NOW</span>
-              </div>
-              <h1 class="text-2xl md:text-4xl font-black leading-tight text-white">
-                Mirzapur Season 3 OTT Release: Kab Aur Kahan Dekhein, Star Cast Aur Story
-              </h1>
-              <p class="mt-2 text-slate-300 text-xs md:text-sm line-clamp-2">
-                Munna Bhaiya ke ant ke baad Guddu Pandit aur Golu Gupta ka kabza ho chuka hai. Purvanchal ki siyasat ka naya chapter shuru.
-              </p>
-              <div class="mt-5">
-                <a href="/posts/mirzapur-3-ott-release.html" class="inline-block bg-white text-black font-black text-xs md:text-sm px-5 py-2.5 rounded-xl hover:bg-slate-200 transition">
-                  Puri Details Padhein &rarr;
-                </a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- Slide 2: Placeholder Release -->
-        <article class="slide">
-          <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=1600&auto=format&fit=crop&q=80" alt="Stree 2 OTT Update" class="slide-image absolute inset-0 w-full h-full object-cover">
-          <div class="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-transparent"></div>
-          
-          <div class="relative z-10 h-full flex items-end">
-            <div class="p-6 md:p-10 max-w-2xl pb-16">
-              <div class="flex gap-2 mb-3">
-                <span class="bg-brand text-white text-[10px] font-black px-2.5 py-1 rounded-md">HOTSTAR / NETFLIX</span>
-                <span class="bg-white/10 text-[10px] font-bold px-2.5 py-1 rounded-md">BLOCKBUSTER</span>
-              </div>
-              <h2 class="text-2xl md:text-4xl font-black leading-tight text-white">
-                Stree 2 OTT Release Date: Kab Online Stream Hogi Ye Film?
-              </h2>
-              <p class="mt-2 text-slate-300 text-xs md:text-sm line-clamp-2">
-                Box office par dhoom machane ke baad OTT release ko lekar aayi badi update.
-              </p>
-              <div class="mt-5">
-                <a href="#" class="inline-block bg-white text-black font-black text-xs md:text-sm px-5 py-2.5 rounded-xl hover:bg-slate-200 transition">
-                  Update Dekhein &rarr;
-                </a>
-              </div>
-            </div>
-          </div>
-        </article>
-
+        <div class="slide active flex items-center justify-center text-slate-500 text-sm">
+          Loading top 10 releases...
+        </div>
       </div>
 
-      <!-- Slider Controls -->
+      <!-- Controls -->
       <button id="prevSlide" type="button" aria-label="Previous" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 backdrop-blur border border-white/20 flex items-center justify-center text-lg z-20 hover:bg-black">&#8249;</button>
       <button id="nextSlide" type="button" aria-label="Next" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 backdrop-blur border border-white/20 flex items-center justify-center text-lg z-20 hover:bg-black">&#8250;</button>
 
-      <!-- Slider Dots -->
-      <div id="sliderDots" class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
-        <button type="button" class="dot w-6 h-1.5 rounded-full bg-white"></button>
-        <button type="button" class="dot w-1.5 h-1.5 rounded-full bg-white/40"></button>
-      </div>
+      <!-- Dots (Compact Multi-Dot Wrapper) -->
+      <div id="sliderDots" class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 max-w-[90%] overflow-x-auto hide-scrollbar px-2 py-1 bg-black/40 backdrop-blur-md rounded-full border border-white/10"></div>
     </section>
 
-    <!-- ==================== AAJ KI RELEASES (GRID) ==================== -->
+    <!-- Aaj Ki Releases Grid -->
     <section id="aaj-release">
       <div class="flex items-end justify-between mb-4">
         <div>
@@ -222,230 +121,169 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        
-        <!-- Post Card 1 (Connected) -->
-        <article class="story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between">
-          <a href="/posts/mirzapur-3-ott-release.html" class="block">
-            <div class="relative">
-              <img src="/images/mirzapur-3-ott.webp" alt="Mirzapur Season 3" class="w-full aspect-[16/9] object-cover">
-              <span class="absolute top-2 left-2 bg-blue-600 text-[9px] font-black px-2 py-0.5 rounded">PRIME</span>
-            </div>
-            <div class="p-3">
-              <h3 class="font-bold text-xs md:text-sm line-clamp-2 text-white hover:text-brand transition">
-                Mirzapur Season 3 OTT Release
-              </h3>
-              <p class="text-[11px] text-slate-400 mt-1">Crime Thriller • Hindi</p>
-              <p class="text-[10px] text-green-400 font-bold mt-2.5">Streaming Now</p>
-            </div>
-          </a>
-        </article>
-
-        <!-- Post Card 2 -->
-        <article class="story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between">
-          <a href="#" class="block">
-            <div class="relative">
-              <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=600&auto=format&fit=crop&q=80" alt="Sector 36" class="w-full aspect-[16/9] object-cover">
-              <span class="absolute top-2 left-2 bg-brand text-[9px] font-black px-2 py-0.5 rounded">NETFLIX</span>
-            </div>
-            <div class="p-3">
-              <h3 class="font-bold text-xs md:text-sm line-clamp-2 text-white hover:text-brand transition">
-                Sector 36 OTT Release Date & Story
-              </h3>
-              <p class="text-[11px] text-slate-400 mt-1">Suspense • Vikrant Massey</p>
-              <p class="text-[10px] text-green-400 font-bold mt-2.5">Streaming Now</p>
-            </div>
-          </a>
-        </article>
-
-        <!-- Post Card 3 -->
-        <article class="story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between">
-          <a href="#" class="block">
-            <div class="relative">
-              <img src="https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=600&auto=format&fit=crop&q=80" alt="Panchayat Season 3" class="w-full aspect-[16/9] object-cover">
-              <span class="absolute top-2 left-2 bg-blue-600 text-[9px] font-black px-2 py-0.5 rounded">PRIME</span>
-            </div>
-            <div class="p-3">
-              <h3 class="font-bold text-xs md:text-sm line-clamp-2 text-white hover:text-brand transition">
-                Panchayat Season 3 Full Episode Details
-              </h3>
-              <p class="text-[11px] text-slate-400 mt-1">Comedy • Jitendra Kumar</p>
-              <p class="text-[10px] text-green-400 font-bold mt-2.5">Streaming Now</p>
-            </div>
-          </a>
-        </article>
-
-        <!-- Post Card 4 -->
-        <article class="story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between">
-          <a href="#" class="block">
-            <div class="relative">
-              <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&auto=format&fit=crop&q=80" alt="Asur Season 2" class="w-full aspect-[16/9] object-cover">
-              <span class="absolute top-2 left-2 bg-yellow-600 text-[9px] font-black px-2 py-0.5 rounded">JIOCINEMA</span>
-            </div>
-            <div class="p-3">
-              <h3 class="font-bold text-xs md:text-sm line-clamp-2 text-white hover:text-brand transition">
-                Asur Season 2: Kab Aur Kaise Dekhein Free
-              </h3>
-              <p class="text-[11px] text-slate-400 mt-1">Mythological Thriller</p>
-              <p class="text-[10px] text-green-400 font-bold mt-2.5">Streaming Now</p>
-            </div>
-          </a>
-        </article>
-
-        <!-- Post Card 5 -->
-        <article class="story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between">
-          <a href="#" class="block">
-            <div class="relative">
-              <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600&auto=format&fit=crop&q=80" alt="Upcoming OTT" class="w-full aspect-[16/9] object-cover">
-              <span class="absolute top-2 left-2 bg-purple-600 text-[9px] font-black px-2 py-0.5 rounded">HOTSTAR</span>
-            </div>
-            <div class="p-3">
-              <h3 class="font-bold text-xs md:text-sm line-clamp-2 text-white hover:text-brand transition">
-                Taaza Khabar Season 2 Release Update
-              </h3>
-              <p class="text-[11px] text-slate-400 mt-1">Drama • Bhuvan Bam</p>
-              <p class="text-[10px] text-yellow-400 font-bold mt-2.5">Coming Friday</p>
-            </div>
-          </a>
-        </article>
-
+      <div id="liveGridContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <!-- Live Firebase Cards Injected Here -->
       </div>
     </section>
 
-    <!-- ==================== PLATFORM ROW ==================== -->
+    <!-- Platform Categories -->
     <section class="grid grid-cols-2 md:grid-cols-4 gap-3">
       <div class="bg-card border border-white/10 rounded-2xl p-4 flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-red-600/20 text-brand font-black flex items-center justify-center text-sm">N</div>
-        <div>
-          <h4 class="font-bold text-xs">Netflix Hindi</h4>
-          <p class="text-[10px] text-slate-400">All Latest Movies</p>
-        </div>
+        <div><h4 class="font-bold text-xs">Netflix Hindi</h4><p class="text-[10px] text-slate-400">All Latest Movies</p></div>
       </div>
-
       <div class="bg-card border border-white/10 rounded-2xl p-4 flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-blue-600/20 text-blue-400 font-black flex items-center justify-center text-sm">P</div>
-        <div>
-          <h4 class="font-bold text-xs">Prime Video</h4>
-          <p class="text-[10px] text-slate-400">Exclusive Series</p>
-        </div>
+        <div><h4 class="font-bold text-xs">Prime Video</h4><p class="text-[10px] text-slate-400">Exclusive Series</p></div>
       </div>
-
       <div class="bg-card border border-white/10 rounded-2xl p-4 flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-yellow-600/20 text-yellow-400 font-black flex items-center justify-center text-sm">J</div>
-        <div>
-          <h4 class="font-bold text-xs">JioCinema</h4>
-          <p class="text-[10px] text-slate-400">Free Streaming</p>
-        </div>
+        <div><h4 class="font-bold text-xs">JioCinema</h4><p class="text-[10px] text-slate-400">Free Streaming</p></div>
       </div>
-
       <div class="bg-card border border-white/10 rounded-2xl p-4 flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-purple-600/20 text-purple-400 font-black flex items-center justify-center text-sm">H</div>
-        <div>
-          <h4 class="font-bold text-xs">Disney+ Hotstar</h4>
-          <p class="text-[10px] text-slate-400">Specials & Cinema</p>
-        </div>
+        <div><h4 class="font-bold text-xs">Disney+ Hotstar</h4><p class="text-[10px] text-slate-400">Specials & Cinema</p></div>
       </div>
-    </section>
-
-    <!-- ==================== FAQ ACCORDION ==================== -->
-    <section class="max-w-3xl space-y-3">
-      <h2 class="text-xl font-black">Frequently Asked Questions</h2>
-      
-      <details class="bg-card border border-white/10 rounded-xl p-4 cursor-pointer">
-        <summary class="font-bold text-sm">Aaj OTT par kaun si nayi Hindi movie release hui hai?</summary>
-        <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-          Netflix, Prime Video aur Hotstar par har hafte nayi Hindi films stream hoti hain. Aaj ki latest release list hamare 'Aaj Ki Releases' section mein updated rehti hai.
-        </p>
-      </details>
-
-      <details class="bg-card border border-white/10 rounded-xl p-4 cursor-pointer">
-        <summary class="font-bold text-sm">OTT release dates kaise check karein?</summary>
-        <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-          Hamare platform par har aane wali Bollywood movie aur web series ka confirmed platform aur exact streaming date provide ki jaati hai.
-        </p>
-      </details>
     </section>
 
   </main>
 
-  <!-- ==================== FOOTER ==================== -->
+  <!-- Footer -->
   <footer class="border-t border-white/10 mt-14 py-8 bg-black">
     <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-      <div>
-        <span class="font-black text-white">GUJARAT FAST ALERT</span> &copy; 2026. All Rights Reserved.
-      </div>
+      <div><span class="font-black text-white">GUJARAT FAST ALERT</span> &copy; 2026. All Rights Reserved.</div>
       <div class="flex gap-4">
         <a href="/privacy-policy.html" class="hover:text-white">Privacy Policy</a>
         <a href="/disclaimer.html" class="hover:text-white">Disclaimer</a>
-        <a href="/about.html" class="hover:text-white">About Us</a>
       </div>
     </div>
   </footer>
 
-  <!-- ==================== SLIDER SCRIPT ==================== -->
+  <!-- Firebase Live Auto-Sync Engine -->
   <script>
-    const track = document.getElementById("sliderTrack");
-    const slides = Array.from(document.querySelectorAll(".slide"));
-    const dots = Array.from(document.querySelectorAll(".dot"));
-    const prevButton = document.getElementById("prevSlide");
-    const nextButton = document.getElementById("nextSlide");
-    let currentSlide = 0;
-    let autoPlay;
+    const firebaseConfig = {
+      apiKey: "AIzaSyD40GV9eAeGiu-Tz0l09ZLifjzAQp3UFso",
+      authDomain: "gujarat-fast-alert.firebaseapp.com",
+      databaseURL: "https://gujarat-fast-alert-default-rtdb.firebaseio.com",
+      projectId: "gujarat-fast-alert",
+      storageBucket: "gujarat-fast-alert.firebasestorage.app",
+      messagingSenderId: "395130500748",
+      appId: "1:395130500748:web:e6589f3a57812efad6ada9"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
 
-    function updateSlider() {
-      track.style.transform = `translateX(-${currentSlide * 100}%)`;
-      slides.forEach((slide, i) => slide.classList.toggle("active", i === currentSlide));
-      dots.forEach((dot, i) => {
-        if (i === currentSlide) {
-          dot.classList.remove("w-1.5", "bg-white/40");
-          dot.classList.add("w-6", "bg-white");
-        } else {
-          dot.classList.remove("w-6", "bg-white");
-          dot.classList.add("w-1.5", "bg-white/40");
+    // 1. Load Live Settings
+    db.ref('settings').on('value', snap => {
+      const data = snap.val();
+      if(data) {
+        if(data.siteTitle) document.getElementById('siteTitle').innerText = data.siteTitle;
+        if(data.headerNotice) {
+          document.getElementById('tickerContainer').classList.remove('hidden');
+          document.getElementById('tickerText').innerText = data.headerNotice;
         }
-      });
-    }
-
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % slides.length;
-      updateSlider();
-    }
-
-    function prevSlide() {
-      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-      updateSlider();
-    }
-
-    nextButton.addEventListener("click", () => { nextSlide(); restartAutoPlay(); });
-    prevButton.addEventListener("click", () => { prevSlide(); restartAutoPlay(); });
-
-    dots.forEach((dot, i) => {
-      dot.addEventListener("click", () => {
-        currentSlide = i;
-        updateSlider();
-        restartAutoPlay();
-      });
+      }
     });
 
-    function startAutoPlay() { autoPlay = setInterval(nextSlide, 5000); }
-    function stopAutoPlay() { clearInterval(autoPlay); }
-    function restartAutoPlay() { stopAutoPlay(); startAutoPlay(); }
+    // 2. Load Live Posts into Slider (Top 10) & Grid (All)
+    db.ref('posts/ott-movies').on('value', snap => {
+      const data = snap.val();
+      if(!data) return;
 
-    const hero = document.getElementById("top-stories");
-    hero.addEventListener("mouseenter", stopAutoPlay);
-    hero.addEventListener("mouseleave", startAutoPlay);
+      const posts = Object.values(data).reverse();
+      const track = document.getElementById("sliderTrack");
+      const dotsContainer = document.getElementById("sliderDots");
+      const grid = document.getElementById("liveGridContainer");
 
-    let startX = 0;
-    hero.addEventListener("touchstart", e => { startX = e.changedTouches[0].screenX; stopAutoPlay(); }, {passive: true});
-    hero.addEventListener("touchend", e => {
-      const diff = startX - e.changedTouches[0].screenX;
-      if (Math.abs(diff) > 40) { diff > 0 ? nextSlide() : prevSlide(); }
+      track.innerHTML = "";
+      dotsContainer.innerHTML = "";
+      grid.innerHTML = "";
+
+      // Hero Slider - Top 10 Posts Setup
+      const top10 = posts.slice(0, 10);
+      top10.forEach((post, i) => {
+        const slide = document.createElement("article");
+        slide.className = `slide ${i === 0 ? 'active' : ''}`;
+        slide.innerHTML = `
+          <img src="${post.image}" alt="${post.title}" class="slide-image absolute inset-0 w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-transparent"></div>
+          <div class="relative z-10 h-full flex items-end">
+            <div class="p-6 md:p-10 max-w-2xl pb-16">
+              <div class="flex gap-2 mb-3">
+                <span class="bg-brand text-white text-[10px] font-black px-2.5 py-1 rounded-md">${post.platform}</span>
+                <span class="bg-white/10 text-[10px] font-bold px-2.5 py-1 rounded-md">#${i + 1} TOP TRENDING</span>
+              </div>
+              <h1 class="text-2xl md:text-4xl font-black leading-tight text-white">${post.title}</h1>
+              <p class="mt-2 text-slate-300 text-xs md:text-sm line-clamp-2">${post.summary}</p>
+              <div class="mt-5">
+                <a href="/posts/${post.link}" class="inline-block bg-white text-black font-black text-xs md:text-sm px-5 py-2.5 rounded-xl hover:bg-slate-200 transition">
+                  Puri Details Padhein &rarr;
+                </a>
+              </div>
+            </div>
+          </div>`;
+        track.appendChild(slide);
+
+        const dot = document.createElement("button");
+        dot.className = `dot ${i === 0 ? 'w-5 bg-white' : 'w-1.5 bg-white/40'} h-1.5 rounded-full transition-all shrink-0`;
+        dotsContainer.appendChild(dot);
+      });
+
+      // Grid Cards (All Posts)
+      posts.forEach(post => {
+        const card = document.createElement("article");
+        card.className = "story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between";
+        card.innerHTML = `
+          <a href="/posts/${post.link}" class="block">
+            <div class="relative">
+              <img src="${post.image}" alt="${post.title}" class="w-full aspect-[16/9] object-cover">
+              <span class="absolute top-2 left-2 bg-brand text-[9px] font-black px-2 py-0.5 rounded text-white">${post.platform}</span>
+            </div>
+            <div class="p-3">
+              <h3 class="font-bold text-xs md:text-sm line-clamp-2 text-white hover:text-brand transition">${post.title}</h3>
+              <p class="text-[11px] text-slate-400 mt-1">${post.genre}</p>
+              <p class="text-[10px] text-green-400 font-bold mt-2.5">${post.status}</p>
+            </div>
+          </a>`;
+        grid.appendChild(card);
+      });
+
+      initSliderEngine();
+    });
+
+    function initSliderEngine() {
+      const track = document.getElementById("sliderTrack");
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const dots = Array.from(document.querySelectorAll(".dot"));
+      const prevButton = document.getElementById("prevSlide");
+      const nextButton = document.getElementById("nextSlide");
+      let currentSlide = 0;
+      let autoPlay;
+
+      function updateSlider() {
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        slides.forEach((s, i) => s.classList.toggle("active", i === currentSlide));
+        dots.forEach((d, i) => {
+          d.className = i === currentSlide ? "dot w-5 bg-white h-1.5 rounded-full shrink-0" : "dot w-1.5 bg-white/40 h-1.5 rounded-full shrink-0";
+        });
+      }
+
+      function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateSlider(); }
+      function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateSlider(); }
+
+      nextButton.onclick = () => { nextSlide(); restartAutoPlay(); };
+      prevButton.onclick = () => { prevSlide(); restartAutoPlay(); };
+      dots.forEach((dot, i) => { dot.onclick = () => { currentSlide = i; updateSlider(); restartAutoPlay(); }; });
+
+      function startAutoPlay() { if(slides.length > 1) autoPlay = setInterval(nextSlide, 5000); }
+      function stopAutoPlay() { clearInterval(autoPlay); }
+      function restartAutoPlay() { stopAutoPlay(); startAutoPlay(); }
+
+      const hero = document.getElementById("top-stories");
+      hero.onmouseenter = stopAutoPlay;
+      hero.onmouseleave = startAutoPlay;
       startAutoPlay();
-    }, {passive: true});
-
-    updateSlider();
-    startAutoPlay();
+    }
   </script>
-
 </body>
 </html>
