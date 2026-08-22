@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTT Fast Alert - Golden Pro Admin Panel</title>
+    <title>Entertainment Fast Alert - Master Admin Panel</title>
     
     <!-- Tailwind CSS & Firebase SDK -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -58,14 +58,14 @@
             <div class="inline-flex items-center justify-center w-16 h-16 bg-red-500/10 text-red-500 rounded-2xl text-3xl mb-4 border border-red-500/20">
                 🎬
             </div>
-            <h2 class="text-2xl font-black text-white tracking-tight">OTT Studio Security Lock</h2>
+            <h2 class="text-2xl font-black text-white tracking-tight">Entertainment Studio Security</h2>
             <p class="text-xs text-slate-400 mt-1 mb-6">Control Panel open karne ke liye PIN enter karein:</p>
             
             <input type="password" inputmode="numeric" pattern="[0-9]*" id="adminPinInput" maxlength="7" placeholder="•••••••" 
                 class="w-full text-center text-3xl tracking-[12px] font-extrabold py-3.5 ott-input rounded-xl mb-5">
             
             <button onclick="checkAdminPin()" class="w-full py-4 bg-red-600 hover:bg-red-700 text-white font-black rounded-xl text-xs tracking-wider shadow-lg shadow-red-600/30 transition">
-                🔓 UNLOCK OTT DASHBOARD
+                🔓 UNLOCK DASHBOARD
             </button>
         </div>
 
@@ -79,9 +79,9 @@
                         👑
                     </div>
                     <div>
-                        <h2 class="text-base font-black text-white tracking-wide">Vanrajsinh OTT Master</h2>
+                        <h2 class="text-base font-black text-white tracking-wide">Vanrajsinh Master Desk</h2>
                         <p class="text-[11px] text-emerald-400 font-bold flex items-center gap-1.5 mt-0.5">
-                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> 10-Slide Engine & Live Sync Active
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Discover Engine Active
                         </p>
                     </div>
                 </div>
@@ -94,7 +94,6 @@
             <div id="githubConfigBlock" class="mb-6 p-4 bg-black/60 border border-red-900/40 rounded-xl space-y-3 hidden">
                 <h4 class="text-xs font-black text-red-400 uppercase tracking-wider flex items-center gap-2">
                     <span>⚙️ GitHub Direct Sync Credentials</span>
-                    <span class="text-[10px] text-slate-500 font-normal">(Local Storage mein save rahega)</span>
                 </h4>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <div>
@@ -113,7 +112,7 @@
 
             <!-- Tabs Navigation -->
             <div class="grid grid-cols-4 gap-1.5 p-1.5 bg-black rounded-xl mb-6 border border-zinc-800">
-                <button class="tab-btn active text-[11px] md:text-xs font-bold py-2.5 rounded-lg text-slate-400 transition-all text-center" onclick="switchTab('post-tab', this)">📝 NEW OTT</button>
+                <button class="tab-btn active text-[11px] md:text-xs font-bold py-2.5 rounded-lg text-slate-400 transition-all text-center" onclick="switchTab('post-tab', this)">📝 NEW POST</button>
                 <button class="tab-btn text-[11px] md:text-xs font-bold py-2.5 rounded-lg text-slate-400 transition-all text-center" onclick="switchTab('manage-tab', this)">⚙️ MANAGE</button>
                 <button class="tab-btn text-[11px] md:text-xs font-bold py-2.5 rounded-lg text-slate-400 transition-all text-center" onclick="switchTab('settings-tab', this)">📢 CONFIG</button>
                 <button class="tab-btn text-[11px] md:text-xs font-bold py-2.5 rounded-lg text-slate-400 transition-all text-center" onclick="switchTab('editor-tab', this)">💻 PREVIEW</button>
@@ -126,75 +125,84 @@
             <div id="post-tab" class="tab-content active space-y-4">
                 
                 <div class="bg-red-500/10 border-l-4 border-red-600 p-3 rounded-r-xl">
-                    <h3 id="form-action-title" class="text-xs font-black text-red-400 uppercase tracking-wider">🔥 Create & Publish OTT Article (Slider & Grid Ready)</h3>
+                    <h3 id="form-action-title" class="text-xs font-black text-red-400 uppercase tracking-wider">🔥 Create & Publish OTT / Theatrical Post</h3>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-bold text-slate-300 mb-1">1. Target Feed Category:</label>
+                        <label class="block text-xs font-bold text-slate-300 mb-1">1. Release Type / Location:</label>
                         <select id="movieCategory" class="w-full p-3 ott-input rounded-xl text-xs font-bold">
                             <option value="ott-movies">🎬 Main Feed (Homepage Top 10 Slider & Grid)</option>
-                            <option value="web-series">📺 Web Series Special</option>
-                            <option value="trending-news">🔥 Trending News & Reviews</option>
+                            <option value="theatres">🏛️ Theatrical / Cinema Release</option>
+                            <option value="youtube-dramas">🔴 YouTube Series & Viral Drama</option>
+                            <option value="web-series">📺 OTT Web Series</option>
                         </select>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold text-slate-300 mb-1">2. Platform Badge:</label>
-                        <select id="moviePlatform" class="w-full p-3 ott-input rounded-xl text-xs font-bold">
-                            <option value="PRIME VIDEO">Prime Video</option>
-                            <option value="NETFLIX">Netflix</option>
-                            <option value="JIOHOTSTAR">JioHotstar</option>
-                            <option value="JIOCINEMA">JioCinema</option>
-                            <option value="SONYLIV">SonyLIV</option>
-                            <option value="ZEE5">Zee5</option>
+                        <label class="block text-xs font-bold text-slate-300 mb-1">2. Platform / Badge Tag:</label>
+                        <select id="moviePlatform" class="w-full p-3 ott-input rounded-xl text-xs font-bold text-amber-300">
+                            <optgroup label="🏛️ Cinema & Free Platforms">
+                                <option value="THEATRES">🎬 THEATRES (CINEMA)</option>
+                                <option value="YOUTUBE">🔴 YOUTUBE</option>
+                                <option value="AMAZON MINITV">⚡ AMAZON MINITV</option>
+                            </optgroup>
+                            <optgroup label="📺 Major OTT Platforms">
+                                <option value="NETFLIX">Netflix</option>
+                                <option value="PRIME VIDEO">Prime Video</option>
+                                <option value="JIOHOTSTAR">JioHotstar</option>
+                                <option value="JIOCINEMA">JioCinema</option>
+                                <option value="SONYLIV">SonyLIV</option>
+                                <option value="ZEE5">Zee5</option>
+                                <option value="AHA VIDEO">Aha Video</option>
+                            </optgroup>
                         </select>
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 mb-1">3. Movie / Web Series Title:</label>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">3. Discover Click Headline (Title):</label>
                     <input type="text" id="movieTitle" placeholder="Stree 2 OTT Release: Kab Aur Kahan Dekhein..." oninput="autoGenerateSlug()" class="w-full p-3 ott-input rounded-xl text-xs font-medium">
                 </div>
 
                 <!-- POSTER UPLOAD SECTION -->
                 <div class="p-3.5 bg-black/60 border border-zinc-800 rounded-xl space-y-2">
-                    <label class="block text-xs font-bold text-amber-400">🖼️ Featured Poster Upload (1200x675 px):</label>
+                    <label class="block text-xs font-bold text-amber-400">🖼️ Discover 16:9 Banner (1200x675 px):</label>
                     <input type="file" id="posterFile" accept="image/*" class="w-full p-2.5 ott-input rounded-xl text-xs text-slate-400">
-                    <p class="text-[10px] text-slate-500">*Gallery se WebP/JPG photo select karo. Seedha GitHub <code class="text-red-400">/images/</code> mein chali jayegi.</p>
+                    <p class="text-[10px] text-slate-500">*Google Discover ke liye HD 1200x675 image select karein. Seedha <code class="text-red-400">/images/</code> mein save hogi.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-bold text-slate-300 mb-1">4. Star Cast:</label>
-                        <input type="text" id="movieCast" placeholder="Rajkummar Rao, Shraddha Kapoor" class="w-full p-3 ott-input rounded-xl text-xs font-medium">
+                        <label class="block text-xs font-bold text-slate-300 mb-1">4. Star Cast / Creators:</label>
+                        <input type="text" id="movieCast" placeholder="Rajkummar Rao / CarryMinati / Bhuvan Bam" class="w-full p-3 ott-input rounded-xl text-xs font-medium">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-300 mb-1">5. Genre & Language:</label>
-                        <input type="text" id="movieGenre" placeholder="Horror Comedy • Hindi" class="w-full p-3 ott-input rounded-xl text-xs font-medium">
+                        <input type="text" id="movieGenre" placeholder="Drama / Comedy • Hindi" class="w-full p-3 ott-input rounded-xl text-xs font-medium">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-bold text-slate-300 mb-1">6. Status / Date:</label>
-                        <input type="text" id="movieStatus" value="Streaming Now" placeholder="Streaming Now / 28 Aug 2026" class="w-full p-3 ott-input rounded-xl text-xs font-medium text-emerald-400">
+                        <label class="block text-xs font-bold text-slate-300 mb-1">6. Status / Exact Release Timing:</label>
+                        <input type="text" id="movieStatus" value="Streaming Now" placeholder="Streaming Now / In Theatres / Live at 6 PM" class="w-full p-3 ott-input rounded-xl text-xs font-medium text-emerald-400">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-300 mb-1">7. Clean Slug (File Name):</label>
+                        <label class="block text-xs font-bold text-slate-300 mb-1">7. Clean URL Slug:</label>
                         <input type="text" id="fileSlug" placeholder="stree-2-ott-release.html" class="w-full p-3 ott-input rounded-xl text-xs font-mono text-amber-300">
                     </div>
                 </div>
 
                 <!-- CONTENT BUILDER -->
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 mb-1">8. Kahani Kya Hai (AI Summary - Slider & Cards Preview):</label>
-                    <textarea id="movieSummary" rows="3" placeholder="Movie ki short story yahan paste karein..." class="w-full p-3 ott-input rounded-xl text-xs leading-relaxed"></textarea>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">8. Kahani / Plot Highlights (Google Discover Snippet):</label>
+                    <textarea id="movieSummary" rows="3" placeholder="Episode ya film ki short story/premise yahan paste karein..." class="w-full p-3 ott-input rounded-xl text-xs leading-relaxed"></textarea>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 mb-1">9. Kyun Dekhein (Why Watch / Review):</label>
-                    <textarea id="movieWhyWatch" rows="2" placeholder="Dekhne ke main reasons & highlights..." class="w-full p-3 ott-input rounded-xl text-xs leading-relaxed"></textarea>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">9. Kyun Dekhein (Why Watch / Streaming Details):</label>
+                    <textarea id="movieWhyWatch" rows="2" placeholder="Free stream link details, episodes count ya review highlights..." class="w-full p-3 ott-input rounded-xl text-xs leading-relaxed"></textarea>
                 </div>
 
                 <input type="hidden" id="editingPostId" value="">
@@ -219,8 +227,9 @@
                     <label class="block text-xs font-bold text-slate-300 mb-1">Category select karein:</label>
                     <select id="manageCategory" onchange="loadCategoryPosts()" class="w-full p-3 ott-input rounded-xl text-xs font-bold">
                         <option value="ott-movies">🎬 Main Feed (Homepage Top 10 Slider & Grid)</option>
-                        <option value="web-series">📺 Web Series Special</option>
-                        <option value="trending-news">🔥 Trending News & Reviews</option>
+                        <option value="theatres">🏛️ Theatrical / Cinema Release</option>
+                        <option value="youtube-dramas">🔴 YouTube Series & Viral Drama</option>
+                        <option value="web-series">📺 OTT Web Series</option>
                     </select>
                 </div>
                 
@@ -235,11 +244,11 @@
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 mb-1">📢 Top Breaking Ticker Alert (Live on index.html):</label>
-                    <textarea id="headerNotice" rows="3" placeholder="Breaking: Mirzapur Season 3 streaming date confirmed..." class="w-full p-3 ott-input rounded-xl text-xs font-medium resize-none"></textarea>
+                    <textarea id="headerNotice" rows="3" placeholder="Breaking: Stree 2 streaming on Prime / Dhruv Rathee new episode out..." class="w-full p-3 ott-input rounded-xl text-xs font-medium resize-none"></textarea>
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-300 mb-1">🌐 Website Brand Title:</label>
-                    <input type="text" id="siteTitleSetting" placeholder="Gujarat Fast Alert - Latest Hindi OTT Releases, Movies & Web Series" class="w-full p-3 ott-input rounded-xl text-xs font-medium">
+                    <input type="text" id="siteTitleSetting" placeholder="Gujarat Fast Alert - Latest OTT, Cinema & YouTube Series" class="w-full p-3 ott-input rounded-xl text-xs font-medium">
                 </div>
                 <button onclick="saveGlobalSettings()" class="w-full py-3.5 bg-red-600 hover:bg-red-700 text-white font-extrabold rounded-xl text-xs tracking-wider shadow-md transition">
                     💾 SAVE GLOBAL SETTINGS
@@ -252,7 +261,7 @@
                     <h3 class="text-xs font-black text-red-400 uppercase tracking-wider">💻 Article Live Canvas Preview</h3>
                 </div>
                 <button onclick="updatePreviewFromFields()" class="w-full py-2.5 bg-zinc-800 hover:bg-zinc-700 text-red-400 border border-zinc-700 font-bold rounded-xl text-xs transition">
-                    🔄 Refresh Preview from Form Data
+                    🔄 Refresh Preview
                 </button>
                 <iframe id="htmlPreviewFrame" class="w-full h-[380px] border border-zinc-800 rounded-xl bg-black"></iframe>
             </div>
@@ -263,7 +272,7 @@
 
     <!-- FOOTER -->
     <footer class="w-full py-4 text-center text-slate-500 text-xs border-t border-zinc-900 mt-6">
-        <p class="font-bold text-slate-400">© 2026 Gujarat Fast Alert OTT Studio</p>
+        <p class="font-bold text-slate-400">© 2026 Gujarat Fast Alert Entertainment Desk</p>
         <p class="text-[11px] text-slate-600">Managed by: <span class="text-amber-500">Vanrajsinh Vaghela</span></p>
     </footer>
 
@@ -373,25 +382,25 @@
   </header>
   <main class="max-w-3xl mx-auto py-6 space-y-6">
     <div class="flex items-center gap-2 text-xs">
-      <span class="bg-brand px-2.5 py-1 rounded font-black text-white">${platform}</span>
-      <span class="text-slate-400">• OTT Update</span>
+      <span class="bg-brand px-2.5 py-1 rounded font-black text-white uppercase">${platform}</span>
+      <span class="text-slate-400">• Release Desk</span>
     </div>
     <h1 class="text-2xl sm:text-4xl font-black leading-tight text-white">${title}</h1>
     <div class="rounded-2xl overflow-hidden border border-white/10 aspect-[16/9] w-full bg-card">
       <img src="${imgPath}" alt="${title}" class="w-full h-full object-cover">
     </div>
     <div class="bg-card border border-white/10 rounded-xl p-4 grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs">
-      <div><span class="text-slate-500 block">Platform:</span><strong class="text-white">${platform}</strong></div>
-      <div><span class="text-slate-500 block">Status:</span><strong class="text-green-400">${status}</strong></div>
+      <div><span class="text-slate-500 block">Platform / Venue:</span><strong class="text-white">${platform}</strong></div>
+      <div><span class="text-slate-500 block">Status / Timing:</span><strong class="text-green-400">${status}</strong></div>
       <div><span class="text-slate-500 block">Genre:</span><strong class="text-white">${genre}</strong></div>
-      <div><span class="text-slate-500 block">Star Cast:</span><strong class="text-white">${cast}</strong></div>
+      <div><span class="text-slate-500 block">Star Cast / Team:</span><strong class="text-white">${cast}</strong></div>
     </div>
     <section class="space-y-2 text-slate-300 text-sm leading-relaxed">
-      <h2 class="text-lg font-black text-white border-l-4 border-brand pl-2.5">Kahani Kya Hai?</h2>
+      <h2 class="text-lg font-black text-white border-l-4 border-brand pl-2.5">Kahani & Highlights</h2>
       <p>${summary}</p>
     </section>
     <section class="space-y-2 text-slate-300 text-sm leading-relaxed">
-      <h2 class="text-lg font-black text-white border-l-4 border-brand pl-2.5">Kyun Dekhein?</h2>
+      <h2 class="text-lg font-black text-white border-l-4 border-brand pl-2.5">Kyun Dekhein / Kahan Dekhein?</h2>
       <p>${whyWatch}</p>
     </section>
   </main>
@@ -426,7 +435,6 @@
             let imgPath = `/images/${cleanSlugName}.webp`;
 
             try {
-                // 1. Upload Poster
                 if (posterInput.files.length > 0) {
                     showStatus("⏳ 1/3. Uploading Poster image to GitHub (/images/)...");
                     const file = posterInput.files[0];
@@ -438,12 +446,10 @@
                     await commitToGithub(token, repo, `images/${imgFileName}`, base64Data.split(',')[1], `Add poster: ${imgFileName}`);
                 }
 
-                // 2. Generate HTML & Commit Post
                 showStatus("⏳ 2/3. Generating SEO HTML Page in GitHub (/posts/)...");
                 const fullHtml = buildPostHTML(title, slug, platform, status, genre, cast, summary, whyWatch, imgPath);
                 await commitToGithub(token, repo, `posts/${slug}`, btoa(unescape(encodeURIComponent(fullHtml))), `Add post: ${slug}`);
 
-                // 3. Sync to Firebase (for index.html Slider & Grid)
                 showStatus("⏳ 3/3. Syncing to Live Database (10-Slider & Grid)...");
                 const postObj = {
                     title,
@@ -465,7 +471,11 @@
                     cancelEditing();
                 } else {
                     await database.ref(`posts/${category}`).push().set(postObj);
-                    showStatus("🎉 SUCCESS! OTT Post Live ho gaya aur index.html par turant sync ho chuka hai!");
+                    // Also mirror into ott-movies if it's theatres/youtube to appear on main homepage
+                    if(category !== 'ott-movies') {
+                        await database.ref(`posts/ott-movies`).push().set(postObj);
+                    }
+                    showStatus("🎉 SUCCESS! Post Live ho gaya aur index.html par turant sync ho chuka hai!");
                     clearForm();
                 }
                 loadCategoryPosts();
@@ -547,7 +557,7 @@
             document.getElementById('editingPostId').value = id;
             document.getElementById('editingCategory').value = category;
             document.getElementById('movieCategory').value = category;
-            document.getElementById('moviePlatform').value = post.platform || 'PRIME VIDEO';
+            document.getElementById('moviePlatform').value = post.platform || 'THEATRES';
             document.getElementById('movieTitle').value = post.title || '';
             document.getElementById('movieCast').value = post.cast || '';
             document.getElementById('movieGenre').value = post.genre || '';
@@ -566,7 +576,7 @@
             document.getElementById('editingPostId').value = '';
             document.getElementById('editingCategory').value = ''; 
             clearForm();
-            document.getElementById('form-action-title').innerText = "🔥 Create & Publish OTT Article (Slider & Grid Ready)";
+            document.getElementById('form-action-title').innerText = "🔥 Create & Publish OTT / Theatrical Post";
             document.getElementById('submitBtn').innerText = "🔥 PUBLISH POST DIRECT TO GITHUB & HOMEPAGE";
             document.getElementById('cancelEditBtn').classList.add('hidden');
         }
