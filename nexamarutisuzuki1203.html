@@ -2,303 +2,332 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>Gujarat Fast Alert Entertainment - Master Admin</title>
+<title>Gujarat Fast Alert - Admin V2</title>
+
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#09090b">
 
 <script src="https://cdn.tailwindcss.com"></script>
-
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
 <style>
-body{
-    font-family:'Plus Jakarta Sans',sans-serif;
-    background:#09090b;
-    color:#f8fafc;
-    -webkit-tap-highlight-color:transparent;
+html{
+  scroll-behavior:smooth;
 }
 
-.tab-content{display:none}
-.tab-content.active{display:block}
+body{
+  background:#09090b;
+  color:#f8fafc;
+  font-family:Arial,Helvetica,sans-serif;
+  -webkit-tap-highlight-color:transparent;
+}
 
 .ott-box{
-    background:#111827;
-    border:1px solid #1f2937;
-    border-radius:20px;
-    box-shadow:0 10px 30px -5px rgba(0,0,0,.7);
+  background:#111113;
+  border:1px solid #27272a;
+  border-radius:22px;
+  box-shadow:0 15px 40px rgba(0,0,0,.55);
 }
 
-.ott-input{
-    background:#18181b;
-    border:1px solid #27272a;
-    color:#f8fafc;
+.input{
+  width:100%;
+  background:#18181b;
+  border:1px solid #303036;
+  color:#fff;
+  border-radius:12px;
+  padding:12px;
+  font-size:13px;
 }
 
-.ott-input:focus{
-    outline:none;
-    border-color:#e50914;
-    box-shadow:0 0 0 2px rgba(229,9,20,.25);
+.input:focus{
+  outline:none;
+  border-color:#e50914;
+  box-shadow:0 0 0 2px rgba(229,9,20,.18);
 }
 
-.tab-btn.active{
-    background:linear-gradient(135deg,#e50914,#991b1b);
-    color:#fff;
-    font-weight:800;
+.tab{
+  color:#a1a1aa;
+  font-weight:800;
+  font-size:11px;
+  padding:11px 7px;
+  border-radius:10px;
+  white-space:nowrap;
 }
 
-::-webkit-scrollbar{
-    width:6px;
+.tab.active{
+  background:linear-gradient(135deg,#e50914,#991b1b);
+  color:#fff;
 }
 
-::-webkit-scrollbar-track{
-    background:#09090b;
+.tab-content{
+  display:none;
 }
 
-::-webkit-scrollbar-thumb{
-    background:#3f3f46;
-    border-radius:10px;
+.tab-content.active{
+  display:block;
+}
+
+.preview-card{
+  background:#18181b;
+  border:1px solid #303036;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.preview-image{
+  width:100%;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  background:#09090b;
+}
+
+.small-label{
+  display:block;
+  color:#a1a1aa;
+  font-size:11px;
+  font-weight:800;
+  margin-bottom:6px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  padding:5px 8px;
+  border-radius:7px;
+  font-size:9px;
+  font-weight:900;
+}
+
+.hide-scroll::-webkit-scrollbar{
+  display:none;
+}
+
+.hide-scroll{
+  scrollbar-width:none;
 }
 </style>
 </head>
 
-<body class="min-h-screen flex flex-col items-center justify-between p-3 md:p-6">
+<body class="min-h-screen">
 
-<div class="w-full h-1.5 bg-gradient-to-r from-red-600 via-amber-500 to-red-600 fixed top-0 left-0 z-50"></div>
+<div class="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-600 via-amber-500 to-red-600 z-50"></div>
 
-<div class="w-full max-w-2xl mx-auto my-auto py-6">
+<!-- ================= PIN SCREEN ================= -->
 
-<!-- ================= SECURITY ================= -->
+<div id="pinScreen" class="min-h-screen flex items-center justify-center p-4">
 
-<div id="pinScreen"
-class="w-full ott-box p-6 md:p-8 text-center transition-all bg-zinc-900">
+  <div class="ott-box w-full max-w-md p-7 text-center">
 
-    <div class="inline-flex items-center justify-center w-16 h-16 bg-red-500/10 text-red-500 rounded-2xl text-3xl mb-4 border border-red-500/20">
-        🎬
+    <div class="w-20 h-20 mx-auto rounded-3xl bg-red-600/10 border border-red-600/20 flex items-center justify-center text-4xl mb-5">
+      🔐
     </div>
 
-    <h2 class="text-2xl font-black text-white tracking-tight">
-        Entertainment Studio Security
-    </h2>
+    <h1 class="text-2xl font-black">
+      Entertainment Admin V2
+    </h1>
 
-    <p class="text-xs text-slate-400 mt-1 mb-6">
-        Control Panel open karne ke liye PIN enter karein:
+    <p class="text-xs text-zinc-500 mt-2 mb-7">
+      Private publishing control panel
     </p>
 
     <input
-        type="password"
-        inputmode="numeric"
-        pattern="[0-9]*"
-        id="adminPinInput"
-        maxlength="7"
-        placeholder="•••••••"
-        autocomplete="off"
-        class="w-full text-center text-3xl tracking-[12px] font-extrabold py-3.5 ott-input rounded-xl mb-5"
+      id="adminPinInput"
+      type="password"
+      inputmode="numeric"
+      maxlength="7"
+      placeholder="•••••••"
+      class="input text-center text-3xl tracking-[12px] mb-4"
     >
 
     <button
-        onclick="checkAdminPin()"
-        class="w-full py-4 bg-red-600 hover:bg-red-700 text-white font-black rounded-xl text-xs tracking-wider shadow-lg shadow-red-600/30 transition"
+      onclick="checkAdminPin()"
+      class="w-full bg-red-600 hover:bg-red-700 py-4 rounded-xl font-black text-xs"
     >
-        🔓 UNLOCK DASHBOARD
+      🔓 UNLOCK ADMIN
     </button>
 
-    <p class="text-[10px] text-slate-600 mt-4">
-        Gujarat Fast Alert Entertainment Studio
+    <p id="pinError" class="hidden text-red-400 text-xs font-bold mt-4">
+      ❌ Invalid PIN
     </p>
+
+  </div>
+
 </div>
 
 
 <!-- ================= MAIN ADMIN ================= -->
 
-<div id="mainAdminBox" class="w-full ott-box p-4 md:p-6 hidden">
+<div id="adminApp" class="hidden">
 
-<!-- HEADER -->
+<header class="sticky top-0 z-40 bg-black/90 backdrop-blur border-b border-white/10">
 
-<div class="flex items-center justify-between border-b border-zinc-800 pb-4 mb-5">
+  <div class="max-w-7xl mx-auto px-3 md:px-5">
 
-    <div class="flex items-center gap-3">
+    <div class="h-16 flex items-center justify-between">
 
-        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-red-600 to-amber-600 flex items-center justify-center text-white text-xl font-black shadow-md">
-            👑
+      <div>
+        <div class="font-black text-sm md:text-lg">
+          <span class="text-red-500">GUJARAT</span> FAST ALERT
         </div>
 
-        <div>
-            <h2 class="text-base font-black text-white tracking-wide">
-                Vanrajsinh Master Desk
-            </h2>
-
-            <p class="text-[11px] text-emerald-400 font-bold flex items-center gap-1.5 mt-0.5">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                Entertainment Control Active
-            </p>
+        <div class="text-[9px] text-amber-400 font-black tracking-widest">
+          ENTERTAINMENT ADMIN V2
         </div>
+      </div>
+
+      <button
+        onclick="toggleGithub()"
+        class="bg-zinc-800 border border-zinc-700 text-amber-400 px-3 py-2 rounded-lg text-[10px] font-black"
+      >
+        ⚙️ GITHUB
+      </button>
 
     </div>
 
-    <button
-        onclick="toggleGithubConfig()"
-        class="text-xs bg-zinc-800 hover:bg-zinc-700 text-red-400 font-bold px-3 py-2 rounded-lg border border-zinc-700 transition"
-    >
-        ⚙️ GitHub
-    </button>
+  </div>
 
-</div>
+</header>
 
+
+<main class="max-w-7xl mx-auto px-3 md:px-5 py-5">
 
 <!-- ================= GITHUB CONFIG ================= -->
 
+<div id="githubBox" class="hidden ott-box p-4 mb-5">
+
+  <h3 class="font-black text-red-400 text-xs mb-3">
+    ⚙️ GitHub Publishing
+  </h3>
+
+  <div class="grid md:grid-cols-2 gap-3">
+
+    <div>
+      <label class="small-label">Repository</label>
+      <input
+        id="ghRepo"
+        class="input"
+        placeholder="username/repository"
+      >
+    </div>
+
+    <div>
+      <label class="small-label">
+        GitHub Personal Access Token
+      </label>
+
+      <input
+        id="ghToken"
+        type="password"
+        class="input"
+        placeholder="Token — current session only"
+      >
+    </div>
+
+  </div>
+
+  <p class="text-[10px] text-amber-400 mt-3">
+    ⚠️ Token browser ke localStorage mein save nahi kiya jayega.
+  </p>
+
+</div>
+
+
+<!-- ================= TOP STATUS ================= -->
+
 <div
-id="githubConfigBlock"
-class="mb-6 p-4 bg-black/60 border border-red-900/40 rounded-xl space-y-3 hidden"
->
-
-<h4 class="text-xs font-black text-red-400 uppercase tracking-wider">
-    ⚙️ GitHub Direct Sync
-</h4>
-
-<div>
-
-<label class="block text-[11px] text-slate-400 font-bold mb-1">
-GitHub Repo:
-</label>
-
-<input
-type="text"
-id="ghRepo"
-placeholder="Username/Repository"
-class="w-full p-2.5 ott-input rounded-lg text-xs"
->
-
-</div>
-
-
-<div>
-
-<label class="block text-[11px] text-slate-400 font-bold mb-1">
-GitHub Personal Access Token:
-</label>
-
-<input
-type="password"
-id="ghToken"
-autocomplete="new-password"
-placeholder="GitHub Token"
-class="w-full p-2.5 ott-input rounded-lg text-xs"
->
-
-</div>
-
-<div class="flex gap-2">
-
-<button
-onclick="saveGithubConfig()"
-class="flex-1 py-2 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg text-xs"
->
-💾 Save
-</button>
-
-<button
-onclick="clearGithubToken()"
-class="py-2 px-4 bg-zinc-800 hover:bg-zinc-700 text-slate-300 font-bold rounded-lg text-xs"
->
-Clear Token
-</button>
-
-</div>
-
-<p class="text-[10px] text-amber-500/80">
-⚠️ GitHub token browser mein save ho sakta hai. Production mein Cloudflare Worker use karna safer rahega.
-</p>
-
-</div>
+  id="statusLog"
+  class="hidden mb-4 p-3 rounded-xl text-xs font-bold"
+></div>
 
 
 <!-- ================= TABS ================= -->
 
-<div class="grid grid-cols-4 gap-1.5 p-1.5 bg-black rounded-xl mb-6 border border-zinc-800">
+<div class="ott-box p-1.5 mb-5 overflow-x-auto hide-scroll">
 
-<button
-class="tab-btn active text-[10px] md:text-xs font-bold py-2.5 rounded-lg text-slate-400"
-onclick="switchTab('post-tab',this)"
->
-📝 NEW POST
-</button>
+  <div class="grid grid-cols-4 min-w-[520px] gap-1">
 
-<button
-class="tab-btn text-[10px] md:text-xs font-bold py-2.5 rounded-lg text-slate-400"
-onclick="switchTab('manage-tab',this)"
->
-⚙️ MANAGE
-</button>
+    <button
+      class="tab active"
+      onclick="switchTab('postTab',this)"
+    >
+      📝 NEW POST
+    </button>
 
-<button
-class="tab-btn text-[10px] md:text-xs font-bold py-2.5 rounded-lg text-slate-400"
-onclick="switchTab('settings-tab',this)"
->
-📢 CONFIG
-</button>
+    <button
+      class="tab"
+      onclick="switchTab('manageTab',this)"
+    >
+      ⚙️ MANAGE
+    </button>
 
-<button
-class="tab-btn text-[10px] md:text-xs font-bold py-2.5 rounded-lg text-slate-400"
-onclick="switchTab('editor-tab',this)"
->
-💻 PREVIEW
-</button>
+    <button
+      class="tab"
+      onclick="switchTab('settingsTab',this)"
+    >
+      📢 SETTINGS
+    </button>
 
-</div>
+    <button
+      class="tab"
+      onclick="switchTab('previewTab',this)"
+    >
+      👁️ LIVE PREVIEW
+    </button>
 
-
-<div id="statusLog"
-class="mb-4 p-3 rounded-xl text-xs font-bold hidden">
-</div>
-
-
-<!-- ================= NEW POST ================= -->
-
-<div id="post-tab" class="tab-content active space-y-4">
-
-<div class="bg-red-500/10 border-l-4 border-red-600 p-3 rounded-r-xl">
-
-<h3 id="form-action-title"
-class="text-xs font-black text-red-400 uppercase tracking-wider">
-
-🔥 Create & Publish Entertainment Post
-
-</h3>
+  </div>
 
 </div>
 
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<!-- ===================================================== -->
+<!-- NEW POST -->
+<!-- ===================================================== -->
+
+<section id="postTab" class="tab-content active">
+
+<div class="grid lg:grid-cols-[1fr_430px] gap-5">
+
+<!-- FORM -->
+
+<div class="space-y-4">
+
+<div class="ott-box p-4">
+
+<h2 class="text-sm font-black text-red-400 mb-4">
+🔥 Create Discover-Friendly Article
+</h2>
+
+
+<!-- CATEGORY -->
+
+<div class="grid md:grid-cols-2 gap-3">
 
 <div>
 
-<label class="block text-xs font-bold text-slate-300 mb-1">
-1. Content Category:
+<label class="small-label">
+Content Category
 </label>
 
-<select
-id="movieCategory"
-class="w-full p-3 ott-input rounded-xl text-xs font-bold"
->
+<select id="movieCategory" class="input">
 
 <option value="ott-movies">
-🎬 Main Feed — Homepage Top 20
+🎬 Main Entertainment Feed
 </option>
 
 <option value="theatres">
-🏛️ Theatrical / Cinema
+🏛️ Cinema / Theatres
 </option>
 
 <option value="youtube-dramas">
-🔴 YouTube Series & Viral
+🔴 YouTube Series
 </option>
 
 <option value="web-series">
-📺 OTT Web Series
+📺 Web Series / OTT
 </option>
 
 </select>
@@ -308,42 +337,22 @@ class="w-full p-3 ott-input rounded-xl text-xs font-bold"
 
 <div>
 
-<label class="block text-xs font-bold text-slate-300 mb-1">
-2. Platform / Badge:
+<label class="small-label">
+Platform / Venue
 </label>
 
-<select
-id="moviePlatform"
-class="w-full p-3 ott-input rounded-xl text-xs font-bold text-amber-300"
->
+<select id="moviePlatform" class="input">
 
-<optgroup label="Cinema & Free">
-
-<option value="THEATRES">
-🎬 THEATRES
-</option>
-
-<option value="YOUTUBE">
-🔴 YOUTUBE
-</option>
-
-<option value="AMAZON MINITV">
-⚡ AMAZON MINITV
-</option>
-
-</optgroup>
-
-<optgroup label="OTT Platforms">
-
-<option value="NETFLIX">Netflix</option>
-<option value="PRIME VIDEO">Prime Video</option>
-<option value="JIOHOTSTAR">JioHotstar</option>
-<option value="JIOCINEMA">JioCinema</option>
-<option value="SONYLIV">SonyLIV</option>
+<option value="THEATRES">THEATRES</option>
+<option value="NETFLIX">NETFLIX</option>
+<option value="PRIME VIDEO">PRIME VIDEO</option>
+<option value="JIOHOTSTAR">JIOHOTSTAR</option>
+<option value="JIOCINEMA">JIOCINEMA</option>
+<option value="SONYLIV">SONYLIV</option>
 <option value="ZEE5">ZEE5</option>
-<option value="AHA VIDEO">Aha Video</option>
-
-</optgroup>
+<option value="AHA VIDEO">AHA VIDEO</option>
+<option value="YOUTUBE">YOUTUBE</option>
+<option value="AMAZON MINITV">AMAZON MINITV</option>
 
 </select>
 
@@ -354,71 +363,155 @@ class="w-full p-3 ott-input rounded-xl text-xs font-bold text-amber-300"
 
 <!-- TITLE -->
 
-<div>
+<div class="mt-4">
 
-<label class="block text-xs font-bold text-slate-300 mb-1">
-3. Discover Click Headline:
+<label class="small-label">
+SEO / Discover Headline
 </label>
 
 <input
-type="text"
 id="movieTitle"
-maxlength="180"
-placeholder="Movie / Web Series / OTT release ka headline..."
-oninput="autoGenerateSlug()"
-class="w-full p-3 ott-input rounded-xl text-xs font-medium"
+class="input"
+placeholder="Stree 2 OTT Release: Kab Aur Kahan Dekhein?"
+oninput="generateSlug();updatePreview()"
 >
 
-<p class="text-[10px] text-slate-600 mt-1">
-Strong headline rakhein, unnecessary clickbait avoid karein.
+<p class="text-[9px] text-zinc-600 mt-1">
+Clear + accurate headline rakhein. Clickbait avoid karein.
 </p>
+
+</div>
+
+
+<!-- SEO -->
+
+<div class="grid md:grid-cols-2 gap-3 mt-4">
+
+<div>
+
+<label class="small-label">
+Focus Keyword
+</label>
+
+<input
+id="focusKeyword"
+class="input"
+placeholder="Stree 2 OTT Release"
+oninput="updatePreview()"
+>
+
+</div>
+
+<div>
+
+<label class="small-label">
+Clean URL Slug
+</label>
+
+<input
+id="fileSlug"
+class="input font-mono text-amber-300"
+placeholder="stree-2-ott-release.html"
+>
+
+</div>
 
 </div>
 
 
 <!-- IMAGE -->
 
-<div class="p-3.5 bg-black/60 border border-zinc-800 rounded-xl space-y-2">
+<div class="mt-4 p-4 bg-black rounded-2xl border border-zinc-800">
 
-<label class="block text-xs font-bold text-amber-400">
-🖼️ Discover Banner — Recommended 1200×675
+<label class="small-label text-amber-400">
+🖼️ Discover Main Image
 </label>
 
 <input
 type="file"
 id="posterFile"
 accept="image/jpeg,image/png,image/webp"
-class="w-full p-2.5 ott-input rounded-xl text-xs text-slate-400"
+class="input"
+onchange="handleImageUpload(this)"
 >
 
-<p class="text-[10px] text-slate-500">
-Recommended: 1200×675 px, JPG/PNG/WebP.
+<div class="grid grid-cols-2 gap-3 mt-3">
+
+<div>
+
+<label class="small-label">
+Recommended Format
+</label>
+
+<select id="imagePreset" class="input">
+
+<option value="1200x675">
+1200 × 675 — 16:9 ⭐
+</option>
+
+<option value="1280x720">
+1280 × 720 — 16:9
+</option>
+
+<option value="1600x900">
+1600 × 900 — 16:9
+</option>
+
+<option value="1920x1080">
+1920 × 1080 — 16:9
+</option>
+
+<option value="1200x800">
+1200 × 800 — 3:2
+</option>
+
+<option value="1200x1200">
+1200 × 1200 — 1:1
+</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label class="small-label">
+Image Status
+</label>
+
+<div
+id="imageStatus"
+class="bg-zinc-900 border border-zinc-800 rounded-xl p-3 text-[10px] text-zinc-500 h-[45px]"
+>
+No image selected
+</div>
+
+</div>
+
+</div>
+
+<p class="text-[9px] text-zinc-500 mt-3">
+Best practical choice: 1200×675 WebP/JPEG. Image width 1200px+ rakhein.
 </p>
 
-<div id="imageInfo"
-class="text-[10px] text-slate-600">
-No image selected.
-</div>
-
 </div>
 
 
-<!-- CAST / GENRE -->
+<!-- DETAILS -->
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<div class="grid md:grid-cols-2 gap-3 mt-4">
 
 <div>
 
-<label class="block text-xs font-bold text-slate-300 mb-1">
-4. Star Cast / Creators:
+<label class="small-label">
+Star Cast / Creator
 </label>
 
 <input
-type="text"
 id="movieCast"
-maxlength="300"
-placeholder="Rajkummar Rao / Bhuvan Bam..."
-class="w-full p-3 ott-input rounded-xl text-xs"
+class="input"
+placeholder="Rajkummar Rao, Shraddha Kapoor"
+oninput="updatePreview()"
 >
 
 </div>
@@ -426,16 +519,15 @@ class="w-full p-3 ott-input rounded-xl text-xs"
 
 <div>
 
-<label class="block text-xs font-bold text-slate-300 mb-1">
-5. Genre & Language:
+<label class="small-label">
+Genre / Language
 </label>
 
 <input
-type="text"
 id="movieGenre"
-maxlength="150"
-placeholder="Drama / Comedy • Hindi"
-class="w-full p-3 ott-input rounded-xl text-xs"
+class="input"
+placeholder="Comedy • Hindi"
+oninput="updatePreview()"
 >
 
 </div>
@@ -443,40 +535,38 @@ class="w-full p-3 ott-input rounded-xl text-xs"
 </div>
 
 
-<!-- STATUS / SLUG -->
-
-<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<div class="grid md:grid-cols-2 gap-3 mt-3">
 
 <div>
 
-<label class="block text-xs font-bold text-slate-300 mb-1">
-6. Status / Release Timing:
+<label class="small-label">
+Status
 </label>
 
-<input
-type="text"
-id="movieStatus"
-value="Streaming Now"
-maxlength="100"
-placeholder="Streaming Now / In Theatres..."
-class="w-full p-3 ott-input rounded-xl text-xs text-emerald-400"
->
+<select id="movieStatus" class="input">
+
+<option>Streaming Now</option>
+<option>In Theatres</option>
+<option>Coming Soon</option>
+<option>Trailer Released</option>
+<option>Episode Out Now</option>
+<option>Live Today</option>
+
+</select>
 
 </div>
 
 
 <div>
 
-<label class="block text-xs font-bold text-slate-300 mb-1">
-7. Clean URL Slug:
+<label class="small-label">
+Release Date / Timing
 </label>
 
 <input
-type="text"
-id="fileSlug"
-maxlength="160"
-placeholder="movie-ott-release.html"
-class="w-full p-3 ott-input rounded-xl text-xs font-mono text-amber-300"
+id="releaseDate"
+type="datetime-local"
+class="input"
 >
 
 </div>
@@ -486,95 +576,197 @@ class="w-full p-3 ott-input rounded-xl text-xs font-mono text-amber-300"
 
 <!-- SUMMARY -->
 
-<div>
+<div class="mt-4">
 
-<label class="block text-xs font-bold text-slate-300 mb-1">
-8. Kahani / Main Highlights:
+<label class="small-label">
+📰 Article Summary / Kahani
 </label>
 
 <textarea
 id="movieSummary"
-rows="4"
-maxlength="2500"
-placeholder="Film/web series ke baare mein original short summary..."
-class="w-full p-3 ott-input rounded-xl text-xs leading-relaxed"
+rows="5"
+class="input"
+placeholder="Film/web series ke baare mein original, useful aur factual summary likhein..."
+oninput="updatePreview()"
 ></textarea>
-
-<p class="text-[10px] text-slate-600 mt-1">
-Original content use karein. Direct copied article publish na karein.
-</p>
 
 </div>
 
 
 <!-- WHY WATCH -->
 
-<div>
+<div class="mt-3">
 
-<label class="block text-xs font-bold text-slate-300 mb-1">
-9. Kyun Dekhein / Kahan Dekhein?
+<label class="small-label">
+⭐ Kyun Dekhein / Kahan Dekhein
 </label>
 
 <textarea
 id="movieWhyWatch"
-rows="3"
-maxlength="1800"
-placeholder="Streaming platform, episode count, viewing details..."
-class="w-full p-3 ott-input rounded-xl text-xs leading-relaxed"
+rows="4"
+class="input"
+placeholder="Platform, release timing, episodes, audience ke liye useful information..."
+oninput="updatePreview()"
 ></textarea>
 
 </div>
 
 
+<!-- BUTTONS -->
+
+<div class="grid grid-cols-2 gap-3 mt-4">
+
+<button
+onclick="publishPost()"
+id="publishBtn"
+class="bg-red-600 hover:bg-red-700 py-4 rounded-xl font-black text-xs"
+>
+🚀 PUBLISH POST
+</button>
+
+<button
+onclick="clearForm()"
+class="bg-zinc-800 hover:bg-zinc-700 py-4 rounded-xl font-black text-xs"
+>
+🧹 CLEAR
+</button>
+
+</div>
+
 <input type="hidden" id="editingPostId">
 <input type="hidden" id="editingCategory">
 
-
-<button
-id="submitBtn"
-onclick="publishOttPost()"
-class="w-full py-4 bg-red-600 hover:bg-red-700 text-white font-extrabold rounded-xl text-xs tracking-wider shadow-lg shadow-red-600/30 transition"
->
-🔥 PUBLISH POST
-</button>
-
-
-<button
-id="cancelEditBtn"
-onclick="cancelEditing()"
-class="w-full py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-bold rounded-xl text-xs hidden"
->
-CANCEL EDIT MODE
-</button>
+</div>
 
 </div>
 
 
-<!-- ================= MANAGE ================= -->
+<!-- LIVE MINI PREVIEW -->
 
-<div id="manage-tab" class="tab-content space-y-4">
+<div class="lg:sticky lg:top-24 h-fit">
 
-<div class="bg-red-500/10 border-l-4 border-red-600 p-3 rounded-r-xl">
+<div class="ott-box p-3">
 
-<h3 class="text-xs font-black text-red-400 uppercase tracking-wider">
-Live Firebase Records
+<div class="flex items-center justify-between mb-3">
+
+<h3 class="text-xs font-black">
+👁️ LIVE ARTICLE PREVIEW
 </h3>
 
+<span class="text-[9px] text-emerald-400 font-bold">
+● LIVE
+</span>
+
 </div>
 
+<div id="livePreview" class="preview-card">
+
+<img
+id="previewImage"
+class="preview-image"
+src=""
+alt=""
+>
+
+<div class="p-5">
+
+<div class="flex gap-2 mb-3">
+
+<span
+id="previewPlatform"
+class="badge bg-red-600 text-white"
+>
+NETFLIX
+</span>
+
+<span class="badge bg-white/10 text-zinc-300">
+ENTERTAINMENT
+</span>
+
+</div>
+
+<h1
+id="previewTitle"
+class="text-xl md:text-2xl font-black leading-tight"
+>
+Preview headline yahan dikhega
+</h1>
+
+<p
+id="previewSummary"
+class="text-xs text-zinc-400 mt-3 leading-relaxed"
+>
+Article summary yahan preview hogi.
+</p>
+
+<div class="grid grid-cols-2 gap-2 mt-4 text-[10px]">
+
+<div class="bg-black rounded-lg p-2">
+<div class="text-zinc-500">Platform</div>
+<strong id="previewPlatform2">NETFLIX</strong>
+</div>
+
+<div class="bg-black rounded-lg p-2">
+<div class="text-zinc-500">Status</div>
+<strong id="previewStatus" class="text-emerald-400">
+Streaming Now
+</strong>
+</div>
+
+</div>
+
+<div class="mt-5">
+
+<h2 class="font-black text-sm border-l-4 border-red-600 pl-2">
+Kahani & Highlights
+</h2>
+
+<p
+id="previewBody"
+class="text-xs text-zinc-400 mt-2 leading-relaxed"
+>
+Preview content yahan dikhega.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- MANAGE -->
+<!-- ===================================================== -->
+
+<section id="manageTab" class="tab-content">
+
+<div class="ott-box p-4">
+
+<h2 class="text-sm font-black text-red-400 mb-4">
+⚙️ Manage Published Posts
+</h2>
 
 <select
 id="manageCategory"
-onchange="loadCategoryPosts()"
-class="w-full p-3 ott-input rounded-xl text-xs font-bold"
+onchange="loadPosts()"
+class="input mb-4"
 >
 
 <option value="ott-movies">
-🎬 Main Feed — Homepage Top 20
+🎬 Main Entertainment Feed
 </option>
 
 <option value="theatres">
-🏛️ Theatrical / Cinema
+🏛️ Cinema / Theatres
 </option>
 
 <option value="youtube-dramas">
@@ -582,7 +774,7 @@ class="w-full p-3 ott-input rounded-xl text-xs font-bold"
 </option>
 
 <option value="web-series">
-📺 OTT Web Series
+📺 Web Series / OTT
 </option>
 
 </select>
@@ -590,37 +782,44 @@ class="w-full p-3 ott-input rounded-xl text-xs font-bold"
 
 <div
 id="postsList"
-class="border border-zinc-800 bg-black rounded-xl p-2 max-h-[450px] overflow-y-auto space-y-2"
-></div>
+class="space-y-2 max-h-[600px] overflow-y-auto"
+>
+
+<div class="text-center text-zinc-600 text-xs p-8">
+Loading...
+</div>
 
 </div>
 
-
-<!-- ================= SETTINGS ================= -->
-
-<div id="settings-tab" class="tab-content space-y-4">
-
-<div class="bg-red-500/10 border-l-4 border-red-600 p-3 rounded-r-xl">
-
-<h3 class="text-xs font-black text-red-400 uppercase tracking-wider">
-Global Website Settings
-</h3>
-
 </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- SETTINGS -->
+<!-- ===================================================== -->
+
+<section id="settingsTab" class="tab-content">
+
+<div class="ott-box p-4 space-y-5">
+
+<h2 class="text-sm font-black text-red-400">
+📢 Website Settings
+</h2>
 
 
 <div>
 
-<label class="block text-xs font-bold text-slate-300 mb-1">
-📢 Breaking Ticker:
+<label class="small-label">
+Breaking Ticker
 </label>
 
 <textarea
 id="headerNotice"
 rows="3"
-maxlength="500"
+class="input"
 placeholder="Breaking entertainment update..."
-class="w-full p-3 ott-input rounded-xl text-xs resize-none"
 ></textarea>
 
 </div>
@@ -628,703 +827,783 @@ class="w-full p-3 ott-input rounded-xl text-xs resize-none"
 
 <div>
 
-<label class="block text-xs font-bold text-slate-300 mb-1">
-🌐 Website Brand Title:
+<label class="small-label">
+Website SEO Title
 </label>
 
 <input
-type="text"
 id="siteTitleSetting"
-maxlength="180"
-placeholder="Gujarat Fast Alert Entertainment"
-class="w-full p-3 ott-input rounded-xl text-xs"
+class="input"
+placeholder="Gujarat Fast Alert - Latest Hindi Movies & OTT"
 >
+
+</div>
+
+
+<div>
+
+<label class="small-label">
+Default SEO Description
+</label>
+
+<textarea
+id="siteDescription"
+rows="3"
+class="input"
+placeholder="Latest Hindi movies, OTT releases..."
+></textarea>
 
 </div>
 
 
 <button
-onclick="saveGlobalSettings()"
-class="w-full py-3.5 bg-red-600 hover:bg-red-700 text-white font-extrabold rounded-xl text-xs"
+onclick="saveSettings()"
+class="w-full bg-red-600 hover:bg-red-700 py-4 rounded-xl font-black text-xs"
 >
-💾 SAVE GLOBAL SETTINGS
+💾 SAVE SETTINGS
 </button>
 
 </div>
 
+</section>
 
-<!-- ================= PREVIEW ================= -->
 
-<div id="editor-tab" class="tab-content space-y-4">
+<!-- ===================================================== -->
+<!-- LARGE LIVE PREVIEW -->
+<!-- ===================================================== -->
 
-<div class="bg-red-500/10 border-l-4 border-red-600 p-3 rounded-r-xl">
+<section id="previewTab" class="tab-content">
 
-<h3 class="text-xs font-black text-red-400 uppercase tracking-wider">
-💻 Live Article Preview
-</h3>
+<div class="ott-box p-4">
 
+<div class="flex items-center justify-between mb-4">
+
+<div>
+<h2 class="text-sm font-black">
+👁️ Full Live Article Preview
+</h2>
+
+<p class="text-[10px] text-zinc-500 mt-1">
+Mobile + desktop article preview
+</p>
 </div>
-
 
 <button
-onclick="updatePreviewFromFields()"
-class="w-full py-2.5 bg-zinc-800 hover:bg-zinc-700 text-red-400 border border-zinc-700 font-bold rounded-xl text-xs"
+onclick="updatePreview()"
+class="bg-zinc-800 border border-zinc-700 px-3 py-2 rounded-lg text-[10px] font-black"
 >
-🔄 Refresh Preview
+🔄 REFRESH
 </button>
 
+</div>
 
-<iframe
-id="htmlPreviewFrame"
-class="w-full h-[500px] border border-zinc-800 rounded-xl bg-black"
-></iframe>
 
+<div class="max-w-4xl mx-auto">
+
+<div class="preview-card">
+
+<img
+id="fullPreviewImage"
+class="w-full aspect-video object-cover"
+src=""
+alt=""
+>
+
+<div class="p-5 md:p-8">
+
+<div class="flex gap-2 mb-4">
+
+<span
+id="fullPreviewPlatform"
+class="badge bg-red-600"
+>
+NETFLIX
+</span>
+
+<span class="badge bg-white/10">
+RELEASE DESK
+</span>
+
+</div>
+
+<h1
+id="fullPreviewTitle"
+class="text-2xl md:text-4xl font-black leading-tight"
+>
+Article Headline
+</h1>
+
+<div class="grid grid-cols-2 md:grid-cols-4 gap-2 mt-5">
+
+<div class="bg-black rounded-xl p-3">
+<div class="text-[9px] text-zinc-500">
+Platform
+</div>
+<strong id="fullPlatform">
+Netflix
+</strong>
+</div>
+
+<div class="bg-black rounded-xl p-3">
+<div class="text-[9px] text-zinc-500">
+Status
+</div>
+<strong id="fullStatus" class="text-emerald-400">
+Streaming Now
+</strong>
+</div>
+
+<div class="bg-black rounded-xl p-3">
+<div class="text-[9px] text-zinc-500">
+Genre
+</div>
+<strong id="fullGenre">
+Hindi
+</strong>
+</div>
+
+<div class="bg-black rounded-xl p-3">
+<div class="text-[9px] text-zinc-500">
+Cast
+</div>
+<strong id="fullCast">
+Star Cast
+</strong>
 </div>
 
 </div>
 
-</div>
 
+<section class="mt-8">
 
-<!-- ================= FOOTER ================= -->
+<h2 class="text-lg md:text-xl font-black border-l-4 border-red-600 pl-3">
+Kahani & Highlights
+</h2>
 
-<footer class="w-full py-5 text-center text-slate-500 text-xs border-t border-zinc-900 mt-6">
-
-<p class="font-bold text-slate-400">
-© 2026 Gujarat Fast Alert Entertainment Desk
+<p
+id="fullSummary"
+class="text-sm text-zinc-300 leading-7 mt-3"
+>
+Summary preview...
 </p>
 
-<p class="text-[11px] text-slate-600 mt-1">
-Managed & Published by:
+</section>
+
+
+<section class="mt-8">
+
+<h2 class="text-lg md:text-xl font-black border-l-4 border-red-600 pl-3">
+Kyun Dekhein / Kahan Dekhein?
+</h2>
+
+<p
+id="fullWhyWatch"
+class="text-sm text-zinc-300 leading-7 mt-3"
+>
+Streaming details...
+</p>
+
+</section>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer class="border-t border-white/10 mt-10 py-7 text-center">
+
+<div class="text-xs text-zinc-500">
+© 2026 Gujarat Fast Alert Entertainment
+</div>
+
+<div class="text-[11px] text-zinc-600 mt-1">
+Managed & Published by
 <span class="text-amber-500 font-bold">
 Vanrajsinh Vaghela
 </span>
-</p>
+</div>
 
 </footer>
 
+</div>
+
+
+<!-- ===================================================== -->
+<!-- JAVASCRIPT -->
+<!-- ===================================================== -->
 
 <script>
 
-/* =========================================================
-   ADMIN PIN
-========================================================= */
-
-const MY_SECRET_PIN = "1465822";
-
-
-/* =========================================================
-   FIREBASE
-========================================================= */
+const ADMIN_PIN = "1465822";
 
 const firebaseConfig = {
-
-apiKey:"AIzaSyD40GV9eAeGiu-Tz0l09ZLifjzAQp3UFso",
-
-authDomain:"gujarat-fast-alert.firebaseapp.com",
-
-databaseURL:"https://gujarat-fast-alert-default-rtdb.firebaseio.com",
-
-projectId:"gujarat-fast-alert",
-
-storageBucket:"gujarat-fast-alert.firebasestorage.app",
-
-messagingSenderId:"395130500748",
-
-appId:"1:395130500748:web:e6589f3a57812efad6ada9"
-
+  apiKey:"AIzaSyD40GV9eAeGiu-Tz0l09ZLifjzAQp3UFso",
+  authDomain:"gujarat-fast-alert.firebaseapp.com",
+  databaseURL:"https://gujarat-fast-alert-default-rtdb.firebaseio.com",
+  projectId:"gujarat-fast-alert",
+  storageBucket:"gujarat-fast-alert.firebasestorage.app",
+  messagingSenderId:"395130500748",
+  appId:"1:395130500748:web:e6589f3a57812efad6ada9"
 };
-
 
 firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
+let currentImageData = null;
+let currentImagePath = null;
 
-/* =========================================================
-   PIN LOGIN
-========================================================= */
+
+/* ================= PIN ================= */
 
 function checkAdminPin(){
 
-const entered =
-document.getElementById("adminPinInput").value.trim();
+  const value =
+    document.getElementById("adminPinInput").value;
 
-if(entered === MY_SECRET_PIN){
+  if(value === ADMIN_PIN){
 
-document.getElementById("pinScreen").style.display="none";
+    document.getElementById("pinScreen")
+      .classList.add("hidden");
 
-document.getElementById("mainAdminBox")
-.classList.remove("hidden");
+    document.getElementById("adminApp")
+      .classList.remove("hidden");
 
-loadSavedGithubConfig();
+    document.getElementById("pinError")
+      .classList.add("hidden");
 
-loadGlobalSettings();
+    loadSettings();
+    loadPosts();
 
-loadCategoryPosts();
+  }else{
 
-showStatus("✅ Admin dashboard unlocked.");
+    document.getElementById("pinError")
+      .classList.remove("hidden");
 
-}else{
+    document.getElementById("adminPinInput").value="";
 
-alert("❌ Invalid PIN!");
-
-document.getElementById("adminPinInput").value="";
+  }
 
 }
 
-}
 
+/* ENTER KEY */
 
 document.getElementById("adminPinInput")
 .addEventListener("keydown",function(e){
 
-if(e.key==="Enter"){
-
-checkAdminPin();
-
-}
+  if(e.key==="Enter"){
+    checkAdminPin();
+  }
 
 });
 
 
-/* =========================================================
-   TABS
-========================================================= */
+/* ================= TABS ================= */
 
-function switchTab(tabId,btn){
+function switchTab(id,button){
 
-document
-.querySelectorAll(".tab-content")
-.forEach(tab=>tab.classList.remove("active"));
+  document.querySelectorAll(".tab-content")
+  .forEach(x=>x.classList.remove("active"));
 
-document
-.querySelectorAll(".tab-btn")
-.forEach(b=>b.classList.remove("active"));
+  document.querySelectorAll(".tab")
+  .forEach(x=>x.classList.remove("active"));
 
-document
-.getElementById(tabId)
-.classList.add("active");
+  document.getElementById(id)
+  .classList.add("active");
 
-if(btn) btn.classList.add("active");
+  if(button)
+    button.classList.add("active");
 
-if(tabId==="editor-tab"){
-
-updatePreviewFromFields();
-
-}
+  updatePreview();
 
 }
 
 
-/* =========================================================
-   GITHUB CONFIG
-========================================================= */
+/* ================= GITHUB ================= */
 
-function toggleGithubConfig(){
+function toggleGithub(){
 
-document
-.getElementById("githubConfigBlock")
-.classList.toggle("hidden");
+  document
+    .getElementById("githubBox")
+    .classList.toggle("hidden");
 
 }
 
-
-function saveGithubConfig(){
-
-const repo =
-document.getElementById("ghRepo").value.trim();
-
-const token =
-document.getElementById("ghToken").value.trim();
-
-if(!repo){
-
-alert("❌ GitHub repository enter karein.");
-
-return;
-
-}
-
-localStorage.setItem("gh_repo",repo);
-
-/*
-Token intentionally saved only when user chooses Save.
-Long-term secure solution = Cloudflare Worker.
-*/
-
-if(token){
-
-localStorage.setItem("gh_token",token);
-
-}
-
-alert("✅ GitHub settings saved.");
-
-}
-
-
-function clearGithubToken(){
-
-localStorage.removeItem("gh_token");
-
-document.getElementById("ghToken").value="";
-
-alert("🔐 GitHub token browser se clear ho gaya.");
-
-}
-
-
-function loadSavedGithubConfig(){
 
 document.getElementById("ghRepo").value =
-localStorage.getItem("gh_repo") ||
-"Vanrajsinh-vaghela/entertainment";
-
-document.getElementById("ghToken").value =
-localStorage.getItem("gh_token") || "";
-
-}
+  sessionStorage.getItem("gh_repo") || "";
 
 
-/* =========================================================
-   SLUG
-========================================================= */
+document.getElementById("ghRepo")
+.addEventListener("input",function(){
 
-function autoGenerateSlug(){
-
-const title =
-document.getElementById("movieTitle").value;
-
-let slug =
-title
-.toLowerCase()
-.replace(/[^a-z0-9]+/g,"-")
-.replace(/^-+|-+$/g,"");
-
-if(!slug){
-
-slug="post-"+Date.now();
-
-}
-
-document.getElementById("fileSlug").value =
-slug+".html";
-
-}
-
-
-/* =========================================================
-   STATUS
-========================================================= */
-
-function showStatus(msg,isError=false){
-
-const log =
-document.getElementById("statusLog");
-
-log.className =
-`mb-4 p-3 rounded-xl text-xs font-bold ${
-isError
-?
-"bg-rose-950 text-rose-300 border border-rose-800"
-:
-"bg-emerald-950 text-emerald-300 border border-emerald-800"
-}`;
-
-log.innerText=msg;
-
-log.classList.remove("hidden");
-
-}
-
-
-/* =========================================================
-   PLATFORM STYLE
-========================================================= */
-
-function getPlatformStyle(platform){
-
-const p=(platform||"").toUpperCase();
-
-if(p.includes("THEATRE"))
-return "bg-amber-600 text-white";
-
-if(p.includes("YOUTUBE"))
-return "bg-red-600 text-white";
-
-if(p.includes("MINITV"))
-return "bg-orange-500 text-white";
-
-if(p.includes("PRIME"))
-return "bg-blue-600 text-white";
-
-if(p.includes("HOTSTAR"))
-return "bg-sky-600 text-white";
-
-if(p.includes("JIOCINEMA"))
-return "bg-yellow-600 text-white";
-
-return "bg-brand text-white";
-
-}
-
-
-/* =========================================================
-   IMAGE INFO
-========================================================= */
-
-document
-.getElementById("posterFile")
-.addEventListener("change",function(){
-
-const file=this.files[0];
-
-const info=document.getElementById("imageInfo");
-
-if(!file){
-
-info.innerText="No image selected.";
-
-return;
-
-}
-
-const sizeMB=(file.size/1024/1024).toFixed(2);
-
-info.innerText =
-`${file.name} • ${sizeMB} MB`;
+  sessionStorage.setItem(
+    "gh_repo",
+    this.value.trim()
+  );
 
 });
 
 
-/* =========================================================
-   HTML ESCAPE
-========================================================= */
+/* ================= STATUS ================= */
 
-function escapeHtml(value){
+function showStatus(message,error=false){
 
-return String(value||"")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+  const box =
+    document.getElementById("statusLog");
+
+  box.className =
+    "mb-4 p-3 rounded-xl text-xs font-bold " +
+    (
+      error
+      ?
+      "bg-red-950 text-red-300 border border-red-800"
+      :
+      "bg-emerald-950 text-emerald-300 border border-emerald-800"
+    );
+
+  box.innerText=message;
+
+  box.classList.remove("hidden");
 
 }
 
 
-/* =========================================================
-   ARTICLE HTML
-========================================================= */
+/* ================= SLUG ================= */
+
+function generateSlug(){
+
+  const title =
+    document.getElementById("movieTitle").value;
+
+  let slug =
+    title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g,"-")
+    .replace(/^-+|-+$/g,"");
+
+  if(!slug)
+    slug="post-"+Date.now();
+
+  document.getElementById("fileSlug").value =
+    slug+".html";
+
+}
+
+
+/* ================= IMAGE ================= */
+
+function handleImageUpload(input){
+
+  const file=input.files[0];
+
+  if(!file)
+    return;
+
+  const status =
+    document.getElementById("imageStatus");
+
+  if(!file.type.match(/^image\//)){
+
+    status.innerText="❌ Invalid image";
+    currentImageData=null;
+    return;
+
+  }
+
+  const img=new Image();
+
+  const reader=new FileReader();
+
+  reader.onload=function(e){
+
+    currentImageData=e.target.result;
+
+    img.onload=function(){
+
+      const width=img.width;
+      const height=img.height;
+
+      if(width<1200){
+
+        status.innerText=
+          "⚠️ Width "+width+"px — 1200px+ recommended";
+
+      }else{
+
+        status.innerText=
+          "✅ "+width+" × "+height+"px";
+
+      }
+
+      updatePreview();
+
+    };
+
+    img.src=e.target.result;
+
+  };
+
+  reader.readAsDataURL(file);
+
+}
+
+
+/* ================= PREVIEW ================= */
+
+function getValue(id,fallback){
+
+  return document.getElementById(id).value.trim()
+    || fallback;
+
+}
+
+
+function updatePreview(){
+
+  const title =
+    getValue(
+      "movieTitle",
+      "Preview headline yahan dikhega"
+    );
+
+  const platform =
+    document.getElementById("moviePlatform").value;
+
+  const status =
+    getValue("movieStatus","Streaming Now");
+
+  const genre =
+    getValue("movieGenre","Hindi Entertainment");
+
+  const cast =
+    getValue("movieCast","Star Cast");
+
+  const summary =
+    getValue(
+      "movieSummary",
+      "Article summary yahan preview hogi."
+    );
+
+  const why =
+    getValue(
+      "movieWhyWatch",
+      "Streaming details yahan preview hongi."
+    );
+
+
+  document.getElementById("previewTitle").innerText=title;
+
+  document.getElementById("previewPlatform").innerText=platform;
+
+  document.getElementById("previewPlatform2").innerText=platform;
+
+  document.getElementById("previewSummary").innerText=summary;
+
+  document.getElementById("previewStatus").innerText=status;
+
+
+  document.getElementById("fullPreviewTitle").innerText=title;
+
+  document.getElementById("fullPreviewPlatform").innerText=platform;
+
+  document.getElementById("fullPlatform").innerText=platform;
+
+  document.getElementById("fullStatus").innerText=status;
+
+  document.getElementById("fullGenre").innerText=genre;
+
+  document.getElementById("fullCast").innerText=cast;
+
+  document.getElementById("fullSummary").innerText=summary;
+
+  document.getElementById("fullWhyWatch").innerText=why;
+
+
+  if(currentImageData){
+
+    document.getElementById("previewImage").src=
+      currentImageData;
+
+    document.getElementById("fullPreviewImage").src=
+      currentImageData;
+
+  }else{
+
+    document.getElementById("previewImage").src=
+      createPlaceholder();
+
+    document.getElementById("fullPreviewImage").src=
+      createPlaceholder();
+
+  }
+
+}
+
+
+function createPlaceholder(){
+
+  return "data:image/svg+xml;charset=UTF-8,"+
+  encodeURIComponent(`
+  <svg xmlns="http://www.w3.org/2000/svg"
+  width="1200"
+  height="675">
+  <rect width="100%" height="100%"
+  fill="#18181b"/>
+  <text x="50%" y="50%"
+  fill="#71717a"
+  font-size="30"
+  text-anchor="middle">
+  IMAGE PREVIEW
+  </text>
+  </svg>
+  `);
+
+}
+
+
+/* ================= BUILD ARTICLE ================= */
 
 function buildPostHTML(
-title,
-slug,
-platform,
-status,
-genre,
-cast,
-summary,
-whyWatch,
-imgPath,
-category
+  title,
+  platform,
+  status,
+  genre,
+  cast,
+  summary,
+  whyWatch,
+  imagePath,
+  releaseDate
 ){
 
-const safeTitle=escapeHtml(title);
-const safePlatform=escapeHtml(platform);
-const safeStatus=escapeHtml(status);
-const safeGenre=escapeHtml(genre);
-const safeCast=escapeHtml(cast);
-const safeSummary=escapeHtml(summary);
-const safeWhy=escapeHtml(whyWatch);
+  const description =
+    summary
+      .replace(/"/g,"'")
+      .substring(0,155);
 
-const description =
-summary
-.replace(/\s+/g," ")
-.substring(0,155)
-.replace(/"/g,"&quot;");
+  const safeTitle =
+    title.replace(/"/g,"&quot;");
 
+  const published =
+    new Date().toISOString();
 
-const categoryName =
-category==="theatres"
-?"Theatrical Release"
-:
-category==="youtube-dramas"
-?"YouTube Series"
-:
-category==="web-series"
-?"Web Series"
-:
-"OTT & Entertainment";
-
-
-return `<!DOCTYPE html>
-
-<html lang="hi" class="dark">
+  return `<!DOCTYPE html>
+<html lang="hi">
 
 <head>
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
 
-<title>${safeTitle} | Gujarat Fast Alert</title>
+<title>${safeTitle}</title>
 
-<meta name="description" content="${description}">
+<meta name="description"
+content="${description}">
 
-<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="robots"
+content="index,follow,max-image-preview:large">
 
-<link rel="canonical" href="/posts/${slug}">
+<meta property="og:type"
+content="article">
 
-<meta property="og:type" content="article">
+<meta property="og:title"
+content="${safeTitle}">
 
-<meta property="og:title" content="${safeTitle}">
+<meta property="og:description"
+content="${description}">
 
-<meta property="og:description" content="${description}">
+<meta property="og:image"
+content="${imagePath}">
 
-<meta property="og:image" content="${imgPath}">
+<meta name="twitter:card"
+content="summary_large_image">
 
-<meta property="og:site_name" content="Gujarat Fast Alert Entertainment">
+<meta name="twitter:title"
+content="${safeTitle}">
 
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description"
+content="${description}">
 
-<meta name="twitter:title" content="${safeTitle}">
-
-<meta name="twitter:description" content="${description}">
-
-<meta name="twitter:image" content="${imgPath}">
-
+<meta name="twitter:image"
+content="${imagePath}">
 
 <script type="application/ld+json">
 
-${JSON.stringify({
-
-"@context":"https://schema.org",
-
-"@type":"NewsArticle",
-
-"headline":title,
-
-"image":[imgPath],
-
-"datePublished":new Date().toISOString(),
-
-"dateModified":new Date().toISOString(),
-
-"author":{
-"@type":"Person",
-"name":"Vanrajsinh Vaghela"
-},
-
-"publisher":{
-"@type":"Organization",
-"name":"Gujarat Fast Alert Entertainment"
-},
-
-"description":summary
-
-})}
+{
+ "@context":"https://schema.org",
+ "@type":"Article",
+ "headline":"${safeTitle}",
+ "image":["${imagePath}"],
+ "datePublished":"${published}",
+ "dateModified":"${published}",
+ "author":{
+   "@type":"Organization",
+   "name":"Gujarat Fast Alert"
+ },
+ "publisher":{
+   "@type":"Organization",
+   "name":"Gujarat Fast Alert"
+ }
+}
 
 <\/script>
-
 
 <script src="https://cdn.tailwindcss.com"><\/script>
 
-<script>
-
-tailwind.config={
-
-theme:{
-
-extend:{
-
-colors:{
-
-brand:'#e50914',
-
-bgmain:'#09090b',
-
-card:'#18181b'
-
-}
-
-}
-
-}
-
-}
-
-<\/script>
-
 </head>
 
+<body class="bg-zinc-950 text-white">
 
-<body class="bg-bgmain text-white font-sans antialiased">
+<header
+class="max-w-4xl mx-auto p-4
+border-b border-white/10">
 
-<header class="border-b border-white/10 bg-black">
-
-<div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
-
-<a href="/" class="font-black text-lg">
-
-<span class="text-brand">GUJARAT</span>
-FAST ALERT
-
+<a href="/"
+class="font-black text-red-500">
+GUJARAT FAST ALERT
 </a>
-
-<a href="/" class="text-xs text-slate-400">
-
-← Back to Home
-
-</a>
-
-</div>
 
 </header>
 
+<main
+class="max-w-4xl mx-auto px-4 py-7">
 
-<main class="max-w-3xl mx-auto px-4 py-7 space-y-6">
+<div class="flex gap-2 mb-4">
 
-
-<div class="flex flex-wrap gap-2 text-xs">
-
-<span class="${getPlatformStyle(platform)} px-2.5 py-1 rounded font-black uppercase">
-
-${safePlatform}
-
+<span
+class="bg-red-600 text-white
+px-2.5 py-1 rounded text-xs font-black">
+${platform}
 </span>
 
-<span class="bg-white/10 px-2.5 py-1 rounded text-slate-300">
-
-${categoryName}
-
+<span
+class="text-zinc-500 text-xs">
+Entertainment Desk
 </span>
 
 </div>
 
-
-<h1 class="text-2xl sm:text-4xl font-black leading-tight">
-
+<h1
+class="text-3xl md:text-5xl
+font-black leading-tight">
 ${safeTitle}
-
 </h1>
 
-
-<p class="text-xs text-slate-500">
-
-Gujarat Fast Alert Entertainment • Published by Vanrajsinh Vaghela
-
-</p>
-
-
-<div class="rounded-2xl overflow-hidden border border-white/10 aspect-[16/9] bg-card">
+<div
+class="mt-6 rounded-2xl
+overflow-hidden border
+border-white/10">
 
 <img
-src="${imgPath}"
+src="${imagePath}"
 alt="${safeTitle}"
-class="w-full h-full object-cover"
-loading="eager"
->
+class="w-full aspect-video object-cover">
 
 </div>
 
+<div
+class="grid grid-cols-2
+md:grid-cols-4 gap-3 mt-5">
 
-<div class="bg-card border border-white/10 rounded-xl p-4 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
+<div class="bg-zinc-900 p-3 rounded-xl">
 
-<div>
+<div class="text-xs text-zinc-500">
+Platform
+</div>
 
-<span class="text-slate-500 block">
-Platform / Venue
-</span>
-
-<strong>${safePlatform}</strong>
+<strong>${platform}</strong>
 
 </div>
 
+<div class="bg-zinc-900 p-3 rounded-xl">
 
-<div>
-
-<span class="text-slate-500 block">
+<div class="text-xs text-zinc-500">
 Status
-</span>
+</div>
 
-<strong class="text-green-400">
-${safeStatus}
+<strong class="text-emerald-400">
+${status}
 </strong>
 
 </div>
 
+<div class="bg-zinc-900 p-3 rounded-xl">
 
-<div>
-
-<span class="text-slate-500 block">
+<div class="text-xs text-zinc-500">
 Genre
-</span>
+</div>
 
-<strong>${safeGenre}</strong>
+<strong>${genre}</strong>
 
 </div>
 
+<div class="bg-zinc-900 p-3 rounded-xl">
 
-<div>
+<div class="text-xs text-zinc-500">
+Cast
+</div>
 
-<span class="text-slate-500 block">
-Cast / Team
-</span>
-
-<strong>${safeCast}</strong>
+<strong>${cast}</strong>
 
 </div>
 
 </div>
 
+<section class="mt-10">
 
-<section class="space-y-2 text-slate-300 text-sm leading-relaxed">
-
-<h2 class="text-lg font-black text-white border-l-4 border-brand pl-2.5">
-
+<h2
+class="text-xl font-black
+border-l-4 border-red-600 pl-3">
 Kahani & Highlights
-
 </h2>
 
-<p>${safeSummary}</p>
+<p
+class="text-zinc-300
+leading-8 mt-4">
+${summary}
+</p>
 
 </section>
 
+<section class="mt-10">
 
-<section class="space-y-2 text-slate-300 text-sm leading-relaxed">
-
-<h2 class="text-lg font-black text-white border-l-4 border-brand pl-2.5">
-
+<h2
+class="text-xl font-black
+border-l-4 border-red-600 pl-3">
 Kyun Dekhein / Kahan Dekhein?
-
 </h2>
 
-<p>${safeWhy}</p>
+<p
+class="text-zinc-300
+leading-8 mt-4">
+${whyWatch}
+</p>
 
 </section>
-
 
 </main>
 
-
-<footer class="max-w-3xl mx-auto border-t border-white/10 mt-12 py-7 text-center text-xs text-slate-600">
-
-<p>
-
-© 2026 Gujarat Fast Alert Entertainment
-
-</p>
-
-<p class="mt-1">
+<footer
+class="border-t border-white/10
+max-w-4xl mx-auto mt-12
+py-7 text-center
+text-xs text-zinc-600">
 
 Managed & Published by
-<span class="text-amber-500">
+<strong class="text-amber-500">
 Vanrajsinh Vaghela
-</span>
-
-</p>
+</strong>
 
 </footer>
 
@@ -1335,979 +1614,684 @@ Vanrajsinh Vaghela
 }
 
 
-/* =========================================================
-   DUPLICATE SLUG CHECK
-========================================================= */
+/* ================= BASE64 ================= */
 
-async function slugExists(slug,category,editingId){
+function fileToBase64(file){
 
-const snapshot =
-await database.ref("posts").once("value");
+  return new Promise((resolve,reject)=>{
 
-const all=snapshot.val();
+    const reader=new FileReader();
 
-if(!all) return false;
+    reader.onload=()=>resolve(
+      reader.result.split(",")[1]
+    );
 
-for(const cat of Object.keys(all)){
+    reader.onerror=reject;
 
-const records=all[cat];
+    reader.readAsDataURL(file);
 
-if(!records) continue;
-
-for(const id of Object.keys(records)){
-
-if(editingId && id===editingId && cat===category){
-
-continue;
+  });
 
 }
 
-if(
-records[id].link &&
-records[id].link.toLowerCase()===slug.toLowerCase()
+
+function stringToBase64(str){
+
+  return btoa(
+    unescape(
+      encodeURIComponent(str)
+    )
+  );
+
+}
+
+
+/* ================= GITHUB ================= */
+
+async function githubCommit(
+  token,
+  repo,
+  path,
+  content,
+  message
 ){
 
-return true;
+  const url=
+    `https://api.github.com/repos/${repo}/contents/${path}`;
 
-}
+  let sha;
 
-}
+  const getResponse=
+    await fetch(url,{
+      headers:{
+        "Authorization":
+          "Bearer "+token,
+        "Accept":
+          "application/vnd.github+json"
+      }
+    });
 
-}
+  if(getResponse.ok){
 
-return false;
+    const old=
+      await getResponse.json();
 
-}
+    sha=old.sha;
 
-
-/* =========================================================
-   PUBLISH
-========================================================= */
-
-async function publishOttPost(){
-
-const repo =
-document.getElementById("ghRepo").value.trim();
-
-const token =
-document.getElementById("ghToken").value.trim();
-
-const category =
-document.getElementById("movieCategory").value;
-
-const platform =
-document.getElementById("moviePlatform").value;
-
-const title =
-document.getElementById("movieTitle").value.trim();
-
-const cast =
-document.getElementById("movieCast").value.trim();
-
-const genre =
-document.getElementById("movieGenre").value.trim();
-
-const status =
-document.getElementById("movieStatus").value.trim();
-
-const summary =
-document.getElementById("movieSummary").value.trim();
-
-const whyWatch =
-document.getElementById("movieWhyWatch").value.trim();
-
-let slug =
-document.getElementById("fileSlug").value.trim();
-
-const posterInput =
-document.getElementById("posterFile");
-
-const editingId =
-document.getElementById("editingPostId").value;
-
-const editingCategory =
-document.getElementById("editingCategory").value;
+  }
 
 
-/* VALIDATION */
+  const body={
+    message:message,
+    content:content
+  };
 
-if(!title){
+  if(sha)
+    body.sha=sha;
 
-alert("❌ Title zaroori hai.");
 
-return;
+  const response=
+    await fetch(url,{
 
-}
+      method:"PUT",
 
-if(!summary){
+      headers:{
+        "Authorization":
+          "Bearer "+token,
+        "Accept":
+          "application/vnd.github+json",
+        "Content-Type":
+          "application/json"
+      },
 
-alert("❌ Summary zaroori hai.");
+      body:JSON.stringify(body)
 
-return;
+    });
 
-}
 
-if(title.length<15){
+  if(!response.ok){
 
-alert("⚠️ Headline thoda detailed rakhein.");
+    const error=
+      await response.json();
 
-return;
+    throw new Error(
+      error.message ||
+      "GitHub API error"
+    );
 
-}
-
-if(summary.length<50){
-
-alert("⚠️ Summary minimum 50 characters rakhein.");
-
-return;
-
-}
-
-if(!repo || !token){
-
-alert(
-"⚠️ GitHub Repo aur Token enter karein."
-);
-
-return;
+  }
 
 }
 
 
-if(!slug){
+/* ================= PUBLISH ================= */
 
-autoGenerateSlug();
+async function publishPost(){
 
-slug=document
-.getElementById("fileSlug")
-.value
-.trim();
+  const repo=
+    document.getElementById("ghRepo")
+    .value.trim();
+
+  const token=
+    document.getElementById("ghToken")
+    .value.trim();
+
+  if(!repo || !token){
+
+    showStatus(
+      "❌ GitHub Repo aur Token enter karo.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  const category=
+    document.getElementById("movieCategory").value;
+
+  const platform=
+    document.getElementById("moviePlatform").value;
+
+  const title=
+    document.getElementById("movieTitle").value.trim();
+
+  const cast=
+    document.getElementById("movieCast").value.trim();
+
+  const genre=
+    document.getElementById("movieGenre").value.trim();
+
+  const status=
+    document.getElementById("movieStatus").value;
+
+  const releaseDate=
+    document.getElementById("releaseDate").value;
+
+  const summary=
+    document.getElementById("movieSummary").value.trim();
+
+  const whyWatch=
+    document.getElementById("movieWhyWatch").value.trim();
+
+  let slug=
+    document.getElementById("fileSlug").value.trim();
+
+
+  if(!title || !summary){
+
+    showStatus(
+      "❌ Title aur Summary required hain.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  if(!slug){
+
+    generateSlug();
+
+    slug=
+      document.getElementById("fileSlug").value;
+
+  }
+
+
+  if(!slug.endsWith(".html"))
+    slug+=".html";
+
+
+  const cleanSlug=
+    slug.replace(".html","");
+
+
+  const file=
+    document.getElementById("posterFile")
+    .files[0];
+
+
+  let imagePath=
+    `/images/${cleanSlug}.webp`;
+
+
+  try{
+
+    if(file){
+
+      showStatus(
+        "⏳ Image GitHub par upload ho rahi hai..."
+      );
+
+
+      const extension=
+        file.name
+        .split(".")
+        .pop()
+        .toLowerCase();
+
+
+      const imageName=
+        `${cleanSlug}.${extension}`;
+
+
+      imagePath=
+        `/images/${imageName}`;
+
+
+      const base64=
+        await fileToBase64(file);
+
+
+      await githubCommit(
+        token,
+        repo,
+        `images/${imageName}`,
+        base64,
+        `Add image: ${imageName}`
+      );
+
+    }
+
+
+    showStatus(
+      "⏳ Article HTML publish ho raha hai..."
+    );
+
+
+    const html=
+      buildPostHTML(
+        title,
+        platform,
+        status,
+        genre,
+        cast,
+        summary,
+        whyWatch,
+        imagePath,
+        releaseDate
+      );
+
+
+    await githubCommit(
+      token,
+      repo,
+      `posts/${slug}`,
+      stringToBase64(html),
+      `Publish post: ${slug}`
+    );
+
+
+    showStatus(
+      "⏳ Firebase homepage feed sync ho raha hai..."
+    );
+
+
+    const post={
+
+      title:title,
+
+      platform:platform,
+
+      genre:genre,
+
+      status:status,
+
+      cast:cast,
+
+      summary:summary,
+
+      whyWatch:whyWatch,
+
+      image:imagePath,
+
+      link:slug,
+
+      timestamp:Date.now(),
+
+      releaseDate:releaseDate || ""
+
+    };
+
+
+    const editingId=
+      document.getElementById("editingPostId")
+      .value;
+
+
+    if(editingId){
+
+      await database
+        .ref(
+          `posts/${category}/${editingId}`
+        )
+        .update(post);
+
+      showStatus(
+        "✅ Post successfully updated!"
+      );
+
+    }else{
+
+      await database
+        .ref(`posts/${category}`)
+        .push()
+        .set(post);
+
+
+      if(category!=="ott-movies"){
+
+        await database
+          .ref("posts/ott-movies")
+          .push()
+          .set(post);
+
+      }
+
+
+      showStatus(
+        "🎉 Published! GitHub + Firebase synced."
+      );
+
+    }
+
+
+    clearForm();
+
+    loadPosts();
+
+  }catch(error){
+
+    console.error(error);
+
+    showStatus(
+      "❌ "+error.message,
+      true
+    );
+
+  }
 
 }
 
 
-if(!slug.endsWith(".html")){
+/* ================= LOAD POSTS ================= */
 
-slug+=".html";
+function loadPosts(){
 
-}
+  const category=
+    document.getElementById("manageCategory")
+    .value;
 
+  const list=
+    document.getElementById("postsList");
 
-slug=slug
-.toLowerCase()
-.replace(/\s+/g,"-")
-.replace(/[^a-z0-9._-]/g,"-")
-.replace(/-+/g,"-");
-
-
-document.getElementById("fileSlug").value=slug;
-
-
-/* DUPLICATE */
-
-try{
-
-const duplicate =
-await slugExists(
-slug,
-editingCategory || category,
-editingId
-);
-
-if(duplicate){
-
-alert(
-"❌ Ye URL slug already exist karta hai. Naya slug rakhein."
-);
-
-return;
-
-}
-
-}catch(e){
-
-console.warn("Slug check failed",e);
-
-}
+  list.innerHTML=
+    `<div class="text-center text-zinc-600 text-xs p-8">
+    Loading posts...
+    </div>`;
 
 
-/* IMAGE */
+  database
+    .ref("posts/"+category)
+    .once("value")
+    .then(snapshot=>{
 
-let imgPath =
-`/images/${slug.replace(".html","")}.webp`;
+      const data=snapshot.val();
 
-let oldImagePath="";
-
-
-try{
-
-if(posterInput.files.length>0){
-
-const file=posterInput.files[0];
-
-if(file.size>8*1024*1024){
-
-alert("❌ Image 8MB se chhoti rakhein.");
-
-return;
-
-}
+      list.innerHTML="";
 
 
-showStatus(
-"⏳ 1/3 — GitHub par image upload ho rahi hai..."
-);
+      if(!data){
+
+        list.innerHTML=
+          `<div class="text-center text-zinc-600 text-xs p-8">
+          No posts found.
+          </div>`;
+
+        return;
+
+      }
 
 
-const ext =
-file.name
-.split(".")
-.pop()
-.toLowerCase();
+      Object
+        .keys(data)
+        .reverse()
+        .forEach(key=>{
 
-const imgFileName =
-`${slug.replace(".html","")}.${ext}`;
-
-imgPath=`/images/${imgFileName}`;
+          const post=data[key];
 
 
-const base64Data =
-await toBase64(file);
+          const item=
+            document.createElement("div");
 
-await commitToGithub(
+          item.className=
+            "bg-zinc-900 border border-zinc-800 rounded-xl p-3 flex gap-3";
 
-token,
 
-repo,
+          item.innerHTML=`
 
-`images/${imgFileName}`,
+          <img
+          src="${post.image || createPlaceholder()}"
+          class="w-20 h-14 object-cover rounded-lg shrink-0"
+          >
 
-base64Data.split(",")[1],
+          <div class="flex-1 min-w-0">
 
-`Add poster: ${imgFileName}`
+            <div class="text-xs font-black text-white">
+              ${escapeHTML(post.title || "")}
+            </div>
 
-);
+            <div class="text-[9px] text-zinc-500 mt-1">
+              ${escapeHTML(post.platform || "")}
+              •
+              ${escapeHTML(post.status || "")}
+            </div>
 
-}else{
+            <div class="text-[9px] text-zinc-600 font-mono mt-1 truncate">
+              ${escapeHTML(post.link || "")}
+            </div>
 
-if(editingId){
+          </div>
 
-const oldSnap =
-await database
-.ref(`posts/${editingCategory}/${editingId}`)
-.once("value");
+          <div class="flex flex-col gap-1">
 
-const oldPost=oldSnap.val();
+            <button
+            class="bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-1 rounded text-[9px] font-black"
+            onclick='editPost(${JSON.stringify(key)},${JSON.stringify(category)},${JSON.stringify(post)})'
+            >
+            ✏️
+            </button>
 
-if(oldPost && oldPost.image){
+            <button
+            class="bg-red-500/10 text-red-400 border border-red-500/20 px-2 py-1 rounded text-[9px] font-black"
+            onclick='deletePost(${JSON.stringify(key)},${JSON.stringify(category)})'
+            >
+            🗑️
+            </button>
 
-imgPath=oldPost.image;
+          </div>
 
-oldImagePath=oldPost.image;
+          `;
 
-}
+          list.appendChild(item);
 
-}
+        });
+
+    });
 
 }
 
 
-/* HTML */
+/* ================= EDIT ================= */
 
-showStatus(
-"⏳ 2/3 — SEO article GitHub par publish ho raha hai..."
-);
+function editPost(id,category,post){
 
+  document.getElementById("editingPostId").value=id;
 
-const fullHtml =
-buildPostHTML(
+  document.getElementById("editingCategory").value=category;
 
-title,
-slug,
-platform,
-status,
-genre,
-cast,
-summary,
-whyWatch,
-imgPath,
-category
+  document.getElementById("movieCategory").value=category;
 
-);
+  document.getElementById("moviePlatform").value=
+    post.platform || "NETFLIX";
 
+  document.getElementById("movieTitle").value=
+    post.title || "";
 
-await commitToGithub(
+  document.getElementById("movieCast").value=
+    post.cast || "";
 
-token,
+  document.getElementById("movieGenre").value=
+    post.genre || "";
 
-repo,
+  document.getElementById("movieStatus").value=
+    post.status || "Streaming Now";
 
-`posts/${slug}`,
+  document.getElementById("fileSlug").value=
+    post.link || "";
 
-utf8ToBase64(fullHtml),
+  document.getElementById("movieSummary").value=
+    post.summary || "";
 
-`Publish article: ${slug}`
+  document.getElementById("movieWhyWatch").value=
+    post.whyWatch || "";
 
-);
+  document.getElementById("releaseDate").value=
+    post.releaseDate || "";
 
+  currentImageData=null;
 
-/* FIREBASE */
+  switchTab(
+    "postTab",
+    document.querySelector(".tab")
+  );
 
-showStatus(
-"⏳ 3/3 — Firebase homepage sync ho raha hai..."
-);
+  updatePreview();
 
-
-const postObj={
-
-title,
-platform,
-genre,
-status,
-cast,
-summary,
-whyWatch,
-image:imgPath,
-link:slug,
-category,
-timestamp:Date.now(),
-updatedAt:Date.now()
-
-};
-
-
-if(editingId){
-
-await database
-.ref(`posts/${editingCategory}/${editingId}`)
-.update(postObj);
-
-
-showStatus(
-"✅ Post successfully updated!"
-);
-
-
-cancelEditing();
-
-
-}else{
-
-await database
-.ref(`posts/${category}`)
-.push()
-.set(postObj);
-
-
-/*
-Main feed mein automatically mirror.
-Isse theatres / YouTube / web-series
-bhi homepage ke 20-post pool mein aa sakte hain.
-*/
-
-if(category!=="ott-movies"){
-
-await database
-.ref("posts/ott-movies")
-.push()
-.set(postObj);
+  showStatus(
+    "✏️ Edit mode active."
+  );
 
 }
 
 
-showStatus(
-"🎉 Post published & homepage synced!"
-);
-
-clearForm();
-
-}
-
-
-loadCategoryPosts();
-
-
-}catch(err){
-
-console.error(err);
-
-showStatus(
-"❌ Error: "+err.message,
-true
-);
-
-}
-
-}
-
-
-/* =========================================================
-   UTF8 BASE64
-========================================================= */
-
-function utf8ToBase64(str){
-
-return btoa(
-unescape(
-encodeURIComponent(str)
-)
-);
-
-}
-
-
-/* =========================================================
-   FILE BASE64
-========================================================= */
-
-function toBase64(file){
-
-return new Promise((resolve,reject)=>{
-
-const reader=new FileReader();
-
-reader.readAsDataURL(file);
-
-reader.onload=()=>{
-resolve(reader.result);
-};
-
-reader.onerror=error=>{
-reject(error);
-};
-
-});
-
-}
-
-
-/* =========================================================
-   GITHUB COMMIT
-========================================================= */
-
-async function commitToGithub(
-token,
-repo,
-path,
-base64Content,
-commitMsg
-){
-
-const apiUrl=
-`https://api.github.com/repos/${repo}/contents/${path}`;
-
-let sha="";
-
-
-const getRes=
-await fetch(
-apiUrl,
-{
-headers:{
-"Authorization":`Bearer ${token}`,
-"Accept":"application/vnd.github+json"
-}
-}
-);
-
-
-if(getRes.ok){
-
-const data=await getRes.json();
-
-sha=data.sha;
-
-}
-
-
-const body={
-
-message:commitMsg,
-
-content:base64Content
-
-};
-
-
-if(sha){
-
-body.sha=sha;
-
-}
-
-
-const res=
-await fetch(
-apiUrl,
-{
-method:"PUT",
-
-headers:{
-
-"Authorization":`Bearer ${token}`,
-
-"Content-Type":
-"application/json",
-
-"Accept":
-"application/vnd.github+json"
-
-},
-
-body:JSON.stringify(body)
-
-}
-);
-
-
-if(!res.ok){
-
-let errData={};
-
-try{
-
-errData=await res.json();
-
-}catch(e){}
-
-throw new Error(
-errData.message ||
-"GitHub API request failed."
-);
-
-}
-
-}
-
-
-/* =========================================================
-   LOAD POSTS
-========================================================= */
-
-function loadCategoryPosts(){
-
-const category =
-document.getElementById("manageCategory").value;
-
-const listDiv =
-document.getElementById("postsList");
-
-listDiv.innerHTML=
-`<p class="text-xs text-slate-500 p-4 text-center">
-Syncing live cloud database...
-</p>`;
-
-
-database
-.ref("posts/"+category)
-.once("value")
-.then(snapshot=>{
-
-listDiv.innerHTML="";
-
-const data=snapshot.val();
-
-if(!data){
-
-listDiv.innerHTML=
-`<p class="text-xs text-slate-500 p-4 text-center">
-Koi post nahi mila.
-</p>`;
-
-return;
-
-}
-
-
-Object
-.keys(data)
-.reverse()
-.forEach(key=>{
-
-const post=data[key];
-
-const item=
-document.createElement("div");
-
-item.className=
-"bg-zinc-900 p-3 rounded-xl border border-zinc-800 flex items-center justify-between gap-2";
-
-
-const safeTitle=
-escapeHtml(post.title);
-
-const safePlatform=
-escapeHtml(post.platform);
-
-const safeLink=
-escapeHtml(post.link);
-
-
-item.innerHTML=`
-
-<div class="min-w-0">
-
-<div class="text-xs font-bold text-slate-200 break-words">
-
-${safeTitle}
-
-<span class="bg-red-500/20 text-red-400 text-[9px] px-2 py-0.5 rounded font-black border border-red-500/30">
-
-${safePlatform}
-
-</span>
-
-</div>
-
-<div class="text-[10px] text-slate-500 font-mono mt-1 break-all">
-
-${safeLink}
-
-</div>
-
-</div>
-
-
-<div class="flex items-center gap-1.5 shrink-0">
-
-<button
-class="px-3 py-1.5 bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-lg font-bold text-[10px]"
-onclick='startEditing(${JSON.stringify(key)},${JSON.stringify(category)},${JSON.stringify(post)})'
->
-✏️
-</button>
-
-
-<button
-class="px-3 py-1.5 bg-rose-500/20 text-rose-300 border border-rose-500/30 rounded-lg font-bold text-[10px]"
-onclick='deletePost(${JSON.stringify(key)},${JSON.stringify(category)})'
->
-🗑️
-</button>
-
-</div>
-`;
-
-listDiv.appendChild(item);
-
-});
-
-});
-
-}
-
-
-/* =========================================================
-   EDIT
-========================================================= */
-
-function startEditing(id,category,post){
-
-document.getElementById("editingPostId").value=id;
-
-document.getElementById("editingCategory").value=category;
-
-document.getElementById("movieCategory").value=category;
-
-document.getElementById("moviePlatform").value=
-post.platform || "THEATRES";
-
-document.getElementById("movieTitle").value=
-post.title || "";
-
-document.getElementById("movieCast").value=
-post.cast || "";
-
-document.getElementById("movieGenre").value=
-post.genre || "";
-
-document.getElementById("movieStatus").value=
-post.status || "Streaming Now";
-
-document.getElementById("fileSlug").value=
-post.link || "";
-
-document.getElementById("movieSummary").value=
-post.summary || "";
-
-document.getElementById("movieWhyWatch").value=
-post.whyWatch || "";
-
-document.getElementById("posterFile").value="";
-
-document.getElementById("form-action-title").innerText=
-"✏️ Editing Live Post";
-
-document.getElementById("submitBtn").innerText=
-"💾 UPDATE & RE-PUBLISH";
-
-document.getElementById("cancelEditBtn")
-.classList.remove("hidden");
-
-switchTab("post-tab");
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-}
-
-
-/* =========================================================
-   CANCEL EDIT
-========================================================= */
-
-function cancelEditing(){
-
-document.getElementById("editingPostId").value="";
-
-document.getElementById("editingCategory").value="";
-
-clearForm();
-
-document.getElementById("form-action-title").innerText=
-"🔥 Create & Publish Entertainment Post";
-
-document.getElementById("submitBtn").innerText=
-"🔥 PUBLISH POST";
-
-document.getElementById("cancelEditBtn")
-.classList.add("hidden");
-
-}
-
-
-/* =========================================================
-   DELETE
-========================================================= */
+/* ================= DELETE ================= */
 
 async function deletePost(id,category){
 
-const confirmDelete=
-confirm(
-"Kya aap sach mein ye Firebase post delete karna chahte hain?"
-);
-
-if(!confirmDelete) return;
+  if(!confirm(
+    "Kya aap ye post delete karna chahte ho?"
+  ))
+    return;
 
 
-try{
+  try{
 
-await database
-.ref(`posts/${category}/${id}`)
-.remove();
-
-showStatus(
-"🗑️ Firebase post delete ho gayi."
-);
-
-loadCategoryPosts();
-
-}catch(err){
-
-showStatus(
-"❌ Delete failed: "+err.message,
-true
-);
-
-}
-
-}
+    await database
+      .ref(`posts/${category}/${id}`)
+      .remove();
 
 
-/* =========================================================
-   GLOBAL SETTINGS
-========================================================= */
+    showStatus(
+      "🗑️ Firebase post deleted."
+    );
 
-function saveGlobalSettings(){
+    loadPosts();
 
-const headerNotice=
-document.getElementById("headerNotice")
-.value
-.trim();
+  }catch(error){
 
-const siteTitle=
-document.getElementById("siteTitleSetting")
-.value
-.trim();
+    showStatus(
+      "❌ "+error.message,
+      true
+    );
 
-
-database
-.ref("settings")
-.set({
-
-headerNotice,
-siteTitle,
-
-updatedAt:Date.now()
-
-})
-.then(()=>{
-
-showStatus(
-"✅ Global settings updated."
-);
-
-})
-.catch(err=>{
-
-showStatus(
-"❌ Settings error: "+err.message,
-true
-);
-
-});
+  }
 
 }
 
 
-function loadGlobalSettings(){
+/* ================= SETTINGS ================= */
 
-database
-.ref("settings")
-.once("value")
-.then(snapshot=>{
+function saveSettings(){
 
-const data=snapshot.val();
+  const settings={
 
-if(!data) return;
+    headerNotice:
+      document.getElementById("headerNotice").value.trim(),
 
-document.getElementById("headerNotice").value=
-data.headerNotice || "";
+    siteTitle:
+      document.getElementById("siteTitleSetting").value.trim(),
 
-document.getElementById("siteTitleSetting").value=
-data.siteTitle || "";
+    siteDescription:
+      document.getElementById("siteDescription").value.trim()
 
-});
+  };
+
+
+  database
+    .ref("settings")
+    .set(settings)
+    .then(()=>{
+
+      showStatus(
+        "✅ Website settings saved."
+      );
+
+    })
+    .catch(error=>{
+
+      showStatus(
+        "❌ "+error.message,
+        true
+      );
+
+    });
 
 }
 
 
-/* =========================================================
-   CLEAR FORM
-========================================================= */
+function loadSettings(){
+
+  database
+    .ref("settings")
+    .once("value")
+    .then(snapshot=>{
+
+      const data=snapshot.val();
+
+      if(!data)
+        return;
+
+      document.getElementById("headerNotice").value=
+        data.headerNotice || "";
+
+      document.getElementById("siteTitleSetting").value=
+        data.siteTitle || "";
+
+      document.getElementById("siteDescription").value=
+        data.siteDescription || "";
+
+    });
+
+}
+
+
+/* ================= CLEAR ================= */
 
 function clearForm(){
 
-document.getElementById("movieTitle").value="";
+  document.getElementById("movieTitle").value="";
 
-document.getElementById("movieCast").value="";
+  document.getElementById("focusKeyword").value="";
 
-document.getElementById("movieGenre").value="";
+  document.getElementById("fileSlug").value="";
 
-document.getElementById("movieStatus").value=
-"Streaming Now";
+  document.getElementById("movieCast").value="";
 
-document.getElementById("movieSummary").value="";
+  document.getElementById("movieGenre").value="";
 
-document.getElementById("movieWhyWatch").value="";
+  document.getElementById("movieSummary").value="";
 
-document.getElementById("fileSlug").value="";
+  document.getElementById("movieWhyWatch").value="";
 
-document.getElementById("posterFile").value="";
+  document.getElementById("releaseDate").value="";
 
-document.getElementById("imageInfo").innerText=
-"No image selected.";
+  document.getElementById("posterFile").value="";
 
-}
+  document.getElementById("editingPostId").value="";
 
+  document.getElementById("editingCategory").value="";
 
-/* =========================================================
-   PREVIEW
-========================================================= */
+  document.getElementById("imageStatus").innerText=
+    "No image selected";
 
-function updatePreviewFromFields(){
+  currentImageData=null;
 
-const title=
-document.getElementById("movieTitle").value ||
-"Preview Movie Title";
-
-const slug=
-document.getElementById("fileSlug").value ||
-"sample-post.html";
-
-const platform=
-document.getElementById("moviePlatform").value;
-
-const status=
-document.getElementById("movieStatus").value ||
-"Streaming Now";
-
-const genre=
-document.getElementById("movieGenre").value ||
-"Entertainment";
-
-const cast=
-document.getElementById("movieCast").value ||
-"Star Cast Info";
-
-const summary=
-document.getElementById("movieSummary").value ||
-"Yahan article summary preview dikhega.";
-
-const whyWatch=
-document.getElementById("movieWhyWatch").value ||
-"Yahan streaming details preview dikhegi.";
-
-const category=
-document.getElementById("movieCategory").value;
-
-const imgPath=
-"/images/sample.webp";
-
-
-const code=
-buildPostHTML(
-
-title,
-slug,
-platform,
-status,
-genre,
-cast,
-summary,
-whyWatch,
-imgPath,
-category
-
-);
-
-
-const iframe=
-document.getElementById("htmlPreviewFrame");
-
-const doc=
-iframe.contentDocument ||
-iframe.contentWindow.document;
-
-doc.open();
-
-doc.write(code);
-
-doc.close();
+  updatePreview();
 
 }
 
 
-/* =========================================================
-   PAGE INIT
-========================================================= */
+/* ================= ESCAPE ================= */
 
-document
-.getElementById("posterFile")
-.addEventListener("change",function(){
+function escapeHTML(text){
 
-const file=this.files[0];
-
-if(file){
-
-document.getElementById("imageInfo").innerText=
-`${file.name} • ${(file.size/1024/1024).toFixed(2)} MB`;
+  return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
-});
+
+/* ================= INITIAL PREVIEW ================= */
+
+updatePreview();
 
 </script>
 
