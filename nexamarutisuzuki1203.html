@@ -96,7 +96,7 @@
     </button>
   </div>
 
-  <!-- 4 Main Navigation Tabs -->
+  <!-- Main Navigation Tabs -->
   <div class="grid grid-cols-4 gap-1 bg-zinc-900 p-1.5 rounded-xl border border-zinc-800 text-xs">
     <button onclick="switchTab('postTab', this)" class="tab-btn active py-2 rounded-lg font-bold text-center transition">📝 NAYA POST</button>
     <button onclick="switchTab('previewTab', this)" class="tab-btn py-2 rounded-lg font-bold text-center transition">👁️ PREVIEW</button>
@@ -107,10 +107,9 @@
   <!-- Status Alert Banner -->
   <div id="statusLog" class="hidden p-3 rounded-xl text-xs font-bold text-center"></div>
 
-  <!-- ================= TAB 1: CREATE / EDIT POST ================= -->
+  <!-- TAB 1: CREATE / EDIT POST -->
   <section id="postTab" class="tab-content active space-y-4 box p-4">
     
-    <!-- Platform & Status Badges -->
     <div class="grid grid-cols-2 gap-2.5">
       <div>
         <label class="text-[11px] text-zinc-400 font-bold block mb-1">1. Target Platform</label>
@@ -138,20 +137,17 @@
       </div>
     </div>
 
-    <!-- Title / Headline -->
     <div>
       <label class="text-[11px] text-zinc-400 font-bold block mb-1">3. Discover Article Headline (Title)</label>
       <input id="movieTitle" class="input" placeholder="e.g. Awarapan 2 Box Office: 19 Saal Baad Wapsi..." oninput="generateSlug(); autoFillHtml()">
     </div>
 
-    <!-- Image Upload (16:9 Format) -->
     <div class="p-3.5 bg-black/40 rounded-xl border border-zinc-800">
-      <label class="text-[11px] text-amber-400 font-bold block mb-1">🖼️ Featured Poster Upload (1200x675 px Banner)</label>
+      <label class="text-[11px] text-amber-400 font-bold block mb-1">🖼️ Featured Poster Upload (16:9 Banner)</label>
       <input id="posterFile" type="file" accept="image/*" class="input text-xs text-zinc-400" onchange="handleImage(this)">
-      <p class="text-[9px] text-zinc-500 mt-1.5">*Gallery se photo select karo (Optional: agar select nahi karoge toh default cover ban jayega).</p>
+      <p class="text-[9px] text-zinc-500 mt-1.5">*Photo select karein. Ye GitHub ke /images folder me auto-upload ho jayegi.</p>
     </div>
 
-    <!-- Cast & Genre -->
     <div class="grid grid-cols-2 gap-2.5">
       <div>
         <label class="text-[11px] text-zinc-400 font-bold block mb-1">4. Star Cast / Creator</label>
@@ -163,25 +159,22 @@
       </div>
     </div>
 
-    <!-- Story Summary -->
     <div>
       <label class="text-[11px] text-zinc-400 font-bold block mb-1">6. Kahani & Highlights (Short Summary)</label>
-      <textarea id="movieSummary" rows="3" class="input" placeholder="Story ka short summary/overview yahan paste karein..." oninput="autoFillHtml()"></textarea>
+      <textarea id="movieSummary" rows="3" class="input" placeholder="Story ka short summary yahan paste karein..." oninput="autoFillHtml()"></textarea>
     </div>
 
-    <!-- Why Watch / Details -->
     <div>
       <label class="text-[11px] text-zinc-400 font-bold block mb-1">7. Kyun Dekhein / Release Info</label>
       <textarea id="movieWhyWatch" rows="2" class="input" placeholder="Kahan stream hoga, timing kya hai..." oninput="autoFillHtml()"></textarea>
     </div>
 
-    <!-- 🔗 3 ACTION BUTTON LINKS -->
+    <!-- ACTION BUTTON LINKS -->
     <div class="p-3.5 bg-black/60 rounded-xl border border-red-900/40 space-y-3">
       <h4 class="text-xs font-black text-red-400 uppercase tracking-wider flex items-center gap-1.5">
         <span>🔗</span> Action Buttons (Auto-Design)
       </h4>
       
-      <!-- Link 1: Official Stream / Tickets -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
         <div>
           <label class="text-[10px] text-zinc-400 font-bold block mb-0.5">Button 1 Text:</label>
@@ -193,7 +186,6 @@
         </div>
       </div>
 
-      <!-- Link 2: Telegram Channel -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
         <div>
           <label class="text-[10px] text-zinc-400 font-bold block mb-0.5">Button 2 Text:</label>
@@ -205,7 +197,6 @@
         </div>
       </div>
 
-      <!-- Link 3: Trailer -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
         <div>
           <label class="text-[10px] text-zinc-400 font-bold block mb-0.5">Button 3 Text (Optional):</label>
@@ -218,7 +209,7 @@
       </div>
     </div>
 
-    <!-- Custom HTML Editor Box -->
+    <!-- Custom HTML Box -->
     <div class="space-y-1.5 pt-2 border-t border-zinc-800">
       <div class="flex items-center justify-between">
         <label class="text-[11px] text-amber-400 font-bold">💻 Custom HTML Code (Auto Generated)</label>
@@ -231,6 +222,7 @@
 
     <input type="hidden" id="editingId">
     <input type="hidden" id="fileSlug">
+    <input type="hidden" id="existingImageUrl">
 
     <div class="pt-2">
       <button id="publishBtn" onclick="publishPost()" class="w-full bg-red-600 hover:bg-red-700 active:scale-95 py-4 rounded-xl font-black text-sm transition shadow-lg shadow-red-600/30">
@@ -243,7 +235,7 @@
 
   </section>
 
-  <!-- ================= TAB 2: LIVE PREVIEW ================= -->
+  <!-- TAB 2: LIVE PREVIEW -->
   <section id="previewTab" class="tab-content space-y-3 box p-4">
     <div class="flex items-center justify-between">
       <div>
@@ -257,7 +249,7 @@
     <iframe id="previewFrame" class="w-full h-[540px] rounded-xl border border-zinc-800 bg-black"></iframe>
   </section>
 
-  <!-- ================= TAB 3: MANAGE POSTS ================= -->
+  <!-- TAB 3: MANAGE POSTS -->
   <section id="manageTab" class="tab-content space-y-3 box p-4">
     <div class="flex items-center justify-between">
       <h3 class="text-xs font-black text-zinc-400 uppercase">Live Published Articles</h3>
@@ -266,7 +258,7 @@
     <div id="postsList" class="space-y-2 max-h-[500px] overflow-y-auto pr-1"></div>
   </section>
 
-  <!-- ================= TAB 4: SITE NOTICE / SETTINGS ================= -->
+  <!-- TAB 4: SITE NOTICE -->
   <section id="settingsTab" class="tab-content space-y-3 box p-4">
     <h3 class="text-xs font-black text-zinc-400 uppercase">Top Marquee Ticker Alert</h3>
     <textarea id="headerNotice" rows="3" class="input" placeholder="Breaking update yahan likhein..."></textarea>
@@ -277,7 +269,6 @@
 
 </div>
 
-<!-- ================= SCRIPT ENGINE ================= -->
 <script>
 const PIN = "1465822";
 const firebaseConfig = {
@@ -462,7 +453,8 @@ function autoFillHtml(force = false) {
   const btn3 = { text: (document.getElementById("btn3Text").value || "").trim(), url: (document.getElementById("btn3Url").value || "").trim() };
 
   const cleanSlug = slug.replace('.html', '');
-  const imgPath = localImageBase64 || `/images/${cleanSlug}.webp`;
+  const existingImg = document.getElementById("existingImageUrl").value;
+  const imgPath = localImageBase64 || existingImg || `/images/${cleanSlug}.webp`;
 
   codeBox.value = buildHTML(title, slug, platform, status, genre, cast, summary, whyWatch, imgPath, btn1, btn2, btn3);
   if (force) codeBox.dataset.touched = "false";
@@ -514,13 +506,13 @@ async function publishPost() {
   if (!slug.endsWith('.html')) slug += '.html';
   const cleanSlug = slug.replace('.html', '');
 
-  let imgPath = `/images/${cleanSlug}.webp`;
+  let imgPath = document.getElementById("existingImageUrl").value || `/images/${cleanSlug}.webp`;
   const btn = document.getElementById("publishBtn");
   btn.disabled = true;
   btn.innerText = "⏳ Uploading to GitHub & Live Site...";
 
   try {
-    // 1. Upload Poster Image (if selected)
+    // 1. Upload Poster Image if chosen
     if (fileInput.files && fileInput.files.length > 0) {
       const file = fileInput.files[0];
       const ext = (file.name.split('.').pop() || "webp").toLowerCase();
@@ -537,7 +529,9 @@ async function publishPost() {
     }
     await commitGh(token, repo, `posts/${slug}`, btoa(unescape(encodeURIComponent(finalHtml))), `Publish post: ${slug}`);
 
-    // 3. Sync to Firebase for Top 20 Slider & Grid
+    // 3. Sync to Firebase
+    const editingId = document.getElementById("editingId").value;
+    const now = Date.now();
     const postObj = { 
       title: title || "", 
       platform: platform || "", 
@@ -551,26 +545,24 @@ async function publishPost() {
       btn1: btn1 || {},
       btn2: btn2 || {},
       btn3: btn3 || {},
-      publishedAt: Date.now(),
-      date: Date.now(),
-      timestamp: Date.now() 
+      publishedAt: now,
+      date: now,
+      timestamp: now 
     };
 
-    const editingId = document.getElementById("editingId").value;
     if (editingId) {
       await db.ref(`posts/ott-movies/${editingId}`).update(postObj);
       showStatus("✅ Post Successfully Updated Live!");
     } else {
       await db.ref("posts/ott-movies").push().set(postObj);
-      showStatus("🎉 Post Successfully Live on Homepage (Top 20 Slider & Grid)!");
+      showStatus("🎉 Post Live on Homepage (Hero Slider & All Grids)!");
     }
 
     resetForm();
     loadPosts();
   } catch (err) {
     console.error("Publish Error:", err);
-    const errorMsg = err && err.message ? err.message : String(err);
-    showStatus("❌ Error: " + errorMsg, true);
+    showStatus("❌ Error: " + (err && err.message ? err.message : String(err)), true);
   } finally {
     btn.disabled = false;
     btn.innerText = "🚀 PUBLISH POST DIRECT TO HOMEPAGE & GITHUB";
@@ -594,10 +586,7 @@ async function commitGh(token, repo, path, base64Content, msg) {
     }
   } catch(e){}
 
-  const bodyData = { 
-    message: msg, 
-    content: base64Content 
-  };
+  const bodyData = { message: msg, content: base64Content };
   if (sha) bodyData.sha = sha;
 
   const putRes = await fetch(url, {
@@ -613,18 +602,14 @@ async function commitGh(token, repo, path, base64Content, msg) {
   if (!putRes.ok) { 
     let errJson;
     try { errJson = await putRes.json(); } catch(e){}
-    const errMsg = (errJson && errJson.message) ? errJson.message : `GitHub API HTTP ${putRes.status}`;
-    throw new Error(errMsg);
+    throw new Error((errJson && errJson.message) ? errJson.message : `GitHub API HTTP ${putRes.status}`);
   }
 }
 
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.onload = () => {
-      const res = reader.result || "";
-      resolve(res.split(',')[1] || "");
-    };
+    reader.onload = () => resolve((reader.result || "").split(',')[1] || "");
     reader.onerror = reject;
     reader.readAsDataURL(file);
   });
@@ -666,12 +651,13 @@ function editPost(key, p) {
   document.getElementById("movieSummary").value = p.summary || "";
   document.getElementById("movieWhyWatch").value = p.whyWatch || "";
   document.getElementById("fileSlug").value = p.link || "";
+  document.getElementById("existingImageUrl").value = p.image || "";
 
   if (p.btn1) { document.getElementById("btn1Text").value = p.btn1.text || ""; document.getElementById("btn1Url").value = p.btn1.url || ""; }
   if (p.btn2) { document.getElementById("btn2Text").value = p.btn2.text || ""; document.getElementById("btn2Url").value = p.btn2.url || ""; }
   if (p.btn3) { document.getElementById("btn3Text").value = p.btn3.text || ""; document.getElementById("btn3Url").value = p.btn3.url || ""; }
 
-  localImageBase64 = p.image || null;
+  localImageBase64 = null;
   autoFillHtml(true);
   document.getElementById("publishBtn").innerText = "💾 UPDATE POST LIVE";
   document.getElementById("cancelEditBtn").classList.remove("hidden");
@@ -689,6 +675,7 @@ function resetForm() {
   document.getElementById("btn3Url").value = "";
   document.getElementById("btn2Url").value = "https://t.me/+rG_x3BDIdYliNTVl";
   document.getElementById("posterFile").value = "";
+  document.getElementById("existingImageUrl").value = "";
   document.getElementById("postHtmlCode").value = "";
   document.getElementById("postHtmlCode").dataset.touched = "false";
   localImageBase64 = null;
