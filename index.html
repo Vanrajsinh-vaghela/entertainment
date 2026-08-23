@@ -7,70 +7,32 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-73Z6FH3JVM');
 </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title id="siteTitle">
-    Gujarat Fast Alert Entertainment - Latest Hindi Movies, OTT & Web Series
-  </title>
-
-  <meta
-    name="description"
-    content="Latest Hindi movies, OTT releases, web series, trailers aur entertainment news Hindi mein."
-  >
-
+  <title id="siteTitle">Gujarat Fast Alert Entertainment - Latest Hindi Movies, OTT & Web Series</title>
+  <meta name="description" content="Latest Hindi movies, OTT releases, web series, trailers aur entertainment news Hindi mein.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#09090b">
+  <link rel="canonical" href="https://entertainment.gujaratfastalert.in/">
 
-  <link
-    rel="canonical"
-    href="https://entertainment.gujaratfastalert.in/"
-  >
-
-  <!-- Open Graph -->
+  <!-- Open Graph / SEO -->
   <meta property="og:type" content="website">
-  <meta
-    property="og:site_name"
-    content="Gujarat Fast Alert Entertainment"
-  >
-  <meta
-    property="og:title"
-    content="Gujarat Fast Alert Entertainment"
-  >
-  <meta
-    property="og:description"
-    content="Latest Hindi Movies, OTT Releases, Trailers, Web Series & Entertainment News"
-  >
-  <meta
-    property="og:image"
-    content="https://entertainment.gujaratfastalert.in/images/mirzapur-3-ott.webp"
-  >
-  <meta
-    property="og:url"
-    content="https://entertainment.gujaratfastalert.in/"
-  >
+  <meta property="og:site_name" content="Gujarat Fast Alert Entertainment">
+  <meta property="og:title" content="Gujarat Fast Alert Entertainment">
+  <meta property="og:description" content="Latest Hindi Movies, OTT Releases, Trailers, Web Series & Entertainment News">
+  <meta property="og:image" content="https://entertainment.gujaratfastalert.in/images/mirzapur-3-ott.webp">
+  <meta property="og:url" content="https://entertainment.gujaratfastalert.in/">
 
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta
-    name="twitter:title"
-    content="Gujarat Fast Alert Entertainment"
-  >
-  <meta
-    name="twitter:description"
-    content="Latest Hindi Movies, OTT Releases, Trailers, Web Series & Entertainment News"
-  >
-  <meta
-    name="twitter:image"
-    content="https://entertainment.gujaratfastalert.in/images/mirzapur-3-ott.webp"
-  >
+  <meta name="twitter:title" content="Gujarat Fast Alert Entertainment">
+  <meta name="twitter:description" content="Latest Hindi Movies, OTT Releases, Trailers, Web Series & Entertainment News">
+  <meta name="twitter:image" content="https://entertainment.gujaratfastalert.in/images/mirzapur-3-ott.webp">
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -102,614 +64,214 @@
   </script>
 
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background-color: #09090b;
-    }
-
-    .hide-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-
-    .hide-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-
+    html { scroll-behavior: smooth; }
+    body { background-color: #09090b; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    
     .slider-track {
       display: flex;
       height: 100%;
-      transition: transform 0.55s ease-in-out;
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
       will-change: transform;
     }
-
     .slide {
       min-width: 100%;
       height: 100%;
       position: relative;
     }
-
     .slide-image {
-      transition: transform 5s linear;
+      transition: transform 6s ease-out;
       will-change: transform;
     }
-
     .slide.active .slide-image {
-      transform: scale(1.04);
+      transform: scale(1.05);
     }
-
-    .story-card,
-    .platform-card {
-      transition:
-        transform .2s ease,
-        border-color .2s ease;
+    .story-card, .platform-card {
+      transition: transform 0.2s ease, border-color 0.2s ease;
     }
-
-    .story-card:hover,
-    .platform-card:hover {
-      transform: translateY(-3px);
-      border-color: #3f3f46;
+    .story-card:hover, .platform-card:hover {
+      transform: translateY(-4px);
+      border-color: #52525b;
     }
-
     .slider-control {
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
-
     @media (max-width: 640px) {
-      .hero-slider {
-        height: 480px;
-      }
+      .hero-slider { height: 480px; }
     }
-
     @media (min-width: 641px) {
-      .hero-slider {
-        height: 440px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      .slider-track,
-      .slide-image,
-      .story-card,
-      .platform-card {
-        transition: none !important;
-      }
+      .hero-slider { height: 450px; }
     }
   </style>
 </head>
 
-
 <body class="bg-bgmain text-white antialiased font-sans">
 
-
-  <!-- =========================================
-       BREAKING NOTICE
-  ========================================== -->
-
-  <div
-    id="tickerContainer"
-    class="bg-red-950/80 border-b border-red-800 text-red-200 text-xs py-1.5 px-4 hidden"
-  >
-
+  <!-- ALERT TICKER -->
+  <div id="tickerContainer" class="bg-red-950/90 border-b border-red-800 text-red-200 text-xs py-1.5 px-4 hidden">
     <div class="max-w-7xl mx-auto flex items-center gap-2">
-
-      <span class="bg-brand text-white text-[9px] font-black px-2 py-0.5 rounded">
-        ALERT
-      </span>
-
-      <marquee
-        id="tickerText"
-        class="font-bold text-xs"
-        scrollamount="5"
-      ></marquee>
-
+      <span class="bg-brand text-white text-[9px] font-black px-2 py-0.5 rounded uppercase">ALERT</span>
+      <marquee id="tickerText" class="font-bold text-xs" scrollamount="5"></marquee>
     </div>
-
   </div>
 
-
-  <!-- =========================================
-       HEADER
-  ========================================== -->
-
+  <!-- HEADER -->
   <header class="sticky top-0 z-50 bg-black/95 backdrop-blur border-b border-white/10">
-
     <div class="max-w-7xl mx-auto px-4">
-
       <div class="min-h-[72px] md:min-h-[80px] flex items-center justify-between gap-4 py-2">
-
-
-        <!-- LOGO -->
-
-        <a
-          href="/"
-          aria-label="Gujarat Fast Alert Entertainment Home"
-          class="shrink-0 flex flex-col justify-center"
-        >
-
+        <a href="/" aria-label="Gujarat Fast Alert Entertainment Home" class="shrink-0 flex flex-col justify-center">
           <div class="text-lg md:text-2xl font-black tracking-tight leading-tight text-white">
-
-            <span class="text-brand">
-              GUJARAT
-            </span>
-
-            FAST ALERT
-
+            <span class="text-brand">GUJARAT</span> FAST ALERT
           </div>
-
-
-          <div class="text-[11px] md:text-xs text-amber-400 font-black tracking-[0.25em] uppercase mt-0.5">
+          <div class="text-[10px] md:text-xs text-amber-400 font-black tracking-[0.25em] uppercase mt-0.5">
             ENTERTAINMENT
           </div>
-
         </a>
 
-
-        <!-- TELEGRAM -->
-
-        <a
-          href="https://t.me/+rG_x3BDIdYliNTVl"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="bg-sky-600 hover:bg-sky-500 active:scale-95 text-white text-xs md:text-sm font-black px-4 md:px-6 py-2.5 rounded-xl flex items-center gap-2 shadow-lg shadow-sky-600/30 transition-all"
-        >
-
-          <span class="text-base">
-            ✈️
-          </span>
-
-          <span>
-            Join Telegram
-          </span>
-
+        <a href="https://t.me/+rG_x3BDIdYliNTVl" target="_blank" rel="noopener noreferrer" class="bg-sky-600 hover:bg-sky-500 active:scale-95 text-white text-xs md:text-sm font-black px-4 md:px-6 py-2.5 rounded-xl flex items-center gap-2 shadow-lg shadow-sky-600/30 transition-all">
+          <span class="text-base">✈️</span>
+          <span>Join Telegram</span>
         </a>
-
       </div>
-
     </div>
-
   </header>
 
-
-  <!-- =========================================
-       MAIN
-  ========================================== -->
-
+  <!-- MAIN WRAPPER -->
   <main class="max-w-7xl mx-auto px-4 py-6 space-y-12">
 
-
-    <!-- =========================================
-         HERO SLIDER - TOP 20
-    ========================================== -->
-
-    <section
-      id="top-stories"
-      class="hero-slider relative overflow-hidden rounded-3xl border border-white/10 bg-black touch-pan-y select-none"
-      aria-label="Latest Entertainment Stories"
-    >
-
+    <!-- HERO SLIDER (TOP 20 AUTO-UPDATED) -->
+    <section id="top-stories" class="hero-slider relative overflow-hidden rounded-3xl border border-white/10 bg-black touch-pan-y select-none" aria-label="Latest Entertainment Stories">
       <div id="sliderTrack" class="slider-track">
-
-        <div class="slide active flex items-center justify-center text-slate-500 text-sm">
+        <div class="slide active flex items-center justify-center text-zinc-500 text-sm">
           Latest entertainment updates loading...
         </div>
-
       </div>
 
-
-      <!-- PREVIOUS -->
-
-      <button
-        id="prevSlide"
-        type="button"
-        aria-label="Previous story"
-        class="slider-control absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 border border-white/20 flex items-center justify-center text-2xl z-20 hover:bg-black active:scale-95 transition"
-      >
+      <button id="prevSlide" type="button" aria-label="Previous story" class="slider-control absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/60 border border-white/20 flex items-center justify-center text-xl md:text-2xl z-20 hover:bg-black active:scale-95 transition">
         &#8249;
       </button>
 
-
-      <!-- NEXT -->
-
-      <button
-        id="nextSlide"
-        type="button"
-        aria-label="Next story"
-        class="slider-control absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 border border-white/20 flex items-center justify-center text-2xl z-20 hover:bg-black active:scale-95 transition"
-      >
+      <button id="nextSlide" type="button" aria-label="Next story" class="slider-control absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/60 border border-white/20 flex items-center justify-center text-xl md:text-2xl z-20 hover:bg-black active:scale-95 transition">
         &#8250;
       </button>
 
-
-      <!-- DOTS -->
-
-      <div
-        id="sliderDots"
-        class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 max-w-[90%] overflow-x-auto hide-scrollbar px-3 py-1.5 bg-black/50 backdrop-blur-md rounded-full border border-white/10"
-        aria-label="Story navigation"
-      ></div>
-
+      <div id="sliderDots" class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 max-w-[90%] overflow-x-auto hide-scrollbar px-3 py-1.5 bg-black/50 backdrop-blur-md rounded-full border border-white/10" aria-label="Story navigation"></div>
     </section>
 
-
-    <!-- =========================================
-         LATEST RELEASES
-    ========================================== -->
-
+    <!-- SECTION 1: LATEST RELEASES -->
     <section id="aaj-release">
-
       <div class="flex items-end justify-between mb-5">
-
         <div>
-
-          <p class="text-brand text-xs font-black uppercase tracking-widest">
-            Streaming Updates
-          </p>
-
-          <h2 class="text-xl md:text-3xl font-black">
-            Latest Releases
-          </h2>
-
-          <p class="text-xs md:text-sm text-slate-400 mt-1">
-            Aaj ki latest movies, OTT releases aur entertainment updates
-          </p>
-
+          <p class="text-brand text-xs font-black uppercase tracking-widest">Streaming Updates</p>
+          <h2 class="text-xl md:text-3xl font-black">Latest Releases</h2>
+          <p class="text-xs md:text-sm text-zinc-400 mt-1">Aaj ki latest movies, OTT releases aur entertainment updates</p>
         </div>
-
       </div>
 
-
-      <div
-        id="liveGridContainer"
-        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
-      >
-
-        <div class="col-span-full text-center py-12 text-slate-500 text-sm">
-          Latest releases loading...
-        </div>
-
+      <div id="liveGridContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
+        <div class="col-span-full text-center py-12 text-zinc-500 text-sm">Latest releases loading...</div>
       </div>
-
     </section>
 
-
-    <!-- =========================================
-         TRENDING
-    ========================================== -->
-
+    <!-- SECTION 2: TRENDING ENTERTAINMENT -->
     <section id="trending-section">
-
       <div class="mb-5">
-
-        <p class="text-brand text-xs font-black uppercase tracking-widest">
-          Popular Now
-        </p>
-
-        <h2 class="text-xl md:text-3xl font-black">
-          Trending Entertainment
-        </h2>
-
-        <p class="text-xs md:text-sm text-slate-400 mt-1">
-          Sabse zyada popular entertainment stories
-        </p>
-
+        <p class="text-brand text-xs font-black uppercase tracking-widest">Popular Now</p>
+        <h2 class="text-xl md:text-3xl font-black">Trending Entertainment</h2>
+        <p class="text-xs md:text-sm text-zinc-400 mt-1">Sabse zyada popular entertainment stories</p>
       </div>
 
-
-      <div
-        id="trendingGridContainer"
-        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
-      >
-
-        <div class="col-span-full text-center py-8 text-slate-500 text-sm">
-          Trending stories loading...
-        </div>
-
+      <div id="trendingGridContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
+        <div class="col-span-full text-center py-8 text-zinc-500 text-sm">Trending stories loading...</div>
       </div>
-
     </section>
 
-
-    <!-- =========================================
-         PLATFORM SECTION
-    ========================================== -->
-
-    <section
-      id="platforms"
-      class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3"
-    >
-
-
-      <!-- CINEMA -->
-
-      <a
-        href="/movies/"
-        class="platform-card bg-card border border-white/10 rounded-2xl p-3.5 sm:p-4 flex flex-col sm:flex-row items-center gap-3 hover:border-amber-500/50 active:scale-[0.98] transition cursor-pointer shadow-lg text-center sm:text-left"
-      >
-
-        <div class="w-12 h-12 rounded-2xl bg-amber-600/20 border border-amber-500/30 text-amber-400 font-black flex items-center justify-center text-xl shrink-0">
-          🏛️
-        </div>
-
+    <!-- PLATFORMS SECTION -->
+    <section id="platforms" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+      <a href="/movies/" class="platform-card bg-card border border-white/10 rounded-2xl p-3.5 sm:p-4 flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+        <div class="w-11 h-11 rounded-2xl bg-amber-600/20 border border-amber-500/30 text-amber-400 font-black flex items-center justify-center text-xl shrink-0">🏛️</div>
         <div>
-
-          <h4 class="font-black text-xs sm:text-sm text-white">
-            Cinema / Theatres
-          </h4>
-
-          <p class="text-[10px] text-slate-400 mt-0.5 hidden sm:block">
-            Box Office
-          </p>
-
+          <h4 class="font-black text-xs sm:text-sm text-white">Cinema / Theatres</h4>
+          <p class="text-[10px] text-zinc-400 mt-0.5 hidden sm:block">Box Office</p>
         </div>
-
       </a>
 
-
-      <!-- YOUTUBE -->
-
-      <a
-        href="/web-series/youtube/"
-        class="platform-card bg-card border border-white/10 rounded-2xl p-3.5 sm:p-4 flex flex-col sm:flex-row items-center gap-3 hover:border-red-500/50 active:scale-[0.98] transition cursor-pointer shadow-lg text-center sm:text-left"
-      >
-
-        <div class="w-12 h-12 rounded-2xl bg-red-600/20 border border-red-500/30 text-red-500 font-black flex items-center justify-center text-xl shrink-0">
-          🔴
-        </div>
-
+      <a href="/web-series/youtube/" class="platform-card bg-card border border-white/10 rounded-2xl p-3.5 sm:p-4 flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+        <div class="w-11 h-11 rounded-2xl bg-red-600/20 border border-red-500/30 text-red-500 font-black flex items-center justify-center text-xl shrink-0">🔴</div>
         <div>
-
-          <h4 class="font-black text-xs sm:text-sm text-white">
-            YouTube Series
-          </h4>
-
-          <p class="text-[10px] text-slate-400 mt-0.5 hidden sm:block">
-            Viral Shows
-          </p>
-
+          <h4 class="font-black text-xs sm:text-sm text-white">YouTube Series</h4>
+          <p class="text-[10px] text-zinc-400 mt-0.5 hidden sm:block">Viral Shows</p>
         </div>
-
       </a>
 
-
-      <!-- NETFLIX -->
-
-      <a
-        href="/ott/netflix/"
-        class="platform-card bg-card border border-white/10 rounded-2xl p-3.5 sm:p-4 flex flex-col sm:flex-row items-center gap-3 hover:border-red-600/50 active:scale-[0.98] transition cursor-pointer shadow-lg text-center sm:text-left"
-      >
-
-        <div class="w-12 h-12 rounded-2xl bg-red-600/20 border border-red-600/30 text-brand font-black flex items-center justify-center text-lg shrink-0">
-          N
-        </div>
-
+      <a href="/ott/netflix/" class="platform-card bg-card border border-white/10 rounded-2xl p-3.5 sm:p-4 flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+        <div class="w-11 h-11 rounded-2xl bg-red-600/20 border border-red-600/30 text-brand font-black flex items-center justify-center text-lg shrink-0">N</div>
         <div>
-
-          <h4 class="font-black text-xs sm:text-sm text-white">
-            Netflix Hindi
-          </h4>
-
-          <p class="text-[10px] text-slate-400 mt-0.5 hidden sm:block">
-            Originals
-          </p>
-
+          <h4 class="font-black text-xs sm:text-sm text-white">Netflix Hindi</h4>
+          <p class="text-[10px] text-zinc-400 mt-0.5 hidden sm:block">Originals</p>
         </div>
-
       </a>
 
-
-      <!-- PRIME -->
-
-      <a
-        href="/ott/prime-video/"
-        class="platform-card bg-card border border-white/10 rounded-2xl p-3.5 sm:p-4 flex flex-col sm:flex-row items-center gap-3 hover:border-blue-500/50 active:scale-[0.98] transition cursor-pointer shadow-lg text-center sm:text-left"
-      >
-
-        <div class="w-12 h-12 rounded-2xl bg-blue-600/20 border border-blue-500/30 text-blue-400 font-black flex items-center justify-center text-lg shrink-0">
-          P
-        </div>
-
+      <a href="/ott/prime-video/" class="platform-card bg-card border border-white/10 rounded-2xl p-3.5 sm:p-4 flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+        <div class="w-11 h-11 rounded-2xl bg-blue-600/20 border border-blue-500/30 text-blue-400 font-black flex items-center justify-center text-lg shrink-0">P</div>
         <div>
-
-          <h4 class="font-black text-xs sm:text-sm text-white">
-            Prime Video
-          </h4>
-
-          <p class="text-[10px] text-slate-400 mt-0.5 hidden sm:block">
-            Blockbusters
-          </p>
-
+          <h4 class="font-black text-xs sm:text-sm text-white">Prime Video</h4>
+          <p class="text-[10px] text-zinc-400 mt-0.5 hidden sm:block">Blockbusters</p>
         </div>
-
       </a>
 
-
-      <!-- JIOHOTSTAR -->
-
-      <a
-        href="/ott/jiohotstar/"
-        class="platform-card bg-card border border-white/10 rounded-2xl p-3.5 sm:p-4 flex flex-col sm:flex-row items-center gap-3 hover:border-sky-500/50 active:scale-[0.98] transition cursor-pointer shadow-lg text-center sm:text-left"
-      >
-
-        <div class="w-12 h-12 rounded-2xl bg-sky-600/20 border border-sky-500/30 text-sky-400 font-black flex items-center justify-center text-lg shrink-0">
-          H
-        </div>
-
+      <a href="/ott/jiohotstar/" class="platform-card bg-card border border-white/10 rounded-2xl p-3.5 sm:p-4 flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+        <div class="w-11 h-11 rounded-2xl bg-sky-600/20 border border-sky-500/30 text-sky-400 font-black flex items-center justify-center text-lg shrink-0">H</div>
         <div>
-
-          <h4 class="font-black text-xs sm:text-sm text-white">
-            JioHotstar
-          </h4>
-
-          <p class="text-[10px] text-slate-400 mt-0.5 hidden sm:block">
-            Live & Shows
-          </p>
-
+          <h4 class="font-black text-xs sm:text-sm text-white">JioHotstar</h4>
+          <p class="text-[10px] text-zinc-400 mt-0.5 hidden sm:block">Live & Shows</p>
         </div>
-
       </a>
 
-
-      <!-- MINITV -->
-
-      <a
-        href="/ott/minitv/"
-        class="platform-card bg-card border border-white/10 rounded-2xl p-3.5 sm:p-4 flex flex-col sm:flex-row items-center gap-3 hover:border-orange-500/50 active:scale-[0.98] transition cursor-pointer shadow-lg text-center sm:text-left"
-      >
-
-        <div class="w-12 h-12 rounded-2xl bg-orange-600/20 border border-orange-500/30 text-orange-400 font-black flex items-center justify-center text-xs shrink-0">
-          MINI
-        </div>
-
+      <a href="/ott/minitv/" class="platform-card bg-card border border-white/10 rounded-2xl p-3.5 sm:p-4 flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+        <div class="w-11 h-11 rounded-2xl bg-orange-600/20 border border-orange-500/30 text-orange-400 font-black flex items-center justify-center text-xs shrink-0">MINI</div>
         <div>
-
-          <h4 class="font-black text-xs sm:text-sm text-white">
-            Amazon MiniTV
-          </h4>
-
-          <p class="text-[10px] text-slate-400 mt-0.5 hidden sm:block">
-            100% Free
-          </p>
-
+          <h4 class="font-black text-xs sm:text-sm text-white">Amazon MiniTV</h4>
+          <p class="text-[10px] text-zinc-400 mt-0.5 hidden sm:block">100% Free</p>
         </div>
-
       </a>
-
     </section>
 
-
-    <!-- =========================================
-         TRUST / ABOUT
-    ========================================== -->
-
+    <!-- ABOUT SECTION -->
     <section class="bg-card border border-white/10 rounded-2xl p-5 md:p-7">
-
-      <h2 class="text-lg md:text-2xl font-black">
-        Hindi Entertainment Updates
-      </h2>
-
-      <p class="text-sm text-slate-400 leading-6 mt-2">
-        Gujarat Fast Alert Entertainment par latest Hindi movies,
-        OTT releases, web series, trailers aur entertainment news
-        Hindi mein padhein.
+      <h2 class="text-lg md:text-2xl font-black">Hindi Entertainment Updates</h2>
+      <p class="text-sm text-zinc-400 leading-6 mt-2">
+        Gujarat Fast Alert Entertainment par latest Hindi movies, OTT releases, web series, trailers aur entertainment news Hindi mein padhein.
       </p>
-
     </section>
 
   </main>
 
-
-  <!-- =========================================
-       FOOTER
-  ========================================== -->
-
+  <!-- FOOTER -->
   <footer class="border-t border-white/10 mt-16 py-8 bg-black">
-
     <div class="max-w-7xl mx-auto px-4">
-
       <div class="flex flex-col md:flex-row items-center justify-between gap-5">
-
-
-        <!-- COPYRIGHT + PUBLISHER -->
-
-        <div class="text-xs text-slate-500 text-center md:text-left">
-
-          <div>
-
-            <span class="font-black text-white">
-              GUJARAT FAST ALERT
-            </span>
-
-            &copy; 2026. All Rights Reserved.
-
-          </div>
-
-
-          <p class="text-[11px] text-slate-600 mt-1">
-
-            Managed &amp; Published by
-
-            <span class="text-slate-400 font-semibold">
-              Vanrajsinh Vaghela
-            </span>
-
-          </p>
-
+        <div class="text-xs text-zinc-500 text-center md:text-left">
+          <div><span class="font-black text-white">GUJARAT FAST ALERT</span> &copy; 2026. All Rights Reserved.</div>
+          <p class="text-[11px] text-zinc-600 mt-1">Managed &amp; Published by <span class="text-zinc-400 font-semibold">Vanrajsinh Vaghela</span></p>
         </div>
 
-
-        <!-- FOOTER PAGES -->
-
-        <nav
-          aria-label="Footer navigation"
-          class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs"
-        >
-
-          <a
-            href="/about-us.html"
-            class="text-slate-500 hover:text-white transition"
-          >
-            About Us
-          </a>
-
-          <a
-            href="/contact-us.html"
-            class="text-slate-500 hover:text-white transition"
-          >
-            Contact Us
-          </a>
-
-          <a
-            href="/privacy-policy.html"
-            class="text-slate-500 hover:text-white transition"
-          >
-            Privacy Policy
-          </a>
-
-          <a
-            href="/disclaimer.html"
-            class="text-slate-500 hover:text-white transition"
-          >
-            Disclaimer
-          </a>
-
-          <a
-            href="/terms-and-conditions.html"
-            class="text-slate-500 hover:text-white transition"
-          >
-            Terms &amp; Conditions
-          </a>
-
-          <a
-            href="/editorial-policy.html"
-            class="text-slate-500 hover:text-white transition"
-          >
-            Editorial Policy
-          </a>
-
+        <nav aria-label="Footer navigation" class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs">
+          <a href="/about-us.html" class="text-zinc-500 hover:text-white transition">About Us</a>
+          <a href="/contact-us.html" class="text-zinc-500 hover:text-white transition">Contact Us</a>
+          <a href="/privacy-policy.html" class="text-zinc-500 hover:text-white transition">Privacy Policy</a>
+          <a href="/disclaimer.html" class="text-zinc-500 hover:text-white transition">Disclaimer</a>
+          <a href="/terms-and-conditions.html" class="text-zinc-500 hover:text-white transition">Terms &amp; Conditions</a>
+          <a href="/editorial-policy.html" class="text-zinc-500 hover:text-white transition">Editorial Policy</a>
         </nav>
-
       </div>
-
     </div>
-
   </footer>
 
-
-  <!-- =========================================
-       FIREBASE ENGINE
-  ========================================== -->
-
+  <!-- ENGINE SCRIPT -->
   <script>
-
     const firebaseConfig = {
       apiKey: "AIzaSyD40GV9eAeGiu-Tz0l09ZLifjzAQp3UFso",
       authDomain: "gujarat-fast-alert.firebaseapp.com",
@@ -719,1228 +281,250 @@
       messagingSenderId: "395130500748",
       appId: "1:395130500748:web:e6589f3a57812efad6ada9"
     };
-
-
     firebase.initializeApp(firebaseConfig);
-
     const db = firebase.database();
 
-
-    /* =========================================
-       SECURITY
-    ========================================== */
-
     function escapeHtml(value) {
-
-      if (value === null || value === undefined) {
-        return '';
-      }
-
-      return String(value)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-
+      if (!value) return '';
+      return String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
     }
-
 
     function safeUrl(value) {
-
-      if (!value) {
-        return '#';
-      }
-
+      if (!value) return '#';
       const url = String(value).trim();
-
-      if (
-        url.startsWith('/') ||
-        url.startsWith('https://') ||
-        url.startsWith('http://')
-      ) {
-        return url;
-      }
-
-      return '#';
-
+      return (url.startsWith('/') || url.startsWith('http://') || url.startsWith('https://')) ? url : '#';
     }
-
-
-    /* =========================================
-       PLATFORM STYLE
-    ========================================== */
 
     function getPlatformStyle(platform) {
-
       const p = (platform || '').toUpperCase();
-
-
-      if (
-        p.includes('THEATRE') ||
-        p.includes('CINEMA')
-      ) {
-        return 'bg-amber-600 text-white';
-      }
-
-
-      if (p.includes('YOUTUBE')) {
-        return 'bg-red-600 text-white';
-      }
-
-
-      if (p.includes('MINITV')) {
-        return 'bg-orange-500 text-white';
-      }
-
-
-      if (p.includes('PRIME')) {
-        return 'bg-blue-600 text-white';
-      }
-
-
-      if (p.includes('HOTSTAR')) {
-        return 'bg-sky-600 text-white';
-      }
-
-
-      if (p.includes('JIOCINEMA')) {
-        return 'bg-yellow-600 text-white';
-      }
-
-
-      if (p.includes('NETFLIX')) {
-        return 'bg-red-700 text-white';
-      }
-
-
+      if (p.includes('THEATRE') || p.includes('CINEMA')) return 'bg-amber-600 text-white';
+      if (p.includes('YOUTUBE')) return 'bg-red-600 text-white';
+      if (p.includes('MINITV')) return 'bg-orange-500 text-white';
+      if (p.includes('PRIME')) return 'bg-blue-600 text-white';
+      if (p.includes('HOTSTAR')) return 'bg-sky-600 text-white';
+      if (p.includes('JIOCINEMA')) return 'bg-yellow-600 text-white';
+      if (p.includes('NETFLIX')) return 'bg-red-700 text-white';
       return 'bg-brand text-white';
-
     }
-
-
-    /* =========================================
-       DATE
-    ========================================== */
 
     function getTimestamp(post) {
-
-      if (!post) {
-        return 0;
-      }
-
-
-      if (typeof post.publishedAt === 'number') {
-        return post.publishedAt;
-      }
-
-
-      if (typeof post.publishedAt === 'string') {
-
-        const parsed =
-          Date.parse(post.publishedAt);
-
-        if (!isNaN(parsed)) {
-          return parsed;
-        }
-
-      }
-
-
-      if (typeof post.date === 'number') {
-        return post.date;
-      }
-
-
-      if (typeof post.date === 'string') {
-
-        const parsed =
-          Date.parse(post.date);
-
-        if (!isNaN(parsed)) {
-          return parsed;
-        }
-
-      }
-
-
-      return 0;
-
+      if (!post) return 0;
+      if (typeof post.publishedAt === 'number') return post.publishedAt;
+      if (typeof post.date === 'number') return post.date;
+      if (typeof post.timestamp === 'number') return post.timestamp;
+      const parsed = Date.parse(post.publishedAt || post.date || '');
+      return !isNaN(parsed) ? parsed : 0;
     }
-
-
-    /* =========================================
-       VIEWS
-    ========================================== */
-
-    function getViews(post) {
-
-      const views =
-        Number(post?.views);
-
-      return Number.isFinite(views)
-        ? views
-        : 0;
-
-    }
-
-
-    /* =========================================
-       POST URL
-    ========================================== */
 
     function getPostUrl(post) {
-
-      if (!post || !post.link) {
-        return '#';
-      }
-
-
-      const link =
-        String(post.link);
-
-
-      if (
-        link.startsWith('http://') ||
-        link.startsWith('https://')
-      ) {
-        return link;
-      }
-
-
+      if (!post || !post.link) return '#';
+      const link = String(post.link);
+      if (link.startsWith('http://') || link.startsWith('https://')) return link;
       return `/posts/${encodeURIComponent(link)}`;
-
     }
 
-
-    /* =========================================
-       SETTINGS LISTENER
-    ========================================== */
-
-    db.ref('settings').on(
-      'value',
-      snap => {
-
-        const data =
-          snap.val();
-
-
-        if (!data) {
-          return;
-        }
-
-
-        if (data.siteTitle) {
-
-          document.getElementById(
-            'siteTitle'
-          ).textContent =
-            data.siteTitle;
-
-        }
-
-
-        if (data.headerNotice) {
-
-          const tickerContainer =
-            document.getElementById(
-              'tickerContainer'
-            );
-
-
-          const tickerText =
-            document.getElementById(
-              'tickerText'
-            );
-
-
-          tickerContainer.classList.remove(
-            'hidden'
-          );
-
-
-          tickerText.textContent =
-            data.headerNotice;
-
-        }
-
-      },
-
-
-      error => {
-
-        console.error(
-          'Settings Firebase error:',
-          error
-        );
-
+    // Realtime Notice & Title
+    db.ref('settings').on('value', snap => {
+      const data = snap.val();
+      if (!data) return;
+      if (data.siteTitle) document.getElementById('siteTitle').textContent = data.siteTitle;
+      if (data.headerNotice) {
+        document.getElementById('tickerContainer').classList.remove('hidden');
+        document.getElementById('tickerText').textContent = data.headerNotice;
       }
-
-    );
-
-
-    /* =========================================
-       POSTS LISTENER
-    ========================================== */
-
-    db.ref('posts/ott-movies').on(
-      'value',
-      snap => {
-
-        const data =
-          snap.val();
-
-
-        const track =
-          document.getElementById(
-            'sliderTrack'
-          );
-
-
-        const dotsContainer =
-          document.getElementById(
-            'sliderDots'
-          );
-
-
-        const latestGrid =
-          document.getElementById(
-            'liveGridContainer'
-          );
-
-
-        const trendingGrid =
-          document.getElementById(
-            'trendingGridContainer'
-          );
-
-
-        track.innerHTML = '';
-
-        dotsContainer.innerHTML = '';
-
-        latestGrid.innerHTML = '';
-
-        trendingGrid.innerHTML = '';
-
-
-        /* EMPTY DATABASE */
-
-        if (!data) {
-
-          track.innerHTML = `
-
-            <div class="slide flex items-center justify-center text-slate-500 text-sm px-6 text-center">
-
-              Abhi koi latest entertainment update available nahi hai.
-
-            </div>
-
-          `;
-
-
-          latestGrid.innerHTML = `
-
-            <div class="col-span-full text-center py-12">
-
-              <p class="text-slate-400 text-sm">
-                Abhi koi new release available nahi hai.
-              </p>
-
-            </div>
-
-          `;
-
-
-          trendingGrid.innerHTML = `
-
-            <div class="col-span-full text-center py-8">
-
-              <p class="text-slate-500 text-sm">
-                Trending stories abhi available nahi hain.
-              </p>
-
-            </div>
-
-          `;
-
-
-          return;
-
-        }
-
-
-        /* FIREBASE OBJECT -> ARRAY */
-
-        let posts =
-          Object.entries(data).map(
-            ([id, post]) => ({
-              id,
-              ...(post || {})
-            })
-          );
-
-
-        /* LATEST FIRST */
-
-        posts.sort(
-          (a, b) =>
-            getTimestamp(b) -
-            getTimestamp(a)
-        );
-
-
-        /* =====================================
-           TOP 20 SLIDER
-        ===================================== */
-
-        const top20 =
-          posts.slice(0, 20);
-
-
-        /* NO SLIDES */
-
-        if (top20.length === 0) {
-
-          track.innerHTML = `
-
-            <div class="slide flex items-center justify-center text-slate-500 text-sm">
-
-              Latest stories available nahi hain.
-
-            </div>
-
-          `;
-
-        }
-
-
-        /* =====================================
-           CREATE 20 SLIDES
-        ===================================== */
-
-        top20.forEach(
-          (post, i) => {
-
-            const badgeColor =
-              getPlatformStyle(
-                post.platform
-              );
-
-
-            const title =
-              escapeHtml(
-                post.title ||
-                'Latest Entertainment Update'
-              );
-
-
-            const summary =
-              escapeHtml(
-                post.summary ||
-                'Latest Hindi entertainment update.'
-              );
-
-
-            const platform =
-              escapeHtml(
-                post.platform ||
-                'ENTERTAINMENT'
-              );
-
-
-            const image =
-              safeUrl(
-                post.image
-              );
-
-
-            const postUrl =
-              getPostUrl(post);
-
-
-            const slide =
-              document.createElement(
-                'article'
-              );
-
-
-            slide.className =
-              `slide ${
-                i === 0
-                  ? 'active'
-                  : ''
-              }`;
-
-
-            slide.innerHTML = `
-
-              <img
-                src="${image}"
-                alt="${title}"
-                class="slide-image absolute inset-0 w-full h-full object-cover"
-                ${
-                  i === 0
-                    ? 'fetchpriority="high"'
-                    : 'loading="lazy"'
-                }
-                decoding="async"
-              >
-
-
-              <div class="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-transparent"></div>
-
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-
-
-              <div class="relative z-10 h-full flex items-end">
-
-                <div class="p-6 md:p-10 max-w-2xl pb-16">
-
-
-                  <div class="flex gap-2 mb-3 flex-wrap">
-
-                    <span class="${badgeColor} text-[10px] font-black px-2.5 py-1 rounded-md uppercase">
-
-                      ${platform}
-
-                    </span>
-
-
-                    <span class="bg-white/10 text-[10px] font-bold px-2.5 py-1 rounded-md">
-
-                      #${i + 1} LATEST
-
-                    </span>
-
-                  </div>
-
-
-                  <h1 class="text-2xl md:text-4xl font-black leading-tight text-white">
-
-                    ${title}
-
-                  </h1>
-
-
-                  <p class="mt-2 text-slate-300 text-xs md:text-sm line-clamp-2">
-
-                    ${summary}
-
-                  </p>
-
-
-                  <div class="mt-5">
-
-                    <a
-                      href="${safeUrl(postUrl)}"
-                      class="inline-block bg-white text-black font-black text-xs md:text-sm px-5 py-2.5 rounded-xl hover:bg-slate-200 transition"
-                    >
-
-                      Puri Details Padhein →
-
-                    </a>
-
-                  </div>
-
-
-                </div>
-
-              </div>
-
-            `;
-
-
-            track.appendChild(
-              slide
-            );
-
-
-            /* DOT */
-
-            const dot =
-              document.createElement(
-                'button'
-              );
-
-
-            dot.type =
-              'button';
-
-
-            dot.className =
-              `dot ${
-                i === 0
-                  ? 'w-5 bg-white'
-                  : 'w-1.5 bg-white/40'
-              } h-1.5 rounded-full transition-all shrink-0`;
-
-
-            dot.setAttribute(
-              'aria-label',
-              `Story ${i + 1}`
-            );
-
-
-            dotsContainer.appendChild(
-              dot
-            );
-
-          }
-        );
-
-
-        /* =====================================
-           LATEST GRID
-        ===================================== */
-
-        posts.forEach(
-          post => {
-
-            const badgeColor =
-              getPlatformStyle(
-                post.platform
-              );
-
-
-            const title =
-              escapeHtml(
-                post.title ||
-                'Entertainment Update'
-              );
-
-
-            const platform =
-              escapeHtml(
-                post.platform ||
-                'ENTERTAINMENT'
-              );
-
-
-            const genre =
-              escapeHtml(
-                post.genre ||
-                'Entertainment'
-              );
-
-
-            const status =
-              escapeHtml(
-                post.status ||
-                'Latest Update'
-              );
-
-
-            const image =
-              safeUrl(
-                post.image
-              );
-
-
-            const postUrl =
-              getPostUrl(post);
-
-
-            const card =
-              document.createElement(
-                'article'
-              );
-
-
-            card.className =
-              'story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between';
-
-
-            card.innerHTML = `
-
-              <a
-                href="${safeUrl(postUrl)}"
-                class="block"
-              >
-
-                <div class="relative">
-
-                  <img
-                    src="${image}"
-                    alt="${title}"
-                    loading="lazy"
-                    decoding="async"
-                    class="w-full aspect-[16/9] object-cover"
-                  >
-
-
-                  <span
-                    class="absolute top-2 left-2 ${badgeColor} text-[9px] font-black px-2 py-0.5 rounded uppercase"
-                  >
-
-                    ${platform}
-
-                  </span>
-
-                </div>
-
-
-                <div class="p-3">
-
-                  <h3 class="font-bold text-xs md:text-sm line-clamp-2 text-white">
-
-                    ${title}
-
-                  </h3>
-
-
-                  <p class="text-[11px] text-slate-400 mt-1">
-
-                    ${genre}
-
-                  </p>
-
-
-                  <p class="text-[10px] text-green-400 font-bold mt-2.5">
-
-                    ${status}
-
-                  </p>
-
-                </div>
-
-              </a>
-
-            `;
-
-
-            latestGrid.appendChild(
-              card
-            );
-
-          }
-        );
-
-
-        /* =====================================
-           TRENDING
-        ===================================== */
-
-        const hasViews =
-          posts.some(
-            post =>
-              getViews(post) > 0
-          );
-
-
-        let trendingPosts;
-
-
-        if (hasViews) {
-
-          trendingPosts =
-            [...posts]
-              .sort(
-                (a, b) =>
-                  getViews(b) -
-                  getViews(a)
-              )
-              .slice(0, 10);
-
-        } else {
-
-          trendingPosts =
-            posts.slice(0, 10);
-
-        }
-
-
-        trendingPosts.forEach(
-          post => {
-
-            const badgeColor =
-              getPlatformStyle(
-                post.platform
-              );
-
-
-            const title =
-              escapeHtml(
-                post.title ||
-                'Trending Entertainment'
-              );
-
-
-            const platform =
-              escapeHtml(
-                post.platform ||
-                'ENTERTAINMENT'
-              );
-
-
-            const genre =
-              escapeHtml(
-                post.genre ||
-                'Entertainment'
-              );
-
-
-            const image =
-              safeUrl(
-                post.image
-              );
-
-
-            const postUrl =
-              getPostUrl(post);
-
-
-            const card =
-              document.createElement(
-                'article'
-              );
-
-
-            card.className =
-              'story-card bg-card border border-white/10 rounded-2xl overflow-hidden';
-
-
-            card.innerHTML = `
-
-              <a
-                href="${safeUrl(postUrl)}"
-                class="block"
-              >
-
-                <div class="relative">
-
-                  <img
-                    src="${image}"
-                    alt="${title}"
-                    loading="lazy"
-                    decoding="async"
-                    class="w-full aspect-[16/9] object-cover"
-                  >
-
-
-                  <span
-                    class="absolute top-2 left-2 ${badgeColor} text-[9px] font-black px-2 py-0.5 rounded uppercase"
-                  >
-
-                    ${platform}
-
-                  </span>
-
-
-                  <span class="absolute top-2 right-2 bg-black/75 backdrop-blur text-white text-[9px] font-black px-2 py-0.5 rounded">
-
-                    🔥 TRENDING
-
-                  </span>
-
-                </div>
-
-
-                <div class="p-3">
-
-                  <h3 class="font-bold text-xs md:text-sm line-clamp-2 text-white">
-
-                    ${title}
-
-                  </h3>
-
-
-                  <p class="text-[11px] text-slate-400 mt-1">
-
-                    ${genre}
-
-                  </p>
-
-                </div>
-
-              </a>
-
-            `;
-
-
-            trendingGrid.appendChild(
-              card
-            );
-
-          }
-        );
-
-
-        /* START SLIDER */
-
-        initSliderEngine();
-
-      },
-
-
-      error => {
-
-        console.error(
-          'Posts Firebase error:',
-          error
-        );
-
-
-        document.getElementById(
-          'liveGridContainer'
-        ).innerHTML = `
-
-          <div class="col-span-full text-center py-12">
-
-            <p class="text-red-400 text-sm font-bold">
-              Content load nahi ho paya.
-            </p>
-
-            <p class="text-slate-500 text-xs mt-1">
-              Please thodi der baad refresh karein.
-            </p>
-
-          </div>
-
-        `;
-
-      }
-
-    );
-
-
-    /* =========================================
-       SLIDER ENGINE
-    ========================================== */
-
-    function initSliderEngine() {
-
-      const track =
-        document.getElementById(
-          'sliderTrack'
-        );
-
-
-      const slides =
-        Array.from(
-          document.querySelectorAll(
-            '.slide'
-          )
-        );
-
-
-      const dots =
-        Array.from(
-          document.querySelectorAll(
-            '.dot'
-          )
-        );
-
-
-      const prevButton =
-        document.getElementById(
-          'prevSlide'
-        );
-
-
-      const nextButton =
-        document.getElementById(
-          'nextSlide'
-        );
-
-
-      const hero =
-        document.getElementById(
-          'top-stories'
-        );
-
-
-      if (slides.length <= 0) {
+    });
+
+    // Realtime Post Rendering
+    db.ref('posts/ott-movies').on('value', snap => {
+      const data = snap.val();
+      const track = document.getElementById('sliderTrack');
+      const dotsContainer = document.getElementById('sliderDots');
+      const latestGrid = document.getElementById('liveGridContainer');
+      const trendingGrid = document.getElementById('trendingGridContainer');
+
+      track.innerHTML = '';
+      dotsContainer.innerHTML = '';
+      latestGrid.innerHTML = '';
+      trendingGrid.innerHTML = '';
+
+      if (!data) {
+        track.innerHTML = `<div class="slide flex items-center justify-center text-zinc-500 text-sm">Abhi koi update available nahi hai.</div>`;
+        latestGrid.innerHTML = `<div class="col-span-full text-center py-12 text-zinc-500 text-sm">Abhi koi post nahi hai.</div>`;
+        trendingGrid.innerHTML = `<div class="col-span-full text-center py-8 text-zinc-500 text-sm">Koi trending post nahi hai.</div>`;
         return;
       }
 
+      let posts = Object.entries(data).map(([id, post]) => ({ id, ...(post || {}) }));
+      posts.sort((a, b) => getTimestamp(b) - getTimestamp(a));
+
+      // 1. Render Top 20 Slider
+      const top20 = posts.slice(0, 20);
+      top20.forEach((post, i) => {
+        const badgeColor = getPlatformStyle(post.platform);
+        const title = escapeHtml(post.title || 'Latest Entertainment Update');
+        const summary = escapeHtml(post.summary || 'Story details and updates available.');
+        const platform = escapeHtml(post.platform || 'ENTERTAINMENT');
+        const image = safeUrl(post.image || '/images/default-banner.webp');
+        const postUrl = getPostUrl(post);
+
+        const slide = document.createElement('article');
+        slide.className = `slide ${i === 0 ? 'active' : ''}`;
+        slide.innerHTML = `
+          <img src="${image}" alt="${title}" class="slide-image absolute inset-0 w-full h-full object-cover" ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" onerror="this.src='/images/default-banner.webp'">
+          <div class="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
+          <div class="relative z-10 h-full flex items-end">
+            <div class="p-6 md:p-10 max-w-2xl pb-16">
+              <div class="flex gap-2 mb-3 flex-wrap">
+                <span class="${badgeColor} text-[10px] font-black px-2.5 py-1 rounded-md uppercase">${platform}</span>
+                <span class="bg-white/15 text-[10px] font-bold px-2.5 py-1 rounded-md">#${i + 1} LATEST</span>
+              </div>
+              <h1 class="text-xl md:text-3xl lg:text-4xl font-black leading-tight text-white line-clamp-2">${title}</h1>
+              <p class="mt-2 text-zinc-300 text-xs md:text-sm line-clamp-2">${summary}</p>
+              <div class="mt-5">
+                <a href="${safeUrl(postUrl)}" class="inline-block bg-white text-black font-black text-xs md:text-sm px-5 py-2.5 rounded-xl hover:bg-zinc-200 active:scale-95 transition">
+                  Puri Details Padhein →
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+        track.appendChild(slide);
+
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = `dot ${i === 0 ? 'w-5 bg-white' : 'w-1.5 bg-white/40'} h-1.5 rounded-full transition-all shrink-0`;
+        dot.setAttribute('aria-label', `Story ${i + 1}`);
+        dotsContainer.appendChild(dot);
+      });
+
+      // 2. Render Latest Releases (Shows all recent cards cleanly)
+      posts.forEach(post => {
+        const badgeColor = getPlatformStyle(post.platform);
+        const title = escapeHtml(post.title || 'Entertainment Update');
+        const platform = escapeHtml(post.platform || 'ENTERTAINMENT');
+        const genre = escapeHtml(post.genre || 'Entertainment');
+        const status = escapeHtml(post.status || 'Live');
+        const image = safeUrl(post.image || '/images/default-banner.webp');
+        const postUrl = getPostUrl(post);
+
+        const card = document.createElement('article');
+        card.className = 'story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between';
+        card.innerHTML = `
+          <a href="${safeUrl(postUrl)}" class="block">
+            <div class="relative aspect-[16/9] w-full overflow-hidden bg-zinc-900">
+              <img src="${image}" alt="${title}" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.src='/images/default-banner.webp'">
+              <span class="absolute top-2 left-2 ${badgeColor} text-[9px] font-black px-2 py-0.5 rounded uppercase">${platform}</span>
+            </div>
+            <div class="p-3">
+              <h3 class="font-bold text-xs md:text-sm line-clamp-2 text-white leading-snug">${title}</h3>
+              <p class="text-[11px] text-zinc-400 mt-1 truncate">${genre}</p>
+              <p class="text-[10px] text-emerald-400 font-bold mt-2">${status}</p>
+            </div>
+          </a>
+        `;
+        latestGrid.appendChild(card);
+      });
+
+      // 3. Render Trending Section (Top 6-12 based on views/order)
+      const trendingPosts = [...posts].slice(0, 12);
+      trendingPosts.forEach(post => {
+        const badgeColor = getPlatformStyle(post.platform);
+        const title = escapeHtml(post.title || 'Trending Entertainment');
+        const platform = escapeHtml(post.platform || 'ENTERTAINMENT');
+        const genre = escapeHtml(post.genre || 'Entertainment');
+        const image = safeUrl(post.image || '/images/default-banner.webp');
+        const postUrl = getPostUrl(post);
+
+        const card = document.createElement('article');
+        card.className = 'story-card bg-card border border-white/10 rounded-2xl overflow-hidden';
+        card.innerHTML = `
+          <a href="${safeUrl(postUrl)}" class="block">
+            <div class="relative aspect-[16/9] w-full overflow-hidden bg-zinc-900">
+              <img src="${image}" alt="${title}" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.src='/images/default-banner.webp'">
+              <span class="absolute top-2 left-2 ${badgeColor} text-[9px] font-black px-2 py-0.5 rounded uppercase">${platform}</span>
+              <span class="absolute top-2 right-2 bg-black/80 backdrop-blur text-white text-[9px] font-black px-2 py-0.5 rounded border border-white/10">🔥 TRENDING</span>
+            </div>
+            <div class="p-3">
+              <h3 class="font-bold text-xs md:text-sm line-clamp-2 text-white leading-snug">${title}</h3>
+              <p class="text-[11px] text-zinc-400 mt-1 truncate">${genre}</p>
+            </div>
+          </a>
+        `;
+        trendingGrid.appendChild(card);
+      });
+
+      initSliderEngine();
+    });
+
+    // Slider Engine Logic
+    function initSliderEngine() {
+      const track = document.getElementById('sliderTrack');
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const dots = Array.from(document.querySelectorAll('.dot'));
+      const prevButton = document.getElementById('prevSlide');
+      const nextButton = document.getElementById('nextSlide');
+      const hero = document.getElementById('top-stories');
+
+      if (slides.length <= 0) return;
 
       let currentSlide = 0;
-
       let autoPlay = null;
-
       let touchStartX = 0;
 
-      let touchEndX = 0;
-
-
-      /* UPDATE */
-
       function updateSlider() {
-
-        track.style.transform =
-          `translateX(-${
-            currentSlide * 100
-          }%)`;
-
-
-        slides.forEach(
-          (slide, index) => {
-
-            slide.classList.toggle(
-              'active',
-              index === currentSlide
-            );
-
-          }
-        );
-
-
-        dots.forEach(
-          (dot, index) => {
-
-            dot.className =
-              index === currentSlide
-
-                ? 'dot w-5 bg-white h-1.5 rounded-full shrink-0 transition-all'
-
-                : 'dot w-1.5 bg-white/40 h-1.5 rounded-full shrink-0 transition-all';
-
-          }
-        );
-
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        slides.forEach((slide, index) => slide.classList.toggle('active', index === currentSlide));
+        dots.forEach((dot, index) => {
+          dot.className = (index === currentSlide) 
+            ? 'dot w-5 bg-white h-1.5 rounded-full shrink-0 transition-all' 
+            : 'dot w-1.5 bg-white/40 h-1.5 rounded-full shrink-0 transition-all';
+        });
       }
-
-
-      /* NEXT */
 
       function nextSlide() {
-
-        if (slides.length <= 1) {
-          return;
-        }
-
-
-        currentSlide =
-          (currentSlide + 1) %
-          slides.length;
-
-
+        if (slides.length <= 1) return;
+        currentSlide = (currentSlide + 1) % slides.length;
         updateSlider();
-
       }
-
-
-      /* PREVIOUS */
 
       function prevSlide() {
-
-        if (slides.length <= 1) {
-          return;
-        }
-
-
-        currentSlide =
-          (
-            currentSlide -
-            1 +
-            slides.length
-          ) %
-          slides.length;
-
-
+        if (slides.length <= 1) return;
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
         updateSlider();
-
       }
-
-
-      /* START */
 
       function startAutoPlay() {
-
         stopAutoPlay();
-
-
-        if (slides.length > 1) {
-
-          autoPlay =
-            setInterval(
-              nextSlide,
-              5000
-            );
-
-        }
-
+        if (slides.length > 1) autoPlay = setInterval(nextSlide, 5000);
       }
-
-
-      /* STOP */
 
       function stopAutoPlay() {
-
-        if (autoPlay) {
-
-          clearInterval(
-            autoPlay
-          );
-
-          autoPlay = null;
-
-        }
-
+        if (autoPlay) { clearInterval(autoPlay); autoPlay = null; }
       }
 
+      nextButton.onclick = () => { nextSlide(); startAutoPlay(); };
+      prevButton.onclick = () => { prevSlide(); startAutoPlay(); };
 
-      /* RESTART */
+      dots.forEach((dot, index) => {
+        dot.onclick = () => { currentSlide = index; updateSlider(); startAutoPlay(); };
+      });
 
-      function restartAutoPlay() {
+      hero.onmouseenter = stopAutoPlay;
+      hero.onmouseleave = startAutoPlay;
 
-        stopAutoPlay();
-
+      hero.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; stopAutoPlay(); }, { passive: true });
+      hero.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) nextSlide(); else prevSlide();
+        }
         startAutoPlay();
-
-      }
-
-
-      /* BUTTONS */
-
-      nextButton.onclick = () => {
-
-        nextSlide();
-
-        restartAutoPlay();
-
-      };
-
-
-      prevButton.onclick = () => {
-
-        prevSlide();
-
-        restartAutoPlay();
-
-      };
-
-
-      /* DOTS */
-
-      dots.forEach(
-        (dot, index) => {
-
-          dot.onclick = () => {
-
-            currentSlide =
-              index;
-
-            updateSlider();
-
-            restartAutoPlay();
-
-          };
-
-        }
-      );
-
-
-      /* DESKTOP HOVER */
-
-      hero.onmouseenter =
-        stopAutoPlay;
-
-
-      hero.onmouseleave =
-        startAutoPlay;
-
-
-      /* MOBILE SWIPE */
-
-      hero.addEventListener(
-        'touchstart',
-        event => {
-
-          touchStartX =
-            event.changedTouches[0]
-              .screenX;
-
-          stopAutoPlay();
-
-        },
-        {
-          passive: true
-        }
-      );
-
-
-      hero.addEventListener(
-        'touchend',
-        event => {
-
-          touchEndX =
-            event.changedTouches[0]
-              .screenX;
-
-
-          const difference =
-            touchStartX -
-            touchEndX;
-
-
-          if (
-            Math.abs(difference) > 50
-          ) {
-
-            if (difference > 0) {
-
-              nextSlide();
-
-            } else {
-
-              prevSlide();
-
-            }
-
-          }
-
-
-          startAutoPlay();
-
-        },
-        {
-          passive: true
-        }
-      );
-
-
-      /* KEYBOARD */
-
-      hero.addEventListener(
-        'keydown',
-        event => {
-
-          if (
-            event.key ===
-            'ArrowRight'
-          ) {
-
-            nextSlide();
-
-            restartAutoPlay();
-
-          }
-
-
-          if (
-            event.key ===
-            'ArrowLeft'
-          ) {
-
-            prevSlide();
-
-            restartAutoPlay();
-
-          }
-
-        }
-      );
-
+      }, { passive: true });
 
       updateSlider();
-
       startAutoPlay();
-
     }
-
   </script>
-
 </body>
 </html>
