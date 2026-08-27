@@ -248,19 +248,32 @@
       cursor: pointer;
     }
 
-    /* Hero Slider Banner */
-    .hero-card {
+    /* Multi-Slide Hero Slider (Up to 20 Posts) */
+    .hero-slider-container {
       position: relative;
       background: var(--card-bg);
       border-radius: var(--radius);
       overflow: hidden;
       border: 1px solid var(--card-border);
       margin-top: 10px;
+      user-select: none;
+      touch-action: pan-y;
+    }
+
+    .hero-slider-track {
+      display: flex;
+      transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+      width: 100%;
+    }
+
+    .hero-slide {
+      min-width: 100%;
+      position: relative;
     }
 
     .hero-img-wrap {
       width: 100%;
-      height: 240px;
+      height: 250px;
       position: relative;
       background: #111;
     }
@@ -274,7 +287,7 @@
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(9,10,11,0.1) 0%, rgba(9,10,11,0.9) 100%);
+      background: linear-gradient(180deg, rgba(9,10,11,0.05) 0%, rgba(9,10,11,0.92) 100%);
     }
 
     .hero-content {
@@ -282,7 +295,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 12px;
+      padding: 12px 14px;
     }
 
     .badge-top {
@@ -296,21 +309,26 @@
       padding: 2px 6px;
       border-radius: 4px;
       text-transform: uppercase;
+      z-index: 2;
     }
 
     .hero-platform {
       font-size: 11px;
       color: #38bdf8;
       font-weight: 700;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
     .hero-title {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 800;
       color: #fff;
       line-height: 1.3;
       margin-bottom: 4px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .hero-summary {
@@ -327,12 +345,69 @@
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      background: rgba(229, 9, 20, 0.9);
+      background: var(--accent);
       color: #fff;
       font-size: 11px;
       font-weight: 700;
-      padding: 5px 10px;
+      padding: 5px 12px;
       border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    .hero-btn:hover {
+      background: var(--accent-hover);
+    }
+
+    /* Hero Navigation Arrows */
+    .hero-nav-btn {
+      position: absolute;
+      top: 40%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 3;
+      font-size: 12px;
+      transition: background 0.2s;
+    }
+
+    .hero-nav-btn:hover {
+      background: rgba(229, 9, 20, 0.85);
+    }
+
+    .hero-nav-btn.prev { left: 8px; }
+    .hero-nav-btn.next { right: 8px; }
+
+    /* Hero Pagination Dots */
+    .hero-dots {
+      position: absolute;
+      bottom: 12px;
+      right: 14px;
+      display: flex;
+      gap: 4px;
+      z-index: 3;
+      align-items: center;
+    }
+
+    .hero-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.35);
+      transition: all 0.25s ease;
+    }
+
+    .hero-dot.active {
+      background: var(--accent);
+      width: 14px;
+      border-radius: 3px;
     }
 
     /* Trending Grid / Cards */
@@ -553,7 +628,7 @@
 </head>
 <body>
 
-  <!-- Top Breaking 3-Item Ticker (Pause on Hover & Touch) -->
+  <!-- Top Breaking 3-Item Ticker -->
   <div class="ticker-bar" id="ticker-bar" title="Touch or hover to pause">
     <span class="ticker-label">BREAKING:</span>
     <div class="ticker-viewport" id="ticker-viewport">
@@ -596,9 +671,9 @@
       <button class="clear-filter-btn" onclick="filterCategory('All')">✕ Show All</button>
     </div>
 
-    <!-- MAIN HOME WRAPPER (Hero + Trending + Explore Grid) -->
+    <!-- MAIN HOME WRAPPER -->
     <div id="home-exclusive-sections">
-      <!-- Hero Slider -->
+      <!-- 20-Post Hero Slider Container -->
       <div id="hero-slider-wrap"></div>
 
       <!-- Trending Section -->
@@ -608,7 +683,7 @@
       </div>
       <div class="trending-scroll" id="trending-container"></div>
 
-      <!-- Explore By Category Grid -->
+      <!-- Explore By Category Grid (6 Cards) -->
       <div class="section-title">
         <span>Explore By Category</span>
       </div>
@@ -646,7 +721,7 @@
       </div>
     </div>
 
-    <!-- DYNAMIC POSTS LIST (Used for Latest News & Category Results) -->
+    <!-- DYNAMIC POSTS LIST -->
     <div class="section-title" id="posts-list-heading">
       <span>Latest News & Updates</span>
     </div>
@@ -697,7 +772,6 @@
 
       if (tickerInterval) clearInterval(tickerInterval);
 
-      // Rotate every 3.5 seconds
       tickerInterval = setInterval(() => {
         if (!isTickerPaused && tickerSlides.length > 1) {
           tickerSlides[tickerIndex].className = 'ticker-slide prev';
@@ -707,7 +781,7 @@
       }, 3500);
     }
 
-    // Touch and Hover Listeners to Pause/Resume Ticker
+    // Ticker Hover / Touch Listeners
     const tickerContainer = document.getElementById('ticker-bar');
     tickerContainer.addEventListener('mouseenter', () => { isTickerPaused = true; });
     tickerContainer.addEventListener('mouseleave', () => { isTickerPaused = false; });
@@ -716,6 +790,126 @@
       setTimeout(() => { isTickerPaused = false; }, 1200);
     }, { passive: true });
 
+    // Hero 20-Post Slider Logic
+    let heroInterval = null;
+    let heroCurrentIndex = 0;
+    let heroTotalSlides = 0;
+    let isHeroPaused = false;
+    let heroStartX = 0;
+
+    function setupHeroSlider(posts) {
+      const heroWrap = document.getElementById('hero-slider-wrap');
+      const heroPosts = posts.slice(0, 20); // Top up to 20 posts
+      heroTotalSlides = heroPosts.length;
+      heroCurrentIndex = 0;
+
+      if (!heroTotalSlides) {
+        heroWrap.innerHTML = '';
+        return;
+      }
+
+      if (heroInterval) clearInterval(heroInterval);
+
+      const slidesHTML = heroPosts.map(post => `
+        <div class="hero-slide">
+          <div class="hero-img-wrap">
+            <img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Filmy+Khabr'">
+            <div class="hero-overlay"></div>
+            <span class="badge-top">${post.badge || 'Trending'}</span>
+          </div>
+          <div class="hero-content">
+            <div class="hero-platform">${post.platform || post.category}</div>
+            <div class="hero-title">${post.title}</div>
+            <div class="hero-summary">${post.summary || ''}</div>
+            <a href="${post.url || `posts/${post.slug}.html`}" class="hero-btn">▶ Watch Full Details</a>
+          </div>
+        </div>
+      `).join('');
+
+      let dotsHTML = '';
+      if (heroTotalSlides > 1) {
+        // Show max 10 indicator dots to keep UI clean
+        const dotsCount = Math.min(heroTotalSlides, 10);
+        dotsHTML = `<div class="hero-dots" id="hero-dots">
+          ${Array.from({ length: dotsCount }).map((_, i) => `<span class="hero-dot ${i === 0 ? 'active' : ''}"></span>`).join('')}
+        </div>`;
+      }
+
+      let navBtns = '';
+      if (heroTotalSlides > 1) {
+        navBtns = `
+          <button class="hero-nav-btn prev" onclick="prevHeroSlide(event)" aria-label="Previous Slide">❮</button>
+          <button class="hero-nav-btn next" onclick="nextHeroSlide(event)" aria-label="Next Slide">❯</button>
+        `;
+      }
+
+      heroWrap.innerHTML = `
+        <div class="hero-slider-container" id="hero-slider-container">
+          <div class="hero-slider-track" id="hero-slider-track">
+            ${slidesHTML}
+          </div>
+          ${navBtns}
+          ${dotsHTML}
+        </div>
+      `;
+
+      const container = document.getElementById('hero-slider-container');
+      if (container && heroTotalSlides > 1) {
+        container.addEventListener('mouseenter', () => { isHeroPaused = true; });
+        container.addEventListener('mouseleave', () => { isHeroPaused = false; });
+        
+        // Touch swipe support
+        container.addEventListener('touchstart', (e) => {
+          isHeroPaused = true;
+          heroStartX = e.touches[0].clientX;
+        }, { passive: true });
+
+        container.addEventListener('touchend', (e) => {
+          const diffX = heroStartX - e.changedTouches[0].clientX;
+          if (Math.abs(diffX) > 40) {
+            if (diffX > 0) nextHeroSlide();
+            else prevHeroSlide();
+          }
+          setTimeout(() => { isHeroPaused = false; }, 1500);
+        }, { passive: true });
+
+        // Auto slide every 4.5 seconds
+        heroInterval = setInterval(() => {
+          if (!isHeroPaused) {
+            nextHeroSlide();
+          }
+        }, 4500);
+      }
+    }
+
+    function updateHeroSlide() {
+      const track = document.getElementById('hero-slider-track');
+      if (!track) return;
+      track.style.transform = `translateX(-${heroCurrentIndex * 100}%)`;
+      
+      const dots = document.querySelectorAll('.hero-dot');
+      if (dots.length) {
+        const activeDotIndex = heroCurrentIndex % dots.length;
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === activeDotIndex);
+        });
+      }
+    }
+
+    function nextHeroSlide(e) {
+      if (e) e.stopPropagation();
+      if (heroTotalSlides <= 1) return;
+      heroCurrentIndex = (heroCurrentIndex + 1) % heroTotalSlides;
+      updateHeroSlide();
+    }
+
+    function prevHeroSlide(e) {
+      if (e) e.stopPropagation();
+      if (heroTotalSlides <= 1) return;
+      heroCurrentIndex = (heroCurrentIndex - 1 + heroTotalSlides) % heroTotalSlides;
+      updateHeroSlide();
+    }
+
     // Fetch data/posts.json with Cache Buster
     async function loadSiteData() {
       try {
@@ -723,7 +917,7 @@
         if (!res.ok) throw new Error('data/posts.json not found');
         rawPosts = await res.json();
         
-        // Setup Ticker Slider with 3 posts
+        // Setup Breaking Ticker (Top 3)
         setupBreakingTicker(rawPosts);
 
         // Check URL Query Param for direct category links
@@ -746,23 +940,8 @@
     function renderAll() {
       if (!rawPosts || rawPosts.length === 0) return;
 
-      // 1. Hero Section
-      const heroPost = rawPosts[0];
-      document.getElementById('hero-slider-wrap').innerHTML = `
-        <div class="hero-card">
-          <div class="hero-img-wrap">
-            <img class="hero-img" src="${heroPost.image || 'images/default.jpg'}" alt="${heroPost.title}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Filmy+Khabr'">
-            <div class="hero-overlay"></div>
-            <span class="badge-top">${heroPost.badge || 'Trending'}</span>
-          </div>
-          <div class="hero-content">
-            <div class="hero-platform">${heroPost.platform || heroPost.category}</div>
-            <div class="hero-title">${heroPost.title}</div>
-            <div class="hero-summary">${heroPost.summary || ''}</div>
-            <a href="${heroPost.url || `posts/${heroPost.slug}.html`}" class="hero-btn">▶ Watch Full Details</a>
-          </div>
-        </div>
-      `;
+      // 1. Hero Slider (Up to 20 Posts)
+      setupHeroSlider(rawPosts);
 
       // 2. Trending Section (Top 4)
       const trendingContainer = document.getElementById('trending-container');
