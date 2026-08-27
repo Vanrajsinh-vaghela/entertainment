@@ -295,7 +295,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 12px 14px;
+      padding: 12px 14px 16px 14px;
     }
 
     .badge-top {
@@ -356,6 +356,24 @@
 
     .hero-btn:hover {
       background: var(--accent-hover);
+    }
+
+    /* Moving Progress Timer Line */
+    .hero-progress-track {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.15);
+      z-index: 4;
+    }
+
+    .hero-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      transition: width 0.1s linear;
     }
 
     /* Hero Navigation Arrows */
@@ -488,7 +506,7 @@
       margin-top: auto;
     }
 
-    /* Explore By Category Grid */
+    /* Explore By Category Grid (6 Cards) */
     .cat-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -673,7 +691,7 @@
 
     <!-- MAIN HOME WRAPPER -->
     <div id="home-exclusive-sections">
-      <!-- 20-Post Hero Slider Container -->
+      <!-- 20-Post Hero Slider Container with Moving Line -->
       <div id="hero-slider-wrap"></div>
 
       <!-- Trending Section -->
@@ -790,25 +808,29 @@
       setTimeout(() => { isTickerPaused = false; }, 1200);
     }, { passive: true });
 
-    // Hero 20-Post Slider Logic
-    let heroInterval = null;
+    // Hero Slider with Animated Moving Line
+    let heroTimer = null;
     let heroCurrentIndex = 0;
     let heroTotalSlides = 0;
     let isHeroPaused = false;
     let heroStartX = 0;
+    const SLIDE_DURATION = 4500;
+    let progressElapsed = 0;
+    const PROGRESS_STEP = 50;
 
     function setupHeroSlider(posts) {
       const heroWrap = document.getElementById('hero-slider-wrap');
-      const heroPosts = posts.slice(0, 20); // Top up to 20 posts
+      const heroPosts = posts.slice(0, 20);
       heroTotalSlides = heroPosts.length;
       heroCurrentIndex = 0;
+      progressElapsed = 0;
 
       if (!heroTotalSlides) {
         heroWrap.innerHTML = '';
         return;
       }
 
-      if (heroInterval) clearInterval(heroInterval);
+      if (heroTimer) clearInterval(heroTimer);
 
       const slidesHTML = heroPosts.map(post => `
         <div class="hero-slide">
@@ -828,7 +850,6 @@
 
       let dotsHTML = '';
       if (heroTotalSlides > 1) {
-        // Show max 10 indicator dots to keep UI clean
         const dotsCount = Math.min(heroTotalSlides, 10);
         dotsHTML = `<div class="hero-dots" id="hero-dots">
           ${Array.from({ length: dotsCount }).map((_, i) => `<span class="hero-dot ${i === 0 ? 'active' : ''}"></span>`).join('')}
@@ -848,17 +869,19 @@
           <div class="hero-slider-track" id="hero-slider-track">
             ${slidesHTML}
           </div>
+          <div class="hero-progress-track">
+            <div class="hero-progress-bar" id="hero-progress-bar"></div>
+          </div>
           ${navBtns}
           ${dotsHTML}
         </div>
       `;
 
       const container = document.getElementById('hero-slider-container');
-      if (container && heroTotalSlides > 1) {
+      if (container) {
         container.addEventListener('mouseenter', () => { isHeroPaused = true; });
         container.addEventListener('mouseleave', () => { isHeroPaused = false; });
-        
-        // Touch swipe support
+
         container.addEventListener('touchstart', (e) => {
           isHeroPaused = true;
           heroStartX = e.touches[0].clientX;
@@ -873,20 +896,33 @@
           setTimeout(() => { isHeroPaused = false; }, 1500);
         }, { passive: true });
 
-        // Auto slide every 4.5 seconds
-        heroInterval = setInterval(() => {
-          if (!isHeroPaused) {
+        startHeroProgress();
+      }
+    }
+
+    function startHeroProgress() {
+      if (heroTimer) clearInterval(heroTimer);
+      progressElapsed = 0;
+
+      heroTimer = setInterval(() => {
+        if (!isHeroPaused && heroTotalSlides > 1) {
+          progressElapsed += PROGRESS_STEP;
+          const percentage = Math.min((progressElapsed / SLIDE_DURATION) * 100, 100);
+          const pBar = document.getElementById('hero-progress-bar');
+          if (pBar) pBar.style.width = `${percentage}%`;
+
+          if (progressElapsed >= SLIDE_DURATION) {
             nextHeroSlide();
           }
-        }, 4500);
-      }
+        }
+      }, PROGRESS_STEP);
     }
 
     function updateHeroSlide() {
       const track = document.getElementById('hero-slider-track');
       if (!track) return;
       track.style.transform = `translateX(-${heroCurrentIndex * 100}%)`;
-      
+
       const dots = document.querySelectorAll('.hero-dot');
       if (dots.length) {
         const activeDotIndex = heroCurrentIndex % dots.length;
@@ -894,6 +930,11 @@
           dot.classList.toggle('active', idx === activeDotIndex);
         });
       }
+
+      // Reset Moving Line to 0% for next slide
+      progressElapsed = 0;
+      const pBar = document.getElementById('hero-progress-bar');
+      if (pBar) pBar.style.width = '0%';
     }
 
     function nextHeroSlide(e) {
@@ -916,7 +957,7 @@
         const res = await fetch(`data/posts.json?_t=${Date.now()}`);
         if (!res.ok) throw new Error('data/posts.json not found');
         rawPosts = await res.json();
-        
+
         // Setup Breaking Ticker (Top 3)
         setupBreakingTicker(rawPosts);
 
@@ -940,7 +981,7 @@
     function renderAll() {
       if (!rawPosts || rawPosts.length === 0) return;
 
-      // 1. Hero Slider (Up to 20 Posts)
+      // 1. Hero Slider with Progress Line
       setupHeroSlider(rawPosts);
 
       // 2. Trending Section (Top 4)
@@ -986,7 +1027,7 @@
     // Dynamic Filter Handler
     function filterCategory(catName, updateUrl = true) {
       currentCategory = catName;
-      
+
       // Update Active Navigation Highlight
       document.querySelectorAll('.nav-link').forEach(el => {
         if (el.textContent.trim().toLowerCase() === catName.toLowerCase()) {
