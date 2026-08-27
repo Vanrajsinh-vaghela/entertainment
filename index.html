@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- ⚡ Speed & Resource Hints -->
+  <link rel="preload" href="/posts.json" as="fetch" crossorigin>
   <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 
@@ -68,7 +69,7 @@
     html { scroll-behavior: smooth; }
     body { 
       background-color: #09090b; 
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
     }
@@ -130,16 +131,16 @@
           </div>
         </a>
 
-        <!-- Action Links -->
+        <!-- Fast Links -->
         <div class="flex items-center gap-2 md:gap-3">
-          <!-- 🚀 Fast Jump to 6-10 Cards Button -->
+          <!-- Jump Directly to Cards Section -->
           <a href="#trending-section" class="bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-zinc-200 text-xs md:text-sm font-bold px-3 md:px-4 py-2 rounded-xl border border-zinc-700 flex items-center gap-1.5 transition">
             <span>🔥</span>
             <span class="hidden sm:inline">Popular Posts</span>
             <span class="sm:hidden">Posts</span>
           </a>
 
-          <!-- Telegram Button -->
+          <!-- Telegram Channel Button -->
           <a href="https://t.me/+rG_x3BDIdYliNTVl" target="_blank" rel="noopener noreferrer" class="bg-sky-600 hover:bg-sky-500 active:scale-95 text-white text-xs md:text-sm font-black px-3.5 md:px-5 py-2 rounded-xl flex items-center gap-1.5 shadow-lg shadow-sky-600/30 transition-all shrink-0">
             <span>✈️</span>
             <span>Telegram</span>
@@ -153,11 +154,14 @@
   <main class="max-w-7xl mx-auto px-4 py-6 space-y-12">
 
     <!-- =======================================================
-         HERO SLIDER (YE CARDS SE AUTO GENERATE HOGA)
-         YAHAN KUCH BHI EDIT KARNE KI ZAROORAT NAHI HAI!
+         HERO SLIDER (posts.json SE AUTO-RENDER HOGA)
     ======================================================== -->
     <section id="top-stories" class="hero-slider relative overflow-hidden rounded-3xl border border-white/10 bg-black touch-pan-y select-none" aria-label="Latest Entertainment Stories">
-      <div id="sliderTrack" class="slider-track"></div>
+      <div id="sliderTrack" class="slider-track">
+        <div class="slide active flex items-center justify-center text-zinc-500 text-sm">
+          Latest entertainment updates loading...
+        </div>
+      </div>
 
       <button id="prevSlide" type="button" aria-label="Previous story" class="slider-control absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/60 border border-white/20 flex items-center justify-center text-xl md:text-2xl z-20 hover:bg-black active:scale-95 transition">
         &#8249;
@@ -170,124 +174,18 @@
       <div id="sliderDots" class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 max-w-[90%] overflow-x-auto hide-scrollbar px-3 py-1.5 bg-black/50 backdrop-blur-md rounded-full border border-white/10" aria-label="Story navigation"></div>
     </section>
 
-
     <!-- =======================================================
-         MAIN CARDS SECTION (TUMHE SIRF YAHAN 5-10 POSTS UPDATE KARNI HAIN)
-         Sabse naya card hamesha sabse upar paste karo.
+         TRENDING / POPULAR GRID (posts.json SE AUTO-RENDER HOGA)
     ======================================================== -->
     <section id="trending-section" class="scroll-mt-24">
-      <div class="flex items-center justify-between mb-5">
-        <div>
-          <p class="text-brand text-xs font-black uppercase tracking-widest">Popular Now</p>
-          <h2 class="text-xl md:text-3xl font-black">Trending Entertainment</h2>
-          <p class="text-xs md:text-sm text-zinc-400 mt-1">Sabse zyada popular entertainment stories</p>
-        </div>
+      <div class="mb-5">
+        <p class="text-brand text-xs font-black uppercase tracking-widest">Popular Now</p>
+        <h2 class="text-xl md:text-3xl font-black">Trending Entertainment</h2>
+        <p class="text-xs md:text-sm text-zinc-400 mt-1">Sabse zyada popular entertainment stories</p>
       </div>
 
       <div id="mainCardsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
-
-        <!-- CARD 1 -->
-        <article class="story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between"
-                 data-summary="Emraan Hashmi 19 saal baad Shivam ke iconic kirdaar mein wapsi kar rahe hain. Redemption aur action se bharpoor kahani.">
-          <a href="/posts/awarapan-2-box-office.html" class="block">
-            <div class="relative aspect-[16/9] w-full overflow-hidden bg-zinc-900">
-              <img src="/images/awarapan-2-release-date-story.webp" alt="Awarapan 2" fetchpriority="high" decoding="async" class="w-full h-full object-cover" onerror="this.src='/images/default-banner.webp'">
-              <span class="platform-badge absolute top-2 left-2 bg-amber-600 text-[9px] font-black px-2 py-0.5 rounded uppercase text-white">THEATRES</span>
-              <span class="absolute top-2 right-2 bg-black/80 backdrop-blur text-white text-[9px] font-black px-2 py-0.5 rounded border border-white/10">🔥 TRENDING</span>
-            </div>
-            <div class="p-3">
-              <h3 class="post-title font-bold text-xs md:text-sm line-clamp-2 text-white leading-snug">Awarapan 2 Release Date & Story: Emraan Hashmi Ki Wapsi</h3>
-              <p class="post-genre text-[11px] text-zinc-400 mt-1 truncate">Drama, Romance • Hindi (2h 20min)</p>
-              <p class="text-[10px] text-emerald-400 font-bold mt-2">Coming Soon (14 Aug)</p>
-            </div>
-          </a>
-        </article>
-
-        <!-- CARD 2 -->
-        <article class="story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between"
-                 data-summary="19 saal pehle Aaliyah ko khone ke baad Shivam Pandit ki zindagi me nayi chunauti aati hai. Nitin Kakkar ka shandar direction.">
-          <a href="/posts/awarapan-2-box-office-story.html" class="block">
-            <div class="relative aspect-[16/9] w-full overflow-hidden bg-zinc-900">
-              <img src="/images/awarapan-2-prompts.webp" alt="Awarapan 2 Story" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.src='/images/default-banner.webp'">
-              <span class="platform-badge absolute top-2 left-2 bg-amber-600 text-[9px] font-black px-2 py-0.5 rounded uppercase text-white">THEATRES</span>
-              <span class="absolute top-2 right-2 bg-black/80 backdrop-blur text-white text-[9px] font-black px-2 py-0.5 rounded border border-white/10">🔥 TRENDING</span>
-            </div>
-            <div class="p-3">
-              <h3 class="post-title font-bold text-xs md:text-sm line-clamp-2 text-white leading-snug">Awarapan 2 Box Office & Story: 19 Saal Baad Shivam Pandit Ki Wapsi</h3>
-              <p class="post-genre text-[11px] text-zinc-400 mt-1 truncate">Action, Drama • Hindi</p>
-              <p class="text-[10px] text-emerald-400 font-bold mt-2">In Theatres</p>
-            </div>
-          </a>
-        </article>
-
-        <!-- CARD 3 -->
-        <article class="story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between"
-                 data-summary="YouTube aur digital releases par blockbuster hit ki tayari, song releases aur exclusive streaming updates.">
-          <a href="/posts/awarapan-2-youtube-updates.html" class="block">
-            <div class="relative aspect-[16/9] w-full overflow-hidden bg-zinc-900">
-              <img src="/images/awarapan-2-poster-dark.webp" alt="Awarapan 2 YouTube" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.src='/images/default-banner.webp'">
-              <span class="platform-badge absolute top-2 left-2 bg-red-600 text-[9px] font-black px-2 py-0.5 rounded uppercase text-white">YOUTUBE</span>
-              <span class="absolute top-2 right-2 bg-black/80 backdrop-blur text-white text-[9px] font-black px-2 py-0.5 rounded border border-white/10">🔥 TRENDING</span>
-            </div>
-            <div class="p-3">
-              <h3 class="post-title font-bold text-xs md:text-sm line-clamp-2 text-white leading-snug">Awarapan 2 Box Office & Story: Blockbuster Songs & Music Updates</h3>
-              <p class="post-genre text-[11px] text-zinc-400 mt-1 truncate">Music, Drama • Hindi</p>
-              <p class="text-[10px] text-emerald-400 font-bold mt-2">In Theatres</p>
-            </div>
-          </a>
-        </article>
-
-        <!-- CARD 4 -->
-        <article class="story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between"
-                 data-summary="Panchayat Season 4 me Phulera gaon ki nayi rajneeti aur Sachiv Ji ki love story ka naya chapter shuru.">
-          <a href="/posts/panchayat-season-4.html" class="block">
-            <div class="relative aspect-[16/9] w-full overflow-hidden bg-zinc-900">
-              <img src="/images/panchayat-4.webp" alt="Panchayat Season 4" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.src='/images/default-banner.webp'">
-              <span class="platform-badge absolute top-2 left-2 bg-blue-600 text-[9px] font-black px-2 py-0.5 rounded uppercase text-white">PRIME VIDEO</span>
-              <span class="absolute top-2 right-2 bg-black/80 backdrop-blur text-white text-[9px] font-black px-2 py-0.5 rounded border border-white/10">🔥 TRENDING</span>
-            </div>
-            <div class="p-3">
-              <h3 class="post-title font-bold text-xs md:text-sm line-clamp-2 text-white leading-snug">Panchayat Season 4 Release Date & Story: Phulera Gaon Ki Wapsi</h3>
-              <p class="post-genre text-[11px] text-zinc-400 mt-1 truncate">Comedy, Drama • Hindi</p>
-              <p class="text-[10px] text-emerald-400 font-bold mt-2">Streaming Soon</p>
-            </div>
-          </a>
-        </article>
-
-        <!-- CARD 5 -->
-        <article class="story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between"
-                 data-summary="Mirzapur Season 3 OTT release aur Guddu Pandit ke takht par Purvanchal ka sabse bada khun-kharaba.">
-          <a href="/posts/mirzapur-3-ott.html" class="block">
-            <div class="relative aspect-[16/9] w-full overflow-hidden bg-zinc-900">
-              <img src="/images/mirzapur-3-ott.webp" alt="Mirzapur 3" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.src='/images/default-banner.webp'">
-              <span class="platform-badge absolute top-2 left-2 bg-blue-600 text-[9px] font-black px-2 py-0.5 rounded uppercase text-white">PRIME VIDEO</span>
-              <span class="absolute top-2 right-2 bg-black/80 backdrop-blur text-white text-[9px] font-black px-2 py-0.5 rounded border border-white/10">🔥 TRENDING</span>
-            </div>
-            <div class="p-3">
-              <h3 class="post-title font-bold text-xs md:text-sm line-clamp-2 text-white leading-snug">Mirzapur Season 3 OTT Release Date & Full Story</h3>
-              <p class="post-genre text-[11px] text-zinc-400 mt-1 truncate">Action, Crime • Hindi</p>
-              <p class="text-[10px] text-emerald-400 font-bold mt-2">Streaming Now</p>
-            </div>
-          </a>
-        </article>
-
-        <!-- CARD 6 -->
-        <article class="story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between"
-                 data-summary="Kota Factory Season 3 Netflix par available hai. Jeetu Bhaiya aur IIT aspirants ke emotion ka finale.">
-          <a href="/posts/kota-factory-3.html" class="block">
-            <div class="relative aspect-[16/9] w-full overflow-hidden bg-zinc-900">
-              <img src="/images/kota-factory-3.webp" alt="Kota Factory 3" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.src='/images/default-banner.webp'">
-              <span class="platform-badge absolute top-2 left-2 bg-red-700 text-[9px] font-black px-2 py-0.5 rounded uppercase text-white">NETFLIX</span>
-              <span class="absolute top-2 right-2 bg-black/80 backdrop-blur text-white text-[9px] font-black px-2 py-0.5 rounded border border-white/10">🔥 TRENDING</span>
-            </div>
-            <div class="p-3">
-              <h3 class="post-title font-bold text-xs md:text-sm line-clamp-2 text-white leading-snug">Kota Factory Season 3: Jeetu Bhaiya Ki Class Ka Finale</h3>
-              <p class="post-genre text-[11px] text-zinc-400 mt-1 truncate">Drama, Education • Hindi</p>
-              <p class="text-[10px] text-emerald-400 font-bold mt-2">Streaming Now</p>
-            </div>
-          </a>
-        </article>
-
+        <div class="col-span-full text-center py-12 text-zinc-500 text-sm">Loading posts...</div>
       </div>
     </section>
 
@@ -374,77 +272,126 @@
   </footer>
 
   <!-- =======================================================
-       AUTO ENGINE: YE CARDS KO PARSE KARKE SLIDER KHUD BANATA HAI
+       SUPERFAST AUTO ENGINE (LOADS posts.json INSTANTLY)
   ======================================================== -->
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const cards = Array.from(document.querySelectorAll("#mainCardsGrid .story-card"));
+    function getPlatformStyle(platform) {
+      const p = (platform || '').toUpperCase();
+      if (p.includes('THEATRE') || p.includes('CINEMA')) return 'bg-amber-600';
+      if (p.includes('YOUTUBE')) return 'bg-red-600';
+      if (p.includes('PRIME')) return 'bg-blue-600';
+      if (p.includes('HOTSTAR')) return 'bg-sky-600';
+      if (p.includes('NETFLIX')) return 'bg-red-700';
+      if (p.includes('MINITV')) return 'bg-orange-500';
+      return 'bg-brand';
+    }
+
+    function escapeHtml(value) {
+      if (!value) return '';
+      return String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
       const track = document.getElementById("sliderTrack");
       const dotsContainer = document.getElementById("sliderDots");
+      const grid = document.getElementById("mainCardsGrid");
 
-      if (!cards.length || !track || !dotsContainer) return;
+      try {
+        const res = await fetch('/posts.json?v=' + Date.now());
+        if (!res.ok) throw new Error("posts.json not found");
+        const posts = await res.json();
 
-      track.innerHTML = "";
-      dotsContainer.innerHTML = "";
+        if (!Array.isArray(posts) || posts.length === 0) {
+          track.innerHTML = `<div class="slide active flex items-center justify-center text-zinc-500 text-sm">Koi post available nahi hai.</div>`;
+          grid.innerHTML = `<div class="col-span-full text-center py-12 text-zinc-500 text-sm">Posts jald hi live hongi.</div>`;
+          return;
+        }
 
-      // Auto-parse up to 10 cards for Hero Slider
-      const sliderCards = cards.slice(0, 10);
+        track.innerHTML = "";
+        dotsContainer.innerHTML = "";
+        grid.innerHTML = "";
 
-      sliderCards.forEach((card, i) => {
-        const linkEl = card.querySelector("a");
-        const imgEl = card.querySelector("img");
-        const titleEl = card.querySelector(".post-title");
-        const genreEl = card.querySelector(".post-genre");
-        const platformBadge = card.querySelector(".platform-badge");
+        // 1. Render Hero Slider (Top 10 items)
+        const sliderPosts = posts.slice(0, 10);
+        sliderPosts.forEach((post, i) => {
+          const badgeBg = getPlatformStyle(post.platform);
+          const title = escapeHtml(post.title);
+          const summary = escapeHtml(post.summary || post.genre || "Latest entertainment update.");
+          const platform = escapeHtml(post.platform || "ENTERTAINMENT");
+          const img = escapeHtml(post.image || "/images/default-banner.webp");
+          const link = escapeHtml(post.link || "#");
 
-        const postUrl = linkEl ? linkEl.getAttribute("href") : "#";
-        const imgSrc = imgEl ? (imgEl.getAttribute("src") || "/images/default-banner.webp") : "/images/default-banner.webp";
-        const title = titleEl ? titleEl.textContent.trim() : "Latest Entertainment Update";
-        const summary = card.getAttribute("data-summary") || (genreEl ? genreEl.textContent.trim() : "Latest entertainment and story updates.");
-        const platform = platformBadge ? platformBadge.textContent.trim() : "ENTERTAINMENT";
-        
-        let badgeBg = "bg-brand";
-        if (platform.includes("THEATRE") || platform.includes("CINEMA")) badgeBg = "bg-amber-600";
-        else if (platform.includes("YOUTUBE")) badgeBg = "bg-red-600";
-        else if (platform.includes("PRIME")) badgeBg = "bg-blue-600";
-        else if (platform.includes("HOTSTAR")) badgeBg = "bg-sky-600";
-        else if (platform.includes("NETFLIX")) badgeBg = "bg-red-700";
-        else if (platform.includes("MINITV")) badgeBg = "bg-orange-500";
-
-        // Build Hero Slide
-        const slide = document.createElement("article");
-        slide.className = `slide ${i === 0 ? 'active' : ''}`;
-        slide.innerHTML = `
-          <img src="${imgSrc}" alt="${title}" class="slide-image absolute inset-0 w-full h-full object-cover" ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" onerror="this.src='/images/default-banner.webp'">
-          <div class="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-transparent"></div>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
-          <div class="relative z-10 h-full flex items-end">
-            <div class="p-6 md:p-10 max-w-2xl pb-16">
-              <div class="flex gap-2 mb-3 flex-wrap">
-                <span class="${badgeBg} text-[10px] font-black px-2.5 py-1 rounded-md uppercase text-white">${platform}</span>
-                <span class="bg-white/15 text-[10px] font-bold px-2.5 py-1 rounded-md text-white">#${i + 1} LATEST</span>
-              </div>
-              <h1 class="text-xl md:text-3xl lg:text-4xl font-black leading-tight text-white line-clamp-2">${title}</h1>
-              <p class="mt-2 text-zinc-300 text-xs md:text-sm line-clamp-2">${summary}</p>
-              <div class="mt-5">
-                <a href="${postUrl}" class="inline-block bg-white text-black font-black text-xs md:text-sm px-5 py-2.5 rounded-xl hover:bg-zinc-200 active:scale-95 transition">
-                  Puri Details Padhein →
-                </a>
+          const slide = document.createElement("article");
+          slide.className = `slide ${i === 0 ? 'active' : ''}`;
+          slide.innerHTML = `
+            <img src="${img}" alt="${title}" class="slide-image absolute inset-0 w-full h-full object-cover" ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" onerror="this.src='/images/default-banner.webp'">
+            <div class="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
+            <div class="relative z-10 h-full flex items-end">
+              <div class="p-6 md:p-10 max-w-2xl pb-16">
+                <div class="flex gap-2 mb-3 flex-wrap">
+                  <span class="${badgeBg} text-[10px] font-black px-2.5 py-1 rounded-md uppercase text-white">${platform}</span>
+                  <span class="bg-white/15 text-[10px] font-bold px-2.5 py-1 rounded-md text-white">#${i + 1} LATEST</span>
+                </div>
+                <h1 class="text-xl md:text-3xl lg:text-4xl font-black leading-tight text-white line-clamp-2">${title}</h1>
+                <p class="mt-2 text-zinc-300 text-xs md:text-sm line-clamp-2">${summary}</p>
+                <div class="mt-5">
+                  <a href="${link}" class="inline-block bg-white text-black font-black text-xs md:text-sm px-5 py-2.5 rounded-xl hover:bg-zinc-200 active:scale-95 transition">
+                    Puri Details Padhein →
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
-        `;
-        track.appendChild(slide);
+          `;
+          track.appendChild(slide);
 
-        // Build Dot
-        const dot = document.createElement("button");
-        dot.type = "button";
-        dot.className = `dot ${i === 0 ? 'w-5 bg-white' : 'w-1.5 bg-white/40'} h-1.5 rounded-full transition-all shrink-0`;
-        dot.setAttribute("aria-label", `Story ${i + 1}`);
-        dotsContainer.appendChild(dot);
-      });
+          const dot = document.createElement("button");
+          dot.type = "button";
+          dot.className = `dot ${i === 0 ? 'w-5 bg-white' : 'w-1.5 bg-white/40'} h-1.5 rounded-full transition-all shrink-0`;
+          dot.setAttribute("aria-label", `Story ${i + 1}`);
+          dotsContainer.appendChild(dot);
+        });
 
-      // Slider Navigation Engine
+        // 2. Render Trending Grid (Top 12 items)
+        const gridPosts = posts.slice(0, 12);
+        gridPosts.forEach(post => {
+          const badgeBg = getPlatformStyle(post.platform);
+          const title = escapeHtml(post.title);
+          const platform = escapeHtml(post.platform || "ENTERTAINMENT");
+          const genre = escapeHtml(post.genre || "Entertainment");
+          const status = escapeHtml(post.status || "In Theatres");
+          const img = escapeHtml(post.image || "/images/default-banner.webp");
+          const link = escapeHtml(post.link || "#");
+
+          const card = document.createElement("article");
+          card.className = "story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between";
+          card.innerHTML = `
+            <a href="${link}" class="block">
+              <div class="relative aspect-[16/9] w-full overflow-hidden bg-zinc-900">
+                <img src="${img}" alt="${title}" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.src='/images/default-banner.webp'">
+                <span class="absolute top-2 left-2 ${badgeBg} text-[9px] font-black px-2 py-0.5 rounded uppercase text-white">${platform}</span>
+                <span class="absolute top-2 right-2 bg-black/80 backdrop-blur text-white text-[9px] font-black px-2 py-0.5 rounded border border-white/10">🔥 TRENDING</span>
+              </div>
+              <div class="p-3">
+                <h3 class="font-bold text-xs md:text-sm line-clamp-2 text-white leading-snug">${title}</h3>
+                <p class="text-[11px] text-zinc-400 mt-1 truncate">${genre}</p>
+                <p class="text-[10px] text-emerald-400 font-bold mt-2">${status}</p>
+              </div>
+            </a>
+          `;
+          grid.appendChild(card);
+        });
+
+        initSlider();
+      } catch (err) {
+        console.error("Fetch Error:", err);
+        track.innerHTML = `<div class="slide active flex items-center justify-center text-zinc-500 text-sm">Failed to load stories.</div>`;
+        grid.innerHTML = `<div class="col-span-full text-center py-12 text-red-400 text-sm">posts.json sync hone ka wait karein.</div>`;
+      }
+    });
+
+    function initSlider() {
+      const track = document.getElementById("sliderTrack");
       const slides = Array.from(document.querySelectorAll(".slide"));
       const dots = Array.from(document.querySelectorAll(".dot"));
       const prevButton = document.getElementById("prevSlide");
@@ -509,7 +456,7 @@
 
       updateSlider();
       startAutoPlay();
-    });
+    }
   </script>
 </body>
 </html>
