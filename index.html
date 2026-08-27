@@ -50,7 +50,7 @@
       padding: 0 12px 30px 12px;
     }
 
-    /* Breaking Ticker */
+    /* Breaking Ticker Slider (Pause on Hover / Touch) */
     .ticker-bar {
       background: #000;
       border-bottom: 1px solid #1f2328;
@@ -58,8 +58,9 @@
       align-items: center;
       padding: 6px 12px;
       font-size: 11px;
+      height: 36px;
       overflow: hidden;
-      white-space: nowrap;
+      user-select: none;
     }
 
     .ticker-label {
@@ -72,12 +73,39 @@
       font-size: 10px;
       text-transform: uppercase;
       flex-shrink: 0;
+      letter-spacing: 0.5px;
     }
 
-    .ticker-text {
+    .ticker-viewport {
+      flex: 1;
+      position: relative;
+      height: 20px;
+      overflow: hidden;
+    }
+
+    .ticker-slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
       color: #d1d5db;
+      white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      opacity: 0;
+      transform: translateY(100%);
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      cursor: pointer;
+    }
+
+    .ticker-slide.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .ticker-slide.prev {
+      opacity: 0;
+      transform: translateY(-100%);
     }
 
     /* Header */
@@ -385,7 +413,7 @@
       margin-top: auto;
     }
 
-    /* Explore By Category 2-Column Grid */
+    /* Explore By Category Grid */
     .cat-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -525,10 +553,12 @@
 </head>
 <body>
 
-  <!-- Top Breaking Ticker -->
-  <div class="ticker-bar">
+  <!-- Top Breaking 3-Item Ticker (Pause on Hover & Touch) -->
+  <div class="ticker-bar" id="ticker-bar" title="Touch or hover to pause">
     <span class="ticker-label">BREAKING:</span>
-    <span class="ticker-text" id="breaking-ticker">Loading latest entertainment updates...</span>
+    <div class="ticker-viewport" id="ticker-viewport">
+      <div class="ticker-slide active">Loading latest entertainment updates...</div>
+    </div>
   </div>
 
   <div class="container">
@@ -560,7 +590,7 @@
       <input type="text" id="search-input" placeholder="Search movies, series, news..." oninput="handleSearch(event)">
     </div>
 
-    <!-- Active Filter Banner (Visible when category is selected) -->
+    <!-- Active Filter Banner -->
     <div id="filter-banner">
       <span class="filter-info" id="filter-label">Category: All</span>
       <button class="clear-filter-btn" onclick="filterCategory('All')">✕ Show All</button>
@@ -641,6 +671,51 @@
     let rawPosts = [];
     let currentCategory = 'All';
 
+    // Ticker Slider Logic
+    let tickerInterval = null;
+    let tickerIndex = 0;
+    let tickerSlides = [];
+    let isTickerPaused = false;
+
+    function setupBreakingTicker(posts) {
+      const viewport = document.getElementById('ticker-viewport');
+      const topThree = posts.slice(0, 3);
+
+      if (!topThree.length) {
+        viewport.innerHTML = '<div class="ticker-slide active">Abhi koi breaking post uplabdh nahi hai.</div>';
+        return;
+      }
+
+      viewport.innerHTML = topThree.map((post, idx) => `
+        <a href="${post.url || `posts/${post.slug}.html`}" class="ticker-slide ${idx === 0 ? 'active' : ''}">
+          • ${post.title}
+        </a>
+      `).join('');
+
+      tickerSlides = Array.from(viewport.querySelectorAll('.ticker-slide'));
+      tickerIndex = 0;
+
+      if (tickerInterval) clearInterval(tickerInterval);
+
+      // Rotate every 3.5 seconds
+      tickerInterval = setInterval(() => {
+        if (!isTickerPaused && tickerSlides.length > 1) {
+          tickerSlides[tickerIndex].className = 'ticker-slide prev';
+          tickerIndex = (tickerIndex + 1) % tickerSlides.length;
+          tickerSlides[tickerIndex].className = 'ticker-slide active';
+        }
+      }, 3500);
+    }
+
+    // Touch and Hover Listeners to Pause/Resume Ticker
+    const tickerContainer = document.getElementById('ticker-bar');
+    tickerContainer.addEventListener('mouseenter', () => { isTickerPaused = true; });
+    tickerContainer.addEventListener('mouseleave', () => { isTickerPaused = false; });
+    tickerContainer.addEventListener('touchstart', () => { isTickerPaused = true; }, { passive: true });
+    tickerContainer.addEventListener('touchend', () => {
+      setTimeout(() => { isTickerPaused = false; }, 1200);
+    }, { passive: true });
+
     // Fetch data/posts.json with Cache Buster
     async function loadSiteData() {
       try {
@@ -648,6 +723,9 @@
         if (!res.ok) throw new Error('data/posts.json not found');
         rawPosts = await res.json();
         
+        // Setup Ticker Slider with 3 posts
+        setupBreakingTicker(rawPosts);
+
         // Check URL Query Param for direct category links
         const params = new URLSearchParams(window.location.search);
         const urlCat = params.get('cat');
@@ -668,10 +746,7 @@
     function renderAll() {
       if (!rawPosts || rawPosts.length === 0) return;
 
-      // 1. Ticker
-      document.getElementById('breaking-ticker').textContent = rawPosts[0].title;
-
-      // 2. Hero Section
+      // 1. Hero Section
       const heroPost = rawPosts[0];
       document.getElementById('hero-slider-wrap').innerHTML = `
         <div class="hero-card">
@@ -689,7 +764,7 @@
         </div>
       `;
 
-      // 3. Trending Section (Top 4)
+      // 2. Trending Section (Top 4)
       const trendingContainer = document.getElementById('trending-container');
       const trendingPosts = rawPosts.slice(0, 4);
       trendingContainer.innerHTML = trendingPosts.map((post, idx) => `
@@ -706,7 +781,7 @@
         </a>
       `).join('');
 
-      // 4. Latest News List
+      // 3. Latest News List
       renderNewsList(rawPosts);
     }
 
@@ -729,7 +804,7 @@
       `).join('');
     }
 
-    // Dynamic Filter Handler (Fixes 404 permanently)
+    // Dynamic Filter Handler
     function filterCategory(catName, updateUrl = true) {
       currentCategory = catName;
       
@@ -760,7 +835,6 @@
         heading.innerHTML = '<span>Latest News & Updates</span>';
         renderAll();
       } else {
-        // Hide hero & trending to focus purely on category list
         homeSections.style.display = 'none';
         filterBanner.style.display = 'flex';
         filterLabel.textContent = `Browsing Category: ${catName}`;
