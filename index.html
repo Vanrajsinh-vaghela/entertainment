@@ -79,13 +79,16 @@
     .ticker-viewport {
       flex: 1;
       position: relative;
-      height: 20px;
+      height: 22px;
       overflow: hidden;
     }
 
     .ticker-slide {
       position: absolute;
-      inset: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       color: #d1d5db;
@@ -94,7 +97,7 @@
       text-overflow: ellipsis;
       opacity: 0;
       transform: translateY(100%);
-      transition: transform 0.4s ease, opacity 0.4s ease;
+      transition: transform 0.45s ease, opacity 0.45s ease;
       cursor: pointer;
     }
 
@@ -764,7 +767,7 @@
     let rawPosts = [];
     let currentCategory = 'All';
 
-    // Ticker Slider Logic
+    // Robust 3-Headline Ticker Logic
     let tickerInterval = null;
     let tickerIndex = 0;
     let tickerSlides = [];
@@ -772,16 +775,33 @@
 
     function setupBreakingTicker(posts) {
       const viewport = document.getElementById('ticker-viewport');
-      const topThree = posts.slice(0, 3);
+      let tickerItems = [];
 
-      if (!topThree.length) {
-        viewport.innerHTML = '<div class="ticker-slide active">Abhi koi breaking post uplabdh nahi hai.</div>';
-        return;
+      if (posts && posts.length > 0) {
+        posts.slice(0, 3).forEach(p => {
+          tickerItems.push({
+            title: p.title,
+            url: p.url || `posts/${p.slug}.html`
+          });
+        });
       }
 
-      viewport.innerHTML = topThree.map((post, idx) => `
-        <a href="${post.url || `posts/${post.slug}.html`}" class="ticker-slide ${idx === 0 ? 'active' : ''}">
-          • ${post.title}
+      // 3 headlines ensure karne ke liye default entertainment alerts
+      const fallbackAlerts = [
+        { title: "⚡ Top OTT & Web Series Weekly Releases & Reviews", url: "#" },
+        { title: "🎬 Bollywood & South Cinema Box Office Updates Live", url: "#" },
+        { title: "🍿 Latest Movie Trailers & Teasers Breakdown Today", url: "#" }
+      ];
+
+      let fbIdx = 0;
+      while (tickerItems.length < 3) {
+        tickerItems.push(fallbackAlerts[fbIdx % fallbackAlerts.length]);
+        fbIdx++;
+      }
+
+      viewport.innerHTML = tickerItems.map((item, idx) => `
+        <a href="${item.url}" class="ticker-slide ${idx === 0 ? 'active' : ''}">
+          • ${item.title}
         </a>
       `).join('');
 
@@ -790,13 +810,23 @@
 
       if (tickerInterval) clearInterval(tickerInterval);
 
+      // Har 3.2 seconds mein smooth vertical slide
       tickerInterval = setInterval(() => {
         if (!isTickerPaused && tickerSlides.length > 1) {
-          tickerSlides[tickerIndex].className = 'ticker-slide prev';
+          const currentSlide = tickerSlides[tickerIndex];
           tickerIndex = (tickerIndex + 1) % tickerSlides.length;
-          tickerSlides[tickerIndex].className = 'ticker-slide active';
+          const nextSlide = tickerSlides[tickerIndex];
+
+          currentSlide.className = 'ticker-slide prev';
+          nextSlide.className = 'ticker-slide active';
+
+          setTimeout(() => {
+            if (currentSlide !== tickerSlides[tickerIndex]) {
+              currentSlide.className = 'ticker-slide';
+            }
+          }, 500);
         }
-      }, 3500);
+      }, 3200);
     }
 
     // Ticker Hover / Touch Listeners
@@ -808,7 +838,7 @@
       setTimeout(() => { isTickerPaused = false; }, 1200);
     }, { passive: true });
 
-    // Hero Slider with Animated Moving Line
+    // Hero Slider with Animated Moving Line (Up to 20 Posts)
     let heroTimer = null;
     let heroCurrentIndex = 0;
     let heroTotalSlides = 0;
@@ -931,7 +961,6 @@
         });
       }
 
-      // Reset Moving Line to 0% for next slide
       progressElapsed = 0;
       const pBar = document.getElementById('hero-progress-bar');
       if (pBar) pBar.style.width = '0%';
@@ -958,7 +987,7 @@
         if (!res.ok) throw new Error('data/posts.json not found');
         rawPosts = await res.json();
 
-        // Setup Breaking Ticker (Top 3)
+        // Breaking Ticker hamesha 3 headlines run karega
         setupBreakingTicker(rawPosts);
 
         // Check URL Query Param for direct category links
@@ -971,6 +1000,7 @@
         }
       } catch (err) {
         console.warn('Could not load posts:', err);
+        setupBreakingTicker([]);
         document.getElementById('posts-list-container').innerHTML = `
           <div class="no-posts">Abhi tak koi post publish nahi hui hai. Admin desk se pehli post create karein.</div>
         `;
@@ -1028,7 +1058,6 @@
     function filterCategory(catName, updateUrl = true) {
       currentCategory = catName;
 
-      // Update Active Navigation Highlight
       document.querySelectorAll('.nav-link').forEach(el => {
         if (el.textContent.trim().toLowerCase() === catName.toLowerCase()) {
           el.classList.add('active');
