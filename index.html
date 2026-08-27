@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="hi" class="dark">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-73Z6FH3JVM"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-73Z6FH3JVM');
-</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ⚡ Speed & Resource Hints -->
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-73Z6FH3JVM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-73Z6FH3JVM');
+  </script>
 
   <title id="siteTitle">Gujarat Fast Alert Entertainment - Latest Hindi Movies, OTT & Web Series</title>
   <meta name="description" content="Latest Hindi movies, OTT releases, web series, trailers aur entertainment news Hindi mein.">
@@ -61,14 +66,19 @@
 
   <style>
     html { scroll-behavior: smooth; }
-    body { background-color: #09090b; }
+    body { 
+      background-color: #09090b; 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
     .hide-scrollbar::-webkit-scrollbar { display: none; }
     .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     
     .slider-track {
       display: flex;
       height: 100%;
-      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
       will-change: transform;
     }
     .slide {
@@ -81,10 +91,12 @@
       will-change: transform;
     }
     .slide.active .slide-image {
-      transform: scale(1.05);
+      transform: scale(1.04);
     }
     .story-card, .platform-card {
       transition: transform 0.2s ease, border-color 0.2s ease;
+      content-visibility: auto;
+      contain-intrinsic-size: 280px;
     }
     .story-card:hover, .platform-card:hover {
       transform: translateY(-4px);
@@ -108,7 +120,7 @@
   <!-- HEADER -->
   <header class="sticky top-0 z-50 bg-black/95 backdrop-blur border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4">
-      <div class="min-h-[72px] md:min-h-[80px] flex items-center justify-between gap-4 py-2">
+      <div class="min-h-[72px] md:min-h-[80px] flex items-center justify-between gap-3 py-2">
         <a href="/" aria-label="Gujarat Fast Alert Entertainment Home" class="shrink-0 flex flex-col justify-center">
           <div class="text-lg md:text-2xl font-black tracking-tight leading-tight text-white">
             <span class="text-brand">GUJARAT</span> FAST ALERT
@@ -118,10 +130,21 @@
           </div>
         </a>
 
-        <a href="https://t.me/+rG_x3BDIdYliNTVl" target="_blank" rel="noopener noreferrer" class="bg-sky-600 hover:bg-sky-500 active:scale-95 text-white text-xs md:text-sm font-black px-4 md:px-6 py-2.5 rounded-xl flex items-center gap-2 shadow-lg shadow-sky-600/30 transition-all">
-          <span class="text-base">✈️</span>
-          <span>Join Telegram</span>
-        </a>
+        <!-- Action Links -->
+        <div class="flex items-center gap-2 md:gap-3">
+          <!-- 🚀 Fast Jump to 6-10 Cards Button -->
+          <a href="#trending-section" class="bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-zinc-200 text-xs md:text-sm font-bold px-3 md:px-4 py-2 rounded-xl border border-zinc-700 flex items-center gap-1.5 transition">
+            <span>🔥</span>
+            <span class="hidden sm:inline">Popular Posts</span>
+            <span class="sm:hidden">Posts</span>
+          </a>
+
+          <!-- Telegram Button -->
+          <a href="https://t.me/+rG_x3BDIdYliNTVl" target="_blank" rel="noopener noreferrer" class="bg-sky-600 hover:bg-sky-500 active:scale-95 text-white text-xs md:text-sm font-black px-3.5 md:px-5 py-2 rounded-xl flex items-center gap-1.5 shadow-lg shadow-sky-600/30 transition-all shrink-0">
+            <span>✈️</span>
+            <span>Telegram</span>
+          </a>
+        </div>
       </div>
     </div>
   </header>
@@ -130,7 +153,7 @@
   <main class="max-w-7xl mx-auto px-4 py-6 space-y-12">
 
     <!-- =======================================================
-         HERO SLIDER (YE NICHE KE CARDS SE KHUD AUTO-GENERATE HOTA HAI)
+         HERO SLIDER (YE CARDS SE AUTO GENERATE HOGA)
          YAHAN KUCH BHI EDIT KARNE KI ZAROORAT NAHI HAI!
     ======================================================== -->
     <section id="top-stories" class="hero-slider relative overflow-hidden rounded-3xl border border-white/10 bg-black touch-pan-y select-none" aria-label="Latest Entertainment Stories">
@@ -149,14 +172,16 @@
 
 
     <!-- =======================================================
-         MAIN CARDS SECTION (TUMHE SIRF YAHAN POST UPDATE KARNI HAI)
+         MAIN CARDS SECTION (TUMHE SIRF YAHAN 5-10 POSTS UPDATE KARNI HAIN)
          Sabse naya card hamesha sabse upar paste karo.
     ======================================================== -->
-    <section id="trending-section">
-      <div class="mb-5">
-        <p class="text-brand text-xs font-black uppercase tracking-widest">Popular Now</p>
-        <h2 class="text-xl md:text-3xl font-black">Trending Entertainment</h2>
-        <p class="text-xs md:text-sm text-zinc-400 mt-1">Sabse zyada popular entertainment stories</p>
+    <section id="trending-section" class="scroll-mt-24">
+      <div class="flex items-center justify-between mb-5">
+        <div>
+          <p class="text-brand text-xs font-black uppercase tracking-widest">Popular Now</p>
+          <h2 class="text-xl md:text-3xl font-black">Trending Entertainment</h2>
+          <p class="text-xs md:text-sm text-zinc-400 mt-1">Sabse zyada popular entertainment stories</p>
+        </div>
       </div>
 
       <div id="mainCardsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
@@ -166,7 +191,7 @@
                  data-summary="Emraan Hashmi 19 saal baad Shivam ke iconic kirdaar mein wapsi kar rahe hain. Redemption aur action se bharpoor kahani.">
           <a href="/posts/awarapan-2-box-office.html" class="block">
             <div class="relative aspect-[16/9] w-full overflow-hidden bg-zinc-900">
-              <img src="/images/awarapan-2-release-date-story.webp" alt="Awarapan 2" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.src='/images/default-banner.webp'">
+              <img src="/images/awarapan-2-release-date-story.webp" alt="Awarapan 2" fetchpriority="high" decoding="async" class="w-full h-full object-cover" onerror="this.src='/images/default-banner.webp'">
               <span class="platform-badge absolute top-2 left-2 bg-amber-600 text-[9px] font-black px-2 py-0.5 rounded uppercase text-white">THEATRES</span>
               <span class="absolute top-2 right-2 bg-black/80 backdrop-blur text-white text-[9px] font-black px-2 py-0.5 rounded border border-white/10">🔥 TRENDING</span>
             </div>
@@ -362,8 +387,8 @@
       track.innerHTML = "";
       dotsContainer.innerHTML = "";
 
-      // Up to 20 cards parsed for Top Hero Slider
-      const sliderCards = cards.slice(0, 20);
+      // Auto-parse up to 10 cards for Hero Slider
+      const sliderCards = cards.slice(0, 10);
 
       sliderCards.forEach((card, i) => {
         const linkEl = card.querySelector("a");
@@ -378,7 +403,6 @@
         const summary = card.getAttribute("data-summary") || (genreEl ? genreEl.textContent.trim() : "Latest entertainment and story updates.");
         const platform = platformBadge ? platformBadge.textContent.trim() : "ENTERTAINMENT";
         
-        // Match badge colors
         let badgeBg = "bg-brand";
         if (platform.includes("THEATRE") || platform.includes("CINEMA")) badgeBg = "bg-amber-600";
         else if (platform.includes("YOUTUBE")) badgeBg = "bg-red-600";
@@ -387,7 +411,7 @@
         else if (platform.includes("NETFLIX")) badgeBg = "bg-red-700";
         else if (platform.includes("MINITV")) badgeBg = "bg-orange-500";
 
-        // 1. Build Slide
+        // Build Hero Slide
         const slide = document.createElement("article");
         slide.className = `slide ${i === 0 ? 'active' : ''}`;
         slide.innerHTML = `
@@ -412,7 +436,7 @@
         `;
         track.appendChild(slide);
 
-        // 2. Build Dot
+        // Build Dot
         const dot = document.createElement("button");
         dot.type = "button";
         dot.className = `dot ${i === 0 ? 'w-5 bg-white' : 'w-1.5 bg-white/40'} h-1.5 rounded-full transition-all shrink-0`;
@@ -420,7 +444,7 @@
         dotsContainer.appendChild(dot);
       });
 
-      // 3. Slider Engine Mechanics
+      // Slider Navigation Engine
       const slides = Array.from(document.querySelectorAll(".slide"));
       const dots = Array.from(document.querySelectorAll(".dot"));
       const prevButton = document.getElementById("prevSlide");
