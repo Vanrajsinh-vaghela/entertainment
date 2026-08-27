@@ -48,10 +48,6 @@
     }
   </script>
 
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-
   <!-- Website Schema -->
   <script type="application/ld+json">
   {
@@ -109,14 +105,6 @@
 
 <body class="bg-bgmain text-white antialiased font-sans">
 
-  <!-- ALERT TICKER -->
-  <div id="tickerContainer" class="bg-red-950/90 border-b border-red-800 text-red-200 text-xs py-1.5 px-4 hidden">
-    <div class="max-w-7xl mx-auto flex items-center gap-2">
-      <span class="bg-brand text-white text-[9px] font-black px-2 py-0.5 rounded uppercase">ALERT</span>
-      <marquee id="tickerText" class="font-bold text-xs" scrollamount="5"></marquee>
-    </div>
-  </div>
-
   <!-- HEADER -->
   <header class="sticky top-0 z-50 bg-black/95 backdrop-blur border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4">
@@ -141,13 +129,12 @@
   <!-- MAIN WRAPPER -->
   <main class="max-w-7xl mx-auto px-4 py-6 space-y-12">
 
-    <!-- HERO SLIDER (TOP 20 AUTO-UPDATED) -->
+    <!-- =======================================================
+         HERO SLIDER (YE NICHE KE CARDS SE KHUD AUTO-GENERATE HOTA HAI)
+         YAHAN KUCH BHI EDIT KARNE KI ZAROORAT NAHI HAI!
+    ======================================================== -->
     <section id="top-stories" class="hero-slider relative overflow-hidden rounded-3xl border border-white/10 bg-black touch-pan-y select-none" aria-label="Latest Entertainment Stories">
-      <div id="sliderTrack" class="slider-track">
-        <div class="slide active flex items-center justify-center text-zinc-500 text-sm">
-          Latest entertainment updates loading...
-        </div>
-      </div>
+      <div id="sliderTrack" class="slider-track"></div>
 
       <button id="prevSlide" type="button" aria-label="Previous story" class="slider-control absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/60 border border-white/20 flex items-center justify-center text-xl md:text-2xl z-20 hover:bg-black active:scale-95 transition">
         &#8249;
@@ -160,22 +147,11 @@
       <div id="sliderDots" class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 max-w-[90%] overflow-x-auto hide-scrollbar px-3 py-1.5 bg-black/50 backdrop-blur-md rounded-full border border-white/10" aria-label="Story navigation"></div>
     </section>
 
-    <!-- SECTION 1: LATEST RELEASES -->
-    <section id="aaj-release">
-      <div class="flex items-end justify-between mb-5">
-        <div>
-          <p class="text-brand text-xs font-black uppercase tracking-widest">Streaming Updates</p>
-          <h2 class="text-xl md:text-3xl font-black">Latest Releases</h2>
-          <p class="text-xs md:text-sm text-zinc-400 mt-1">Aaj ki latest movies, OTT releases aur entertainment updates</p>
-        </div>
-      </div>
 
-      <div id="liveGridContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
-        <div class="col-span-full text-center py-12 text-zinc-500 text-sm">Latest releases loading...</div>
-      </div>
-    </section>
-
-    <!-- SECTION 2: TRENDING ENTERTAINMENT -->
+    <!-- =======================================================
+         MAIN CARDS SECTION (TUMHE SIRF YAHAN POST UPDATE KARNI HAI)
+         Sabse naya card hamesha sabse upar paste karo.
+    ======================================================== -->
     <section id="trending-section">
       <div class="mb-5">
         <p class="text-brand text-xs font-black uppercase tracking-widest">Popular Now</p>
@@ -183,8 +159,110 @@
         <p class="text-xs md:text-sm text-zinc-400 mt-1">Sabse zyada popular entertainment stories</p>
       </div>
 
-      <div id="trendingGridContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
-        <div class="col-span-full text-center py-8 text-zinc-500 text-sm">Trending stories loading...</div>
+      <div id="mainCardsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
+
+        <!-- CARD 1 -->
+        <article class="story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between"
+                 data-summary="Emraan Hashmi 19 saal baad Shivam ke iconic kirdaar mein wapsi kar rahe hain. Redemption aur action se bharpoor kahani.">
+          <a href="/posts/awarapan-2-box-office.html" class="block">
+            <div class="relative aspect-[16/9] w-full overflow-hidden bg-zinc-900">
+              <img src="/images/awarapan-2-release-date-story.webp" alt="Awarapan 2" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.src='/images/default-banner.webp'">
+              <span class="platform-badge absolute top-2 left-2 bg-amber-600 text-[9px] font-black px-2 py-0.5 rounded uppercase text-white">THEATRES</span>
+              <span class="absolute top-2 right-2 bg-black/80 backdrop-blur text-white text-[9px] font-black px-2 py-0.5 rounded border border-white/10">🔥 TRENDING</span>
+            </div>
+            <div class="p-3">
+              <h3 class="post-title font-bold text-xs md:text-sm line-clamp-2 text-white leading-snug">Awarapan 2 Release Date & Story: Emraan Hashmi Ki Wapsi</h3>
+              <p class="post-genre text-[11px] text-zinc-400 mt-1 truncate">Drama, Romance • Hindi (2h 20min)</p>
+              <p class="text-[10px] text-emerald-400 font-bold mt-2">Coming Soon (14 Aug)</p>
+            </div>
+          </a>
+        </article>
+
+        <!-- CARD 2 -->
+        <article class="story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between"
+                 data-summary="19 saal pehle Aaliyah ko khone ke baad Shivam Pandit ki zindagi me nayi chunauti aati hai. Nitin Kakkar ka shandar direction.">
+          <a href="/posts/awarapan-2-box-office-story.html" class="block">
+            <div class="relative aspect-[16/9] w-full overflow-hidden bg-zinc-900">
+              <img src="/images/awarapan-2-prompts.webp" alt="Awarapan 2 Story" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.src='/images/default-banner.webp'">
+              <span class="platform-badge absolute top-2 left-2 bg-amber-600 text-[9px] font-black px-2 py-0.5 rounded uppercase text-white">THEATRES</span>
+              <span class="absolute top-2 right-2 bg-black/80 backdrop-blur text-white text-[9px] font-black px-2 py-0.5 rounded border border-white/10">🔥 TRENDING</span>
+            </div>
+            <div class="p-3">
+              <h3 class="post-title font-bold text-xs md:text-sm line-clamp-2 text-white leading-snug">Awarapan 2 Box Office & Story: 19 Saal Baad Shivam Pandit Ki Wapsi</h3>
+              <p class="post-genre text-[11px] text-zinc-400 mt-1 truncate">Action, Drama • Hindi</p>
+              <p class="text-[10px] text-emerald-400 font-bold mt-2">In Theatres</p>
+            </div>
+          </a>
+        </article>
+
+        <!-- CARD 3 -->
+        <article class="story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between"
+                 data-summary="YouTube aur digital releases par blockbuster hit ki tayari, song releases aur exclusive streaming updates.">
+          <a href="/posts/awarapan-2-youtube-updates.html" class="block">
+            <div class="relative aspect-[16/9] w-full overflow-hidden bg-zinc-900">
+              <img src="/images/awarapan-2-poster-dark.webp" alt="Awarapan 2 YouTube" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.src='/images/default-banner.webp'">
+              <span class="platform-badge absolute top-2 left-2 bg-red-600 text-[9px] font-black px-2 py-0.5 rounded uppercase text-white">YOUTUBE</span>
+              <span class="absolute top-2 right-2 bg-black/80 backdrop-blur text-white text-[9px] font-black px-2 py-0.5 rounded border border-white/10">🔥 TRENDING</span>
+            </div>
+            <div class="p-3">
+              <h3 class="post-title font-bold text-xs md:text-sm line-clamp-2 text-white leading-snug">Awarapan 2 Box Office & Story: Blockbuster Songs & Music Updates</h3>
+              <p class="post-genre text-[11px] text-zinc-400 mt-1 truncate">Music, Drama • Hindi</p>
+              <p class="text-[10px] text-emerald-400 font-bold mt-2">In Theatres</p>
+            </div>
+          </a>
+        </article>
+
+        <!-- CARD 4 -->
+        <article class="story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between"
+                 data-summary="Panchayat Season 4 me Phulera gaon ki nayi rajneeti aur Sachiv Ji ki love story ka naya chapter shuru.">
+          <a href="/posts/panchayat-season-4.html" class="block">
+            <div class="relative aspect-[16/9] w-full overflow-hidden bg-zinc-900">
+              <img src="/images/panchayat-4.webp" alt="Panchayat Season 4" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.src='/images/default-banner.webp'">
+              <span class="platform-badge absolute top-2 left-2 bg-blue-600 text-[9px] font-black px-2 py-0.5 rounded uppercase text-white">PRIME VIDEO</span>
+              <span class="absolute top-2 right-2 bg-black/80 backdrop-blur text-white text-[9px] font-black px-2 py-0.5 rounded border border-white/10">🔥 TRENDING</span>
+            </div>
+            <div class="p-3">
+              <h3 class="post-title font-bold text-xs md:text-sm line-clamp-2 text-white leading-snug">Panchayat Season 4 Release Date & Story: Phulera Gaon Ki Wapsi</h3>
+              <p class="post-genre text-[11px] text-zinc-400 mt-1 truncate">Comedy, Drama • Hindi</p>
+              <p class="text-[10px] text-emerald-400 font-bold mt-2">Streaming Soon</p>
+            </div>
+          </a>
+        </article>
+
+        <!-- CARD 5 -->
+        <article class="story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between"
+                 data-summary="Mirzapur Season 3 OTT release aur Guddu Pandit ke takht par Purvanchal ka sabse bada khun-kharaba.">
+          <a href="/posts/mirzapur-3-ott.html" class="block">
+            <div class="relative aspect-[16/9] w-full overflow-hidden bg-zinc-900">
+              <img src="/images/mirzapur-3-ott.webp" alt="Mirzapur 3" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.src='/images/default-banner.webp'">
+              <span class="platform-badge absolute top-2 left-2 bg-blue-600 text-[9px] font-black px-2 py-0.5 rounded uppercase text-white">PRIME VIDEO</span>
+              <span class="absolute top-2 right-2 bg-black/80 backdrop-blur text-white text-[9px] font-black px-2 py-0.5 rounded border border-white/10">🔥 TRENDING</span>
+            </div>
+            <div class="p-3">
+              <h3 class="post-title font-bold text-xs md:text-sm line-clamp-2 text-white leading-snug">Mirzapur Season 3 OTT Release Date & Full Story</h3>
+              <p class="post-genre text-[11px] text-zinc-400 mt-1 truncate">Action, Crime • Hindi</p>
+              <p class="text-[10px] text-emerald-400 font-bold mt-2">Streaming Now</p>
+            </div>
+          </a>
+        </article>
+
+        <!-- CARD 6 -->
+        <article class="story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between"
+                 data-summary="Kota Factory Season 3 Netflix par available hai. Jeetu Bhaiya aur IIT aspirants ke emotion ka finale.">
+          <a href="/posts/kota-factory-3.html" class="block">
+            <div class="relative aspect-[16/9] w-full overflow-hidden bg-zinc-900">
+              <img src="/images/kota-factory-3.webp" alt="Kota Factory 3" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.src='/images/default-banner.webp'">
+              <span class="platform-badge absolute top-2 left-2 bg-red-700 text-[9px] font-black px-2 py-0.5 rounded uppercase text-white">NETFLIX</span>
+              <span class="absolute top-2 right-2 bg-black/80 backdrop-blur text-white text-[9px] font-black px-2 py-0.5 rounded border border-white/10">🔥 TRENDING</span>
+            </div>
+            <div class="p-3">
+              <h3 class="post-title font-bold text-xs md:text-sm line-clamp-2 text-white leading-snug">Kota Factory Season 3: Jeetu Bhaiya Ki Class Ka Finale</h3>
+              <p class="post-genre text-[11px] text-zinc-400 mt-1 truncate">Drama, Education • Hindi</p>
+              <p class="text-[10px] text-emerald-400 font-bold mt-2">Streaming Now</p>
+            </div>
+          </a>
+        </article>
+
       </div>
     </section>
 
@@ -270,119 +348,62 @@
     </div>
   </footer>
 
-  <!-- ENGINE SCRIPT -->
+  <!-- =======================================================
+       AUTO ENGINE: YE CARDS KO PARSE KARKE SLIDER KHUD BANATA HAI
+  ======================================================== -->
   <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyD40GV9eAeGiu-Tz0l09ZLifjzAQp3UFso",
-      authDomain: "gujarat-fast-alert.firebaseapp.com",
-      databaseURL: "https://gujarat-fast-alert-default-rtdb.firebaseio.com",
-      projectId: "gujarat-fast-alert",
-      storageBucket: "gujarat-fast-alert.firebasestorage.app",
-      messagingSenderId: "395130500748",
-      appId: "1:395130500748:web:e6589f3a57812efad6ada9"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
+    document.addEventListener("DOMContentLoaded", () => {
+      const cards = Array.from(document.querySelectorAll("#mainCardsGrid .story-card"));
+      const track = document.getElementById("sliderTrack");
+      const dotsContainer = document.getElementById("sliderDots");
 
-    function escapeHtml(value) {
-      if (!value) return '';
-      return String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
-    }
+      if (!cards.length || !track || !dotsContainer) return;
 
-    function safeUrl(value) {
-      if (!value) return '#';
-      const url = String(value).trim();
-      return (url.startsWith('/') || url.startsWith('http://') || url.startsWith('https://')) ? url : '#';
-    }
+      track.innerHTML = "";
+      dotsContainer.innerHTML = "";
 
-    function getPlatformStyle(platform) {
-      const p = (platform || '').toUpperCase();
-      if (p.includes('THEATRE') || p.includes('CINEMA')) return 'bg-amber-600 text-white';
-      if (p.includes('YOUTUBE')) return 'bg-red-600 text-white';
-      if (p.includes('MINITV')) return 'bg-orange-500 text-white';
-      if (p.includes('PRIME')) return 'bg-blue-600 text-white';
-      if (p.includes('HOTSTAR')) return 'bg-sky-600 text-white';
-      if (p.includes('JIOCINEMA')) return 'bg-yellow-600 text-white';
-      if (p.includes('NETFLIX')) return 'bg-red-700 text-white';
-      return 'bg-brand text-white';
-    }
+      // Up to 20 cards parsed for Top Hero Slider
+      const sliderCards = cards.slice(0, 20);
 
-    function getTimestamp(post) {
-      if (!post) return 0;
-      if (typeof post.publishedAt === 'number') return post.publishedAt;
-      if (typeof post.date === 'number') return post.date;
-      if (typeof post.timestamp === 'number') return post.timestamp;
-      const parsed = Date.parse(post.publishedAt || post.date || '');
-      return !isNaN(parsed) ? parsed : 0;
-    }
+      sliderCards.forEach((card, i) => {
+        const linkEl = card.querySelector("a");
+        const imgEl = card.querySelector("img");
+        const titleEl = card.querySelector(".post-title");
+        const genreEl = card.querySelector(".post-genre");
+        const platformBadge = card.querySelector(".platform-badge");
 
-    function getPostUrl(post) {
-      if (!post || !post.link) return '#';
-      const link = String(post.link);
-      if (link.startsWith('http://') || link.startsWith('https://')) return link;
-      return `/posts/${encodeURIComponent(link)}`;
-    }
+        const postUrl = linkEl ? linkEl.getAttribute("href") : "#";
+        const imgSrc = imgEl ? (imgEl.getAttribute("src") || "/images/default-banner.webp") : "/images/default-banner.webp";
+        const title = titleEl ? titleEl.textContent.trim() : "Latest Entertainment Update";
+        const summary = card.getAttribute("data-summary") || (genreEl ? genreEl.textContent.trim() : "Latest entertainment and story updates.");
+        const platform = platformBadge ? platformBadge.textContent.trim() : "ENTERTAINMENT";
+        
+        // Match badge colors
+        let badgeBg = "bg-brand";
+        if (platform.includes("THEATRE") || platform.includes("CINEMA")) badgeBg = "bg-amber-600";
+        else if (platform.includes("YOUTUBE")) badgeBg = "bg-red-600";
+        else if (platform.includes("PRIME")) badgeBg = "bg-blue-600";
+        else if (platform.includes("HOTSTAR")) badgeBg = "bg-sky-600";
+        else if (platform.includes("NETFLIX")) badgeBg = "bg-red-700";
+        else if (platform.includes("MINITV")) badgeBg = "bg-orange-500";
 
-    // Realtime Notice & Title
-    db.ref('settings').on('value', snap => {
-      const data = snap.val();
-      if (!data) return;
-      if (data.siteTitle) document.getElementById('siteTitle').textContent = data.siteTitle;
-      if (data.headerNotice) {
-        document.getElementById('tickerContainer').classList.remove('hidden');
-        document.getElementById('tickerText').textContent = data.headerNotice;
-      }
-    });
-
-    // Realtime Post Rendering
-    db.ref('posts/ott-movies').on('value', snap => {
-      const data = snap.val();
-      const track = document.getElementById('sliderTrack');
-      const dotsContainer = document.getElementById('sliderDots');
-      const latestGrid = document.getElementById('liveGridContainer');
-      const trendingGrid = document.getElementById('trendingGridContainer');
-
-      track.innerHTML = '';
-      dotsContainer.innerHTML = '';
-      latestGrid.innerHTML = '';
-      trendingGrid.innerHTML = '';
-
-      if (!data) {
-        track.innerHTML = `<div class="slide flex items-center justify-center text-zinc-500 text-sm">Abhi koi update available nahi hai.</div>`;
-        latestGrid.innerHTML = `<div class="col-span-full text-center py-12 text-zinc-500 text-sm">Abhi koi post nahi hai.</div>`;
-        trendingGrid.innerHTML = `<div class="col-span-full text-center py-8 text-zinc-500 text-sm">Koi trending post nahi hai.</div>`;
-        return;
-      }
-
-      let posts = Object.entries(data).map(([id, post]) => ({ id, ...(post || {}) }));
-      posts.sort((a, b) => getTimestamp(b) - getTimestamp(a));
-
-      // 1. Render Top 20 Slider
-      const top20 = posts.slice(0, 20);
-      top20.forEach((post, i) => {
-        const badgeColor = getPlatformStyle(post.platform);
-        const title = escapeHtml(post.title || 'Latest Entertainment Update');
-        const summary = escapeHtml(post.summary || 'Story details and updates available.');
-        const platform = escapeHtml(post.platform || 'ENTERTAINMENT');
-        const image = safeUrl(post.image || '/images/default-banner.webp');
-        const postUrl = getPostUrl(post);
-
-        const slide = document.createElement('article');
+        // 1. Build Slide
+        const slide = document.createElement("article");
         slide.className = `slide ${i === 0 ? 'active' : ''}`;
         slide.innerHTML = `
-          <img src="${image}" alt="${title}" class="slide-image absolute inset-0 w-full h-full object-cover" ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" onerror="this.src='/images/default-banner.webp'">
+          <img src="${imgSrc}" alt="${title}" class="slide-image absolute inset-0 w-full h-full object-cover" ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" onerror="this.src='/images/default-banner.webp'">
           <div class="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-transparent"></div>
           <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
           <div class="relative z-10 h-full flex items-end">
             <div class="p-6 md:p-10 max-w-2xl pb-16">
               <div class="flex gap-2 mb-3 flex-wrap">
-                <span class="${badgeColor} text-[10px] font-black px-2.5 py-1 rounded-md uppercase">${platform}</span>
-                <span class="bg-white/15 text-[10px] font-bold px-2.5 py-1 rounded-md">#${i + 1} LATEST</span>
+                <span class="${badgeBg} text-[10px] font-black px-2.5 py-1 rounded-md uppercase text-white">${platform}</span>
+                <span class="bg-white/15 text-[10px] font-bold px-2.5 py-1 rounded-md text-white">#${i + 1} LATEST</span>
               </div>
               <h1 class="text-xl md:text-3xl lg:text-4xl font-black leading-tight text-white line-clamp-2">${title}</h1>
               <p class="mt-2 text-zinc-300 text-xs md:text-sm line-clamp-2">${summary}</p>
               <div class="mt-5">
-                <a href="${safeUrl(postUrl)}" class="inline-block bg-white text-black font-black text-xs md:text-sm px-5 py-2.5 rounded-xl hover:bg-zinc-200 active:scale-95 transition">
+                <a href="${postUrl}" class="inline-block bg-white text-black font-black text-xs md:text-sm px-5 py-2.5 rounded-xl hover:bg-zinc-200 active:scale-95 transition">
                   Puri Details Padhein →
                 </a>
               </div>
@@ -391,80 +412,20 @@
         `;
         track.appendChild(slide);
 
-        const dot = document.createElement('button');
-        dot.type = 'button';
+        // 2. Build Dot
+        const dot = document.createElement("button");
+        dot.type = "button";
         dot.className = `dot ${i === 0 ? 'w-5 bg-white' : 'w-1.5 bg-white/40'} h-1.5 rounded-full transition-all shrink-0`;
-        dot.setAttribute('aria-label', `Story ${i + 1}`);
+        dot.setAttribute("aria-label", `Story ${i + 1}`);
         dotsContainer.appendChild(dot);
       });
 
-      // 2. Render Latest Releases (Shows all recent cards cleanly)
-      posts.forEach(post => {
-        const badgeColor = getPlatformStyle(post.platform);
-        const title = escapeHtml(post.title || 'Entertainment Update');
-        const platform = escapeHtml(post.platform || 'ENTERTAINMENT');
-        const genre = escapeHtml(post.genre || 'Entertainment');
-        const status = escapeHtml(post.status || 'Live');
-        const image = safeUrl(post.image || '/images/default-banner.webp');
-        const postUrl = getPostUrl(post);
-
-        const card = document.createElement('article');
-        card.className = 'story-card bg-card border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between';
-        card.innerHTML = `
-          <a href="${safeUrl(postUrl)}" class="block">
-            <div class="relative aspect-[16/9] w-full overflow-hidden bg-zinc-900">
-              <img src="${image}" alt="${title}" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.src='/images/default-banner.webp'">
-              <span class="absolute top-2 left-2 ${badgeColor} text-[9px] font-black px-2 py-0.5 rounded uppercase">${platform}</span>
-            </div>
-            <div class="p-3">
-              <h3 class="font-bold text-xs md:text-sm line-clamp-2 text-white leading-snug">${title}</h3>
-              <p class="text-[11px] text-zinc-400 mt-1 truncate">${genre}</p>
-              <p class="text-[10px] text-emerald-400 font-bold mt-2">${status}</p>
-            </div>
-          </a>
-        `;
-        latestGrid.appendChild(card);
-      });
-
-      // 3. Render Trending Section (Top 6-12 based on views/order)
-      const trendingPosts = [...posts].slice(0, 12);
-      trendingPosts.forEach(post => {
-        const badgeColor = getPlatformStyle(post.platform);
-        const title = escapeHtml(post.title || 'Trending Entertainment');
-        const platform = escapeHtml(post.platform || 'ENTERTAINMENT');
-        const genre = escapeHtml(post.genre || 'Entertainment');
-        const image = safeUrl(post.image || '/images/default-banner.webp');
-        const postUrl = getPostUrl(post);
-
-        const card = document.createElement('article');
-        card.className = 'story-card bg-card border border-white/10 rounded-2xl overflow-hidden';
-        card.innerHTML = `
-          <a href="${safeUrl(postUrl)}" class="block">
-            <div class="relative aspect-[16/9] w-full overflow-hidden bg-zinc-900">
-              <img src="${image}" alt="${title}" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.src='/images/default-banner.webp'">
-              <span class="absolute top-2 left-2 ${badgeColor} text-[9px] font-black px-2 py-0.5 rounded uppercase">${platform}</span>
-              <span class="absolute top-2 right-2 bg-black/80 backdrop-blur text-white text-[9px] font-black px-2 py-0.5 rounded border border-white/10">🔥 TRENDING</span>
-            </div>
-            <div class="p-3">
-              <h3 class="font-bold text-xs md:text-sm line-clamp-2 text-white leading-snug">${title}</h3>
-              <p class="text-[11px] text-zinc-400 mt-1 truncate">${genre}</p>
-            </div>
-          </a>
-        `;
-        trendingGrid.appendChild(card);
-      });
-
-      initSliderEngine();
-    });
-
-    // Slider Engine Logic
-    function initSliderEngine() {
-      const track = document.getElementById('sliderTrack');
-      const slides = Array.from(document.querySelectorAll('.slide'));
-      const dots = Array.from(document.querySelectorAll('.dot'));
-      const prevButton = document.getElementById('prevSlide');
-      const nextButton = document.getElementById('nextSlide');
-      const hero = document.getElementById('top-stories');
+      // 3. Slider Engine Mechanics
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const dots = Array.from(document.querySelectorAll(".dot"));
+      const prevButton = document.getElementById("prevSlide");
+      const nextButton = document.getElementById("nextSlide");
+      const hero = document.getElementById("top-stories");
 
       if (slides.length <= 0) return;
 
@@ -474,11 +435,11 @@
 
       function updateSlider() {
         track.style.transform = `translateX(-${currentSlide * 100}%)`;
-        slides.forEach((slide, index) => slide.classList.toggle('active', index === currentSlide));
+        slides.forEach((slide, index) => slide.classList.toggle("active", index === currentSlide));
         dots.forEach((dot, index) => {
           dot.className = (index === currentSlide) 
-            ? 'dot w-5 bg-white h-1.5 rounded-full shrink-0 transition-all' 
-            : 'dot w-1.5 bg-white/40 h-1.5 rounded-full shrink-0 transition-all';
+            ? "dot w-5 bg-white h-1.5 rounded-full shrink-0 transition-all" 
+            : "dot w-1.5 bg-white/40 h-1.5 rounded-full shrink-0 transition-all";
         });
       }
 
@@ -513,8 +474,8 @@
       hero.onmouseenter = stopAutoPlay;
       hero.onmouseleave = startAutoPlay;
 
-      hero.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; stopAutoPlay(); }, { passive: true });
-      hero.addEventListener('touchend', e => {
+      hero.addEventListener("touchstart", e => { touchStartX = e.changedTouches[0].screenX; stopAutoPlay(); }, { passive: true });
+      hero.addEventListener("touchend", e => {
         const diff = touchStartX - e.changedTouches[0].screenX;
         if (Math.abs(diff) > 50) {
           if (diff > 0) nextSlide(); else prevSlide();
@@ -524,7 +485,7 @@
 
       updateSlider();
       startAutoPlay();
-    }
+    });
   </script>
 </body>
 </html>
