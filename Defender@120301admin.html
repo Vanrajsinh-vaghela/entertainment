@@ -1,1 +1,2550 @@
-01
+<!DOCTYPE html>
+<html lang="hi" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Filmy Khabr Admin</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+tailwind.config={
+darkMode:'class',
+theme:{
+extend:{
+colors:{
+brand:'#e50914',
+bgmain:'#09090b'
+}
+}
+}
+}
+</script>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+background:#09090b;
+color:#fff;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif
+}
+
+input,textarea,select{
+outline:none
+}
+
+textarea{
+resize:vertical
+}
+
+.tab-active{
+background:#e50914!important;
+color:#fff!important
+}
+
+.preview-page{
+background:#09090b;
+color:#fff;
+min-height:100vh
+}
+
+.preview-container{
+max-width:900px;
+margin:auto;
+padding:25px 18px 60px
+}
+
+.preview-page h1{
+font-size:34px;
+line-height:1.2;
+font-weight:900;
+margin:0 0 12px
+}
+
+.preview-page h2{
+font-size:27px;
+font-weight:900;
+margin:30px 0 12px
+}
+
+.preview-page h3{
+font-size:22px;
+font-weight:800;
+margin:25px 0 10px
+}
+
+.preview-page p{
+font-size:17px;
+line-height:1.85;
+color:#d4d4d8;
+margin:14px 0
+}
+
+.preview-page img{
+max-width:100%;
+height:auto;
+border-radius:14px;
+margin:18px 0
+}
+
+.preview-page a{
+color:#ff6268;
+text-decoration:underline
+}
+
+.preview-page ul,
+.preview-page ol{
+padding-left:25px;
+line-height:1.8;
+color:#d4d4d8
+}
+
+.preview-page blockquote{
+border-left:4px solid #e50914;
+padding-left:16px;
+color:#a1a1aa
+}
+
+.label{
+font-size:10px;
+font-weight:800;
+color:#a1a1aa
+}
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+PIN SCREEN
+===================================================== -->
+
+<div
+id="lockScreen"
+class="fixed inset-0 z-[9999] bg-[#09090b] flex items-center justify-center px-5">
+
+<div
+class="w-full max-w-sm rounded-2xl border border-white/10 bg-[#111113] p-6 text-center">
+
+<div class="font-black text-2xl">
+FILMY KHABR
+</div>
+
+<div class="text-[10px] text-zinc-500 font-bold mt-1">
+SECURE ADMIN ACCESS
+</div>
+
+<div class="mt-7">
+
+<label class="block text-left label">
+ADMIN PIN
+</label>
+
+<input
+id="adminPin"
+type="password"
+inputmode="numeric"
+maxlength="7"
+placeholder="Enter PIN"
+class="w-full mt-2 bg-black border border-white/10 rounded-xl px-4 py-4 text-center text-xl tracking-[8px]">
+
+</div>
+
+<button
+onclick="unlockAdmin()"
+class="w-full mt-4 py-4 rounded-xl bg-[#e50914] font-black text-sm">
+
+UNLOCK ADMIN
+
+</button>
+
+<div
+id="pinError"
+class="text-red-400 text-xs mt-3 hidden">
+
+Wrong PIN.
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+ADMIN APP
+===================================================== -->
+
+<div id="adminApp" class="hidden">
+
+
+<header
+class="sticky top-0 z-50 bg-[#111113]/95 backdrop-blur-xl border-b border-white/10">
+
+<div class="max-w-7xl mx-auto px-4 py-3">
+
+<div class="flex items-center justify-between gap-2">
+
+<div>
+
+<div class="font-black text-lg">
+FILMY KHABR
+</div>
+
+<div class="text-[9px] text-zinc-500 font-bold">
+VANRAJSINH MASTER DESK
+</div>
+
+</div>
+
+
+<div class="flex gap-1">
+
+<button
+id="newTab"
+onclick="showTab('new')"
+class="tab tab-active px-3 py-2 rounded-lg bg-[#e50914] text-[10px] font-black">
+
+NEW POST
+
+</button>
+
+<button
+id="manageTab"
+onclick="showTab('manage')"
+class="tab px-3 py-2 rounded-lg bg-zinc-800 text-[10px] font-black">
+
+MANAGE
+
+</button>
+
+<button
+id="previewTab"
+onclick="showTab('preview')"
+class="tab px-3 py-2 rounded-lg bg-zinc-800 text-[10px] font-black">
+
+PREVIEW
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+
+
+<main class="max-w-7xl mx-auto px-4 py-5">
+
+
+<!-- =====================================================
+GITHUB SETTINGS
+===================================================== -->
+
+<section
+class="rounded-xl border border-white/10 bg-[#111113] p-4 mb-5">
+
+<div class="flex items-center justify-between">
+
+<div>
+
+<h2 class="font-black text-sm">
+GitHub Connection
+</h2>
+
+<p class="text-[10px] text-zinc-500 mt-1">
+Vanrajsinh-vaghela / GitHub.Io
+</p>
+
+</div>
+
+<span
+id="connectionStatus"
+class="text-[10px] text-zinc-500">
+
+Not Connected
+
+</span>
+
+</div>
+
+
+<div class="grid md:grid-cols-3 gap-3 mt-4">
+
+<div>
+
+<label class="label">
+USERNAME
+</label>
+
+<input
+id="githubUser"
+value="Vanrajsinh-vaghela"
+class="w-full mt-1 bg-black border border-white/10 rounded-lg px-3 py-3 text-sm">
+
+</div>
+
+
+<div>
+
+<label class="label">
+REPOSITORY
+</label>
+
+<input
+id="githubRepo"
+value="GitHub.Io"
+class="w-full mt-1 bg-black border border-white/10 rounded-lg px-3 py-3 text-sm">
+
+</div>
+
+
+<div>
+
+<label class="label">
+GITHUB TOKEN
+</label>
+
+<input
+id="githubToken"
+type="password"
+placeholder="github_pat_..."
+class="w-full mt-1 bg-black border border-white/10 rounded-lg px-3 py-3 text-sm">
+
+</div>
+
+</div>
+
+<p class="text-[9px] text-zinc-600 mt-3">
+Token ko HTML code mein save nahi kiya gaya hai.
+</p>
+
+</section>
+
+
+
+<!-- =====================================================
+NEW POST
+===================================================== -->
+
+<section id="newSection">
+
+
+<div class="grid lg:grid-cols-2 gap-5">
+
+
+<!-- FORM -->
+
+<div>
+
+<div
+class="rounded-xl border border-white/10 bg-[#111113] p-4">
+
+<div class="flex items-center justify-between mb-5">
+
+<div>
+
+<h2
+id="formTitle"
+class="font-black text-lg">
+
+Create New Post
+
+</h2>
+
+<p class="text-[10px] text-zinc-500">
+Post + Photo + Article
+</p>
+
+</div>
+
+<button
+id="cancelEdit"
+onclick="resetForm()"
+class="hidden text-xs text-red-400 font-bold">
+
+Cancel Edit
+
+</button>
+
+</div>
+
+
+<input
+type="hidden"
+id="editingIndex"
+value="-1">
+
+
+
+<!-- TITLE -->
+
+<div class="mb-4">
+
+<label class="label">
+ARTICLE TITLE
+</label>
+
+<input
+id="title"
+placeholder="Example: Awarapan 2 Release Date..."
+class="w-full mt-1 bg-black border border-white/10 rounded-lg px-3 py-3 text-sm">
+
+</div>
+
+
+
+<!-- CATEGORY -->
+
+<div class="grid grid-cols-2 gap-3 mb-4">
+
+<div>
+
+<label class="label">
+CATEGORY
+</label>
+
+<select
+id="category"
+class="w-full mt-1 bg-black border border-white/10 rounded-lg px-3 py-3 text-sm">
+
+<option>MOVIES</option>
+<option>WEB SERIES</option>
+<option>OTT</option>
+<option>TRAILERS</option>
+<option>NEWS</option>
+<option>UPCOMING</option>
+<option>CELEBRITY NEWS</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label class="label">
+PLATFORM
+</label>
+
+<select
+id="platform"
+class="w-full mt-1 bg-black border border-white/10 rounded-lg px-3 py-3 text-sm">
+
+<option>THEATRES</option>
+<option>NETFLIX</option>
+<option>PRIME VIDEO</option>
+<option>JIOHOTSTAR</option>
+<option>JIOCINEMA</option>
+<option>SONYLIV</option>
+<option>ZEE5</option>
+<option>AHA VIDEO</option>
+<option>YOUTUBE</option>
+<option>AMAZON MINITV</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+
+<!-- BADGE -->
+
+<div class="mb-4">
+
+<label class="label">
+BADGE
+</label>
+
+<select
+id="badge"
+class="w-full mt-1 bg-black border border-white/10 rounded-lg px-3 py-3 text-sm">
+
+<option>TRENDING</option>
+<option>BREAKING</option>
+<option>NEW</option>
+<option>EXCLUSIVE</option>
+<option>TOP STORY</option>
+
+</select>
+
+</div>
+
+
+
+<!-- IMAGE -->
+
+<div class="mb-4">
+
+<label class="label">
+ARTICLE PHOTO
+</label>
+
+<input
+id="imageFile"
+type="file"
+accept="image/*"
+class="w-full mt-2 bg-black border border-white/10 rounded-lg px-3 py-3 text-xs">
+
+<div
+id="imageStatus"
+class="text-[10px] text-zinc-500 mt-2">
+
+Photo select karo.
+
+</div>
+
+</div>
+
+
+
+<!-- IMAGE PATH -->
+
+<div class="mb-4">
+
+<label class="label">
+IMAGE PATH
+</label>
+
+<input
+id="imagePath"
+placeholder="/images/movie.webp"
+class="w-full mt-1 bg-black border border-white/10 rounded-lg px-3 py-3 text-sm">
+
+</div>
+
+
+
+<!-- SLUG -->
+
+<div class="mb-4">
+
+<label class="label">
+URL SLUG
+</label>
+
+<input
+id="slug"
+placeholder="movie-name-release-date"
+class="w-full mt-1 bg-black border border-white/10 rounded-lg px-3 py-3 text-sm">
+
+</div>
+
+
+
+<!-- SUMMARY -->
+
+<div class="mb-4">
+
+<label class="label">
+SHORT SUMMARY
+</label>
+
+<textarea
+id="summary"
+rows="4"
+placeholder="Article ka short summary..."
+class="w-full mt-1 bg-black border border-white/10 rounded-lg px-3 py-3 text-sm"></textarea>
+
+</div>
+
+
+
+<!-- LINK -->
+
+<div
+class="rounded-xl border border-white/10 bg-black p-3 mb-4">
+
+<div class="font-black text-sm mb-3">
+🔗 Add Article Link
+</div>
+
+<input
+id="linkText"
+placeholder="Link Text"
+class="w-full bg-[#111113] border border-white/10 rounded-lg px-3 py-3 text-xs mb-2">
+
+<input
+id="linkUrl"
+placeholder="https://example.com"
+class="w-full bg-[#111113] border border-white/10 rounded-lg px-3 py-3 text-xs mb-2">
+
+<button
+onclick="insertLink()"
+class="w-full bg-zinc-800 rounded-lg py-3 text-xs font-black">
+
+INSERT LINK
+
+</button>
+
+</div>
+
+
+
+<!-- ARTICLE -->
+
+<div class="mb-4">
+
+<div class="flex justify-between">
+
+<label class="label">
+FULL ARTICLE
+</label>
+
+<span class="text-[9px] text-zinc-600">
+HTML allowed
+</span>
+
+</div>
+
+<textarea
+id="article"
+rows="18"
+placeholder="<p>Yahan complete article likho...</p>"
+class="w-full mt-1 bg-black border border-white/10 rounded-lg px-3 py-3 text-sm font-mono"></textarea>
+
+</div>
+
+
+
+<button
+id="publishButton"
+onclick="publishPost()"
+class="w-full py-4 rounded-xl bg-[#e50914] font-black text-sm">
+
+PUBLISH POST
+
+</button>
+
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+LIVE PREVIEW
+===================================================== -->
+
+<div>
+
+<div class="sticky top-24">
+
+<div class="flex items-center justify-between mb-3">
+
+<div>
+
+<h2 class="font-black text-lg">
+Article Preview
+</h2>
+
+<p class="text-[10px] text-zinc-500">
+Live preview
+
+</p>
+
+</div>
+
+<button
+onclick="updatePreview()"
+class="px-3 py-2 rounded-lg bg-zinc-800 text-xs font-bold">
+
+↻ Refresh
+
+</button>
+
+</div>
+
+
+<div
+class="rounded-xl border border-white/10 overflow-hidden">
+
+<div id="quickPreview"></div>
+
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+MANAGE
+===================================================== -->
+
+<section
+id="manageSection"
+class="hidden">
+
+<div
+class="rounded-xl border border-white/10 bg-[#111113] p-4">
+
+<div class="flex items-center justify-between mb-5">
+
+<div>
+
+<h2 class="font-black text-lg">
+Manage Posts
+</h2>
+
+<p
+id="postCount"
+class="text-[10px] text-zinc-500">
+
+0 posts
+
+</p>
+
+</div>
+
+<button
+onclick="loadPosts()"
+class="px-3 py-2 rounded-lg bg-zinc-800 text-xs font-bold">
+
+↻ Refresh
+
+</button>
+
+</div>
+
+
+<div
+id="postsList"
+class="space-y-2">
+
+<div class="text-center py-10 text-zinc-500 text-sm">
+Posts load karne ke liye GitHub token enter karo.
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+FULL PREVIEW
+===================================================== -->
+
+<section
+id="previewSection"
+class="hidden">
+
+<div class="flex items-center justify-between mb-4">
+
+<div>
+
+<h2 class="font-black text-xl">
+Full Article Preview
+</h2>
+
+<p class="text-[10px] text-zinc-500">
+Website-style article preview
+</p>
+
+</div>
+
+
+<div class="flex gap-2">
+
+<button
+onclick="updateFullPreview()"
+class="px-4 py-2 rounded-lg bg-zinc-800 text-xs font-bold">
+
+↻ Refresh Preview
+
+</button>
+
+<button
+onclick="showTab('new')"
+class="px-4 py-2 rounded-lg bg-[#e50914] text-xs font-bold">
+
+← Editor
+
+</button>
+
+</div>
+
+</div>
+
+
+<div
+id="fullPreview"
+class="rounded-xl overflow-hidden border border-white/10">
+
+</div>
+
+</section>
+
+
+</main>
+
+
+<!-- STATUS -->
+
+<div
+id="status"
+class="fixed bottom-4 left-4 right-4 md:left-auto md:w-[430px] bg-[#18181b] border border-white/10 rounded-xl px-4 py-3 text-xs hidden z-[999]">
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================================
+PIN
+===================================================== */
+
+const ADMIN_PIN="1465822";
+
+
+function unlockAdmin(){
+
+const pin=
+document.getElementById("adminPin").value;
+
+
+if(pin===ADMIN_PIN){
+
+document.getElementById("lockScreen")
+.classList
+.add("hidden");
+
+
+document.getElementById("adminApp")
+.classList
+.remove("hidden");
+
+
+sessionStorage.setItem(
+"filmy_admin_unlocked",
+"1"
+);
+
+}else{
+
+document.getElementById("pinError")
+.classList
+.remove("hidden");
+
+}
+
+}
+
+
+document.getElementById("adminPin")
+.addEventListener(
+"keydown",
+e=>{
+
+if(e.key==="Enter")
+unlockAdmin();
+
+});
+
+
+if(
+sessionStorage.getItem(
+"filmy_admin_unlocked"
+)==="1"
+){
+
+document.getElementById("lockScreen")
+.classList
+.add("hidden");
+
+document.getElementById("adminApp")
+.classList
+.remove("hidden");
+
+}
+
+
+
+/* =====================================================
+SHORTCUT
+===================================================== */
+
+const $=
+id=>document.getElementById(id);
+
+
+let posts=[];
+
+
+
+/* =====================================================
+STATUS
+===================================================== */
+
+function status(message,type="success"){
+
+const box=$("status");
+
+box.textContent=message;
+
+box.classList.remove("hidden");
+
+box.className=
+"fixed bottom-4 left-4 right-4 md:left-auto md:w-[430px] bg-[#18181b] border border-white/10 rounded-xl px-4 py-3 text-xs z-[999] "+
+(type==="error"
+?
+"text-red-400"
+:
+"text-green-400");
+
+setTimeout(
+()=>box.classList.add("hidden"),
+5000
+);
+
+}
+
+
+
+/* =====================================================
+GITHUB
+===================================================== */
+
+function config(){
+
+return{
+
+user:$("githubUser").value.trim(),
+
+repo:$("githubRepo").value.trim(),
+
+token:$("githubToken").value.trim()
+
+};
+
+}
+
+
+function headers(){
+
+const c=config();
+
+return{
+
+"Accept":
+"application/vnd.github+json",
+
+"Authorization":
+"Bearer "+c.token,
+
+"X-GitHub-Api-Version":
+"2022-11-28"
+
+};
+
+}
+
+
+async function github(
+path,
+options={}
+){
+
+const c=config();
+
+if(!c.token){
+
+throw new Error(
+"GitHub token enter karo."
+);
+
+}
+
+
+const r=
+await fetch(
+"https://api.github.com/repos/"+
+encodeURIComponent(c.user)+
+"/"+
+encodeURIComponent(c.repo)+
+path,
+{
+
+...options,
+
+headers:{
+...headers(),
+...(options.headers||{})
+}
+
+}
+);
+
+
+if(!r.ok){
+
+let msg=
+"GitHub API Error";
+
+
+try{
+
+const x=
+await r.json();
+
+msg=x.message||msg;
+
+}catch(e){}
+
+
+throw new Error(msg);
+
+}
+
+
+return r;
+
+}
+
+
+
+/* =====================================================
+BASE64
+===================================================== */
+
+function encode64(text){
+
+return btoa(
+unescape(
+encodeURIComponent(text)
+)
+);
+
+}
+
+
+function decode64(text){
+
+return decodeURIComponent(
+escape(
+atob(
+text.replace(/\n/g,"")
+)
+)
+);
+
+}
+
+
+
+/* =====================================================
+GET FILE
+===================================================== */
+
+async function getFile(path){
+
+return await(
+await github(
+"/contents/"+
+path+
+"?ref=main"
+)
+).json();
+
+}
+
+
+
+/* =====================================================
+SAVE FILE
+===================================================== */
+
+async function saveFile(
+path,
+content,
+message
+){
+
+let sha=null;
+
+
+try{
+
+const old=
+await getFile(path);
+
+sha=old.sha;
+
+}catch(e){}
+
+
+const body={
+
+message,
+
+content:
+encode64(content),
+
+branch:"main"
+
+};
+
+
+if(sha)
+body.sha=sha;
+
+
+await github(
+"/contents/"+
+path,
+{
+
+method:"PUT",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:
+JSON.stringify(body)
+
+}
+);
+
+
+
+}
+
+
+
+/* =====================================================
+TAB
+===================================================== */
+
+function showTab(tab){
+
+$("newSection")
+.classList
+.toggle(
+"hidden",
+tab!=="new"
+);
+
+
+$("manageSection")
+.classList
+.toggle(
+"hidden",
+tab!=="manage"
+);
+
+
+$("previewSection")
+.classList
+.toggle(
+"hidden",
+tab!=="preview"
+);
+
+
+document.querySelectorAll(".tab")
+.forEach(
+x=>x.classList.remove(
+"tab-active"
+)
+);
+
+
+if(tab==="new")
+$("newTab")
+.classList
+.add("tab-active");
+
+
+if(tab==="manage")
+$("manageTab")
+.classList
+.add("tab-active");
+
+
+if(tab==="preview")
+$("previewTab")
+.classList
+.add("tab-active");
+
+
+if(tab==="manage")
+loadPosts();
+
+
+if(tab==="preview")
+updateFullPreview();
+
+}
+
+
+
+/* =====================================================
+SLUG
+===================================================== */
+
+$("title").addEventListener(
+"input",
+function(){
+
+if(
+$("editingIndex").value!="-1"
+)
+return;
+
+
+$("slug").value=
+this.value
+
+.toLowerCase()
+
+.replace(/[^a-z0-9\s-]/g,"")
+
+.trim()
+
+.replace(/\s+/g,"-")
+
+.replace(/-+/g,"-");
+
+
+updatePreview();
+
+});
+
+
+
+/* =====================================================
+LIVE PREVIEW
+===================================================== */
+
+[
+"title",
+"summary",
+"article",
+"platform",
+"imagePath"
+].forEach(id=>{
+
+$(id).addEventListener(
+"input",
+updatePreview
+);
+
+});
+
+
+$("platform").addEventListener(
+"change",
+updatePreview
+);
+
+
+
+/* =====================================================
+IMAGE SELECT
+===================================================== */
+
+$("imageFile").addEventListener(
+"change",
+function(){
+
+const file=this.files[0];
+
+if(!file)
+return;
+
+
+$("imageStatus").textContent=
+"Selected: "+file.name;
+
+
+const reader=
+new FileReader();
+
+
+reader.onload=e=>{
+
+$("quickPreview").dataset.image=
+e.target.result;
+
+updatePreview();
+
+};
+
+
+reader.readAsDataURL(file);
+
+});
+
+
+
+/* =====================================================
+ESCAPE
+===================================================== */
+
+function esc(value){
+
+return String(value??"")
+.replace(/[&<>"']/g,m=>({
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+
+}[m]));
+
+}
+
+
+
+/* =====================================================
+PREVIEW
+===================================================== */
+
+function previewHTML(){
+
+const title=
+$("title").value.trim()||
+"Article Title";
+
+
+const summary=
+$("summary").value.trim()||
+"Article summary...";
+
+
+const platform=
+$("platform").value||
+"MOVIES";
+
+
+const article=
+$("article").value||
+"<p>Full article preview yahan dikhega.</p>";
+
+
+const image=
+$("imagePath").value.trim();
+
+
+let img="";
+
+
+if(image){
+
+img=
+`<img src="${esc(image)}" alt="${esc(title)}">`;
+
+}
+
+
+return`
+
+<div class="preview-page">
+
+<div class="preview-container">
+
+<div class="text-[10px] text-red-500 font-black mb-2">
+
+${esc(platform)}
+
+</div>
+
+<h1>
+${esc(title)}
+</h1>
+
+<div class="text-xs text-zinc-500 mb-4">
+Filmy Khabr • Latest Entertainment
+</div>
+
+<p>
+<strong>${esc(summary)}</strong>
+</p>
+
+${img}
+
+<div>
+${article}
+</div>
+
+<footer class="mt-10 pt-5 border-t border-white/10 text-xs text-zinc-500 leading-6">
+
+© 2026 Filmy Khabr.<br>
+
+Managed and Published by Vanrajsinh Vaghela.<br>
+
+All Rights Reserved.
+
+</footer>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+function updatePreview(){
+
+$("quickPreview").innerHTML=
+previewHTML();
+
+
+const file=
+$("imageFile").files[0];
+
+
+if(file){
+
+const reader=
+new FileReader();
+
+
+reader.onload=e=>{
+
+const img=
+$("quickPreview")
+.querySelector("img");
+
+
+if(img){
+
+img.src=
+e.target.result;
+
+}else{
+
+$("quickPreview").innerHTML=
+previewHTML()
+.replace(
+"</div>\n\n</div>",
+`<img src="${e.target.result}" alt="Article Photo"></div></div>`
+);
+
+}
+
+};
+
+
+reader.readAsDataURL(file);
+
+}
+
+}
+
+
+function updateFullPreview(){
+
+$("fullPreview").innerHTML=
+previewHTML();
+
+}
+
+
+
+/* =====================================================
+LINK INSERT
+===================================================== */
+
+function insertLink(){
+
+const text=
+$("linkText").value.trim();
+
+
+const url=
+$("linkUrl").value.trim();
+
+
+if(!text){
+
+status(
+"Link text enter karo.",
+"error"
+);
+
+return;
+
+}
+
+
+if(
+!/^https?:\/\//i.test(url)
+){
+
+status(
+"Valid https:// URL enter karo.",
+"error"
+);
+
+return;
+
+}
+
+
+const html=
+`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(text)}</a>`;
+
+
+const article=
+$("article");
+
+
+const start=
+article.selectionStart;
+
+
+const end=
+article.selectionEnd;
+
+
+article.value=
+article.value.substring(0,start)+
+html+
+article.value.substring(end);
+
+
+article.focus();
+
+
+article.setSelectionRange(
+start+html.length,
+start+html.length
+);
+
+
+$("linkText").value="";
+$("linkUrl").value="";
+
+
+updatePreview();
+
+
+status(
+"Link article mein add ho gaya."
+);
+
+}
+
+
+
+/* =====================================================
+UPLOAD IMAGE
+===================================================== */
+
+async function uploadImage(){
+
+const file=
+$("imageFile").files[0];
+
+
+if(!file)
+return null;
+
+
+const buffer=
+await file.arrayBuffer();
+
+
+const bytes=
+new Uint8Array(buffer);
+
+
+let binary="";
+
+
+const chunk=0x8000;
+
+
+for(
+let i=0;
+i<bytes.length;
+i+=chunk
+){
+
+binary+=String.fromCharCode(
+...bytes.subarray(
+i,
+Math.min(i+chunk,bytes.length)
+)
+);
+
+}
+
+
+const content=
+btoa(binary);
+
+
+let filename=
+file.name
+
+.toLowerCase()
+
+.replace(/[^a-z0-9._-]/g,"-");
+
+
+if(!filename.includes(".")){
+
+filename+=".jpg";
+
+}
+
+
+const path=
+"images/"+filename;
+
+
+let sha=null;
+
+
+try{
+
+const old=
+await getFile(path);
+
+sha=old.sha;
+
+}catch(e){}
+
+
+const body={
+
+message:
+"Upload image: "+filename,
+
+content,
+
+branch:"main"
+
+};
+
+
+if(sha)
+body.sha=sha;
+
+
+await github(
+"/contents/"+path,
+{
+
+method:"PUT",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:
+JSON.stringify(body)
+
+}
+);
+
+
+return "/"+path;
+
+}
+
+
+
+/* =====================================================
+ARTICLE HTML
+===================================================== */
+
+function buildArticle(post){
+
+return`<!DOCTYPE html>
+
+<html lang="hi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>
+${esc(post.title)} - Filmy Khabr
+</title>
+
+<meta name="description"
+content="${esc(post.summary)}">
+
+<meta name="robots"
+content="index,follow,max-image-preview:large">
+
+<link rel="canonical"
+href="https://entertainment.gujaratfastalert.in/posts/${esc(post.slug)}.html">
+
+<meta property="og:type"
+content="article">
+
+<meta property="og:title"
+content="${esc(post.title)}">
+
+<meta property="og:description"
+content="${esc(post.summary)}">
+
+<meta property="og:image"
+content="https://entertainment.gujaratfastalert.in${esc(post.image)}">
+
+<style>
+
+*{box-sizing:border-box}
+
+body{
+margin:0;
+background:#09090b;
+color:#fff;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif
+}
+
+main{
+max-width:900px;
+margin:auto;
+padding:25px 18px 60px
+}
+
+.brand{
+font-size:23px;
+font-weight:900;
+margin-bottom:30px
+}
+
+.category{
+font-size:11px;
+font-weight:900;
+color:#e50914;
+margin-bottom:10px
+}
+
+h1{
+font-size:38px;
+line-height:1.2;
+font-weight:900;
+margin:0 0 12px
+}
+
+.meta{
+font-size:12px;
+color:#71717a;
+margin-bottom:20px
+}
+
+.hero{
+width:100%;
+height:auto;
+border-radius:14px;
+margin:15px 0 20px
+}
+
+.summary{
+font-size:18px;
+line-height:1.7;
+color:#e4e4e7;
+font-weight:700
+}
+
+.article{
+font-size:17px;
+line-height:1.85;
+color:#d4d4d8
+}
+
+.article p{
+margin:16px 0
+}
+
+.article h2{
+font-size:28px;
+color:#fff;
+margin:32px 0 12px
+}
+
+.article h3{
+font-size:22px;
+color:#fff;
+margin:25px 0 10px
+}
+
+.article img{
+max-width:100%;
+height:auto;
+border-radius:14px;
+margin:20px 0
+}
+
+.article a{
+color:#ff6268;
+text-decoration:underline
+}
+
+footer{
+margin-top:45px;
+padding-top:20px;
+border-top:1px solid #27272a;
+font-size:12px;
+line-height:2;
+color:#71717a
+}
+
+@media(max-width:600px){
+
+h1{
+font-size:29px
+}
+
+.article{
+font-size:16px
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<main>
+
+<div class="brand">
+FILMY KHABR
+</div>
+
+<div class="category">
+${esc(post.platform)}
+</div>
+
+<h1>
+${esc(post.title)}
+</h1>
+
+<div class="meta">
+${esc(post.date)} • Filmy Khabr
+</div>
+
+<img
+class="hero"
+src="${esc(post.image)}"
+alt="${esc(post.title)}">
+
+<div class="summary">
+${esc(post.summary)}
+</div>
+
+<div class="article">
+
+${post.article}
+
+</div>
+
+<footer>
+
+© 2026 Filmy Khabr.<br>
+
+Managed and Published by Vanrajsinh Vaghela.<br>
+
+All Rights Reserved.
+
+</footer>
+
+</main>
+
+</body>
+
+</html>`;
+
+}
+
+
+
+/* =====================================================
+LOAD POSTS
+===================================================== */
+
+async function loadPosts(){
+
+try{
+
+$("connectionStatus").textContent=
+"Connecting...";
+
+
+const file=
+await getFile(
+"data/posts.json"
+);
+
+
+const raw=
+decode64(file.content);
+
+
+const data=
+JSON.parse(raw);
+
+
+posts=
+Array.isArray(data)
+?
+data
+:
+(
+Array.isArray(data.posts)
+?
+data.posts
+:
+[]
+);
+
+
+$("connectionStatus").textContent=
+"Connected";
+
+
+renderPosts();
+
+
+}catch(error){
+
+$("connectionStatus").textContent=
+"Error";
+
+
+status(
+error.message,
+"error"
+);
+
+}
+
+}
+
+
+
+/* =====================================================
+RENDER POSTS
+===================================================== */
+
+function renderPosts(){
+
+$("postCount").textContent=
+posts.length+
+(posts.length===1?" post":" posts");
+
+
+if(!posts.length){
+
+$("postsList").innerHTML=`
+
+<div class="text-center py-10 text-zinc-500">
+No posts found.
+</div>
+
+`;
+
+return;
+
+}
+
+
+$("postsList").innerHTML=
+posts.map((p,i)=>`
+
+<div class="rounded-xl border border-white/10 bg-black p-3">
+
+<div class="flex gap-3">
+
+<img
+src="${esc(p.image||"")}"
+onerror="this.style.display='none'"
+class="w-24 h-16 object-cover rounded-lg shrink-0">
+
+<div class="min-w-0 flex-1">
+
+<div class="text-[9px] text-red-500 font-black">
+${esc(p.category||"")}
+</div>
+
+<h3 class="font-bold text-sm leading-snug">
+${esc(p.title||"Untitled")}
+</h3>
+
+<div class="text-[10px] text-zinc-500 mt-1">
+${esc(p.date||"")}
+</div>
+
+</div>
+
+<div class="flex gap-2 items-center">
+
+<button
+onclick="editPost(${i})"
+class="px-3 py-2 rounded-lg bg-zinc-800 text-xs font-bold">
+
+Edit
+
+</button>
+
+<button
+onclick="deletePost(${i})"
+class="px-3 py-2 rounded-lg bg-red-950 text-red-400 text-xs font-bold">
+
+Delete
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+
+
+/* =====================================================
+EDIT
+===================================================== */
+
+function editPost(index){
+
+const p=
+posts[index];
+
+
+if(!p)
+return;
+
+
+$("editingIndex").value=
+index;
+
+
+$("formTitle").textContent=
+"Edit Post";
+
+
+$("cancelEdit")
+.classList
+.remove("hidden");
+
+
+$("title").value=
+p.title||"";
+
+
+$("category").value=
+p.category||"MOVIES";
+
+
+$("platform").value=
+p.platform||"THEATRES";
+
+
+$("badge").value=
+p.badge||"TRENDING";
+
+
+$("slug").value=
+p.slug||
+(p.url||"")
+.replace("/posts/","")
+.replace(".html","");
+
+
+$("summary").value=
+p.summary||"";
+
+
+$("article").value=
+p.article||"";
+
+
+$("imagePath").value=
+p.image||"";
+
+
+$("imageFile").value="";
+
+
+$("imageStatus").textContent=
+"Existing image loaded.";
+
+
+$("publishButton").textContent=
+"UPDATE POST";
+
+
+showTab("new");
+
+
+updatePreview();
+
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+
+/* =====================================================
+DELETE
+===================================================== */
+
+async function deletePost(index){
+
+const p=
+posts[index];
+
+
+if(!p)
+return;
+
+
+if(
+!confirm(
+"Delete this post?\n\n"+
+p.title
+)
+)
+return;
+
+
+try{
+
+posts.splice(
+index,
+1
+);
+
+
+await saveFile(
+
+"data/posts.json",
+
+JSON.stringify(
+posts,
+null,
+2
+),
+
+"Delete post: "+p.title
+
+);
+
+
+const slug=
+p.slug||
+(p.url||"")
+.replace("/posts/","")
+.replace(".html","");
+
+
+if(slug){
+
+try{
+
+const file=
+await getFile(
+"posts/"+slug+".html"
+);
+
+
+await github(
+"/contents/posts/"+slug+".html",
+{
+
+method:"DELETE",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:
+JSON.stringify({
+
+message:
+"Delete article: "+p.title,
+
+sha:file.sha,
+
+branch:"main"
+
+})
+
+}
+);
+
+}catch(e){}
+
+}
+
+
+status(
+"Post deleted successfully."
+);
+
+
+renderPosts();
+
+
+}catch(error){
+
+status(
+error.message,
+"error"
+);
+
+}
+
+}
+
+
+
+/* =====================================================
+PUBLISH
+===================================================== */
+
+async function publishPost(){
+
+try{
+
+$("publishButton").disabled=
+true;
+
+
+$("publishButton").textContent=
+"Publishing...";
+
+
+const editing=
+Number(
+$("editingIndex").value
+);
+
+
+const title=
+$("title").value.trim();
+
+
+const slug=
+$("slug").value.trim();
+
+
+const summary=
+$("summary").value.trim();
+
+
+const article=
+$("article").value.trim();
+
+
+if(!title)
+throw new Error(
+"Title required."
+);
+
+
+if(!slug)
+throw new Error(
+"Slug required."
+);
+
+
+if(!summary)
+throw new Error(
+"Summary required."
+);
+
+
+if(!article)
+throw new Error(
+"Full article required."
+);
+
+
+let image=
+$("imagePath").value.trim();
+
+
+if(
+$("imageFile").files[0]
+){
+
+image=
+await uploadImage();
+
+}
+
+
+if(!image)
+throw new Error(
+"Photo select karo ya image path do."
+);
+
+
+const now=
+new Date();
+
+
+const date=
+now.toLocaleDateString(
+"en-IN",
+{
+day:"2-digit",
+month:"short",
+year:"numeric"
+}
+);
+
+
+const dateOrder=
+Date.now();
+
+
+const post={
+
+title,
+
+image,
+
+url:
+"/posts/"+slug+".html",
+
+platform:
+$("platform").value,
+
+category:
+$("category").value,
+
+date,
+
+time:"Just now",
+
+summary,
+
+badge:
+$("badge").value,
+
+slug,
+
+article,
+
+dateOrder,
+
+timestamp:
+Date.now()
+
+};
+
+
+if(
+editing>=0 &&
+posts[editing]
+){
+
+post.timestamp=
+posts[editing].timestamp||
+Date.now();
+
+
+posts[editing]=post;
+
+}else{
+
+posts.unshift(post);
+
+}
+
+
+posts.sort(
+(a,b)=>
+Number(b.dateOrder||0)-
+Number(a.dateOrder||0)
+);
+
+
+await saveFile(
+
+"data/posts.json",
+
+JSON.stringify(
+posts,
+null,
+2
+),
+
+editing>=0
+?
+"Update post: "+title
+:
+"Publish post: "+title
+
+);
+
+
+await saveFile(
+
+"posts/"+slug+".html",
+
+buildArticle(post),
+
+editing>=0
+?
+"Update article: "+title
+:
+"Create article: "+title
+
+);
+
+
+status(
+editing>=0
+?
+"Post updated successfully!"
+:
+"Post published successfully!"
+);
+
+
+resetForm();
+
+
+renderPosts();
+
+
+}catch(error){
+
+status(
+error.message,
+"error"
+);
+
+}finally{
+
+$("publishButton").disabled=
+false;
+
+$("publishButton").textContent=
+$("editingIndex").value!="-1"
+?
+"UPDATE POST"
+:
+"PUBLISH POST";
+
+}
+
+}
+
+
+
+/* =====================================================
+RESET
+===================================================== */
+
+function resetForm(){
+
+$("editingIndex").value=
+"-1";
+
+
+$("formTitle").textContent=
+"Create New Post";
+
+
+$("cancelEdit")
+.classList
+.add("hidden");
+
+
+$("title").value="";
+
+$("category").value=
+"MOVIES";
+
+
+$("platform").value=
+"THEATRES";
+
+
+$("badge").value=
+"TRENDING";
+
+
+$("imageFile").value="";
+
+$("imagePath").value="";
+
+$("slug").value="";
+
+$("summary").value="";
+
+$("article").value="";
+
+$("linkText").value="";
+
+$("linkUrl").value="";
+
+
+$("imageStatus").textContent=
+"Photo select karo.";
+
+
+$("publishButton").textContent=
+"PUBLISH POST";
+
+
+updatePreview();
+
+}
+
+
+updatePreview();
+
+</script>
+
+</body>
+</html>
