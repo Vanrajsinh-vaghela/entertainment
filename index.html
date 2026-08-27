@@ -1,1308 +1,832 @@
 <!DOCTYPE html>
-<html lang="hi" class="dark">
+<html lang="hi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filmy Khabr - Entertainment, Movies, OTT & Web Series News</title>
+  <meta name="description" content="Latest Hindi entertainment news, movie reviews, web series updates, OTT releases and trailers.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:site_name" content="Filmy Khabr">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Filmy Khabr - Entertainment, Movies, OTT & Web Series">
+  <meta property="og:description" content="Latest Hindi entertainment news, OTT releases, web series and trailer updates.">
+  <style>
+    :root {
+      --bg: #090a0b;
+      --surface: #121417;
+      --card-bg: #171a1e;
+      --card-border: #23272d;
+      --accent: #e50914;
+      --accent-hover: #b80710;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --text-dim: #6b7280;
+      --radius: 8px;
+    }
 
-<title>Filmy Khabr - Latest Hindi Movies, OTT & Web Series</title>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-<meta name="description" content="Latest Hindi movies, OTT releases, web series, trailers aur entertainment news Hindi mein.">
-<meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="theme-color" content="#09090b">
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.4;
+      font-size: 14px;
+    }
 
-<link rel="canonical" href="https://entertainment.gujaratfastalert.in/">
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Filmy Khabr">
-<meta property="og:title" content="Filmy Khabr">
-<meta property="og:description" content="Latest Hindi Movies, OTT Releases, Trailers, Web Series & Entertainment News">
-<meta property="og:image" content="https://entertainment.gujaratfastalert.in/images/mirzapur-3-ott.webp">
-<meta property="og:url" content="https://entertainment.gujaratfastalert.in/">
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 12px 30px 12px;
+    }
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Filmy Khabr">
-<meta name="twitter:description" content="Latest Hindi Movies, OTT Releases, Trailers, Web Series & Entertainment News">
-<meta name="twitter:image" content="https://entertainment.gujaratfastalert.in/images/mirzapur-3-ott.webp">
+    /* Breaking Ticker */
+    .ticker-bar {
+      background: #000;
+      border-bottom: 1px solid #1f2328;
+      display: flex;
+      align-items: center;
+      padding: 6px 12px;
+      font-size: 11px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
 
+    .ticker-label {
+      background: var(--accent);
+      color: #fff;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 3px;
+      margin-right: 8px;
+      font-size: 10px;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-73Z6FH3JVM"></script>
+    .ticker-text {
+      color: #d1d5db;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-<script>
-window.dataLayer=window.dataLayer||[];
-function gtag(){dataLayer.push(arguments)}
-gtag('js',new Date());
-gtag('config','G-73Z6FH3JVM');
-</script>
+    /* Header */
+    header {
+      padding: 12px 0 8px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
+    .brand {
+      display: flex;
+      flex-direction: column;
+    }
 
-<script src="https://cdn.tailwindcss.com"></script>
+    .brand-title {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      color: #fff;
+      line-height: 1;
+    }
 
-<script>
-tailwind.config={
-darkMode:'class',
-theme:{
-extend:{
-colors:{
-brand:'#e50914',
-bgmain:'#09090b',
-card:'#15181a'
-}
-}
-}
-}
-</script>
+    .brand-badge {
+      background: var(--accent);
+      color: #fff;
+      font-size: 8px;
+      font-weight: 800;
+      padding: 2px 4px;
+      border-radius: 2px;
+      align-self: flex-start;
+      margin-top: 3px;
+      letter-spacing: 0.5px;
+    }
 
+    /* Navigation Bar */
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 8px 0 12px 0;
+      border-bottom: 1px solid var(--card-border);
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
 
-<script type="application/ld+json">
-{
-"@context":"https://schema.org",
-"@type":"WebSite",
-"name":"Filmy Khabr",
-"url":"https://entertainment.gujaratfastalert.in/",
-"description":"Latest Hindi Movies, OTT Releases, Trailers, Web Series & Entertainment News"
-}
-</script>
+    nav::-webkit-scrollbar {
+      display: none;
+    }
 
+    .nav-link {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      white-space: nowrap;
+      cursor: pointer;
+      padding-bottom: 2px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s;
+    }
 
-<style>
+    .nav-link.active, .nav-link:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
 
-html{
-scroll-behavior:smooth
-}
+    .search-btn {
+      margin-left: auto;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
 
-body{
-margin:0;
-background:#09090b;
-color:#fff;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
--webkit-font-smoothing:antialiased
-}
+    /* Search Box Overlay */
+    #search-container {
+      display: none;
+      padding: 8px 0;
+      margin-bottom: 10px;
+    }
 
-.hide-scrollbar::-webkit-scrollbar{
-display:none
-}
+    #search-input {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      outline: none;
+    }
 
-.hide-scrollbar{
-scrollbar-width:none
-}
+    /* Active Filter Banner */
+    #filter-banner {
+      display: none;
+      background: #1e1314;
+      border: 1px solid #4a1518;
+      border-radius: var(--radius);
+      padding: 8px 12px;
+      margin: 12px 0;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-.hero-track{
-display:flex;
-height:100%;
-transition:transform .5s cubic-bezier(.25,1,.5,1)
-}
+    .filter-info {
+      font-size: 12px;
+      font-weight: 600;
+      color: #fca5a5;
+    }
 
-.hero-slide{
-min-width:100%;
-height:100%;
-position:relative
-}
+    .clear-filter-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
 
-.hero-image{
-transition:transform 6s ease-out
-}
+    /* Section Headings */
+    .section-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      margin: 18px 0 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-.hero-slide.active .hero-image{
-transform:scale(1.035)
-}
+    .section-view-all {
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 700;
+      cursor: pointer;
+    }
 
-.hover-card{
-transition:.2s
-}
+    /* Hero Slider Banner */
+    .hero-card {
+      position: relative;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      margin-top: 10px;
+    }
 
-.hover-card:hover{
-transform:translateY(-3px);
-border-color:#444
-}
+    .hero-img-wrap {
+      width: 100%;
+      height: 240px;
+      position: relative;
+      background: #111;
+    }
 
-.clamp2{
-display:-webkit-box;
--webkit-line-clamp:2;
--webkit-box-orient:vertical;
-overflow:hidden
-}
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-.clamp3{
-display:-webkit-box;
--webkit-line-clamp:3;
--webkit-box-orient:vertical;
-overflow:hidden
-}
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(9,10,11,0.1) 0%, rgba(9,10,11,0.9) 100%);
+    }
 
-@media(max-width:767px){
+    .hero-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px;
+    }
 
-.desktop-nav{
-display:none
-}
+    .badge-top {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
 
-.hero{
-height:390px
-}
+    .hero-platform {
+      font-size: 11px;
+      color: #38bdf8;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
 
-}
+    .hero-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
 
-@media(min-width:768px){
+    .hero-summary {
+      font-size: 11px;
+      color: #d1d5db;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
 
-.hero{
-height:405px
-}
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(229, 9, 20, 0.9);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
 
-}
+    /* Trending Grid / Cards */
+    .trending-scroll {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px;
+    }
 
-</style>
+    .trend-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
 
+    .trend-img-box {
+      position: relative;
+      width: 100%;
+      height: 140px;
+      background: #111;
+    }
+
+    .trend-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .trend-rank {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 3px;
+    }
+
+    .trend-info {
+      padding: 8px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .trend-platform {
+      font-size: 10px;
+      color: #38bdf8;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .trend-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+
+    .trend-date {
+      font-size: 10px;
+      color: var(--text-dim);
+      margin-top: auto;
+    }
+
+    /* Explore By Category 2-Column Grid */
+    .cat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .cat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 14px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+
+    .cat-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .cat-icon {
+      font-size: 22px;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .cat-name {
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .cat-desc {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    /* Latest News Horizontal List */
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .news-card {
+      display: flex;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      padding: 8px;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .news-thumb {
+      width: 85px;
+      height: 60px;
+      border-radius: 4px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #111;
+    }
+
+    .news-meta {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .news-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Telegram Community Card */
+    .community-box {
+      background: linear-gradient(135deg, #162436 0%, #11161d 100%);
+      border: 1px solid #1e3a5f;
+      border-radius: var(--radius);
+      padding: 14px;
+      margin-top: 18px;
+      text-align: center;
+    }
+
+    .comm-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .comm-desc {
+      font-size: 11px;
+      color: #93c5fd;
+      margin-bottom: 10px;
+    }
+
+    .comm-btn {
+      display: inline-block;
+      background: #0284c7;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 7px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 24px;
+      padding-top: 14px;
+      border-top: 1px solid var(--card-border);
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .no-posts {
+      text-align: center;
+      padding: 30px 10px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+  </style>
 </head>
-
-
-<body class="bg-bgmain text-white">
-
-
-<!-- BREAKING TICKER -->
-
-<div class="border-b border-white/10 bg-[#0c0f11]">
-
-<div class="max-w-[1240px] mx-auto px-4 h-11 flex items-center justify-between gap-3">
-
-<div class="flex items-center gap-2 min-w-0">
-
-<b class="bg-brand text-[11px] md:text-xs px-3 py-1.5 rounded">
-BREAKING:
-</b>
-
-<a
-id="breaking"
-href="#"
-class="text-xs md:text-sm font-semibold truncate">
-
-Latest Entertainment Update
-
-</a>
-
-</div>
-
-
-<div class="hidden md:flex items-center gap-2 text-xs text-zinc-400">
-
-<span>Follow Us:</span>
-
-<a
-href="https://t.me/+rG_x3BDIdYliNTVl"
-class="w-6 h-6 rounded-full bg-sky-600 flex items-center justify-center">
-✈
-</a>
-
-<a
-href="#"
-class="w-6 h-6 rounded-full bg-pink-600 flex items-center justify-center">
-◎
-</a>
-
-<a
-href="#"
-class="w-6 h-6 rounded-full bg-red-600 flex items-center justify-center">
-▶
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- HEADER -->
-
-<header class="sticky top-0 z-50 bg-[#090b0c]/95 backdrop-blur-xl border-b border-white/10">
-
-<div class="max-w-[1240px] mx-auto px-4">
-
-<div class="h-[72px] flex items-center justify-between gap-5">
-
-
-<!-- FILMY KHABR BRAND -->
-
-<a href="/" class="shrink-0">
-
-<div class="text-[21px] md:text-[25px] font-black leading-[.86] text-center">
-
-FILMY<br>KHABR
-
-<span class="block w-fit mx-auto bg-brand text-[8px] md:text-[9px] font-black px-1.5 py-0.5 mt-1">
-ENTERTAINMENT
-</span>
-
-</div>
-
-</a>
-
-
-<!-- NAVIGATION -->
-
-<nav class="desktop-nav flex items-center h-full gap-7 text-[13px] font-bold text-zinc-200">
-
-<a
-href="/"
-class="h-full flex items-center text-brand border-b-[3px] border-brand">
-Home
-</a>
-
-<a href="/movies/">Movies</a>
-
-<a href="/web-series/">Web Series</a>
-
-<a href="/ott/">OTT</a>
-
-<a href="/trailers/">Trailers</a>
-
-<a href="/news/">News</a>
-
-<a href="/upcoming/">Upcoming</a>
-
-</nav>
-
-
-<button
-id="search"
-class="text-2xl text-zinc-300">
-⌕
-</button>
-
-</div>
-
-</div>
-
-</header>
-
-
-<!-- MAIN -->
-
-<main class="max-w-[1240px] mx-auto px-4 py-4 md:py-5">
-
-
-<!-- HERO + SIDE STORIES -->
-
-<section class="grid grid-cols-1 lg:grid-cols-[minmax(0,2.05fr)_minmax(300px,1fr)] gap-3 md:gap-4">
-
-
-<!-- HERO SLIDER -->
-
-<div
-id="hero"
-class="hero relative overflow-hidden rounded-xl border border-white/10 bg-black">
-
-<div
-id="heroTrack"
-class="hero-track">
-</div>
-
-
-<button
-id="prev"
-class="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-black/60 border border-white/20 text-xl">
-‹
-</button>
-
-
-<button
-id="next"
-class="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-black/60 border border-white/20 text-xl">
-›
-</button>
-
-
-<div
-id="dots"
-class="absolute bottom-4 right-5 z-30 flex gap-2">
-</div>
-
-</div>
-
-
-<!-- SIDE STORIES -->
-
-<div
-id="side"
-class="hidden lg:flex flex-col gap-3">
-</div>
-
-</section>
-
-
-<!-- TRENDING -->
-
-<section class="mt-7">
-
-<div class="flex items-end justify-between mb-3">
-
-<h2 class="text-xl md:text-2xl font-black">
-🔥 Trending Now
-</h2>
-
-<a
-href="/trending/"
-class="text-brand text-xs font-bold">
-View All ›
-</a>
-
-</div>
-
-
-<div
-id="trending"
-class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
-</div>
-
-</section>
-
-
-<!-- EXPLORE CATEGORY -->
-
-<section class="mt-8 border-t border-white/10 pt-6">
-
-<h2 class="text-xl md:text-2xl font-black mb-4">
-Explore By Category
-</h2>
-
-
-<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-
-
-<!-- MOVIES -->
-
-<a
-href="/movies/"
-class="hover-card rounded-xl border border-white/10 bg-[#171a1d] p-4 text-center">
-
-<div class="text-4xl mb-3">
-🎬
-</div>
-
-<b class="text-sm">
-Movies
-</b>
-
-<p class="text-[11px] text-zinc-400 mt-1">
-Cinema Updates
-</p>
-
-</a>
-
-
-<!-- WEB SERIES -->
-
-<a
-href="/web-series/"
-class="hover-card rounded-xl border border-white/10 bg-[#171a1d] p-4 text-center">
-
-<div class="text-4xl mb-3">
-▣
-</div>
-
-<b class="text-sm">
-Web Series
-</b>
-
-<p class="text-[11px] text-zinc-400 mt-1">
-All New Shows
-</p>
-
-</a>
-
-
-<!-- OTT -->
-
-<a
-href="/ott/"
-class="hover-card rounded-xl border border-white/10 bg-[#171a1d] p-4 text-center">
-
-<div class="text-4xl mb-3">
-📺
-</div>
-
-<b class="text-sm">
-OTT Releases
-</b>
-
-<p class="text-[11px] text-zinc-400 mt-1">
-Platform Updates
-</p>
-
-</a>
-
-
-<!-- TRAILERS -->
-
-<a
-href="/trailers/"
-class="hover-card rounded-xl border border-white/10 bg-[#171a1d] p-4 text-center">
-
-<div class="text-4xl mb-3">
-▶
-</div>
-
-<b class="text-sm">
-Trailers
-</b>
-
-<p class="text-[11px] text-zinc-400 mt-1">
-Latest Trailers
-</p>
-
-</a>
-
-
-<!-- CELEBRITY -->
-
-<a
-href="/celebrity-news/"
-class="hover-card rounded-xl border border-white/10 bg-[#171a1d] p-4 text-center">
-
-<div class="text-4xl mb-3">
-⭐
-</div>
-
-<b class="text-sm">
-Celebrity News
-</b>
-
-<p class="text-[11px] text-zinc-400 mt-1">
-Star Updates
-</p>
-
-</a>
-
-
-<!-- NEWS -->
-
-<a
-href="/news/"
-class="hover-card rounded-xl border border-white/10 bg-[#171a1d] p-4 text-center">
-
-<div class="text-4xl mb-3">
-📰
-</div>
-
-<b class="text-sm">
-Entertainment News
-</b>
-
-<p class="text-[11px] text-zinc-400 mt-1">
-Latest News
-</p>
-
-</a>
-
-
-</div>
-
-</section>
-
-
-<!-- LATEST NEWS -->
-
-<section class="mt-8 border-t border-white/10 pt-6">
-
-<div class="grid grid-cols-1 lg:grid-cols-[minmax(0,2fr)_minmax(300px,1fr)] gap-5">
-
-
-<div>
-
-<h2 class="text-xl md:text-2xl font-black mb-3">
-Latest News & Updates
-</h2>
-
-
-<div
-id="latest"
-class="divide-y divide-white/10 border-y border-white/10">
-</div>
-
-</div>
-
-
-<!-- SIDEBAR -->
-
-<aside class="space-y-3">
-
-
-<!-- COMMUNITY -->
-
-<div class="rounded-xl border border-white/10 bg-[#111416] p-4">
-
-<h3 class="font-black">
-Join Our Community
-</h3>
-
-<p class="text-xs text-zinc-400 mt-1 mb-3">
-Latest updates ke liye humse juden
-</p>
-
-
-<a
-href="https://t.me/+rG_x3BDIdYliNTVl"
-class="h-10 rounded-lg bg-[#229ED9] flex items-center justify-center gap-2 text-xs font-bold">
-
-✈️ Join Telegram Channel
-
-</a>
-
-
-<div class="flex gap-3 mt-4">
-
-<span class="text-xs text-zinc-400">
-Follow on
-</span>
-
-
-<a
-href="#"
-class="w-8 h-8 rounded-full bg-sky-600 flex items-center justify-center">
-✈
-</a>
-
-
-<a
-href="#"
-class="w-8 h-8 rounded-full bg-pink-600 flex items-center justify-center">
-◎
-</a>
-
-
-<a
-href="#"
-class="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center">
-▶
-</a>
-
-</div>
-
-</div>
-
-
-<!-- POPULAR TAGS -->
-
-<div class="rounded-xl border border-white/10 bg-[#111416] p-4">
-
-<h3 class="font-black mb-3">
-Popular Tags
-</h3>
-
-
-<div
-id="popularTags"
-class="flex flex-wrap gap-2">
-</div>
-
-</div>
-
-
-</aside>
-
-</div>
-
-</section>
-
-
-</main>
-
-
-<!-- FOOTER -->
-
-<footer class="border-t border-white/10 mt-7 bg-[#080a0b]">
-
-<div class="max-w-[1240px] mx-auto px-4 py-7 grid grid-cols-1 md:grid-cols-[1.35fr_1fr_1fr] gap-7">
-
-
-<!-- FOOTER BRAND -->
-
-<div>
-
-<div class="text-xl font-black leading-[.9] text-center md:text-left">
-
-FILMY<br>KHABR
-
-<span class="block w-fit mx-auto md:mx-0 bg-brand text-[8px] font-black px-1.5 py-0.5 mt-1">
-ENTERTAINMENT
-</span>
-
-</div>
-
-
-<p class="text-xs text-zinc-400 leading-6 mt-3">
-
-Filmy Khabr par payein latest Hindi movies, OTT releases, web series, trailers aur entertainment news Hindi mein.
-
-</p>
-
-</div>
-
-
-<!-- QUICK LINKS -->
-
-<div>
-
-<h3 class="font-bold text-sm mb-3">
-Quick Links
-</h3>
-
-
-<div class="grid grid-cols-2 gap-y-2 text-xs text-zinc-400">
-
-<a href="/about-us.html">
-› About Us
-</a>
-
-<a href="/disclaimer.html">
-› Disclaimer
-</a>
-
-<a href="/contact-us.html">
-› Contact Us
-</a>
-
-<a href="/terms-and-conditions.html">
-› Terms & Conditions
-</a>
-
-<a href="/privacy-policy.html">
-› Privacy Policy
-</a>
-
-<a href="/editorial-policy.html">
-› Editorial Policy
-</a>
-
-</div>
-
-</div>
-
-
-<!-- CONNECT -->
-
-<div>
-
-<h3 class="font-bold text-sm mb-3">
-Connect With Us
-</h3>
-
-
-<div class="flex gap-3">
-
-<a
-href="https://t.me/+rG_x3BDIdYliNTVl"
-class="w-9 h-9 rounded-full bg-sky-600 flex items-center justify-center">
-✈
-</a>
-
-
-<a
-href="#"
-class="w-9 h-9 rounded-full bg-pink-600 flex items-center justify-center">
-◎
-</a>
-
-
-<a
-href="#"
-class="w-9 h-9 rounded-full bg-red-600 flex items-center justify-center">
-▶
-</a>
-
-</div>
-
-
-<p class="text-[11px] text-zinc-500 mt-4">
-© 2026 Filmy Khabr.
-</p>
-
-
-<p class="text-[11px] text-zinc-500 mt-1">
-Managed and Published by:
-<span class="text-zinc-300 font-semibold">
-Vanrajsinh Vaghela
-</span>
-</p>
-
-
-<p class="text-[11px] text-zinc-500 mt-1">
-All Rights Reserved.
-</p>
-
-
-</div>
-
-</div>
-
-</footer>
-
-
-<script>
-
-
-const DEMO=[
-
-{
-title:'Mirzapur Season 3 Officially Streaming Now',
-image:'/images/mirzapur-3-ott.webp',
-url:'/posts/mirzapur-3-ott.html',
-platform:'PRIME VIDEO',
-category:'OTT',
-date:'11 Aug 2025',
-time:'1 day ago',
-summary:'Guddu Pandit ki wapsi ke saath Purvanchal me shuru hua ek nayi kahani ka safar.',
-badge:'TRENDING'
-},
-
-{
-title:'Awarapan 2 Release Date Announcement',
-image:'/images/awarapan-2-release-date-story.webp',
-url:'/posts/awarapan-2-box-office.html',
-platform:'THEATRES',
-category:'MOVIES',
-date:'14 Aug 2025',
-time:'2 hours ago',
-summary:'Emraan Hashmi 19 saal baad Shivam ke iconic kirdaar mein wapsi kar rahe hain.',
-badge:'TRENDING'
-},
-
-{
-title:'Kota Factory Season 3 Streaming Now',
-image:'/images/kota-factory-3.webp',
-url:'/posts/kota-factory-3.html',
-platform:'NETFLIX',
-category:'WEB SERIES',
-date:'12 Aug 2025',
-time:'5 hours ago',
-summary:'Jeetu Bhaiya aur IIT aspirants ki emotional journey ka finale.',
-badge:'TRENDING'
-},
-
-{
-title:'Panchayat Season 4 Coming Soon',
-image:'/images/panchayat-4.webp',
-url:'/posts/panchayat-season-4.html',
-platform:'PRIME VIDEO',
-category:'WEB SERIES',
-date:'10 Aug 2025',
-time:'8 hours ago',
-summary:'Phulera gaon ki nayi rajneeti aur Sachiv Ji ki kahani ka naya twist.',
-badge:'TRENDING'
-},
-
-{
-title:'Awarapan 2 Box Office & Story: 19 Saal Baad Shivam Pandit Ki Wapsi',
-image:'/images/awarapan-2-prompts.webp',
-url:'/posts/awarapan-2-box-office-story.html',
-platform:'THEATRES',
-category:'MOVIES',
-date:'14 Aug 2025',
-time:'1 day ago',
-summary:'19 saal pehle Aaliyah ko khone ke baad Shivam Pandit ki zindagi mein nayi chunauti.',
-badge:'TRENDING'
-},
-
-{
-title:'Awarapan 2: Blockbuster Songs & OTT Streaming Updates',
-image:'/images/awarapan-2-poster-dark.webp',
-url:'/posts/awarapan-2-youtube-updates.html',
-platform:'YOUTUBE',
-category:'TRAILERS',
-date:'13 Aug 2025',
-time:'1 day ago',
-summary:'Blockbuster songs, digital release aur OTT streaming updates ki complete details.',
-badge:'TRENDING'
-}
-
-];
-
-
-const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({
-
-'&':'&amp;',
-'<':'&lt;',
-'>':'&gt;',
-'"':'&quot;',
-"'":'&#039;'
-
-}[m]));
-
-
-const cls=p=>{
-
-p=(p||'').toUpperCase();
-
-return p.includes('THEATRE')
-?'text-amber-400'
-
-:p.includes('NETFLIX')
-?'text-red-500'
-
-:p.includes('YOUTUBE')
-?'text-red-500'
-
-:p.includes('PRIME')||p.includes('HOTSTAR')
-?'text-sky-400'
-
-:'text-brand';
-
-};
-
-
-const FALLBACK="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 675'><rect width='1200' height='675' fill='%23121416'/><text x='600' y='335' text-anchor='middle' font-family='Arial' font-size='42' font-weight='900' fill='%23e50914'>FILMY KHABR</text></svg>";
-
-
-function safe(){
-
-document.querySelectorAll('img').forEach(i=>{
-
-i.onerror=()=>{
-
-i.onerror=null;
-i.src=FALLBACK
-
-}
-
-})
-
-}
-
-
-function render(posts){
-
-let hero=posts.slice(0,5),
-t=document.getElementById('heroTrack'),
-d=document.getElementById('dots'),
-side=document.getElementById('side');
-
-t.innerHTML='';
-d.innerHTML='';
-side.innerHTML='';
-
-
-hero.forEach((p,i)=>{
-
-t.innerHTML+=`
-
-<article class="hero-slide ${i?'':'active'}">
-
-<img
-src="${esc(p.image)}"
-alt="${esc(p.title)}"
-class="hero-image absolute inset-0 w-full h-full object-cover"
-${i?'loading="lazy"':'fetchpriority="high"'}>
-
-<div class="absolute inset-0 bg-gradient-to-r from-black/95 via-black/60 to-transparent"></div>
-
-<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
-
-
-<span class="absolute top-4 right-4 bg-brand text-[10px] font-black px-2.5 py-1 rounded">
-${esc(p.badge||'TRENDING')}
-</span>
-
-
-<div class="absolute left-5 md:left-7 bottom-7 max-w-[75%]">
-
-<span class="inline-block border border-white/20 bg-black/50 rounded px-2 py-1 ${cls(p.platform)} text-[9px] font-black mb-2">
-${esc(p.platform||'ENTERTAINMENT')}
-</span>
-
-
-<h1 class="text-xl md:text-3xl lg:text-[34px] font-black leading-tight clamp2">
-${esc(p.title)}
-</h1>
-
-
-<p class="text-xs md:text-sm text-zinc-300 mt-2 clamp2">
-${esc(p.summary||'')}
-</p>
-
-
-<a
-href="${esc(p.url||'#')}"
-class="inline-flex items-center gap-2 mt-4 text-sm font-black">
-
-<span class="w-8 h-8 rounded-full border border-brand flex items-center justify-center text-brand">
-▶
-</span>
-
-Watch Full Details
-
-</a>
-
-</div>
-
-</article>
-`;
-
-
-d.innerHTML+=`
-
-<button
-class="dot h-2 w-2 rounded-full bg-white/70"
-aria-label="Story ${i+1}">
-</button>
-
-`;
-
-});
-
-
-posts.slice(1,4).forEach(p=>
-
-side.innerHTML+=`
-
-<a
-href="${esc(p.url||'#')}"
-class="hover-card flex-1 rounded-xl border border-white/10 bg-[#111416] overflow-hidden flex items-center">
-
-<div class="w-[39%] h-full min-h-[110px] shrink-0">
-
-<img
-src="${esc(p.image)}"
-alt="${esc(p.title)}"
-class="w-full h-full object-cover"
-loading="lazy">
-
-</div>
-
-
-<div class="p-3 min-w-0">
-
-<div class="${cls(p.platform)} text-[9px] font-black mb-2">
-${esc(p.platform)}
-</div>
-
-<h3 class="text-sm font-bold leading-snug clamp2">
-${esc(p.title)}
-</h3>
-
-<p class="text-[10px] text-zinc-500 mt-3">
-${esc(p.date||p.time||'')}
-</p>
-
-</div>
-
-</a>
-
-`);
-
-
-const slides=[...t.children],
-dots=[...d.children];
-
-let cur=0,
-timer;
-
-
-function go(n){
-
-cur=(n+slides.length)%slides.length;
-
-t.style.transform=`translateX(-${cur*100}%)`;
-
-
-slides.forEach((x,i)=>
-x.classList.toggle('active',i===cur)
-);
-
-
-dots.forEach((x,i)=>
-
-x.className=i===cur
-
-?'dot h-2 w-5 rounded-full bg-brand'
-
-:'dot h-2 w-2 rounded-full bg-white/70'
-
-);
-
-}
-
-
-function start(){
-
-clearInterval(timer);
-
-if(slides.length>1)
-
-timer=setInterval(
-()=>go(cur+1),
-5000
-);
-
-}
-
-
-document.getElementById('next').onclick=()=>{
-
-go(cur+1);
-start()
-
-};
-
-
-document.getElementById('prev').onclick=()=>{
-
-go(cur-1);
-start()
-
-};
-
-
-dots.forEach((x,i)=>
-
-x.onclick=()=>{
-
-go(i);
-start()
-
-}
-
-);
-
-
-document.getElementById('hero').onmouseenter=()=>{
-
-clearInterval(timer)
-
-};
-
-
-document.getElementById('hero').onmouseleave=start;
-
-
-go(0);
-start();
-
-
-/* TRENDING */
-
-let tg=document.getElementById('trending');
-
-
-tg.innerHTML=posts.slice(0,6).map((p,i)=>
-
-`
-
-<a
-href="${esc(p.url||'#')}"
-class="hover-card rounded-xl border border-white/10 bg-[#111416] overflow-hidden block">
-
-
-<div class="relative aspect-[4/5]">
-
-<img
-src="${esc(p.image)}"
-alt="${esc(p.title)}"
-class="w-full h-full object-cover"
-loading="lazy">
-
-
-<span class="absolute top-2 left-2 w-7 h-7 rounded-lg bg-brand text-xs font-black flex items-center justify-center">
-${i+1}
-</span>
-
-</div>
-
-
-<div class="p-2.5">
-
-<div class="${cls(p.platform)} text-[9px] font-black mb-1">
-${esc(p.platform)}
-</div>
-
-
-<h3 class="text-[11px] md:text-xs font-bold leading-snug clamp3">
-${esc(p.title)}
-</h3>
-
-
-<p class="text-[10px] text-zinc-500 mt-2">
-${esc(p.date||p.time||'')}
-</p>
-
-</div>
-
-</a>
-
-`
-
-).join('');
-
-
-/* LATEST */
-
-let latest=document.getElementById('latest');
-
-
-latest.innerHTML=posts.slice(0,6).map(p=>
-
-`
-
-<a
-href="${esc(p.url||'#')}"
-class="hover-card flex gap-3 py-3 items-center">
-
-
-<div class="w-[92px] h-[58px] rounded-lg overflow-hidden shrink-0">
-
-<img
-src="${esc(p.image)}"
-alt="${esc(p.title)}"
-class="w-full h-full object-cover"
-loading="lazy">
-
-</div>
-
-
-<div class="min-w-0 flex-1">
-
-<h3 class="text-xs md:text-sm font-bold clamp2">
-${esc(p.title)}
-</h3>
-
-
-<p class="hidden sm:block text-[10px] text-zinc-400 mt-1 clamp2">
-${esc(p.summary||'')}
-</p>
-
-</div>
-
-
-<span class="hidden sm:block text-[10px] text-zinc-500 shrink-0">
-${esc(p.time||p.date||'')}
-</span>
-
-</a>
-
-`
-
-).join('');
-
-
-/* BREAKING */
-
-document.getElementById('breaking').textContent=
-posts[0]?.title||'Latest Entertainment Update';
-
-
-document.getElementById('breaking').href=
-posts[0]?.url||'#';
-
-
-/* TAGS */
-
-const tags=[
-
-'Bollywood',
-'Netflix',
-'Prime Video',
-'Web Series',
-'Trailers',
-'Box Office',
-'Awarapan 2',
-'Mirzapur 3'
-
-];
-
-
-document.getElementById('popularTags').innerHTML=
-
-tags.map(x=>
-
-`
-
-<a
-href="/tag/${x.toLowerCase().replaceAll(' ','-')}/"
-class="px-3 py-1.5 rounded-lg border border-white/10 bg-[#191c1f] text-[10px] text-zinc-300">
-
-${x}
-
-</a>
-
-`
-
-).join('');
-
-
-safe()
-
-}
-
-
-/* LOAD POSTS */
-
-async function load(){
-
-let posts=[];
-
-
-try{
-
-let r=await fetch(
-'/data/posts.json?v='+Date.now(),
-{
-cache:'no-store'
-}
-);
-
-
-if(r.ok){
-
-let x=await r.json();
-
-
-posts=Array.isArray(x)
-
-?x
-
-:(Array.isArray(x.posts)?x.posts:[])
-
-}
-
-}catch(e){}
-
-
-if(!posts.length)
-
-posts=DEMO;
-
-
-posts.sort((a,b)=>
-
-Number(b.dateOrder||b.timestamp||0)-
-Number(a.dateOrder||a.timestamp||0)
-
-);
-
-
-render(posts)
-
-}
-
-
-/* SEARCH */
-
-document.getElementById('search').onclick=()=>{
-
-let q=prompt(
-'Movie, actor, trailer ya web series search karein...'
-);
-
-
-if(q)
-
-location.href=
-'/search.html?q='+
-encodeURIComponent(q)
-
-};
-
-
-load();
-
-</script>
-
+<body>
+
+  <!-- Top Breaking Ticker -->
+  <div class="ticker-bar">
+    <span class="ticker-label">BREAKING:</span>
+    <span class="ticker-text" id="breaking-ticker">Loading latest entertainment updates...</span>
+  </div>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <a href="index.html" class="brand-title">FILMY KHABR</a>
+        <span class="brand-badge">ENTERTAINMENT</span>
+      </div>
+      <div>
+        <button class="search-btn" onclick="toggleSearch()" title="Search Articles">🔍</button>
+      </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav>
+      <span class="nav-link active" onclick="filterCategory('All')">Home</span>
+      <span class="nav-link" onclick="filterCategory('Movies')">Movies</span>
+      <span class="nav-link" onclick="filterCategory('Web Series')">Web Series</span>
+      <span class="nav-link" onclick="filterCategory('OTT')">OTT</span>
+      <span class="nav-link" onclick="filterCategory('Trailers')">Trailers</span>
+      <span class="nav-link" onclick="filterCategory('News')">News</span>
+      <span class="nav-link" onclick="filterCategory('Upcoming')">Upcoming</span>
+      <span class="nav-link" onclick="filterCategory('Celebrity News')">Celebrity</span>
+    </nav>
+
+    <!-- Search Box -->
+    <div id="search-container">
+      <input type="text" id="search-input" placeholder="Search movies, series, news..." oninput="handleSearch(event)">
+    </div>
+
+    <!-- Active Filter Banner (Visible when category is selected) -->
+    <div id="filter-banner">
+      <span class="filter-info" id="filter-label">Category: All</span>
+      <button class="clear-filter-btn" onclick="filterCategory('All')">✕ Show All</button>
+    </div>
+
+    <!-- MAIN HOME WRAPPER (Hero + Trending + Explore Grid) -->
+    <div id="home-exclusive-sections">
+      <!-- Hero Slider -->
+      <div id="hero-slider-wrap"></div>
+
+      <!-- Trending Section -->
+      <div class="section-title">
+        <span>🔥 Trending Now</span>
+        <span class="section-view-all" onclick="filterCategory('Trending')">View All ›</span>
+      </div>
+      <div class="trending-scroll" id="trending-container"></div>
+
+      <!-- Explore By Category Grid -->
+      <div class="section-title">
+        <span>Explore By Category</span>
+      </div>
+      <div class="cat-grid">
+        <div class="cat-card" onclick="filterCategory('Movies')">
+          <span class="cat-icon">🎬</span>
+          <div class="cat-name">Movies</div>
+          <div class="cat-desc">Cinema Updates</div>
+        </div>
+        <div class="cat-card" onclick="filterCategory('Web Series')">
+          <span class="cat-icon">📺</span>
+          <div class="cat-name">Web Series</div>
+          <div class="cat-desc">All New Shows</div>
+        </div>
+        <div class="cat-card" onclick="filterCategory('OTT')">
+          <span class="cat-icon">🍿</span>
+          <div class="cat-name">OTT Releases</div>
+          <div class="cat-desc">Platform Updates</div>
+        </div>
+        <div class="cat-card" onclick="filterCategory('Trailers')">
+          <span class="cat-icon">▶️</span>
+          <div class="cat-name">Trailers</div>
+          <div class="cat-desc">Latest Trailers</div>
+        </div>
+        <div class="cat-card" onclick="filterCategory('Celebrity News')">
+          <span class="cat-icon">⭐</span>
+          <div class="cat-name">Celebrity News</div>
+          <div class="cat-desc">Star Updates</div>
+        </div>
+        <div class="cat-card" onclick="filterCategory('News')">
+          <span class="cat-icon">📰</span>
+          <div class="cat-name">Entertainment News</div>
+          <div class="cat-desc">Latest News</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DYNAMIC POSTS LIST (Used for Latest News & Category Results) -->
+    <div class="section-title" id="posts-list-heading">
+      <span>Latest News & Updates</span>
+    </div>
+    <div class="news-list" id="posts-list-container"></div>
+
+    <!-- Telegram Community -->
+    <div class="community-box">
+      <div class="comm-title">Join Our Community</div>
+      <div class="comm-desc">Sabse pehle movie aur OTT updates pane ke liye judiye</div>
+      <a href="https://t.me/" target="_blank" rel="noopener noreferrer" class="comm-btn">Join Telegram Channel</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      © 2026 Filmy Khabr.<br>
+      Managed and Published by Vanrajsinh Vaghela.<br>
+      All Rights Reserved.
+    </footer>
+  </div>
+
+  <script>
+    let rawPosts = [];
+    let currentCategory = 'All';
+
+    // Fetch data/posts.json with Cache Buster
+    async function loadSiteData() {
+      try {
+        const res = await fetch(`data/posts.json?_t=${Date.now()}`);
+        if (!res.ok) throw new Error('data/posts.json not found');
+        rawPosts = await res.json();
+        
+        // Check URL Query Param for direct category links
+        const params = new URLSearchParams(window.location.search);
+        const urlCat = params.get('cat');
+        if (urlCat) {
+          filterCategory(urlCat, false);
+        } else {
+          renderAll();
+        }
+      } catch (err) {
+        console.warn('Could not load posts:', err);
+        document.getElementById('posts-list-container').innerHTML = `
+          <div class="no-posts">Abhi tak koi post publish nahi hui hai. Admin desk se pehli post create karein.</div>
+        `;
+      }
+    }
+
+    // Render Full Homepage
+    function renderAll() {
+      if (!rawPosts || rawPosts.length === 0) return;
+
+      // 1. Ticker
+      document.getElementById('breaking-ticker').textContent = rawPosts[0].title;
+
+      // 2. Hero Section
+      const heroPost = rawPosts[0];
+      document.getElementById('hero-slider-wrap').innerHTML = `
+        <div class="hero-card">
+          <div class="hero-img-wrap">
+            <img class="hero-img" src="${heroPost.image || 'images/default.jpg'}" alt="${heroPost.title}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Filmy+Khabr'">
+            <div class="hero-overlay"></div>
+            <span class="badge-top">${heroPost.badge || 'Trending'}</span>
+          </div>
+          <div class="hero-content">
+            <div class="hero-platform">${heroPost.platform || heroPost.category}</div>
+            <div class="hero-title">${heroPost.title}</div>
+            <div class="hero-summary">${heroPost.summary || ''}</div>
+            <a href="${heroPost.url || `posts/${heroPost.slug}.html`}" class="hero-btn">▶ Watch Full Details</a>
+          </div>
+        </div>
+      `;
+
+      // 3. Trending Section (Top 4)
+      const trendingContainer = document.getElementById('trending-container');
+      const trendingPosts = rawPosts.slice(0, 4);
+      trendingContainer.innerHTML = trendingPosts.map((post, idx) => `
+        <a href="${post.url || `posts/${post.slug}.html`}" class="trend-card">
+          <div class="trend-img-box">
+            <img class="trend-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/300x200/171a1e/ffffff?text=Post'">
+            <div class="trend-rank">${idx + 1}</div>
+          </div>
+          <div class="trend-info">
+            <div class="trend-platform">${post.platform || post.category}</div>
+            <div class="trend-title">${post.title}</div>
+            <div class="trend-date">${post.date || '2026'}</div>
+          </div>
+        </a>
+      `).join('');
+
+      // 4. Latest News List
+      renderNewsList(rawPosts);
+    }
+
+    // Render News Card List
+    function renderNewsList(posts) {
+      const container = document.getElementById('posts-list-container');
+      if (!posts.length) {
+        container.innerHTML = `<div class="no-posts">Is category mein abhi koi post nahi mili.</div>`;
+        return;
+      }
+
+      container.innerHTML = posts.map(post => `
+        <a href="${post.url || `posts/${post.slug}.html`}" class="news-card">
+          <img class="news-thumb" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/120x80/171a1e/ffffff?text=News'">
+          <div style="flex:1; min-width:0;">
+            <div class="news-meta">${post.category} • ${post.platform || 'General'} • ${post.date || ''}</div>
+            <div class="news-title">${post.title}</div>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    // Dynamic Filter Handler (Fixes 404 permanently)
+    function filterCategory(catName, updateUrl = true) {
+      currentCategory = catName;
+      
+      // Update Active Navigation Highlight
+      document.querySelectorAll('.nav-link').forEach(el => {
+        if (el.textContent.trim().toLowerCase() === catName.toLowerCase()) {
+          el.classList.add('active');
+        } else if (catName === 'All' && el.textContent.trim() === 'Home') {
+          el.classList.add('active');
+        } else {
+          el.classList.remove('active');
+        }
+      });
+
+      const homeSections = document.getElementById('home-exclusive-sections');
+      const filterBanner = document.getElementById('filter-banner');
+      const filterLabel = document.getElementById('filter-label');
+      const heading = document.getElementById('posts-list-heading');
+
+      if (updateUrl) {
+        const newUrl = catName === 'All' ? window.location.pathname : `?cat=${encodeURIComponent(catName)}`;
+        window.history.pushState({}, '', newUrl);
+      }
+
+      if (catName === 'All') {
+        homeSections.style.display = 'block';
+        filterBanner.style.display = 'none';
+        heading.innerHTML = '<span>Latest News & Updates</span>';
+        renderAll();
+      } else {
+        // Hide hero & trending to focus purely on category list
+        homeSections.style.display = 'none';
+        filterBanner.style.display = 'flex';
+        filterLabel.textContent = `Browsing Category: ${catName}`;
+        heading.innerHTML = `<span>All ${catName} Articles</span>`;
+
+        let filtered = [];
+        if (catName === 'Trending') {
+          filtered = rawPosts.filter(p => (p.badge || '').toLowerCase() === 'trending');
+        } else {
+          filtered = rawPosts.filter(p => {
+            const c = (p.category || '').toLowerCase();
+            const target = catName.toLowerCase();
+            return c.includes(target) || target.includes(c);
+          });
+        }
+        renderNewsList(filtered);
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Live Search
+    function toggleSearch() {
+      const box = document.getElementById('search-container');
+      const input = document.getElementById('search-input');
+      if (box.style.display === 'block') {
+        box.style.display = 'none';
+        input.value = '';
+        if (currentCategory === 'All') renderAll();
+        else filterCategory(currentCategory, false);
+      } else {
+        box.style.display = 'block';
+        input.focus();
+      }
+    }
+
+    function handleSearch(e) {
+      const query = e.target.value.toLowerCase().trim();
+      if (!query) {
+        if (currentCategory === 'All') renderAll();
+        else filterCategory(currentCategory, false);
+        return;
+      }
+
+      const results = rawPosts.filter(p => 
+        (p.title && p.title.toLowerCase().includes(query)) ||
+        (p.summary && p.summary.toLowerCase().includes(query)) ||
+        (p.category && p.category.toLowerCase().includes(query))
+      );
+
+      document.getElementById('home-exclusive-sections').style.display = 'none';
+      document.getElementById('filter-banner').style.display = 'flex';
+      document.getElementById('filter-label').textContent = `Search: "${query}" (${results.length} Found)`;
+      document.getElementById('posts-list-heading').innerHTML = `<span>Search Results</span>`;
+      renderNewsList(results);
+    }
+
+    // Handle Browser Back/Forward buttons
+    window.addEventListener('popstate', () => {
+      const params = new URLSearchParams(window.location.search);
+      const cat = params.get('cat') || 'All';
+      filterCategory(cat, false);
+    });
+
+    // Run on startup
+    window.addEventListener('DOMContentLoaded', loadSiteData);
+  </script>
 </body>
 </html>
