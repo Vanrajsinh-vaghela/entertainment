@@ -63,7 +63,7 @@
       padding: 0 12px 30px 12px;
     }
 
-    /* Breaking Ticker Slider (Pause on Hover / Touch) */
+    /* Breaking Ticker */
     .ticker-bar {
       background: #000;
       border-bottom: 1px solid #1f2328;
@@ -264,7 +264,7 @@
       cursor: pointer;
     }
 
-    /* Multi-Slide Hero Slider (Up to 20 Posts) */
+    /* Multi-Slide Hero Slider with Inline Player */
     .hero-slider-container {
       position: relative;
       background: var(--card-bg);
@@ -287,23 +287,26 @@
       position: relative;
     }
 
-    .hero-img-wrap {
+    .hero-media-wrap {
       width: 100%;
-      height: 255px;
+      height: 260px;
       position: relative;
-      background: #111;
+      background: #000;
+      overflow: hidden;
     }
 
     .hero-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
 
     .hero-overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(180deg, rgba(9,10,11,0.05) 0%, rgba(9,10,11,0.92) 100%);
+      pointer-events: none;
     }
 
     .hero-content {
@@ -312,6 +315,7 @@
       left: 0;
       right: 0;
       padding: 12px 14px 16px 14px;
+      pointer-events: auto;
     }
 
     .badge-top {
@@ -413,7 +417,7 @@
     /* Hero Navigation Arrows */
     .hero-nav-btn {
       position: absolute;
-      top: 40%;
+      top: 35%;
       transform: translateY(-50%);
       background: rgba(0, 0, 0, 0.55);
       border: 1px solid rgba(255, 255, 255, 0.15);
@@ -509,33 +513,6 @@
       z-index: 1;
     }
 
-    .trend-play-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.3);
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-
-    .trend-card:hover .trend-play-overlay {
-      opacity: 1;
-    }
-
-    .play-circle {
-      width: 36px;
-      height: 36px;
-      background: rgba(229, 9, 20, 0.9);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 14px;
-    }
-
     .trend-info {
       padding: 8px;
       flex: 1;
@@ -568,7 +545,7 @@
       margin-top: auto;
     }
 
-    /* Explore By Category Grid (6 Cards) */
+    /* Explore By Category Grid */
     .cat-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -687,80 +664,7 @@
       text-decoration: none;
     }
 
-    /* TRAILER MODAL / POPUP */
-    #trailer-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.88);
-      backdrop-filter: blur(4px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 99999;
-      padding: 16px;
-    }
-
-    .modal-box {
-      background: #121417;
-      border: 1px solid #282d34;
-      border-radius: 10px;
-      width: 100%;
-      max-width: 680px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-      position: relative;
-    }
-
-    .modal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 14px;
-      background: #171a1e;
-      border-bottom: 1px solid #23272d;
-    }
-
-    .modal-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: #fff;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-right: 10px;
-    }
-
-    .close-btn {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-size: 20px;
-      cursor: pointer;
-      line-height: 1;
-      padding: 2px 6px;
-    }
-
-    .close-btn:hover {
-      color: var(--accent);
-    }
-
-    .video-wrapper {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      background: #000;
-    }
-
-    .video-wrapper iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    /* Ultra-Modern Shiny Author Branding Animation */
+    /* Shiny Author Animation */
     .shiny-author {
       background: linear-gradient(90deg, #f59e0b, #ec4899, #38bdf8, #f59e0b);
       background-size: 200% auto;
@@ -862,7 +766,7 @@
 
     <!-- MAIN HOME WRAPPER -->
     <div id="home-exclusive-sections">
-      <!-- 20-Post Hero Slider Container with Moving Line -->
+      <!-- 20-Post Hero Slider Container with Direct Inline Video Player -->
       <div id="hero-slider-wrap"></div>
 
       <!-- Trending Section -->
@@ -937,19 +841,6 @@
     </footer>
   </div>
 
-  <!-- TRAILER VIDEO MODAL -->
-  <div id="trailer-modal" onclick="closeTrailerModal(event)">
-    <div class="modal-box" onclick="event.stopPropagation()">
-      <div class="modal-header">
-        <div class="modal-title" id="modal-video-title">Official Trailer</div>
-        <button class="close-btn" onclick="closeTrailerModal()" aria-label="Close">✕</button>
-      </div>
-      <div class="video-wrapper">
-        <iframe id="trailer-iframe" src="" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-      </div>
-    </div>
-  </div>
-
   <script>
     let rawPosts = [];
     let currentCategory = 'All';
@@ -970,26 +861,28 @@
       return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0` : null;
     }
 
-    // Modal Controls
-    function openTrailer(title, videoUrl) {
+    // Direct Inline Hero Player (Plays inside current slide)
+    function playHeroInline(slideIndex, title, videoUrl) {
       const embedUrl = getYoutubeEmbedUrl(videoUrl);
       if (!embedUrl) {
         const query = encodeURIComponent(title + " official trailer");
         window.open(`https://www.youtube.com/results?search_query=${query}`, '_blank');
         return;
       }
-      document.getElementById('modal-video-title').textContent = title;
-      document.getElementById('trailer-iframe').src = embedUrl;
-      document.getElementById('trailer-modal').style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeTrailerModal() {
-      const modal = document.getElementById('trailer-modal');
-      const iframe = document.getElementById('trailer-iframe');
-      modal.style.display = 'none';
-      iframe.src = '';
-      document.body.style.overflow = '';
+      
+      const mediaWrap = document.getElementById(`hero-media-${slideIndex}`);
+      if (mediaWrap) {
+        mediaWrap.innerHTML = `
+          <iframe 
+            src="${embedUrl}" 
+            style="width:100%; height:100%; border:0;" 
+            allow="autoplay; encrypted-media; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        `;
+        // Pause auto-slider when video starts
+        isHeroPaused = true;
+      }
     }
 
     // Ticker Logic
@@ -1084,22 +977,22 @@
 
       if (heroTimer) clearInterval(heroTimer);
 
-      const slidesHTML = heroPosts.map(post => {
+      const slidesHTML = heroPosts.map((post, idx) => {
         const trailerUrl = post.trailer || (post.category === 'Trailers' || post.platform === 'YouTube' ? 'https://www.youtube.com' : '');
         return `
-          <div class="hero-slide">
-            <div class="hero-img-wrap">
+          <div class="hero-slide" id="hero-slide-${idx}">
+            <div class="hero-media-wrap" id="hero-media-${idx}">
               <img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Filmy+Khabr'">
               <div class="hero-overlay"></div>
               <span class="badge-top">${post.badge || 'Trending'}</span>
             </div>
             <div class="hero-content">
               <div class="hero-platform">${post.platform || post.category}</div>
-              <div class="hero-title">${post.title}</div>
+              <div class="hero-title"><a href="${post.url || `posts/${post.slug}.html`}">${post.title}</a></div>
               <div class="hero-summary">${post.summary || ''}</div>
               <div class="hero-actions">
                 <a href="${post.url || `posts/${post.slug}.html`}" class="hero-btn">Read Article</a>
-                <button class="hero-btn hero-btn-trailer" onclick="openTrailer('${post.title.replace(/'/g, "\\'")}', '${trailerUrl}')">▶ Play Trailer</button>
+                <button class="hero-btn hero-btn-trailer" onclick="playHeroInline(${idx}, '${post.title.replace(/'/g, "\\'")}', '${trailerUrl}')">▶ Play Trailer</button>
               </div>
             </div>
           </div>
@@ -1181,6 +1074,20 @@
       if (!track) return;
       track.style.transform = `translateX(-${heroCurrentIndex * 100}%)`;
 
+      // Reset any active iframe video when changing slides
+      rawPosts.slice(0, 20).forEach((post, idx) => {
+        if (idx !== heroCurrentIndex) {
+          const wrap = document.getElementById(`hero-media-${idx}`);
+          if (wrap && wrap.querySelector('iframe')) {
+            wrap.innerHTML = `
+              <img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Filmy+Khabr'">
+              <div class="hero-overlay"></div>
+              <span class="badge-top">${post.badge || 'Trending'}</span>
+            `;
+          }
+        }
+      });
+
       const dots = document.querySelectorAll('.hero-dot');
       if (dots.length) {
         const activeDotIndex = heroCurrentIndex % dots.length;
@@ -1208,7 +1115,7 @@
       updateHeroSlide();
     }
 
-    // Fetch data/posts.json with Cache Buster
+    // Load Data
     async function loadSiteData() {
       try {
         const res = await fetch(`data/posts.json?_t=${Date.now()}`);
@@ -1246,9 +1153,6 @@
           <div class="trend-img-box">
             <img class="trend-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/300x200/171a1e/ffffff?text=Post'">
             <div class="trend-rank">${idx + 1}</div>
-            <div class="trend-play-overlay">
-              <div class="play-circle">▶</div>
-            </div>
           </div>
           <div class="trend-info">
             <div class="trend-platform">${post.platform || post.category}</div>
@@ -1261,7 +1165,6 @@
       renderNewsList(rawPosts);
     }
 
-    // Render News Card List
     function renderNewsList(posts) {
       const container = document.getElementById('posts-list-container');
       if (!posts.length) {
@@ -1280,7 +1183,6 @@
       `).join('');
     }
 
-    // Dynamic Filter
     function filterCategory(catName, updateUrl = true) {
       currentCategory = catName;
 
@@ -1331,7 +1233,6 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Live Search
     function toggleSearch() {
       const box = document.getElementById('search-container');
       const input = document.getElementById('search-input');
