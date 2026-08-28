@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Homepage -->
   <url>
     <loc>https://entertainment.gujaratfastalert.in/</loc>
     <priority>1.0</priority>
     <changefreq>daily</changefreq>
   </url>
-
-  <!-- Legal & Compliance Pages -->
   <url>
     <loc>https://entertainment.gujaratfastalert.in/about.html</loc>
     <priority>0.6</priority>
@@ -28,10 +25,57 @@
     <priority>0.5</priority>
     <changefreq>monthly</changefreq>
   </url>
-
-  <!-- Current Live Posts -->
+  <url>
+    <loc>https://entertainment.gujaratfastalert.in/posts/yash-toxic-fairy-tale-for-grown-ups-movie-details.html</loc>
+    <lastmod>2026-08-28</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
   <url>
     <loc>https://entertainment.gujaratfastalert.in/posts/alpha-teaser-yrf.html</loc>
+    <lastmod>2026-08-28</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://entertainment.gujaratfastalert.in/posts/avengers-doomsday-mcu.html</loc>
+    <lastmod>2026-08-28</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://entertainment.gujaratfastalert.in/posts/the-family-man-season-3-story-ending-explained--.html</loc>
+    <lastmod>2026-08-28</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://entertainment.gujaratfastalert.in/posts/ramayana-movie-update-4000.html</loc>
+    <lastmod>2026-08-28</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://entertainment.gujaratfastalert.in/posts/weekend-ott-releases-5.html</loc>
+    <lastmod>2026-08-28</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://entertainment.gujaratfastalert.in/posts/the-family-man-all-seasons-breakdown-1-3.html</loc>
+    <lastmod>2026-08-28</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://entertainment.gujaratfastalert.in/posts/sapne-vs-everyone-ending-explained-tvf-season-2.html</loc>
+    <lastmod>2026-08-28</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://entertainment.gujaratfastalert.in/posts/mirzapur-season-3-ending-explained.html</loc>
+    <lastmod>2026-08-28</lastmod>
     <priority>0.8</priority>
     <changefreq>weekly</changefreq>
   </url>
