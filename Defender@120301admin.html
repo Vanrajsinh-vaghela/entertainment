@@ -156,7 +156,7 @@
       font-weight: 600;
     }
 
-    /* Compact Form Layout */
+    /* Form Layout */
     .form-group {
       margin-bottom: 8px;
     }
@@ -400,7 +400,7 @@
 </head>
 <body>
 
-  <!-- PIN GATE (NUMERIC KEYPAD ENABLED) -->
+  <!-- PIN GATE -->
   <div id="pin-gate">
     <div class="pin-box">
       <h2>FILMY KHABR ADMIN</h2>
@@ -461,11 +461,11 @@
           <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" onchange="saveCreds()">
         </div>
         <div class="form-group">
-          <label>Google Analytics Tag ID (Auto Inject)</label>
+          <label>Google Analytics Tag ID</label>
           <input type="text" id="ga-id" value="G-E6B67VBEFZ" placeholder="G-E6B67VBEFZ" onchange="saveCreds()">
         </div>
       </div>
-      <div class="helper-txt">Analytics Tag ID har post mein automatic inject hoga. Settings browser mein locally save rehti hain.</div>
+      <div class="helper-txt">Analytics Tag ID har post mein automatic inject hoga. Settings locally saved rehti hain.</div>
     </div>
 
     <!-- TAB 1: NEW POST FORM -->
@@ -474,7 +474,7 @@
         <div class="card-header">
           <div>
             <span class="card-title" id="form-heading">Create New Post</span>
-            <div class="card-subtitle">Discover Ready + E-E-A-T + Gtag Auto Deploy</div>
+            <div class="card-subtitle">Discover Ready + Direct Video Embed</div>
           </div>
           <button class="btn btn-secondary" style="font-size: 10px; padding: 3px 6px;" onclick="resetForm()">Clear Form</button>
         </div>
@@ -539,9 +539,15 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label>Image File Path / URL</label>
-          <input type="text" id="post-image-path" placeholder="images/mirzapur-season-3.jpg">
+        <div class="form-row-2">
+          <div class="form-group">
+            <label>Image Path / URL</label>
+            <input type="text" id="post-image-path" placeholder="images/sample.jpg">
+          </div>
+          <div class="form-group">
+            <label>YouTube Trailer URL (For Direct Hero Play)</label>
+            <input type="text" id="post-trailer" placeholder="https://www.youtube.com/watch?v=...">
+          </div>
         </div>
 
         <div class="form-group">
@@ -617,7 +623,6 @@
     let selectedImageExt = "jpg";
     let allPostsCache = [];
 
-    // PIN Protection
     function verifyPin() {
       const pin = document.getElementById('admin-pin-input').value.trim();
       if (pin === MASTER_PIN) {
@@ -642,7 +647,6 @@
       autoUpdateSummary();
     }
 
-    // Tab Switcher
     function switchTab(tab) {
       document.getElementById('view-new-post').classList.toggle('hidden', tab !== 'new-post');
       document.getElementById('view-manage').classList.toggle('hidden', tab !== 'manage');
@@ -659,7 +663,6 @@
       }
     }
 
-    // Save & Load Credentials locally
     function saveCreds() {
       const user = document.getElementById('gh-user').value.trim();
       const repo = document.getElementById('gh-repo').value.trim();
@@ -690,7 +693,6 @@
       document.getElementById('conn-summary').textContent = `${u} / ${r}`;
     }
 
-    // Auto Slug Generator
     function autoGenerateSlug() {
       const editId = document.getElementById('edit-post-id').value;
       if (editId) return;
@@ -702,7 +704,6 @@
       document.getElementById('post-slug').value = slug;
     }
 
-    // Image file handler
     function handleImageFile(e) {
       const file = e.target.files[0];
       if (!file) return;
@@ -717,7 +718,6 @@
       reader.readAsDataURL(file);
     }
 
-    // Insert Link Helper
     function insertArticleLink() {
       const txt = document.getElementById('link-text').value.trim();
       const url = document.getElementById('link-url').value.trim();
@@ -736,7 +736,6 @@
       showToast('Link inserted');
     }
 
-    // Toast Notification
     function showToast(msg) {
       const t = document.getElementById('toast');
       t.textContent = msg;
@@ -744,7 +743,6 @@
       setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    // GitHub API Core Helpers
     async function ghRequest(path, method = 'GET', body = null) {
       const user = document.getElementById('gh-user').value.trim();
       const repo = document.getElementById('gh-repo').value.trim();
@@ -779,7 +777,6 @@
       return decodeURIComponent(escape(atob(str)));
     }
 
-    // Render Preview Tab
     function renderDedicatedPreview() {
       const title = document.getElementById('post-title').value || 'Article Title Preview';
       const category = document.getElementById('post-category').value;
@@ -805,7 +802,6 @@
       }
     }
 
-    // 100% Discover & Schema.org Compliant Post HTML Generator with Footer Links & Shiny Branding
     function generatePostHTML(post) {
       const absoluteUrl = `https://entertainment.gujaratfastalert.in/posts/${post.slug}.html`;
       const absoluteImg = post.image.startsWith('http') 
@@ -964,7 +960,6 @@
 </html>`;
     }
 
-    // Publish / Update Post
     async function publishPost() {
       const btn = document.getElementById('publish-btn');
       const title = document.getElementById('post-title').value.trim();
@@ -973,6 +968,7 @@
       const platform = document.getElementById('post-platform').value;
       const badge = document.getElementById('post-badge').value;
       let imagePath = document.getElementById('post-image-path').value.trim();
+      const trailer = document.getElementById('post-trailer').value.trim();
       const summary = document.getElementById('post-summary').value.trim();
       const content = document.getElementById('post-content').value.trim();
       const editId = document.getElementById('edit-post-id').value;
@@ -1021,6 +1017,7 @@
           platform,
           badge,
           image: imagePath || '',
+          trailer: trailer || '',
           summary,
           content,
           date: dateStr,
@@ -1072,7 +1069,7 @@
           sha: postFileSha || undefined
         });
 
-        showToast('Post published successfully with GTAG & E-E-A-T!');
+        showToast('Post published successfully!');
         resetForm();
         switchTab('manage');
       } catch (err) {
@@ -1083,7 +1080,6 @@
       }
     }
 
-    // Load & Manage Posts
     async function loadManagePosts() {
       const container = document.getElementById('posts-list-container');
       container.innerHTML = '<div style="text-align: center; padding: 15px; color: var(--text-muted); font-size: 12px;">Fetching from data/posts.json...</div>';
@@ -1120,7 +1116,6 @@
       }
     }
 
-    // Edit Post
     function editPost(id) {
       const post = allPostsCache.find(p => p.id === id);
       if (!post) return;
@@ -1131,6 +1126,7 @@
       document.getElementById('post-platform').value = post.platform || 'General';
       document.getElementById('post-badge').value = post.badge || 'Trending';
       document.getElementById('post-image-path').value = post.image || '';
+      document.getElementById('post-trailer').value = post.trailer || '';
       document.getElementById('post-summary').value = post.summary || '';
       document.getElementById('post-content').value = post.content || '';
 
@@ -1141,7 +1137,6 @@
       showToast('Loaded post for editing');
     }
 
-    // Delete Post
     async function deletePost(id) {
       const post = allPostsCache.find(p => p.id === id);
       if (!confirm(`Are you sure you want to delete "${post ? post.title : 'this post'}"?`)) return;
@@ -1166,12 +1161,12 @@
       }
     }
 
-    // Reset Form
     function resetForm() {
       document.getElementById('edit-post-id').value = '';
       document.getElementById('post-title').value = '';
       document.getElementById('post-slug').value = '';
       document.getElementById('post-image-path').value = '';
+      document.getElementById('post-trailer').value = '';
       document.getElementById('post-summary').value = '';
       document.getElementById('post-content').value = '';
       document.getElementById('post-file').value = '';
