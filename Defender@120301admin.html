@@ -434,11 +434,11 @@
       </div>
     </header>
 
-    <!-- GITHUB CONNECTION (COMPACT UNIFIED) -->
+    <!-- GITHUB & ANALYTICS CONNECTION -->
     <div class="card">
       <div class="card-header">
         <div>
-          <span class="card-title">GitHub Connection</span>
+          <span class="card-title">Site & GitHub Config</span>
           <div class="card-subtitle" id="conn-summary">Vanrajsinh-vaghela / GitHub.Io</div>
         </div>
         <span class="status-badge" id="conn-status">Ready</span>
@@ -446,20 +446,26 @@
 
       <div class="form-row-2">
         <div class="form-group">
-          <label>Username</label>
+          <label>GitHub Username</label>
           <input type="text" id="gh-user" value="Vanrajsinh-vaghela" placeholder="Vanrajsinh-vaghela" onchange="saveCreds()">
         </div>
         <div class="form-group">
-          <label>Repository</label>
+          <label>Repository Name</label>
           <input type="text" id="gh-repo" value="GitHub.Io" placeholder="GitHub.Io" onchange="saveCreds()">
         </div>
       </div>
 
-      <div class="form-group" style="margin-bottom: 0;">
-        <label>GitHub Personal Access Token (PAT)</label>
-        <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" onchange="saveCreds()">
-        <div class="helper-txt">Token browser mein locally save rehta hai, GitHub HTML code mein nahi.</div>
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>GitHub Token (PAT)</label>
+          <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" onchange="saveCreds()">
+        </div>
+        <div class="form-group">
+          <label>Google Analytics Tag ID (Auto Inject)</label>
+          <input type="text" id="ga-id" placeholder="e.g. G-XXXXXXXXXX" onchange="saveCreds()">
+        </div>
       </div>
+      <div class="helper-txt">Analytics Tag ID har post mein automatic inject hoga. Settings browser mein locally save rehti hain.</div>
     </div>
 
     <!-- TAB 1: NEW POST FORM -->
@@ -468,7 +474,7 @@
         <div class="card-header">
           <div>
             <span class="card-title" id="form-heading">Create New Post</span>
-            <div class="card-subtitle">Discover Ready + Schema Auto Deploy</div>
+            <div class="card-subtitle">Discover Ready + Gtag Auto Deploy</div>
           </div>
           <button class="btn btn-secondary" style="font-size: 10px; padding: 3px 6px;" onclick="resetForm()">Clear Form</button>
         </div>
@@ -654,14 +660,16 @@
       }
     }
 
-    // Save & Load GitHub Credentials locally
+    // Save & Load Credentials locally
     function saveCreds() {
       const user = document.getElementById('gh-user').value.trim();
       const repo = document.getElementById('gh-repo').value.trim();
       const token = document.getElementById('gh-token').value.trim();
+      const gaId = document.getElementById('ga-id').value.trim();
       localStorage.setItem('fk_gh_user', user);
       localStorage.setItem('fk_gh_repo', repo);
       if (token) localStorage.setItem('fk_gh_token', token);
+      if (gaId) localStorage.setItem('fk_ga_id', gaId);
       autoUpdateSummary();
       showToast('Settings saved');
     }
@@ -670,9 +678,11 @@
       const u = localStorage.getItem('fk_gh_user');
       const r = localStorage.getItem('fk_gh_repo');
       const t = localStorage.getItem('fk_gh_token');
+      const ga = localStorage.getItem('fk_ga_id');
       if (u) document.getElementById('gh-user').value = u;
       if (r) document.getElementById('gh-repo').value = r;
       if (t) document.getElementById('gh-token').value = t;
+      if (ga) document.getElementById('ga-id').value = ga;
     }
 
     function autoUpdateSummary() {
@@ -797,7 +807,7 @@
       }
     }
 
-    // 100% Discover & Schema.org Compliant Post HTML Generator
+    // 100% Discover & Schema.org Compliant Post HTML Generator with GTAG AUTO INJECT
     function generatePostHTML(post) {
       const absoluteUrl = `https://entertainment.gujaratfastalert.in/posts/${post.slug}.html`;
       const absoluteImg = post.image.startsWith('http') 
@@ -807,6 +817,21 @@
       const safeSummary = (post.summary || post.title).replace(/"/g, '&quot;');
       const safeTitle = post.title.replace(/"/g, '&quot;');
       const isoDate = post.isoDate || new Date().toISOString();
+      const gaId = document.getElementById('ga-id').value.trim();
+
+      // Automated Google Analytics Tag
+      let gtagSnippet = '';
+      if (gaId) {
+        gtagSnippet = `
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=${gaId}"><\/script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${gaId}');
+  <\/script>`;
+      }
 
       return `<!DOCTYPE html>
 <html lang="hi">
@@ -814,7 +839,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${post.title} - Filmy Khabr</title>
-  
+  ${gtagSnippet}
   <!-- Essential Google Discover Meta Tags -->
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="description" content="${safeSummary}">
@@ -872,7 +897,7 @@
 
   <style>
     :root { --bg: #0c0d0e; --card: #141618; --accent: #e50914; --text: #f3f4f6; --muted: #9ca3af; --border: #22262a; }
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background: var(--bg); color: var(--text); padding: 12px; line-height: 1.65; font-size: 15px; }
     .post-container { max-width: 680px; margin: 0 auto; background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
     .nav-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
@@ -1029,7 +1054,7 @@
           sha: postFileSha || undefined
         });
 
-        showToast('Post published successfully!');
+        showToast('Post published successfully with GTAG!');
         resetForm();
         switchTab('manage');
       } catch (err) {
