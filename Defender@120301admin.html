@@ -404,7 +404,7 @@
       margin-top: 2px;
     }
 
-    /* Publish Success Modal (Instant Link & GSC Inspection) */
+    /* Publish Success Modal */
     #publish-success-modal {
       position: fixed;
       inset: 0;
@@ -441,6 +441,7 @@
       font-size: 12px;
       color: var(--text-muted);
       margin-bottom: 12px;
+      line-height: 1.5;
     }
 
     .url-copy-box {
@@ -533,7 +534,7 @@
           <input type="text" id="ga-id" value="G-E6B67VBEFZ" placeholder="G-E6B67VBEFZ" onchange="saveCreds()">
         </div>
       </div>
-      <div class="helper-txt">Analytics Tag ID har post mein automatic inject hoga. Settings locally saved rehti hain.</div>
+      <div class="helper-txt">Analytics Tag aur Sitemap.xml har post publish par automatic deploy hote hain.</div>
     </div>
 
     <!-- TAB 1: NEW POST FORM -->
@@ -542,7 +543,7 @@
         <div class="card-header">
           <div>
             <span class="card-title" id="form-heading">Create New Post</span>
-            <div class="card-subtitle">Discover Ready + Article Trailer Player</div>
+            <div class="card-subtitle">Discover Ready + Auto-Sitemap Engine</div>
           </div>
           <button class="btn btn-secondary" style="font-size: 10px; padding: 3px 6px;" onclick="resetForm()">Clear Form</button>
         </div>
@@ -645,7 +646,7 @@
         <div class="card-header">
           <div>
             <span class="card-title">Manage Existing Posts</span>
-            <div class="card-subtitle">Edit or Delete from data/posts.json</div>
+            <div class="card-subtitle">Edit or Delete from data/posts.json & sitemap.xml</div>
           </div>
           <button class="btn btn-secondary" style="font-size: 11px; padding: 4px 8px;" onclick="loadManagePosts()">Refresh List</button>
         </div>
@@ -687,10 +688,10 @@
   <div id="publish-success-modal">
     <div class="modal-box">
       <div class="modal-head">
-        <span>🎉 Post Published Successfully!</span>
+        <span>🎉 Post & Sitemap.xml Published!</span>
       </div>
       <div class="modal-desc">
-        Aapka Discover-ready article live ho chuka hai. Niche diye gaye link ko copy karke Google Search Console mein Indexing Request karein.
+        Aapka article live ho chuka hai aur <b>sitemap.xml</b> background mein update ho gaya hai. Link copy karke Google Search Console mein Indexing Request karein.
       </div>
       
       <label>Live Article URL:</label>
@@ -836,7 +837,6 @@
       setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    // Extract YouTube Embed URL helper
     function getYoutubeEmbedUrl(url) {
       if (!url) return null;
       let videoId = '';
@@ -909,6 +909,28 @@
       } else {
         imgEl.style.display = 'none';
       }
+    }
+
+    // Dynamic Full Sitemap.xml Generator
+    function generateSitemapXML(posts) {
+      let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+      xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+      
+      // 1. Static Root Pages
+      xml += `  <url>\n    <loc>https://entertainment.gujaratfastalert.in/</loc>\n    <priority>1.0</priority>\n    <changefreq>daily</changefreq>\n  </url>\n`;
+      xml += `  <url>\n    <loc>https://entertainment.gujaratfastalert.in/about.html</loc>\n    <priority>0.6</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
+      xml += `  <url>\n    <loc>https://entertainment.gujaratfastalert.in/contact.html</loc>\n    <priority>0.6</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
+      xml += `  <url>\n    <loc>https://entertainment.gujaratfastalert.in/privacy-policy.html</loc>\n    <priority>0.5</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
+      xml += `  <url>\n    <loc>https://entertainment.gujaratfastalert.in/disclaimer.html</loc>\n    <priority>0.5</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
+
+      // 2. All Dynamic Post URLs
+      posts.forEach(p => {
+        const postDate = p.date || new Date().toISOString().split('T')[0];
+        xml += `  <url>\n    <loc>https://entertainment.gujaratfastalert.in/posts/${p.slug}.html</loc>\n    <lastmod>${postDate}</lastmod>\n    <priority>0.8</priority>\n    <changefreq>weekly</changefreq>\n  </url>\n`;
+      });
+
+      xml += `</urlset>`;
+      return xml;
     }
 
     // 100% Discover & Schema.org Compliant Post Generator WITH IN-ARTICLE TRAILER PLAYER
@@ -1202,7 +1224,22 @@
           sha: postFileSha || undefined
         });
 
-        // Show Instant Success Modal with Direct Copy & GSC Links
+        // Auto Generate & Update sitemap.xml on GitHub
+        btn.textContent = 'Updating sitemap.xml on GitHub...';
+        const sitemapXML = generateSitemapXML(postsList);
+        let sitemapFileSha = null;
+        try {
+          const existingSitemap = await ghRequest('sitemap.xml');
+          if (existingSitemap && existingSitemap.sha) sitemapFileSha = existingSitemap.sha;
+        } catch(e){}
+
+        await ghRequest('sitemap.xml', 'PUT', {
+          message: `Update sitemap.xml for ${slug}`,
+          content: utf8ToBase64(sitemapXML),
+          sha: sitemapFileSha || undefined
+        });
+
+        // Show Success Modal
         const fullLiveUrl = `https://entertainment.gujaratfastalert.in/posts/${slug}.html`;
         document.getElementById('success-post-url').value = fullLiveUrl;
         document.getElementById('btn-open-post').href = fullLiveUrl;
@@ -1293,19 +1330,34 @@
       if (!confirm(`Are you sure you want to delete "${post ? post.title : 'this post'}"?`)) return;
 
       try {
-        showToast('Deleting post...');
+        showToast('Deleting post & updating sitemap...');
         const file = await ghRequest('data/posts.json');
         if (!file) throw new Error('data/posts.json not found');
         let posts = JSON.parse(base64ToUtf8(file.content));
         posts = posts.filter(p => p.id !== id);
 
+        // Update posts.json
         await ghRequest('data/posts.json', 'PUT', {
           message: `Delete post ${id}`,
           content: utf8ToBase64(JSON.stringify(posts, null, 2)),
           sha: file.sha
         });
 
-        showToast('Post deleted successfully');
+        // Update sitemap.xml on delete
+        const sitemapXML = generateSitemapXML(posts);
+        let sitemapFileSha = null;
+        try {
+          const existingSitemap = await ghRequest('sitemap.xml');
+          if (existingSitemap && existingSitemap.sha) sitemapFileSha = existingSitemap.sha;
+        } catch(e){}
+
+        await ghRequest('sitemap.xml', 'PUT', {
+          message: `Update sitemap.xml after deleting ${id}`,
+          content: utf8ToBase64(sitemapXML),
+          sha: sitemapFileSha || undefined
+        });
+
+        showToast('Post deleted & sitemap updated successfully');
         loadManagePosts();
       } catch(err) {
         alert('Delete failed: ' + err.message);
