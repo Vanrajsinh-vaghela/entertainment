@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Filmy Khabr - Admin Desk</title>
-  <meta name="robots" content="noindex, nofollow">
+  <meta name="robots" content="index, follow">
   <style>
     :root {
       --bg: #0c0d0e;
@@ -606,7 +606,7 @@
         </div>
 
         <div class="form-group">
-          <label>YouTube Trailer URL (Auto embeds inside content automatically)</label>
+          <label>YouTube Trailer URL (Automatically places right before the last section)</label>
           <input type="text" id="post-trailer" placeholder="https://www.youtube.com/watch?v=...">
         </div>
 
@@ -624,7 +624,7 @@
         </div>
 
         <div class="form-group">
-          <textarea id="post-content" placeholder="Type full Hindi article content here. Trailer will automatically insert itself nicely inside the content."></textarea>
+          <textarea id="post-content" placeholder="Type full Hindi article content here. Trailer will automatically appear before the final conclusion/last paragraph."></textarea>
         </div>
 
         <button class="btn btn-accent" id="publish-btn" onclick="publishPost()">Publish Discover-Ready Post</button>
@@ -853,7 +853,6 @@
       return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}` : null;
     }
 
-    // Automatically inject trailer nicely inside the content (e.g. after the first paragraph or block)
     function processContentWithTrailer(rawContent, trailerUrl) {
       const embedTrailer = getYoutubeEmbedUrl(trailerUrl);
       if (!embedTrailer) return rawContent;
@@ -866,13 +865,17 @@
         </div>
       </div>`;
 
-      // If content has paragraph tags, insert after the first </p>, otherwise prepend or append
       if (rawContent.includes('</p>')) {
         const parts = rawContent.split('</p>');
-        parts[0] = parts[0] + '</p>' + trailerBoxHTML;
-        return parts.join('</p>');
+        if (parts.length > 2) {
+          parts.splice(parts.length - 2, 0, trailerBoxHTML);
+          return parts.join('</p>');
+        } else {
+          parts[0] = parts[0] + '</p>' + trailerBoxHTML;
+          return parts.join('</p>');
+        }
       } else {
-        return trailerBoxHTML + '<br>' + rawContent;
+        return rawContent + '<br>' + trailerBoxHTML;
       }
     }
 
@@ -984,7 +987,6 @@
   <\/script>`;
       }
 
-      // Automatically place trailer inside content
       const finalArticleBody = processContentWithTrailer(post.content, post.trailer);
 
       return `<!DOCTYPE html>
