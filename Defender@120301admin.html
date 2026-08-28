@@ -234,6 +234,7 @@
       border: none;
       transition: 0.2s;
       gap: 4px;
+      text-decoration: none;
     }
 
     .btn-accent {
@@ -267,6 +268,12 @@
       border: 1px solid #1e3a8a;
       padding: 4px 8px;
       font-size: 11px;
+    }
+
+    .btn-success {
+      background: #065f46;
+      color: #a7f3d0;
+      border: 1px solid #047857;
     }
 
     /* Manage List */
@@ -396,6 +403,67 @@
       color: var(--text-muted);
       margin-top: 2px;
     }
+
+    /* Publish Success Modal (Instant Link & GSC Inspection) */
+    #publish-success-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      padding: 16px;
+    }
+
+    .modal-box {
+      background: #14171a;
+      border: 1px solid #2a3038;
+      border-radius: var(--radius);
+      padding: 18px;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--success);
+      margin-bottom: 10px;
+    }
+
+    .modal-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .url-copy-box {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .url-copy-box input {
+      font-size: 12px;
+      padding: 8px;
+      background: #0a0b0d;
+      border: 1px solid #23272d;
+      color: #38bdf8;
+      font-weight: 600;
+    }
+
+    .modal-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
@@ -474,7 +542,7 @@
         <div class="card-header">
           <div>
             <span class="card-title" id="form-heading">Create New Post</span>
-            <div class="card-subtitle">Discover Ready + Direct Video Embed</div>
+            <div class="card-subtitle">Discover Ready + Article Trailer Player</div>
           </div>
           <button class="btn btn-secondary" style="font-size: 10px; padding: 3px 6px;" onclick="resetForm()">Clear Form</button>
         </div>
@@ -545,7 +613,7 @@
             <input type="text" id="post-image-path" placeholder="images/sample.jpg">
           </div>
           <div class="form-group">
-            <label>YouTube Trailer URL (For Direct Hero Play)</label>
+            <label>YouTube Trailer URL (Auto Embeds in Article & Slider)</label>
             <input type="text" id="post-trailer" placeholder="https://www.youtube.com/watch?v=...">
           </div>
         </div>
@@ -613,6 +681,31 @@
       </div>
     </div>
 
+  </div>
+
+  <!-- PUBLISH SUCCESS MODAL -->
+  <div id="publish-success-modal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <span>🎉 Post Published Successfully!</span>
+      </div>
+      <div class="modal-desc">
+        Aapka Discover-ready article live ho chuka hai. Niche diye gaye link ko copy karke Google Search Console mein Indexing Request karein.
+      </div>
+      
+      <label>Live Article URL:</label>
+      <div class="url-copy-box">
+        <input type="text" id="success-post-url" readonly>
+        <button class="btn btn-secondary" onclick="copyPostLink()">📋 Copy</button>
+      </div>
+
+      <div class="modal-actions">
+        <a id="btn-open-post" href="#" target="_blank" class="btn btn-secondary">🚀 View Live Post</a>
+        <a id="btn-open-gsc" href="https://search.google.com/search-console" target="_blank" class="btn btn-success">🔍 Open Search Console</a>
+      </div>
+
+      <button class="btn btn-accent" style="margin-top: 6px;" onclick="closeSuccessModal()">Done / Close</button>
+    </div>
   </div>
 
   <div id="toast" class="notification">Message</div>
@@ -743,6 +836,22 @@
       setTimeout(() => t.classList.remove('show'), 3000);
     }
 
+    // Extract YouTube Embed URL helper
+    function getYoutubeEmbedUrl(url) {
+      if (!url) return null;
+      let videoId = '';
+      if (url.includes('youtu.be/')) {
+        videoId = url.split('youtu.be/')[1].split(/[?#]/)[0];
+      } else if (url.includes('watch?v=')) {
+        videoId = url.split('watch?v=')[1].split('&')[0];
+      } else if (url.includes('/embed/')) {
+        videoId = url.split('/embed/')[1].split(/[?#]/)[0];
+      } else if (url.length === 11 && !url.includes('/')) {
+        videoId = url;
+      }
+      return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}` : null;
+    }
+
     async function ghRequest(path, method = 'GET', body = null) {
       const user = document.getElementById('gh-user').value.trim();
       const repo = document.getElementById('gh-repo').value.trim();
@@ -802,6 +911,7 @@
       }
     }
 
+    // 100% Discover & Schema.org Compliant Post Generator WITH IN-ARTICLE TRAILER PLAYER
     function generatePostHTML(post) {
       const absoluteUrl = `https://entertainment.gujaratfastalert.in/posts/${post.slug}.html`;
       const absoluteImg = post.image.startsWith('http') 
@@ -812,6 +922,7 @@
       const safeTitle = post.title.replace(/"/g, '&quot;');
       const isoDate = post.isoDate || new Date().toISOString();
       const gaId = document.getElementById('ga-id').value.trim() || 'G-E6B67VBEFZ';
+      const embedTrailer = getYoutubeEmbedUrl(post.trailer);
 
       let gtagSnippet = '';
       if (gaId) {
@@ -824,6 +935,18 @@
     gtag('js', new Date());
     gtag('config', '${gaId}');
   <\/script>`;
+      }
+
+      let trailerSectionHTML = '';
+      if (embedTrailer) {
+        trailerSectionHTML = `
+    <!-- Official Trailer Embed Section -->
+    <div class="article-trailer-box">
+      <div class="trailer-tag">▶ Official Trailer & Video Preview</div>
+      <div class="video-responsive">
+        <iframe src="${embedTrailer}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>`;
       }
 
       return `<!DOCTYPE html>
@@ -899,8 +1022,15 @@
     .meta { font-size: 12px; color: var(--muted); margin: 8px 0 12px 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
     .author-tag { color: #38bdf8; font-weight: 700; }
     h1 { font-size: 22px; line-height: 1.35; margin: 8px 0 12px 0; color: #fff; font-weight: 800; }
-    .featured-img-wrap { width: 100%; border-radius: 6px; overflow: hidden; margin: 12px 0 16px 0; background: #111; }
+    .featured-img-wrap { width: 100%; border-radius: 6px; overflow: hidden; margin: 12px 0 14px 0; background: #111; }
     .featured-img { width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; display: block; }
+    
+    /* In-Article Responsive Video Box */
+    .article-trailer-box { margin: 16px 0; background: #0c0e10; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    .trailer-tag { padding: 6px 10px; font-size: 11px; font-weight: 700; color: #38bdf8; background: #121519; border-bottom: 1px solid var(--border); }
+    .video-responsive { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+    .video-responsive iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
     .article-body { font-size: 15px; color: #e5e7eb; }
     .article-body p { margin-bottom: 14px; }
     .article-body h2, .article-body h3 { color: #fff; margin: 18px 0 8px 0; font-size: 18px; }
@@ -941,6 +1071,9 @@
     </div>
     <h1>${post.title}</h1>
     ${post.image ? `<div class="featured-img-wrap"><img class="featured-img" src="../${post.image}" alt="${safeTitle}" width="1200" height="675" loading="eager"></div>` : ''}
+    
+    ${trailerSectionHTML}
+
     <div class="article-body">
       ${post.content}
     </div>
@@ -1069,15 +1202,33 @@
           sha: postFileSha || undefined
         });
 
-        showToast('Post published successfully!');
+        // Show Instant Success Modal with Direct Copy & GSC Links
+        const fullLiveUrl = `https://entertainment.gujaratfastalert.in/posts/${slug}.html`;
+        document.getElementById('success-post-url').value = fullLiveUrl;
+        document.getElementById('btn-open-post').href = fullLiveUrl;
+        document.getElementById('publish-success-modal').style.display = 'flex';
+
         resetForm();
-        switchTab('manage');
       } catch (err) {
         alert('Publish failed: ' + err.message);
       } finally {
         btn.disabled = false;
         btn.textContent = 'Publish Discover-Ready Post';
       }
+    }
+
+    function copyPostLink() {
+      const input = document.getElementById('success-post-url');
+      input.select();
+      input.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(input.value).then(() => {
+        showToast('Link copied to clipboard!');
+      });
+    }
+
+    function closeSuccessModal() {
+      document.getElementById('publish-success-modal').style.display = 'none';
+      switchTab('manage');
     }
 
     async function loadManagePosts() {
