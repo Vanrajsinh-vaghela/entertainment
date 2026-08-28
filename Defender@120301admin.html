@@ -549,6 +549,9 @@
         </div>
 
         <input type="hidden" id="edit-post-id" value="">
+        <input type="hidden" id="edit-published-at" value="">
+        <input type="hidden" id="post-slug" value="">
+        <input type="hidden" id="post-image-path" value="">
 
         <div class="form-group">
           <label>Article Title (Google Discover Optimized)</label>
@@ -597,26 +600,14 @@
           </div>
         </div>
 
-        <div class="form-row-2">
-          <div class="form-group">
-            <label>URL Slug</label>
-            <input type="text" id="post-slug" placeholder="mirzapur-season-3-ending-explained">
-          </div>
-          <div class="form-group">
-            <label>Featured Image (1200px+ Recommended)</label>
-            <input type="file" id="post-file" accept="image/*" onchange="handleImageFile(event)">
-          </div>
+        <div class="form-group">
+          <label>Featured Image (1200px+ Recommended)</label>
+          <input type="file" id="post-file" accept="image/*" onchange="handleImageFile(event)">
         </div>
 
-        <div class="form-row-2">
-          <div class="form-group">
-            <label>Image Path / URL</label>
-            <input type="text" id="post-image-path" placeholder="images/sample.jpg">
-          </div>
-          <div class="form-group">
-            <label>YouTube Trailer URL (Auto Embeds in Article & Slider)</label>
-            <input type="text" id="post-trailer" placeholder="https://www.youtube.com/watch?v=...">
-          </div>
+        <div class="form-group">
+          <label>YouTube Trailer URL (Auto Embeds in Article & Slider)</label>
+          <input type="text" id="post-trailer" placeholder="https://www.youtube.com/watch?v=...">
         </div>
 
         <div class="form-group">
@@ -674,7 +665,7 @@
           </div>
           <h1 class="preview-title" id="prev-title">Article Title Preview</h1>
           <div class="preview-meta" id="prev-date">By Vanrajsinh Vaghela • Today • Filmy Khabr</div>
-          <img src="" id="prev-img" class="preview-img" alt="Post Preview" style="display:none;">
+          <img src="" id="prev-img" class="preview-img" alt="Post Preview" style="display:none;" width="1200" height="675">
           <div class="preview-body" id="prev-content">
             <p>Post content will appear here when you write in the editor.</p>
           </div>
@@ -789,23 +780,34 @@
 
     function autoGenerateSlug() {
       const editId = document.getElementById('edit-post-id').value;
-      if (editId) return;
+      if (editId) return; // Do not modify slug if editing existing article
       const title = document.getElementById('post-title').value;
       const slug = title.toLowerCase()
-        .replace(/[^\w\s-]/g, '')
+        .replace(/[^a-z0-9\s-]/g, '')
         .trim()
         .replace(/\s+/g, '-');
+      
       document.getElementById('post-slug').value = slug;
+      
+      // Auto set image path if image not manually uploaded yet
+      if (!selectedImageBase64) {
+        document.getElementById('post-image-path').value = slug ? `images/${slug}.${selectedImageExt}` : '';
+      }
     }
 
     function handleImageFile(e) {
       const file = e.target.files[0];
       if (!file) return;
       selectedImageExt = file.name.split('.').pop() || 'jpg';
+      
+      if (file.size < 30000) {
+        showToast('Warning: Image file size is quite small for high quality.');
+      }
+
       const reader = new FileReader();
       reader.onload = function(evt) {
         selectedImageBase64 = evt.target.result.split(',')[1];
-        const slug = document.getElementById('post-slug').value || 'post-image';
+        const slug = document.getElementById('post-slug').value || ('post-' + Date.now());
         document.getElementById('post-image-path').value = `images/${slug}.${selectedImageExt}`;
         showToast('Image loaded for commit');
       };
@@ -911,21 +913,18 @@
       }
     }
 
-    // Dynamic Full Sitemap.xml Generator
     function generateSitemapXML(posts) {
       let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
       xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
       
-      // 1. Static Root Pages
       xml += `  <url>\n    <loc>https://entertainment.gujaratfastalert.in/</loc>\n    <priority>1.0</priority>\n    <changefreq>daily</changefreq>\n  </url>\n`;
       xml += `  <url>\n    <loc>https://entertainment.gujaratfastalert.in/about.html</loc>\n    <priority>0.6</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
       xml += `  <url>\n    <loc>https://entertainment.gujaratfastalert.in/contact.html</loc>\n    <priority>0.6</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
       xml += `  <url>\n    <loc>https://entertainment.gujaratfastalert.in/privacy-policy.html</loc>\n    <priority>0.5</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
       xml += `  <url>\n    <loc>https://entertainment.gujaratfastalert.in/disclaimer.html</loc>\n    <priority>0.5</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
 
-      // 2. All Dynamic Post URLs
       posts.forEach(p => {
-        const postDate = p.date || new Date().toISOString().split('T')[0];
+        const postDate = p.publishedAt ? p.publishedAt.split('T')[0] : (p.date || new Date().toISOString().split('T')[0]);
         xml += `  <url>\n    <loc>https://entertainment.gujaratfastalert.in/posts/${p.slug}.html</loc>\n    <lastmod>${postDate}</lastmod>\n    <priority>0.8</priority>\n    <changefreq>weekly</changefreq>\n  </url>\n`;
       });
 
@@ -933,16 +932,20 @@
       return xml;
     }
 
-    // 100% Discover & Schema.org Compliant Post Generator WITH IN-ARTICLE TRAILER PLAYER
     function generatePostHTML(post) {
       const absoluteUrl = `https://entertainment.gujaratfastalert.in/posts/${post.slug}.html`;
       const absoluteImg = post.image.startsWith('http') 
         ? post.image 
         : `https://entertainment.gujaratfastalert.in/${post.image}`;
       
-      const safeSummary = (post.summary || post.title).replace(/"/g, '&quot;');
+      const rawSummary = post.summary || post.title;
+      const safeSummary = rawSummary.replace(/"/g, '&quot;');
       const safeTitle = post.title.replace(/"/g, '&quot;');
-      const isoDate = post.isoDate || new Date().toISOString();
+      
+      const publishedAt = post.publishedAt || post.isoDate || new Date().toISOString();
+      const modifiedAt = post.modifiedAt || new Date().toISOString();
+      const displayDate = post.date || new Date().toISOString().split('T')[0];
+
       const gaId = document.getElementById('ga-id').value.trim() || 'G-E6B67VBEFZ';
       const embedTrailer = getYoutubeEmbedUrl(post.trailer);
 
@@ -962,7 +965,6 @@
       let trailerSectionHTML = '';
       if (embedTrailer) {
         trailerSectionHTML = `
-    <!-- Official Trailer Embed Section -->
     <div class="article-trailer-box">
       <div class="trailer-tag">▶ Official Trailer & Video Preview</div>
       <div class="video-responsive">
@@ -978,13 +980,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${post.title} - Filmy Khabr</title>
   ${gtagSnippet}
-  <!-- Essential Google Discover Meta Tags -->
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="description" content="${safeSummary}">
   <meta name="author" content="Vanrajsinh Vaghela">
   <link rel="canonical" href="${absoluteUrl}">
   
-  <!-- Open Graph / Discover Social Tags -->
   <meta property="og:locale" content="hi_IN">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Filmy Khabr">
@@ -994,17 +994,16 @@
   <meta property="og:image" content="${absoluteImg}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="675">
-  <meta property="article:published_time" content="${isoDate}">
+  <meta property="article:published_time" content="${publishedAt}">
+  <meta property="article:modified_time" content="${modifiedAt}">
   <meta property="article:author" content="Vanrajsinh Vaghela">
   <meta property="article:section" content="${post.category}">
 
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${safeTitle}">
   <meta name="twitter:description" content="${safeSummary}">
   <meta name="twitter:image" content="${absoluteImg}">
 
-  <!-- Schema.org NewsArticle Structured Data for Google Discover -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -1017,8 +1016,8 @@
     "image": [
       "${absoluteImg}"
     ],
-    "datePublished": "${isoDate}",
-    "dateModified": "${isoDate}",
+    "datePublished": "${publishedAt}",
+    "dateModified": "${modifiedAt}",
     "author": {
       "@type": "Person",
       "name": "Vanrajsinh Vaghela",
@@ -1029,7 +1028,7 @@
       "name": "Filmy Khabr",
       "url": "https://entertainment.gujaratfastalert.in/"
     },
-    "description": ${JSON.stringify(post.summary || post.title)}
+    "description": ${JSON.stringify(rawSummary)}
   }
   <\/script>
 
@@ -1047,7 +1046,6 @@
     .featured-img-wrap { width: 100%; border-radius: 6px; overflow: hidden; margin: 12px 0 14px 0; background: #111; }
     .featured-img { width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; display: block; }
     
-    /* In-Article Responsive Video Box */
     .article-trailer-box { margin: 16px 0; background: #0c0e10; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
     .trailer-tag { padding: 6px 10px; font-size: 11px; font-weight: 700; color: #38bdf8; background: #121519; border-bottom: 1px solid var(--border); }
     .video-responsive { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
@@ -1089,7 +1087,7 @@
       <span>•</span>
       <span>${post.platform || 'General'}</span>
       <span>•</span>
-      <time datetime="${isoDate}">${post.date}</time>
+      <time datetime="${publishedAt}">${displayDate}</time>
     </div>
     <h1>${post.title}</h1>
     ${post.image ? `<div class="featured-img-wrap"><img class="featured-img" src="../${post.image}" alt="${safeTitle}" width="1200" height="675" loading="eager"></div>` : ''}
@@ -1118,18 +1116,22 @@
     async function publishPost() {
       const btn = document.getElementById('publish-btn');
       const title = document.getElementById('post-title').value.trim();
+      
+      autoGenerateSlug();
       const slug = document.getElementById('post-slug').value.trim();
+      let imagePath = document.getElementById('post-image-path').value.trim();
+
       const category = document.getElementById('post-category').value;
       const platform = document.getElementById('post-platform').value;
       const badge = document.getElementById('post-badge').value;
-      let imagePath = document.getElementById('post-image-path').value.trim();
       const trailer = document.getElementById('post-trailer').value.trim();
-      const summary = document.getElementById('post-summary').value.trim();
+      const summaryInput = document.getElementById('post-summary').value.trim();
       const content = document.getElementById('post-content').value.trim();
       const editId = document.getElementById('edit-post-id').value;
+      const existingPublishedAt = document.getElementById('edit-published-at').value;
 
       if (!title || !slug || !content) {
-        alert('Please fill Title, Slug and Content.');
+        alert('Please fill Title and Content fields.');
         return;
       }
 
@@ -1162,7 +1164,18 @@
 
         const now = new Date();
         const dateStr = now.toISOString().split('T')[0];
-        const isoDate = now.toISOString();
+        const currentIso = now.toISOString();
+
+        const finalPublishedAt = existingPublishedAt ? existingPublishedAt : currentIso;
+        const finalModifiedAt = currentIso;
+
+        let finalSummary = summaryInput;
+        if (!finalSummary) {
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = content;
+          const textOnly = tempDiv.textContent || tempDiv.innerText || '';
+          finalSummary = textOnly.substring(0, 150).trim() || title;
+        }
 
         const postObj = {
           id: editId || ('post_' + Date.now()),
@@ -1173,10 +1186,11 @@
           badge,
           image: imagePath || '',
           trailer: trailer || '',
-          summary,
+          summary: finalSummary,
           content,
           date: dateStr,
-          isoDate: isoDate,
+          publishedAt: finalPublishedAt,
+          modifiedAt: finalModifiedAt,
           url: `posts/${slug}.html`
         };
 
@@ -1196,8 +1210,15 @@
 
         if (editId) {
           const idx = postsList.findIndex(p => p.id === editId);
-          if (idx !== -1) postsList[idx] = postObj;
-          else postsList.unshift(postObj);
+          if (idx !== -1) {
+            if (!postsList[idx].publishedAt && postsList[idx].isoDate) {
+              postsList[idx].publishedAt = postsList[idx].isoDate;
+            }
+            postObj.publishedAt = postsList[idx].publishedAt || finalPublishedAt;
+            postsList[idx] = postObj;
+          } else {
+            postsList.unshift(postObj);
+          }
         } else {
           postsList.unshift(postObj);
         }
@@ -1224,7 +1245,6 @@
           sha: postFileSha || undefined
         });
 
-        // Auto Generate & Update sitemap.xml on GitHub
         btn.textContent = 'Updating sitemap.xml on GitHub...';
         const sitemapXML = generateSitemapXML(postsList);
         let sitemapFileSha = null;
@@ -1239,7 +1259,6 @@
           sha: sitemapFileSha || undefined
         });
 
-        // Show Success Modal
         const fullLiveUrl = `https://entertainment.gujaratfastalert.in/posts/${slug}.html`;
         document.getElementById('success-post-url').value = fullLiveUrl;
         document.getElementById('btn-open-post').href = fullLiveUrl;
@@ -1308,12 +1327,15 @@
       const post = allPostsCache.find(p => p.id === id);
       if (!post) return;
       document.getElementById('edit-post-id').value = post.id;
+      document.getElementById('edit-published-at').value = post.publishedAt || post.isoDate || '';
+      
       document.getElementById('post-title').value = post.title || '';
       document.getElementById('post-slug').value = post.slug || '';
+      document.getElementById('post-image-path').value = post.image || '';
+      
       document.getElementById('post-category').value = post.category || 'Movies';
       document.getElementById('post-platform').value = post.platform || 'General';
       document.getElementById('post-badge').value = post.badge || 'Trending';
-      document.getElementById('post-image-path').value = post.image || '';
       document.getElementById('post-trailer').value = post.trailer || '';
       document.getElementById('post-summary').value = post.summary || '';
       document.getElementById('post-content').value = post.content || '';
@@ -1336,14 +1358,12 @@
         let posts = JSON.parse(base64ToUtf8(file.content));
         posts = posts.filter(p => p.id !== id);
 
-        // Update posts.json
         await ghRequest('data/posts.json', 'PUT', {
           message: `Delete post ${id}`,
           content: utf8ToBase64(JSON.stringify(posts, null, 2)),
           sha: file.sha
         });
 
-        // Update sitemap.xml on delete
         const sitemapXML = generateSitemapXML(posts);
         let sitemapFileSha = null;
         try {
@@ -1366,6 +1386,7 @@
 
     function resetForm() {
       document.getElementById('edit-post-id').value = '';
+      document.getElementById('edit-published-at').value = '';
       document.getElementById('post-title').value = '';
       document.getElementById('post-slug').value = '';
       document.getElementById('post-image-path').value = '';
