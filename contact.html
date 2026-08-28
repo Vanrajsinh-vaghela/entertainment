@@ -13,22 +13,108 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us - Filmy Khabr</title>
-  <meta name="description" content="Contact Filmy Khabr editorial desk and publisher Vanrajsinh Vaghela for news tips, corrections, or copyright inquiries.">
+  <meta name="description" content="Contact Filmy Khabr editorial desk and publisher Vanrajsinh Vaghela via email Gujaratfastalert@gmail.com for news tips, queries, and copyright notices.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://entertainment.gujaratfastalert.in/contact.html">
   <style>
-    :root { --bg: #090a0b; --card: #171a1e; --border: #23272d; --accent: #e50914; --text: #f3f4f6; --muted: #9ca3af; }
-    * { margin:0; padding:0; box-sizing:border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: var(--bg); color: var(--text); padding: 16px 12px 30px; line-height: 1.6; font-size: 14px; }
-    .page-box { max-width: 720px; margin: 0 auto; background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
-    .top-nav { margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
-    .top-nav a { color: var(--accent); text-decoration: none; font-weight: 700; font-size: 13px; }
-    h1 { font-size: 22px; color: #fff; margin-bottom: 12px; font-weight: 800; }
-    h2 { font-size: 16px; color: #fff; margin: 18px 0 8px 0; }
-    p { margin-bottom: 12px; color: #d1d5db; }
-    .contact-item { background: #111316; border: 1px solid var(--border); border-radius: 6px; padding: 12px; margin-bottom: 10px; }
-    .contact-label { font-size: 11px; font-weight: 700; color: #38bdf8; text-transform: uppercase; margin-bottom: 2px; }
-    .contact-val { font-size: 14px; color: #fff; font-weight: 600; word-break: break-all; }
+    :root { 
+      --bg: #090a0b; 
+      --card: #171a1e; 
+      --border: #23272d; 
+      --accent: #e50914; 
+      --text: #f3f4f6; 
+      --muted: #9ca3af; 
+      --radius: 8px;
+    }
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+    }
+    body { 
+      background: var(--bg); 
+      color: var(--text); 
+      padding: 16px 12px 30px; 
+      line-height: 1.6; 
+      font-size: 14px; 
+    }
+    .page-box { 
+      max-width: 720px; 
+      margin: 0 auto; 
+      background: var(--card); 
+      border: 1px solid var(--border); 
+      border-radius: var(--radius); 
+      padding: 20px; 
+    }
+    .top-nav { 
+      margin-bottom: 16px; 
+      padding-bottom: 10px; 
+      border-bottom: 1px solid var(--border); 
+    }
+    .top-nav a { 
+      color: var(--accent); 
+      text-decoration: none; 
+      font-weight: 700; 
+      font-size: 13px; 
+    }
+    h1 { 
+      font-size: 22px; 
+      color: #fff; 
+      margin-bottom: 12px; 
+      font-weight: 800; 
+    }
+    h2 { 
+      font-size: 16px; 
+      color: #fff; 
+      margin: 20px 0 10px 0; 
+    }
+    p { 
+      margin-bottom: 12px; 
+      color: #d1d5db; 
+    }
+    .contact-item { 
+      background: #111316; 
+      border: 1px solid var(--border); 
+      border-radius: 6px; 
+      padding: 14px; 
+      margin-bottom: 10px; 
+    }
+    .contact-label { 
+      font-size: 11px; 
+      font-weight: 700; 
+      color: #38bdf8; 
+      text-transform: uppercase; 
+      margin-bottom: 4px; 
+      letter-spacing: 0.5px;
+    }
+    .contact-val { 
+      font-size: 14px; 
+      color: #fff; 
+      font-weight: 600; 
+      word-break: break-all; 
+    }
+    .contact-val a {
+      color: #fca5a5;
+      text-decoration: underline;
+    }
+    .email-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 7px 14px;
+      border-radius: 6px;
+      margin-top: 8px;
+      transition: background 0.2s;
+    }
+    .email-btn:hover {
+      background: #b80710;
+    }
     .shiny-author {
       background: linear-gradient(90deg, #f59e0b, #ec4899, #38bdf8, #f59e0b);
       background-size: 200% auto;
@@ -36,13 +122,37 @@
       -webkit-background-clip: text;
       background-clip: text;
       font-weight: 800;
+      letter-spacing: 0.5px;
       animation: shine 4s linear infinite;
     }
-    @keyframes shine { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
-    footer { text-align: center; margin-top: 24px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 11px; color: var(--muted); line-height: 1.6; }
-    .footer-links { margin-bottom: 8px; }
-    .footer-links a { color: var(--muted); text-decoration: none; margin: 0 4px; }
-    .footer-links a:hover { color: #fff; }
+    @keyframes shine { 
+      0% { background-position: 0% center; } 
+      100% { background-position: 200% center; } 
+    }
+    footer { 
+      text-align: center; 
+      margin-top: 24px; 
+      padding-top: 14px; 
+      border-top: 1px solid var(--border); 
+      font-size: 11px; 
+      color: var(--muted); 
+      line-height: 1.6; 
+    }
+    .footer-links { 
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px; 
+    }
+    .footer-links a { 
+      color: var(--muted); 
+      text-decoration: none; 
+      font-size: 11px; 
+    }
+    .footer-links a:hover { 
+      color: #fff; 
+    }
   </style>
 </head>
 <body>
@@ -52,26 +162,42 @@
     </div>
 
     <h1>Contact Us</h1>
-    <p>यदि आपके पास किसी समाचार, मूवी ट्रेलर या रिव्यू से संबंधित कोई सुझाव, प्रश्न या प्रतिक्रिया है, तो आप हमारी संपादकीय टीम से सीधे संपर्क कर सकते हैं।</p>
+    <p>यदि आपके पास किसी समाचार, रिव्यू, ट्रेलर अपडेट या सुझाव से संबंधित कोई प्रश्न है, तो आप हमारी संपादकीय टीम से सीधे संपर्क कर सकते हैं।</p>
 
-    <h2>Editorial & Publisher Information</h2>
+    <h2>Official Contact Desk</h2>
+
+    <!-- Direct Email Desk -->
+    <div class="contact-item">
+      <div class="contact-label">Official Email Support</div>
+      <div class="contact-val">
+        <a href="mailto:Gujaratfastalert@gmail.com">Gujaratfastalert@gmail.com</a>
+      </div>
+      <p style="font-size: 12px; color: #9ca3af; margin: 6px 0 8px 0;">
+        आप हमें किसी भी प्रश्न, विज्ञापन या सहयोग के लिए सीधे ईमेल भी भेज सकते हैं।
+      </p>
+      <a href="mailto:Gujaratfastalert@gmail.com" class="email-btn">✉ Send Direct Email</a>
+    </div>
+
+    <!-- Publisher Info -->
     <div class="contact-item">
       <div class="contact-label">Managed & Published By</div>
       <div class="contact-val">Vanrajsinh Vaghela</div>
     </div>
 
+    <!-- Website URL -->
     <div class="contact-item">
       <div class="contact-label">Official Website</div>
       <div class="contact-val">https://entertainment.gujaratfastalert.in</div>
     </div>
 
+    <!-- Community -->
     <div class="contact-item">
       <div class="contact-label">Social & Community</div>
-      <div class="contact-val">Telegram Channel: Filmy Khabr Official</div>
+      <div class="contact-val">Telegram: Filmy Khabr Official Channel</div>
     </div>
 
-    <h2>कंटेंट सुधार और कॉपीराइट पूछताछ</h2>
-    <p>यदि आपको हमारी वेबसाइट पर प्रकाशित किसी भी सामग्री में कोई तथ्यात्मक त्रुटि लगती है या कॉपीराइट संबंधी कोई आपत्ति है, तो कृपया संपूर्ण विवरण के साथ हमें सूचित करें। हमारी टीम 24 से 48 कार्य घंटों के भीतर आवश्यक समीक्षा करेगी।</p>
+    <h2>कंटेंट सुधार और कॉपीराइट नोटिस</h2>
+    <p>यदि आपको वेबसाइट पर प्रकाशित किसी भी कंटेंट में कोई तथ्यात्मक सुधार करवाना हो या किसी सामग्री से संबंधित कोई कॉपीराइट आपत्ति हो, तो कृपया ईमेल में पोस्ट का URL और संपूर्ण विवरण दर्ज करके <b>Gujaratfastalert@gmail.com</b> पर मेल भेजें। हमारी टीम 24 से 48 घंटों में समीक्षा करेगी।</p>
 
     <footer>
       <div class="footer-links">
