@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6B67VBEFZ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E6B67VBEFZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-  gtag('config', 'G-E6B67VBEFZ');
-</script>
-<meta name="google-site-verification" content="BE1aM7twVnliG5WUG9TTrr1KLBu_-SIu_bGY_FjLwyg" />
+    gtag('config', 'G-E6B67VBEFZ');
+  </script>
+
+  <!-- Google Search Console Verification -->
+  <meta name="google-site-verification" content="BE1aM7twVnliG5WUG9TTrr1KLBu_-SIu_bGY_FjLwyg" />
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Filmy Khabr - Entertainment, Movies, OTT & Web Series News</title>
@@ -286,7 +289,7 @@
 
     .hero-img-wrap {
       width: 100%;
-      height: 250px;
+      height: 255px;
       position: relative;
       background: #111;
     }
@@ -354,6 +357,12 @@
       margin-bottom: 8px;
     }
 
+    .hero-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
     .hero-btn {
       display: inline-flex;
       align-items: center;
@@ -364,11 +373,23 @@
       font-weight: 700;
       padding: 5px 12px;
       border-radius: 4px;
+      border: none;
+      cursor: pointer;
       transition: background 0.2s;
     }
 
     .hero-btn:hover {
       background: var(--accent-hover);
+    }
+
+    .hero-btn-trailer {
+      background: #1f2937;
+      color: #f3f4f6;
+      border: 1px solid #374151;
+    }
+
+    .hero-btn-trailer:hover {
+      background: #374151;
     }
 
     /* Moving Progress Timer Line */
@@ -485,6 +506,34 @@
       align-items: center;
       justify-content: center;
       border-radius: 3px;
+      z-index: 1;
+    }
+
+    .trend-play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .trend-card:hover .trend-play-overlay {
+      opacity: 1;
+    }
+
+    .play-circle {
+      width: 36px;
+      height: 36px;
+      background: rgba(229, 9, 20, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 14px;
     }
 
     .trend-info {
@@ -638,6 +687,79 @@
       text-decoration: none;
     }
 
+    /* TRAILER MODAL / POPUP */
+    #trailer-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      padding: 16px;
+    }
+
+    .modal-box {
+      background: #121417;
+      border: 1px solid #282d34;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 680px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      position: relative;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: #171a1e;
+      border-bottom: 1px solid #23272d;
+    }
+
+    .modal-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-right: 10px;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+      padding: 2px 6px;
+    }
+
+    .close-btn:hover {
+      color: var(--accent);
+    }
+
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      background: #000;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
     /* Footer */
     footer {
       text-align: center;
@@ -773,11 +895,62 @@
     </footer>
   </div>
 
+  <!-- TRAILER VIDEO MODAL -->
+  <div id="trailer-modal" onclick="closeTrailerModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title" id="modal-video-title">Official Trailer</div>
+        <button class="close-btn" onclick="closeTrailerModal()" aria-label="Close">✕</button>
+      </div>
+      <div class="video-wrapper">
+        <iframe id="trailer-iframe" src="" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
   <script>
     let rawPosts = [];
     let currentCategory = 'All';
 
-    // Robust 3-Headline Ticker Logic
+    // Extract YouTube Embed URL helper
+    function getYoutubeEmbedUrl(url) {
+      if (!url) return null;
+      let videoId = '';
+      if (url.includes('youtu.be/')) {
+        videoId = url.split('youtu.be/')[1].split(/[?#]/)[0];
+      } else if (url.includes('watch?v=')) {
+        videoId = url.split('watch?v=')[1].split('&')[0];
+      } else if (url.includes('/embed/')) {
+        videoId = url.split('/embed/')[1].split(/[?#]/)[0];
+      } else if (url.length === 11 && !url.includes('/')) {
+        videoId = url;
+      }
+      return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0` : null;
+    }
+
+    // Modal Controls
+    function openTrailer(title, videoUrl) {
+      const embedUrl = getYoutubeEmbedUrl(videoUrl);
+      if (!embedUrl) {
+        const query = encodeURIComponent(title + " official trailer");
+        window.open(`https://www.youtube.com/results?search_query=${query}`, '_blank');
+        return;
+      }
+      document.getElementById('modal-video-title').textContent = title;
+      document.getElementById('trailer-iframe').src = embedUrl;
+      document.getElementById('trailer-modal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeTrailerModal() {
+      const modal = document.getElementById('trailer-modal');
+      const iframe = document.getElementById('trailer-iframe');
+      modal.style.display = 'none';
+      iframe.src = '';
+      document.body.style.overflow = '';
+    }
+
+    // Ticker Logic
     let tickerInterval = null;
     let tickerIndex = 0;
     let tickerSlides = [];
@@ -796,7 +969,6 @@
         });
       }
 
-      // 3 headlines ensure karne ke liye default entertainment alerts
       const fallbackAlerts = [
         { title: "⚡ Top OTT & Web Series Weekly Releases & Reviews", url: "#" },
         { title: "🎬 Bollywood & South Cinema Box Office Updates Live", url: "#" },
@@ -820,7 +992,6 @@
 
       if (tickerInterval) clearInterval(tickerInterval);
 
-      // Har 3.2 seconds mein smooth vertical slide
       tickerInterval = setInterval(() => {
         if (!isTickerPaused && tickerSlides.length > 1) {
           const currentSlide = tickerSlides[tickerIndex];
@@ -839,7 +1010,6 @@
       }, 3200);
     }
 
-    // Ticker Hover / Touch Listeners
     const tickerContainer = document.getElementById('ticker-bar');
     tickerContainer.addEventListener('mouseenter', () => { isTickerPaused = true; });
     tickerContainer.addEventListener('mouseleave', () => { isTickerPaused = false; });
@@ -848,7 +1018,7 @@
       setTimeout(() => { isTickerPaused = false; }, 1200);
     }, { passive: true });
 
-    // Hero Slider with Animated Moving Line (Up to 20 Posts)
+    // Hero Slider
     let heroTimer = null;
     let heroCurrentIndex = 0;
     let heroTotalSlides = 0;
@@ -872,21 +1042,27 @@
 
       if (heroTimer) clearInterval(heroTimer);
 
-      const slidesHTML = heroPosts.map(post => `
-        <div class="hero-slide">
-          <div class="hero-img-wrap">
-            <img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Filmy+Khabr'">
-            <div class="hero-overlay"></div>
-            <span class="badge-top">${post.badge || 'Trending'}</span>
+      const slidesHTML = heroPosts.map(post => {
+        const trailerUrl = post.trailer || (post.category === 'Trailers' || post.platform === 'YouTube' ? 'https://www.youtube.com' : '');
+        return `
+          <div class="hero-slide">
+            <div class="hero-img-wrap">
+              <img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Filmy+Khabr'">
+              <div class="hero-overlay"></div>
+              <span class="badge-top">${post.badge || 'Trending'}</span>
+            </div>
+            <div class="hero-content">
+              <div class="hero-platform">${post.platform || post.category}</div>
+              <div class="hero-title">${post.title}</div>
+              <div class="hero-summary">${post.summary || ''}</div>
+              <div class="hero-actions">
+                <a href="${post.url || `posts/${post.slug}.html`}" class="hero-btn">Read Article</a>
+                <button class="hero-btn hero-btn-trailer" onclick="openTrailer('${post.title.replace(/'/g, "\\'")}', '${trailerUrl}')">▶ Play Trailer</button>
+              </div>
+            </div>
           </div>
-          <div class="hero-content">
-            <div class="hero-platform">${post.platform || post.category}</div>
-            <div class="hero-title">${post.title}</div>
-            <div class="hero-summary">${post.summary || ''}</div>
-            <a href="${post.url || `posts/${post.slug}.html`}" class="hero-btn">▶ Watch Full Details</a>
-          </div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
 
       let dotsHTML = '';
       if (heroTotalSlides > 1) {
@@ -990,17 +1166,15 @@
       updateHeroSlide();
     }
 
-    // Fetch data/posts.json with Cache Buster
+    // Load Data
     async function loadSiteData() {
       try {
         const res = await fetch(`data/posts.json?_t=${Date.now()}`);
         if (!res.ok) throw new Error('data/posts.json not found');
         rawPosts = await res.json();
 
-        // Breaking Ticker hamesha 3 headlines run karega
         setupBreakingTicker(rawPosts);
 
-        // Check URL Query Param for direct category links
         const params = new URLSearchParams(window.location.search);
         const urlCat = params.get('cat');
         if (urlCat) {
@@ -1021,10 +1195,8 @@
     function renderAll() {
       if (!rawPosts || rawPosts.length === 0) return;
 
-      // 1. Hero Slider with Progress Line
       setupHeroSlider(rawPosts);
 
-      // 2. Trending Section (Top 4)
       const trendingContainer = document.getElementById('trending-container');
       const trendingPosts = rawPosts.slice(0, 4);
       trendingContainer.innerHTML = trendingPosts.map((post, idx) => `
@@ -1032,6 +1204,9 @@
           <div class="trend-img-box">
             <img class="trend-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/300x200/171a1e/ffffff?text=Post'">
             <div class="trend-rank">${idx + 1}</div>
+            <div class="trend-play-overlay">
+              <div class="play-circle">▶</div>
+            </div>
           </div>
           <div class="trend-info">
             <div class="trend-platform">${post.platform || post.category}</div>
@@ -1041,11 +1216,10 @@
         </a>
       `).join('');
 
-      // 3. Latest News List
       renderNewsList(rawPosts);
     }
 
-    // Render News Card List
+    // News Card List
     function renderNewsList(posts) {
       const container = document.getElementById('posts-list-container');
       if (!posts.length) {
@@ -1064,7 +1238,7 @@
       `).join('');
     }
 
-    // Dynamic Filter Handler
+    // Dynamic Filter
     function filterCategory(catName, updateUrl = true) {
       currentCategory = catName;
 
@@ -1151,14 +1325,12 @@
       renderNewsList(results);
     }
 
-    // Handle Browser Back/Forward buttons
     window.addEventListener('popstate', () => {
       const params = new URLSearchParams(window.location.search);
       const cat = params.get('cat') || 'All';
       filterCategory(cat, false);
     });
 
-    // Run on startup
     window.addEventListener('DOMContentLoaded', loadSiteData);
   </script>
 </body>
