@@ -290,7 +290,7 @@
       background: var(--card-bg);
     }
 
-    /* 1. 100% Clean 16:9 Video Area */
+    /* Clean 16:9 Video Area */
     .hero-media-wrap {
       width: 100%;
       aspect-ratio: 16 / 9;
@@ -313,7 +313,7 @@
       display: block;
     }
 
-    /* 2. Structured Content Below Video */
+    /* Structured Content Below Video */
     .hero-content {
       padding: 12px 14px 16px 14px;
       background: var(--card-bg);
@@ -427,7 +427,7 @@
       transition: width 0.1s linear;
     }
 
-    /* Hero Navigation Arrows (Positioned cleanly on the Video Area) */
+    /* Hero Navigation Arrows */
     .hero-nav-btn {
       position: absolute;
       top: 25%;
@@ -874,7 +874,9 @@
       return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0` : null;
     }
 
-    // Direct Inline Hero Player (Plays inside clean 16:9 frame)
+    // Direct Inline Hero Player (Completely Freezes Slider while Playing)
+    let isVideoPlaying = false;
+
     function playHeroInline(slideIndex, title, videoUrl) {
       const embedUrl = getYoutubeEmbedUrl(videoUrl);
       if (!embedUrl) {
@@ -885,6 +887,12 @@
       
       const mediaWrap = document.getElementById(`hero-media-${slideIndex}`);
       if (mediaWrap) {
+        // Stop the auto-slide timer completely while video is active
+        isVideoPlaying = true;
+        if (heroTimer) clearInterval(heroTimer);
+        const pBar = document.getElementById('hero-progress-bar');
+        if (pBar) pBar.style.width = '0%';
+
         mediaWrap.innerHTML = `
           <iframe 
             src="${embedUrl}" 
@@ -892,7 +900,6 @@
             allowfullscreen>
           </iframe>
         `;
-        isHeroPaused = true;
       }
     }
 
@@ -980,6 +987,7 @@
       heroTotalSlides = heroPosts.length;
       heroCurrentIndex = 0;
       progressElapsed = 0;
+      isVideoPlaying = false;
 
       if (!heroTotalSlides) {
         heroWrap.innerHTML = '';
@@ -1068,10 +1076,11 @@
 
     function startHeroProgress() {
       if (heroTimer) clearInterval(heroTimer);
+      if (isVideoPlaying) return; // Do not auto-slide if video is actively playing
       progressElapsed = 0;
 
       heroTimer = setInterval(() => {
-        if (!isHeroPaused && heroTotalSlides > 1) {
+        if (!isHeroPaused && !isVideoPlaying && heroTotalSlides > 1) {
           progressElapsed += PROGRESS_STEP;
           const percentage = Math.min((progressElapsed / SLIDE_DURATION) * 100, 100);
           const pBar = document.getElementById('hero-progress-bar');
@@ -1089,17 +1098,18 @@
       if (!track) return;
       track.style.transform = `translateX(-${heroCurrentIndex * 100}%)`;
 
-      // Reset any active iframe video when switching slides
+      // Reset any active iframe video when moving to another slide
       rawPosts.slice(0, 20).forEach((post, idx) => {
-        if (idx !== heroCurrentIndex) {
-          const wrap = document.getElementById(`hero-media-${idx}`);
-          if (wrap && wrap.querySelector('iframe')) {
-            wrap.innerHTML = `
-              <img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Filmy+Khabr'">
-            `;
-          }
+        const wrap = document.getElementById(`hero-media-${idx}`);
+        if (wrap && wrap.querySelector('iframe')) {
+          wrap.innerHTML = `
+            <img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Filmy+Khabr'">
+          `;
         }
       });
+
+      // Reset video playing status and restart normal auto-slide timer
+      isVideoPlaying = false;
 
       const dots = document.querySelectorAll('.hero-dot');
       if (dots.length) {
@@ -1112,6 +1122,8 @@
       progressElapsed = 0;
       const pBar = document.getElementById('hero-progress-bar');
       if (pBar) pBar.style.width = '0%';
+
+      startHeroProgress();
     }
 
     function nextHeroSlide(e) {
