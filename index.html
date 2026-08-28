@@ -643,6 +643,45 @@
       overflow: hidden;
     }
 
+    /* Professional Box-Type Pagination */
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin: 24px 0 16px 0;
+      flex-wrap: wrap;
+    }
+
+    .page-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.2s;
+      text-decoration: none;
+    }
+
+    .page-btn:hover {
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .page-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .page-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
     /* Telegram Community Card */
     .community-box {
       background: linear-gradient(135deg, #162436 0%, #11161d 100%);
@@ -833,6 +872,9 @@
     </div>
     <div class="news-list" id="posts-list-container"></div>
 
+    <!-- Professional Box Pagination Container -->
+    <div id="pagination-box" class="pagination-container"></div>
+
     <!-- Telegram Community -->
     <div class="community-box">
       <div class="comm-title">Join Our Community</div>
@@ -857,6 +899,8 @@
   <script>
     let rawPosts = [];
     let currentCategory = 'All';
+    const POSTS_PER_PAGE = 20;
+    let currentPage = 1;
 
     // Extract YouTube Embed URL helper
     function getYoutubeEmbedUrl(url) {
@@ -887,7 +931,6 @@
       
       const mediaWrap = document.getElementById(`hero-media-${slideIndex}`);
       if (mediaWrap) {
-        // Stop the auto-slide timer completely while video is active
         isVideoPlaying = true;
         if (heroTimer) clearInterval(heroTimer);
         const pBar = document.getElementById('hero-progress-bar');
@@ -1000,12 +1043,10 @@
         const trailerUrl = post.trailer || (post.category === 'Trailers' || post.platform === 'YouTube' ? 'https://www.youtube.com' : '');
         return `
           <div class="hero-slide" id="hero-slide-${idx}">
-            <!-- 1. Clean 16:9 Media Frame -->
             <div class="hero-media-wrap" id="hero-media-${idx}">
               <img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Filmy+Khabr'">
             </div>
 
-            <!-- 2. Clean Separated Info Section Below Video -->
             <div class="hero-content">
               <div class="hero-meta-row">
                 <span class="hero-platform">${post.platform || post.category}</span>
@@ -1076,7 +1117,7 @@
 
     function startHeroProgress() {
       if (heroTimer) clearInterval(heroTimer);
-      if (isVideoPlaying) return; // Do not auto-slide if video is actively playing
+      if (isVideoPlaying) return;
       progressElapsed = 0;
 
       heroTimer = setInterval(() => {
@@ -1098,7 +1139,6 @@
       if (!track) return;
       track.style.transform = `translateX(-${heroCurrentIndex * 100}%)`;
 
-      // Reset any active iframe video when moving to another slide
       rawPosts.slice(0, 20).forEach((post, idx) => {
         const wrap = document.getElementById(`hero-media-${idx}`);
         if (wrap && wrap.querySelector('iframe')) {
@@ -1108,7 +1148,6 @@
         }
       });
 
-      // Reset video playing status and restart normal auto-slide timer
       isVideoPlaying = false;
 
       const dots = document.querySelectorAll('.hero-dot');
@@ -1165,7 +1204,7 @@
       }
     }
 
-    // Render Full Homepage
+    // Render Full Homepage with Pagination Support
     function renderAll() {
       if (!rawPosts || rawPosts.length === 0) return;
 
@@ -1187,17 +1226,28 @@
         </a>
       `).join('');
 
-      renderNewsList(rawPosts);
+      renderPaginatedNewsList(rawPosts);
     }
 
-    function renderNewsList(posts) {
+    function renderPaginatedNewsList(posts) {
       const container = document.getElementById('posts-list-container');
+      const paginationEl = document.getElementById('pagination-box');
+
       if (!posts.length) {
         container.innerHTML = `<div class="no-posts">Is category mein abhi koi post nahi mili.</div>`;
+        paginationEl.innerHTML = '';
         return;
       }
 
-      container.innerHTML = posts.map(post => `
+      const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+      if (currentPage > totalPages) currentPage = totalPages;
+      if (currentPage < 1) currentPage = 1;
+
+      const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+      const endIndex = startIndex + POSTS_PER_PAGE;
+      const currentPosts = posts.slice(startIndex, endIndex);
+
+      container.innerHTML = currentPosts.map(post => `
         <a href="${post.url || `posts/${post.slug}.html`}" class="news-card">
           <img class="news-thumb" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/120x80/171a1e/ffffff?text=News'">
           <div style="flex:1; min-width:0;">
@@ -1206,10 +1256,69 @@
           </div>
         </a>
       `).join('');
+
+      renderBoxPagination(totalPages);
+    }
+
+    function renderBoxPagination(totalPages) {
+      const paginationEl = document.getElementById('pagination-box');
+      if (totalPages <= 1) {
+        paginationEl.innerHTML = '';
+        return;
+      }
+
+      let paginationHTML = '';
+
+      if (currentPage > 1) {
+        paginationHTML += `<button class="page-btn" onclick="changePage(${currentPage - 1})">« Prev</button>`;
+      } else {
+        paginationHTML += `<button class="page-btn" disabled>« Prev</button>`;
+      }
+
+      for (let i = 1; i <= totalPages; i++) {
+        if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
+          if (i === currentPage) {
+            paginationHTML += `<button class="page-btn active">${i}</button>`;
+          } else {
+            paginationHTML += `<button class="page-btn" onclick="changePage(${i})">${i}</button>`;
+          }
+        } else if (i === currentPage - 3 || i === currentPage + 3) {
+          paginationHTML += `<span style="color: var(--text-muted); padding: 0 4px;">...</span>`;
+        }
+      }
+
+      if (currentPage < totalPages) {
+        paginationHTML += `<button class="page-btn" onclick="changePage(${currentPage + 1})">Next »</button>`;
+      } else {
+        paginationHTML += `<button class="page-btn" disabled>Next »</button>`;
+      }
+
+      paginationEl.innerHTML = paginationHTML;
+    }
+
+    function changePage(page) {
+      currentPage = page;
+      if (currentCategory === 'All') {
+        renderPaginatedNewsList(rawPosts);
+      } else {
+        let filtered = [];
+        if (currentCategory === 'Trending') {
+          filtered = rawPosts.filter(p => (p.badge || '').toLowerCase() === 'trending');
+        } else {
+          filtered = rawPosts.filter(p => {
+            const c = (p.category || '').toLowerCase();
+            const target = currentCategory.toLowerCase();
+            return c.includes(target) || target.includes(c);
+          });
+        }
+        renderPaginatedNewsList(filtered);
+      }
+      window.scrollTo({ top: 400, behavior: 'smooth' });
     }
 
     function filterCategory(catName, updateUrl = true) {
       currentCategory = catName;
+      currentPage = 1; // Reset to page 1 on category change
 
       document.querySelectorAll('.nav-link').forEach(el => {
         if (el.textContent.trim().toLowerCase() === catName.toLowerCase()) {
@@ -1252,7 +1361,7 @@
             return c.includes(target) || target.includes(c);
           });
         }
-        renderNewsList(filtered);
+        renderPaginatedNewsList(filtered);
       }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1274,6 +1383,7 @@
 
     function handleSearch(e) {
       const query = e.target.value.toLowerCase().trim();
+      currentPage = 1;
       if (!query) {
         if (currentCategory === 'All') renderAll();
         else filterCategory(currentCategory, false);
@@ -1290,7 +1400,7 @@
       document.getElementById('filter-banner').style.display = 'flex';
       document.getElementById('filter-label').textContent = `Search: "${query}" (${results.length} Found)`;
       document.getElementById('posts-list-heading').innerHTML = `<span>Search Results</span>`;
-      renderNewsList(results);
+      renderPaginatedNewsList(results);
     }
 
     window.addEventListener('popstate', () => {
