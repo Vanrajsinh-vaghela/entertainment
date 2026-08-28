@@ -7,7 +7,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-E6B67VBEFZ');
   </script>
 
@@ -18,7 +17,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Filmy Khabr - Entertainment, Movies, OTT & Web Series News</title>
   <meta name="description" content="Latest Hindi entertainment news, movie reviews, web series updates, OTT releases and trailers.">
-  <meta name="robots" content="index, follow">
+  <meta name="author" content="Vanrajsinh Vaghela">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta property="og:site_name" content="Filmy Khabr">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Filmy Khabr - Entertainment, Movies, OTT & Web Series">
@@ -199,7 +199,7 @@
       flex-shrink: 0;
     }
 
-    /* Search Box Overlay */
+    /* Search Box */
     #search-container {
       display: none;
       padding: 8px 0;
@@ -760,6 +760,23 @@
       border: 0;
     }
 
+    /* Ultra-Modern Shiny Author Branding Animation */
+    .shiny-author {
+      background: linear-gradient(90deg, #f59e0b, #ec4899, #38bdf8, #f59e0b);
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      animation: shine 4s linear infinite;
+    }
+
+    @keyframes shine {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
     /* Footer */
     footer {
       text-align: center;
@@ -769,6 +786,25 @@
       font-size: 11px;
       color: var(--text-muted);
       line-height: 1.6;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 11px;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: #fff;
     }
 
     .no-posts {
@@ -887,10 +923,16 @@
       <a href="https://t.me/" target="_blank" rel="noopener noreferrer" class="comm-btn">Join Telegram Channel</a>
     </div>
 
-    <!-- Footer -->
+    <!-- Footer with E-E-A-T Compliance Links & Shiny Author Branding -->
     <footer>
+      <div class="footer-links">
+        <a href="about.html">About Us</a> •
+        <a href="contact.html">Contact Us</a> •
+        <a href="privacy-policy.html">Privacy Policy</a> •
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
       © 2026 Filmy Khabr.<br>
-      Managed and Published by Vanrajsinh Vaghela.<br>
+      <span class="shiny-author">Managed and Published by Vanrajsinh Vaghela.</span><br>
       All Rights Reserved.
     </footer>
   </div>
@@ -1166,7 +1208,7 @@
       updateHeroSlide();
     }
 
-    // Load Data
+    // Fetch data/posts.json with Cache Buster
     async function loadSiteData() {
       try {
         const res = await fetch(`data/posts.json?_t=${Date.now()}`);
@@ -1219,7 +1261,7 @@
       renderNewsList(rawPosts);
     }
 
-    // News Card List
+    // Render News Card List
     function renderNewsList(posts) {
       const container = document.getElementById('posts-list-container');
       if (!posts.length) {
