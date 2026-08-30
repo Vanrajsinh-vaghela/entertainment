@@ -605,9 +605,49 @@
           <input type="file" id="post-file" accept="image/*" onchange="handleImageFile(event)">
         </div>
 
-        <div class="form-group">
-          <label>YouTube Trailer URL (Automatically places right before the last section)</label>
-          <input type="text" id="post-trailer" placeholder="https://www.youtube.com/watch?v=...">
+        <!-- 2 YouTube Trailer Links with Individual Position Dropdowns -->
+        <div style="background: #111315; border: 1px solid #23272c; border-radius: 6px; padding: 10px; margin-bottom: 10px;">
+          <label style="color: #38bdf8; margin-bottom: 8px;">▶ YouTube Video 1 & Video 2 Placements</label>
+          
+          <!-- Video 1 -->
+          <div class="form-row-2" style="margin-bottom: 8px;">
+            <div class="form-group">
+              <label>Video 1 URL</label>
+              <input type="text" id="trailer-url-1" placeholder="https://youtube.com/watch?v=...">
+            </div>
+            <div class="form-group">
+              <label>Video 1 Position</label>
+              <select id="trailer-pos-1">
+                <option value="">-- No Video --</option>
+                <option value="top">Top (Sabse Upar)</option>
+                <option value="upper-middle">Upper Middle</option>
+                <option value="middle" selected>Exact Middle</option>
+                <option value="lower-middle">Lower Middle</option>
+                <option value="before-last">Before Last Section</option>
+                <option value="bottom">Very Bottom</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Video 2 -->
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Video 2 URL</label>
+              <input type="text" id="trailer-url-2" placeholder="https://youtube.com/watch?v=...">
+            </div>
+            <div class="form-group">
+              <label>Video 2 Position</label>
+              <select id="trailer-pos-2">
+                <option value="">-- No Video --</option>
+                <option value="top">Top (Sabse Upar)</option>
+                <option value="upper-middle">Upper Middle</option>
+                <option value="middle">Exact Middle</option>
+                <option value="lower-middle">Lower Middle</option>
+                <option value="before-last" selected>Before Last Section</option>
+                <option value="bottom">Very Bottom</option>
+              </select>
+            </div>
+          </div>
         </div>
 
         <div class="form-group">
@@ -618,13 +658,13 @@
         <!-- Article Link Helper Tool -->
         <label>Article Content & In-line Links</label>
         <div class="link-helper-box">
-          <input type="text" id="link-text" placeholder="Link Text (e.g. Watch Trailer)">
+          <input type="text" id="link-text" placeholder="Link Text (e.g. Read More)">
           <input type="text" id="link-url" placeholder="URL (https://...)">
           <button type="button" class="btn btn-secondary" onclick="insertArticleLink()">Insert Link</button>
         </div>
 
         <div class="form-group">
-          <textarea id="post-content" placeholder="Type full Hindi article content here. Trailer will automatically appear before the final conclusion/last paragraph."></textarea>
+          <textarea id="post-content" placeholder="Type full Hindi article content here. Videos will automatically be placed based on your 2 position dropdown selections above."></textarea>
         </div>
 
         <button class="btn btn-accent" id="publish-btn" onclick="publishPost()">Publish Discover-Ready Post</button>
@@ -853,30 +893,72 @@
       return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}` : null;
     }
 
-    function processContentWithTrailer(rawContent, trailerUrl) {
-      const embedTrailer = getYoutubeEmbedUrl(trailerUrl);
-      if (!embedTrailer) return rawContent;
+    // Process up to 2 independent videos with separate positions
+    function processContentWithTrailers(rawContent) {
+      let trailersMap = {
+        'top': [],
+        'upper-middle': [],
+        'middle': [],
+        'lower-middle': [],
+        'before-last': [],
+        'bottom': []
+      };
 
-      const trailerBoxHTML = `
-      <div class="article-trailer-box">
-        <div class="trailer-tag">▶ Official Trailer & Video Preview</div>
-        <div class="video-responsive">
-          <iframe src="${embedTrailer}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-        </div>
-      </div>`;
-
-      if (rawContent.includes('</p>')) {
-        const parts = rawContent.split('</p>');
-        if (parts.length > 2) {
-          parts.splice(parts.length - 2, 0, trailerBoxHTML);
-          return parts.join('</p>');
-        } else {
-          parts[0] = parts[0] + '</p>' + trailerBoxHTML;
-          return parts.join('</p>');
+      for (let i = 1; i <= 2; i++) {
+        const pos = document.getElementById(`trailer-pos-${i}`)?.value;
+        const url = document.getElementById(`trailer-url-${i}`)?.value.trim();
+        const embedUrl = getYoutubeEmbedUrl(url);
+        if (pos && embedUrl) {
+          const trailerBoxHTML = `
+          <div class="article-trailer-box">
+            <div class="trailer-tag">▶ Official Trailer & Video Preview ${i}</div>
+            <div class="video-responsive">
+              <iframe src="${embedUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </div>`;
+          if (trailersMap[pos]) {
+            trailersMap[pos].push(trailerBoxHTML);
+          }
         }
-      } else {
-        return rawContent + '<br>' + trailerBoxHTML;
       }
+
+      let finalHtml = rawContent;
+
+      if (trailersMap['top'].length > 0) {
+        finalHtml = trailersMap['top'].join('') + finalHtml;
+      }
+
+      if (trailersMap['bottom'].length > 0) {
+        finalHtml = finalHtml + trailersMap['bottom'].join('');
+      }
+
+      if (finalHtml.includes('</p>')) {
+        let parts = finalHtml.split('</p>');
+        parts = parts.map((p, idx) => idx < parts.length - 1 ? p + '</p>' : p);
+        const totalParas = parts.length - 1;
+
+        if (totalParas > 0) {
+          if (trailersMap['upper-middle'].length > 0) {
+            const idx = Math.max(0, Math.floor(totalParas * 0.25));
+            parts[idx] = parts[idx] + trailersMap['upper-middle'].join('');
+          }
+          if (trailersMap['middle'].length > 0) {
+            const idx = Math.max(0, Math.floor(totalParas * 0.5));
+            parts[idx] = parts[idx] + trailersMap['middle'].join('');
+          }
+          if (trailersMap['lower-middle'].length > 0) {
+            const idx = Math.max(0, Math.floor(totalParas * 0.75));
+            parts[idx] = parts[idx] + trailersMap['lower-middle'].join('');
+          }
+          if (trailersMap['before-last'].length > 0) {
+            const idx = Math.max(0, totalParas - 1);
+            parts[idx] = parts[idx] + trailersMap['before-last'].join('');
+          }
+        }
+        finalHtml = parts.join('');
+      }
+
+      return finalHtml;
     }
 
     async function ghRequest(path, method = 'GET', body = null) {
@@ -920,12 +1002,11 @@
       const badge = document.getElementById('post-badge').value;
       const imgPath = document.getElementById('post-image-path').value;
       const rawContent = document.getElementById('post-content').value || '<p>Write your article to see preview...</p>';
-      const trailer = document.getElementById('post-trailer').value;
 
       document.getElementById('prev-title').textContent = title;
       document.getElementById('prev-badge').textContent = badge;
       document.getElementById('prev-category').textContent = `${category} • ${platform}`;
-      document.getElementById('prev-content').innerHTML = processContentWithTrailer(rawContent, trailer);
+      document.getElementById('prev-content').innerHTML = processContentWithTrailers(rawContent);
 
       const imgEl = document.getElementById('prev-img');
       if (selectedImageBase64) {
@@ -987,7 +1068,7 @@
   <\/script>`;
       }
 
-      const finalArticleBody = processContentWithTrailer(post.content, post.trailer);
+      const finalArticleBody = processContentWithTrailers(post.content);
 
       return `<!DOCTYPE html>
 <html lang="hi">
@@ -1138,7 +1219,6 @@
       const category = document.getElementById('post-category').value;
       const platform = document.getElementById('post-platform').value;
       const badge = document.getElementById('post-badge').value;
-      const trailer = document.getElementById('post-trailer').value.trim();
       const summaryInput = document.getElementById('post-summary').value.trim();
       const content = document.getElementById('post-content').value.trim();
       const editId = document.getElementById('edit-post-id').value;
@@ -1199,7 +1279,6 @@
           platform,
           badge,
           image: imagePath || '',
-          trailer: trailer || '',
           summary: finalSummary,
           content,
           date: dateStr,
@@ -1350,7 +1429,6 @@
       document.getElementById('post-category').value = post.category || 'Movies';
       document.getElementById('post-platform').value = post.platform || 'General';
       document.getElementById('post-badge').value = post.badge || 'Trending';
-      document.getElementById('post-trailer').value = post.trailer || '';
       document.getElementById('post-summary').value = post.summary || '';
       document.getElementById('post-content').value = post.content || '';
 
@@ -1404,7 +1482,6 @@
       document.getElementById('post-title').value = '';
       document.getElementById('post-slug').value = '';
       document.getElementById('post-image-path').value = '';
-      document.getElementById('post-trailer').value = '';
       document.getElementById('post-summary').value = '';
       document.getElementById('post-content').value = '';
       document.getElementById('post-file').value = '';
