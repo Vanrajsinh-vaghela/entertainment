@@ -601,11 +601,79 @@
         </div>
 
         <div class="form-group">
-          <label>Featured Image (1200px+ Recommended)</label>
+          <label>Featured Image (Main Banner)</label>
           <input type="file" id="post-file" accept="image/*" onchange="handleImageFile(event)">
         </div>
 
-        <!-- 2 Independent YouTube Videos with Dropdown Positions -->
+        <!-- 3 Additional Extra Images with Position Dropdowns -->
+        <div style="background: #111315; border: 1px solid #23272c; border-radius: 6px; padding: 10px; margin-bottom: 10px;">
+          <label style="color: #38bdf8; margin-bottom: 8px;">🖼️ Additional Article Images (Up to 3 Extra)</label>
+          
+          <!-- Extra Image 1 -->
+          <div class="form-row-2" style="margin-bottom: 8px;">
+            <div class="form-group">
+              <label>Extra Image 1 File</label>
+              <input type="file" id="extra-img-file-1" accept="image/*" onchange="handleExtraImage(event, 1)">
+              <input type="hidden" id="extra-img-path-1" value="">
+            </div>
+            <div class="form-group">
+              <label>Extra Image 1 Position</label>
+              <select id="extra-img-pos-1">
+                <option value="">-- Do Not Show --</option>
+                <option value="top">Top (Sabse Upar)</option>
+                <option value="upper-middle">Upper Middle</option>
+                <option value="middle">Exact Middle</option>
+                <option value="lower-middle">Lower Middle</option>
+                <option value="before-last" selected>Before Last Section</option>
+                <option value="bottom">Very Bottom</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Extra Image 2 -->
+          <div class="form-row-2" style="margin-bottom: 8px;">
+            <div class="form-group">
+              <label>Extra Image 2 File</label>
+              <input type="file" id="extra-img-file-2" accept="image/*" onchange="handleExtraImage(event, 2)">
+              <input type="hidden" id="extra-img-path-2" value="">
+            </div>
+            <div class="form-group">
+              <label>Extra Image 2 Position</label>
+              <select id="extra-img-pos-2">
+                <option value="">-- Do Not Show --</option>
+                <option value="top">Top (Sabse Upar)</option>
+                <option value="upper-middle">Upper Middle</option>
+                <option value="middle">Exact Middle</option>
+                <option value="lower-middle">Lower Middle</option>
+                <option value="before-last">Before Last Section</option>
+                <option value="bottom">Very Bottom</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Extra Image 3 -->
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Extra Image 3 File</label>
+              <input type="file" id="extra-img-file-3" accept="image/*" onchange="handleExtraImage(event, 3)">
+              <input type="hidden" id="extra-img-path-3" value="">
+            </div>
+            <div class="form-group">
+              <label>Extra Image 3 Position</label>
+              <select id="extra-img-pos-3">
+                <option value="">-- Do Not Show --</option>
+                <option value="top">Top (Sabse Upar)</option>
+                <option value="upper-middle">Upper Middle</option>
+                <option value="middle">Exact Middle</option>
+                <option value="lower-middle">Lower Middle</option>
+                <option value="before-last">Before Last Section</option>
+                <option value="bottom">Very Bottom</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 YouTube Trailer Links with Position Dropdowns -->
         <div style="background: #111315; border: 1px solid #23272c; border-radius: 6px; padding: 10px; margin-bottom: 10px;">
           <label style="color: #38bdf8; margin-bottom: 8px;">▶ YouTube Video 1 & Video 2 Placements</label>
           
@@ -664,7 +732,7 @@
         </div>
 
         <div class="form-group">
-          <textarea id="post-content" placeholder="Type full Hindi article content here. Videos will automatically be placed based on your 2 position dropdown selections above."></textarea>
+          <textarea id="post-content" placeholder="Type full Hindi article content here. Videos and extra images will automatically be placed based on your dropdown selections."></textarea>
         </div>
 
         <button class="btn btn-accent" id="publish-btn" onclick="publishPost()">Publish Discover-Ready Post</button>
@@ -746,6 +814,8 @@
     const MASTER_PIN = "1465822";
     let selectedImageBase64 = null;
     let selectedImageExt = "jpg";
+    let extraImagesData = { 1: null, 2: null, 3: null };
+    let extraImagesExt = { 1: "jpg", 2: "jpg", 3: "jpg" };
     let allPostsCache = [];
 
     function verifyPin() {
@@ -832,23 +902,37 @@
       if (!selectedImageBase64) {
         document.getElementById('post-image-path').value = slug ? `images/${slug}.${selectedImageExt}` : '';
       }
+      for (let i = 1; i <= 3; i++) {
+        if (!extraImagesData[i]) {
+          document.getElementById(`extra-img-path-${i}`).value = slug ? `images/${slug}-extra-${i}.${extraImagesExt[i]}` : '';
+        }
+      }
     }
 
     function handleImageFile(e) {
       const file = e.target.files[0];
       if (!file) return;
       selectedImageExt = file.name.split('.').pop() || 'jpg';
-      
-      if (file.size < 30000) {
-        showToast('Warning: Image file size is quite small for high quality.');
-      }
-
       const reader = new FileReader();
       reader.onload = function(evt) {
         selectedImageBase64 = evt.target.result.split(',')[1];
         const slug = document.getElementById('post-slug').value || ('post-' + Date.now());
         document.getElementById('post-image-path').value = `images/${slug}.${selectedImageExt}`;
-        showToast('Image loaded for commit');
+        showToast('Main image loaded');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handleExtraImage(e, index) {
+      const file = e.target.files[0];
+      if (!file) return;
+      extraImagesExt[index] = file.name.split('.').pop() || 'jpg';
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        extraImagesData[index] = evt.target.result.split(',')[1];
+        const slug = document.getElementById('post-slug').value || ('post-' + Date.now());
+        document.getElementById(`extra-img-path-${index}`).value = `images/${slug}-extra-${index}.${extraImagesExt[index]}`;
+        showToast(`Extra Image ${index} loaded`);
       };
       reader.readAsDataURL(file);
     }
@@ -893,9 +977,9 @@
       return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=0&rel=0` : null;
     }
 
-    // Process up to 2 independent videos with separate positions
-    function processContentWithTrailers(rawContent) {
-      let trailersMap = {
+    // Process trailers and extra images combined according to their positions
+    function processContentWithElements(rawContent, currentSlug) {
+      let positionMap = {
         'top': [],
         'upper-middle': [],
         'middle': [],
@@ -904,32 +988,44 @@
         'bottom': []
       };
 
+      // 1. Collect YouTube Videos
       for (let i = 1; i <= 2; i++) {
         const pos = document.getElementById(`trailer-pos-${i}`)?.value;
         const url = document.getElementById(`trailer-url-${i}`)?.value.trim();
         const embedUrl = getYoutubeEmbedUrl(url);
         if (pos && embedUrl) {
-          const trailerBoxHTML = `
+          const boxHTML = `
           <div class="article-trailer-box">
             <div class="trailer-tag">▶ Official Trailer & Video Preview ${i}</div>
             <div class="video-responsive">
               <iframe src="${embedUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
             </div>
           </div>`;
-          if (trailersMap[pos]) {
-            trailersMap[pos].push(trailerBoxHTML);
-          }
+          if (positionMap[pos]) positionMap[pos].push(boxHTML);
+        }
+      }
+
+      // 2. Collect Extra Images
+      for (let i = 1; i <= 3; i++) {
+        const pos = document.getElementById(`extra-img-pos-${i}`)?.value;
+        const path = document.getElementById(`extra-img-path-${i}`)?.value.trim();
+        if (pos && path) {
+          const imgHTML = `
+          <div class="article-extra-img-box" style="margin: 16px 0; border-radius: 6px; overflow: hidden; background: #111;">
+            <img src="../${path}" alt="Extra Article Image ${i}" style="width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; display:block;" loading="lazy">
+          </div>`;
+          if (positionMap[pos]) positionMap[pos].push(imgHTML);
         }
       }
 
       let finalHtml = rawContent || '';
 
-      if (trailersMap['top'].length > 0) {
-        finalHtml = trailersMap['top'].join('') + finalHtml;
+      if (positionMap['top'].length > 0) {
+        finalHtml = positionMap['top'].join('') + finalHtml;
       }
 
-      if (trailersMap['bottom'].length > 0) {
-        finalHtml = finalHtml + trailersMap['bottom'].join('');
+      if (positionMap['bottom'].length > 0) {
+        finalHtml = finalHtml + positionMap['bottom'].join('');
       }
 
       if (finalHtml.includes('</p>')) {
@@ -938,21 +1034,21 @@
         const totalParas = parts.length - 1;
 
         if (totalParas > 0) {
-          if (trailersMap['upper-middle'].length > 0) {
+          if (positionMap['upper-middle'].length > 0) {
             const idx = Math.max(0, Math.floor(totalParas * 0.25));
-            parts[idx] = parts[idx] + trailersMap['upper-middle'].join('');
+            parts[idx] = parts[idx] + positionMap['upper-middle'].join('');
           }
-          if (trailersMap['middle'].length > 0) {
+          if (positionMap['middle'].length > 0) {
             const idx = Math.max(0, Math.floor(totalParas * 0.5));
-            parts[idx] = parts[idx] + trailersMap['middle'].join('');
+            parts[idx] = parts[idx] + positionMap['middle'].join('');
           }
-          if (trailersMap['lower-middle'].length > 0) {
+          if (positionMap['lower-middle'].length > 0) {
             const idx = Math.max(0, Math.floor(totalParas * 0.75));
-            parts[idx] = parts[idx] + trailersMap['lower-middle'].join('');
+            parts[idx] = parts[idx] + positionMap['lower-middle'].join('');
           }
-          if (trailersMap['before-last'].length > 0) {
+          if (positionMap['before-last'].length > 0) {
             const idx = Math.max(0, totalParas - 1);
-            parts[idx] = parts[idx] + trailersMap['before-last'].join('');
+            parts[idx] = parts[idx] + positionMap['before-last'].join('');
           }
         }
         finalHtml = parts.join('');
@@ -1006,7 +1102,7 @@
       document.getElementById('prev-title').textContent = title;
       document.getElementById('prev-badge').textContent = badge;
       document.getElementById('prev-category').textContent = `${category} • ${platform}`;
-      document.getElementById('prev-content').innerHTML = processContentWithTrailers(rawContent);
+      document.getElementById('prev-content').innerHTML = processContentWithElements(rawContent, 'preview');
 
       const imgEl = document.getElementById('prev-img');
       if (selectedImageBase64) {
@@ -1068,7 +1164,7 @@
   <\/script>`;
       }
 
-      const finalArticleBody = processContentWithTrailers(post.content);
+      const finalArticleBody = processContentWithElements(post.content, post.slug);
 
       return `<!DOCTYPE html>
 <html lang="hi">
@@ -1239,8 +1335,9 @@
       btn.textContent = 'Publishing to GitHub...';
 
       try {
+        // 1. Upload Main Image
         if (selectedImageBase64) {
-          btn.textContent = 'Uploading Image...';
+          btn.textContent = 'Uploading Main Image...';
           const imgFileName = `images/${slug}.${selectedImageExt}`;
           let imgSha = null;
           try {
@@ -1249,11 +1346,30 @@
           } catch(e){}
 
           await ghRequest(imgFileName, 'PUT', {
-            message: `Upload image for ${slug}`,
+            message: `Upload main image for ${slug}`,
             content: selectedImageBase64,
             sha: imgSha || undefined
           });
           imagePath = imgFileName;
+        }
+
+        // 2. Upload Extra Images (1 to 3)
+        for (let i = 1; i <= 3; i++) {
+          if (extraImagesData[i]) {
+            btn.textContent = `Uploading Extra Image ${i}...`;
+            const extraFileName = document.getElementById(`extra-img-path-${i}`).value || `images/${slug}-extra-${i}.${extraImagesExt[i]}`;
+            let extraSha = null;
+            try {
+              const existingExtra = await ghRequest(extraFileName);
+              if (existingExtra && existingExtra.sha) extraSha = existingExtra.sha;
+            } catch(e){}
+
+            await ghRequest(extraFileName, 'PUT', {
+              message: `Upload extra image ${i} for ${slug}`,
+              content: extraImagesData[i],
+              sha: extraSha || undefined
+            });
+          }
         }
 
         const now = new Date();
@@ -1486,6 +1602,11 @@
       document.getElementById('post-content').value = '';
       document.getElementById('post-file').value = '';
       selectedImageBase64 = null;
+      for (let i = 1; i <= 3; i++) {
+        document.getElementById(`extra-img-file-${i}`).value = '';
+        document.getElementById(`extra-img-path-${i}`).value = '';
+        extraImagesData[i] = null;
+      }
       document.getElementById('form-heading').textContent = 'Create New Post';
       document.getElementById('publish-btn').textContent = 'Publish Discover-Ready Post';
     }
