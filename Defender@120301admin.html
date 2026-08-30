@@ -605,7 +605,7 @@
           <input type="file" id="post-file" accept="image/*" onchange="handleImageFile(event)">
         </div>
 
-        <!-- 2 YouTube Trailer Links with Individual Position Dropdowns -->
+        <!-- 2 Independent YouTube Videos with Dropdown Positions -->
         <div style="background: #111315; border: 1px solid #23272c; border-radius: 6px; padding: 10px; margin-bottom: 10px;">
           <label style="color: #38bdf8; margin-bottom: 8px;">▶ YouTube Video 1 & Video 2 Placements</label>
           
@@ -890,7 +890,7 @@
       } else if (url.length === 11 && !url.includes('/')) {
         videoId = url;
       }
-      return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}` : null;
+      return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=0&rel=0` : null;
     }
 
     // Process up to 2 independent videos with separate positions
@@ -922,7 +922,7 @@
         }
       }
 
-      let finalHtml = rawContent;
+      let finalHtml = rawContent || '';
 
       if (trailersMap['top'].length > 0) {
         finalHtml = trailersMap['top'].join('') + finalHtml;
