@@ -605,6 +605,12 @@
           <input type="file" id="post-file" accept="image/*" onchange="handleImageFile(event)">
         </div>
 
+        <!-- Dedicated Hero Slider Trailer URL -->
+        <div class="form-group">
+          <label style="color: #f59e0b;">🌟 Hero Slider Trailer URL (For Homepage Slider Play)</label>
+          <input type="text" id="hero-slider-trailer" placeholder="https://www.youtube.com/watch?v=...">
+        </div>
+
         <!-- 3 Additional Extra Images with Position Dropdowns -->
         <div style="background: #111315; border: 1px solid #23272c; border-radius: 6px; padding: 10px; margin-bottom: 10px;">
           <label style="color: #38bdf8; margin-bottom: 8px;">🖼️ Additional Article Images (Up to 3 Extra)</label>
@@ -673,14 +679,14 @@
           </div>
         </div>
 
-        <!-- 2 YouTube Trailer Links with Position Dropdowns -->
+        <!-- 2 YouTube Article Video Links with Position Dropdowns -->
         <div style="background: #111315; border: 1px solid #23272c; border-radius: 6px; padding: 10px; margin-bottom: 10px;">
-          <label style="color: #38bdf8; margin-bottom: 8px;">▶ YouTube Video 1 & Video 2 Placements</label>
+          <label style="color: #38bdf8; margin-bottom: 8px;">▶ Article Video 1 & Video 2 Placements (Inside Article Only)</label>
           
           <!-- Video 1 -->
           <div class="form-row-2" style="margin-bottom: 8px;">
             <div class="form-group">
-              <label>Video 1 URL</label>
+              <label>Article Video 1 URL</label>
               <input type="text" id="trailer-url-1" placeholder="https://youtube.com/watch?v=...">
             </div>
             <div class="form-group">
@@ -700,7 +706,7 @@
           <!-- Video 2 -->
           <div class="form-row-2">
             <div class="form-group">
-              <label>Video 2 URL</label>
+              <label>Article Video 2 URL</label>
               <input type="text" id="trailer-url-2" placeholder="https://youtube.com/watch?v=...">
             </div>
             <div class="form-group">
@@ -1315,6 +1321,7 @@
       const category = document.getElementById('post-category').value;
       const platform = document.getElementById('post-platform').value;
       const badge = document.getElementById('post-badge').value;
+      const heroSliderTrailer = document.getElementById('hero-slider-trailer').value.trim();
       const summaryInput = document.getElementById('post-summary').value.trim();
       const content = document.getElementById('post-content').value.trim();
       const editId = document.getElementById('edit-post-id').value;
@@ -1395,6 +1402,7 @@
           platform,
           badge,
           image: imagePath || '',
+          trailer: heroSliderTrailer || '', // Dedicated for Homepage Hero Slider Play
           summary: finalSummary,
           content,
           date: dateStr,
@@ -1545,6 +1553,7 @@
       document.getElementById('post-category').value = post.category || 'Movies';
       document.getElementById('post-platform').value = post.platform || 'General';
       document.getElementById('post-badge').value = post.badge || 'Trending';
+      if(post.trailer) document.getElementById('hero-slider-trailer').value = post.trailer;
       document.getElementById('post-summary').value = post.summary || '';
       document.getElementById('post-content').value = post.content || '';
 
@@ -1598,6 +1607,9 @@
       document.getElementById('post-title').value = '';
       document.getElementById('post-slug').value = '';
       document.getElementById('post-image-path').value = '';
+      document.getElementById('hero-slider-trailer').value = '';
+      document.getElementById('trailer-url-1').value = '';
+      document.getElementById('trailer-url-2').value = '';
       document.getElementById('post-summary').value = '';
       document.getElementById('post-content').value = '';
       document.getElementById('post-file').value = '';
