@@ -1256,6 +1256,14 @@
     .article-body ul, .article-body ol { margin: 8px 0 14px 20px; }
     .article-body li { margin-bottom: 6px; }
     .article-body a { color: #38bdf8; text-decoration: underline; font-weight: 600; }
+    
+    /* Share Buttons Bar */
+    .share-bar { display: flex; gap: 8px; margin: 20px 0 10px 0; flex-wrap: wrap; }
+    .share-btn { flex: 1; min-width: 100px; padding: 10px; text-align: center; border-radius: 6px; font-size: 12px; font-weight: 700; color: #fff; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 5px; }
+    .share-whatsapp { background: #25D366; }
+    .share-telegram { background: #0088cc; }
+    .share-twitter { background: #1da1f2; }
+
     .shiny-author {
       background: linear-gradient(90deg, #f59e0b, #ec4899, #38bdf8, #f59e0b);
       background-size: 200% auto;
@@ -1294,6 +1302,14 @@
     <div class="article-body">
       ${finalArticleBody}
     </div>
+
+    <!-- Direct Share Buttons Bar -->
+    <div class="share-bar">
+      <a href="https://api.whatsapp.com/send?text=${encodeURIComponent(post.title + ' - ' + absoluteUrl)}" target="_blank" rel="noopener noreferrer" class="share-btn share-whatsapp">💬 WhatsApp</a>
+      <a href="https://t.me/share/url?url=${encodeURIComponent(absoluteUrl)}&text=${encodeURIComponent(post.title)}" target="_blank" rel="noopener noreferrer" class="share-btn share-telegram">✈ Telegram</a>
+      <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(absoluteUrl)}&text=${encodeURIComponent(post.title)}" target="_blank" rel="noopener noreferrer" class="share-btn share-twitter">𝕏 Twitter</a>
+    </div>
+
     <footer>
       <div class="footer-links">
         <a href="../about.html">About Us</a> •
