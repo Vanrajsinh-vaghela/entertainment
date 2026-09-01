@@ -724,6 +724,36 @@
           </div>
         </div>
 
+        <!-- Direct Ad Insertion Code Boxes (5 Slots) -->
+        <div style="background: #111315; border: 1px solid #23272c; border-radius: 6px; padding: 10px; margin-bottom: 10px;">
+          <label style="color: #10b981; margin-bottom: 8px;">💰 Direct Ad Code Boxes (Adsterra / AdSense / HTML)</label>
+          
+          <div class="form-group" style="margin-bottom: 6px;">
+            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 1 (Top Banner - Under Title/Main Image)</label>
+            <textarea id="ad-code-1" placeholder="Paste Ad HTML/JS code here..." style="min-height: 60px; font-family: monospace; font-size: 11px;"></textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 6px;">
+            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 2 (Upper Content)</label>
+            <textarea id="ad-code-2" placeholder="Paste Ad HTML/JS code here..." style="min-height: 60px; font-family: monospace; font-size: 11px;"></textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 6px;">
+            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 3 (Exact Middle)</label>
+            <textarea id="ad-code-3" placeholder="Paste Ad HTML/JS code here..." style="min-height: 60px; font-family: monospace; font-size: 11px;"></textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 6px;">
+            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 4 (Before FAQs / Conclusion)</label>
+            <textarea id="ad-code-4" placeholder="Paste Ad HTML/JS code here..." style="min-height: 60px; font-family: monospace; font-size: 11px;"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 5 (Bottom / Footer Banner)</label>
+            <textarea id="ad-code-5" placeholder="Paste Ad HTML/JS code here..." style="min-height: 60px; font-family: monospace; font-size: 11px;"></textarea>
+          </div>
+        </div>
+
         <div class="form-group">
           <label>Short Summary / Meta Excerpt</label>
           <input type="text" id="post-summary" placeholder="1-2 line summary for search and feed snippet">
@@ -983,7 +1013,7 @@
       return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=0&rel=0` : null;
     }
 
-    // Process trailers and extra images combined according to their positions
+    // Process trailers, extra images, and direct ads combined according to their positions
     function processContentWithElements(rawContent, currentSlug) {
       let positionMap = {
         'top': [],
@@ -994,7 +1024,27 @@
         'bottom': []
       };
 
-      // 1. Collect YouTube Videos
+      // 1. Add Ad Slot 1 to Top if present
+      const ad1 = document.getElementById('ad-code-1')?.value.trim();
+      if (ad1) positionMap['top'].push(`<div class="article-ad-box" style="margin: 14px 0; text-align:center;">${ad1}</div>`);
+
+      // 2. Add Ad Slot 2 to Upper-Middle if present
+      const ad2 = document.getElementById('ad-code-2')?.value.trim();
+      if (ad2) positionMap['upper-middle'].push(`<div class="article-ad-box" style="margin: 14px 0; text-align:center;">${ad2}</div>`);
+
+      // 3. Add Ad Slot 3 to Exact Middle if present
+      const ad3 = document.getElementById('ad-code-3')?.value.trim();
+      if (ad3) positionMap['middle'].push(`<div class="article-ad-box" style="margin: 14px 0; text-align:center;">${ad3}</div>`);
+
+      // 4. Add Ad Slot 4 to Before-Last if present
+      const ad4 = document.getElementById('ad-code-4')?.value.trim();
+      if (ad4) positionMap['before-last'].push(`<div class="article-ad-box" style="margin: 14px 0; text-align:center;">${ad4}</div>`);
+
+      // 5. Add Ad Slot 5 to Bottom if present
+      const ad5 = document.getElementById('ad-code-5')?.value.trim();
+      if (ad5) positionMap['bottom'].push(`<div class="article-ad-box" style="margin: 14px 0; text-align:center;">${ad5}</div>`);
+
+      // 6. Collect YouTube Videos
       for (let i = 1; i <= 2; i++) {
         const pos = document.getElementById(`trailer-pos-${i}`)?.value;
         const url = document.getElementById(`trailer-url-${i}`)?.value.trim();
@@ -1011,7 +1061,7 @@
         }
       }
 
-      // 2. Collect Extra Images
+      // 7. Collect Extra Images
       for (let i = 1; i <= 3; i++) {
         const pos = document.getElementById(`extra-img-pos-${i}`)?.value;
         const path = document.getElementById(`extra-img-path-${i}`)?.value.trim();
@@ -1626,6 +1676,10 @@
       document.getElementById('hero-slider-trailer').value = '';
       document.getElementById('trailer-url-1').value = '';
       document.getElementById('trailer-url-2').value = '';
+      for (let i = 1; i <= 5; i++) {
+        const adBox = document.getElementById(`ad-code-${i}`);
+        if (adBox) adBox.value = '';
+      }
       document.getElementById('post-summary').value = '';
       document.getElementById('post-content').value = '';
       document.getElementById('post-file').value = '';
