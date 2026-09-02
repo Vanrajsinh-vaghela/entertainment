@@ -611,7 +611,7 @@
           <input type="text" id="hero-slider-trailer" placeholder="https://www.youtube.com/watch?v=...">
         </div>
 
-        <!-- 3 Additional Extra Images with Position Dropdowns (RESTORED & VISIBLE) -->
+        <!-- 3 Additional Extra Images with Position Dropdowns (FIXED & FULLY FUNCTIONAL) -->
         <div style="background: #111315; border: 1px solid #23272c; border-radius: 6px; padding: 10px; margin-bottom: 10px;">
           <label style="color: #38bdf8; margin-bottom: 8px;">🖼️ Additional Article Images (Up to 3 Extra)</label>
           
@@ -850,7 +850,7 @@
     const MASTER_PIN = "1465822";
     let selectedImageBase64 = null;
     let selectedImageExt = "jpg";
-    let extraImagesData = { 1: null, 2: null, 3: null };
+    let extraImagesBase64 = { 1: null, 2: null, 3: null };
     let extraImagesExt = { 1: "jpg", 2: "jpg", 3: "jpg" };
     let allPostsCache = [];
 
@@ -939,7 +939,7 @@
         document.getElementById('post-image-path').value = slug ? `images/${slug}.${selectedImageExt}` : '';
       }
       for (let i = 1; i <= 3; i++) {
-        if (!extraImagesData[i]) {
+        if (!extraImagesBase64[i]) {
           document.getElementById(`extra-img-path-${i}`).value = slug ? `images/${slug}-extra-${i}.${extraImagesExt[i]}` : '';
         }
       }
@@ -965,7 +965,7 @@
       extraImagesExt[index] = file.name.split('.').pop() || 'jpg';
       const reader = new FileReader();
       reader.onload = function(evt) {
-        extraImagesData[index] = evt.target.result.split(',')[1];
+        extraImagesBase64[index] = evt.target.result.split(',')[1];
         const slug = document.getElementById('post-slug').value || ('post-' + Date.now());
         document.getElementById(`extra-img-path-${index}`).value = `images/${slug}-extra-${index}.${extraImagesExt[index]}`;
         showToast(`Extra Image ${index} loaded`);
@@ -1014,7 +1014,7 @@
     }
 
     // Process trailers, extra images, and direct ads combined according to their positions
-    function processContentWithElements(rawContent, currentSlug) {
+    function processContentWithElements(rawContent, currentSlug, extraImagesObj) {
       let positionMap = {
         'top': [],
         'upper-middle': [],
@@ -1061,10 +1061,15 @@
         }
       }
 
-      // 7. Collect Extra Images (Fixed path usage for saved or newly uploaded images)
+      // 7. Collect Extra Images (Reads from DOM inputs or stored post object)
       for (let i = 1; i <= 3; i++) {
         const pos = document.getElementById(`extra-img-pos-${i}`)?.value;
-        const path = document.getElementById(`extra-img-path-${i}`)?.value.trim();
+        let path = document.getElementById(`extra-img-path-${i}`)?.value.trim();
+        
+        if (extraImagesObj && extraImagesObj[`extraImage${i}`]) {
+          path = extraImagesObj[`extraImage${i}`];
+        }
+
         if (pos && path) {
           const imgHTML = `
           <div class="article-extra-img-box" style="margin: 16px 0; border-radius: 6px; overflow: hidden; background: #111;">
@@ -1158,7 +1163,11 @@
       document.getElementById('prev-title').textContent = title;
       document.getElementById('prev-badge').textContent = badge;
       document.getElementById('prev-category').textContent = `${category} • ${platform}`;
-      document.getElementById('prev-content').innerHTML = processContentWithElements(rawContent, 'preview');
+      document.getElementById('prev-content').innerHTML = processContentWithElements(rawContent, 'preview', {
+        extraImage1: document.getElementById('extra-img-path-1').value,
+        extraImage2: document.getElementById('extra-img-path-2').value,
+        extraImage3: document.getElementById('extra-img-path-3').value
+      });
 
       const imgEl = document.getElementById('prev-img');
       if (selectedImageBase64) {
@@ -1220,7 +1229,11 @@
   <\/script>`;
       }
 
-      const finalArticleBody = processContentWithElements(post.content, post.slug);
+      const finalArticleBody = processContentWithElements(post.content, post.slug, {
+        extraImage1: post.extraImage1 || '',
+        extraImage2: post.extraImage2 || '',
+        extraImage3: post.extraImage3 || ''
+      });
 
       return `<!DOCTYPE html>
 <html lang="hi">
@@ -1426,11 +1439,13 @@
           imagePath = imgFileName;
         }
 
-        // 2. Upload Extra Images (1 to 3)
+        // 2. Upload Extra Images (1 to 3) & collect paths
+        let extraPaths = { 1: document.getElementById('extra-img-path-1').value, 2: document.getElementById('extra-img-path-2').value, 3: document.getElementById('extra-img-path-3').value };
+        
         for (let i = 1; i <= 3; i++) {
-          if (extraImagesData[i]) {
+          if (extraImagesBase64[i]) {
             btn.textContent = `Uploading Extra Image ${i}...`;
-            const extraFileName = document.getElementById(`extra-img-path-${i}`).value || `images/${slug}-extra-${i}.${extraImagesExt[i]}`;
+            const extraFileName = extraPaths[i] || `images/${slug}-extra-${i}.${extraImagesExt[i]}`;
             let extraSha = null;
             try {
               const existingExtra = await ghRequest(extraFileName);
@@ -1439,9 +1454,10 @@
 
             await ghRequest(extraFileName, 'PUT', {
               message: `Upload extra image ${i} for ${slug}`,
-              content: extraImagesData[i],
+              content: extraImagesBase64[i],
               sha: extraSha || undefined
             });
+            extraPaths[i] = extraFileName;
           }
         }
 
@@ -1468,7 +1484,10 @@
           platform,
           badge,
           image: imagePath || '',
-          trailer: heroSliderTrailer || '', // Dedicated for Homepage Hero Slider Play
+          extraImage1: extraPaths[1] || '',
+          extraImage2: extraPaths[2] || '',
+          extraImage3: extraPaths[3] || '',
+          trailer: heroSliderTrailer || '',
           summary: finalSummary,
           content,
           date: dateStr,
@@ -1498,6 +1517,10 @@
               postsList[idx].publishedAt = postsList[idx].isoDate;
             }
             postObj.publishedAt = postsList[idx].publishedAt || finalPublishedAt;
+            // Preserve existing extra images if not re-uploaded
+            if (!extraImagesBase64[1]) postObj.extraImage1 = postsList[idx].extraImage1 || '';
+            if (!extraImagesBase64[2]) postObj.extraImage2 = postsList[idx].extraImage2 || '';
+            if (!extraImagesBase64[3]) postObj.extraImage3 = postsList[idx].extraImage3 || '';
             postsList[idx] = postObj;
           } else {
             postsList.unshift(postObj);
@@ -1620,6 +1643,11 @@
       document.getElementById('post-platform').value = post.platform || 'General';
       document.getElementById('post-badge').value = post.badge || 'Trending';
       if(post.trailer) document.getElementById('hero-slider-trailer').value = post.trailer;
+      
+      if (post.extraImage1) document.getElementById('extra-img-path-1').value = post.extraImage1;
+      if (post.extraImage2) document.getElementById('extra-img-path-2').value = post.extraImage2;
+      if (post.extraImage3) document.getElementById('extra-img-path-3').value = post.extraImage3;
+
       document.getElementById('post-summary').value = post.summary || '';
       document.getElementById('post-content').value = post.content || '';
 
@@ -1687,7 +1715,7 @@
       for (let i = 1; i <= 3; i++) {
         document.getElementById(`extra-img-file-${i}`).value = '';
         document.getElementById(`extra-img-path-${i}`).value = '';
-        extraImagesData[i] = null;
+        extraImagesBase64[i] = null;
       }
       document.getElementById('form-heading').textContent = 'Create New Post';
       document.getElementById('publish-btn').textContent = 'Publish Discover-Ready Post';
