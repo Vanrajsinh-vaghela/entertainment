@@ -4,10 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Filmy Khabr - Admin Desk</title>
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@400;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <meta name="robots" content="index, follow">
   <style>
     :root {
       --bg: #0c0d0e;
@@ -317,8 +314,6 @@
     }
 
     /* Live Preview Screen */
-    .font-preview-label { font-size: 10px; color: var(--text-muted); margin-top: 5px; }
-
     .preview-pane {
       background: #111315;
       border-radius: 6px;
@@ -375,6 +370,28 @@
       color: #38bdf8;
       text-decoration: underline;
     }
+
+    /* Article Visual Theme Preview */
+    .preview-pane[data-visual-theme="blue-white"] { background:#eef6ff; border-color:#cfe0f5; }
+    .preview-pane[data-visual-theme="blue-white"] .preview-title { color:#0b3d91; }
+    .preview-pane[data-visual-theme="blue-white"] .preview-badge { background:#146ef5; }
+    .preview-pane[data-visual-theme="blue-white"] .preview-body { color:#253b5a; }
+    .preview-pane[data-visual-theme="blue-white"] .preview-body a { color:#146ef5; }
+    .preview-pane[data-visual-theme="dark-red"] { background:#08090b; border-color:#3a2025; }
+    .preview-pane[data-visual-theme="dark-red"] .preview-title { color:#fff; }
+    .preview-pane[data-visual-theme="dark-red"] .preview-badge { background:#ef233c; }
+    .preview-pane[data-visual-theme="dark-red"] .preview-body { color:#e5e7eb; }
+    .preview-pane[data-visual-theme="dark-red"] .preview-body a { color:#ff5a6d; }
+    .preview-pane[data-visual-theme="light-minimal"] { background:#f7f8fa; border-color:#e1e5eb; }
+    .preview-pane[data-visual-theme="light-minimal"] .preview-title { color:#172033; }
+    .preview-pane[data-visual-theme="light-minimal"] .preview-badge { background:#172033; }
+    .preview-pane[data-visual-theme="light-minimal"] .preview-body { color:#354052; }
+    .preview-pane[data-visual-theme="light-minimal"] .preview-body a { color:#2457a6; }
+    .preview-pane[data-visual-theme="purple-vibes"] { background:#100b20; border-color:#39275a; }
+    .preview-pane[data-visual-theme="purple-vibes"] .preview-title { color:#e5c8ff; }
+    .preview-pane[data-visual-theme="purple-vibes"] .preview-badge { background:#a855f7; }
+    .preview-pane[data-visual-theme="purple-vibes"] .preview-body { color:#e9ddf7; }
+    .preview-pane[data-visual-theme="purple-vibes"] .preview-body a { color:#c084fc; }
 
     .hidden {
       display: none !important;
@@ -605,16 +622,48 @@
           </div>
         </div>
 
+        <!-- Article Theme / Editorial Angle -->
+        <div class="form-row-2">
+          <div class="form-group">
+            <label>Article Theme / Editorial Angle</label>
+            <select id="post-theme">
+              <option value="Auto / Best Current Angle">Auto / Best Current Angle</option>
+              <option value="Latest Update / Breaking News">Latest Update / Breaking News</option>
+              <option value="Trailer / First Look">Trailer / First Look</option>
+              <option value="Teaser / Announcement">Teaser / Announcement</option>
+              <option value="Release Date Focus">Release Date Focus</option>
+              <option value="OTT / Streaming Focus">OTT / Streaming Focus</option>
+              <option value="Cast & Characters">Cast & Characters</option>
+              <option value="Story / Plot Focus">Story / Plot Focus</option>
+              <option value="Ending / Explained">Ending / Explained</option>
+              <option value="Box Office / Collection">Box Office / Collection</option>
+              <option value="Review / Verdict">Review / Verdict</option>
+              <option value="Franchise / Sequel Connection">Franchise / Sequel Connection</option>
+              <option value="Celebrity Focus">Celebrity Focus</option>
+              <option value="Controversy / Debate">Controversy / Debate</option>
+              <option value="Behind the Scenes / Production">Behind the Scenes / Production</option>
+              <option value="Comparison / Face-Off">Comparison / Face-Off</option>
+              <option value="Audience / Social Buzz">Audience / Social Buzz</option>
+              <option value="Custom Theme">Custom Theme</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Custom Theme / Angle (Optional)</label>
+            <input type="text" id="post-custom-theme" placeholder="e.g. Preity Zinta ke character par focus">
+          </div>
+        </div>
+        <div class="helper-txt" style="margin-bottom: 10px;">Editorial Theme article ke angle ke liye hai. Neeche Visual Theme se live article ka look choose karein.</div>
+
+        <!-- Article Visual Theme -->
         <div class="form-group">
-          <label>Article Font</label>
-          <select id="post-font" onchange="updateFontPreview()">
-            <option value="Noto Sans Devanagari" selected>Noto Sans Devanagari (Recommended)</option>
-            <option value="Inter">Inter</option>
-            <option value="Roboto">Roboto</option>
-            <option value="Poppins">Poppins</option>
-            <option value="Merriweather">Merriweather</option>
+          <label>🎨 Article Visual Theme</label>
+          <select id="post-visual-theme" onchange="applyVisualThemePreview()">
+            <option value="blue-white" selected>🔵 Blue & White — Standard</option>
+            <option value="dark-red">🌑 Dark Mode — Cinematic Red</option>
+            <option value="light-minimal">⚪ Light Minimal — Clean</option>
+            <option value="purple-vibes">🟣 Purple Vibes — Premium</option>
           </select>
-          <div class="helper-txt">Hindi articles ke liye Noto Sans Devanagari recommended. Selected font live article mein bhi save hoga.</div>
+          <div class="helper-txt">Published article ka visual style yahan select karein. Default: Blue & White.</div>
         </div>
 
         <div class="form-group">
@@ -893,7 +942,7 @@
     function initAdmin() {
       loadCreds();
       autoUpdateSummary();
-      updateFontPreview();
+      applyVisualThemePreview();
     }
 
     function switchTab(tab) {
@@ -942,59 +991,17 @@
       document.getElementById('conn-summary').textContent = `${u} / ${r}`;
     }
 
-    const ARTICLE_FONTS = {
-      "Noto Sans Devanagari": "'Noto Sans Devanagari', sans-serif",
-      "Inter": "'Inter', sans-serif",
-      "Roboto": "'Roboto', sans-serif",
-      "Poppins": "'Poppins', sans-serif",
-      "Merriweather": "'Merriweather', serif"
-    };
-
-    function getArticleFont(font) {
-      return ARTICLE_FONTS[font] || ARTICLE_FONTS["Noto Sans Devanagari"];
-    }
-
-    function updateFontPreview() {
-      const font = document.getElementById('post-font')?.value || 'Noto Sans Devanagari';
-      const cssFont = getArticleFont(font);
-      const title = document.getElementById('prev-title');
-      const body = document.getElementById('prev-content');
-      if (title) title.style.fontFamily = cssFont;
-      if (body) body.style.fontFamily = cssFont;
-      const pane = document.querySelector('.preview-pane');
-      if (pane) pane.style.fontFamily = cssFont;
-    }
-
-    function getFormElementsConfig() {
-      const ads = {};
-      for (let i = 1; i <= 5; i++) ads[i] = document.getElementById(`ad-code-${i}`)?.value.trim() || '';
-      const videos = {};
-      for (let i = 1; i <= 2; i++) {
-        videos[i] = {
-          url: document.getElementById(`trailer-url-${i}`)?.value.trim() || '',
-          position: document.getElementById(`trailer-pos-${i}`)?.value || ''
-        };
-      }
-      const extraPositions = {};
-      for (let i = 1; i <= 3; i++) extraPositions[i] = document.getElementById(`extra-img-pos-${i}`)?.value || '';
-      return { ads, videos, extraPositions };
-    }
-
-    function escapeHtml(value) {
-      return String(value ?? '').replace(/[&<>\"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[ch]));
-    }
-
-    function isValidHttpUrl(value) {
-      try { const u = new URL(value); return u.protocol === 'http:' || u.protocol === 'https:'; } catch(e) { return false; }
-    }
-
     function autoGenerateSlug() {
       const editId = document.getElementById('edit-post-id').value;
-      if (editId) return;
-      const title = document.getElementById('post-title').value || '';
-      const englishPart = title.match(/[A-Za-z0-9]+(?:[\s-]+[A-Za-z0-9]+)*/g)?.join(' ') || '';
-      const slug = englishPart.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-+/g, '-');
+      if (editId) return; 
+      const title = document.getElementById('post-title').value;
+      const slug = title.toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .trim()
+        .replace(/\s+/g, '-');
+      
       document.getElementById('post-slug').value = slug;
+      
       if (!selectedImageBase64) {
         document.getElementById('post-image-path').value = slug ? `images/${slug}.${selectedImageExt}` : '';
       }
@@ -1051,6 +1058,12 @@
       showToast('Link inserted');
     }
 
+    document.getElementById('post-custom-theme')?.addEventListener('input', function() {
+      if (this.value.trim()) {
+        document.getElementById('post-theme').value = 'Custom Theme';
+      }
+    });
+
     function showToast(msg) {
       const t = document.getElementById('toast');
       t.textContent = msg;
@@ -1074,8 +1087,7 @@
     }
 
     // Process trailers, extra images, and direct ads combined according to their positions
-    function processContentWithElements(rawContent, currentSlug, extraImagesObj, extraImagesBase64Map, isPreview = false, elementConfig = null) {
-      const cfg = elementConfig || getFormElementsConfig();
+    function processContentWithElements(rawContent, currentSlug, extraImagesObj, extraImagesBase64Map, isPreview = false) {
       let positionMap = {
         'top': [],
         'upper-middle': [],
@@ -1086,29 +1098,29 @@
       };
 
       // 1. Add Ad Slot 1 to Top if present
-      const ad1 = cfg.ads?.[1] || '';
+      const ad1 = document.getElementById('ad-code-1')?.value.trim();
       if (ad1) positionMap['top'].push(`<div class="article-ad-box" style="margin: 14px 0; text-align:center;">${ad1}</div>`);
 
       // 2. Add Ad Slot 2 to Upper-Middle if present
-      const ad2 = cfg.ads?.[2] || '';
+      const ad2 = document.getElementById('ad-code-2')?.value.trim();
       if (ad2) positionMap['upper-middle'].push(`<div class="article-ad-box" style="margin: 14px 0; text-align:center;">${ad2}</div>`);
 
       // 3. Add Ad Slot 3 to Exact Middle if present
-      const ad3 = cfg.ads?.[3] || '';
+      const ad3 = document.getElementById('ad-code-3')?.value.trim();
       if (ad3) positionMap['middle'].push(`<div class="article-ad-box" style="margin: 14px 0; text-align:center;">${ad3}</div>`);
 
       // 4. Add Ad Slot 4 to Before-Last if present
-      const ad4 = cfg.ads?.[4] || '';
+      const ad4 = document.getElementById('ad-code-4')?.value.trim();
       if (ad4) positionMap['before-last'].push(`<div class="article-ad-box" style="margin: 14px 0; text-align:center;">${ad4}</div>`);
 
       // 5. Add Ad Slot 5 to Bottom if present
-      const ad5 = cfg.ads?.[5] || '';
+      const ad5 = document.getElementById('ad-code-5')?.value.trim();
       if (ad5) positionMap['bottom'].push(`<div class="article-ad-box" style="margin: 14px 0; text-align:center;">${ad5}</div>`);
 
       // 6. Collect YouTube Videos
       for (let i = 1; i <= 2; i++) {
-        const pos = cfg.videos?.[i]?.position || '';
-        const url = cfg.videos?.[i]?.url || '';
+        const pos = document.getElementById(`trailer-pos-${i}`)?.value;
+        const url = document.getElementById(`trailer-url-${i}`)?.value.trim();
         const embedUrl = getYoutubeEmbedUrl(url);
         if (pos && embedUrl) {
           const boxHTML = `
@@ -1124,7 +1136,7 @@
 
       // 7. Collect Extra Images (Instant preview support with Base64 or relative path)
       for (let i = 1; i <= 3; i++) {
-        const pos = cfg.extraPositions?.[i] || '';
+        const pos = document.getElementById(`extra-img-pos-${i}`)?.value;
         let imgSrc = '';
 
         if (isPreview && extraImagesBase64Map && extraImagesBase64Map[i]) {
@@ -1226,18 +1238,22 @@
       const category = document.getElementById('post-category').value;
       const platform = document.getElementById('post-platform').value;
       const badge = document.getElementById('post-badge').value;
+      const theme = document.getElementById('post-theme').value;
+      const customTheme = document.getElementById('post-custom-theme').value.trim();
       const imgPath = document.getElementById('post-image-path').value;
+      const visualTheme = document.getElementById('post-visual-theme')?.value || 'blue-white';
       const rawContent = document.getElementById('post-content').value || '<p>Write your article to see preview...</p>';
 
       document.getElementById('prev-title').textContent = title;
       document.getElementById('prev-badge').textContent = badge;
+      const previewPane = document.querySelector('.preview-pane');
+      if (previewPane) previewPane.setAttribute('data-visual-theme', visualTheme);
       document.getElementById('prev-category').textContent = `${category} • ${platform}`;
       document.getElementById('prev-content').innerHTML = processContentWithElements(rawContent, 'preview', {
         extraImage1: document.getElementById('extra-img-path-1').value,
         extraImage2: document.getElementById('extra-img-path-2').value,
         extraImage3: document.getElementById('extra-img-path-3').value
-      }, extraImagesBase64, true, getFormElementsConfig());
-      updateFontPreview();
+      }, extraImagesBase64, true);
 
       const imgEl = document.getElementById('prev-img');
       if (selectedImageBase64) {
@@ -1249,6 +1265,12 @@
       } else {
         imgEl.style.display = 'none';
       }
+    }
+
+    function applyVisualThemePreview() {
+      const theme = document.getElementById('post-visual-theme')?.value || 'blue-white';
+      const previewPane = document.querySelector('.preview-pane');
+      if (previewPane) previewPane.setAttribute('data-visual-theme', theme);
     }
 
     function generateSitemapXML(posts) {
@@ -1277,10 +1299,8 @@
         : `https://entertainment.gujaratfastalert.in/${post.image}`;
       
       const rawSummary = post.summary || post.title;
-      const safeSummary = escapeHtml(rawSummary);
-      const safeTitle = escapeHtml(post.title);
-      const fontName = post.font || 'Noto Sans Devanagari';
-      const articleFont = getArticleFont(fontName);
+      const safeSummary = rawSummary.replace(/"/g, '&quot;');
+      const safeTitle = post.title.replace(/"/g, '&quot;');
       
       const publishedAt = post.publishedAt || post.isoDate || new Date().toISOString();
       const modifiedAt = post.modifiedAt || new Date().toISOString();
@@ -1305,7 +1325,7 @@
         extraImage1: post.extraImage1 || '',
         extraImage2: post.extraImage2 || '',
         extraImage3: post.extraImage3 || ''
-      }, null, false, { ads: post.ads || {}, videos: post.videos || {}, extraPositions: post.extraImagePositions || {} });
+      }, null, false);
 
       return `<!DOCTYPE html>
 <html lang="hi">
@@ -1318,9 +1338,6 @@
   <meta name="description" content="${safeSummary}">
   <meta name="author" content="Vanrajsinh Vaghela">
   <link rel="canonical" href="${absoluteUrl}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@400;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
   
   <meta property="og:locale" content="hi_IN">
   <meta property="og:type" content="article">
@@ -1371,7 +1388,7 @@
 
   <style>
     :root { --bg: #0c0d0e; --card: #141618; --accent: #e50914; --text: #f3f4f6; --muted: #9ca3af; --border: #22262a; }
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: ${articleFont}; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background: var(--bg); color: var(--text); padding: 12px; line-height: 1.65; font-size: 15px; }
     .post-container { max-width: 680px; margin: 0 auto; background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
     .nav-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
@@ -1417,9 +1434,43 @@
     .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
     .footer-links a { color: var(--muted); text-decoration: none; font-size: 11px; }
     .footer-links a:hover { color: #fff; }
+
+    /* FILMY KHABR Article Visual Themes */
+    body.theme-blue-white { --bg:#eef6ff; --card:#ffffff; --accent:#146ef5; --text:#10233f; --muted:#5f7188; --border:#cfe0f5; }
+    body.theme-blue-white { color:var(--text); }
+    body.theme-blue-white .post-container { box-shadow:0 8px 28px rgba(20,110,245,.10); }
+    body.theme-blue-white h1, body.theme-blue-white .article-body h2, body.theme-blue-white .article-body h3 { color:#0b3d91; }
+    body.theme-blue-white .article-body { color:#253b5a; }
+    body.theme-blue-white .article-body a, body.theme-blue-white .nav-bar a { color:#146ef5; }
+    body.theme-blue-white .article-trailer-box { background:#f5faff; border-color:#cfe0f5; }
+    body.theme-blue-white .trailer-tag { color:#146ef5; background:#eaf3ff; border-color:#cfe0f5; }
+    body.theme-dark-red { --bg:#08090b; --card:#111316; --accent:#ef233c; --text:#f5f5f5; --muted:#a5abb5; --border:#2b2e34; }
+    body.theme-dark-red { color:var(--text); }
+    body.theme-dark-red .post-container { box-shadow:0 8px 30px rgba(239,35,60,.12); }
+    body.theme-dark-red .article-body h2, body.theme-dark-red .article-body h3 { color:#fff; border-left:3px solid #ef233c; padding-left:8px; }
+    body.theme-dark-red .article-body { color:#e5e7eb; }
+    body.theme-dark-red .article-body a, body.theme-dark-red .nav-bar a { color:#ff5a6d; }
+    body.theme-dark-red .article-trailer-box { border-color:#3a2025; }
+    body.theme-dark-red .trailer-tag { color:#ff5a6d; background:#191014; border-color:#3a2025; }
+    body.theme-light-minimal { --bg:#f7f8fa; --card:#ffffff; --accent:#172033; --text:#172033; --muted:#697386; --border:#e1e5eb; }
+    body.theme-light-minimal { color:var(--text); }
+    body.theme-light-minimal .post-container { box-shadow:0 4px 18px rgba(23,32,51,.06); }
+    body.theme-light-minimal h1, body.theme-light-minimal .article-body h2, body.theme-light-minimal .article-body h3 { color:#172033; }
+    body.theme-light-minimal .article-body { color:#354052; }
+    body.theme-light-minimal .article-body a, body.theme-light-minimal .nav-bar a { color:#2457a6; }
+    body.theme-light-minimal .article-trailer-box { background:#fafafa; border-color:#e1e5eb; }
+    body.theme-light-minimal .trailer-tag { color:#2457a6; background:#f2f4f7; border-color:#e1e5eb; }
+    body.theme-purple-vibes { --bg:#100b20; --card:#1a1230; --accent:#a855f7; --text:#f7f2ff; --muted:#b9add0; --border:#39275a; }
+    body.theme-purple-vibes { color:var(--text); }
+    body.theme-purple-vibes .post-container { box-shadow:0 8px 32px rgba(168,85,247,.14); }
+    body.theme-purple-vibes h1, body.theme-purple-vibes .article-body h2, body.theme-purple-vibes .article-body h3 { color:#e5c8ff; }
+    body.theme-purple-vibes .article-body { color:#e9ddf7; }
+    body.theme-purple-vibes .article-body a, body.theme-purple-vibes .nav-bar a { color:#c084fc; }
+    body.theme-purple-vibes .article-trailer-box { border-color:#39275a; }
+    body.theme-purple-vibes .trailer-tag { color:#c084fc; background:#211638; border-color:#39275a; }
   </style>
 </head>
-<body>
+<body class="theme-${post.visualTheme || 'blue-white'}">
   <article class="post-container">
     <div class="nav-bar">
       <a href="../index.html">← FILMY KHABR HOME</a>
@@ -1475,29 +1526,18 @@
       const category = document.getElementById('post-category').value;
       const platform = document.getElementById('post-platform').value;
       const badge = document.getElementById('post-badge').value;
+      const articleTheme = document.getElementById('post-theme').value;
+      const customTheme = document.getElementById('post-custom-theme').value.trim();
       const heroSliderTrailer = document.getElementById('hero-slider-trailer').value.trim();
       const summaryInput = document.getElementById('post-summary').value.trim();
       const content = document.getElementById('post-content').value.trim();
-      const font = document.getElementById('post-font').value || 'Noto Sans Devanagari';
-      const formConfig = getFormElementsConfig();
       const editId = document.getElementById('edit-post-id').value;
       const existingPublishedAt = document.getElementById('edit-published-at').value;
 
       if (!title || !slug || !content) {
-        alert('Please fill Title, Slug and Article Content.');
+        alert('Please fill Title and Content fields.');
         return;
       }
-      if (!document.getElementById('post-image-path').value.trim() && !selectedImageBase64) {
-        alert('Main Featured Image is required for a Discover-ready post.');
-        return;
-      }
-      if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
-        alert('Invalid slug. Use lowercase English words separated by hyphens.');
-        return;
-      }
-      if (formConfig.videos[1].url && !getYoutubeEmbedUrl(formConfig.videos[1].url)) { alert('Article Video 1 URL is not a valid YouTube URL.'); return; }
-      if (formConfig.videos[2].url && !getYoutubeEmbedUrl(formConfig.videos[2].url)) { alert('Article Video 2 URL is not a valid YouTube URL.'); return; }
-      if (document.getElementById('hero-slider-trailer').value && !getYoutubeEmbedUrl(document.getElementById('hero-slider-trailer').value)) { alert('Hero Slider Trailer URL is not a valid YouTube URL.'); return; }
 
       const token = document.getElementById('gh-token').value.trim();
       if (!token) {
@@ -1571,15 +1611,14 @@
           category,
           platform,
           badge,
+          articleTheme: articleTheme || 'Auto / Best Current Angle',
+          customTheme: customTheme || '',
+          visualTheme: document.getElementById('post-visual-theme')?.value || 'blue-white',
           image: imagePath || '',
           extraImage1: extraPaths[1] || '',
           extraImage2: extraPaths[2] || '',
           extraImage3: extraPaths[3] || '',
           trailer: heroSliderTrailer || '',
-          font,
-          ads: formConfig.ads,
-          videos: formConfig.videos,
-          extraImagePositions: formConfig.extraPositions,
           summary: finalSummary,
           content,
           date: dateStr,
@@ -1602,15 +1641,6 @@
           }
         }
 
-        const duplicate = postsList.find(p => p.slug === slug && p.id !== editId);
-        if (duplicate) throw new Error(`Slug already exists: ${slug}. Please use a unique slug.`);
-        if (editId) {
-          const existingEditedPost = postsList.find(p => p.id === editId);
-          if (existingEditedPost && existingEditedPost.slug && existingEditedPost.slug !== slug) {
-            throw new Error('Slug change during Edit is blocked because the old article URL would remain orphaned. Keep the existing slug.');
-          }
-        }
-
         if (editId) {
           const idx = postsList.findIndex(p => p.id === editId);
           if (idx !== -1) {
@@ -1618,7 +1648,6 @@
               postsList[idx].publishedAt = postsList[idx].isoDate;
             }
             postObj.publishedAt = postsList[idx].publishedAt || finalPublishedAt;
-            postObj.date = postsList[idx].date || postObj.date;
             if (!extraImagesBase64[1]) postObj.extraImage1 = postsList[idx].extraImage1 || '';
             if (!extraImagesBase64[2]) postObj.extraImage2 = postsList[idx].extraImage2 || '';
             if (!extraImagesBase64[3]) postObj.extraImage3 = postsList[idx].extraImage3 || '';
@@ -1715,7 +1744,7 @@
             <div class="post-item">
               <div class="post-item-info">
                 <div class="post-item-title">${post.title}</div>
-                <div class="post-item-meta">${post.category} • ${post.badge || 'Trending'} • ${post.date || ''}</div>
+                <div class="post-item-meta">${post.category} • ${post.badge || 'Trending'} • ${post.articleTheme || 'Auto / Best Current Angle'} • ${post.visualTheme || 'blue-white'} • ${post.date || ''}</div>
               </div>
               <div class="post-actions">
                 <button class="btn btn-edit" onclick="editPost('${post.id}')">Edit</button>
@@ -1743,14 +1772,11 @@
       document.getElementById('post-category').value = post.category || 'Movies';
       document.getElementById('post-platform').value = post.platform || 'General';
       document.getElementById('post-badge').value = post.badge || 'Trending';
-      document.getElementById('hero-slider-trailer').value = post.trailer || '';
-      document.getElementById('post-font').value = post.font || 'Noto Sans Devanagari';
-      for (let i = 1; i <= 2; i++) {
-        document.getElementById(`trailer-url-${i}`).value = post.videos?.[i]?.url || '';
-        document.getElementById(`trailer-pos-${i}`).value = post.videos?.[i]?.position || (i === 1 ? 'middle' : 'before-last');
-      }
-      for (let i = 1; i <= 5; i++) document.getElementById(`ad-code-${i}`).value = post.ads?.[i] || '';
-      for (let i = 1; i <= 3; i++) document.getElementById(`extra-img-pos-${i}`).value = post.extraImagePositions?.[i] || (i === 1 ? 'before-last' : '');
+      document.getElementById('post-theme').value = post.articleTheme || 'Auto / Best Current Angle';
+      document.getElementById('post-custom-theme').value = post.customTheme || '';
+      document.getElementById('post-visual-theme').value = post.visualTheme || 'blue-white';
+      applyVisualThemePreview();
+      if(post.trailer) document.getElementById('hero-slider-trailer').value = post.trailer;
       
       if (post.extraImage1) document.getElementById('extra-img-path-1').value = post.extraImage1;
       if (post.extraImage2) document.getElementById('extra-img-path-2').value = post.extraImage2;
@@ -1807,18 +1833,15 @@
       document.getElementById('edit-post-id').value = '';
       document.getElementById('edit-published-at').value = '';
       document.getElementById('post-title').value = '';
+      document.getElementById('post-theme').value = 'Auto / Best Current Angle';
+      document.getElementById('post-custom-theme').value = '';
+      document.getElementById('post-visual-theme').value = 'blue-white';
+      applyVisualThemePreview();
       document.getElementById('post-slug').value = '';
       document.getElementById('post-image-path').value = '';
       document.getElementById('hero-slider-trailer').value = '';
-      document.getElementById('post-font').value = 'Noto Sans Devanagari';
-      document.getElementById('post-category').value = 'Movies';
-      document.getElementById('post-platform').value = 'General';
-      document.getElementById('post-badge').value = 'Trending';
       document.getElementById('trailer-url-1').value = '';
       document.getElementById('trailer-url-2').value = '';
-      document.getElementById('trailer-pos-1').value = 'middle';
-      document.getElementById('trailer-pos-2').value = 'before-last';
-      for (let i = 1; i <= 3; i++) document.getElementById(`extra-img-pos-${i}`).value = i === 1 ? 'before-last' : '';
       for (let i = 1; i <= 5; i++) {
         const adBox = document.getElementById(`ad-code-${i}`);
         if (adBox) adBox.value = '';
@@ -1834,7 +1857,6 @@
       }
       document.getElementById('form-heading').textContent = 'Create New Post';
       document.getElementById('publish-btn').textContent = 'Publish Discover-Ready Post';
-      updateFontPreview();
     }
   </script>
 </body>
