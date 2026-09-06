@@ -68,7 +68,7 @@
       padding: 0 16px 48px;
     }
 
-    /* Layout for Sections Below Hero: Main Content (Left) + Sidebar (Right starting from Trending) */
+    /* Full-Width Page Layout: Main Content (Left) + Sidebar (Right starting from Trending downwards) */
     .content-sidebar-layout {
       display: grid;
       grid-template-columns: 1fr 340px;
@@ -81,7 +81,7 @@
       min-width: 0;
     }
 
-    /* Sidebar Layout (Starting right at Trending Section as requested) */
+    /* Sidebar Layout */
     .sidebar {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -260,52 +260,54 @@
       cursor: pointer;
     }
 
-    /* Top ticker — compact editorial strip */
+    /* 4. Enhanced Breaking Ticker Bar & Text */
     .ticker-bar {
       position: sticky;
       top: 0;
       z-index: 1000;
-      height: 40px;
-      padding: 7px 18px;
-      background: rgba(5,6,7,.94);
+      height: 44px;
+      padding: 8px 20px;
+      background: rgba(5,6,7,.96);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid #22272d;
       box-shadow: 0 5px 18px rgba(0,0,0,.22);
+      display: flex;
+      align-items: center;
     }
     .ticker-label {
       background: var(--accent);
       color: #fff;
-      font-weight: 800;
-      padding: 3px 7px;
-      border-radius: 4px;
-      margin-right: 10px;
-      font-size: 10px;
+      font-weight: 900;
+      padding: 4px 10px;
+      border-radius: 5px;
+      margin-right: 12px;
+      font-size: 11px;
       text-transform: uppercase;
       flex-shrink: 0;
-      letter-spacing: .7px;
+      letter-spacing: .9px;
     }
     .ticker-viewport {
       flex: 1;
       position: relative;
-      height: 22px;
+      height: 26px;
       overflow: hidden;
     }
     .ticker-slide {
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
       display: flex; align-items: center;
-      color: #dfe2e6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      color: #f1f3f5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
       opacity: 0; transform: translateY(100%);
       transition: transform 0.45s ease, opacity 0.45s ease;
-      cursor: pointer; font-size: 12px;
+      cursor: pointer; font-size: 13px; font-weight: 600;
     }
     .ticker-slide.active { opacity: 1; transform: translateY(0); }
     .ticker-slide.prev { opacity: 0; transform: translateY(-100%); }
 
-    /* Header */
+    /* 5. Professional Header Styling (Without "Entertainment") */
     header {
-      padding: 24px 0 18px;
-      min-height: 86px;
+      padding: 26px 0 16px;
+      min-height: 80px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -313,46 +315,35 @@
     .brand { display: flex; flex-direction: column; }
     .brand-title {
       font-family: Georgia, "Times New Roman", serif;
-      font-size: 30px;
+      font-size: 34px;
       font-weight: 900;
-      letter-spacing: 1.2px;
-      line-height: .95;
+      letter-spacing: 1.5px;
+      line-height: 1;
       color: #fff;
-    }
-    .brand-badge {
-      background: var(--accent);
-      color: #fff;
-      font-size: 8px;
-      font-weight: 800;
-      padding: 3px 7px;
-      border-radius: 4px;
-      align-self: flex-start;
-      margin-top: 6px;
-      letter-spacing: 1px;
     }
     .search-btn {
-      width: 40px; height: 40px;
+      width: 44px; height: 44px;
       border: 1px solid #2b3138; border-radius: 50%;
-      background: #111419; color: #e8eaed; font-size: 16px;
+      background: #111419; color: #e8eaed; font-size: 17px;
       cursor: pointer; transition: .2s ease;
     }
     .search-btn:hover { border-color: var(--accent); background: #191c21; transform: translateY(-1px); }
 
-    /* Navigation */
+    /* 6. Enlarged Horizontal Navigation Bar Links */
     nav {
-      display: flex; align-items: center; gap: 7px;
-      overflow-x: auto; padding: 0 0 15px;
+      display: flex; align-items: center; gap: 10px;
+      overflow-x: auto; padding: 0 0 16px;
       border-bottom: 1px solid #252a30;
       scrollbar-width: none; -ms-overflow-style: none;
     }
     nav::-webkit-scrollbar { display: none; }
     .nav-link {
-      padding: 8px 12px 7px; border: 1px solid transparent; border-radius: 999px;
-      font-size: 12px; font-weight: 700; color: #aeb4bd; white-space: nowrap; cursor: pointer;
-      transition: color 0.2s;
+      padding: 10px 16px; border: 1px solid transparent; border-radius: 999px;
+      font-size: 14px; font-weight: 700; color: #b8bec9; white-space: nowrap; cursor: pointer;
+      transition: all 0.2s;
     }
     .nav-link.active, .nav-link:hover {
-      color: #fff; background: rgba(229,9,20,.12); border-color: rgba(229,9,20,.38);
+      color: #fff; background: rgba(229,9,20,.15); border-color: rgba(229,9,20,.45);
     }
 
     #search-container {
@@ -373,7 +364,7 @@
 
     /* Section Headings */
     .section-title {
-      margin: 30px 0 13px; font-size: 18px; font-weight: 800; color: #fff;
+      margin: 32px 0 14px; font-size: 18px; font-weight: 800; color: #fff;
       display: flex; align-items: center; justify-content: space-between;
     }
     .section-title > span:first-child::before {
@@ -382,7 +373,7 @@
     }
     .section-view-all { font-size: 12px; color: var(--accent); font-weight: 700; cursor: pointer; }
 
-    /* Full-Width Hero Slider (Bada Trailer Section on Top) */
+    /* Hero Slider & Enlarged Buttons (1) */
     .hero-slider-container {
       position: relative; background: var(--card-bg); border-radius: 16px;
       overflow: hidden; border: 1px solid #2a3038; margin-top: 10px;
@@ -393,39 +384,43 @@
     .hero-media-wrap { width: 100%; aspect-ratio: 16 / 9; position: relative; background: #000; overflow: hidden; }
     .hero-media-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
     .hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-content { padding: 18px 20px 22px; background: var(--card-bg); position: relative; }
-    .hero-meta-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
-    .hero-platform { font-size: 11px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: .8px; }
-    .badge-tag { background: var(--accent); color: #fff; font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 5px; text-transform: uppercase; }
+    .hero-content { padding: 20px 22px 24px; background: var(--card-bg); position: relative; }
+    .hero-meta-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .hero-platform { font-size: 12px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: .8px; }
+    .badge-tag { background: var(--accent); color: #fff; font-size: 11px; font-weight: 800; padding: 5px 10px; border-radius: 6px; text-transform: uppercase; }
     .hero-title {
-      font-family: Georgia, "Times New Roman", serif; font-size: clamp(20px, 2.2vw, 27px);
-      font-weight: 800; color: #fff; line-height: 1.2; margin: 6px 0 8px;
+      font-family: Georgia, "Times New Roman", serif; font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 800; color: #fff; line-height: 1.2; margin: 8px 0 10px;
       display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
     }
     .hero-title a:hover { color: var(--accent-hover); }
-    .hero-summary { font-size: 14px; color: #c7ccd3; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 14px; }
-    .hero-actions { display: flex; gap: 10px; align-items: center; }
+    .hero-summary { font-size: 14px; color: #c7ccd3; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 16px; }
+    
+    .hero-actions { display: flex; gap: 12px; align-items: center; }
     .hero-btn {
-      display: inline-flex; align-items: center; gap: 6px; background: var(--accent); color: #fff;
-      font-size: 12px; font-weight: 700; padding: 8px 16px; border-radius: 7px; border: none; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff;
+      font-size: 13px; font-weight: 700; padding: 11px 20px; border-radius: 8px; border: none; cursor: pointer; text-decoration: none;
+      box-shadow: 0 4px 12px rgba(229,9,20,0.3); transition: all 0.2s;
     }
-    .hero-btn:hover { background: var(--accent-hover); }
-    .hero-btn-trailer { background: #1a1e24; color: #f3f4f6; border: 1px solid #2b3138; }
+    .hero-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .hero-btn-trailer { background: #1f242c; color: #f3f4f6; border: 1px solid #374151; box-shadow: none; }
+    .hero-btn-trailer:hover { background: #2d3440; }
+
     .hero-progress-track { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: rgba(255,255,255,.15); z-index: 4; }
     .hero-progress-bar { height: 100%; width: 0%; background: var(--accent); transition: width 0.1s linear; }
     .hero-nav-btn {
       position: absolute; top: 40%; transform: translateY(-50%); background: rgba(0,0,0,.65);
-      border: 1px solid rgba(255,255,255,.2); color: #fff; width: 38px; height: 38px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 5; font-size: 13px;
+      border: 1px solid rgba(255,255,255,.2); color: #fff; width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 5; font-size: 14px;
     }
     .hero-nav-btn:hover { background: rgba(229,9,20,.9); }
-    .hero-nav-btn.prev { left: 10px; }
-    .hero-nav-btn.next { right: 10px; }
-    .hero-dots { position: absolute; bottom: 12px; right: 16px; display: flex; gap: 5px; z-index: 3; align-items: center; }
+    .hero-nav-btn.prev { left: 12px; }
+    .hero-nav-btn.next { right: 12px; }
+    .hero-dots { position: absolute; bottom: 14px; right: 18px; display: flex; gap: 6px; z-index: 3; align-items: center; }
     .hero-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.5); transition: all 0.25s ease; }
     .hero-dot.active { background: var(--accent); width: 16px; border-radius: 3px; }
 
-    /* Trending Grid (2 columns to fit beside sidebar perfectly) */
+    /* Trending Grid */
     .trending-scroll { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
     .trend-card {
       background: var(--card-bg); border: 1px solid #252b32; border-radius: 12px; overflow: hidden;
@@ -444,16 +439,17 @@
     .trend-title { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 6px; }
     .trend-date { font-size: 10px; color: var(--text-dim); margin-top: auto; }
 
-    /* Explore By Category Grid */
-    .cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 8px; }
+    /* 3. Enlarged & Enhanced Explore By Category Buttons */
+    .cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 10px; }
     .cat-card {
-      background: linear-gradient(180deg, #12161b, #0f1216); border: 1px solid var(--card-border);
-      border-radius: 12px; padding: 16px 10px; text-align: center; cursor: pointer; transition: 0.15s;
+      background: linear-gradient(135deg, #151a21, #0d1014); border: 1px solid #2a323d;
+      border-radius: 14px; padding: 20px 14px; text-align: center; cursor: pointer; 
+      transition: all 0.2s ease; box-shadow: 0 6px 18px rgba(0,0,0,0.15);
     }
-    .cat-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .cat-icon { font-size: 24px; margin-bottom: 6px; display: block; }
-    .cat-name { font-size: 13px; font-weight: 800; color: #fff; margin-bottom: 2px; }
-    .cat-desc { font-size: 10px; color: var(--text-muted); }
+    .cat-card:hover { border-color: var(--accent); transform: translateY(-3px); background: linear-gradient(135deg, #1d242e, #11151a); }
+    .cat-icon { font-size: 28px; margin-bottom: 8px; display: block; }
+    .cat-name { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 3px; }
+    .cat-desc { font-size: 11px; color: var(--text-muted); }
 
     /* Latest News List (8 posts per page) */
     .news-list { display: flex; flex-direction: column; gap: 10px; }
@@ -516,18 +512,17 @@
   </div>
 
   <div class="container">
-    <!-- Header -->
+    <!-- Header (Professional, without "Entertainment") -->
     <header>
       <div class="brand">
         <a href="index.html" class="brand-title">FILMY KHABR</a>
-        <span class="brand-badge">ENTERTAINMENT</span>
       </div>
       <div>
         <button class="search-btn" onclick="toggleSearch()" title="Search Articles">🔍</button>
       </div>
     </header>
 
-    <!-- Navigation Bar -->
+    <!-- Navigation Bar (Enlarged Links) -->
     <nav>
       <span class="nav-link active" onclick="filterCategory('All')">Home</span>
       <span class="nav-link" onclick="filterCategory('Movies')">Movies</span>
@@ -567,7 +562,7 @@
           </div>
           <div class="trending-scroll" id="trending-container"></div>
 
-          <!-- Explore By Category Grid -->
+          <!-- Explore By Category Grid (Enlarged Buttons) -->
           <div class="section-title">
             <span>Explore By Category</span>
           </div>
