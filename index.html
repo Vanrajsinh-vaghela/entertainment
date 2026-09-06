@@ -1227,7 +1227,7 @@
       updateHeroSlide();
     }
 
-    // Load Data
+    // Load Data (Robust parsing with raw control characters cleaning)
     async function loadSiteData() {
       const postsUrl = new URL('data/posts.json', window.location.href);
       postsUrl.searchParams.set('_t', Date.now());
@@ -1236,7 +1236,15 @@
       try {
         const res = await fetch(postsUrl.href, { cache: 'no-store' });
         if (!res.ok) throw new Error(`data/posts.json HTTP ${res.status}`);
-        data = await res.json();
+        
+        const rawText = await res.text();
+        try {
+          data = JSON.parse(rawText);
+        } catch (jsonErr) {
+          console.warn('Standard JSON parse failed, cleaning control characters...', jsonErr);
+          const cleanedText = rawText.replace(/[\u0000-\u001F\u007F-\u009F]/g, " ");
+          data = JSON.parse(cleanedText);
+        }
       } catch (err) {
         console.error('POSTS JSON LOAD ERROR:', err);
         setupBreakingTicker([]);
@@ -1260,7 +1268,6 @@
         else renderAll();
       } catch (err) {
         console.error('POSTS RENDER ERROR:', err);
-        // Never show the misleading “no posts” message when JSON loaded successfully.
         const box = document.getElementById('posts-list-container');
         if (box) box.innerHTML = `<div class="no-posts">Posts load ho gayi hain, lekin homepage render karte waqt error aaya. Please refresh karein.</div>`;
       }
