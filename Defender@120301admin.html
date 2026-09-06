@@ -371,28 +371,6 @@
       text-decoration: underline;
     }
 
-    /* Article Visual Theme Preview */
-    .preview-pane[data-visual-theme="blue-white"] { background:#eef6ff; border-color:#cfe0f5; }
-    .preview-pane[data-visual-theme="blue-white"] .preview-title { color:#0b3d91; }
-    .preview-pane[data-visual-theme="blue-white"] .preview-badge { background:#146ef5; }
-    .preview-pane[data-visual-theme="blue-white"] .preview-body { color:#253b5a; }
-    .preview-pane[data-visual-theme="blue-white"] .preview-body a { color:#146ef5; }
-    .preview-pane[data-visual-theme="dark-red"] { background:#08090b; border-color:#3a2025; }
-    .preview-pane[data-visual-theme="dark-red"] .preview-title { color:#fff; }
-    .preview-pane[data-visual-theme="dark-red"] .preview-badge { background:#ef233c; }
-    .preview-pane[data-visual-theme="dark-red"] .preview-body { color:#e5e7eb; }
-    .preview-pane[data-visual-theme="dark-red"] .preview-body a { color:#ff5a6d; }
-    .preview-pane[data-visual-theme="light-minimal"] { background:#f7f8fa; border-color:#e1e5eb; }
-    .preview-pane[data-visual-theme="light-minimal"] .preview-title { color:#172033; }
-    .preview-pane[data-visual-theme="light-minimal"] .preview-badge { background:#172033; }
-    .preview-pane[data-visual-theme="light-minimal"] .preview-body { color:#354052; }
-    .preview-pane[data-visual-theme="light-minimal"] .preview-body a { color:#2457a6; }
-    .preview-pane[data-visual-theme="purple-vibes"] { background:#100b20; border-color:#39275a; }
-    .preview-pane[data-visual-theme="purple-vibes"] .preview-title { color:#e5c8ff; }
-    .preview-pane[data-visual-theme="purple-vibes"] .preview-badge { background:#a855f7; }
-    .preview-pane[data-visual-theme="purple-vibes"] .preview-body { color:#e9ddf7; }
-    .preview-pane[data-visual-theme="purple-vibes"] .preview-body a { color:#c084fc; }
-
     .hidden {
       display: none !important;
     }
@@ -530,7 +508,7 @@
       <div class="card-header">
         <div>
           <span class="card-title">Site & GitHub Config</span>
-          <div class="card-subtitle" id="conn-summary">Vanrajsinh-vaghela / Entertainment</div>
+          <div class="card-subtitle" id="conn-summary">Vanrajsinh-vaghela / entertainment</div>
         </div>
         <span class="status-badge" id="conn-status">Ready</span>
       </div>
@@ -542,7 +520,7 @@
         </div>
         <div class="form-group">
           <label>Repository Name</label>
-          <input type="text" id="gh-repo" value="Entertainment" placeholder="Entertainment" onchange="saveCreds()">
+          <input type="text" id="gh-repo" value="entertainment" placeholder="entertainment" onchange="saveCreds()">
         </div>
       </div>
 
@@ -622,50 +600,6 @@
           </div>
         </div>
 
-        <!-- Article Theme / Editorial Angle -->
-        <div class="form-row-2">
-          <div class="form-group">
-            <label>Article Theme / Editorial Angle</label>
-            <select id="post-theme">
-              <option value="Auto / Best Current Angle">Auto / Best Current Angle</option>
-              <option value="Latest Update / Breaking News">Latest Update / Breaking News</option>
-              <option value="Trailer / First Look">Trailer / First Look</option>
-              <option value="Teaser / Announcement">Teaser / Announcement</option>
-              <option value="Release Date Focus">Release Date Focus</option>
-              <option value="OTT / Streaming Focus">OTT / Streaming Focus</option>
-              <option value="Cast & Characters">Cast & Characters</option>
-              <option value="Story / Plot Focus">Story / Plot Focus</option>
-              <option value="Ending / Explained">Ending / Explained</option>
-              <option value="Box Office / Collection">Box Office / Collection</option>
-              <option value="Review / Verdict">Review / Verdict</option>
-              <option value="Franchise / Sequel Connection">Franchise / Sequel Connection</option>
-              <option value="Celebrity Focus">Celebrity Focus</option>
-              <option value="Controversy / Debate">Controversy / Debate</option>
-              <option value="Behind the Scenes / Production">Behind the Scenes / Production</option>
-              <option value="Comparison / Face-Off">Comparison / Face-Off</option>
-              <option value="Audience / Social Buzz">Audience / Social Buzz</option>
-              <option value="Custom Theme">Custom Theme</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Custom Theme / Angle (Optional)</label>
-            <input type="text" id="post-custom-theme" placeholder="e.g. Preity Zinta ke character par focus">
-          </div>
-        </div>
-        <div class="helper-txt" style="margin-bottom: 10px;">Editorial Theme article ke angle ke liye hai. Neeche Visual Theme se live article ka look choose karein.</div>
-
-        <!-- Article Visual Theme -->
-        <div class="form-group">
-          <label>🎨 Article Visual Theme</label>
-          <select id="post-visual-theme" onchange="applyVisualThemePreview()">
-            <option value="blue-white" selected>🔵 Blue & White — Standard</option>
-            <option value="dark-red">🌑 Dark Mode — Cinematic Red</option>
-            <option value="light-minimal">⚪ Light Minimal — Clean</option>
-            <option value="purple-vibes">🟣 Purple Vibes — Premium</option>
-          </select>
-          <div class="helper-txt">Published article ka visual style yahan select karein. Default: Blue & White.</div>
-        </div>
-
         <div class="form-group">
           <label>Featured Image (Main Banner)</label>
           <input type="file" id="post-file" accept="image/*" onchange="handleImageFile(event)">
@@ -677,7 +611,7 @@
           <input type="text" id="hero-slider-trailer" placeholder="https://www.youtube.com/watch?v=...">
         </div>
 
-        <!-- 3 Additional Extra Images with Position Dropdowns (FIXED PREVIEW & PATHS) -->
+        <!-- 3 Additional Extra Images with Position Dropdowns -->
         <div style="background: #111315; border: 1px solid #23272c; border-radius: 6px; padding: 10px; margin-bottom: 10px;">
           <label style="color: #38bdf8; margin-bottom: 8px;">🖼️ Additional Article Images (Up to 3 Extra)</label>
           
@@ -790,33 +724,48 @@
           </div>
         </div>
 
-        <!-- Direct Ad Insertion Code Boxes (5 Slots) -->
+        <!-- Direct Ad Insertion Code Boxes (8 Slots Total) -->
         <div style="background: #111315; border: 1px solid #23272c; border-radius: 6px; padding: 10px; margin-bottom: 10px;">
-          <label style="color: #10b981; margin-bottom: 8px;">💰 Direct Ad Code Boxes (Adsterra / AdSense / HTML)</label>
+          <label style="color: #10b981; margin-bottom: 8px;">💰 Direct Ad Code Boxes (Adsterra / AdSense / HTML - 8 Slots)</label>
           
           <div class="form-group" style="margin-bottom: 6px;">
-            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 1 (Top Banner - Under Title/Main Image)</label>
-            <textarea id="ad-code-1" placeholder="Paste Ad HTML/JS code here..." style="min-height: 60px; font-family: monospace; font-size: 11px;"></textarea>
+            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 1 (Popunder / Top Banner)</label>
+            <textarea id="ad-code-1" placeholder="Paste Ad HTML/JS code here..." style="min-height: 50px; font-family: monospace; font-size: 11px;"></textarea>
           </div>
 
           <div class="form-group" style="margin-bottom: 6px;">
-            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 2 (Upper Content)</label>
-            <textarea id="ad-code-2" placeholder="Paste Ad HTML/JS code here..." style="min-height: 60px; font-family: monospace; font-size: 11px;"></textarea>
+            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 2 (Native Banner)</label>
+            <textarea id="ad-code-2" placeholder="Paste Ad HTML/JS code here..." style="min-height: 50px; font-family: monospace; font-size: 11px;"></textarea>
           </div>
 
           <div class="form-group" style="margin-bottom: 6px;">
-            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 3 (Exact Middle)</label>
-            <textarea id="ad-code-3" placeholder="Paste Ad HTML/JS code here..." style="min-height: 60px; font-family: monospace; font-size: 11px;"></textarea>
+            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 3 (Banner 728x90 / Upper Content)</label>
+            <textarea id="ad-code-3" placeholder="Paste Ad HTML/JS code here..." style="min-height: 50px; font-family: monospace; font-size: 11px;"></textarea>
           </div>
 
           <div class="form-group" style="margin-bottom: 6px;">
-            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 4 (Before FAQs / Conclusion)</label>
-            <textarea id="ad-code-4" placeholder="Paste Ad HTML/JS code here..." style="min-height: 60px; font-family: monospace; font-size: 11px;"></textarea>
+            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 4 (Banner 300x250 / Exact Middle)</label>
+            <textarea id="ad-code-4" placeholder="Paste Ad HTML/JS code here..." style="min-height: 50px; font-family: monospace; font-size: 11px;"></textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 6px;">
+            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 5 (Social Bar / Before Conclusion)</label>
+            <textarea id="ad-code-5" placeholder="Paste Ad HTML/JS code here..." style="min-height: 50px; font-family: monospace; font-size: 11px;"></textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 6px;">
+            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 6 (Extra Slot A)</label>
+            <textarea id="ad-code-6" placeholder="Paste Ad HTML/JS code here..." style="min-height: 50px; font-family: monospace; font-size: 11px;"></textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 6px;">
+            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 7 (Extra Slot B)</label>
+            <textarea id="ad-code-7" placeholder="Paste Ad HTML/JS code here..." style="min-height: 50px; font-family: monospace; font-size: 11px;"></textarea>
           </div>
 
           <div class="form-group">
-            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 5 (Bottom / Footer Banner)</label>
-            <textarea id="ad-code-5" placeholder="Paste Ad HTML/JS code here..." style="min-height: 60px; font-family: monospace; font-size: 11px;"></textarea>
+            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 8 (Footer / Extra Slot C)</label>
+            <textarea id="ad-code-8" placeholder="Paste Ad HTML/JS code here..." style="min-height: 50px; font-family: monospace; font-size: 11px;"></textarea>
           </div>
         </div>
 
@@ -914,9 +863,6 @@
 
   <script>
     const MASTER_PIN = "1465822";
-    // STEP 4: Central site URL for the new Filmy Khabr subdomain.
-    // Keep this as the single source of truth for generated article/sitemap URLs.
-    const SITE_BASE_URL = "https://filmykhabr.gujaratfastalert.in";
     let selectedImageBase64 = null;
     let selectedImageExt = "jpg";
     let extraImagesBase64 = { 1: null, 2: null, 3: null };
@@ -945,7 +891,6 @@
     function initAdmin() {
       loadCreds();
       autoUpdateSummary();
-      applyVisualThemePreview();
     }
 
     function switchTab(tab) {
@@ -990,7 +935,7 @@
 
     function autoUpdateSummary() {
       const u = document.getElementById('gh-user').value.trim() || 'Vanrajsinh-vaghela';
-      const r = document.getElementById('gh-repo').value.trim() || 'Entertainment';
+      const r = document.getElementById('gh-repo').value.trim() || 'entertainment';
       document.getElementById('conn-summary').textContent = `${u} / ${r}`;
     }
 
@@ -1061,12 +1006,6 @@
       showToast('Link inserted');
     }
 
-    document.getElementById('post-custom-theme')?.addEventListener('input', function() {
-      if (this.value.trim()) {
-        document.getElementById('post-theme').value = 'Custom Theme';
-      }
-    });
-
     function showToast(msg) {
       const t = document.getElementById('toast');
       t.textContent = msg;
@@ -1089,7 +1028,6 @@
       return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=0&rel=0` : null;
     }
 
-    // Process trailers, extra images, and direct ads combined according to their positions
     function processContentWithElements(rawContent, currentSlug, extraImagesObj, extraImagesBase64Map, isPreview = false) {
       let positionMap = {
         'top': [],
@@ -1100,27 +1038,14 @@
         'bottom': []
       };
 
-      // 1. Add Ad Slot 1 to Top if present
-      const ad1 = document.getElementById('ad-code-1')?.value.trim();
-      if (ad1) positionMap['top'].push(`<div class="article-ad-box" style="margin: 14px 0; text-align:center;">${ad1}</div>`);
+      for (let i = 1; i <= 8; i++) {
+        const adVal = document.getElementById(`ad-code-${i}`)?.value.trim();
+        if (adVal) {
+          const targetPos = i === 1 ? 'top' : i === 2 ? 'upper-middle' : i === 3 ? 'middle' : i === 4 ? 'lower-middle' : i === 5 ? 'before-last' : 'bottom';
+          positionMap[targetPos].push(`<div class="article-ad-box" style="margin: 14px 0; text-align:center;">${adVal}</div>`);
+        }
+      }
 
-      // 2. Add Ad Slot 2 to Upper-Middle if present
-      const ad2 = document.getElementById('ad-code-2')?.value.trim();
-      if (ad2) positionMap['upper-middle'].push(`<div class="article-ad-box" style="margin: 14px 0; text-align:center;">${ad2}</div>`);
-
-      // 3. Add Ad Slot 3 to Exact Middle if present
-      const ad3 = document.getElementById('ad-code-3')?.value.trim();
-      if (ad3) positionMap['middle'].push(`<div class="article-ad-box" style="margin: 14px 0; text-align:center;">${ad3}</div>`);
-
-      // 4. Add Ad Slot 4 to Before-Last if present
-      const ad4 = document.getElementById('ad-code-4')?.value.trim();
-      if (ad4) positionMap['before-last'].push(`<div class="article-ad-box" style="margin: 14px 0; text-align:center;">${ad4}</div>`);
-
-      // 5. Add Ad Slot 5 to Bottom if present
-      const ad5 = document.getElementById('ad-code-5')?.value.trim();
-      if (ad5) positionMap['bottom'].push(`<div class="article-ad-box" style="margin: 14px 0; text-align:center;">${ad5}</div>`);
-
-      // 6. Collect YouTube Videos
       for (let i = 1; i <= 2; i++) {
         const pos = document.getElementById(`trailer-pos-${i}`)?.value;
         const url = document.getElementById(`trailer-url-${i}`)?.value.trim();
@@ -1137,7 +1062,6 @@
         }
       }
 
-      // 7. Collect Extra Images (Instant preview support with Base64 or relative path)
       for (let i = 1; i <= 3; i++) {
         const pos = document.getElementById(`extra-img-pos-${i}`)?.value;
         let imgSrc = '';
@@ -1241,16 +1165,11 @@
       const category = document.getElementById('post-category').value;
       const platform = document.getElementById('post-platform').value;
       const badge = document.getElementById('post-badge').value;
-      const theme = document.getElementById('post-theme').value;
-      const customTheme = document.getElementById('post-custom-theme').value.trim();
       const imgPath = document.getElementById('post-image-path').value;
-      const visualTheme = document.getElementById('post-visual-theme')?.value || 'blue-white';
       const rawContent = document.getElementById('post-content').value || '<p>Write your article to see preview...</p>';
 
       document.getElementById('prev-title').textContent = title;
       document.getElementById('prev-badge').textContent = badge;
-      const previewPane = document.querySelector('.preview-pane');
-      if (previewPane) previewPane.setAttribute('data-visual-theme', visualTheme);
       document.getElementById('prev-category').textContent = `${category} • ${platform}`;
       document.getElementById('prev-content').innerHTML = processContentWithElements(rawContent, 'preview', {
         extraImage1: document.getElementById('extra-img-path-1').value,
@@ -1270,25 +1189,19 @@
       }
     }
 
-    function applyVisualThemePreview() {
-      const theme = document.getElementById('post-visual-theme')?.value || 'blue-white';
-      const previewPane = document.querySelector('.preview-pane');
-      if (previewPane) previewPane.setAttribute('data-visual-theme', theme);
-    }
-
     function generateSitemapXML(posts) {
       let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
       xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
       
-      xml += `  <url>\n    <loc>${SITE_BASE_URL}/</loc>\n    <priority>1.0</priority>\n    <changefreq>daily</changefreq>\n  </url>\n`;
-      xml += `  <url>\n    <loc>${SITE_BASE_URL}/about.html</loc>\n    <priority>0.6</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
-      xml += `  <url>\n    <loc>${SITE_BASE_URL}/contact.html</loc>\n    <priority>0.6</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
-      xml += `  <url>\n    <loc>${SITE_BASE_URL}/privacy-policy.html</loc>\n    <priority>0.5</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
-      xml += `  <url>\n    <loc>${SITE_BASE_URL}/disclaimer.html</loc>\n    <priority>0.5</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
+      xml += `  <url>\n    <loc>https://filmykhabr.gujaratfastalert.in/</loc>\n    <priority>1.0</priority>\n    <changefreq>daily</changefreq>\n  </url>\n`;
+      xml += `  <url>\n    <loc>https://filmykhabr.gujaratfastalert.in/about.html</loc>\n    <priority>0.6</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
+      xml += `  <url>\n    <loc>https://filmykhabr.gujaratfastalert.in/contact.html</loc>\n    <priority>0.6</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
+      xml += `  <url>\n    <loc>https://filmykhabr.gujaratfastalert.in/privacy-policy.html</loc>\n    <priority>0.5</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
+      xml += `  <url>\n    <loc>https://filmykhabr.gujaratfastalert.in/disclaimer.html</loc>\n    <priority>0.5</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
 
       posts.forEach(p => {
         const postDate = p.publishedAt ? p.publishedAt.split('T')[0] : (p.date || new Date().toISOString().split('T')[0]);
-        xml += `  <url>\n    <loc>${SITE_BASE_URL}/posts/${p.slug}.html</loc>\n    <lastmod>${postDate}</lastmod>\n    <priority>0.8</priority>\n    <changefreq>weekly</changefreq>\n  </url>\n`;
+        xml += `  <url>\n    <loc>https://filmykhabr.gujaratfastalert.in/posts/${p.slug}.html</loc>\n    <lastmod>${postDate}</lastmod>\n    <priority>0.8</priority>\n    <changefreq>weekly</changefreq>\n  </url>\n`;
       });
 
       xml += `</urlset>`;
@@ -1296,10 +1209,10 @@
     }
 
     function generatePostHTML(post) {
-      const absoluteUrl = `${SITE_BASE_URL}/posts/${post.slug}.html`;
+      const absoluteUrl = `https://filmykhabr.gujaratfastalert.in/posts/${post.slug}.html`;
       const absoluteImg = post.image.startsWith('http') 
         ? post.image 
-        : `${SITE_BASE_URL}/${post.image}`;
+        : `https://filmykhabr.gujaratfastalert.in/${post.image}`;
       
       const rawSummary = post.summary || post.title;
       const safeSummary = rawSummary.replace(/"/g, '&quot;');
@@ -1383,7 +1296,7 @@
     "publisher": {
       "@type": "Organization",
       "name": "Filmy Khabr",
-      "url": "${SITE_BASE_URL}/"
+      "url": "https://filmykhabr.gujaratfastalert.in/"
     },
     "description": ${JSON.stringify(rawSummary)}
   }
@@ -1437,43 +1350,9 @@
     .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
     .footer-links a { color: var(--muted); text-decoration: none; font-size: 11px; }
     .footer-links a:hover { color: #fff; }
-
-    /* FILMY KHABR Article Visual Themes */
-    body.theme-blue-white { --bg:#eef6ff; --card:#ffffff; --accent:#146ef5; --text:#10233f; --muted:#5f7188; --border:#cfe0f5; }
-    body.theme-blue-white { color:var(--text); }
-    body.theme-blue-white .post-container { box-shadow:0 8px 28px rgba(20,110,245,.10); }
-    body.theme-blue-white h1, body.theme-blue-white .article-body h2, body.theme-blue-white .article-body h3 { color:#0b3d91; }
-    body.theme-blue-white .article-body { color:#253b5a; }
-    body.theme-blue-white .article-body a, body.theme-blue-white .nav-bar a { color:#146ef5; }
-    body.theme-blue-white .article-trailer-box { background:#f5faff; border-color:#cfe0f5; }
-    body.theme-blue-white .trailer-tag { color:#146ef5; background:#eaf3ff; border-color:#cfe0f5; }
-    body.theme-dark-red { --bg:#08090b; --card:#111316; --accent:#ef233c; --text:#f5f5f5; --muted:#a5abb5; --border:#2b2e34; }
-    body.theme-dark-red { color:var(--text); }
-    body.theme-dark-red .post-container { box-shadow:0 8px 30px rgba(239,35,60,.12); }
-    body.theme-dark-red .article-body h2, body.theme-dark-red .article-body h3 { color:#fff; border-left:3px solid #ef233c; padding-left:8px; }
-    body.theme-dark-red .article-body { color:#e5e7eb; }
-    body.theme-dark-red .article-body a, body.theme-dark-red .nav-bar a { color:#ff5a6d; }
-    body.theme-dark-red .article-trailer-box { border-color:#3a2025; }
-    body.theme-dark-red .trailer-tag { color:#ff5a6d; background:#191014; border-color:#3a2025; }
-    body.theme-light-minimal { --bg:#f7f8fa; --card:#ffffff; --accent:#172033; --text:#172033; --muted:#697386; --border:#e1e5eb; }
-    body.theme-light-minimal { color:var(--text); }
-    body.theme-light-minimal .post-container { box-shadow:0 4px 18px rgba(23,32,51,.06); }
-    body.theme-light-minimal h1, body.theme-light-minimal .article-body h2, body.theme-light-minimal .article-body h3 { color:#172033; }
-    body.theme-light-minimal .article-body { color:#354052; }
-    body.theme-light-minimal .article-body a, body.theme-light-minimal .nav-bar a { color:#2457a6; }
-    body.theme-light-minimal .article-trailer-box { background:#fafafa; border-color:#e1e5eb; }
-    body.theme-light-minimal .trailer-tag { color:#2457a6; background:#f2f4f7; border-color:#e1e5eb; }
-    body.theme-purple-vibes { --bg:#100b20; --card:#1a1230; --accent:#a855f7; --text:#f7f2ff; --muted:#b9add0; --border:#39275a; }
-    body.theme-purple-vibes { color:var(--text); }
-    body.theme-purple-vibes .post-container { box-shadow:0 8px 32px rgba(168,85,247,.14); }
-    body.theme-purple-vibes h1, body.theme-purple-vibes .article-body h2, body.theme-purple-vibes .article-body h3 { color:#e5c8ff; }
-    body.theme-purple-vibes .article-body { color:#e9ddf7; }
-    body.theme-purple-vibes .article-body a, body.theme-purple-vibes .nav-bar a { color:#c084fc; }
-    body.theme-purple-vibes .article-trailer-box { border-color:#39275a; }
-    body.theme-purple-vibes .trailer-tag { color:#c084fc; background:#211638; border-color:#39275a; }
   </style>
 </head>
-<body class="theme-${post.visualTheme || 'blue-white'}">
+<body>
   <article class="post-container">
     <div class="nav-bar">
       <a href="../index.html">← FILMY KHABR HOME</a>
@@ -1529,8 +1408,6 @@
       const category = document.getElementById('post-category').value;
       const platform = document.getElementById('post-platform').value;
       const badge = document.getElementById('post-badge').value;
-      const articleTheme = document.getElementById('post-theme').value;
-      const customTheme = document.getElementById('post-custom-theme').value.trim();
       const heroSliderTrailer = document.getElementById('hero-slider-trailer').value.trim();
       const summaryInput = document.getElementById('post-summary').value.trim();
       const content = document.getElementById('post-content').value.trim();
@@ -1614,9 +1491,6 @@
           category,
           platform,
           badge,
-          articleTheme: articleTheme || 'Auto / Best Current Angle',
-          customTheme: customTheme || '',
-          visualTheme: document.getElementById('post-visual-theme')?.value || 'blue-white',
           image: imagePath || '',
           extraImage1: extraPaths[1] || '',
           extraImage2: extraPaths[2] || '',
@@ -1698,7 +1572,7 @@
           sha: sitemapFileSha || undefined
         });
 
-        const fullLiveUrl = `${SITE_BASE_URL}/posts/${slug}.html`;
+        const fullLiveUrl = `https://filmykhabr.gujaratfastalert.in/posts/${slug}.html`;
         document.getElementById('success-post-url').value = fullLiveUrl;
         document.getElementById('btn-open-post').href = fullLiveUrl;
         document.getElementById('publish-success-modal').style.display = 'flex';
@@ -1747,7 +1621,7 @@
             <div class="post-item">
               <div class="post-item-info">
                 <div class="post-item-title">${post.title}</div>
-                <div class="post-item-meta">${post.category} • ${post.badge || 'Trending'} • ${post.articleTheme || 'Auto / Best Current Angle'} • ${post.visualTheme || 'blue-white'} • ${post.date || ''}</div>
+                <div class="post-item-meta">${post.category} • ${post.badge || 'Trending'} • ${post.date || ''}</div>
               </div>
               <div class="post-actions">
                 <button class="btn btn-edit" onclick="editPost('${post.id}')">Edit</button>
@@ -1775,10 +1649,6 @@
       document.getElementById('post-category').value = post.category || 'Movies';
       document.getElementById('post-platform').value = post.platform || 'General';
       document.getElementById('post-badge').value = post.badge || 'Trending';
-      document.getElementById('post-theme').value = post.articleTheme || 'Auto / Best Current Angle';
-      document.getElementById('post-custom-theme').value = post.customTheme || '';
-      document.getElementById('post-visual-theme').value = post.visualTheme || 'blue-white';
-      applyVisualThemePreview();
       if(post.trailer) document.getElementById('hero-slider-trailer').value = post.trailer;
       
       if (post.extraImage1) document.getElementById('extra-img-path-1').value = post.extraImage1;
@@ -1836,16 +1706,12 @@
       document.getElementById('edit-post-id').value = '';
       document.getElementById('edit-published-at').value = '';
       document.getElementById('post-title').value = '';
-      document.getElementById('post-theme').value = 'Auto / Best Current Angle';
-      document.getElementById('post-custom-theme').value = '';
-      document.getElementById('post-visual-theme').value = 'blue-white';
-      applyVisualThemePreview();
       document.getElementById('post-slug').value = '';
       document.getElementById('post-image-path').value = '';
       document.getElementById('hero-slider-trailer').value = '';
       document.getElementById('trailer-url-1').value = '';
       document.getElementById('trailer-url-2').value = '';
-      for (let i = 1; i <= 5; i++) {
+      for (let i = 1; i <= 8; i++) {
         const adBox = document.getElementById(`ad-code-${i}`);
         if (adBox) adBox.value = '';
       }
