@@ -14,7 +14,7 @@
   <meta name="google-site-verification" content="BE1aM7twVnliG5WUG9TTrr1KLBu_-SIu_bGY_FjLwyg" />
 
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Filmy Khabr - Entertainment, Movies, OTT & Web Series News</title>
   <meta name="description" content="Latest Hindi entertainment news, movie reviews, web series updates, OTT releases and trailers.">
   <meta name="author" content="Vanrajsinh Vaghela">
@@ -60,7 +60,7 @@
       font-size: 16px;
       line-height: 1.6;
       min-height: 100vh;
-      max-width: 1200px;  /* Removed fixed width */
+      max-width: 1200px;
       margin: 0 auto;
       padding: 0 16px 40px;
     }
@@ -79,7 +79,7 @@
     /* Content + Sidebar Layout */
     .content-sidebar-layout {
       display: grid;
-      grid-template-columns: 1fr;  /* Mobile default */
+      grid-template-columns: 1fr;
       gap: 28px;
       align-items: start;
       margin-top: 14px;
@@ -101,7 +101,6 @@
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
       padding: 24px;
-      /* Sticky only on desktop */
     }
     @media (min-width: 992px) {
       .sidebar {
@@ -845,9 +844,692 @@
 
   <!-- SCRIPT (Same as original, no changes) -->
   <script>
-    // ... (Same as your original JavaScript - I have not changed a single line)
-    // Bas wahi JS jo aapne diya tha, bilkul waisa hi hai.
-    // Niche complete JS paste kar diya hai (aapke original se).
+    let rawPosts = [];
+    let currentCategory = 'All';
+    const POSTS_PER_PAGE = 8;
+    let currentPage = 1;
+
+    function safeText(value, fallback = '') {
+      return value === null || value === undefined ? fallback : String(value);
+    }
+
+    function escapeHtml(value) {
+      return safeText(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/\"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function safeUrl(value, fallback = '#') {
+      const raw = safeText(value, '').trim();
+      if (!raw) return fallback;
+      try {
+        const u = new URL(raw, window.location.href);
+        if (u.protocol === 'http:' || u.protocol === 'https:') return u.href;
+      } catch (_) {}
+      return fallback;
+    }
+
+    function normalizePosts(data) {
+      if (!Array.isArray(data)) return [];
+      return data.filter(p => p && typeof p === 'object').map(p => ({
+        ...p,
+        title: safeText(p.title, 'Untitled'),
+        slug: safeText(p.slug, ''),
+        url: safeText(p.url, ''),
+        image: safeText(p.image, ''),
+        summary: safeText(p.summary, ''),
+        category: safeText(p.category, 'News'),
+        platform: safeText(p.platform, 'General'),
+        badge: safeText(p.badge, 'Trending'),
+        date: safeText(p.date, '2026'),
+        trailer: safeText(p.trailer, '')
+      }));
+    }
+
+    function getYoutubeEmbedUrl(url) {
+      if (!url) return null;
+      let videoId = '';
+      if (url.includes('youtu.be/')) {
+        videoId = url.split('youtu.be/')[1].split(/[?#]/)[0];
+      } else if (url.includes('watch?v=')) {
+        videoId = url.split('watch?v=')[1].split('&')[0];
+      } else if (url.includes('/embed/')) {
+        videoId = url.split('/embed/')[1].split(/[?#]/)[0];
+      } else if (url.length === 11 && !url.includes('/')) {
+        videoId = url;
+      }
+      return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0` : null;
+    }
+
+    let isVideoPlaying = false;
+
+    function playHeroInline(slideIndex, title, videoUrl) {
+      const embedUrl = getYoutubeEmbedUrl(videoUrl);
+      if (!embedUrl) {
+        const query = encodeURIComponent(title + " official trailer");
+        window.open(`https://www.youtube.com/results?search_query=${query}`, '_blank');
+        return;
+      }
+      
+      const mediaWrap = document.getElementById(`hero-media-${slideIndex}`);
+      if (mediaWrap) {
+        isVideoPlaying = true;
+        if (heroTimer) clearInterval(heroTimer);
+        const pBar = document.getElementById('hero-progress-bar');
+        if (pBar) pBar.style.width = '0%';
+
+        mediaWrap.innerHTML = `
+          <iframe 
+            src="${embedUrl}" 
+            allow="autoplay; encrypted-media; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        `;
+      }
+    }
+
+    let tickerInterval = null;
+    let tickerIndex = 0;
+    let tickerSlides = [];
+    let isTickerPaused = false;
+
+    function setupBreakingTicker(posts) {
+      const viewport = document.getElementById('ticker-viewport');
+      let tickerItems = [];
+
+      if (posts && posts.length > 0) {
+        posts.slice(0, 3).forEach(p => {
+          tickerItems.push({
+            title: p.title,
+            url: p.url || `posts/${p.slug}.html`
+          });
+        });
+      }
+
+      const fallbackAlerts = [
+        { title: "⚡ Top OTT & Web Series Weekly Releases & Reviews", url: "#" },
+        { title: "🎬 Bollywood & South Cinema Box Office Updates Live", url: "#" },
+        { title: "🍿 Latest Movie Trailers & Teasers Breakdown Today", url: "#" }
+      ];
+
+      let fbIdx = 0;
+      while (tickerItems.length < 3) {
+        tickerItems.push(fallbackAlerts[fbIdx % fallbackAlerts.length]);
+        fbIdx++;
+      }
+
+      viewport.innerHTML = tickerItems.map((item, idx) => `
+        <a href="${item.url}" class="ticker-slide ${idx === 0 ? 'active' : ''}">
+          • ${item.title}
+        </a>
+      `).join('');
+
+      tickerSlides = Array.from(viewport.querySelectorAll('.ticker-slide'));
+      tickerIndex = 0;
+
+      if (tickerInterval) clearInterval(tickerInterval);
+
+      tickerInterval = setInterval(() => {
+        if (!isTickerPaused && tickerSlides.length > 1) {
+          const currentSlide = tickerSlides[tickerIndex];
+          tickerIndex = (tickerIndex + 1) % tickerSlides.length;
+          const nextSlide = tickerSlides[tickerIndex];
+
+          currentSlide.className = 'ticker-slide prev';
+          nextSlide.className = 'ticker-slide active';
+
+          setTimeout(() => {
+            if (currentSlide !== tickerSlides[tickerIndex]) {
+              currentSlide.className = 'ticker-slide';
+            }
+          }, 500);
+        }
+      }, 3200);
+    }
+
+    const tickerContainer = document.getElementById('ticker-bar');
+    tickerContainer.addEventListener('mouseenter', () => { isTickerPaused = true; });
+    tickerContainer.addEventListener('mouseleave', () => { isTickerPaused = false; });
+    tickerContainer.addEventListener('touchstart', () => { isTickerPaused = true; }, { passive: true });
+    tickerContainer.addEventListener('touchend', () => {
+      setTimeout(() => { isTickerPaused = false; }, 1200);
+    }, { passive: true });
+
+    let heroTimer = null;
+    let heroCurrentIndex = 0;
+    let heroTotalSlides = 0;
+    let isHeroPaused = false;
+    let heroStartX = 0;
+    const SLIDE_DURATION = 4500;
+    let progressElapsed = 0;
+    const PROGRESS_STEP = 50;
+
+    function setupHeroSlider(posts) {
+      const heroWrap = document.getElementById('hero-slider-wrap');
+      const heroPosts = posts.slice(0, 20);
+      heroTotalSlides = heroPosts.length;
+      heroCurrentIndex = 0;
+      progressElapsed = 0;
+      isVideoPlaying = false;
+
+      if (!heroTotalSlides) {
+        heroWrap.innerHTML = '';
+        return;
+      }
+
+      if (heroTimer) clearInterval(heroTimer);
+
+      const slidesHTML = heroPosts.map((post, idx) => {
+        const trailerUrl = post.trailer || (post.category === 'Trailers' || post.platform === 'YouTube' ? 'https://www.youtube.com' : '');
+        return `
+          <div class="hero-slide" id="hero-slide-${idx}">
+            <div class="hero-media-wrap" id="hero-media-${idx}">
+              <img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/600x400/eee/999?text=Filmy+Khabr'">
+            </div>
+
+            <div class="hero-content">
+              <div class="hero-meta-row">
+                <span class="hero-platform">${post.platform || post.category}</span>
+                <span class="badge-tag">${post.badge || 'Trending'}</span>
+              </div>
+              <div class="hero-title"><a href="${post.url || `posts/${post.slug}.html`}">${post.title}</a></div>
+              <div class="hero-summary">${post.summary || ''}</div>
+              <div class="hero-actions">
+                <a href="${post.url || `posts/${post.slug}.html`}" class="hero-btn">Read Article</a>
+                <button class="hero-btn hero-btn-trailer" onclick="playHeroInline(${idx}, '${post.title.replace(/'/g, "\\'")}', '${trailerUrl}')">▶ Play Trailer</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      let dotsHTML = '';
+      if (heroTotalSlides > 1) {
+        const dotsCount = Math.min(heroTotalSlides, 10);
+        dotsHTML = `<div class="hero-dots" id="hero-dots">
+          ${Array.from({ length: dotsCount }).map((_, i) => `<span class="hero-dot ${i === 0 ? 'active' : ''}"></span>`).join('')}
+        </div>`;
+      }
+
+      let navBtns = '';
+      if (heroTotalSlides > 1) {
+        navBtns = `
+          <button class="hero-nav-btn prev" onclick="prevHeroSlide(event)" aria-label="Previous Slide">❮</button>
+          <button class="hero-nav-btn next" onclick="nextHeroSlide(event)" aria-label="Next Slide">❯</button>
+        `;
+      }
+
+      heroWrap.innerHTML = `
+        <div class="hero-slider-container" id="hero-slider-container">
+          <div class="hero-slider-track" id="hero-slider-track">
+            ${slidesHTML}
+          </div>
+          <div class="hero-progress-track">
+            <div class="hero-progress-bar" id="hero-progress-bar"></div>
+          </div>
+          ${navBtns}
+          ${dotsHTML}
+        </div>
+      `;
+
+      const container = document.getElementById('hero-slider-container');
+      if (container) {
+        container.addEventListener('mouseenter', () => { isHeroPaused = true; });
+        container.addEventListener('mouseleave', () => { isHeroPaused = false; });
+
+        container.addEventListener('touchstart', (e) => {
+          isHeroPaused = true;
+          heroStartX = e.touches[0].clientX;
+        }, { passive: true });
+
+        container.addEventListener('touchend', (e) => {
+          const diffX = heroStartX - e.changedTouches[0].clientX;
+          if (Math.abs(diffX) > 40) {
+            if (diffX > 0) nextHeroSlide();
+            else prevHeroSlide();
+          }
+          setTimeout(() => { isHeroPaused = false; }, 1500);
+        }, { passive: true });
+
+        startHeroProgress();
+      }
+    }
+
+    function startHeroProgress() {
+      if (heroTimer) clearInterval(heroTimer);
+      if (isVideoPlaying) return;
+      progressElapsed = 0;
+
+      heroTimer = setInterval(() => {
+        if (!isHeroPaused && !isVideoPlaying && heroTotalSlides > 1) {
+          progressElapsed += PROGRESS_STEP;
+          const percentage = Math.min((progressElapsed / SLIDE_DURATION) * 100, 100);
+          const pBar = document.getElementById('hero-progress-bar');
+          if (pBar) pBar.style.width = `${percentage}%`;
+
+          if (progressElapsed >= SLIDE_DURATION) {
+            nextHeroSlide();
+          }
+        }
+      }, PROGRESS_STEP);
+    }
+
+    function updateHeroSlide() {
+      const track = document.getElementById('hero-slider-track');
+      if (!track) return;
+      track.style.transform = `translateX(-${heroCurrentIndex * 100}%)`;
+
+      rawPosts.slice(0, 20).forEach((post, idx) => {
+        const wrap = document.getElementById(`hero-media-${idx}`);
+        if (wrap && wrap.querySelector('iframe')) {
+          wrap.innerHTML = `
+            <img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/600x400/eee/999?text=Filmy+Khabr'">
+          `;
+        }
+      });
+
+      isVideoPlaying = false;
+
+      const dots = document.querySelectorAll('.hero-dot');
+      if (dots.length) {
+        const activeDotIndex = heroCurrentIndex % dots.length;
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === activeDotIndex);
+        });
+      }
+
+      progressElapsed = 0;
+      const pBar = document.getElementById('hero-progress-bar');
+      if (pBar) pBar.style.width = '0%';
+
+      startHeroProgress();
+    }
+
+    function nextHeroSlide(e) {
+      if (e) e.stopPropagation();
+      if (heroTotalSlides <= 1) return;
+      heroCurrentIndex = (heroCurrentIndex + 1) % heroTotalSlides;
+      updateHeroSlide();
+    }
+
+    function prevHeroSlide(e) {
+      if (e) e.stopPropagation();
+      if (heroTotalSlides <= 1) return;
+      heroCurrentIndex = (heroCurrentIndex - 1 + heroTotalSlides) % heroTotalSlides;
+      updateHeroSlide();
+    }
+
+    // Trending Slider Logic
+    let trendingTimer = null;
+    let trendingCurrentIndex = 0;
+    let trendingTotalSlides = 0;
+    let isTrendingPaused = false;
+    let trendingStartX = 0;
+
+    function setupTrendingSlider(posts) {
+      const wrap = document.getElementById('trending-slider-wrap');
+      const trendingPosts = posts.slice(0, 6);
+      trendingTotalSlides = trendingPosts.length;
+      trendingCurrentIndex = 0;
+
+      if (!trendingTotalSlides) {
+        wrap.innerHTML = '';
+        return;
+      }
+
+      if (trendingTimer) clearInterval(trendingTimer);
+
+      const slidesHTML = trendingPosts.map((post, idx) => {
+        const articleUrl = post.url || `posts/${post.slug}.html`;
+        const imageUrl = post.image || 'images/default.jpg';
+        return `
+          <div class="trending-slide" id="trending-slide-${idx}">
+            <div class="trending-slide-img-box">
+              <a href="${articleUrl}">
+                <img class="trending-slide-img" src="${imageUrl}" alt="${escapeHtml(post.title)}" onerror="this.src='https://placehold.co/600x400/eee/999?text=Post'">
+              </a>
+              <div class="trending-slide-rank">${idx + 1}</div>
+            </div>
+            <div class="trending-slide-content">
+              <div class="trending-slide-platform">${post.platform || post.category}</div>
+              <div class="trending-slide-title"><a href="${articleUrl}">${escapeHtml(post.title)}</a></div>
+              <div class="trending-slide-date">${post.date || '2026'}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      let dotsHTML = '';
+      if (trendingTotalSlides > 1) {
+        dotsHTML = `<div class="trending-dots" id="trending-dots">
+          ${Array.from({ length: trendingTotalSlides }).map((_, i) => `<span class="trending-dot ${i === 0 ? 'active' : ''}"></span>`).join('')}
+        </div>`;
+      }
+
+      let navBtns = '';
+      if (trendingTotalSlides > 1) {
+        navBtns = `
+          <button class="trending-nav-btn prev" onclick="prevTrendingSlide(event)" aria-label="Previous Slide">❮</button>
+          <button class="trending-nav-btn next" onclick="nextTrendingSlide(event)" aria-label="Next Slide">❯</button>
+        `;
+      }
+
+      wrap.innerHTML = `
+        <div class="trending-slider-container" id="trending-slider-container">
+          <div class="trending-slider-track" id="trending-slider-track">
+            ${slidesHTML}
+          </div>
+          ${navBtns}
+          ${dotsHTML}
+        </div>
+      `;
+
+      const container = document.getElementById('trending-slider-container');
+      if (container) {
+        container.addEventListener('mouseenter', () => { isTrendingPaused = true; });
+        container.addEventListener('mouseleave', () => { isTrendingPaused = false; });
+        container.addEventListener('touchstart', (e) => {
+          isTrendingPaused = true;
+          trendingStartX = e.touches[0].clientX;
+        }, { passive: true });
+        container.addEventListener('touchend', (e) => {
+          const diffX = trendingStartX - e.changedTouches[0].clientX;
+          if (Math.abs(diffX) > 40) {
+            if (diffX > 0) nextTrendingSlide();
+            else prevTrendingSlide();
+          }
+          setTimeout(() => { isTrendingPaused = false; }, 1500);
+        }, { passive: true });
+
+        startTrendingAutoPlay();
+      }
+    }
+
+    function startTrendingAutoPlay() {
+      if (trendingTimer) clearInterval(trendingTimer);
+      trendingTimer = setInterval(() => {
+        if (!isTrendingPaused && trendingTotalSlides > 1) {
+          nextTrendingSlide();
+        }
+      }, 4000);
+    }
+
+    function updateTrendingSlide() {
+      const track = document.getElementById('trending-slider-track');
+      if (!track) return;
+      track.style.transform = `translateX(-${trendingCurrentIndex * 100}%)`;
+
+      const dots = document.querySelectorAll('.trending-dot');
+      if (dots.length) {
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === trendingCurrentIndex);
+        });
+      }
+    }
+
+    function nextTrendingSlide(e) {
+      if (e) e.stopPropagation();
+      if (trendingTotalSlides <= 1) return;
+      trendingCurrentIndex = (trendingCurrentIndex + 1) % trendingTotalSlides;
+      updateTrendingSlide();
+    }
+
+    function prevTrendingSlide(e) {
+      if (e) e.stopPropagation();
+      if (trendingTotalSlides <= 1) return;
+      trendingCurrentIndex = (trendingCurrentIndex - 1 + trendingTotalSlides) % trendingTotalSlides;
+      updateTrendingSlide();
+    }
+
+    async function loadSiteData() {
+      try {
+        const res = await fetch(`data/posts.json?_t=${Date.now()}`);
+        if (!res.ok) throw new Error('data/posts.json not found');
+        rawPosts = await res.json();
+
+        setupBreakingTicker(rawPosts);
+        renderSidebarWidgets(rawPosts);
+
+        const params = new URLSearchParams(window.location.search);
+        const urlCat = params.get('cat');
+        if (urlCat) {
+          filterCategory(urlCat, false);
+        } else {
+          renderAll();
+        }
+      } catch (err) {
+        console.warn('Could not load posts:', err);
+        setupBreakingTicker([]);
+        document.getElementById('posts-list-container').innerHTML = `
+          <div class="no-posts">Abhi तक कोई post publish नहीं हुई है।</div>
+        `;
+      }
+    }
+
+    function renderSidebarWidgets(posts) {
+      const latestContainer = document.getElementById('sidebar-latest-container');
+      const trendingContainer = document.getElementById('sidebar-trending-container');
+      const editorsPickContainer = document.getElementById('sidebar-editors-pick');
+
+      if (posts && posts.length > 0) {
+        const topPost = posts[0];
+        editorsPickContainer.innerHTML = `
+          <span class="editors-pick-badge">Must Read</span>
+          <a href="${topPost.url || `posts/${topPost.slug}.html`}" class="editors-pick-title" style="display:block; color:#1e293b; text-decoration:none;">${topPost.title}</a>
+        `;
+
+        latestContainer.innerHTML = posts.slice(0, 4).map(p => `
+          <a href="${p.url || `posts/${p.slug}.html`}" class="sidebar-news-item">
+            <img class="sidebar-news-thumb" src="${p.image || 'images/default.jpg'}" alt="${escapeHtml(p.title)}" onerror="this.src='https://placehold.co/100x70/eee/999?text=News'">
+            <div class="sidebar-news-info">
+              <div class="sidebar-news-meta">${escapeHtml(p.category)}</div>
+              <div class="sidebar-news-title">${escapeHtml(p.title)}</div>
+            </div>
+          </a>
+        `).join('');
+
+        const trendingSlice = posts.slice(0, 5);
+        trendingContainer.innerHTML = trendingSlice.map((p, idx) => `
+          <a href="${p.url || `posts/${p.slug}.html`}" class="sidebar-trending-item">
+            <span class="sidebar-trending-rank">${idx + 1}</span>
+            <span class="sidebar-trending-title">${escapeHtml(p.title)}</span>
+          </a>
+        `).join('');
+      }
+    }
+
+    function renderAll() {
+      if (!rawPosts || rawPosts.length === 0) return;
+
+      setupHeroSlider(rawPosts);
+      setupTrendingSlider(rawPosts);
+      renderPaginatedNewsList(rawPosts);
+    }
+
+    function renderPaginatedNewsList(posts) {
+      const container = document.getElementById('posts-list-container');
+      const paginationEl = document.getElementById('pagination-box');
+
+      if (!posts.length) {
+        container.innerHTML = `<div class="no-posts">Is category mein abhi koi post nahi mili.</div>`;
+        paginationEl.innerHTML = '';
+        return;
+      }
+
+      const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+      if (currentPage > totalPages) currentPage = totalPages;
+      if (currentPage < 1) currentPage = 1;
+
+      const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+      const endIndex = startIndex + POSTS_PER_PAGE;
+      const currentPosts = posts.slice(startIndex, endIndex);
+
+      container.innerHTML = currentPosts.map(post => `
+        <a href="${post.url || `posts/${post.slug}.html`}" class="news-card">
+          <img class="news-thumb" src="${post.image || 'images/default.jpg'}" alt="${escapeHtml(post.title)}" onerror="this.src='https://placehold.co/120x80/eee/999?text=News'">
+          <div style="flex:1; min-width:0;">
+            <div class="news-meta">${escapeHtml(post.category)} • ${escapeHtml(post.date || '')}</div>
+            <div class="news-title">${escapeHtml(post.title)}</div>
+          </div>
+        </a>
+      `).join('');
+
+      renderBoxPagination(totalPages);
+    }
+
+    function renderBoxPagination(totalPages) {
+      const paginationEl = document.getElementById('pagination-box');
+      if (totalPages <= 1) {
+        paginationEl.innerHTML = '';
+        return;
+      }
+
+      let paginationHTML = '';
+
+      if (currentPage > 1) {
+        paginationHTML += `<button class="page-btn" onclick="changePage(${currentPage - 1})">« Prev</button>`;
+      } else {
+        paginationHTML += `<button class="page-btn" disabled>« Prev</button>`;
+      }
+
+      for (let i = 1; i <= totalPages; i++) {
+        if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
+          if (i === currentPage) {
+            paginationHTML += `<button class="page-btn active">${i}</button>`;
+          } else {
+            paginationHTML += `<button class="page-btn" onclick="changePage(${i})">${i}</button>`;
+          }
+        } else if (i === currentPage - 3 || i === currentPage + 3) {
+          paginationHTML += `<span style="color: var(--text-muted); padding: 0 4px;">...</span>`;
+        }
+      }
+
+      if (currentPage < totalPages) {
+        paginationHTML += `<button class="page-btn" onclick="changePage(${currentPage + 1})">Next »</button>`;
+      } else {
+        paginationHTML += `<button class="page-btn" disabled>Next »</button>`;
+      }
+
+      paginationEl.innerHTML = paginationHTML;
+    }
+
+    function changePage(page) {
+      currentPage = page;
+      if (currentCategory === 'All') {
+        renderPaginatedNewsList(rawPosts);
+      } else {
+        let filtered = [];
+        if (currentCategory === 'Trending') {
+          filtered = rawPosts.filter(p => (p.badge || '').toLowerCase() === 'trending');
+        } else {
+          filtered = rawPosts.filter(p => {
+            const c = (p.category || '').toLowerCase();
+            const target = currentCategory.toLowerCase();
+            return c.includes(target) || target.includes(c);
+          });
+        }
+        renderPaginatedNewsList(filtered);
+      }
+      window.scrollTo({ top: 400, behavior: 'smooth' });
+    }
+
+    function filterCategory(catName, updateUrl = true) {
+      currentCategory = catName;
+      currentPage = 1;
+
+      document.querySelectorAll('.nav-link').forEach(el => {
+        if (el.textContent.trim().toLowerCase() === catName.toLowerCase()) {
+          el.classList.add('active');
+        } else if (catName === 'All' && el.textContent.trim() === 'Home') {
+          el.classList.add('active');
+        } else {
+          el.classList.remove('active');
+        }
+      });
+
+      const homeSections = document.getElementById('home-exclusive-sections');
+      const filterBanner = document.getElementById('filter-banner');
+      const filterLabel = document.getElementById('filter-label');
+      const heading = document.getElementById('posts-list-heading');
+
+      if (updateUrl) {
+        const newUrl = catName === 'All' ? window.location.pathname : `?cat=${encodeURIComponent(catName)}`;
+        window.history.pushState({}, '', newUrl);
+      }
+
+      if (catName === 'All') {
+        homeSections.style.display = 'block';
+        filterBanner.style.display = 'none';
+        heading.innerHTML = '<span>Latest News & Updates</span>';
+        renderAll();
+      } else {
+        homeSections.style.display = 'none';
+        filterBanner.style.display = 'flex';
+        filterLabel.textContent = `Browsing Category: ${catName}`;
+        heading.innerHTML = `<span>All ${catName} Articles</span>`;
+
+        let filtered = [];
+        if (catName === 'Trending') {
+          filtered = rawPosts.filter(p => (p.badge || '').toLowerCase() === 'trending');
+        } else {
+          filtered = rawPosts.filter(p => {
+            const c = (p.category || '').toLowerCase();
+            const target = catName.toLowerCase();
+            return c.includes(target) || target.includes(c);
+          });
+        }
+        renderPaginatedNewsList(filtered);
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleSearch() {
+      const box = document.getElementById('search-container');
+      const input = document.getElementById('search-input');
+      if (box.style.display === 'block') {
+        box.style.display = 'none';
+        input.value = '';
+        if (currentCategory === 'All') renderAll();
+        else filterCategory(currentCategory, false);
+      } else {
+        box.style.display = 'block';
+        input.focus();
+      }
+    }
+
+    function handleSearch(e) {
+      const query = e.target.value.toLowerCase().trim();
+      currentPage = 1;
+      if (!query) {
+        if (currentCategory === 'All') renderAll();
+        else filterCategory(currentCategory, false);
+        return;
+      }
+
+      const results = rawPosts.filter(p => 
+        (p.title && p.title.toLowerCase().includes(query)) ||
+        (p.summary && p.summary.toLowerCase().includes(query)) ||
+        (p.category && p.category.toLowerCase().includes(query))
+      );
+
+      document.getElementById('home-exclusive-sections').style.display = 'none';
+      document.getElementById('filter-banner').style.display = 'flex';
+      document.getElementById('filter-label').textContent = `Search: "${query}" (${results.length} Found)`;
+      document.getElementById('posts-list-heading').innerHTML = `<span>Search Results</span>`;
+      renderPaginatedNewsList(results);
+    }
+
+    window.addEventListener('popstate', () => {
+      const params = new URLSearchParams(window.location.search);
+      const cat = params.get('cat') || 'All';
+      filterCategory(cat, false);
+    });
+
+    window.addEventListener('DOMContentLoaded', loadSiteData);
   </script>
 </body>
 </html>
