@@ -1006,6 +1006,76 @@ nav {
 .news-meta { font-size: 10px; margin-bottom: 5px; color: #929aa5; }
 .news-title { font-size: 14px; line-height: 1.45; }
 
+/* Popular Categories — vertical editorial list */
+.popular-categories-section {
+  margin-top: 34px;
+}
+.popular-category-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.popular-category-card {
+  width: 100%;
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 13px;
+  text-align: left;
+  color: var(--text-main);
+  background: linear-gradient(135deg, #15191f, #101318);
+  border: 1px solid #272d35;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+.popular-category-card:hover {
+  transform: translateY(-2px);
+  border-color: #3c444e;
+  background: linear-gradient(135deg, #1a1f26, #12161b);
+}
+.popular-category-icon {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #0b0e12;
+  border: 1px solid #282e36;
+  font-size: 20px;
+}
+.popular-category-copy {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.popular-category-copy strong {
+  font-size: 13px;
+  line-height: 1.25;
+  color: #fff;
+}
+.popular-category-copy small {
+  font-size: 10px;
+  line-height: 1.35;
+  color: #8f98a4;
+}
+.popular-category-arrow {
+  font-size: 24px;
+  line-height: 1;
+  color: #68717d;
+}
+.comm-kicker {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1.4px;
+  color: #38bdf8;
+  margin-bottom: 5px;
+}
+
 /* Pagination */
 .pagination-container { margin: 30px 0 20px; gap: 7px; }
 .page-btn {
@@ -1073,6 +1143,17 @@ footer {
   .news-title { font-size: 12px; line-height: 1.4; }
   .news-meta { font-size: 9px; }
   .community-box { margin-top: 24px; }
+}
+
+@media (max-width: 600px) {
+  .popular-categories-section { margin-top: 28px; }
+  .popular-category-list { grid-template-columns: 1fr; gap: 8px; }
+  .popular-category-card { min-height: 68px; padding: 10px 11px; border-radius: 10px; }
+  .popular-category-icon { width: 38px; height: 38px; flex-basis: 38px; font-size: 18px; }
+  .popular-category-copy strong { font-size: 12px; }
+  .popular-category-copy small { font-size: 9px; }
+  .popular-category-arrow { font-size: 22px; }
+  .comm-kicker { font-size: 8px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1143,42 +1224,6 @@ footer {
       </div>
       <div class="trending-scroll" id="trending-container"></div>
 
-      <!-- Explore By Category Grid (6 Cards) -->
-      <div class="section-title">
-        <span>Explore By Category</span>
-      </div>
-      <div class="cat-grid">
-        <div class="cat-card" onclick="filterCategory('Movies')">
-          <span class="cat-icon">🎬</span>
-          <div class="cat-name">Movies</div>
-          <div class="cat-desc">Cinema Updates</div>
-        </div>
-        <div class="cat-card" onclick="filterCategory('Web Series')">
-          <span class="cat-icon">📺</span>
-          <div class="cat-name">Web Series</div>
-          <div class="cat-desc">All New Shows</div>
-        </div>
-        <div class="cat-card" onclick="filterCategory('OTT')">
-          <span class="cat-icon">🍿</span>
-          <div class="cat-name">OTT Releases</div>
-          <div class="cat-desc">Platform Updates</div>
-        </div>
-        <div class="cat-card" onclick="filterCategory('Trailers')">
-          <span class="cat-icon">▶️</span>
-          <div class="cat-name">Trailers</div>
-          <div class="cat-desc">Latest Trailers</div>
-        </div>
-        <div class="cat-card" onclick="filterCategory('Celebrity News')">
-          <span class="cat-icon">⭐</span>
-          <div class="cat-name">Celebrity News</div>
-          <div class="cat-desc">Star Updates</div>
-        </div>
-        <div class="cat-card" onclick="filterCategory('News')">
-          <span class="cat-icon">📰</span>
-          <div class="cat-name">Entertainment News</div>
-          <div class="cat-desc">Latest News</div>
-        </div>
-      </div>
     </div>
 
     <!-- DYNAMIC POSTS LIST -->
@@ -1187,13 +1232,55 @@ footer {
     </div>
     <div class="news-list" id="posts-list-container"></div>
 
+
+    <!-- POPULAR CATEGORIES — vertical editorial section -->
+    <section class="popular-categories-section" id="popular-categories-section" aria-label="Popular Categories">
+      <div class="section-title">
+        <span>⭐ Popular Categories</span>
+        <span class="section-view-all" onclick="filterCategory('All')">Explore All ›</span>
+      </div>
+      <div class="popular-category-list">
+        <button class="popular-category-card" onclick="filterCategory('Movies')" type="button">
+          <span class="popular-category-icon">🎬</span>
+          <span class="popular-category-copy"><strong>Movies</strong><small>Bollywood, Hollywood & South Cinema</small></span>
+          <span class="popular-category-arrow">›</span>
+        </button>
+        <button class="popular-category-card" onclick="filterCategory('Web Series')" type="button">
+          <span class="popular-category-icon">📺</span>
+          <span class="popular-category-copy"><strong>Web Series</strong><small>New shows, seasons & streaming updates</small></span>
+          <span class="popular-category-arrow">›</span>
+        </button>
+        <button class="popular-category-card" onclick="filterCategory('OTT')" type="button">
+          <span class="popular-category-icon">🍿</span>
+          <span class="popular-category-copy"><strong>OTT Releases</strong><small>Netflix, Prime Video & more</small></span>
+          <span class="popular-category-arrow">›</span>
+        </button>
+        <button class="popular-category-card" onclick="filterCategory('Trailers')" type="button">
+          <span class="popular-category-icon">▶️</span>
+          <span class="popular-category-copy"><strong>Trailers</strong><small>Latest trailers & teasers</small></span>
+          <span class="popular-category-arrow">›</span>
+        </button>
+        <button class="popular-category-card" onclick="filterCategory('Celebrity News')" type="button">
+          <span class="popular-category-icon">⭐</span>
+          <span class="popular-category-copy"><strong>Celebrity News</strong><small>Star updates & entertainment news</small></span>
+          <span class="popular-category-arrow">›</span>
+        </button>
+        <button class="popular-category-card" onclick="filterCategory('News')" type="button">
+          <span class="popular-category-icon">📰</span>
+          <span class="popular-category-copy"><strong>Entertainment News</strong><small>Latest breaking entertainment stories</small></span>
+          <span class="popular-category-arrow">›</span>
+        </button>
+      </div>
+    </section>
+
     <!-- Professional Box Pagination Container -->
     <div id="pagination-box" class="pagination-container"></div>
 
     <!-- Telegram Community -->
     <div class="community-box">
-      <div class="comm-title">Join Our Community</div>
-      <div class="comm-desc">Sabse pehle movie aur OTT updates pane ke liye judiye</div>
+      <div class="comm-kicker">GET LATEST UPDATES</div>
+      <div class="comm-title">Get Latest Movie & OTT Updates</div>
+      <div class="comm-desc">Sabse pehle movie, web series aur OTT updates pane ke liye Filmy Khabr community se judiye.</div>
       <a href="https://t.me/+rG_x3BDIdYliNTVl" target="_blank" rel="noopener noreferrer" class="comm-btn">Join Telegram Channel</a>
     </div>
 
@@ -1649,6 +1736,8 @@ footer {
       const filterBanner = document.getElementById('filter-banner');
       const filterLabel = document.getElementById('filter-label');
       const heading = document.getElementById('posts-list-heading');
+      const popularCategories = document.getElementById('popular-categories-section');
+      const communityBox = document.querySelector('.community-box');
 
       if (updateUrl) {
         const newUrl = catName === 'All' ? window.location.pathname : `?cat=${encodeURIComponent(catName)}`;
@@ -1657,11 +1746,15 @@ footer {
 
       if (catName === 'All') {
         homeSections.style.display = 'block';
+        if (popularCategories) popularCategories.style.display = 'block';
+        if (communityBox) communityBox.style.display = 'block';
         filterBanner.style.display = 'none';
         heading.innerHTML = '<span>Latest News & Updates</span>';
         renderAll();
       } else {
         homeSections.style.display = 'none';
+        if (popularCategories) popularCategories.style.display = 'none';
+        if (communityBox) communityBox.style.display = 'none';
         filterBanner.style.display = 'flex';
         filterLabel.textContent = `Browsing Category: ${catName}`;
         heading.innerHTML = `<span>All ${catName} Articles</span>`;
@@ -1712,6 +1805,10 @@ footer {
       );
 
       document.getElementById('home-exclusive-sections').style.display = 'none';
+      const popularCategories = document.getElementById('popular-categories-section');
+      const communityBox = document.querySelector('.community-box');
+      if (popularCategories) popularCategories.style.display = 'none';
+      if (communityBox) communityBox.style.display = 'none';
       document.getElementById('filter-banner').style.display = 'flex';
       document.getElementById('filter-label').textContent = `Search: "${query}" (${results.length} Found)`;
       document.getElementById('posts-list-heading').innerHTML = `<span>Search Results</span>`;
