@@ -276,7 +276,7 @@
       border: 1px solid #047857;
     }
 
-    /* Manage List */
+    /* Manage List & Pagination */
     .post-item {
       display: flex;
       align-items: center;
@@ -311,6 +311,37 @@
     .post-actions {
       display: flex;
       gap: 6px;
+    }
+
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .page-btn {
+      background: #202327;
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .page-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .page-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
     }
 
     /* Live Preview Screen */
@@ -370,28 +401,6 @@
       color: #38bdf8;
       text-decoration: underline;
     }
-
-    /* Article Visual Theme Preview */
-    .preview-pane[data-visual-theme="blue-white"] { background:#eef6ff; border-color:#cfe0f5; }
-    .preview-pane[data-visual-theme="blue-white"] .preview-title { color:#0b3d91; }
-    .preview-pane[data-visual-theme="blue-white"] .preview-badge { background:#146ef5; }
-    .preview-pane[data-visual-theme="blue-white"] .preview-body { color:#253b5a; }
-    .preview-pane[data-visual-theme="blue-white"] .preview-body a { color:#146ef5; }
-    .preview-pane[data-visual-theme="dark-red"] { background:#08090b; border-color:#3a2025; }
-    .preview-pane[data-visual-theme="dark-red"] .preview-title { color:#fff; }
-    .preview-pane[data-visual-theme="dark-red"] .preview-badge { background:#ef233c; }
-    .preview-pane[data-visual-theme="dark-red"] .preview-body { color:#e5e7eb; }
-    .preview-pane[data-visual-theme="dark-red"] .preview-body a { color:#ff5a6d; }
-    .preview-pane[data-visual-theme="light-minimal"] { background:#f7f8fa; border-color:#e1e5eb; }
-    .preview-pane[data-visual-theme="light-minimal"] .preview-title { color:#172033; }
-    .preview-pane[data-visual-theme="light-minimal"] .preview-badge { background:#172033; }
-    .preview-pane[data-visual-theme="light-minimal"] .preview-body { color:#354052; }
-    .preview-pane[data-visual-theme="light-minimal"] .preview-body a { color:#2457a6; }
-    .preview-pane[data-visual-theme="purple-vibes"] { background:#100b20; border-color:#39275a; }
-    .preview-pane[data-visual-theme="purple-vibes"] .preview-title { color:#e5c8ff; }
-    .preview-pane[data-visual-theme="purple-vibes"] .preview-badge { background:#a855f7; }
-    .preview-pane[data-visual-theme="purple-vibes"] .preview-body { color:#e9ddf7; }
-    .preview-pane[data-visual-theme="purple-vibes"] .preview-body a { color:#c084fc; }
 
     .hidden {
       display: none !important;
@@ -530,7 +539,7 @@
       <div class="card-header">
         <div>
           <span class="card-title">Site & GitHub Config</span>
-          <div class="card-subtitle" id="conn-summary">Vanrajsinh-vaghela / Entertainment</div>
+          <div class="card-subtitle" id="conn-summary">Vanrajsinh-vaghela / entertainment</div>
         </div>
         <span class="status-badge" id="conn-status">Ready</span>
       </div>
@@ -542,7 +551,7 @@
         </div>
         <div class="form-group">
           <label>Repository Name</label>
-          <input type="text" id="gh-repo" value="Entertainment" placeholder="Entertainment" onchange="saveCreds()">
+          <input type="text" id="gh-repo" value="entertainment" placeholder="entertainment" onchange="saveCreds()">
         </div>
       </div>
 
@@ -622,48 +631,15 @@
           </div>
         </div>
 
-        <!-- Article Theme / Editorial Angle -->
-        <div class="form-row-2">
-          <div class="form-group">
-            <label>Article Theme / Editorial Angle</label>
-            <select id="post-theme">
-              <option value="Auto / Best Current Angle">Auto / Best Current Angle</option>
-              <option value="Latest Update / Breaking News">Latest Update / Breaking News</option>
-              <option value="Trailer / First Look">Trailer / First Look</option>
-              <option value="Teaser / Announcement">Teaser / Announcement</option>
-              <option value="Release Date Focus">Release Date Focus</option>
-              <option value="OTT / Streaming Focus">OTT / Streaming Focus</option>
-              <option value="Cast & Characters">Cast & Characters</option>
-              <option value="Story / Plot Focus">Story / Plot Focus</option>
-              <option value="Ending / Explained">Ending / Explained</option>
-              <option value="Box Office / Collection">Box Office / Collection</option>
-              <option value="Review / Verdict">Review / Verdict</option>
-              <option value="Franchise / Sequel Connection">Franchise / Sequel Connection</option>
-              <option value="Celebrity Focus">Celebrity Focus</option>
-              <option value="Controversy / Debate">Controversy / Debate</option>
-              <option value="Behind the Scenes / Production">Behind the Scenes / Production</option>
-              <option value="Comparison / Face-Off">Comparison / Face-Off</option>
-              <option value="Audience / Social Buzz">Audience / Social Buzz</option>
-              <option value="Custom Theme">Custom Theme</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Custom Theme / Angle (Optional)</label>
-            <input type="text" id="post-custom-theme" placeholder="e.g. Preity Zinta ke character par focus">
-          </div>
-        </div>
-        <div class="helper-txt" style="margin-bottom: 10px;">Editorial Theme article ke angle ke liye hai. Neeche Visual Theme se live article ka look choose karein.</div>
-
-        <!-- Article Visual Theme -->
+        <!-- Typography / Font Style Selector for Article -->
         <div class="form-group">
-          <label>🎨 Article Visual Theme</label>
-          <select id="post-visual-theme" onchange="applyVisualThemePreview()">
-            <option value="blue-white" selected>🔵 Blue & White — Standard</option>
-            <option value="dark-red">🌑 Dark Mode — Cinematic Red</option>
-            <option value="light-minimal">⚪ Light Minimal — Clean</option>
-            <option value="purple-vibes">🟣 Purple Vibes — Premium</option>
+          <label style="color: #f59e0b;">🔤 Article Font Style / Typography</label>
+          <select id="post-font-style">
+            <option value="playfair-lora">Playfair Display & Lora (Classic Editorial Serif)</option>
+            <option value="roboto-sans">Roboto & Inter (Modern Clean Sans-Serif)</option>
+            <option value="noto-serif">Noto Serif Devanagari (Traditional Hindi Serif)</option>
+            <option value="noto-sans" selected>Noto Sans Devanagari (Clean Hindi Modern)</option>
           </select>
-          <div class="helper-txt">Published article ka visual style yahan select karein. Default: Blue & White.</div>
         </div>
 
         <div class="form-group">
@@ -677,7 +653,7 @@
           <input type="text" id="hero-slider-trailer" placeholder="https://www.youtube.com/watch?v=...">
         </div>
 
-        <!-- 3 Additional Extra Images with Position Dropdowns (FIXED PREVIEW & PATHS) -->
+        <!-- 3 Additional Extra Images with Position Dropdowns -->
         <div style="background: #111315; border: 1px solid #23272c; border-radius: 6px; padding: 10px; margin-bottom: 10px;">
           <label style="color: #38bdf8; margin-bottom: 8px;">🖼️ Additional Article Images (Up to 3 Extra)</label>
           
@@ -790,33 +766,48 @@
           </div>
         </div>
 
-        <!-- Direct Ad Insertion Code Boxes (5 Slots) -->
+        <!-- Direct Ad Insertion Code Boxes (8 Slots Total with Proper Names) -->
         <div style="background: #111315; border: 1px solid #23272c; border-radius: 6px; padding: 10px; margin-bottom: 10px;">
-          <label style="color: #10b981; margin-bottom: 8px;">💰 Direct Ad Code Boxes (Adsterra / AdSense / HTML)</label>
+          <label style="color: #10b981; margin-bottom: 8px;">💰 Direct Ad Code Boxes (8 Slots)</label>
           
           <div class="form-group" style="margin-bottom: 6px;">
-            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 1 (Top Banner - Under Title/Main Image)</label>
-            <textarea id="ad-code-1" placeholder="Paste Ad HTML/JS code here..." style="min-height: 60px; font-family: monospace; font-size: 11px;"></textarea>
+            <label style="font-size: 9px; color: #9ca3af;">Popunder (Ad Slot 1)</label>
+            <textarea id="ad-code-1" placeholder="Paste Popunder code here..." style="min-height: 45px; font-family: monospace; font-size: 11px;"></textarea>
           </div>
 
           <div class="form-group" style="margin-bottom: 6px;">
-            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 2 (Upper Content)</label>
-            <textarea id="ad-code-2" placeholder="Paste Ad HTML/JS code here..." style="min-height: 60px; font-family: monospace; font-size: 11px;"></textarea>
+            <label style="font-size: 9px; color: #9ca3af;">Native Banner (Ad Slot 2)</label>
+            <textarea id="ad-code-2" placeholder="Paste Native Banner code here..." style="min-height: 45px; font-family: monospace; font-size: 11px;"></textarea>
           </div>
 
           <div class="form-group" style="margin-bottom: 6px;">
-            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 3 (Exact Middle)</label>
-            <textarea id="ad-code-3" placeholder="Paste Ad HTML/JS code here..." style="min-height: 60px; font-family: monospace; font-size: 11px;"></textarea>
+            <label style="font-size: 9px; color: #9ca3af;">Banner 728x90 (Ad Slot 3)</label>
+            <textarea id="ad-code-3" placeholder="Paste Banner 728x90 code here..." style="min-height: 45px; font-family: monospace; font-size: 11px;"></textarea>
           </div>
 
           <div class="form-group" style="margin-bottom: 6px;">
-            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 4 (Before FAQs / Conclusion)</label>
-            <textarea id="ad-code-4" placeholder="Paste Ad HTML/JS code here..." style="min-height: 60px; font-family: monospace; font-size: 11px;"></textarea>
+            <label style="font-size: 9px; color: #9ca3af;">Banner 300x250 (Ad Slot 4)</label>
+            <textarea id="ad-code-4" placeholder="Paste Banner 300x250 code here..." style="min-height: 45px; font-family: monospace; font-size: 11px;"></textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 6px;">
+            <label style="font-size: 9px; color: #9ca3af;">Social Bar (Ad Slot 5)</label>
+            <textarea id="ad-code-5" placeholder="Paste Social Bar code here..." style="min-height: 45px; font-family: monospace; font-size: 11px;"></textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 6px;">
+            <label style="font-size: 9px; color: #9ca3af;">Smartlink / Extra Ad 6</label>
+            <textarea id="ad-code-6" placeholder="Paste Smartlink code here..." style="min-height: 45px; font-family: monospace; font-size: 11px;"></textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 6px;">
+            <label style="font-size: 9px; color: #9ca3af;">Extra Ad Slot 7</label>
+            <textarea id="ad-code-7" placeholder="Paste Ad code here..." style="min-height: 45px; font-family: monospace; font-size: 11px;"></textarea>
           </div>
 
           <div class="form-group">
-            <label style="font-size: 9px; color: #9ca3af;">Ad Slot 5 (Bottom / Footer Banner)</label>
-            <textarea id="ad-code-5" placeholder="Paste Ad HTML/JS code here..." style="min-height: 60px; font-family: monospace; font-size: 11px;"></textarea>
+            <label style="font-size: 9px; color: #9ca3af;">Extra Ad Slot 8</label>
+            <textarea id="ad-code-8" placeholder="Paste Ad code here..." style="min-height: 45px; font-family: monospace; font-size: 11px;"></textarea>
           </div>
         </div>
 
@@ -841,7 +832,7 @@
       </div>
     </div>
 
-    <!-- TAB 2: MANAGE POSTS -->
+    <!-- TAB 2: MANAGE POSTS WITH PAGINATION -->
     <div id="view-manage" class="hidden">
       <div class="card">
         <div class="card-header">
@@ -854,6 +845,8 @@
         <div id="posts-list-container">
           <div style="text-align: center; padding: 20px; color: var(--text-muted); font-size: 12px;">Loading posts...</div>
         </div>
+        <!-- Manage Pagination Box -->
+        <div id="manage-pagination-box" class="pagination-container"></div>
       </div>
     </div>
 
@@ -919,6 +912,8 @@
     let extraImagesBase64 = { 1: null, 2: null, 3: null };
     let extraImagesExt = { 1: "jpg", 2: "jpg", 3: "jpg" };
     let allPostsCache = [];
+    let manageCurrentPage = 1;
+    const MANAGE_PER_PAGE = 15;
 
     function verifyPin() {
       const pin = document.getElementById('admin-pin-input').value.trim();
@@ -942,7 +937,6 @@
     function initAdmin() {
       loadCreds();
       autoUpdateSummary();
-      applyVisualThemePreview();
     }
 
     function switchTab(tab) {
@@ -987,7 +981,7 @@
 
     function autoUpdateSummary() {
       const u = document.getElementById('gh-user').value.trim() || 'Vanrajsinh-vaghela';
-      const r = document.getElementById('gh-repo').value.trim() || 'Entertainment';
+      const r = document.getElementById('gh-repo').value.trim() || 'entertainment';
       document.getElementById('conn-summary').textContent = `${u} / ${r}`;
     }
 
@@ -1058,12 +1052,6 @@
       showToast('Link inserted');
     }
 
-    document.getElementById('post-custom-theme')?.addEventListener('input', function() {
-      if (this.value.trim()) {
-        document.getElementById('post-theme').value = 'Custom Theme';
-      }
-    });
-
     function showToast(msg) {
       const t = document.getElementById('toast');
       t.textContent = msg;
@@ -1086,7 +1074,6 @@
       return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=0&rel=0` : null;
     }
 
-    // Process trailers, extra images, and direct ads combined according to their positions
     function processContentWithElements(rawContent, currentSlug, extraImagesObj, extraImagesBase64Map, isPreview = false) {
       let positionMap = {
         'top': [],
@@ -1097,27 +1084,14 @@
         'bottom': []
       };
 
-      // 1. Add Ad Slot 1 to Top if present
-      const ad1 = document.getElementById('ad-code-1')?.value.trim();
-      if (ad1) positionMap['top'].push(`<div class="article-ad-box" style="margin: 14px 0; text-align:center;">${ad1}</div>`);
+      for (let i = 1; i <= 8; i++) {
+        const adVal = document.getElementById(`ad-code-${i}`)?.value.trim();
+        if (adVal) {
+          const targetPos = i === 1 ? 'top' : i === 2 ? 'upper-middle' : i === 3 ? 'middle' : i === 4 ? 'lower-middle' : i === 5 ? 'before-last' : 'bottom';
+          positionMap[targetPos].push(`<div class="article-ad-box" style="margin: 14px 0; text-align:center;">${adVal}</div>`);
+        }
+      }
 
-      // 2. Add Ad Slot 2 to Upper-Middle if present
-      const ad2 = document.getElementById('ad-code-2')?.value.trim();
-      if (ad2) positionMap['upper-middle'].push(`<div class="article-ad-box" style="margin: 14px 0; text-align:center;">${ad2}</div>`);
-
-      // 3. Add Ad Slot 3 to Exact Middle if present
-      const ad3 = document.getElementById('ad-code-3')?.value.trim();
-      if (ad3) positionMap['middle'].push(`<div class="article-ad-box" style="margin: 14px 0; text-align:center;">${ad3}</div>`);
-
-      // 4. Add Ad Slot 4 to Before-Last if present
-      const ad4 = document.getElementById('ad-code-4')?.value.trim();
-      if (ad4) positionMap['before-last'].push(`<div class="article-ad-box" style="margin: 14px 0; text-align:center;">${ad4}</div>`);
-
-      // 5. Add Ad Slot 5 to Bottom if present
-      const ad5 = document.getElementById('ad-code-5')?.value.trim();
-      if (ad5) positionMap['bottom'].push(`<div class="article-ad-box" style="margin: 14px 0; text-align:center;">${ad5}</div>`);
-
-      // 6. Collect YouTube Videos
       for (let i = 1; i <= 2; i++) {
         const pos = document.getElementById(`trailer-pos-${i}`)?.value;
         const url = document.getElementById(`trailer-url-${i}`)?.value.trim();
@@ -1134,7 +1108,6 @@
         }
       }
 
-      // 7. Collect Extra Images (Instant preview support with Base64 or relative path)
       for (let i = 1; i <= 3; i++) {
         const pos = document.getElementById(`extra-img-pos-${i}`)?.value;
         let imgSrc = '';
@@ -1238,16 +1211,11 @@
       const category = document.getElementById('post-category').value;
       const platform = document.getElementById('post-platform').value;
       const badge = document.getElementById('post-badge').value;
-      const theme = document.getElementById('post-theme').value;
-      const customTheme = document.getElementById('post-custom-theme').value.trim();
       const imgPath = document.getElementById('post-image-path').value;
-      const visualTheme = document.getElementById('post-visual-theme')?.value || 'blue-white';
       const rawContent = document.getElementById('post-content').value || '<p>Write your article to see preview...</p>';
 
       document.getElementById('prev-title').textContent = title;
       document.getElementById('prev-badge').textContent = badge;
-      const previewPane = document.querySelector('.preview-pane');
-      if (previewPane) previewPane.setAttribute('data-visual-theme', visualTheme);
       document.getElementById('prev-category').textContent = `${category} • ${platform}`;
       document.getElementById('prev-content').innerHTML = processContentWithElements(rawContent, 'preview', {
         extraImage1: document.getElementById('extra-img-path-1').value,
@@ -1265,12 +1233,6 @@
       } else {
         imgEl.style.display = 'none';
       }
-    }
-
-    function applyVisualThemePreview() {
-      const theme = document.getElementById('post-visual-theme')?.value || 'blue-white';
-      const previewPane = document.querySelector('.preview-pane');
-      if (previewPane) previewPane.setAttribute('data-visual-theme', theme);
     }
 
     function generateSitemapXML(posts) {
@@ -1321,6 +1283,29 @@
   <\/script>`;
       }
 
+      const fontStyle = post.fontStyle || 'noto-sans';
+      let fontImports = '';
+      let headlineFont = '"Noto Sans Devanagari", sans-serif';
+      let bodyFont = '"Noto Sans Devanagari", sans-serif';
+
+      if (fontStyle === 'playfair-lora') {
+        fontImports = `<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">`;
+        headlineFont = '"Playfair Display", serif';
+        bodyFont = '"Lora", serif';
+      } else if (fontStyle === 'roboto-sans') {
+        fontImports = `<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">`;
+        headlineFont = '"Roboto", sans-serif';
+        bodyFont = '"Inter", sans-serif';
+      } else if (fontStyle === 'noto-serif') {
+        fontImports = `<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">`;
+        headlineFont = '"Noto Serif Devanagari", serif';
+        bodyFont = '"Noto Serif Devanagari", serif';
+      } else {
+        fontImports = `<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">`;
+        headlineFont = '"Noto Sans Devanagari", sans-serif';
+        bodyFont = '"Noto Sans Devanagari", sans-serif';
+      }
+
       const finalArticleBody = processContentWithElements(post.content, post.slug, {
         extraImage1: post.extraImage1 || '',
         extraImage2: post.extraImage2 || '',
@@ -1333,6 +1318,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${post.title} - Filmy Khabr</title>
+  ${fontImports}
   ${gtagSnippet}
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="description" content="${safeSummary}">
@@ -1387,90 +1373,63 @@
   <\/script>
 
   <style>
-    :root { --bg: #0c0d0e; --card: #141618; --accent: #e50914; --text: #f3f4f6; --muted: #9ca3af; --border: #22262a; }
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: var(--bg); color: var(--text); padding: 12px; line-height: 1.65; font-size: 15px; }
-    .post-container { max-width: 680px; margin: 0 auto; background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
-    .nav-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    :root { 
+      --bg: #ffffff; 
+      --card: #ffffff; 
+      --accent: #e50914; 
+      --text: #171717; 
+      --muted: #666666; 
+      --border: #e5e7eb; 
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--text); padding: 12px; line-height: 1.8; font-size: 19px; font-family: ${bodyFont}; }
+    .post-container { max-width: 720px; margin: 0 auto; background: var(--card); padding: 16px 20px; }
+    .nav-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     .nav-bar a { color: var(--accent); text-decoration: none; font-weight: 700; font-size: 13px; }
     .badge { display: inline-block; background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; }
-    .meta { font-size: 12px; color: var(--muted); margin: 8px 0 12px 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-    .author-tag { color: #38bdf8; font-weight: 700; }
-    h1 { font-size: 22px; line-height: 1.35; margin: 8px 0 12px 0; color: #fff; font-weight: 800; }
-    .featured-img-wrap { width: 100%; border-radius: 6px; overflow: hidden; margin: 12px 0 14px 0; background: #111; }
-    .featured-img { width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; display: block; }
+    .meta { font-size: 13px; color: var(--muted); margin: 8px 0 16px 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .author-tag { color: var(--text); font-weight: 700; }
+    h1 { font-size: 36px; line-height: 1.25; margin: 10px 0 14px 0; color: var(--text); font-weight: 800; font-family: ${headlineFont}; }
+    .featured-img-wrap { width: 100%; border-radius: 8px; overflow: hidden; margin: 16px 0 20px 0; background: #f3f4f6; aspect-ratio: 16/9; }
+    .featured-img { width: 100%; height: 100%; object-fit: cover; display: block; }
     
-    .article-trailer-box { margin: 20px 0; background: #0c0e10; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
-    .trailer-tag { padding: 6px 10px; font-size: 11px; font-weight: 700; color: #38bdf8; background: #121519; border-bottom: 1px solid var(--border); }
+    .article-trailer-box { margin: 24px 0; background: #000; border-radius: 8px; overflow: hidden; }
+    .trailer-tag { padding: 8px 12px; font-size: 12px; font-weight: 700; color: #fff; background: #171717; }
     .video-responsive { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
     .video-responsive iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-    .article-body { font-size: 15px; color: #e5e7eb; }
-    .article-body p { margin-bottom: 14px; }
-    .article-body h2, .article-body h3 { color: #fff; margin: 18px 0 8px 0; font-size: 18px; }
-    .article-body ul, .article-body ol { margin: 8px 0 14px 20px; }
-    .article-body li { margin-bottom: 6px; }
-    .article-body a { color: #38bdf8; text-decoration: underline; font-weight: 600; }
+    .article-body { font-size: 19px; color: #171717; }
+    .article-body p { margin-bottom: 22px; }
+    .article-body h2, .article-body h3 { color: #171717; margin: 28px 0 12px 0; font-size: 24px; font-family: ${headlineFont}; font-weight: 700; }
+    .article-body ul, .article-body ol { margin: 12px 0 20px 24px; }
+    .article-body li { margin-bottom: 8px; }
+    .article-body a { color: var(--accent); text-decoration: underline; font-weight: 600; }
     
     /* Share Buttons Bar */
-    .share-bar { display: flex; gap: 8px; margin: 20px 0 10px 0; flex-wrap: wrap; }
+    .share-bar { display: flex; gap: 8px; margin: 24px 0 16px 0; flex-wrap: wrap; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     .share-btn { flex: 1; min-width: 100px; padding: 10px; text-align: center; border-radius: 6px; font-size: 12px; font-weight: 700; color: #fff; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 5px; }
     .share-whatsapp { background: #25D366; }
     .share-telegram { background: #0088cc; }
     .share-twitter { background: #1da1f2; }
 
     .shiny-author {
-      background: linear-gradient(90deg, #f59e0b, #ec4899, #38bdf8, #f59e0b);
-      background-size: 200% auto;
-      color: transparent;
-      -webkit-background-clip: text;
-      background-clip: text;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      animation: shine 4s linear infinite;
+      font-weight: 700;
+      color: var(--text);
     }
-    @keyframes shine { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
-    footer { text-align: center; margin-top: 24px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 11px; color: var(--muted); line-height: 1.6; }
-    .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
-    .footer-links a { color: var(--muted); text-decoration: none; font-size: 11px; }
-    .footer-links a:hover { color: #fff; }
+    footer { text-align: center; margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); line-height: 1.6; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 12px; }
+    .footer-links a:hover { color: var(--accent); }
 
-    /* FILMY KHABR Article Visual Themes */
-    body.theme-blue-white { --bg:#eef6ff; --card:#ffffff; --accent:#146ef5; --text:#10233f; --muted:#5f7188; --border:#cfe0f5; }
-    body.theme-blue-white { color:var(--text); }
-    body.theme-blue-white .post-container { box-shadow:0 8px 28px rgba(20,110,245,.10); }
-    body.theme-blue-white h1, body.theme-blue-white .article-body h2, body.theme-blue-white .article-body h3 { color:#0b3d91; }
-    body.theme-blue-white .article-body { color:#253b5a; }
-    body.theme-blue-white .article-body a, body.theme-blue-white .nav-bar a { color:#146ef5; }
-    body.theme-blue-white .article-trailer-box { background:#f5faff; border-color:#cfe0f5; }
-    body.theme-blue-white .trailer-tag { color:#146ef5; background:#eaf3ff; border-color:#cfe0f5; }
-    body.theme-dark-red { --bg:#08090b; --card:#111316; --accent:#ef233c; --text:#f5f5f5; --muted:#a5abb5; --border:#2b2e34; }
-    body.theme-dark-red { color:var(--text); }
-    body.theme-dark-red .post-container { box-shadow:0 8px 30px rgba(239,35,60,.12); }
-    body.theme-dark-red .article-body h2, body.theme-dark-red .article-body h3 { color:#fff; border-left:3px solid #ef233c; padding-left:8px; }
-    body.theme-dark-red .article-body { color:#e5e7eb; }
-    body.theme-dark-red .article-body a, body.theme-dark-red .nav-bar a { color:#ff5a6d; }
-    body.theme-dark-red .article-trailer-box { border-color:#3a2025; }
-    body.theme-dark-red .trailer-tag { color:#ff5a6d; background:#191014; border-color:#3a2025; }
-    body.theme-light-minimal { --bg:#f7f8fa; --card:#ffffff; --accent:#172033; --text:#172033; --muted:#697386; --border:#e1e5eb; }
-    body.theme-light-minimal { color:var(--text); }
-    body.theme-light-minimal .post-container { box-shadow:0 4px 18px rgba(23,32,51,.06); }
-    body.theme-light-minimal h1, body.theme-light-minimal .article-body h2, body.theme-light-minimal .article-body h3 { color:#172033; }
-    body.theme-light-minimal .article-body { color:#354052; }
-    body.theme-light-minimal .article-body a, body.theme-light-minimal .nav-bar a { color:#2457a6; }
-    body.theme-light-minimal .article-trailer-box { background:#fafafa; border-color:#e1e5eb; }
-    body.theme-light-minimal .trailer-tag { color:#2457a6; background:#f2f4f7; border-color:#e1e5eb; }
-    body.theme-purple-vibes { --bg:#100b20; --card:#1a1230; --accent:#a855f7; --text:#f7f2ff; --muted:#b9add0; --border:#39275a; }
-    body.theme-purple-vibes { color:var(--text); }
-    body.theme-purple-vibes .post-container { box-shadow:0 8px 32px rgba(168,85,247,.14); }
-    body.theme-purple-vibes h1, body.theme-purple-vibes .article-body h2, body.theme-purple-vibes .article-body h3 { color:#e5c8ff; }
-    body.theme-purple-vibes .article-body { color:#e9ddf7; }
-    body.theme-purple-vibes .article-body a, body.theme-purple-vibes .nav-bar a { color:#c084fc; }
-    body.theme-purple-vibes .article-trailer-box { border-color:#39275a; }
-    body.theme-purple-vibes .trailer-tag { color:#c084fc; background:#211638; border-color:#39275a; }
+    @media (max-width: 768px) {
+      body { font-size: 18px; padding: 4px; }
+      .post-container { padding: 12px 14px; }
+      h1 { font-size: 30px; }
+      .article-body { font-size: 18px; }
+    }
   </style>
 </head>
-<body class="theme-${post.visualTheme || 'blue-white'}">
+<body>
   <article class="post-container">
     <div class="nav-bar">
       <a href="../index.html">← FILMY KHABR HOME</a>
@@ -1526,8 +1485,7 @@
       const category = document.getElementById('post-category').value;
       const platform = document.getElementById('post-platform').value;
       const badge = document.getElementById('post-badge').value;
-      const articleTheme = document.getElementById('post-theme').value;
-      const customTheme = document.getElementById('post-custom-theme').value.trim();
+      const fontStyle = document.getElementById('post-font-style').value;
       const heroSliderTrailer = document.getElementById('hero-slider-trailer').value.trim();
       const summaryInput = document.getElementById('post-summary').value.trim();
       const content = document.getElementById('post-content').value.trim();
@@ -1611,9 +1569,7 @@
           category,
           platform,
           badge,
-          articleTheme: articleTheme || 'Auto / Best Current Angle',
-          customTheme: customTheme || '',
-          visualTheme: document.getElementById('post-visual-theme')?.value || 'blue-white',
+          fontStyle,
           image: imagePath || '',
           extraImage1: extraPaths[1] || '',
           extraImage2: extraPaths[2] || '',
@@ -1730,33 +1686,88 @@
         const file = await ghRequest('data/posts.json');
         if (!file || !file.content) {
           container.innerHTML = '<div style="text-align:center; padding: 15px; font-size: 12px; color: var(--text-muted);">No posts found in data/posts.json.</div>';
+          document.getElementById('manage-pagination-box').innerHTML = '';
           return;
         }
         allPostsCache = JSON.parse(base64ToUtf8(file.content));
         if (!allPostsCache.length) {
           container.innerHTML = '<div style="text-align:center; padding: 15px; font-size: 12px; color: var(--text-muted);">data/posts.json is empty.</div>';
+          document.getElementById('manage-pagination-box').innerHTML = '';
           return;
         }
 
-        let html = '';
-        allPostsCache.forEach(post => {
-          html += `
-            <div class="post-item">
-              <div class="post-item-info">
-                <div class="post-item-title">${post.title}</div>
-                <div class="post-item-meta">${post.category} • ${post.badge || 'Trending'} • ${post.articleTheme || 'Auto / Best Current Angle'} • ${post.visualTheme || 'blue-white'} • ${post.date || ''}</div>
-              </div>
-              <div class="post-actions">
-                <button class="btn btn-edit" onclick="editPost('${post.id}')">Edit</button>
-                <button class="btn btn-danger" onclick="deletePost('${post.id}')">Delete</button>
-              </div>
-            </div>
-          `;
-        });
-        container.innerHTML = html;
+        renderManageListPaginated();
       } catch (err) {
         container.innerHTML = `<div style="color:var(--danger); font-size:12px; padding:10px;">Error: ${err.message}</div>`;
+        document.getElementById('manage-pagination-box').innerHTML = '';
       }
+    }
+
+    function renderManageListPaginated() {
+      const container = document.getElementById('posts-list-container');
+      const paginationEl = document.getElementById('manage-pagination-box');
+      
+      const totalPages = Math.ceil(allPostsCache.length / MANAGE_PER_PAGE);
+      if (manageCurrentPage > totalPages) manageCurrentPage = totalPages;
+      if (manageCurrentPage < 1) manageCurrentPage = 1;
+
+      const startIndex = (manageCurrentPage - 1) * MANAGE_PER_PAGE;
+      const currentSlice = allPostsCache.slice(startIndex, startIndex + MANAGE_PER_PAGE);
+
+      let html = '';
+      currentSlice.forEach(post => {
+        html += `
+          <div class="post-item">
+            <div class="post-item-info">
+              <div class="post-item-title">${post.title}</div>
+              <div class="post-item-meta">${post.category} • ${post.badge || 'Trending'} • ${post.date || ''}</div>
+            </div>
+            <div class="post-actions">
+              <button class="btn btn-edit" onclick="editPost('${post.id}')">Edit</button>
+              <button class="btn btn-danger" onclick="deletePost('${post.id}')">Delete</button>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+
+      // Render Manage Pagination Controls
+      if (totalPages <= 1) {
+        paginationEl.innerHTML = '';
+        return;
+      }
+
+      let pagHTML = '';
+      if (manageCurrentPage > 1) {
+        pagHTML += `<button class="page-btn" onclick="changeManagePage(${manageCurrentPage - 1})">« Prev</button>`;
+      } else {
+        pagHTML += `<button class="page-btn" disabled>« Prev</button>`;
+      }
+
+      for (let i = 1; i <= totalPages; i++) {
+        if (i === 1 || i === totalPages || (i >= manageCurrentPage - 2 && i <= manageCurrentPage + 2)) {
+          if (i === manageCurrentPage) {
+            pagHTML += `<button class="page-btn active">${i}</button>`;
+          } else {
+            pagHTML += `<button class="page-btn" onclick="changeManagePage(${i})">${i}</button>`;
+          }
+        } else if (i === manageCurrentPage - 3 || i === manageCurrentPage + 3) {
+          pagHTML += `<span style="color: var(--text-muted); padding: 0 4px;">...</span>`;
+        }
+      }
+
+      if (manageCurrentPage < totalPages) {
+        pagHTML += `<button class="page-btn" onclick="changeManagePage(${manageCurrentPage + 1})">Next »</button>`;
+      } else {
+        pagHTML += `<button class="page-btn" disabled>Next »</button>`;
+      }
+
+      paginationEl.innerHTML = pagHTML;
+    }
+
+    function changeManagePage(page) {
+      manageCurrentPage = page;
+      renderManageListPaginated();
     }
 
     function editPost(id) {
@@ -1772,11 +1783,8 @@
       document.getElementById('post-category').value = post.category || 'Movies';
       document.getElementById('post-platform').value = post.platform || 'General';
       document.getElementById('post-badge').value = post.badge || 'Trending';
-      document.getElementById('post-theme').value = post.articleTheme || 'Auto / Best Current Angle';
-      document.getElementById('post-custom-theme').value = post.customTheme || '';
-      document.getElementById('post-visual-theme').value = post.visualTheme || 'blue-white';
-      applyVisualThemePreview();
-      if(post.trailer) document.getElementById('hero-slider-trailer').value = post.trailer;
+      if (post.fontStyle) document.getElementById('post-font-style').value = post.fontStyle;
+      if (post.trailer) document.getElementById('hero-slider-trailer').value = post.trailer;
       
       if (post.extraImage1) document.getElementById('extra-img-path-1').value = post.extraImage1;
       if (post.extraImage2) document.getElementById('extra-img-path-2').value = post.extraImage2;
@@ -1833,16 +1841,12 @@
       document.getElementById('edit-post-id').value = '';
       document.getElementById('edit-published-at').value = '';
       document.getElementById('post-title').value = '';
-      document.getElementById('post-theme').value = 'Auto / Best Current Angle';
-      document.getElementById('post-custom-theme').value = '';
-      document.getElementById('post-visual-theme').value = 'blue-white';
-      applyVisualThemePreview();
       document.getElementById('post-slug').value = '';
       document.getElementById('post-image-path').value = '';
       document.getElementById('hero-slider-trailer').value = '';
       document.getElementById('trailer-url-1').value = '';
       document.getElementById('trailer-url-2').value = '';
-      for (let i = 1; i <= 5; i++) {
+      for (let i = 1; i <= 8; i++) {
         const adBox = document.getElementById(`ad-code-${i}`);
         if (adBox) adBox.value = '';
       }
