@@ -83,7 +83,7 @@
       min-width: 0;
     }
 
-    /* Sidebar Layout (Bigger and Much More Readable Text) */
+    /* Sidebar Layout */
     .sidebar {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -218,7 +218,7 @@
       border-color: var(--accent);
     }
 
-    /* Custom Widget: Upcoming Release Calendar (Readable) */
+    /* Custom Widget: Upcoming Release Calendar */
     .calendar-list {
       display: flex;
       flex-direction: column;
@@ -244,7 +244,7 @@
       line-height: 1.4;
     }
 
-    /* Custom Widget: Editor's Pick (Readable) */
+    /* Custom Widget: Editor's Pick */
     .editors-pick-box {
       background: linear-gradient(135deg, #1e1314 0%, #11151a 100%);
       border: 1px solid #4a1518;
@@ -270,7 +270,7 @@
       line-height: 1.45;
     }
 
-    /* 1. Breaking Ticker Bar & Text (Bada aur clear) */
+    /* Breaking Ticker Bar */
     .ticker-bar {
       position: sticky;
       top: 0;
@@ -314,7 +314,7 @@
     .ticker-slide.active { opacity: 1; transform: translateY(0); }
     .ticker-slide.prev { opacity: 0; transform: translateY(-100%); }
 
-    /* Header (2. Filmy Khabr Made Bada) */
+    /* Header */
     header {
       padding: 36px 0 20px;
       min-height: 110px;
@@ -343,7 +343,7 @@
     }
     .search-btn:hover { border-color: var(--accent); background: #191c21; transform: translateY(-1px); }
 
-    /* 3. Movies / Nav Links (Made Bada) */
+    /* Navigation */
     nav {
       display: flex; align-items: center; justify-content: center; gap: 14px;
       overflow-x: auto; padding: 0 0 20px;
@@ -435,36 +435,159 @@
     .hero-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.5); transition: all 0.25s ease; }
     .hero-dot.active { background: var(--accent); width: 16px; border-radius: 3px; }
 
-    /* 3. Trending Now Posters (Made Compact / Chhote kiye gaye hain) */
-    .trending-scroll { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-    .trend-card {
-      background: var(--card-bg); border: 1px solid #252b32; border-radius: 10px; overflow: hidden;
-      display: flex; flex-direction: column; box-shadow: 0 4px 14px rgba(0,0,0,.15); transition: transform .2s;
+    /* 2. Explore By Category Horizontal Bar (Placed right below main hero slider) */
+    .explore-cat-bar {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 16px 0;
+      margin-top: 18px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
-    .trend-card:hover { transform: translateY(-2px); border-color: #3b424b; }
-    .trend-img-box { position: relative; width: 100%; aspect-ratio: 16/9; background: #111; }
-    .trend-img { width: 100%; height: 100%; object-fit: cover; }
-    .trend-rank {
-      position: absolute; top: 6px; left: 6px; background: var(--accent); color: #fff;
-      font-size: 11px; font-weight: 900; width: 20px; height: 20px; display: flex;
-      align-items: center; justify-content: center; border-radius: 4px; z-index: 1;
+    .explore-cat-bar::-webkit-scrollbar { display: none; }
+    .explore-cat-item {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #151a21, #0d1014);
+      border: 1px solid #2a323d;
+      padding: 12px 22px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
     }
-    .trend-info { padding: 8px 10px; flex: 1; display: flex; flex-direction: column; }
-    .trend-platform { font-size: 9px; color: #38bdf8; font-weight: 700; margin-bottom: 2px; text-transform: uppercase; }
-    .trend-title { font-size: 12px; font-weight: 700; color: #fff; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 4px; }
-    .trend-date { font-size: 9px; color: var(--text-dim); margin-top: auto; }
+    .explore-cat-item:hover {
+      border-color: var(--accent);
+      background: linear-gradient(135deg, #1d242e, #11151a);
+      transform: translateY(-2px);
+    }
+    .explore-cat-icon { font-size: 20px; }
+    .explore-cat-text { font-size: 14px; font-weight: 800; color: #fff; white-space: nowrap; }
 
-    /* Explore By Category Cards */
-    .cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 10px; }
-    .cat-card {
-      background: linear-gradient(135deg, #151a21, #0d1014); border: 1px solid #2a323d;
-      border-radius: 14px; padding: 20px 14px; text-align: center; cursor: pointer; 
-      transition: all 0.2s ease; box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    /* 1. Trending Now Slider (Single slide layout matching hero style) */
+    .trending-slider-container {
+      position: relative;
+      background: var(--card-bg);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid #252b32;
+      box-shadow: 0 8px 22px rgba(0,0,0,.18);
     }
-    .cat-card:hover { border-color: var(--accent); transform: translateY(-3px); background: linear-gradient(135deg, #1d242e, #11151a); }
-    .cat-icon { font-size: 28px; margin-bottom: 8px; display: block; }
-    .cat-name { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 3px; }
-    .cat-desc { font-size: 11px; color: var(--text-muted); }
+    .trending-slider-track {
+      display: flex;
+      transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+      width: 100%;
+    }
+    .trending-slide {
+      min-width: 100%;
+      display: flex;
+      flex-direction: column;
+      background: var(--card-bg);
+      position: relative;
+    }
+    .trending-slide-img-box {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      position: relative;
+      background: #111;
+      overflow: hidden;
+    }
+    .trending-slide-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .trending-slide-rank {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      z-index: 2;
+    }
+    .trending-slide-content {
+      padding: 16px 18px 20px;
+      background: var(--card-bg);
+    }
+    .trending-slide-platform {
+      font-size: 11px;
+      color: #38bdf8;
+      font-weight: 700;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+    .trending-slide-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 6px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .trending-slide-title a:hover { color: var(--accent); }
+    .trending-slide-date {
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+    .trending-nav-btn {
+      position: absolute;
+      top: 35%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 5;
+      font-size: 12px;
+      transition: background 0.2s;
+    }
+    .trending-nav-btn:hover { background: rgba(229, 9, 20, 0.9); }
+    .trending-nav-btn.prev { left: 10px; }
+    .trending-nav-btn.next { right: 10px; }
+    .trending-dots {
+      position: absolute;
+      bottom: 14px;
+      right: 16px;
+      display: flex;
+      gap: 5px;
+      z-index: 3;
+      align-items: center;
+    }
+    .trending-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      transition: all 0.25s ease;
+    }
+    .trending-dot.active {
+      background: var(--accent);
+      width: 16px;
+      border-radius: 3px;
+    }
 
     /* Latest News List */
     .news-list { display: flex; flex-direction: column; gap: 10px; }
@@ -555,6 +678,34 @@
     <!-- FULL-WIDTH HERO SLIDER ON TOP -->
     <div id="hero-slider-wrap"></div>
 
+    <!-- EXPLORE BY CATEGORY HORIZONTAL BAR (Placed right below main hero slider) -->
+    <div class="explore-cat-bar">
+      <div class="explore-cat-item" onclick="filterCategory('Movies')">
+        <span class="explore-cat-icon">🎬</span>
+        <span class="explore-cat-text">Movies</span>
+      </div>
+      <div class="explore-cat-item" onclick="filterCategory('Web Series')">
+        <span class="explore-cat-icon">📺</span>
+        <span class="explore-cat-text">Web Series</span>
+      </div>
+      <div class="explore-cat-item" onclick="filterCategory('OTT')">
+        <span class="explore-cat-icon">🍿</span>
+        <span class="explore-cat-text">OTT Releases</span>
+      </div>
+      <div class="explore-cat-item" onclick="filterCategory('Trailers')">
+        <span class="explore-cat-icon">▶️</span>
+        <span class="explore-cat-text">Trailers</span>
+      </div>
+      <div class="explore-cat-item" onclick="filterCategory('Celebrity News')">
+        <span class="explore-cat-icon">⭐</span>
+        <span class="explore-cat-text">Celebrity News</span>
+      </div>
+      <div class="explore-cat-item" onclick="filterCategory('News')">
+        <span class="explore-cat-icon">📰</span>
+        <span class="explore-cat-text">Entertainment News</span>
+      </div>
+    </div>
+
     <!-- CONTENT + SIDEBAR LAYOUT -->
     <div class="content-sidebar-layout">
       
@@ -562,49 +713,12 @@
       <div class="main-column">
         <!-- MAIN HOME WRAPPER -->
         <div id="home-exclusive-sections">
-          <!-- Trending Section -->
+          <!-- Trending Section (Converted to single-slide slider format) -->
           <div class="section-title">
             <span>🔥 Trending Now</span>
             <span class="section-view-all" onclick="filterCategory('Trending')">View All ›</span>
           </div>
-          <div class="trending-scroll" id="trending-container"></div>
-
-          <!-- Explore By Category Grid -->
-          <div class="section-title">
-            <span>Explore By Category</span>
-          </div>
-          <div class="cat-grid">
-            <div class="cat-card" onclick="filterCategory('Movies')">
-              <span class="cat-icon">🎬</span>
-              <div class="cat-name">Movies</div>
-              <div class="cat-desc">Cinema Updates</div>
-            </div>
-            <div class="cat-card" onclick="filterCategory('Web Series')">
-              <span class="cat-icon">📺</span>
-              <div class="cat-name">Web Series</div>
-              <div class="cat-desc">All New Shows</div>
-            </div>
-            <div class="cat-card" onclick="filterCategory('OTT')">
-              <span class="cat-icon">🍿</span>
-              <div class="cat-name">OTT Releases</div>
-              <div class="cat-desc">Platform Updates</div>
-            </div>
-            <div class="cat-card" onclick="filterCategory('Trailers')">
-              <span class="cat-icon">▶️</span>
-              <div class="cat-name">Trailers</div>
-              <div class="cat-desc">Latest Trailers</div>
-            </div>
-            <div class="cat-card" onclick="filterCategory('Celebrity News')">
-              <span class="cat-icon">⭐</span>
-              <div class="cat-name">Celebrity News</div>
-              <div class="cat-desc">Star Updates</div>
-            </div>
-            <div class="cat-card" onclick="filterCategory('News')">
-              <span class="cat-icon">📰</span>
-              <div class="cat-name">Entertainment News</div>
-              <div class="cat-desc">Latest News</div>
-            </div>
-          </div>
+          <div id="trending-slider-wrap"></div>
         </div>
 
         <!-- DYNAMIC POSTS LIST -->
@@ -1012,6 +1126,128 @@
       updateHeroSlide();
     }
 
+    // Trending Slider Logic
+    let trendingTimer = null;
+    let trendingCurrentIndex = 0;
+    let trendingTotalSlides = 0;
+    let isTrendingPaused = false;
+    let trendingStartX = 0;
+
+    function setupTrendingSlider(posts) {
+      const wrap = document.getElementById('trending-slider-wrap');
+      const trendingPosts = posts.slice(0, 6);
+      trendingTotalSlides = trendingPosts.length;
+      trendingCurrentIndex = 0;
+
+      if (!trendingTotalSlides) {
+        wrap.innerHTML = '';
+        return;
+      }
+
+      if (trendingTimer) clearInterval(trendingTimer);
+
+      const slidesHTML = trendingPosts.map((post, idx) => {
+        const articleUrl = post.url || `posts/${post.slug}.html`;
+        const imageUrl = post.image || 'images/default.jpg';
+        return `
+          <div class="trending-slide" id="trending-slide-${idx}">
+            <div class="trending-slide-img-box">
+              <a href="${articleUrl}">
+                <img class="trending-slide-img" src="${imageUrl}" alt="${escapeHtml(post.title)}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Post'">
+              </a>
+              <div class="trending-slide-rank">${idx + 1}</div>
+            </div>
+            <div class="trending-slide-content">
+              <div class="trending-slide-platform">${post.platform || post.category}</div>
+              <div class="trending-slide-title"><a href="${articleUrl}">${escapeHtml(post.title)}</a></div>
+              <div class="trending-slide-date">${post.date || '2026'}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      let dotsHTML = '';
+      if (trendingTotalSlides > 1) {
+        dotsHTML = `<div class="trending-dots" id="trending-dots">
+          ${Array.from({ length: trendingTotalSlides }).map((_, i) => `<span class="trending-dot ${i === 0 ? 'active' : ''}"></span>`).join('')}
+        </div>`;
+      }
+
+      let navBtns = '';
+      if (trendingTotalSlides > 1) {
+        navBtns = `
+          <button class="trending-nav-btn prev" onclick="prevTrendingSlide(event)" aria-label="Previous Slide">❮</button>
+          <button class="trending-nav-btn next" onclick="nextTrendingSlide(event)" aria-label="Next Slide">❯</button>
+        `;
+      }
+
+      wrap.innerHTML = `
+        <div class="trending-slider-container" id="trending-slider-container">
+          <div class="trending-slider-track" id="trending-slider-track">
+            ${slidesHTML}
+          </div>
+          ${navBtns}
+          ${dotsHTML}
+        </div>
+      `;
+
+      const container = document.getElementById('trending-slider-container');
+      if (container) {
+        container.addEventListener('mouseenter', () => { isTrendingPaused = true; });
+        container.addEventListener('mouseleave', () => { isTrendingPaused = false; });
+        container.addEventListener('touchstart', (e) => {
+          isTrendingPaused = true;
+          trendingStartX = e.touches[0].clientX;
+        }, { passive: true });
+        container.addEventListener('touchend', (e) => {
+          const diffX = trendingStartX - e.changedTouches[0].clientX;
+          if (Math.abs(diffX) > 40) {
+            if (diffX > 0) nextTrendingSlide();
+            else prevTrendingSlide();
+          }
+          setTimeout(() => { isTrendingPaused = false; }, 1500);
+        }, { passive: true });
+
+        startTrendingAutoPlay();
+      }
+    }
+
+    function startTrendingAutoPlay() {
+      if (trendingTimer) clearInterval(trendingTimer);
+      trendingTimer = setInterval(() => {
+        if (!isTrendingPaused && trendingTotalSlides > 1) {
+          nextTrendingSlide();
+        }
+      }, 4000);
+    }
+
+    function updateTrendingSlide() {
+      const track = document.getElementById('trending-slider-track');
+      if (!track) return;
+      track.style.transform = `translateX(-${trendingCurrentIndex * 100}%)`;
+
+      const dots = document.querySelectorAll('.trending-dot');
+      if (dots.length) {
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === trendingCurrentIndex);
+        });
+      }
+    }
+
+    function nextTrendingSlide(e) {
+      if (e) e.stopPropagation();
+      if (trendingTotalSlides <= 1) return;
+      trendingCurrentIndex = (trendingCurrentIndex + 1) % trendingTotalSlides;
+      updateTrendingSlide();
+    }
+
+    function prevTrendingSlide(e) {
+      if (e) e.stopPropagation();
+      if (trendingTotalSlides <= 1) return;
+      trendingCurrentIndex = (trendingCurrentIndex - 1 + trendingTotalSlides) % trendingTotalSlides;
+      updateTrendingSlide();
+    }
+
     async function loadSiteData() {
       try {
         const res = await fetch(`data/posts.json?_t=${Date.now()}`);
@@ -1051,10 +1287,10 @@
 
         latestContainer.innerHTML = posts.slice(0, 4).map(p => `
           <a href="${p.url || `posts/${p.slug}.html`}" class="sidebar-news-item">
-            <img class="sidebar-news-thumb" src="${p.image || 'images/default.jpg'}" alt="${p.title}" onerror="this.src='https://placehold.co/100x70/171a1e/ffffff?text=News'">
+            <img class="sidebar-news-thumb" src="${p.image || 'images/default.jpg'}" alt="${escapeHtml(p.title)}" onerror="this.src='https://placehold.co/100x70/171a1e/ffffff?text=News'">
             <div class="sidebar-news-info">
-              <div class="sidebar-news-meta">${p.category}</div>
-              <div class="sidebar-news-title">${p.title}</div>
+              <div class="sidebar-news-meta">${escapeHtml(p.category)}</div>
+              <div class="sidebar-news-title">${escapeHtml(p.title)}</div>
             </div>
           </a>
         `).join('');
@@ -1063,7 +1299,7 @@
         trendingContainer.innerHTML = trendingSlice.map((p, idx) => `
           <a href="${p.url || `posts/${p.slug}.html`}" class="sidebar-trending-item">
             <span class="sidebar-trending-rank">${idx + 1}</span>
-            <span class="sidebar-trending-title">${p.title}</span>
+            <span class="sidebar-trending-title">${escapeHtml(p.title)}</span>
           </a>
         `).join('');
       }
@@ -1073,23 +1309,7 @@
       if (!rawPosts || rawPosts.length === 0) return;
 
       setupHeroSlider(rawPosts);
-
-      const trendingContainer = document.getElementById('trending-container');
-      const trendingPosts = rawPosts.slice(0, 4);
-      trendingContainer.innerHTML = trendingPosts.map((post, idx) => `
-        <a href="${post.url || `posts/${post.slug}.html`}" class="trend-card">
-          <div class="trend-img-box">
-            <img class="trend-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/300x200/171a1e/ffffff?text=Post'">
-            <div class="trend-rank">${idx + 1}</div>
-          </div>
-          <div class="trend-info">
-            <div class="trend-platform">${post.platform || post.category}</div>
-            <div class="trend-title">${post.title}</div>
-            <div class="trend-date">${post.date || '2026'}</div>
-          </div>
-        </a>
-      `).join('');
-
+      setupTrendingSlider(rawPosts);
       renderPaginatedNewsList(rawPosts);
     }
 
@@ -1113,10 +1333,10 @@
 
       container.innerHTML = currentPosts.map(post => `
         <a href="${post.url || `posts/${post.slug}.html`}" class="news-card">
-          <img class="news-thumb" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/120x80/171a1e/ffffff?text=News'">
+          <img class="news-thumb" src="${post.image || 'images/default.jpg'}" alt="${escapeHtml(post.title)}" onerror="this.src='https://placehold.co/120x80/171a1e/ffffff?text=News'">
           <div style="flex:1; min-width:0;">
-            <div class="news-meta">${post.category} • ${post.date || ''}</div>
-            <div class="news-title">${post.title}</div>
+            <div class="news-meta">${escapeHtml(post.category)} • ${escapeHtml(post.date || '')}</div>
+            <div class="news-title">${escapeHtml(post.title)}</div>
           </div>
         </a>
       `).join('');
