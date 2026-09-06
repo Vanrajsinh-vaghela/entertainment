@@ -1374,7 +1374,7 @@
 
   <style>
     :root { 
-      --bg: #ffffff; 
+      --bg: #f5f5f5; 
       --card: #ffffff; 
       --accent: #e50914; 
       --text: #171717; 
@@ -1383,14 +1383,16 @@
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: var(--bg); color: var(--text); padding: 12px; line-height: 1.8; font-size: 19px; font-family: ${bodyFont}; }
-    .post-container { max-width: 720px; margin: 0 auto; background: var(--card); padding: 16px 20px; }
+    .page-wrapper { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 320px; gap: 24px; align-items: start; }
+    .post-container { background: var(--card); border-radius: 8px; border: 1px solid var(--border); padding: 24px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .sidebar { background: var(--card); border-radius: 8px; border: 1px solid var(--border); padding: 16px; position: sticky; top: 12px; }
     .nav-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     .nav-bar a { color: var(--accent); text-decoration: none; font-weight: 700; font-size: 13px; }
     .badge { display: inline-block; background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; }
     .meta { font-size: 13px; color: var(--muted); margin: 8px 0 16px 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     .author-tag { color: var(--text); font-weight: 700; }
-    h1 { font-size: 36px; line-height: 1.25; margin: 10px 0 14px 0; color: var(--text); font-weight: 800; font-family: ${headlineFont}; }
-    .featured-img-wrap { width: 100%; border-radius: 8px; overflow: hidden; margin: 16px 0 20px 0; background: #f3f4f6; aspect-ratio: 16/9; }
+    h1 { font-size: 42px; line-height: 1.2; margin: 10px 0 14px 0; color: var(--text); font-weight: 800; font-family: ${headlineFont}; }
+    .featured-img-wrap { width: 100%; border-radius: 8px; overflow: hidden; margin: 16px 0 24px 0; background: #f3f4f6; aspect-ratio: 16/9; }
     .featured-img { width: 100%; height: 100%; object-fit: cover; display: block; }
     
     .article-trailer-box { margin: 24px 0; background: #000; border-radius: 8px; overflow: hidden; }
@@ -1400,11 +1402,31 @@
 
     .article-body { font-size: 19px; color: #171717; }
     .article-body p { margin-bottom: 22px; }
-    .article-body h2, .article-body h3 { color: #171717; margin: 28px 0 12px 0; font-size: 24px; font-family: ${headlineFont}; font-weight: 700; }
+    .article-body h2, .article-body h3 { color: #171717; margin: 28px 0 12px 0; font-size: 26px; font-family: ${headlineFont}; font-weight: 700; }
     .article-body ul, .article-body ol { margin: 12px 0 20px 24px; }
     .article-body li { margin-bottom: 8px; }
     .article-body a { color: var(--accent); text-decoration: underline; font-weight: 600; }
-    
+
+    /* Movie Details Fact Box */
+    .movie-details-box { background: #fafafa; border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 6px; padding: 16px; margin: 24px 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .movie-details-title { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); margin-bottom: 10px; }
+    .movie-details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px; color: var(--text); }
+
+    /* Related Stories Grid */
+    .related-section { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .related-title { font-size: 18px; font-weight: 800; margin-bottom: 14px; color: var(--text); text-transform: uppercase; letter-spacing: 0.5px; }
+    .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .related-card { background: #fff; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; }
+    .related-card img { width: 100%; height: 100px; object-fit: cover; }
+    .related-card-content { padding: 10px; font-size: 12px; font-weight: 700; color: var(--text); line-height: 1.3; }
+
+    /* Sidebar Widgets */
+    .sidebar-widget { margin-bottom: 20px; }
+    .sidebar-widget h3 { font-size: 14px; font-weight: 800; text-transform: uppercase; border-bottom: 2px solid var(--accent); padding-bottom: 6px; margin-bottom: 12px; color: var(--text); }
+    .sidebar-news-item { display: flex; gap: 10px; margin-bottom: 10px; text-decoration: none; color: inherit; align-items: center; }
+    .sidebar-news-item img { width: 60px; height: 45px; object-fit: cover; border-radius: 4px; }
+    .sidebar-news-title { font-size: 12px; font-weight: 700; line-height: 1.3; color: var(--text); }
+
     /* Share Buttons Bar */
     .share-bar { display: flex; gap: 8px; margin: 24px 0 16px 0; flex-wrap: wrap; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     .share-btn { flex: 1; min-width: 100px; padding: 10px; text-align: center; border-radius: 6px; font-size: 12px; font-weight: 700; color: #fff; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 5px; }
@@ -1412,51 +1434,107 @@
     .share-telegram { background: #0088cc; }
     .share-twitter { background: #1da1f2; }
 
-    .shiny-author {
-      font-weight: 700;
-      color: var(--text);
-    }
-    footer { text-align: center; margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); line-height: 1.6; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    footer { text-align: center; margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); line-height: 1.6; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; grid-column: 1 / -1; }
     .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
     .footer-links a { color: var(--muted); text-decoration: none; font-size: 12px; }
     .footer-links a:hover { color: var(--accent); }
 
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
+      .page-wrapper { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
       body { font-size: 18px; padding: 4px; }
-      .post-container { padding: 12px 14px; }
-      h1 { font-size: 30px; }
-      .article-body { font-size: 18px; }
+      .post-container { padding: 16px; }
+      h1 { font-size: 32px; }
+      .related-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <article class="post-container">
-    <div class="nav-bar">
-      <a href="../index.html">← FILMY KHABR HOME</a>
-      <span class="badge">${post.badge || 'Trending'}</span>
-    </div>
-    <div class="meta">
-      <span class="author-tag">By Vanrajsinh Vaghela</span>
-      <span>•</span>
-      <span>${post.category}</span>
-      <span>•</span>
-      <span>${post.platform || 'General'}</span>
-      <span>•</span>
-      <time datetime="${publishedAt}">${displayDate}</time>
-    </div>
-    <h1>${post.title}</h1>
-    ${post.image ? `<div class="featured-img-wrap"><img class="featured-img" src="../${post.image}" alt="${safeTitle}" width="1200" height="675" loading="eager"></div>` : ''}
-    
-    <div class="article-body">
-      ${finalArticleBody}
-    </div>
+  <div class="page-wrapper">
+    <article class="post-container">
+      <div class="nav-bar">
+        <a href="../index.html">← FILMY KHABR HOME</a>
+        <span class="badge">${post.badge || 'Trending'}</span>
+      </div>
+      <div class="meta">
+        <span class="author-tag">By Vanrajsinh Vaghela</span>
+        <span>•</span>
+        <span>${post.category}</span>
+        <span>•</span>
+        <span>${post.platform || 'General'}</span>
+        <span>•</span>
+        <time datetime="${publishedAt}">${displayDate}</time>
+      </div>
+      <h1>${post.title}</h1>
+      ${post.image ? `<div class="featured-img-wrap"><img class="featured-img" src="../${post.image}" alt="${safeTitle}" width="1200" height="675" loading="eager"></div>` : ''}
+      
+      <div class="article-body">
+        ${finalArticleBody}
+      </div>
 
-    <!-- Direct Share Buttons Bar -->
-    <div class="share-bar">
-      <a href="https://api.whatsapp.com/send?text=${encodeURIComponent(post.title + ' - ' + absoluteUrl)}" target="_blank" rel="noopener noreferrer" class="share-btn share-whatsapp">💬 WhatsApp</a>
-      <a href="https://t.me/share/url?url=${encodeURIComponent(absoluteUrl)}&text=${encodeURIComponent(post.title)}" target="_blank" rel="noopener noreferrer" class="share-btn share-telegram">✈ Telegram</a>
-      <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(absoluteUrl)}&text=${encodeURIComponent(post.title)}" target="_blank" rel="noopener noreferrer" class="share-btn share-twitter">𝕏 Twitter</a>
-    </div>
+      <!-- Movie Details Box -->
+      <div class="movie-details-box">
+        <div class="movie-details-title">🎬 Movie / Series Details</div>
+        <div class="movie-details-grid">
+          <div><strong>Release Date:</strong> ${displayDate}</div>
+          <div><strong>Genre:</strong> ${post.category}</div>
+          <div><strong>Platform:</strong> ${post.platform || 'Theatrical'}</div>
+          <div><strong>Status:</strong> ${post.badge || 'Released'}</div>
+        </div>
+      </div>
+
+      <!-- Related Stories Block -->
+      <div class="related-section">
+        <div class="related-title">Related Stories</div>
+        <div class="related-grid">
+          <a href="../index.html" class="related-card">
+            <img src="../${post.image}" alt="Related">
+            <div class="related-card-content">${post.title}</div>
+          </a>
+          <a href="../index.html" class="related-card">
+            <img src="../${post.image}" alt="Related">
+            <div class="related-card-content">Latest Bollywood & OTT Updates Live Today</div>
+          </a>
+          <a href="../index.html" class="related-card">
+            <img src="../${post.image}" alt="Related">
+            <div class="related-card-content">Upcoming Hollywood & Action Movies 2026</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Direct Share Buttons Bar -->
+      <div class="share-bar">
+        <a href="https://api.whatsapp.com/send?text=${encodeURIComponent(post.title + ' - ' + absoluteUrl)}" target="_blank" rel="noopener noreferrer" class="share-btn share-whatsapp">💬 WhatsApp</a>
+        <a href="https://t.me/share/url?url=${encodeURIComponent(absoluteUrl)}&text=${encodeURIComponent(post.title)}" target="_blank" rel="noopener noreferrer" class="share-btn share-telegram">✈ Telegram</a>
+        <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(absoluteUrl)}&text=${encodeURIComponent(post.title)}" target="_blank" rel="noopener noreferrer" class="share-btn share-twitter">𝕏 Twitter</a>
+      </div>
+    </article>
+
+    <!-- Desktop Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-widget">
+        <h3>🔥 Trending News</h3>
+        <a href="../index.html" class="sidebar-news-item">
+          <img src="../${post.image}" alt="News">
+          <div class="sidebar-news-title">Pushpa 2 Trailer Release Date & Box Office Updates</div>
+        </a>
+        <a href="../index.html" class="sidebar-news-item">
+          <img src="../${post.image}" alt="News">
+          <div class="sidebar-news-title">Kalki 2898 AD Sequel Shooting & Cast Details</div>
+        </a>
+        <a href="../index.html" class="sidebar-news-item">
+          <img src="../${post.image}" alt="News">
+          <div class="sidebar-news-title">Shah Rukh Khan की नई फिल्म पर बड़ा अपडेट सामने आया</div>
+        </a>
+      </div>
+      <div class="sidebar-widget" style="text-align:center;">
+        <h3>Sponsored</h3>
+        <div style="background:#171a1e; color:#fff; padding:20px; border-radius:6px; font-size:12px; font-weight:700;">
+          BIGGEST MOVIES<br>BIGGEST EMOTIONS<br>
+          <span style="color:var(--accent);">FILMY KHABR</span>
+        </div>
+      </div>
+    </aside>
 
     <footer>
       <div class="footer-links">
@@ -1469,7 +1547,7 @@
       <span class="shiny-author">Managed and Published by Vanrajsinh Vaghela.</span><br>
       All Rights Reserved.
     </footer>
-  </article>
+  </div>
 </body>
 </html>`;
     }
