@@ -902,6 +902,47 @@
     const POSTS_PER_PAGE = 20;
     let currentPage = 1;
 
+    // Safe rendering helpers: keep one malformed field from breaking the whole homepage.
+    function safeText(value, fallback = '') {
+      return value === null || value === undefined ? fallback : String(value);
+    }
+
+    function escapeHtml(value) {
+      return safeText(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/\"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function safeUrl(value, fallback = '#') {
+      const raw = safeText(value, '').trim();
+      if (!raw) return fallback;
+      try {
+        const u = new URL(raw, window.location.href);
+        if (u.protocol === 'http:' || u.protocol === 'https:') return u.href;
+      } catch (_) {}
+      return fallback;
+    }
+
+    function normalizePosts(data) {
+      if (!Array.isArray(data)) return [];
+      return data.filter(p => p && typeof p === 'object').map(p => ({
+        ...p,
+        title: safeText(p.title, 'Untitled'),
+        slug: safeText(p.slug, ''),
+        url: safeText(p.url, ''),
+        image: safeText(p.image, ''),
+        summary: safeText(p.summary, ''),
+        category: safeText(p.category, 'News'),
+        platform: safeText(p.platform, 'General'),
+        badge: safeText(p.badge, 'Trending'),
+        date: safeText(p.date, '2026'),
+        trailer: safeText(p.trailer, '')
+      }));
+    }
+
     // Extract YouTube Embed URL helper
     function getYoutubeEmbedUrl(url) {
       if (!url) return null;
@@ -922,24 +963,25 @@
     let isVideoPlaying = false;
 
     function playHeroInline(slideIndex, title, videoUrl) {
+      title = safeText(title);
+      videoUrl = safeText(videoUrl);
       const embedUrl = getYoutubeEmbedUrl(videoUrl);
       if (!embedUrl) {
-        const query = encodeURIComponent(title + " official trailer");
+        const query = encodeURIComponent(title + ' official trailer');
         window.open(`https://www.youtube.com/results?search_query=${query}`, '_blank');
         return;
       }
-      
+
       const mediaWrap = document.getElementById(`hero-media-${slideIndex}`);
       if (mediaWrap) {
         isVideoPlaying = true;
         if (heroTimer) clearInterval(heroTimer);
         const pBar = document.getElementById('hero-progress-bar');
         if (pBar) pBar.style.width = '0%';
-
         mediaWrap.innerHTML = `
-          <iframe 
-            src="${embedUrl}" 
-            allow="autoplay; encrypted-media; picture-in-picture" 
+          <iframe
+            src="${escapeHtml(embedUrl)}"
+            allow="autoplay; encrypted-media; picture-in-picture"
             allowfullscreen>
           </iframe>
         `;
@@ -978,8 +1020,8 @@
       }
 
       viewport.innerHTML = tickerItems.map((item, idx) => `
-        <a href="${item.url}" class="ticker-slide ${idx === 0 ? 'active' : ''}">
-          • ${item.title}
+        <a href="${escapeHtml(safeUrl(item.url))}" class="ticker-slide ${idx === 0 ? 'active' : ''}">
+          • ${escapeHtml(item.title)}
         </a>
       `).join('');
 
@@ -1026,7 +1068,7 @@
 
     function setupHeroSlider(posts) {
       const heroWrap = document.getElementById('hero-slider-wrap');
-      const heroPosts = posts.slice(0, 20);
+      const heroPosts = Array.isArray(posts) ? posts.slice(0, 20) : [];
       heroTotalSlides = heroPosts.length;
       heroCurrentIndex = 0;
       progressElapsed = 0;
@@ -1040,23 +1082,24 @@
       if (heroTimer) clearInterval(heroTimer);
 
       const slidesHTML = heroPosts.map((post, idx) => {
-        const trailerUrl = post.trailer || (post.category === 'Trailers' || post.platform === 'YouTube' ? 'https://www.youtube.com' : '');
+        const trailerUrl = safeText(post.trailer) || ((post.category === 'Trailers' || post.platform === 'YouTube') ? 'https://www.youtube.com' : '');
+        const articleUrl = safeUrl(post.url || (post.slug ? `posts/${post.slug}.html` : '#'));
+        const imageUrl = safeUrl(post.image || 'images/default.jpg', 'images/default.jpg');
         return `
           <div class="hero-slide" id="hero-slide-${idx}">
             <div class="hero-media-wrap" id="hero-media-${idx}">
-              <img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Filmy+Khabr'">
+              <img class="hero-img" src="${escapeHtml(imageUrl)}" alt="${escapeHtml(post.title)}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Filmy+Khabr'">
             </div>
-
             <div class="hero-content">
               <div class="hero-meta-row">
-                <span class="hero-platform">${post.platform || post.category}</span>
-                <span class="badge-tag">${post.badge || 'Trending'}</span>
+                <span class="hero-platform">${escapeHtml(post.platform || post.category)}</span>
+                <span class="badge-tag">${escapeHtml(post.badge || 'Trending')}</span>
               </div>
-              <div class="hero-title"><a href="${post.url || `posts/${post.slug}.html`}">${post.title}</a></div>
-              <div class="hero-summary">${post.summary || ''}</div>
+              <div class="hero-title"><a href="${escapeHtml(articleUrl)}">${escapeHtml(post.title)}</a></div>
+              <div class="hero-summary">${escapeHtml(post.summary || '')}</div>
               <div class="hero-actions">
-                <a href="${post.url || `posts/${post.slug}.html`}" class="hero-btn">Read Article</a>
-                <button class="hero-btn hero-btn-trailer" onclick="playHeroInline(${idx}, '${post.title.replace(/'/g, "\\'")}', '${trailerUrl}')">▶ Play Trailer</button>
+                <a href="${escapeHtml(articleUrl)}" class="hero-btn">Read Article</a>
+                <button class="hero-btn hero-btn-trailer hero-play-btn" data-slide-index="${idx}" type="button">▶ Play Trailer</button>
               </div>
             </div>
           </div>
@@ -1092,16 +1135,22 @@
         </div>
       `;
 
+      document.querySelectorAll('.hero-play-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = Number(btn.dataset.slideIndex);
+          const post = heroPosts[idx];
+          playHeroInline(idx, post ? post.title : '', post ? post.trailer : '');
+        });
+      });
+
       const container = document.getElementById('hero-slider-container');
       if (container) {
         container.addEventListener('mouseenter', () => { isHeroPaused = true; });
         container.addEventListener('mouseleave', () => { isHeroPaused = false; });
-
         container.addEventListener('touchstart', (e) => {
           isHeroPaused = true;
           heroStartX = e.touches[0].clientX;
         }, { passive: true });
-
         container.addEventListener('touchend', (e) => {
           const diffX = heroStartX - e.changedTouches[0].clientX;
           if (Math.abs(diffX) > 40) {
@@ -1110,7 +1159,6 @@
           }
           setTimeout(() => { isHeroPaused = false; }, 1500);
         }, { passive: true });
-
         startHeroProgress();
       }
     }
@@ -1143,7 +1191,7 @@
         const wrap = document.getElementById(`hero-media-${idx}`);
         if (wrap && wrap.querySelector('iframe')) {
           wrap.innerHTML = `
-            <img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Filmy+Khabr'">
+            <img class="hero-img" src="${escapeHtml(safeUrl(post.image || 'images/default.jpg', 'images/default.jpg'))}" alt="${escapeHtml(post.title)}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Filmy+Khabr'">
           `;
         }
       });
@@ -1181,51 +1229,66 @@
 
     // Load Data
     async function loadSiteData() {
+      const postsUrl = new URL('data/posts.json', window.location.href);
+      postsUrl.searchParams.set('_t', Date.now());
+
+      let data;
       try {
-        const res = await fetch(`data/posts.json?_t=${Date.now()}`);
-        if (!res.ok) throw new Error('data/posts.json not found');
-        rawPosts = await res.json();
+        const res = await fetch(postsUrl.href, { cache: 'no-store' });
+        if (!res.ok) throw new Error(`data/posts.json HTTP ${res.status}`);
+        data = await res.json();
+      } catch (err) {
+        console.error('POSTS JSON LOAD ERROR:', err);
+        setupBreakingTicker([]);
+        const box = document.getElementById('posts-list-container');
+        if (box) box.innerHTML = `<div class="no-posts">Posts load nahi ho paayi. Please refresh karke dobara try karein.</div>`;
+        return;
+      }
 
-        setupBreakingTicker(rawPosts);
+      rawPosts = normalizePosts(data);
+      if (!rawPosts.length) {
+        setupBreakingTicker([]);
+        document.getElementById('posts-list-container').innerHTML = `<div class="no-posts">Abhi tak koi post publish nahi hui hai.</div>`;
+        return;
+      }
 
+      setupBreakingTicker(rawPosts);
+      try {
         const params = new URLSearchParams(window.location.search);
         const urlCat = params.get('cat');
-        if (urlCat) {
-          filterCategory(urlCat, false);
-        } else {
-          renderAll();
-        }
+        if (urlCat) filterCategory(urlCat, false);
+        else renderAll();
       } catch (err) {
-        console.warn('Could not load posts:', err);
-        setupBreakingTicker([]);
-        document.getElementById('posts-list-container').innerHTML = `
-          <div class="no-posts">Abhi tak koi post publish nahi hui hai. Admin desk se pehli post create karein.</div>
-        `;
+        console.error('POSTS RENDER ERROR:', err);
+        // Never show the misleading “no posts” message when JSON loaded successfully.
+        const box = document.getElementById('posts-list-container');
+        if (box) box.innerHTML = `<div class="no-posts">Posts load ho gayi hain, lekin homepage render karte waqt error aaya. Please refresh karein.</div>`;
       }
     }
 
     // Render Full Homepage with Pagination Support
     function renderAll() {
-      if (!rawPosts || rawPosts.length === 0) return;
+      if (!Array.isArray(rawPosts) || rawPosts.length === 0) return;
 
       setupHeroSlider(rawPosts);
-
       const trendingContainer = document.getElementById('trending-container');
       const trendingPosts = rawPosts.slice(0, 4);
-      trendingContainer.innerHTML = trendingPosts.map((post, idx) => `
-        <a href="${post.url || `posts/${post.slug}.html`}" class="trend-card">
+      trendingContainer.innerHTML = trendingPosts.map((post, idx) => {
+        const articleUrl = safeUrl(post.url || (post.slug ? `posts/${post.slug}.html` : '#'));
+        const imageUrl = safeUrl(post.image || 'images/default.jpg', 'images/default.jpg');
+        return `
+        <a href="${escapeHtml(articleUrl)}" class="trend-card">
           <div class="trend-img-box">
-            <img class="trend-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/300x200/171a1e/ffffff?text=Post'">
+            <img class="trend-img" src="${escapeHtml(imageUrl)}" alt="${escapeHtml(post.title)}" onerror="this.src='https://placehold.co/300x200/171a1e/ffffff?text=Post'">
             <div class="trend-rank">${idx + 1}</div>
           </div>
           <div class="trend-info">
-            <div class="trend-platform">${post.platform || post.category}</div>
-            <div class="trend-title">${post.title}</div>
-            <div class="trend-date">${post.date || '2026'}</div>
+            <div class="trend-platform">${escapeHtml(post.platform || post.category)}</div>
+            <div class="trend-title">${escapeHtml(post.title)}</div>
+            <div class="trend-date">${escapeHtml(post.date || '2026')}</div>
           </div>
-        </a>
-      `).join('');
-
+        </a>`;
+      }).join('');
       renderPaginatedNewsList(rawPosts);
     }
 
@@ -1233,7 +1296,7 @@
       const container = document.getElementById('posts-list-container');
       const paginationEl = document.getElementById('pagination-box');
 
-      if (!posts.length) {
+      if (!Array.isArray(posts) || !posts.length) {
         container.innerHTML = `<div class="no-posts">Is category mein abhi koi post nahi mili.</div>`;
         paginationEl.innerHTML = '';
         return;
@@ -1244,19 +1307,19 @@
       if (currentPage < 1) currentPage = 1;
 
       const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
-      const endIndex = startIndex + POSTS_PER_PAGE;
-      const currentPosts = posts.slice(startIndex, endIndex);
-
-      container.innerHTML = currentPosts.map(post => `
-        <a href="${post.url || `posts/${post.slug}.html`}" class="news-card">
-          <img class="news-thumb" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/120x80/171a1e/ffffff?text=News'">
+      const currentPosts = posts.slice(startIndex, startIndex + POSTS_PER_PAGE);
+      container.innerHTML = currentPosts.map(post => {
+        const articleUrl = safeUrl(post.url || (post.slug ? `posts/${post.slug}.html` : '#'));
+        const imageUrl = safeUrl(post.image || 'images/default.jpg', 'images/default.jpg');
+        return `
+        <a href="${escapeHtml(articleUrl)}" class="news-card">
+          <img class="news-thumb" src="${escapeHtml(imageUrl)}" alt="${escapeHtml(post.title)}" onerror="this.src='https://placehold.co/120x80/171a1e/ffffff?text=News'">
           <div style="flex:1; min-width:0;">
-            <div class="news-meta">${post.category} • ${post.platform || 'General'} • ${post.date || ''}</div>
-            <div class="news-title">${post.title}</div>
+            <div class="news-meta">${escapeHtml(post.category)} • ${escapeHtml(post.platform || 'General')} • ${escapeHtml(post.date || '')}</div>
+            <div class="news-title">${escapeHtml(post.title)}</div>
           </div>
-        </a>
-      `).join('');
-
+        </a>`;
+      }).join('');
       renderBoxPagination(totalPages);
     }
 
