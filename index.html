@@ -33,7 +33,7 @@
       --accent-hover: #ff2633;
       --text-main: #f7f7f8;
       --text-muted: #a7adb7;
-      --text-dim: #8b929e;
+      --text-dim: #9aa1aebf;
       --radius: 12px;
       --shadow: 0 12px 35px rgba(0,0,0,.28);
     }
@@ -73,7 +73,7 @@
     /* Content + Sidebar Layout */
     .content-sidebar-layout {
       display: grid;
-      grid-template-columns: 1fr 360px;
+      grid-template-columns: 1fr 380px;
       gap: 28px;
       align-items: start;
       margin-top: 14px;
@@ -83,18 +83,18 @@
       min-width: 0;
     }
 
-    /* Sidebar Layout */
+    /* Sidebar Layout (Bigger and Much More Readable Text) */
     .sidebar {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
-      padding: 20px;
+      padding: 24px;
       position: sticky;
       top: 60px;
     }
 
     .sidebar-widget {
-      margin-bottom: 26px;
+      margin-bottom: 28px;
     }
 
     .sidebar-widget:last-child {
@@ -102,13 +102,13 @@
     }
 
     .sidebar-widget h3 {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
+      letter-spacing: 0.9px;
       border-bottom: 2px solid var(--accent);
       padding-bottom: 8px;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       color: #fff;
       display: flex;
       align-items: center;
@@ -117,8 +117,8 @@
 
     .sidebar-news-item {
       display: flex;
-      gap: 12px;
-      margin-bottom: 14px;
+      gap: 14px;
+      margin-bottom: 16px;
       text-decoration: none;
       color: inherit;
       align-items: center;
@@ -126,14 +126,14 @@
     }
 
     .sidebar-news-item:hover {
-      opacity: 0.8;
+      opacity: 0.85;
     }
 
     .sidebar-news-thumb {
-      width: 85px;
-      height: 62px;
+      width: 95px;
+      height: 68px;
       object-fit: cover;
-      border-radius: 6px;
+      border-radius: 8px;
       background: #111;
       flex-shrink: 0;
     }
@@ -144,18 +144,18 @@
     }
 
     .sidebar-news-meta {
-      font-size: 11px;
-      color: var(--text-dim);
-      margin-bottom: 3px;
+      font-size: 12px;
+      color: #cbd5e1;
+      margin-bottom: 4px;
       text-transform: uppercase;
       font-weight: 700;
     }
 
     .sidebar-news-title {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
-      color: var(--text-main);
-      line-height: 1.4;
+      color: #ffffff;
+      line-height: 1.45;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
@@ -165,10 +165,10 @@
     .sidebar-trending-item {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #1a1e24;
+      gap: 14px;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #1f242c;
       text-decoration: none;
       color: inherit;
     }
@@ -176,22 +176,22 @@
     .sidebar-trending-rank {
       background: var(--accent);
       color: #fff;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 900;
-      width: 24px;
-      height: 24px;
+      width: 26px;
+      height: 26px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 5px;
+      border-radius: 6px;
       flex-shrink: 0;
     }
 
     .sidebar-trending-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: #f3f4f6;
-      line-height: 1.4;
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.45;
     }
 
     .sidebar-cats {
@@ -203,11 +203,11 @@
     .sidebar-cat-tag {
       background: #191e25;
       border: 1px solid #28303a;
-      padding: 7px 12px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #e2e8f0;
       cursor: pointer;
       transition: 0.2s;
     }
@@ -218,7 +218,7 @@
       border-color: var(--accent);
     }
 
-    /* Custom Widget: Upcoming Release Calendar */
+    /* Custom Widget: Upcoming Release Calendar (Readable) */
     .calendar-list {
       display: flex;
       flex-direction: column;
@@ -227,50 +227,50 @@
     .calendar-item {
       background: #161c24;
       border: 1px solid #222b36;
-      padding: 10px 12px;
+      padding: 12px 14px;
       border-radius: 8px;
     }
     .calendar-date {
       color: #38bdf8;
-      font-weight: 700;
-      font-size: 11px;
-      margin-bottom: 3px;
+      font-weight: 800;
+      font-size: 12px;
+      margin-bottom: 4px;
       text-transform: uppercase;
     }
     .calendar-title {
       color: #fff;
       font-weight: 700;
-      font-size: 13px;
-      line-height: 1.35;
+      font-size: 14px;
+      line-height: 1.4;
     }
 
-    /* Custom Widget: Editor's Pick */
+    /* Custom Widget: Editor's Pick (Readable) */
     .editors-pick-box {
       background: linear-gradient(135deg, #1e1314 0%, #11151a 100%);
       border: 1px solid #4a1518;
       border-radius: 10px;
-      padding: 14px;
+      padding: 16px;
     }
     .editors-pick-badge {
       display: inline-block;
       background: var(--accent);
       color: #fff;
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 800;
-      padding: 3px 8px;
+      padding: 4px 9px;
       border-radius: 4px;
       margin-bottom: 8px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
     .editors-pick-title {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 700;
       color: #fff;
-      line-height: 1.4;
+      line-height: 1.45;
     }
 
-    /* 1. Breaking Ticker Bar & Text (Made Bada) */
+    /* 1. Breaking Ticker Bar & Text (Bada aur clear) */
     .ticker-bar {
       position: sticky;
       top: 0;
@@ -316,34 +316,34 @@
 
     /* Header (2. Filmy Khabr Made Bada) */
     header {
-      padding: 32px 0 20px;
-      min-height: 100px;
+      padding: 36px 0 20px;
+      min-height: 110px;
       display: grid;
-      grid-template-columns: 48px 1fr 48px;
+      grid-template-columns: 52px 1fr 52px;
       align-items: center;
       justify-items: center;
     }
     .brand-title {
       font-family: Georgia, "Times New Roman", serif;
-      font-size: 46px;
+      font-size: 52px;
       font-weight: 900;
-      letter-spacing: 2px;
+      letter-spacing: 2.5px;
       line-height: 1;
       color: #fff;
       text-align: center;
       grid-column: 2;
     }
     .search-btn {
-      width: 48px; height: 48px;
+      width: 52px; height: 52px;
       border: 1px solid #2b3138; border-radius: 50%;
-      background: #111419; color: #e8eaed; font-size: 19px;
+      background: #111419; color: #e8eaed; font-size: 21px;
       cursor: pointer; transition: .2s ease;
       grid-column: 3;
       justify-self: end;
     }
     .search-btn:hover { border-color: var(--accent); background: #191c21; transform: translateY(-1px); }
 
-    /* 3. Movies / Nav Links (Made Bada for easy touch/click) */
+    /* 3. Movies / Nav Links (Made Bada) */
     nav {
       display: flex; align-items: center; justify-content: center; gap: 14px;
       overflow-x: auto; padding: 0 0 20px;
@@ -353,8 +353,8 @@
     }
     nav::-webkit-scrollbar { display: none; }
     .nav-link {
-      padding: 12px 20px; border: 1px solid transparent; border-radius: 999px;
-      font-size: 16px; font-weight: 700; color: #cfd4dc; white-space: nowrap; cursor: pointer;
+      padding: 12px 22px; border: 1px solid transparent; border-radius: 999px;
+      font-size: 16px; font-weight: 700; color: #d1d5db; white-space: nowrap; cursor: pointer;
       transition: all 0.2s;
     }
     .nav-link.active, .nav-link:hover {
@@ -435,24 +435,24 @@
     .hero-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.5); transition: all 0.25s ease; }
     .hero-dot.active { background: var(--accent); width: 16px; border-radius: 3px; }
 
-    /* Trending Grid */
-    .trending-scroll { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    /* 3. Trending Now Posters (Made Compact / Chhote kiye gaye hain) */
+    .trending-scroll { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
     .trend-card {
-      background: var(--card-bg); border: 1px solid #252b32; border-radius: 12px; overflow: hidden;
-      display: flex; flex-direction: column; box-shadow: 0 8px 22px rgba(0,0,0,.18); transition: transform .2s;
+      background: var(--card-bg); border: 1px solid #252b32; border-radius: 10px; overflow: hidden;
+      display: flex; flex-direction: column; box-shadow: 0 4px 14px rgba(0,0,0,.15); transition: transform .2s;
     }
-    .trend-card:hover { transform: translateY(-3px); border-color: #3b424b; }
-    .trend-img-box { position: relative; width: 100%; aspect-ratio: 16/10; background: #111; }
+    .trend-card:hover { transform: translateY(-2px); border-color: #3b424b; }
+    .trend-img-box { position: relative; width: 100%; aspect-ratio: 16/9; background: #111; }
     .trend-img { width: 100%; height: 100%; object-fit: cover; }
     .trend-rank {
-      position: absolute; top: 9px; left: 9px; background: var(--accent); color: #fff;
-      font-size: 12px; font-weight: 900; width: 24px; height: 24px; display: flex;
-      align-items: center; justify-content: center; border-radius: 5px; z-index: 1;
+      position: absolute; top: 6px; left: 6px; background: var(--accent); color: #fff;
+      font-size: 11px; font-weight: 900; width: 20px; height: 20px; display: flex;
+      align-items: center; justify-content: center; border-radius: 4px; z-index: 1;
     }
-    .trend-info { padding: 11px 12px 12px; flex: 1; display: flex; flex-direction: column; }
-    .trend-platform { font-size: 10px; color: #38bdf8; font-weight: 700; margin-bottom: 3px; text-transform: uppercase; }
-    .trend-title { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 6px; }
-    .trend-date { font-size: 10px; color: var(--text-dim); margin-top: auto; }
+    .trend-info { padding: 8px 10px; flex: 1; display: flex; flex-direction: column; }
+    .trend-platform { font-size: 9px; color: #38bdf8; font-weight: 700; margin-bottom: 2px; text-transform: uppercase; }
+    .trend-title { font-size: 12px; font-weight: 700; color: #fff; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 4px; }
+    .trend-date { font-size: 9px; color: var(--text-dim); margin-top: auto; }
 
     /* Explore By Category Cards */
     .cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 10px; }
@@ -466,16 +466,16 @@
     .cat-name { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 3px; }
     .cat-desc { font-size: 11px; color: var(--text-muted); }
 
-    /* 4. Latest News List (Thumbnails and text made significantly bigger & readable) */
-    .news-list { display: flex; flex-direction: column; gap: 14px; }
+    /* Latest News List */
+    .news-list { display: flex; flex-direction: column; gap: 10px; }
     .news-card {
       display: flex; background: var(--card-bg); border: 1px solid #242a31;
-      border-radius: 12px; overflow: hidden; padding: 12px; gap: 16px; align-items: center; transition: 0.2s;
+      border-radius: 11px; overflow: hidden; padding: 10px; gap: 12px; align-items: center; transition: 0.2s;
     }
     .news-card:hover { border-color: #3a414a; background: #15191e; }
-    .news-thumb { width: 150px; height: 95px; border-radius: 8px; object-fit: cover; flex-shrink: 0; background: #111; }
-    .news-meta { font-size: 11px; color: #a0aab5; margin-bottom: 4px; text-transform: uppercase; font-weight: 700; }
-    .news-title { font-size: 15px; font-weight: 700; color: #fff; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .news-thumb { width: 120px; height: 75px; border-radius: 7px; object-fit: cover; flex-shrink: 0; background: #111; }
+    .news-meta { font-size: 10px; color: #929aa5; margin-bottom: 3px; text-transform: uppercase; }
+    .news-title { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
     /* Pagination */
     .pagination-container { display: flex; justify-content: center; align-items: center; gap: 6px; margin: 28px 0 16px 0; flex-wrap: wrap; }
