@@ -14,15 +14,57 @@
   <meta name="google-site-verification" content="BE1aM7twVnliG5WUG9TTrr1KLBu_-SIu_bGY_FjLwyg" />
 
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1200">
-  <title>Filmy Khabr - Entertainment, Movies, OTT & Web Series News</title>
-  <meta name="description" content="Latest Hindi entertainment news, movie reviews, web series updates, OTT releases and trailers.">
+  <!-- ✅ Responsive viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- ✅ SEO Title & Description -->
+  <title>Filmy Khabr – Latest Hindi Movie News, OTT Releases, Web Series Updates & Trailers 2026</title>
+  <meta name="description" content="Filmy Khabr brings you the latest Bollywood & South cinema news, OTT releases, web series reviews, trailers, and celebrity updates in Hindi. Stay ahead in the entertainment world.">
   <meta name="author" content="Vanrajsinh Vaghela">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  
+  <!-- ✅ Canonical URL -->
+  <link rel="canonical" href="https://www.yourdomain.com/">
+  
+  <!-- ✅ Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- ✅ Open Graph -->
   <meta property="og:site_name" content="Filmy Khabr">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Filmy Khabr - Entertainment, Movies, OTT & Web Series">
-  <meta property="og:description" content="Latest Hindi entertainment news, OTT releases, web series and trailer updates.">
+  <meta property="og:title" content="Filmy Khabr – Latest Hindi Movie News, OTT Releases, Web Series Updates & Trailers">
+  <meta property="og:description" content="Stay updated with the latest Hindi entertainment news, OTT releases, web series, and trailer updates.">
+  <meta property="og:url" content="https://www.yourdomain.com/">
+  <meta property="og:image" content="https://www.yourdomain.com/images/filmykhabr-og.jpg">
+  <meta property="og:locale" content="hi_IN">
+
+  <!-- ✅ Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Filmy Khabr – Latest Hindi Movie News, OTT Releases, Web Series Updates">
+  <meta name="twitter:description" content="Get the latest entertainment news, movie reviews, web series updates, and OTT releases.">
+  <meta name="twitter:image" content="https://www.yourdomain.com/images/filmykhabr-twitter.jpg">
+
+  <!-- ✅ Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Filmy Khabr",
+    "url": "https://www.yourdomain.com/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.yourdomain.com/?s={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- ✅ Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --bg: #070809;
@@ -42,21 +84,26 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       -webkit-tap-highlight-color: transparent;
     }
 
-    html { scroll-behavior: smooth; background: var(--bg); }
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
     body {
       background:
         radial-gradient(circle at 50% -10%, rgba(229,9,20,.09), transparent 34%),
         linear-gradient(180deg, #070809 0%, #090b0e 45%, #070809 100%);
       color: var(--text-main);
-      font-size: 15px;
-      line-height: 1.55;
+      font-size: 16px;
+      line-height: 1.6;
       min-height: 100vh;
-      width: 1200px;
+      max-width: 1200px;
       margin: 0 auto;
+      padding: 0 16px;
     }
 
     a {
@@ -67,36 +114,46 @@
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 16px 48px;
+      padding: 0 0 48px;
     }
 
-    /* Content + Sidebar Layout */
+    /* --- Responsive Grid Layout --- */
     .content-sidebar-layout {
       display: grid;
-      grid-template-columns: 1fr 380px;
+      grid-template-columns: 1fr;
       gap: 28px;
       align-items: start;
       margin-top: 14px;
+    }
+
+    @media (min-width: 1024px) {
+      .content-sidebar-layout {
+        grid-template-columns: 1fr 380px;
+      }
     }
 
     .main-column {
       min-width: 0;
     }
 
-    /* Sidebar Layout */
+    /* Sidebar */
     .sidebar {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
       padding: 24px;
-      position: sticky;
-      top: 60px;
+    }
+
+    @media (min-width: 1024px) {
+      .sidebar {
+        position: sticky;
+        top: 60px;
+      }
     }
 
     .sidebar-widget {
       margin-bottom: 28px;
     }
-
     .sidebar-widget:last-child {
       margin-bottom: 0;
     }
@@ -119,16 +176,12 @@
       display: flex;
       gap: 14px;
       margin-bottom: 16px;
-      text-decoration: none;
-      color: inherit;
       align-items: center;
       transition: opacity 0.2s;
     }
-
     .sidebar-news-item:hover {
       opacity: 0.85;
     }
-
     .sidebar-news-thumb {
       width: 95px;
       height: 68px;
@@ -137,12 +190,10 @@
       background: #111;
       flex-shrink: 0;
     }
-
     .sidebar-news-info {
       flex: 1;
       min-width: 0;
     }
-
     .sidebar-news-meta {
       font-size: 12px;
       color: #cbd5e1;
@@ -150,7 +201,6 @@
       text-transform: uppercase;
       font-weight: 700;
     }
-
     .sidebar-news-title {
       font-size: 14px;
       font-weight: 700;
@@ -161,7 +211,6 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
-
     .sidebar-trending-item {
       display: flex;
       align-items: center;
@@ -169,10 +218,7 @@
       margin-bottom: 14px;
       padding-bottom: 12px;
       border-bottom: 1px solid #1f242c;
-      text-decoration: none;
-      color: inherit;
     }
-
     .sidebar-trending-rank {
       background: var(--accent);
       color: #fff;
@@ -186,20 +232,17 @@
       border-radius: 6px;
       flex-shrink: 0;
     }
-
     .sidebar-trending-title {
       font-size: 14px;
       font-weight: 700;
       color: #ffffff;
       line-height: 1.45;
     }
-
     .sidebar-cats {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
     }
-
     .sidebar-cat-tag {
       background: #191e25;
       border: 1px solid #28303a;
@@ -211,14 +254,13 @@
       cursor: pointer;
       transition: 0.2s;
     }
-
     .sidebar-cat-tag:hover {
       background: var(--accent);
       color: #fff;
       border-color: var(--accent);
     }
 
-    /* Custom Widget: Upcoming Release Calendar */
+    /* Calendar & Editor's Pick */
     .calendar-list {
       display: flex;
       flex-direction: column;
@@ -243,8 +285,6 @@
       font-size: 14px;
       line-height: 1.4;
     }
-
-    /* Custom Widget: Editor's Pick */
     .editors-pick-box {
       background: linear-gradient(135deg, #1e1314 0%, #11151a 100%);
       border: 1px solid #4a1518;
@@ -270,7 +310,7 @@
       line-height: 1.45;
     }
 
-    /* Breaking Ticker Bar */
+    /* Ticker Bar */
     .ticker-bar {
       position: sticky;
       top: 0;
@@ -324,8 +364,8 @@
       justify-items: center;
     }
     .brand-title {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 52px;
+      font-family: 'Poppins', Georgia, serif;
+      font-size: 48px;
       font-weight: 900;
       letter-spacing: 2.5px;
       line-height: 1;
@@ -343,7 +383,7 @@
     }
     .search-btn:hover { border-color: var(--accent); background: #191c21; transform: translateY(-1px); }
 
-    /* Navigation */
+    /* Nav */
     nav {
       display: flex; align-items: center; justify-content: center; gap: 14px;
       overflow-x: auto; padding: 0 0 20px;
@@ -379,7 +419,7 @@
 
     /* Section Headings */
     .section-title {
-      margin: 32px 0 14px; font-size: 18px; font-weight: 800; color: #fff;
+      margin: 32px 0 14px; font-size: 20px; font-weight: 800; color: #fff;
       display: flex; align-items: center; justify-content: space-between;
     }
     .section-title > span:first-child::before {
@@ -404,12 +444,12 @@
     .hero-platform { font-size: 12px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: .8px; }
     .badge-tag { background: var(--accent); color: #fff; font-size: 11px; font-weight: 800; padding: 5px 10px; border-radius: 6px; text-transform: uppercase; }
     .hero-title {
-      font-family: Georgia, "Times New Roman", serif; font-size: clamp(20px, 2.5vw, 30px);
+      font-family: 'Poppins', Georgia, serif; font-size: clamp(22px, 2.5vw, 32px);
       font-weight: 800; color: #fff; line-height: 1.2; margin: 8px 0 10px;
       display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
     }
     .hero-title a:hover { color: var(--accent-hover); }
-    .hero-summary { font-size: 14px; color: #c7ccd3; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 16px; }
+    .hero-summary { font-size: 15px; color: #c7ccd3; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 16px; }
     
     .hero-actions { display: flex; gap: 12px; align-items: center; }
     .hero-btn {
@@ -435,7 +475,7 @@
     .hero-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.5); transition: all 0.25s ease; }
     .hero-dot.active { background: var(--accent); width: 16px; border-radius: 3px; }
 
-    /* 2. Explore By Category Horizontal Bar (Placed right below main hero slider) */
+    /* Explore Category Bar */
     .explore-cat-bar {
       display: flex;
       gap: 12px;
@@ -467,7 +507,7 @@
     .explore-cat-icon { font-size: 20px; }
     .explore-cat-text { font-size: 14px; font-weight: 800; color: #fff; white-space: nowrap; }
 
-    /* 1. Trending Now Slider (Single slide layout matching hero style) */
+    /* Trending Slider */
     .trending-slider-container {
       position: relative;
       background: var(--card-bg);
@@ -530,7 +570,7 @@
       letter-spacing: .5px;
     }
     .trending-slide-title {
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: 'Poppins', Georgia, serif;
       font-size: 18px;
       font-weight: 800;
       color: #fff;
@@ -595,7 +635,7 @@
       display: flex; background: var(--card-bg); border: 1px solid #242a31;
       border-radius: 11px; overflow: hidden; padding: 10px; gap: 12px; align-items: center; transition: 0.2s;
     }
-    .news-card:hover { border-color: #3a414a; background: #15191e; }
+    .news-card:hover { border-color: #3a414a; background: #15191e; transform: translateY(-2px); }
     .news-thumb { width: 120px; height: 75px; border-radius: 7px; object-fit: cover; flex-shrink: 0; background: #111; }
     .news-meta { font-size: 10px; color: #929aa5; margin-bottom: 3px; text-transform: uppercase; }
     .news-title { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -610,7 +650,7 @@
     .page-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
     .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-    /* Telegram Community Card */
+    /* Telegram Community */
     .community-box {
       background: linear-gradient(135deg, #111c29, #0d131b); border: 1px solid #244564;
       border-radius: 14px; padding: 20px 16px; margin-top: 24px; text-align: center;
@@ -623,12 +663,33 @@
     .shiny-author { font-weight: 700; color: #fff; }
 
     /* Footer */
-    footer { text-align: center; margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--card-border); font-size: 11px; color: var(--text-muted); line-height: 1.6; }
+    footer { text-align: center; margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--card-border); font-size: 12px; color: var(--text-muted); line-height: 1.6; }
     .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
-    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 11px; transition: color 0.2s; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 12px; transition: color 0.2s; }
     .footer-links a:hover { color: #fff; }
 
     .no-posts { text-align: center; padding: 40px 10px; color: var(--text-muted); font-size: 14px; }
+
+    /* Focus styles for accessibility */
+    a:focus, button:focus, input:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* Mobile responsiveness tweaks */
+    @media (max-width: 768px) {
+      .brand-title { font-size: 32px; }
+      header { grid-template-columns: 40px 1fr 40px; }
+      .search-btn { width: 40px; height: 40px; font-size: 18px; }
+      .nav-link { font-size: 14px; padding: 8px 14px; }
+      .hero-title { font-size: 22px; }
+      .hero-summary { font-size: 14px; }
+      .hero-actions { flex-wrap: wrap; }
+      .hero-btn { font-size: 12px; padding: 9px 14px; }
+      .news-card { flex-direction: column; align-items: flex-start; }
+      .news-thumb { width: 100%; height: 140px; }
+      .trending-slide-title { font-size: 16px; }
+    }
   </style>
 </head>
 <body>
@@ -648,7 +709,7 @@
         <a href="index.html">FILMY KHABR</a>
       </div>
       <div>
-        <button class="search-btn" onclick="toggleSearch()" title="Search Articles">🔍</button>
+        <button class="search-btn" onclick="toggleSearch()" title="Search Articles" aria-label="Search">🔍</button>
       </div>
     </header>
 
@@ -666,7 +727,7 @@
 
     <!-- Search Box -->
     <div id="search-container">
-      <input type="text" id="search-input" placeholder="Search movies, series, news..." oninput="handleSearch(event)">
+      <input type="text" id="search-input" placeholder="Search movies, series, news..." oninput="handleSearch(event)" aria-label="Search Input">
     </div>
 
     <!-- Active Filter Banner -->
@@ -678,7 +739,7 @@
     <!-- FULL-WIDTH HERO SLIDER ON TOP -->
     <div id="hero-slider-wrap"></div>
 
-    <!-- EXPLORE BY CATEGORY HORIZONTAL BAR (Placed right below main hero slider) -->
+    <!-- EXPLORE BY CATEGORY HORIZONTAL BAR -->
     <div class="explore-cat-bar">
       <div class="explore-cat-item" onclick="filterCategory('Movies')">
         <span class="explore-cat-icon">🎬</span>
@@ -713,7 +774,7 @@
       <div class="main-column">
         <!-- MAIN HOME WRAPPER -->
         <div id="home-exclusive-sections">
-          <!-- Trending Section (Converted to single-slide slider format) -->
+          <!-- Trending Section -->
           <div class="section-title">
             <span>🔥 Trending Now</span>
             <span class="section-view-all" onclick="filterCategory('Trending')">View All ›</span>
@@ -727,7 +788,7 @@
         </div>
         <div class="news-list" id="posts-list-container"></div>
 
-        <!-- Professional Box Pagination Container -->
+        <!-- Pagination Container -->
         <div id="pagination-box" class="pagination-container"></div>
 
         <!-- Telegram Community -->
@@ -808,6 +869,7 @@
   </div>
 
   <script>
+    // --- JavaScript (unchanged except minor optimizations) ---
     let rawPosts = [];
     let currentCategory = 'All';
     const POSTS_PER_PAGE = 8;
@@ -889,7 +951,8 @@
           <iframe 
             src="${embedUrl}" 
             allow="autoplay; encrypted-media; picture-in-picture" 
-            allowfullscreen>
+            allowfullscreen
+            title="${escapeHtml(title)}">
           </iframe>
         `;
       }
@@ -991,7 +1054,7 @@
         return `
           <div class="hero-slide" id="hero-slide-${idx}">
             <div class="hero-media-wrap" id="hero-media-${idx}">
-              <img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Filmy+Khabr'">
+              <img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${escapeHtml(post.title)}" loading="${idx === 0 ? 'eager' : 'lazy'}" fetchpriority="${idx === 0 ? 'high' : 'low'}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Filmy+Khabr'">
             </div>
 
             <div class="hero-content">
@@ -1090,7 +1153,7 @@
         const wrap = document.getElementById(`hero-media-${idx}`);
         if (wrap && wrap.querySelector('iframe')) {
           wrap.innerHTML = `
-            <img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Filmy+Khabr'">
+            <img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" loading="lazy" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Filmy+Khabr'">
           `;
         }
       });
@@ -1153,7 +1216,7 @@
           <div class="trending-slide" id="trending-slide-${idx}">
             <div class="trending-slide-img-box">
               <a href="${articleUrl}">
-                <img class="trending-slide-img" src="${imageUrl}" alt="${escapeHtml(post.title)}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Post'">
+                <img class="trending-slide-img" src="${imageUrl}" alt="${escapeHtml(post.title)}" loading="lazy" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Post'">
               </a>
               <div class="trending-slide-rank">${idx + 1}</div>
             </div>
@@ -1253,6 +1316,7 @@
         const res = await fetch(`data/posts.json?_t=${Date.now()}`);
         if (!res.ok) throw new Error('data/posts.json not found');
         rawPosts = await res.json();
+        rawPosts = normalizePosts(rawPosts);
 
         setupBreakingTicker(rawPosts);
         renderSidebarWidgets(rawPosts);
@@ -1287,7 +1351,7 @@
 
         latestContainer.innerHTML = posts.slice(0, 4).map(p => `
           <a href="${p.url || `posts/${p.slug}.html`}" class="sidebar-news-item">
-            <img class="sidebar-news-thumb" src="${p.image || 'images/default.jpg'}" alt="${escapeHtml(p.title)}" onerror="this.src='https://placehold.co/100x70/171a1e/ffffff?text=News'">
+            <img class="sidebar-news-thumb" src="${p.image || 'images/default.jpg'}" alt="${escapeHtml(p.title)}" loading="lazy" onerror="this.src='https://placehold.co/100x70/171a1e/ffffff?text=News'">
             <div class="sidebar-news-info">
               <div class="sidebar-news-meta">${escapeHtml(p.category)}</div>
               <div class="sidebar-news-title">${escapeHtml(p.title)}</div>
@@ -1333,7 +1397,7 @@
 
       container.innerHTML = currentPosts.map(post => `
         <a href="${post.url || `posts/${post.slug}.html`}" class="news-card">
-          <img class="news-thumb" src="${post.image || 'images/default.jpg'}" alt="${escapeHtml(post.title)}" onerror="this.src='https://placehold.co/120x80/171a1e/ffffff?text=News'">
+          <img class="news-thumb" src="${post.image || 'images/default.jpg'}" alt="${escapeHtml(post.title)}" loading="lazy" onerror="this.src='https://placehold.co/120x80/171a1e/ffffff?text=News'">
           <div style="flex:1; min-width:0;">
             <div class="news-meta">${escapeHtml(post.category)} • ${escapeHtml(post.date || '')}</div>
             <div class="news-title">${escapeHtml(post.title)}</div>
