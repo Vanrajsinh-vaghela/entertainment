@@ -68,8 +68,8 @@
       padding: 0 16px 48px;
     }
 
-    /* Two-Column Page Layout */
-    .page-layout {
+    /* Top Section Grid: Hero Slider (Left) + Sidebar (Right) */
+    .top-hero-layout {
       display: grid;
       grid-template-columns: 1fr 340px;
       gap: 28px;
@@ -77,18 +77,16 @@
       margin-top: 14px;
     }
 
-    .main-content {
+    .hero-main-area {
       min-width: 0;
     }
 
-    /* Sidebar Layout (Green Box Features matching photo 1) */
+    /* Sidebar Layout (Restricted to Top Hero section only) */
     .sidebar {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
       padding: 16px;
-      position: sticky;
-      top: 56px;
     }
 
     .sidebar-widget {
@@ -426,7 +424,7 @@
     .hero-dot.active { background: var(--accent); width: 14px; border-radius: 3px; }
 
     /* Trending Grid */
-    .trending-scroll { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .trending-scroll { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
     .trend-card {
       background: var(--card-bg); border: 1px solid #252b32; border-radius: 12px; overflow: hidden;
       display: flex; flex-direction: column; box-shadow: 0 8px 22px rgba(0,0,0,.18); transition: transform .2s;
@@ -445,7 +443,7 @@
     .trend-date { font-size: 10px; color: var(--text-dim); margin-top: auto; }
 
     /* Explore By Category Grid */
-    .cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 8px; }
+    .cat-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 8px; }
     .cat-card {
       background: linear-gradient(180deg, #12161b, #0f1216); border: 1px solid var(--card-border);
       border-radius: 12px; padding: 16px 10px; text-align: center; cursor: pointer; transition: 0.15s;
@@ -455,7 +453,7 @@
     .cat-name { font-size: 13px; font-weight: 800; color: #fff; margin-bottom: 2px; }
     .cat-desc { font-size: 10px; color: var(--text-muted); }
 
-    /* Latest News List (Reduced post count to 8 per page for better UX as requested) */
+    /* Latest News List (8 posts per page) */
     .news-list { display: flex; flex-direction: column; gap: 10px; }
     .news-card {
       display: flex; background: var(--card-bg); border: 1px solid #242a31;
@@ -496,9 +494,9 @@
 
     .no-posts { text-align: center; padding: 40px 10px; color: var(--text-muted); font-size: 14px; }
 
-    /* Responsive adjustments for Sidebar */
+    /* Responsive adjustments */
     @media (max-width: 959px) {
-      .page-layout { grid-template-columns: 1fr; }
+      .top-hero-layout { grid-template-columns: 1fr; }
       .sidebar { display: none; }
       .trending-scroll { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .cat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -550,78 +548,13 @@
       <button class="clear-filter-btn" onclick="filterCategory('All')">✕ Show All</button>
     </div>
 
-    <!-- PAGE LAYOUT GRID (Main Content + Sidebar matching Photo 1) -->
-    <div class="page-layout">
-      
-      <!-- MAIN CONTENT COLUMN -->
-      <div class="main-content">
-        <div id="home-exclusive-sections">
-          <!-- Hero Slider Container -->
-          <div id="hero-slider-wrap"></div>
-
-          <!-- Trending Section -->
-          <div class="section-title">
-            <span>🔥 Trending Now</span>
-            <span class="section-view-all" onclick="filterCategory('Trending')">View All ›</span>
-          </div>
-          <div class="trending-scroll" id="trending-container"></div>
-
-          <!-- Explore By Category Grid -->
-          <div class="section-title">
-            <span>Explore By Category</span>
-          </div>
-          <div class="cat-grid">
-            <div class="cat-card" onclick="filterCategory('Movies')">
-              <span class="cat-icon">🎬</span>
-              <div class="cat-name">Movies</div>
-              <div class="cat-desc">Cinema Updates</div>
-            </div>
-            <div class="cat-card" onclick="filterCategory('Web Series')">
-              <span class="cat-icon">📺</span>
-              <div class="cat-name">Web Series</div>
-              <div class="cat-desc">All New Shows</div>
-            </div>
-            <div class="cat-card" onclick="filterCategory('OTT')">
-              <span class="cat-icon">🍿</span>
-              <div class="cat-name">OTT Releases</div>
-              <div class="cat-desc">Platform Updates</div>
-            </div>
-            <div class="cat-card" onclick="filterCategory('Trailers')">
-              <span class="cat-icon">▶️</span>
-              <div class="cat-name">Trailers</div>
-              <div class="cat-desc">Latest Trailers</div>
-            </div>
-            <div class="cat-card" onclick="filterCategory('Celebrity News')">
-              <span class="cat-icon">⭐</span>
-              <div class="cat-name">Celebrity News</div>
-              <div class="cat-desc">Star Updates</div>
-            </div>
-            <div class="cat-card" onclick="filterCategory('News')">
-              <span class="cat-icon">📰</span>
-              <div class="cat-name">Entertainment News</div>
-              <div class="cat-desc">Latest News</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- DYNAMIC POSTS LIST -->
-        <div class="section-title" id="posts-list-heading">
-          <span>Latest News & Updates</span>
-        </div>
-        <div class="news-list" id="posts-list-container"></div>
-
-        <!-- Professional Box Pagination Container (Reduced per page to 8) -->
-        <div id="pagination-box" class="pagination-container"></div>
-
-        <!-- Telegram Community -->
-        <div class="community-box">
-          <div class="comm-title">Join Our Community</div>
-          <div class="comm-desc">Sabse pehle movie aur OTT updates pane ke liye judiye</div>
-          <a href="https://t.me/+rG_x3BDIdYliNTVl" target="_blank" rel="noopener noreferrer" class="comm-btn">Join Telegram Channel</a>
-        </div>
+    <!-- TOP SECTION: HERO SLIDER (LEFT) + SIDEBAR (RIGHT) -->
+    <div class="top-hero-layout">
+      <div class="hero-main-area">
+        <div id="hero-slider-wrap"></div>
       </div>
 
-      <!-- SIDEBAR (Matching Photo 1 Green Box) -->
+      <!-- SIDEBAR (Restricted only to the top hero area) -->
       <aside class="sidebar">
         <div class="sidebar-widget">
           <h3>📌 LATEST NEWS</h3>
@@ -654,7 +587,69 @@
           </div>
         </div>
       </aside>
+    </div>
 
+    <!-- MAIN HOME WRAPPER (Full Width Sections Below Hero) -->
+    <div id="home-exclusive-sections">
+      <!-- Trending Section -->
+      <div class="section-title">
+        <span>🔥 Trending Now</span>
+        <span class="section-view-all" onclick="filterCategory('Trending')">View All ›</span>
+      </div>
+      <div class="trending-scroll" id="trending-container"></div>
+
+      <!-- Explore By Category Grid -->
+      <div class="section-title">
+        <span>Explore By Category</span>
+      </div>
+      <div class="cat-grid">
+        <div class="cat-card" onclick="filterCategory('Movies')">
+          <span class="cat-icon">🎬</span>
+          <div class="cat-name">Movies</div>
+          <div class="cat-desc">Cinema Updates</div>
+        </div>
+        <div class="cat-card" onclick="filterCategory('Web Series')">
+          <span class="cat-icon">📺</span>
+          <div class="cat-name">Web Series</div>
+          <div class="cat-desc">All New Shows</div>
+        </div>
+        <div class="cat-card" onclick="filterCategory('OTT')">
+          <span class="cat-icon">🍿</span>
+          <div class="cat-name">OTT Releases</div>
+          <div class="cat-desc">Platform Updates</div>
+        </div>
+        <div class="cat-card" onclick="filterCategory('Trailers')">
+          <span class="cat-icon">▶️</span>
+          <div class="cat-name">Trailers</div>
+          <div class="cat-desc">Latest Trailers</div>
+        </div>
+        <div class="cat-card" onclick="filterCategory('Celebrity News')">
+          <span class="cat-icon">⭐</span>
+          <div class="cat-name">Celebrity News</div>
+          <div class="cat-desc">Star Updates</div>
+        </div>
+        <div class="cat-card" onclick="filterCategory('News')">
+          <span class="cat-icon">📰</span>
+          <div class="cat-name">Entertainment News</div>
+          <div class="cat-desc">Latest News</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DYNAMIC POSTS LIST -->
+    <div class="section-title" id="posts-list-heading">
+      <span>Latest News & Updates</span>
+    </div>
+    <div class="news-list" id="posts-list-container"></div>
+
+    <!-- Professional Box Pagination Container (8 posts per page) -->
+    <div id="pagination-box" class="pagination-container"></div>
+
+    <!-- Telegram Community -->
+    <div class="community-box">
+      <div class="comm-title">Join Our Community</div>
+      <div class="comm-desc">Sabse pehle movie aur OTT updates pane ke liye judiye</div>
+      <a href="https://t.me/+rG_x3BDIdYliNTVl" target="_blank" rel="noopener noreferrer" class="comm-btn">Join Telegram Channel</a>
     </div>
 
     <!-- Footer -->
@@ -674,7 +669,7 @@
   <script>
     let rawPosts = [];
     let currentCategory = 'All';
-    const POSTS_PER_PAGE = 8; // Reduced post count per page as requested
+    const POSTS_PER_PAGE = 8; // 8 posts per page for clean pagination
     let currentPage = 1;
 
     function safeText(value, fallback = '') {
@@ -1020,7 +1015,6 @@
       const trendingContainer = document.getElementById('sidebar-trending-container');
 
       if (posts && posts.length > 0) {
-        // Latest News Widget (Top 4 posts matching photo 1)
         latestContainer.innerHTML = posts.slice(0, 4).map(p => `
           <a href="${p.url || `posts/${p.slug}.html`}" class="sidebar-news-item">
             <img class="sidebar-news-thumb" src="${p.image || 'images/default.jpg'}" alt="${p.title}" onerror="this.src='https://placehold.co/100x70/171a1e/ffffff?text=News'">
@@ -1031,7 +1025,6 @@
           </a>
         `).join('');
 
-        // Trending Widget (Top 5 numbered list matching photo 1)
         const trendingSlice = posts.slice(0, 5);
         trendingContainer.innerHTML = trendingSlice.map((p, idx) => `
           <a href="${p.url || `posts/${p.slug}.html`}" class="sidebar-trending-item">
