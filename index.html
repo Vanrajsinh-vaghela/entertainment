@@ -68,8 +68,8 @@
       padding: 0 16px 48px;
     }
 
-    /* Top Section Grid: Hero Slider (Left) + Sidebar (Right) */
-    .top-hero-layout {
+    /* Layout for Sections Below Hero: Main Content (Left) + Sidebar (Right starting from Trending) */
+    .content-sidebar-layout {
       display: grid;
       grid-template-columns: 1fr 340px;
       gap: 28px;
@@ -77,16 +77,18 @@
       margin-top: 14px;
     }
 
-    .hero-main-area {
+    .main-column {
       min-width: 0;
     }
 
-    /* Sidebar Layout (Restricted to Top Hero section only) */
+    /* Sidebar Layout (Starting right at Trending Section as requested) */
     .sidebar {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
       padding: 16px;
+      position: sticky;
+      top: 56px;
     }
 
     .sidebar-widget {
@@ -380,10 +382,10 @@
     }
     .section-view-all { font-size: 12px; color: var(--accent); font-weight: 700; cursor: pointer; }
 
-    /* Hero Slider */
+    /* Full-Width Hero Slider (Bada Trailer Section on Top) */
     .hero-slider-container {
       position: relative; background: var(--card-bg); border-radius: 16px;
-      overflow: hidden; border: 1px solid #2a3038; margin-top: 0;
+      overflow: hidden; border: 1px solid #2a3038; margin-top: 10px;
       box-shadow: var(--shadow); user-select: none; touch-action: pan-y;
     }
     .hero-slider-track { display: flex; transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
@@ -391,40 +393,40 @@
     .hero-media-wrap { width: 100%; aspect-ratio: 16 / 9; position: relative; background: #000; overflow: hidden; }
     .hero-media-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
     .hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-content { padding: 16px 18px 20px; background: var(--card-bg); position: relative; }
+    .hero-content { padding: 18px 20px 22px; background: var(--card-bg); position: relative; }
     .hero-meta-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
     .hero-platform { font-size: 11px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: .8px; }
     .badge-tag { background: var(--accent); color: #fff; font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 5px; text-transform: uppercase; }
     .hero-title {
-      font-family: Georgia, "Times New Roman", serif; font-size: clamp(18px, 2vw, 24px);
+      font-family: Georgia, "Times New Roman", serif; font-size: clamp(20px, 2.2vw, 27px);
       font-weight: 800; color: #fff; line-height: 1.2; margin: 6px 0 8px;
       display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
     }
     .hero-title a:hover { color: var(--accent-hover); }
-    .hero-summary { font-size: 13px; color: #c7ccd3; line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 12px; }
-    .hero-actions { display: flex; gap: 8px; align-items: center; }
+    .hero-summary { font-size: 14px; color: #c7ccd3; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 14px; }
+    .hero-actions { display: flex; gap: 10px; align-items: center; }
     .hero-btn {
       display: inline-flex; align-items: center; gap: 6px; background: var(--accent); color: #fff;
-      font-size: 11px; font-weight: 700; padding: 7px 14px; border-radius: 6px; border: none; cursor: pointer; text-decoration: none;
+      font-size: 12px; font-weight: 700; padding: 8px 16px; border-radius: 7px; border: none; cursor: pointer; text-decoration: none;
     }
     .hero-btn:hover { background: var(--accent-hover); }
     .hero-btn-trailer { background: #1a1e24; color: #f3f4f6; border: 1px solid #2b3138; }
     .hero-progress-track { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: rgba(255,255,255,.15); z-index: 4; }
     .hero-progress-bar { height: 100%; width: 0%; background: var(--accent); transition: width 0.1s linear; }
     .hero-nav-btn {
-      position: absolute; top: 38%; transform: translateY(-50%); background: rgba(0,0,0,.65);
-      border: 1px solid rgba(255,255,255,.2); color: #fff; width: 34px; height: 34px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 5; font-size: 12px;
+      position: absolute; top: 40%; transform: translateY(-50%); background: rgba(0,0,0,.65);
+      border: 1px solid rgba(255,255,255,.2); color: #fff; width: 38px; height: 38px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 5; font-size: 13px;
     }
     .hero-nav-btn:hover { background: rgba(229,9,20,.9); }
-    .hero-nav-btn.prev { left: 8px; }
-    .hero-nav-btn.next { right: 8px; }
-    .hero-dots { position: absolute; bottom: 12px; right: 16px; display: flex; gap: 4px; z-index: 3; align-items: center; }
-    .hero-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.5); transition: all 0.25s ease; }
-    .hero-dot.active { background: var(--accent); width: 14px; border-radius: 3px; }
+    .hero-nav-btn.prev { left: 10px; }
+    .hero-nav-btn.next { right: 10px; }
+    .hero-dots { position: absolute; bottom: 12px; right: 16px; display: flex; gap: 5px; z-index: 3; align-items: center; }
+    .hero-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.5); transition: all 0.25s ease; }
+    .hero-dot.active { background: var(--accent); width: 16px; border-radius: 3px; }
 
-    /* Trending Grid */
-    .trending-scroll { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    /* Trending Grid (2 columns to fit beside sidebar perfectly) */
+    .trending-scroll { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
     .trend-card {
       background: var(--card-bg); border: 1px solid #252b32; border-radius: 12px; overflow: hidden;
       display: flex; flex-direction: column; box-shadow: 0 8px 22px rgba(0,0,0,.18); transition: transform .2s;
@@ -443,7 +445,7 @@
     .trend-date { font-size: 10px; color: var(--text-dim); margin-top: auto; }
 
     /* Explore By Category Grid */
-    .cat-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 8px; }
+    .cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 8px; }
     .cat-card {
       background: linear-gradient(180deg, #12161b, #0f1216); border: 1px solid var(--card-border);
       border-radius: 12px; padding: 16px 10px; text-align: center; cursor: pointer; transition: 0.15s;
@@ -496,7 +498,7 @@
 
     /* Responsive adjustments */
     @media (max-width: 959px) {
-      .top-hero-layout { grid-template-columns: 1fr; }
+      .content-sidebar-layout { grid-template-columns: 1fr; }
       .sidebar { display: none; }
       .trending-scroll { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .cat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -548,13 +550,79 @@
       <button class="clear-filter-btn" onclick="filterCategory('All')">✕ Show All</button>
     </div>
 
-    <!-- TOP SECTION: HERO SLIDER (LEFT) + SIDEBAR (RIGHT) -->
-    <div class="top-hero-layout">
-      <div class="hero-main-area">
-        <div id="hero-slider-wrap"></div>
+    <!-- FULL-WIDTH HERO SLIDER ON TOP -->
+    <div id="hero-slider-wrap"></div>
+
+    <!-- CONTENT + SIDEBAR LAYOUT (Sidebar starts right from Trending Section downwards) -->
+    <div class="content-sidebar-layout">
+      
+      <!-- MAIN COLUMN (Left) -->
+      <div class="main-column">
+        <!-- MAIN HOME WRAPPER -->
+        <div id="home-exclusive-sections">
+          <!-- Trending Section -->
+          <div class="section-title">
+            <span>🔥 Trending Now</span>
+            <span class="section-view-all" onclick="filterCategory('Trending')">View All ›</span>
+          </div>
+          <div class="trending-scroll" id="trending-container"></div>
+
+          <!-- Explore By Category Grid -->
+          <div class="section-title">
+            <span>Explore By Category</span>
+          </div>
+          <div class="cat-grid">
+            <div class="cat-card" onclick="filterCategory('Movies')">
+              <span class="cat-icon">🎬</span>
+              <div class="cat-name">Movies</div>
+              <div class="cat-desc">Cinema Updates</div>
+            </div>
+            <div class="cat-card" onclick="filterCategory('Web Series')">
+              <span class="cat-icon">📺</span>
+              <div class="cat-name">Web Series</div>
+              <div class="cat-desc">All New Shows</div>
+            </div>
+            <div class="cat-card" onclick="filterCategory('OTT')">
+              <span class="cat-icon">🍿</span>
+              <div class="cat-name">OTT Releases</div>
+              <div class="cat-desc">Platform Updates</div>
+            </div>
+            <div class="cat-card" onclick="filterCategory('Trailers')">
+              <span class="cat-icon">▶️</span>
+              <div class="cat-name">Trailers</div>
+              <div class="cat-desc">Latest Trailers</div>
+            </div>
+            <div class="cat-card" onclick="filterCategory('Celebrity News')">
+              <span class="cat-icon">⭐</span>
+              <div class="cat-name">Celebrity News</div>
+              <div class="cat-desc">Star Updates</div>
+            </div>
+            <div class="cat-card" onclick="filterCategory('News')">
+              <span class="cat-icon">📰</span>
+              <div class="cat-name">Entertainment News</div>
+              <div class="cat-desc">Latest News</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DYNAMIC POSTS LIST -->
+        <div class="section-title" id="posts-list-heading">
+          <span>Latest News & Updates</span>
+        </div>
+        <div class="news-list" id="posts-list-container"></div>
+
+        <!-- Professional Box Pagination Container (8 posts per page) -->
+        <div id="pagination-box" class="pagination-container"></div>
+
+        <!-- Telegram Community -->
+        <div class="community-box">
+          <div class="comm-title">Join Our Community</div>
+          <div class="comm-desc">Sabse pehle movie aur OTT updates pane ke liye judiye</div>
+          <a href="https://t.me/+rG_x3BDIdYliNTVl" target="_blank" rel="noopener noreferrer" class="comm-btn">Join Telegram Channel</a>
+        </div>
       </div>
 
-      <!-- SIDEBAR (Restricted only to the top hero area) -->
+      <!-- SIDEBAR (Right side starting from Trending downwards) -->
       <aside class="sidebar">
         <div class="sidebar-widget">
           <h3>📌 LATEST NEWS</h3>
@@ -587,69 +655,7 @@
           </div>
         </div>
       </aside>
-    </div>
 
-    <!-- MAIN HOME WRAPPER (Full Width Sections Below Hero) -->
-    <div id="home-exclusive-sections">
-      <!-- Trending Section -->
-      <div class="section-title">
-        <span>🔥 Trending Now</span>
-        <span class="section-view-all" onclick="filterCategory('Trending')">View All ›</span>
-      </div>
-      <div class="trending-scroll" id="trending-container"></div>
-
-      <!-- Explore By Category Grid -->
-      <div class="section-title">
-        <span>Explore By Category</span>
-      </div>
-      <div class="cat-grid">
-        <div class="cat-card" onclick="filterCategory('Movies')">
-          <span class="cat-icon">🎬</span>
-          <div class="cat-name">Movies</div>
-          <div class="cat-desc">Cinema Updates</div>
-        </div>
-        <div class="cat-card" onclick="filterCategory('Web Series')">
-          <span class="cat-icon">📺</span>
-          <div class="cat-name">Web Series</div>
-          <div class="cat-desc">All New Shows</div>
-        </div>
-        <div class="cat-card" onclick="filterCategory('OTT')">
-          <span class="cat-icon">🍿</span>
-          <div class="cat-name">OTT Releases</div>
-          <div class="cat-desc">Platform Updates</div>
-        </div>
-        <div class="cat-card" onclick="filterCategory('Trailers')">
-          <span class="cat-icon">▶️</span>
-          <div class="cat-name">Trailers</div>
-          <div class="cat-desc">Latest Trailers</div>
-        </div>
-        <div class="cat-card" onclick="filterCategory('Celebrity News')">
-          <span class="cat-icon">⭐</span>
-          <div class="cat-name">Celebrity News</div>
-          <div class="cat-desc">Star Updates</div>
-        </div>
-        <div class="cat-card" onclick="filterCategory('News')">
-          <span class="cat-icon">📰</span>
-          <div class="cat-name">Entertainment News</div>
-          <div class="cat-desc">Latest News</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- DYNAMIC POSTS LIST -->
-    <div class="section-title" id="posts-list-heading">
-      <span>Latest News & Updates</span>
-    </div>
-    <div class="news-list" id="posts-list-container"></div>
-
-    <!-- Professional Box Pagination Container (8 posts per page) -->
-    <div id="pagination-box" class="pagination-container"></div>
-
-    <!-- Telegram Community -->
-    <div class="community-box">
-      <div class="comm-title">Join Our Community</div>
-      <div class="comm-desc">Sabse pehle movie aur OTT updates pane ke liye judiye</div>
-      <a href="https://t.me/+rG_x3BDIdYliNTVl" target="_blank" rel="noopener noreferrer" class="comm-btn">Join Telegram Channel</a>
     </div>
 
     <!-- Footer -->
@@ -669,7 +675,7 @@
   <script>
     let rawPosts = [];
     let currentCategory = 'All';
-    const POSTS_PER_PAGE = 8; // 8 posts per page for clean pagination
+    const POSTS_PER_PAGE = 8; // 8 posts per page
     let currentPage = 1;
 
     function safeText(value, fallback = '') {
