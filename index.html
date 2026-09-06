@@ -14,15 +14,37 @@
   <meta name="google-site-verification" content="BE1aM7twVnliG5WUG9TTrr1KLBu_-SIu_bGY_FjLwyg" />
 
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1200">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Filmy Khabr - Entertainment, Movies, OTT & Web Series News</title>
   <meta name="description" content="Latest Hindi entertainment news, movie reviews, web series updates, OTT releases and trailers.">
   <meta name="author" content="Vanrajsinh Vaghela">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://filmykhabr.gujaratfastalert.in/index.html">
+  
   <meta property="og:site_name" content="Filmy Khabr">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Filmy Khabr - Entertainment, Movies, OTT & Web Series">
   <meta property="og:description" content="Latest Hindi entertainment news, OTT releases, web series and trailer updates.">
+  <meta property="og:url" content="https://filmykhabr.gujaratfastalert.in/index.html">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Filmy Khabr - Entertainment, Movies, OTT & Web Series">
+  <meta name="twitter:description" content="Latest Hindi entertainment news, OTT releases, web series and trailer updates.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Filmy Khabr",
+    "url": "https://filmykhabr.gujaratfastalert.in/",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Filmy Khabr",
+      "url": "https://filmykhabr.gujaratfastalert.in/"
+    }
+  }
+  </script>
+
   <style>
     :root {
       --bg: #070809;
@@ -55,8 +77,6 @@
       font-size: 15px;
       line-height: 1.55;
       min-height: 100vh;
-      width: 1200px;
-      margin: 0 auto;
     }
 
     a {
@@ -70,213 +90,13 @@
       padding: 0 16px 48px;
     }
 
-    /* Content + Sidebar Layout */
-    .content-sidebar-layout {
-      display: grid;
-      grid-template-columns: 1fr 360px;
-      gap: 28px;
-      align-items: start;
-      margin-top: 14px;
-    }
-
-    .main-column {
-      min-width: 0;
-    }
-
-    /* 2. Enhanced Readable Sidebar Layout */
-    .sidebar {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 20px;
-      position: sticky;
-      top: 60px;
-    }
-
-    .sidebar-widget {
-      margin-bottom: 26px;
-    }
-
-    .sidebar-widget:last-child {
-      margin-bottom: 0;
-    }
-
-    .sidebar-widget h3 {
-      font-size: 14px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      border-bottom: 2px solid var(--accent);
-      padding-bottom: 8px;
-      margin-bottom: 14px;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .sidebar-news-item {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 14px;
-      text-decoration: none;
-      color: inherit;
-      align-items: center;
-      transition: opacity 0.2s;
-    }
-
-    .sidebar-news-item:hover {
-      opacity: 0.8;
-    }
-
-    .sidebar-news-thumb {
-      width: 85px;
-      height: 62px;
-      object-fit: cover;
-      border-radius: 6px;
-      background: #111;
-      flex-shrink: 0;
-    }
-
-    .sidebar-news-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .sidebar-news-meta {
-      font-size: 11px;
-      color: var(--text-dim);
-      margin-bottom: 3px;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-
-    .sidebar-news-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-main);
-      line-height: 1.4;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .sidebar-trending-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #1a1e24;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .sidebar-trending-rank {
-      background: var(--accent);
-      color: #fff;
-      font-size: 12px;
-      font-weight: 900;
-      width: 24px;
-      height: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 5px;
-      flex-shrink: 0;
-    }
-
-    .sidebar-trending-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: #f3f4f6;
-      line-height: 1.4;
-    }
-
-    .sidebar-cats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .sidebar-cat-tag {
-      background: #191e25;
-      border: 1px solid #28303a;
-      padding: 7px 12px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .sidebar-cat-tag:hover {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
-    }
-
-    /* Custom Widget: Upcoming Release Calendar (Readable) */
-    .calendar-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .calendar-item {
-      background: #161c24;
-      border: 1px solid #222b36;
-      padding: 10px 12px;
-      border-radius: 8px;
-    }
-    .calendar-date {
-      color: #38bdf8;
-      font-weight: 700;
-      font-size: 11px;
-      margin-bottom: 3px;
-      text-transform: uppercase;
-    }
-    .calendar-title {
-      color: #fff;
-      font-weight: 700;
-      font-size: 13px;
-      line-height: 1.35;
-    }
-
-    /* Custom Widget: Editor's Pick (Readable) */
-    .editors-pick-box {
-      background: linear-gradient(135deg, #1e1314 0%, #11151a 100%);
-      border: 1px solid #4a1518;
-      border-radius: 10px;
-      padding: 14px;
-    }
-    .editors-pick-badge {
-      display: inline-block;
-      background: var(--accent);
-      color: #fff;
-      font-size: 10px;
-      font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 4px;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .editors-pick-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.4;
-    }
-
-    /* 1. Enhanced & Enlarged Breaking Ticker Bar */
+    /* Top Breaking Ticker */
     .ticker-bar {
       position: sticky;
       top: 0;
       z-index: 1000;
-      height: 52px;
-      padding: 10px 24px;
+      height: 46px;
+      padding: 8px 20px;
       background: rgba(5,6,7,.96);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid #22272d;
@@ -288,31 +108,22 @@
       background: var(--accent);
       color: #fff;
       font-weight: 900;
-      padding: 5px 12px;
-      border-radius: 6px;
-      margin-right: 14px;
-      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 5px;
+      margin-right: 12px;
+      font-size: 11px;
       text-transform: uppercase;
       flex-shrink: 0;
-      letter-spacing: 1px;
+      letter-spacing: .9px;
     }
-    .ticker-viewport {
-      flex: 1;
-      position: relative;
-      height: 30px;
+    .ticker-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: #f1f3f5;
+      white-space: nowrap;
       overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .ticker-slide {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      display: flex; align-items: center;
-      color: #f8f9fa; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-      opacity: 0; transform: translateY(100%);
-      transition: transform 0.45s ease, opacity 0.45s ease;
-      cursor: pointer; font-size: 14px; font-weight: 700;
-    }
-    .ticker-slide.active { opacity: 1; transform: translateY(0); }
-    .ticker-slide.prev { opacity: 0; transform: translateY(-100%); }
 
     /* Header */
     header {
@@ -321,23 +132,24 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      border-bottom: 1px solid #252a30;
+      margin-bottom: 16px;
     }
-    .brand { display: flex; flex-direction: column; }
     .brand-title {
       font-family: Georgia, "Times New Roman", serif;
-      font-size: 34px;
+      font-size: 32px;
       font-weight: 900;
       letter-spacing: 1.5px;
       line-height: 1;
       color: #fff;
     }
     .search-btn {
-      width: 44px; height: 44px;
+      width: 42px; height: 42px;
       border: 1px solid #2b3138; border-radius: 50%;
-      background: #111419; color: #e8eaed; font-size: 17px;
+      background: #111419; color: #e8eaed; font-size: 16px;
       cursor: pointer; transition: .2s ease;
     }
-    .search-btn:hover { border-color: var(--accent); background: #191c21; transform: translateY(-1px); }
+    .search-btn:hover { border-color: var(--accent); background: #191c21; }
 
     /* Navigation */
     nav {
@@ -345,11 +157,12 @@
       overflow-x: auto; padding: 0 0 16px;
       border-bottom: 1px solid #252a30;
       scrollbar-width: none; -ms-overflow-style: none;
+      margin-bottom: 24px;
     }
     nav::-webkit-scrollbar { display: none; }
     .nav-link {
-      padding: 10px 16px; border: 1px solid transparent; border-radius: 999px;
-      font-size: 14px; font-weight: 700; color: #b8bec9; white-space: nowrap; cursor: pointer;
+      padding: 8px 14px; border: 1px solid transparent; border-radius: 999px;
+      font-size: 13px; font-weight: 700; color: #b8bec9; white-space: nowrap; cursor: pointer;
       transition: all 0.2s;
     }
     .nav-link.active, .nav-link:hover {
@@ -357,7 +170,7 @@
     }
 
     #search-container {
-      display: none; padding: 14px 0 2px; margin-bottom: 6px;
+      display: none; padding: 10px 0; margin-bottom: 16px;
     }
     #search-input {
       width: 100%; min-height: 46px; padding: 11px 15px; border-radius: 10px;
@@ -365,152 +178,194 @@
     }
 
     #filter-banner {
-      display: none; background: #fef2f2; border: 1px solid #fecaca;
-      border-radius: var(--radius); padding: 10px 14px; margin: 14px 0;
+      display: none; background: #1e1314; border: 1px solid #4a1518;
+      border-radius: var(--radius); padding: 10px 14px; margin: 16px 0;
       align-items: center; justify-content: space-between;
     }
-    .filter-info { font-size: 13px; font-weight: 600; color: #b91c1c; }
+    .filter-info { font-size: 13px; font-weight: 600; color: #fca5a5; }
     .clear-filter-btn { background: var(--accent); color: #fff; border: none; font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
+
+    /* Main Grid Layout */
+    .content-sidebar-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 28px;
+      align-items: start;
+    }
+    .main-column { min-width: 0; }
+
+    /* Hero / Featured Story */
+    .hero-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+    .hero-img-wrap {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #000;
+      overflow: hidden;
+    }
+    .hero-img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.3s ease;
+    }
+    .hero-card:hover .hero-img { transform: scale(1.02); }
+    .hero-body { padding: 20px; }
+    .hero-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 11px; color: var(--text-muted); }
+    .hero-badge { background: var(--accent); color: #fff; font-weight: 800; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; }
+    .hero-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(22px, 2.2vw, 28px);
+      font-weight: 800; color: #fff; line-height: 1.25; margin-bottom: 10px;
+    }
+    .hero-title a:hover { color: var(--accent); }
+    .hero-summary { font-size: 14px; color: #c7ccd3; line-height: 1.6; margin-bottom: 16px; }
+    .btn-read {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent); color: #fff; font-size: 12px; font-weight: 700;
+      padding: 9px 18px; border-radius: 6px; transition: background 0.2s;
+    }
+    .btn-read:hover { background: var(--accent-hover); }
 
     /* Section Headings */
     .section-title {
-      margin: 32px 0 14px; font-size: 18px; font-weight: 800; color: #fff;
+      margin: 28px 0 14px; font-size: 18px; font-weight: 800; color: #fff;
       display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid #22272d; padding-bottom: 8px;
     }
-    .section-title > span:first-child::before {
-      content: ""; display: inline-block; width: 4px; height: 18px; margin-right: 9px;
-      vertical-align: -2px; background: var(--accent); border-radius: 3px;
+    .section-title span:first-child::before {
+      content: ""; display: inline-block; width: 4px; height: 16px; margin-right: 8px;
+      vertical-align: -2px; background: var(--accent); border-radius: 2px;
     }
     .section-view-all { font-size: 12px; color: var(--accent); font-weight: 700; cursor: pointer; }
 
-    /* Hero Slider */
-    .hero-slider-container {
-      position: relative; background: var(--card-bg); border-radius: 16px;
-      overflow: hidden; border: 1px solid #2a3038; margin-top: 10px;
-      box-shadow: var(--shadow); user-select: none; touch-action: pan-y;
+    /* Popular / Trending Stories Grid */
+    .popular-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
     }
-    .hero-slider-track { display: flex; transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
-    .hero-slide { min-width: 100%; display: flex; flex-direction: column; position: relative; background: var(--card-bg); }
-    .hero-media-wrap { width: 100%; aspect-ratio: 16 / 9; position: relative; background: #000; overflow: hidden; }
-    .hero-media-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
-    .hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-content { padding: 20px 22px 24px; background: var(--card-bg); position: relative; }
-    .hero-meta-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-    .hero-platform { font-size: 12px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: .8px; }
-    .badge-tag { background: var(--accent); color: #fff; font-size: 11px; font-weight: 800; padding: 5px 10px; border-radius: 6px; text-transform: uppercase; }
-    .hero-title {
-      font-family: Georgia, "Times New Roman", serif; font-size: clamp(20px, 2.5vw, 30px);
-      font-weight: 800; color: #fff; line-height: 1.2; margin: 8px 0 10px;
-      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    .popular-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, border-color 0.2s;
     }
-    .hero-title a:hover { color: var(--accent-hover); }
-    .hero-summary { font-size: 14px; color: #c7ccd3; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 16px; }
-    
-    .hero-actions { display: flex; gap: 12px; align-items: center; }
-    .hero-btn {
-      display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff;
-      font-size: 13px; font-weight: 700; padding: 11px 20px; border-radius: 8px; border: none; cursor: pointer; text-decoration: none;
-      box-shadow: 0 4px 12px rgba(229,9,20,0.3); transition: all 0.2s;
-    }
-    .hero-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
-    .hero-btn-trailer { background: #1f242c; color: #f3f4f6; border: 1px solid #374151; box-shadow: none; }
-    .hero-btn-trailer:hover { background: #2d3440; }
+    .popular-card:hover { transform: translateY(-2px); border-color: #3b424b; }
+    .popular-img-wrap { width: 100%; aspect-ratio: 16/10; background: #111; overflow: hidden; }
+    .popular-img { width: 100%; height: 100%; object-fit: cover; }
+    .popular-content { padding: 12px; flex: 1; display: flex; flex-direction: column; }
+    .popular-cat { font-size: 10px; color: #38bdf8; font-weight: 700; text-transform: uppercase; margin-bottom: 4px; }
+    .popular-title { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.35; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .popular-date { font-size: 10px; color: var(--text-dim); margin-top: auto; }
 
-    .hero-progress-track { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: rgba(255,255,255,.15); z-index: 4; }
-    .hero-progress-bar { height: 100%; width: 0%; background: var(--accent); transition: width 0.1s linear; }
-    .hero-nav-btn {
-      position: absolute; top: 40%; transform: translateY(-50%); background: rgba(0,0,0,.65);
-      border: 1px solid rgba(255,255,255,.2); color: #fff; width: 40px; height: 40px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 5; font-size: 14px;
-    }
-    .hero-nav-btn:hover { background: rgba(229,9,20,.9); }
-    .hero-nav-btn.prev { left: 12px; }
-    .hero-nav-btn.next { right: 12px; }
-    .hero-dots { position: absolute; bottom: 14px; right: 18px; display: flex; gap: 6px; z-index: 3; align-items: center; }
-    .hero-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.5); transition: all 0.25s ease; }
-    .hero-dot.active { background: var(--accent); width: 16px; border-radius: 3px; }
-
-    /* Trending Grid */
-    .trending-scroll { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-    .trend-card {
-      background: var(--card-bg); border: 1px solid #252b32; border-radius: 12px; overflow: hidden;
-      display: flex; flex-direction: column; box-shadow: 0 8px 22px rgba(0,0,0,.18); transition: transform .2s;
-    }
-    .trend-card:hover { transform: translateY(-3px); border-color: #3b424b; }
-    .trend-img-box { position: relative; width: 100%; aspect-ratio: 16/10; background: #111; }
-    .trend-img { width: 100%; height: 100%; object-fit: cover; }
-    .trend-rank {
-      position: absolute; top: 9px; left: 9px; background: var(--accent); color: #fff;
-      font-size: 12px; font-weight: 900; width: 24px; height: 24px; display: flex;
-      align-items: center; justify-content: center; border-radius: 5px; z-index: 1;
-    }
-    .trend-info { padding: 11px 12px 12px; flex: 1; display: flex; flex-direction: column; }
-    .trend-platform { font-size: 10px; color: #38bdf8; font-weight: 700; margin-bottom: 3px; text-transform: uppercase; }
-    .trend-title { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 6px; }
-    .trend-date { font-size: 10px; color: var(--text-dim); margin-top: auto; }
-
-    /* Explore By Category Cards */
-    .cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 10px; }
-    .cat-card {
-      background: linear-gradient(135deg, #151a21, #0d1014); border: 1px solid #2a323d;
-      border-radius: 14px; padding: 20px 14px; text-align: center; cursor: pointer; 
-      transition: all 0.2s ease; box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-    }
-    .cat-card:hover { border-color: var(--accent); transform: translateY(-3px); background: linear-gradient(135deg, #1d242e, #11151a); }
-    .cat-icon { font-size: 28px; margin-bottom: 8px; display: block; }
-    .cat-name { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 3px; }
-    .cat-desc { font-size: 11px; color: var(--text-muted); }
-
-    /* Latest News List */
-    .news-list { display: flex; flex-direction: column; gap: 10px; }
+    /* News Lists & Category Cards */
+    .news-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
     .news-card {
-      display: flex; background: var(--card-bg); border: 1px solid #242a31;
-      border-radius: 11px; overflow: hidden; padding: 10px; gap: 12px; align-items: center; transition: 0.2s;
+      display: flex; background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: var(--radius); overflow: hidden; padding: 10px; gap: 12px; align-items: center;
+      transition: background 0.2s, border-color 0.2s;
     }
-    .news-card:hover { border-color: #3a414a; background: #15191e; }
-    .news-thumb { width: 120px; height: 75px; border-radius: 7px; object-fit: cover; flex-shrink: 0; background: #111; }
-    .news-meta { font-size: 10px; color: #929aa5; margin-bottom: 3px; text-transform: uppercase; }
-    .news-title { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .news-card:hover { border-color: #3b424b; background: #15191e; }
+    .news-thumb { width: 110px; height: 74px; border-radius: 8px; object-fit: cover; flex-shrink: 0; background: #111; }
+    .news-info { flex: 1; min-width: 0; }
+    .news-meta { font-size: 10px; color: var(--text-dim); margin-bottom: 3px; text-transform: uppercase; }
+    .news-title { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+    /* Sidebar Widgets */
+    .sidebar {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 18px;
+      position: sticky;
+      top: 60px;
+    }
+    .sidebar-widget { margin-bottom: 24px; }
+    .sidebar-widget:last-child { margin-bottom: 0; }
+    .sidebar-widget h3 {
+      font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;
+      border-bottom: 2px solid var(--accent); padding-bottom: 6px; margin-bottom: 12px; color: #fff;
+    }
+    
+    /* Editor's Pick Box */
+    .editors-pick-box {
+      background: linear-gradient(135deg, #1e1314 0%, #11151a 100%);
+      border: 1px solid #4a1518; border-radius: 8px; padding: 12px;
+    }
+    .editors-badge { background: var(--accent); color: #fff; font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 3px; text-transform: uppercase; }
+    .editors-title { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.35; margin-top: 6px; display: block; }
+
+    /* Sidebar News Item */
+    .side-news { display: flex; gap: 10px; margin-bottom: 12px; text-decoration: none; align-items: center; }
+    .side-news img { width: 70px; height: 50px; object-fit: cover; border-radius: 6px; background: #111; flex-shrink: 0; }
+    .side-news-title { font-size: 12px; font-weight: 700; color: #fff; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+    /* Calendar List */
+    .calendar-item { background: #161c24; border: 1px solid #222b36; padding: 8px 10px; border-radius: 6px; margin-bottom: 8px; }
+    .calendar-date { color: #38bdf8; font-weight: 700; font-size: 10px; text-transform: uppercase; margin-bottom: 2px; }
+    .calendar-title { color: #fff; font-weight: 600; font-size: 12px; }
+
+    /* Categories Tags */
+    .sidebar-cats { display: flex; flex-wrap: wrap; gap: 6px; }
+    .sidebar-cat-tag {
+      background: #191e25; border: 1px solid #28303a; padding: 5px 10px;
+      border-radius: 6px; font-size: 11px; font-weight: 600; color: var(--text-muted); cursor: pointer;
+    }
+    .sidebar-cat-tag:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    /* Telegram CTA */
+    .community-box {
+      background: linear-gradient(135deg, #111c29, #0d131b); border: 1px solid #244564;
+      border-radius: var(--radius); padding: 18px; margin-top: 24px; text-align: center;
+    }
+    .comm-title { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+    .comm-desc { font-size: 12px; color: #93c5fd; margin-bottom: 12px; }
+    .comm-btn { display: inline-block; background: #0284c7; color: #fff; font-size: 12px; font-weight: 700; padding: 7px 16px; border-radius: 999px; }
 
     /* Pagination */
-    .pagination-container { display: flex; justify-content: center; align-items: center; gap: 6px; margin: 28px 0 16px 0; flex-wrap: wrap; }
+    .pagination-container { display: flex; justify-content: center; align-items: center; gap: 6px; margin: 24px 0; }
     .page-btn {
-      background: #11151a; border: 1px solid var(--card-border); color: var(--text-main);
-      padding: 8px 14px; font-size: 13px; font-weight: 700; border-radius: 8px; cursor: pointer; transition: 0.2s;
+      background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-main);
+      padding: 7px 12px; font-size: 12px; font-weight: 700; border-radius: 6px; cursor: pointer;
     }
-    .page-btn:hover { border-color: var(--accent); color: var(--accent); }
     .page-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
     .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-    /* Telegram Community Card */
-    .community-box {
-      background: linear-gradient(135deg, #111c29, #0d131b); border: 1px solid #244564;
-      border-radius: 14px; padding: 20px 16px; margin-top: 24px; text-align: center;
-    }
-    .comm-title { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 4px; }
-    .comm-desc { font-size: 12px; color: #93c5fd; margin-bottom: 12px; }
-    .comm-btn { display: inline-block; background: #0284c7; color: #fff; font-size: 13px; font-weight: 700; padding: 8px 18px; border-radius: 999px; text-decoration: none; }
-
-    /* Shiny Author */
-    .shiny-author { font-weight: 700; color: #fff; }
-
     /* Footer */
-    footer { text-align: center; margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--card-border); font-size: 11px; color: var(--text-muted); line-height: 1.6; }
-    .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
-    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 11px; transition: color 0.2s; }
+    footer {
+      text-align: center; margin-top: 36px; padding-top: 20px;
+      border-top: 1px solid var(--card-border); font-size: 11px; color: var(--text-muted); line-height: 1.6;
+    }
+    .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
+    .footer-links a { color: var(--text-muted); font-size: 11px; }
     .footer-links a:hover { color: #fff; }
+    .publisher-id { margin-top: 6px; font-weight: 700; color: #fff; }
 
-    .no-posts { text-align: center; padding: 40px 10px; color: var(--text-muted); font-size: 14px; }
+    .no-posts { text-align: center; padding: 30px; color: var(--text-muted); font-size: 13px; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .content-sidebar-layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .popular-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Top Breaking Ticker -->
-  <div class="ticker-bar" id="ticker-bar" title="Touch or hover to pause">
-    <span class="ticker-label">BREAKING:</span>
-    <div class="ticker-viewport" id="ticker-viewport">
-      <div class="ticker-slide active">Loading latest entertainment updates...</div>
-    </div>
+  <!-- Breaking Ticker -->
+  <div class="ticker-bar" id="ticker-bar">
+    <span class="ticker-label">LATEST</span>
+    <div class="ticker-text" id="ticker-text">Loading latest entertainment updates...</div>
   </div>
 
   <div class="container">
@@ -524,7 +379,7 @@
       </div>
     </header>
 
-    <!-- Navigation Bar -->
+    <!-- Navigation -->
     <nav>
       <span class="nav-link active" onclick="filterCategory('All')">Home</span>
       <span class="nav-link" onclick="filterCategory('Movies')">Movies</span>
@@ -533,142 +388,84 @@
       <span class="nav-link" onclick="filterCategory('Trailers')">Trailers</span>
       <span class="nav-link" onclick="filterCategory('News')">News</span>
       <span class="nav-link" onclick="filterCategory('Upcoming')">Upcoming</span>
-      <span class="nav-link" onclick="filterCategory('Celebrity News')">Celebrity</span>
+      <span class="nav-link" onclick="filterCategory('Celebrity News')">Celebrity News</span>
     </nav>
 
     <!-- Search Box -->
     <div id="search-container">
-      <input type="text" id="search-input" placeholder="Search movies, series, news..." oninput="handleSearch(event)">
+      <input type="text" id="search-input" placeholder="Search available movies, series, news..." oninput="handleSearch(event)">
     </div>
 
-    <!-- Active Filter Banner -->
+    <!-- Filter Banner -->
     <div id="filter-banner">
       <span class="filter-info" id="filter-label">Category: All</span>
       <button class="clear-filter-btn" onclick="filterCategory('All')">✕ Show All</button>
     </div>
 
-    <!-- FULL-WIDTH HERO SLIDER ON TOP -->
-    <div id="hero-slider-wrap"></div>
-
-    <!-- CONTENT + SIDEBAR LAYOUT -->
+    <!-- Main Content & Sidebar Grid -->
     <div class="content-sidebar-layout">
       
-      <!-- MAIN COLUMN (Left) -->
-      <div class="main-column">
-        <!-- MAIN HOME WRAPPER -->
-        <div id="home-exclusive-sections">
-          <!-- Trending Section -->
-          <div class="section-title">
-            <span>🔥 Trending Now</span>
-            <span class="section-view-all" onclick="filterCategory('Trending')">View All ›</span>
-          </div>
-          <div class="trending-scroll" id="trending-container"></div>
+      <!-- Left Column -->
+      <div class="main-column" id="main-dynamic-content">
+        
+        <!-- Featured Hero Section -->
+        <div id="hero-section-wrap"></div>
 
-          <!-- Explore By Category Grid -->
-          <div class="section-title">
-            <span>Explore By Category</span>
-          </div>
-          <div class="cat-grid">
-            <div class="cat-card" onclick="filterCategory('Movies')">
-              <span class="cat-icon">🎬</span>
-              <div class="cat-name">Movies</div>
-              <div class="cat-desc">Cinema Updates</div>
-            </div>
-            <div class="cat-card" onclick="filterCategory('Web Series')">
-              <span class="cat-icon">📺</span>
-              <div class="cat-name">Web Series</div>
-              <div class="cat-desc">All New Shows</div>
-            </div>
-            <div class="cat-card" onclick="filterCategory('OTT')">
-              <span class="cat-icon">🍿</span>
-              <div class="cat-name">OTT Releases</div>
-              <div class="cat-desc">Platform Updates</div>
-            </div>
-            <div class="cat-card" onclick="filterCategory('Trailers')">
-              <span class="cat-icon">▶️</span>
-              <div class="cat-name">Trailers</div>
-              <div class="cat-desc">Latest Trailers</div>
-            </div>
-            <div class="cat-card" onclick="filterCategory('Celebrity News')">
-              <span class="cat-icon">⭐</span>
-              <div class="cat-name">Celebrity News</div>
-              <div class="cat-desc">Star Updates</div>
-            </div>
-            <div class="cat-card" onclick="filterCategory('News')">
-              <span class="cat-icon">📰</span>
-              <div class="cat-name">Entertainment News</div>
-              <div class="cat-desc">Latest News</div>
-            </div>
-          </div>
+        <!-- Popular Stories Section -->
+        <div class="section-title">
+          <span>Popular Stories</span>
+          <span class="section-view-all" onclick="filterCategory('Trending')">View All ›</span>
         </div>
+        <div class="popular-grid" id="popular-container"></div>
 
-        <!-- DYNAMIC POSTS LIST -->
-        <div class="section-title" id="posts-list-heading">
-          <span>Latest News & Updates</span>
-        </div>
-        <div class="news-list" id="posts-list-container"></div>
+        <!-- Dynamic Category Sections / Latest News -->
+        <div id="dynamic-category-sections"></div>
 
-        <!-- Professional Box Pagination Container -->
-        <div id="pagination-box" class="pagination-container"></div>
-
-        <!-- Telegram Community -->
-        <div class="community-box">
-          <div class="comm-title">Join Our Community</div>
-          <div class="comm-desc">Sabse pehle movie aur OTT updates pane ke liye judiye</div>
-          <a href="https://t.me/+rG_x3BDIdYliNTVl" target="_blank" rel="noopener noreferrer" class="comm-btn">Join Telegram Channel</a>
-        </div>
       </div>
 
-      <!-- SIDEBAR (Enlarged and Fully Readable Text) -->
+      <!-- Right Column / Sidebar -->
       <aside class="sidebar">
-        <!-- Widget 4: Editor's Pick -->
         <div class="sidebar-widget">
-          <h3>⭐ EDITOR'S PICK</h3>
+          <h3>Editor's Pick</h3>
           <div class="editors-pick-box" id="sidebar-editors-pick">
-            <span class="editors-pick-badge">Must Read</span>
-            <div class="editors-pick-title">Loading top story...</div>
+            <span class="editors-badge">Must Read</span>
+            <span class="editors-title">Loading...</span>
           </div>
         </div>
 
         <div class="sidebar-widget">
-          <h3>📌 LATEST NEWS</h3>
+          <h3>Latest News</h3>
           <div id="sidebar-latest-container"></div>
         </div>
 
         <div class="sidebar-widget">
-          <h3>🔥 TRENDING</h3>
-          <div id="sidebar-trending-container"></div>
-        </div>
-
-        <!-- Widget 2: Upcoming Release Calendar -->
-        <div class="sidebar-widget">
-          <h3>📅 UPCOMING RELEASES</h3>
+          <h3>Upcoming Releases</h3>
           <div class="calendar-list">
             <div class="calendar-item">
-              <div class="calendar-date">10 Sept 2026</div>
-              <div class="calendar-title">Mirzapur: The Movie (Theatres)</div>
-            </div>
-            <div class="calendar-item">
-              <div class="calendar-date">14 Sept 2026</div>
-              <div class="calendar-title">Vibe Season 2 (Netflix OTT)</div>
-            </div>
-            <div class="calendar-item">
-              <div class="calendar-date">22 Sept 2026</div>
-              <div class="calendar-title">Street Fighter Sequel Teaser</div>
+              <div class="calendar-date">Theatres / OTT</div>
+              <div class="calendar-title">Check latest schedules in posts</div>
             </div>
           </div>
         </div>
 
         <div class="sidebar-widget">
-          <h3>📂 POPULAR CATEGORIES</h3>
+          <h3>Categories</h3>
           <div class="sidebar-cats">
             <span class="sidebar-cat-tag" onclick="filterCategory('Movies')">Movies</span>
             <span class="sidebar-cat-tag" onclick="filterCategory('Web Series')">Web Series</span>
             <span class="sidebar-cat-tag" onclick="filterCategory('OTT')">OTT</span>
             <span class="sidebar-cat-tag" onclick="filterCategory('Trailers')">Trailers</span>
             <span class="sidebar-cat-tag" onclick="filterCategory('News')">News</span>
-            <span class="sidebar-cat-tag" onclick="filterCategory('Celebrity News')">Celebrity</span>
+            <span class="sidebar-cat-tag" onclick="filterCategory('Upcoming')">Upcoming</span>
+            <span class="sidebar-cat-tag" onclick="filterCategory('Celebrity News')">Celebrity News</span>
           </div>
+        </div>
+
+        <!-- Telegram CTA -->
+        <div class="community-box">
+          <div class="comm-title">Get Daily Updates</div>
+          <div class="comm-desc">Get daily movie, OTT and entertainment updates</div>
+          <a href="https://t.me/+rG_x3BDIdYliNTVl" target="_blank" rel="noopener noreferrer" class="comm-btn">JOIN TELEGRAM</a>
         </div>
       </aside>
 
@@ -682,9 +479,8 @@
         <a href="privacy-policy.html">Privacy Policy</a> •
         <a href="disclaimer.html">Disclaimer</a>
       </div>
-      © 2026 Filmy Khabr.<br>
-      <span class="shiny-author">Managed and Published by Vanrajsinh Vaghela.</span><br>
-      All Rights Reserved.
+      <div class="publisher-id">FILMY KHABR — Entertainment News Publication</div>
+      © 2026 Filmy Khabr. Managed and Published by Vanrajsinh Vaghela. All Rights Reserved.
     </footer>
   </div>
 
@@ -694,12 +490,12 @@
     const POSTS_PER_PAGE = 8;
     let currentPage = 1;
 
-    function safeText(value, fallback = '') {
-      return value === null || value === undefined ? fallback : String(value);
+    function safeText(val, fallback = '') {
+      return val === null || val === undefined ? fallback : String(val);
     }
 
-    function escapeHtml(value) {
-      return safeText(value)
+    function escapeHtml(str) {
+      return safeText(str)
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
@@ -707,14 +503,14 @@
         .replace(/'/g, '&#39;');
     }
 
-    function safeUrl(value, fallback = '#') {
-      const raw = safeText(value, '').trim();
+    function safeUrl(val, fallback = '#') {
+      const raw = safeText(val, '').trim();
       if (!raw) return fallback;
       try {
         const u = new URL(raw, window.location.href);
         if (u.protocol === 'http:' || u.protocol === 'https:') return u.href;
       } catch (_) {}
-      return fallback;
+      return raw.startsWith('posts/') ? raw : raw;
     }
 
     function normalizePosts(data) {
@@ -723,459 +519,195 @@
         ...p,
         title: safeText(p.title, 'Untitled'),
         slug: safeText(p.slug, ''),
-        url: safeText(p.url, ''),
+        url: safeText(p.url, p.slug ? `posts/${p.slug}.html` : '#'),
         image: safeText(p.image, ''),
         summary: safeText(p.summary, ''),
         category: safeText(p.category, 'News'),
         platform: safeText(p.platform, 'General'),
-        badge: safeText(p.badge, 'Trending'),
-        date: safeText(p.date, '2026'),
-        trailer: safeText(p.trailer, '')
+        badge: safeText(p.badge, 'Update'),
+        date: safeText(p.date, '')
       }));
-    }
-
-    function getYoutubeEmbedUrl(url) {
-      if (!url) return null;
-      let videoId = '';
-      if (url.includes('youtu.be/')) {
-        videoId = url.split('youtu.be/')[1].split(/[?#]/)[0];
-      } else if (url.includes('watch?v=')) {
-        videoId = url.split('watch?v=')[1].split('&')[0];
-      } else if (url.includes('/embed/')) {
-        videoId = url.split('/embed/')[1].split(/[?#]/)[0];
-      } else if (url.length === 11 && !url.includes('/')) {
-        videoId = url;
-      }
-      return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0` : null;
-    }
-
-    let isVideoPlaying = false;
-
-    function playHeroInline(slideIndex, title, videoUrl) {
-      const embedUrl = getYoutubeEmbedUrl(videoUrl);
-      if (!embedUrl) {
-        const query = encodeURIComponent(title + " official trailer");
-        window.open(`https://www.youtube.com/results?search_query=${query}`, '_blank');
-        return;
-      }
-      
-      const mediaWrap = document.getElementById(`hero-media-${slideIndex}`);
-      if (mediaWrap) {
-        isVideoPlaying = true;
-        if (heroTimer) clearInterval(heroTimer);
-        const pBar = document.getElementById('hero-progress-bar');
-        if (pBar) pBar.style.width = '0%';
-
-        mediaWrap.innerHTML = `
-          <iframe 
-            src="${embedUrl}" 
-            allow="autoplay; encrypted-media; picture-in-picture" 
-            allowfullscreen>
-          </iframe>
-        `;
-      }
-    }
-
-    let tickerInterval = null;
-    let tickerIndex = 0;
-    let tickerSlides = [];
-    let isTickerPaused = false;
-
-    function setupBreakingTicker(posts) {
-      const viewport = document.getElementById('ticker-viewport');
-      let tickerItems = [];
-
-      if (posts && posts.length > 0) {
-        posts.slice(0, 3).forEach(p => {
-          tickerItems.push({
-            title: p.title,
-            url: p.url || `posts/${p.slug}.html`
-          });
-        });
-      }
-
-      const fallbackAlerts = [
-        { title: "⚡ Top OTT & Web Series Weekly Releases & Reviews", url: "#" },
-        { title: "🎬 Bollywood & South Cinema Box Office Updates Live", url: "#" },
-        { title: "🍿 Latest Movie Trailers & Teasers Breakdown Today", url: "#" }
-      ];
-
-      let fbIdx = 0;
-      while (tickerItems.length < 3) {
-        tickerItems.push(fallbackAlerts[fbIdx % fallbackAlerts.length]);
-        fbIdx++;
-      }
-
-      viewport.innerHTML = tickerItems.map((item, idx) => `
-        <a href="${item.url}" class="ticker-slide ${idx === 0 ? 'active' : ''}">
-          • ${item.title}
-        </a>
-      `).join('');
-
-      tickerSlides = Array.from(viewport.querySelectorAll('.ticker-slide'));
-      tickerIndex = 0;
-
-      if (tickerInterval) clearInterval(tickerInterval);
-
-      tickerInterval = setInterval(() => {
-        if (!isTickerPaused && tickerSlides.length > 1) {
-          const currentSlide = tickerSlides[tickerIndex];
-          tickerIndex = (tickerIndex + 1) % tickerSlides.length;
-          const nextSlide = tickerSlides[tickerIndex];
-
-          currentSlide.className = 'ticker-slide prev';
-          nextSlide.className = 'ticker-slide active';
-
-          setTimeout(() => {
-            if (currentSlide !== tickerSlides[tickerIndex]) {
-              currentSlide.className = 'ticker-slide';
-            }
-          }, 500);
-        }
-      }, 3200);
-    }
-
-    const tickerContainer = document.getElementById('ticker-bar');
-    tickerContainer.addEventListener('mouseenter', () => { isTickerPaused = true; });
-    tickerContainer.addEventListener('mouseleave', () => { isTickerPaused = false; });
-    tickerContainer.addEventListener('touchstart', () => { isTickerPaused = true; }, { passive: true });
-    tickerContainer.addEventListener('touchend', () => {
-      setTimeout(() => { isTickerPaused = false; }, 1200);
-    }, { passive: true });
-
-    let heroTimer = null;
-    let heroCurrentIndex = 0;
-    let heroTotalSlides = 0;
-    let isHeroPaused = false;
-    let heroStartX = 0;
-    const SLIDE_DURATION = 4500;
-    let progressElapsed = 0;
-    const PROGRESS_STEP = 50;
-
-    function setupHeroSlider(posts) {
-      const heroWrap = document.getElementById('hero-slider-wrap');
-      const heroPosts = posts.slice(0, 20);
-      heroTotalSlides = heroPosts.length;
-      heroCurrentIndex = 0;
-      progressElapsed = 0;
-      isVideoPlaying = false;
-
-      if (!heroTotalSlides) {
-        heroWrap.innerHTML = '';
-        return;
-      }
-
-      if (heroTimer) clearInterval(heroTimer);
-
-      const slidesHTML = heroPosts.map((post, idx) => {
-        const trailerUrl = post.trailer || (post.category === 'Trailers' || post.platform === 'YouTube' ? 'https://www.youtube.com' : '');
-        return `
-          <div class="hero-slide" id="hero-slide-${idx}">
-            <div class="hero-media-wrap" id="hero-media-${idx}">
-              <img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Filmy+Khabr'">
-            </div>
-
-            <div class="hero-content">
-              <div class="hero-meta-row">
-                <span class="hero-platform">${post.platform || post.category}</span>
-                <span class="badge-tag">${post.badge || 'Trending'}</span>
-              </div>
-              <div class="hero-title"><a href="${post.url || `posts/${post.slug}.html`}">${post.title}</a></div>
-              <div class="hero-summary">${post.summary || ''}</div>
-              <div class="hero-actions">
-                <a href="${post.url || `posts/${post.slug}.html`}" class="hero-btn">Read Article</a>
-                <button class="hero-btn hero-btn-trailer" onclick="playHeroInline(${idx}, '${post.title.replace(/'/g, "\\'")}', '${trailerUrl}')">▶ Play Trailer</button>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      let dotsHTML = '';
-      if (heroTotalSlides > 1) {
-        const dotsCount = Math.min(heroTotalSlides, 10);
-        dotsHTML = `<div class="hero-dots" id="hero-dots">
-          ${Array.from({ length: dotsCount }).map((_, i) => `<span class="hero-dot ${i === 0 ? 'active' : ''}"></span>`).join('')}
-        </div>`;
-      }
-
-      let navBtns = '';
-      if (heroTotalSlides > 1) {
-        navBtns = `
-          <button class="hero-nav-btn prev" onclick="prevHeroSlide(event)" aria-label="Previous Slide">❮</button>
-          <button class="hero-nav-btn next" onclick="nextHeroSlide(event)" aria-label="Next Slide">❯</button>
-        `;
-      }
-
-      heroWrap.innerHTML = `
-        <div class="hero-slider-container" id="hero-slider-container">
-          <div class="hero-slider-track" id="hero-slider-track">
-            ${slidesHTML}
-          </div>
-          <div class="hero-progress-track">
-            <div class="hero-progress-bar" id="hero-progress-bar"></div>
-          </div>
-          ${navBtns}
-          ${dotsHTML}
-        </div>
-      `;
-
-      const container = document.getElementById('hero-slider-container');
-      if (container) {
-        container.addEventListener('mouseenter', () => { isHeroPaused = true; });
-        container.addEventListener('mouseleave', () => { isHeroPaused = false; });
-
-        container.addEventListener('touchstart', (e) => {
-          isHeroPaused = true;
-          heroStartX = e.touches[0].clientX;
-        }, { passive: true });
-
-        container.addEventListener('touchend', (e) => {
-          const diffX = heroStartX - e.changedTouches[0].clientX;
-          if (Math.abs(diffX) > 40) {
-            if (diffX > 0) nextHeroSlide();
-            else prevHeroSlide();
-          }
-          setTimeout(() => { isHeroPaused = false; }, 1500);
-        }, { passive: true });
-
-        startHeroProgress();
-      }
-    }
-
-    function startHeroProgress() {
-      if (heroTimer) clearInterval(heroTimer);
-      if (isVideoPlaying) return;
-      progressElapsed = 0;
-
-      heroTimer = setInterval(() => {
-        if (!isHeroPaused && !isVideoPlaying && heroTotalSlides > 1) {
-          progressElapsed += PROGRESS_STEP;
-          const percentage = Math.min((progressElapsed / SLIDE_DURATION) * 100, 100);
-          const pBar = document.getElementById('hero-progress-bar');
-          if (pBar) pBar.style.width = `${percentage}%`;
-
-          if (progressElapsed >= SLIDE_DURATION) {
-            nextHeroSlide();
-          }
-        }
-      }, PROGRESS_STEP);
-    }
-
-    function updateHeroSlide() {
-      const track = document.getElementById('hero-slider-track');
-      if (!track) return;
-      track.style.transform = `translateX(-${heroCurrentIndex * 100}%)`;
-
-      rawPosts.slice(0, 20).forEach((post, idx) => {
-        const wrap = document.getElementById(`hero-media-${idx}`);
-        if (wrap && wrap.querySelector('iframe')) {
-          wrap.innerHTML = `
-            <img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Filmy+Khabr'">
-          `;
-        }
-      });
-
-      isVideoPlaying = false;
-
-      const dots = document.querySelectorAll('.hero-dot');
-      if (dots.length) {
-        const activeDotIndex = heroCurrentIndex % dots.length;
-        dots.forEach((dot, idx) => {
-          dot.classList.toggle('active', idx === activeDotIndex);
-        });
-      }
-
-      progressElapsed = 0;
-      const pBar = document.getElementById('hero-progress-bar');
-      if (pBar) pBar.style.width = '0%';
-
-      startHeroProgress();
-    }
-
-    function nextHeroSlide(e) {
-      if (e) e.stopPropagation();
-      if (heroTotalSlides <= 1) return;
-      heroCurrentIndex = (heroCurrentIndex + 1) % heroTotalSlides;
-      updateHeroSlide();
-    }
-
-    function prevHeroSlide(e) {
-      if (e) e.stopPropagation();
-      if (heroTotalSlides <= 1) return;
-      heroCurrentIndex = (heroCurrentIndex - 1 + heroTotalSlides) % heroTotalSlides;
-      updateHeroSlide();
     }
 
     async function loadSiteData() {
       try {
         const res = await fetch(`data/posts.json?_t=${Date.now()}`);
-        if (!res.ok) throw new Error('data/posts.json not found');
-        rawPosts = await res.json();
+        if (!res.ok) throw new Error('posts.json fetch failed');
+        const data = await res.json();
+        rawPosts = normalizePosts(data);
 
-        setupBreakingTicker(rawPosts);
-        renderSidebarWidgets(rawPosts);
-
-        const params = new URLSearchParams(window.location.search);
-        const urlCat = params.get('cat');
-        if (urlCat) {
-          filterCategory(urlCat, false);
-        } else {
-          renderAll();
+        if (!rawPosts.length) {
+          showFallback('No entertainment stories found in publication database.');
+          return;
         }
+
+        renderHomeView();
       } catch (err) {
-        console.warn('Could not load posts:', err);
-        setupBreakingTicker([]);
-        document.getElementById('posts-list-container').innerHTML = `
-          <div class="no-posts">Abhi तक कोई post publish नहीं हुई है।</div>
-        `;
+        console.error('Data load error:', err);
+        showFallback('Unable to load latest entertainment updates. Please check back shortly.');
       }
     }
 
-    function renderSidebarWidgets(posts) {
-      const latestContainer = document.getElementById('sidebar-latest-container');
-      const trendingContainer = document.getElementById('sidebar-trending-container');
-      const editorsPickContainer = document.getElementById('sidebar-editors-pick');
+    function showFallback(msg) {
+      document.getElementById('ticker-text').textContent = 'LATEST ENTERTAINMENT UPDATE';
+      document.getElementById('hero-section-wrap').innerHTML = `<div class="no-posts">${msg}</div>`;
+      document.getElementById('popular-container').innerHTML = '';
+      document.getElementById('dynamic-category-sections').innerHTML = '';
+      document.getElementById('sidebar-editors-pick').innerHTML = `<span class="editors-badge">Notice</span><span class="editors-title">${msg}</span>`;
+      document.getElementById('sidebar-latest-container').innerHTML = `<div class="no-posts" style="padding:10px;">No articles available.</div>`;
+    }
 
-      if (posts && posts.length > 0) {
-        const topPost = posts[0];
-        editorsPickContainer.innerHTML = `
-          <span class="editors-pick-badge">Must Read</span>
-          <a href="${topPost.url || `posts/${topPost.slug}.html`}" class="editors-pick-title" style="display:block; color:#fff; text-decoration:none;">${topPost.title}</a>
+    function renderHomeView() {
+      // 1. Ticker Bar
+      const latestPost = rawPosts[0];
+      document.getElementById('ticker-text').textContent = latestPost ? latestPost.title : 'LATEST ENTERTAINMENT UPDATE';
+
+      // 2. Hero Section
+      const heroWrap = document.getElementById('hero-section-wrap');
+      if (latestPost) {
+        const heroUrl = safeUrl(latestPost.url || `posts/${latestPost.slug}.html`);
+        const heroImg = safeUrl(latestPost.image || 'images/default.jpg');
+        heroWrap.innerHTML = `
+          <div class="hero-card">
+            <div class="hero-img-wrap">
+              <a href="${escapeHtml(heroUrl)}">
+                <img class="hero-img" src="${escapeHtml(heroImg)}" alt="${escapeHtml(latestPost.title)}" onerror="this.src='https://placehold.co/1200x675/171a1e/ffffff?text=Filmy+Khabr'">
+              </a>
+            </div>
+            <div class="hero-body">
+              <div class="hero-meta">
+                <span class="hero-badge">${escapeHtml(latestPost.badge || latestPost.category)}</span>
+                <span>•</span>
+                <span>${escapeHtml(latestPost.category)}</span>
+                <span>•</span>
+                <span>${escapeHtml(latestPost.date)}</span>
+              </div>
+              <h1 class="hero-title"><a href="${escapeHtml(heroUrl)}">${escapeHtml(latestPost.title)}</a></h1>
+              <div class="hero-summary">${escapeHtml(latestPost.summary || '')}</div>
+              <a href="${escapeHtml(heroUrl)}" class="btn-read">Read Article →</a>
+            </div>
+          </div>
         `;
+      } else {
+        heroWrap.innerHTML = '';
+      }
 
-        latestContainer.innerHTML = posts.slice(0, 4).map(p => `
-          <a href="${p.url || `posts/${p.slug}.html`}" class="sidebar-news-item">
-            <img class="sidebar-news-thumb" src="${p.image || 'images/default.jpg'}" alt="${p.title}" onerror="this.src='https://placehold.co/100x70/171a1e/ffffff?text=News'">
-            <div class="sidebar-news-info">
-              <div class="sidebar-news-meta">${p.category}</div>
-              <div class="sidebar-news-title">${p.title}</div>
+      // 3. Popular Stories (Next 4 posts)
+      const popularContainer = document.getElementById('popular-container');
+      const popularPosts = rawPosts.slice(1, 5);
+      popularContainer.innerHTML = popularPosts.map(p => {
+        const pUrl = safeUrl(p.url || `posts/${p.slug}.html`);
+        const pImg = safeUrl(p.image || 'images/default.jpg');
+        return `
+          <a href="${escapeHtml(pUrl)}" class="popular-card">
+            <div class="popular-img-wrap">
+              <img class="popular-img" src="${escapeHtml(pImg)}" alt="${escapeHtml(p.title)}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Filmy+Khabr'">
+            </div>
+            <div class="popular-content">
+              <div class="popular-cat">${escapeHtml(p.category)} • ${escapeHtml(p.platform || 'General')}</div>
+              <div class="popular-title">${escapeHtml(p.title)}</div>
+              <div class="popular-date">${escapeHtml(p.date)}</div>
             </div>
           </a>
-        `).join('');
+        `;
+      }).join('');
 
-        const trendingSlice = posts.slice(0, 5);
-        trendingContainer.innerHTML = trendingSlice.map((p, idx) => `
-          <a href="${p.url || `posts/${p.slug}.html`}" class="sidebar-trending-item">
-            <span class="sidebar-trending-rank">${idx + 1}</span>
-            <span class="sidebar-trending-title">${p.title}</span>
+      // 4. Sidebar Widgets
+      const editorsPickEl = document.getElementById('sidebar-editors-pick');
+      if (latestPost) {
+        editorsPickEl.innerHTML = `
+          <span class="editors-badge">Must Read</span>
+          <a href="${escapeHtml(safeUrl(latestPost.url || `posts/${latestPost.slug}.html`))}" class="editors-title">${escapeHtml(latestPost.title)}</a>
+        `;
+      }
+
+      const sideLatest = document.getElementById('sidebar-latest-container');
+      sideLatest.innerHTML = rawPosts.slice(0, 4).map(p => {
+        const sUrl = safeUrl(p.url || `posts/${p.slug}.html`);
+        const sImg = safeUrl(p.image || 'images/default.jpg');
+        return `
+          <a href="${escapeHtml(sUrl)}" class="side-news">
+            <img src="${escapeHtml(sImg)}" alt="${escapeHtml(p.title)}" onerror="this.src='https://placehold.co/100x70/171a1e/ffffff?text=News'">
+            <div class="side-news-title">${escapeHtml(p.title)}</div>
           </a>
-        `).join('');
-      }
+        `;
+      }).join('');
+
+      // 5. Dynamic Sections (Latest News Feed with Pagination)
+      renderDynamicFeed(rawPosts);
     }
 
-    function renderAll() {
-      if (!rawPosts || rawPosts.length === 0) return;
-
-      setupHeroSlider(rawPosts);
-
-      const trendingContainer = document.getElementById('trending-container');
-      const trendingPosts = rawPosts.slice(0, 4);
-      trendingContainer.innerHTML = trendingPosts.map((post, idx) => `
-        <a href="${post.url || `posts/${post.slug}.html`}" class="trend-card">
-          <div class="trend-img-box">
-            <img class="trend-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/300x200/171a1e/ffffff?text=Post'">
-            <div class="trend-rank">${idx + 1}</div>
-          </div>
-          <div class="trend-info">
-            <div class="trend-platform">${post.platform || post.category}</div>
-            <div class="trend-title">${post.title}</div>
-            <div class="trend-date">${post.date || '2026'}</div>
-          </div>
-        </a>
-      `).join('');
-
-      renderPaginatedNewsList(rawPosts);
-    }
-
-    function renderPaginatedNewsList(posts) {
-      const container = document.getElementById('posts-list-container');
-      const paginationEl = document.getElementById('pagination-box');
-
-      if (!posts.length) {
-        container.innerHTML = `<div class="no-posts">Is category mein abhi koi post nahi mili.</div>`;
-        paginationEl.innerHTML = '';
-        return;
-      }
-
-      const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+    function renderDynamicFeed(postsToRender) {
+      const dynamicContainer = document.getElementById('dynamic-category-sections');
+      
+      const totalPages = Math.ceil(postsToRender.length / POSTS_PER_PAGE);
       if (currentPage > totalPages) currentPage = totalPages;
       if (currentPage < 1) currentPage = 1;
 
       const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
-      const endIndex = startIndex + POSTS_PER_PAGE;
-      const currentPosts = posts.slice(startIndex, endIndex);
+      const currentSlice = postsToRender.slice(startIndex, startIndex + POSTS_PER_PAGE);
 
-      container.innerHTML = currentPosts.map(post => `
-        <a href="${post.url || `posts/${post.slug}.html`}" class="news-card">
-          <img class="news-thumb" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/120x80/171a1e/ffffff?text=News'">
-          <div style="flex:1; min-width:0;">
-            <div class="news-meta">${post.category} • ${post.platform || 'General'} • ${post.date || ''}</div>
-            <div class="news-title">${post.title}</div>
-          </div>
-        </a>
-      `).join('');
+      let feedHtml = `
+        <div class="section-title">
+          <span>Latest Entertainment News</span>
+        </div>
+        <div class="news-list">
+      `;
 
-      renderBoxPagination(totalPages);
-    }
-
-    function renderBoxPagination(totalPages) {
-      const paginationEl = document.getElementById('pagination-box');
-      if (totalPages <= 1) {
-        paginationEl.innerHTML = '';
-        return;
-      }
-
-      let paginationHTML = '';
-
-      if (currentPage > 1) {
-        paginationHTML += `<button class="page-btn" onclick="changePage(${currentPage - 1})">« Prev</button>`;
+      if (!currentSlice.length) {
+        feedHtml += `<div class="no-posts">No stories found.</div>`;
       } else {
-        paginationHTML += `<button class="page-btn" disabled>« Prev</button>`;
+        feedHtml += currentSlice.map(p => {
+          const nUrl = safeUrl(p.url || `posts/${p.slug}.html`);
+          const nImg = safeUrl(p.image || 'images/default.jpg');
+          return `
+            <a href="${escapeHtml(nUrl)}" class="news-card">
+              <img class="news-thumb" src="${escapeHtml(nImg)}" alt="${escapeHtml(p.title)}" onerror="this.src='https://placehold.co/120x80/171a1e/ffffff?text=News'">
+              <div class="news-info">
+                <div class="news-meta">${escapeHtml(p.category)} • ${escapeHtml(p.date)}</div>
+                <div class="news-title">${escapeHtml(p.title)}</div>
+              </div>
+            </a>
+          `;
+        }).join('');
       }
 
-      for (let i = 1; i <= totalPages; i++) {
-        if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
-          if (i === currentPage) {
-            paginationHTML += `<button class="page-btn active">${i}</button>`;
-          } else {
-            paginationHTML += `<button class="page-btn" onclick="changePage(${i})">${i}</button>`;
-          }
-        } else if (i === currentPage - 3 || i === currentPage + 3) {
-          paginationHTML += `<span style="color: var(--text-muted); padding: 0 4px;">...</span>`;
+      feedHtml += `</div>`;
+
+      // Pagination
+      if (totalPages > 1) {
+        feedHtml += `<div class="pagination-container">`;
+        if (currentPage > 1) {
+          feedHtml += `<button class="page-btn" onclick="changePage(${currentPage - 1})">« Prev</button>`;
         }
+        for (let i = 1; i <= totalPages; i++) {
+          if (i === currentPage) {
+            feedHtml += `<button class="page-btn active">${i}</button>`;
+          } else {
+            feedHtml += `<button class="page-btn" onclick="changePage(${i})">${i}</button>`;
+          }
+        }
+        if (currentPage < totalPages) {
+          feedHtml += `<button class="page-btn" onclick="changePage(${currentPage + 1})">Next »</button>`;
+        }
+        feedHtml += `</div>`;
       }
 
-      if (currentPage < totalPages) {
-        paginationHTML += `<button class="page-btn" onclick="changePage(${currentPage + 1})">Next »</button>`;
-      } else {
-        paginationHTML += `<button class="page-btn" disabled>Next »</button>`;
-      }
-
-      paginationEl.innerHTML = paginationHTML;
+      dynamicContainer.innerHTML = feedHtml;
     }
 
     function changePage(page) {
       currentPage = page;
       if (currentCategory === 'All') {
-        renderPaginatedNewsList(rawPosts);
+        renderDynamicFeed(rawPosts);
       } else {
-        let filtered = [];
-        if (currentCategory === 'Trending') {
-          filtered = rawPosts.filter(p => (p.badge || '').toLowerCase() === 'trending');
-        } else {
-          filtered = rawPosts.filter(p => {
-            const c = (p.category || '').toLowerCase();
-            const target = currentCategory.toLowerCase();
-            return c.includes(target) || target.includes(c);
-          });
-        }
-        renderPaginatedNewsList(filtered);
+        const filtered = rawPosts.filter(p => p.category.toLowerCase().includes(currentCategory.toLowerCase()));
+        renderDynamicFeed(filtered);
       }
       window.scrollTo({ top: 400, behavior: 'smooth' });
     }
 
-    function filterCategory(catName, updateUrl = true) {
+    function filterCategory(catName) {
       currentCategory = catName;
       currentPage = 1;
 
@@ -1189,40 +721,30 @@
         }
       });
 
-      const homeSections = document.getElementById('home-exclusive-sections');
-      const filterBanner = document.getElementById('filter-banner');
-      const filterLabel = document.getElementById('filter-label');
-      const heading = document.getElementById('posts-list-heading');
-
-      if (updateUrl) {
-        const newUrl = catName === 'All' ? window.location.pathname : `?cat=${encodeURIComponent(catName)}`;
-        window.history.pushState({}, '', newUrl);
-      }
+      const heroWrap = document.getElementById('hero-section-wrap');
+      const popularWrap = document.getElementById('popular-container').parentElement;
+      const banner = document.getElementById('filter-banner');
+      const label = document.getElementById('filter-label');
 
       if (catName === 'All') {
-        homeSections.style.display = 'block';
-        filterBanner.style.display = 'none';
-        heading.innerHTML = '<span>Latest News & Updates</span>';
-        renderAll();
+        heroWrap.style.display = 'block';
+        popularWrap.style.display = 'block';
+        banner.style.display = 'none';
+        renderDynamicFeed(rawPosts);
       } else {
-        homeSections.style.display = 'none';
-        filterBanner.style.display = 'flex';
-        filterLabel.textContent = `Browsing Category: ${catName}`;
-        heading.innerHTML = `<span>All ${catName} Articles</span>`;
+        heroWrap.style.display = 'none';
+        popularWrap.style.display = 'none';
+        banner.style.display = 'flex';
+        label.textContent = `Category: ${catName}`;
 
         let filtered = [];
         if (catName === 'Trending') {
-          filtered = rawPosts.filter(p => (p.badge || '').toLowerCase() === 'trending');
+          filtered = rawPosts.slice(0, 10);
         } else {
-          filtered = rawPosts.filter(p => {
-            const c = (p.category || '').toLowerCase();
-            const target = catName.toLowerCase();
-            return c.includes(target) || target.includes(c);
-          });
+          filtered = rawPosts.filter(p => p.category.toLowerCase().includes(catName.toLowerCase()));
         }
-        renderPaginatedNewsList(filtered);
+        renderDynamicFeed(filtered);
       }
-
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -1232,8 +754,7 @@
       if (box.style.display === 'block') {
         box.style.display = 'none';
         input.value = '';
-        if (currentCategory === 'All') renderAll();
-        else filterCategory(currentCategory, false);
+        filterCategory('All');
       } else {
         box.style.display = 'block';
         input.focus();
@@ -1241,32 +762,24 @@
     }
 
     function handleSearch(e) {
-      const query = e.target.value.toLowerCase().trim();
+      const q = e.target.value.toLowerCase().trim();
       currentPage = 1;
-      if (!query) {
-        if (currentCategory === 'All') renderAll();
-        else filterCategory(currentCategory, false);
+      if (!q) {
+        filterCategory('All');
         return;
       }
-
       const results = rawPosts.filter(p => 
-        (p.title && p.title.toLowerCase().includes(query)) ||
-        (p.summary && p.summary.toLowerCase().includes(query)) ||
-        (p.category && p.category.toLowerCase().includes(query))
+        p.title.toLowerCase().includes(q) || 
+        p.summary.toLowerCase().includes(q) || 
+        p.category.toLowerCase().includes(q)
       );
 
-      document.getElementById('home-exclusive-sections').style.display = 'none';
+      document.getElementById('hero-section-wrap').style.display = 'none';
+      document.getElementById('popular-container').parentElement.style.display = 'none';
       document.getElementById('filter-banner').style.display = 'flex';
-      document.getElementById('filter-label').textContent = `Search: "${query}" (${results.length} Found)`;
-      document.getElementById('posts-list-heading').innerHTML = `<span>Search Results</span>`;
-      renderPaginatedNewsList(results);
+      document.getElementById('filter-label').textContent = `Search Results for "${q}" (${results.length} found)`;
+      renderDynamicFeed(results);
     }
-
-    window.addEventListener('popstate', () => {
-      const params = new URLSearchParams(window.location.search);
-      const cat = params.get('cat') || 'All';
-      filterCategory(cat, false);
-    });
 
     window.addEventListener('DOMContentLoaded', loadSiteData);
   </script>
