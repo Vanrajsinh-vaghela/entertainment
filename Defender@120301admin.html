@@ -914,6 +914,9 @@
 
   <script>
     const MASTER_PIN = "1465822";
+    // STEP 4: Central site URL for the new Filmy Khabr subdomain.
+    // Keep this as the single source of truth for generated article/sitemap URLs.
+    const SITE_BASE_URL = "https://filmykhabr.gujaratfastalert.in";
     let selectedImageBase64 = null;
     let selectedImageExt = "jpg";
     let extraImagesBase64 = { 1: null, 2: null, 3: null };
@@ -1277,15 +1280,15 @@
       let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
       xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
       
-      xml += `  <url>\n    <loc>https://entertainment.gujaratfastalert.in/</loc>\n    <priority>1.0</priority>\n    <changefreq>daily</changefreq>\n  </url>\n`;
-      xml += `  <url>\n    <loc>https://entertainment.gujaratfastalert.in/about.html</loc>\n    <priority>0.6</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
-      xml += `  <url>\n    <loc>https://entertainment.gujaratfastalert.in/contact.html</loc>\n    <priority>0.6</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
-      xml += `  <url>\n    <loc>https://entertainment.gujaratfastalert.in/privacy-policy.html</loc>\n    <priority>0.5</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
-      xml += `  <url>\n    <loc>https://entertainment.gujaratfastalert.in/disclaimer.html</loc>\n    <priority>0.5</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
+      xml += `  <url>\n    <loc>${SITE_BASE_URL}/</loc>\n    <priority>1.0</priority>\n    <changefreq>daily</changefreq>\n  </url>\n`;
+      xml += `  <url>\n    <loc>${SITE_BASE_URL}/about.html</loc>\n    <priority>0.6</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
+      xml += `  <url>\n    <loc>${SITE_BASE_URL}/contact.html</loc>\n    <priority>0.6</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
+      xml += `  <url>\n    <loc>${SITE_BASE_URL}/privacy-policy.html</loc>\n    <priority>0.5</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
+      xml += `  <url>\n    <loc>${SITE_BASE_URL}/disclaimer.html</loc>\n    <priority>0.5</priority>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
 
       posts.forEach(p => {
         const postDate = p.publishedAt ? p.publishedAt.split('T')[0] : (p.date || new Date().toISOString().split('T')[0]);
-        xml += `  <url>\n    <loc>https://entertainment.gujaratfastalert.in/posts/${p.slug}.html</loc>\n    <lastmod>${postDate}</lastmod>\n    <priority>0.8</priority>\n    <changefreq>weekly</changefreq>\n  </url>\n`;
+        xml += `  <url>\n    <loc>${SITE_BASE_URL}/posts/${p.slug}.html</loc>\n    <lastmod>${postDate}</lastmod>\n    <priority>0.8</priority>\n    <changefreq>weekly</changefreq>\n  </url>\n`;
       });
 
       xml += `</urlset>`;
@@ -1293,10 +1296,10 @@
     }
 
     function generatePostHTML(post) {
-      const absoluteUrl = `https://entertainment.gujaratfastalert.in/posts/${post.slug}.html`;
+      const absoluteUrl = `${SITE_BASE_URL}/posts/${post.slug}.html`;
       const absoluteImg = post.image.startsWith('http') 
         ? post.image 
-        : `https://entertainment.gujaratfastalert.in/${post.image}`;
+        : `${SITE_BASE_URL}/${post.image}`;
       
       const rawSummary = post.summary || post.title;
       const safeSummary = rawSummary.replace(/"/g, '&quot;');
@@ -1380,7 +1383,7 @@
     "publisher": {
       "@type": "Organization",
       "name": "Filmy Khabr",
-      "url": "https://entertainment.gujaratfastalert.in/"
+      "url": "${SITE_BASE_URL}/"
     },
     "description": ${JSON.stringify(rawSummary)}
   }
@@ -1695,7 +1698,7 @@
           sha: sitemapFileSha || undefined
         });
 
-        const fullLiveUrl = `https://entertainment.gujaratfastalert.in/posts/${slug}.html`;
+        const fullLiveUrl = `${SITE_BASE_URL}/posts/${slug}.html`;
         document.getElementById('success-post-url').value = fullLiveUrl;
         document.getElementById('btn-open-post').href = fullLiveUrl;
         document.getElementById('publish-success-modal').style.display = 'flex';
