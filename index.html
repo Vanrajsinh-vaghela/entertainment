@@ -13,7 +13,7 @@
   <meta name="google-site-verification" content="BE1aM7twVnliG5WUG9TTrr1KLBu_-SIu_bGY_FjLwyg" />
 
   <meta charset="UTF-8">
-  <!-- ✅ FORCE DESKTOP MODE: Mobile par bhi 1200px width -->
+  <!-- ✅ Mobile par bhi Desktop view (Force Desktop Mode) -->
   <meta name="viewport" content="width=1200">
   
   <title>Filmy Khabr - Entertainment, Movies, OTT & Web Series News</title>
@@ -26,7 +26,6 @@
   <meta property="og:description" content="Latest Hindi entertainment news, OTT releases, web series and trailer updates.">
   
   <style>
-    /* ========== THEME VARIABLES (LIGHT AND DARK) ========== */
     :root {
       --bg: #f8f9fa;
       --surface: #ffffff;
@@ -58,4 +57,431 @@
 
     h1, h2, h3, .brand-title, .hero-title, .trending-slide-title { font-family: Georgia, "Times New Roman", serif; }
 
-    html { scroll-behavior: smooth; background: var(--bg
+    html { scroll-behavior: smooth; background: var(--bg); }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      font-size: 16px;
+      line-height: 1.5;
+      min-height: 100vh;
+      /* ✅ Force Desktop Width */
+      width: 1200px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px 40px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 0 48px; }
+
+    /* ✅ Desktop Grid (Sidebar Right) */
+    .content-sidebar-layout { display: grid; grid-template-columns: 1fr 380px; gap: 28px; align-items: start; margin-top: 14px; }
+
+    .main-column { min-width: 0; }
+
+    .sidebar { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); position: sticky; top: 60px; }
+
+    .sidebar-widget { margin-bottom: 28px; }
+    .sidebar-widget:last-child { margin-bottom: 0; }
+    .sidebar-widget h3 { font-size: 20px; font-weight: 800; border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 16px; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
+    .sidebar-news-item { display: flex; gap: 14px; margin-bottom: 16px; text-decoration: none; color: inherit; align-items: center; transition: opacity 0.2s; }
+    .sidebar-news-item:hover { opacity: 0.85; }
+    .sidebar-news-thumb { width: 95px; height: 68px; object-fit: cover; border-radius: 6px; background: #eee; flex-shrink: 0; }
+    .sidebar-news-meta { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; font-weight: 700; }
+    .sidebar-news-title { font-size: 15px; font-weight: 600; color: var(--text-main); line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .sidebar-trending-item { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--card-border); text-decoration: none; color: inherit; }
+    .sidebar-trending-rank { background: var(--accent); color: #fff; font-size: 13px; font-weight: 900; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; border-radius: 6px; flex-shrink: 0; }
+    .sidebar-trending-title { font-size: 15px; font-weight: 600; color: var(--text-main); line-height: 1.3; }
+    .sidebar-cats { display: flex; flex-wrap: wrap; gap: 8px; }
+    .sidebar-cat-tag { background: var(--bg); border: 1px solid var(--card-border); padding: 6px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: 0.2s; }
+    .sidebar-cat-tag:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    .calendar-item { background: var(--bg); border: 1px solid var(--card-border); padding: 12px 14px; border-radius: 8px; margin-bottom: 10px; }
+    .calendar-date { color: var(--accent); font-weight: 800; font-size: 12px; margin-bottom: 4px; text-transform: uppercase; }
+    .calendar-title { color: var(--text-main); font-weight: 600; font-size: 14px; line-height: 1.3; }
+
+    .editors-pick-box { background: var(--bg); border: 1px solid var(--card-border); border-radius: 10px; padding: 16px; }
+    .editors-pick-badge { display: inline-block; background: var(--accent); color: #fff; font-size: 11px; font-weight: 800; padding: 4px 9px; border-radius: 4px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .editors-pick-title { font-size: 16px; font-weight: 600; color: var(--text-main); line-height: 1.3; }
+
+    .ticker-bar { position: sticky; top: 0; z-index: 1000; height: 60px; padding: 12px 20px; background: var(--surface); border-bottom: 2px solid var(--accent); box-shadow: var(--shadow); display: flex; align-items: center; }
+    .ticker-label { background: var(--accent); color: #fff; font-weight: 900; padding: 6px 14px; border-radius: 4px; margin-right: 16px; font-size: 13px; text-transform: uppercase; flex-shrink: 0; letter-spacing: 1px; }
+    .ticker-viewport { flex: 1; position: relative; height: 36px; overflow: hidden; }
+    .ticker-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0; transform: translateY(100%); transition: transform 0.45s ease, opacity 0.45s ease; cursor: pointer; font-size: 15px; font-weight: 700; }
+    .ticker-slide.active { opacity: 1; transform: translateY(0); }
+    .ticker-slide.prev { opacity: 0; transform: translateY(-100%); }
+
+    header { padding: 30px 0 20px; min-height: 110px; display: grid; grid-template-columns: 60px 1fr 60px; align-items: center; justify-items: center; background: var(--surface); border-bottom: 2px solid var(--card-border); }
+    /* ✅ Professional & Bada Brand Title */
+    .brand-title { font-family: Georgia, "Times New Roman", serif; font-size: 64px; font-weight: 900; letter-spacing: 3px; line-height: 1; color: var(--text-main); text-align: center; grid-column: 2; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
+    .theme-toggle { width: 44px; height: 44px; border: 1px solid var(--card-border); border-radius: 50%; background: var(--bg); color: var(--text-main); font-size: 20px; cursor: pointer; transition: .2s ease; grid-column: 1; justify-self: start; }
+    .theme-toggle:hover { border-color: var(--accent); }
+    .search-btn { width: 44px; height: 44px; border: 1px solid var(--card-border); border-radius: 50%; background: var(--bg); color: var(--text-main); font-size: 20px; cursor: pointer; transition: .2s ease; grid-column: 3; justify-self: end; }
+    .search-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    nav { display: flex; align-items: center; justify-content: center; gap: 14px; overflow-x: auto; padding: 14px 0; background: var(--surface); border-bottom: 1px solid var(--card-border); scrollbar-width: none; -ms-overflow-style: none; margin-bottom: 20px; }
+    nav::-webkit-scrollbar { display: none; }
+    .nav-link { padding: 10px 20px; border: 1px solid transparent; border-radius: 999px; font-size: 16px; font-weight: 600; color: var(--text-muted); white-space: nowrap; cursor: pointer; transition: all 0.2s; }
+    .nav-link.active, .nav-link:hover { color: var(--accent); background: var(--bg); border-color: var(--card-border); }
+
+    #search-container { display: none; padding: 10px 0; margin-bottom: 10px; }
+    #search-input { width: 100%; min-height: 46px; padding: 10px 15px; border-radius: 8px; background: var(--bg); border: 1px solid var(--card-border); color: var(--text-main); font-size: 15px; outline: none; }
+
+    #filter-banner { display: none; background: #fef2f2; border: 1px solid #fecaca; border-radius: var(--radius); padding: 10px 14px; margin: 10px 0; align-items: center; justify-content: space-between; }
+    .filter-info { font-size: 13px; font-weight: 600; color: #b91c1c; }
+    .clear-filter-btn { background: var(--accent); color: #fff; border: none; font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
+
+    .section-title { margin: 30px 0 15px; font-size: 24px; font-weight: 800; color: var(--text-main); display: flex; align-items: center; justify-content: space-between; }
+    .section-title > span:first-child::before { content: ""; display: inline-block; width: 4px; height: 18px; margin-right: 9px; vertical-align: -2px; background: var(--accent); border-radius: 3px; }
+    .section-view-all { font-size: 13px; color: var(--accent); font-weight: 700; cursor: pointer; }
+
+    /* Hero Slider */
+    .hero-slider-container { position: relative; background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--card-border); margin-top: 10px; box-shadow: var(--shadow); user-select: none; touch-action: pan-y; }
+    .hero-slider-track { display: flex; transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
+    .hero-slide { min-width: 100%; display: flex; flex-direction: column; position: relative; background: var(--card-bg); }
+    .hero-media-wrap { width: 100%; height: 500px; position: relative; background: #000; overflow: hidden; }
+    .hero-media-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-content { padding: 25px 25px 30px; background: var(--card-bg); position: relative; }
+    .hero-meta-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+    .hero-platform { font-size: 13px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: .8px; }
+    .badge-tag { background: var(--bg); color: var(--text-muted); border: 1px solid var(--card-border); font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 6px; text-transform: uppercase; }
+    .hero-title { font-family: Georgia, "Times New Roman", serif; font-size: 36px; font-weight: 800; color: var(--text-main); line-height: 1.1; margin: 8px 0 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .hero-title a:hover { color: var(--accent-hover); }
+    .hero-summary { font-size: 17px; color: var(--text-muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 14px; }
+    /* ✅ Bade Buttons */
+    .hero-actions { display: flex; gap: 12px; align-items: center; }
+    .hero-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--accent); color: #fff; font-size: 20px; font-weight: 800; padding: 20px 40px; border-radius: 12px; border: none; cursor: pointer; text-decoration: none; box-shadow: 0 4px 15px rgba(185,28,28,0.3); transition: all 0.2s; }
+    .hero-btn:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .hero-btn-trailer { background: var(--bg); color: var(--text-main); border: 2px solid var(--card-border); box-shadow: none; }
+    .hero-btn-trailer:hover { background: var(--card-border); }
+
+    .hero-progress-track { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: rgba(0,0,0,0.1); z-index: 4; }
+    .hero-progress-bar { height: 100%; width: 0%; background: var(--accent); transition: width 0.1s linear; }
+    .hero-nav-btn { position: absolute; top: 45%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: 1px solid var(--card-border); color: var(--text-main); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 5; font-size: 16px; }
+    .hero-nav-btn:hover { background: var(--accent); color: #fff; }
+    .hero-nav-btn.prev { left: 12px; }
+    .hero-nav-btn.next { right: 12px; }
+    /* ✅ Dots Clickable */
+    .hero-dots { position: absolute; bottom: 14px; right: 18px; display: flex; gap: 6px; z-index: 3; align-items: center; }
+    .hero-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(0,0,0,0.3); transition: all 0.25s ease; cursor: pointer; }
+    .hero-dot.active { background: var(--accent); width: 24px; border-radius: 5px; }
+
+    /* Explore Bar */
+    .explore-cat-bar { display: flex; gap: 12px; overflow-x: auto; padding: 16px 0; margin-top: 18px; scrollbar-width: none; -ms-overflow-style: none; }
+    .explore-cat-bar::-webkit-scrollbar { display: none; }
+    .explore-cat-item { flex: 0 0 auto; display: flex; align-items: center; gap: 10px; background: var(--card-bg); border: 1px solid var(--card-border); padding: 12px 24px; border-radius: 50px; cursor: pointer; transition: all 0.2s ease; box-shadow: var(--shadow); }
+    .explore-cat-item:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .explore-cat-icon { font-size: 20px; }
+    .explore-cat-text { font-size: 15px; font-weight: 700; color: var(--text-main); white-space: nowrap; }
+
+    /* Trending Slider - ✅ 6 Items */
+    .trending-slider-container { position: relative; background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--card-border); box-shadow: var(--shadow); }
+    .trending-slider-track { display: flex; transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
+    .trending-slide { min-width: 100%; display: flex; flex-direction: column; background: var(--card-bg); position: relative; }
+    .trending-slide-img-box { width: 100%; aspect-ratio: 16 / 9; position: relative; background: #eee; overflow: hidden; }
+    .trending-slide-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .trending-slide-rank { position: absolute; top: 10px; left: 10px; background: var(--accent); color: #fff; font-size: 13px; font-weight: 900; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 6px; z-index: 2; }
+    .trending-slide-content { padding: 18px 20px 22px; background: var(--card-bg); }
+    .trending-slide-platform { font-size: 12px; color: var(--text-muted); font-weight: 700; margin-bottom: 4px; text-transform: uppercase; letter-spacing: .5px; }
+    .trending-slide-title { font-family: Georgia, "Times New Roman", serif; font-size: 24px; font-weight: 800; color: var(--text-main); line-height: 1.2; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .trending-slide-title a:hover { color: var(--accent); }
+    .trending-slide-date { font-size: 12px; color: var(--text-dim); }
+    .trending-nav-btn { position: absolute; top: 35%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: 1px solid var(--card-border); color: var(--text-main); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 5; font-size: 14px; }
+    .trending-nav-btn:hover { background: var(--accent); color: #fff; }
+    .trending-nav-btn.prev { left: 10px; }
+    .trending-nav-btn.next { right: 10px; }
+    /* ✅ Dots Clickable */
+    .trending-dots { position: absolute; bottom: 14px; right: 16px; display: flex; gap: 5px; z-index: 3; align-items: center; }
+    .trending-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(0,0,0,0.3); transition: all 0.25s ease; cursor: pointer; }
+    .trending-dot.active { background: var(--accent); width: 20px; border-radius: 5px; }
+
+    /* News List */
+    .news-list { display: flex; flex-direction: column; gap: 15px; }
+    .news-card { display: flex; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 10px; overflow: hidden; padding: 15px; gap: 20px; align-items: center; transition: 0.2s; box-shadow: var(--shadow); }
+    .news-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .news-thumb { width: 180px; height: 120px; border-radius: 6px; object-fit: cover; flex-shrink: 0; background: #eee; }
+    .news-meta { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; font-weight: 700; }
+    .news-title { font-size: 20px; font-weight: 700; color: var(--text-main); line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+    .pagination-container { display: flex; justify-content: center; align-items: center; gap: 6px; margin: 28px 0 16px 0; flex-wrap: wrap; }
+    .page-btn { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-main); padding: 10px 16px; font-size: 15px; font-weight: 700; border-radius: 8px; cursor: pointer; transition: 0.2s; }
+    .page-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .page-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .community-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 20px 16px; margin-top: 24px; text-align: center; box-shadow: var(--shadow); }
+    .comm-title { font-size: 18px; font-weight: 800; color: var(--text-main); margin-bottom: 4px; }
+    .comm-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 12px; }
+    .comm-btn { display: inline-block; background: var(--accent); color: #fff; font-size: 14px; font-weight: 700; padding: 10px 20px; border-radius: 999px; text-decoration: none; }
+    .comm-btn:hover { background: var(--accent-hover); }
+
+    footer { text-align: center; margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--card-border); font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+    .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+    .no-posts { text-align: center; padding: 40px 10px; color: var(--text-muted); font-size: 14px; }
+  </style>
+</head>
+<body>
+
+  <div class="ticker-bar" id="ticker-bar" title="Touch or hover to pause">
+    <span class="ticker-label">BREAKING:</span>
+    <div class="ticker-viewport" id="ticker-viewport">
+      <div class="ticker-slide active">Loading latest entertainment updates...</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <header>
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Day/Night">🌙</button>
+      <div class="brand-title">
+        <a href="index.html">FILMY KHABR</a>
+      </div>
+      <div>
+        <button class="search-btn" onclick="toggleSearch()" title="Search Articles">🔍</button>
+      </div>
+    </header>
+
+    <nav>
+      <span class="nav-link active" onclick="filterCategory('All')">Home</span>
+      <span class="nav-link" onclick="filterCategory('Movies')">Movies</span>
+      <span class="nav-link" onclick="filterCategory('Web Series')">Web Series</span>
+      <span class="nav-link" onclick="filterCategory('OTT')">OTT</span>
+      <span class="nav-link" onclick="filterCategory('Trailers')">Trailers</span>
+      <span class="nav-link" onclick="filterCategory('News')">News</span>
+      <span class="nav-link" onclick="filterCategory('Upcoming')">Upcoming</span>
+      <span class="nav-link" onclick="filterCategory('Celebrity News')">Celebrity</span>
+    </nav>
+
+    <div id="search-container">
+      <input type="text" id="search-input" placeholder="Search movies, series, news..." oninput="handleSearch(event)">
+    </div>
+
+    <div id="filter-banner">
+      <span class="filter-info" id="filter-label">Category: All</span>
+      <button class="clear-filter-btn" onclick="filterCategory('All')">✕ Show All</button>
+    </div>
+
+    <div id="hero-slider-wrap"></div>
+
+    <div class="explore-cat-bar">
+      <div class="explore-cat-item" onclick="filterCategory('Movies')">
+        <span class="explore-cat-icon">🎬</span>
+        <span class="explore-cat-text">Movies</span>
+      </div>
+      <div class="explore-cat-item" onclick="filterCategory('Web Series')">
+        <span class="explore-cat-icon">📺</span>
+        <span class="explore-cat-text">Web Series</span>
+      </div>
+      <div class="explore-cat-item" onclick="filterCategory('OTT')">
+        <span class="explore-cat-icon">🍿</span>
+        <span class="explore-cat-text">OTT Releases</span>
+      </div>
+      <div class="explore-cat-item" onclick="filterCategory('Trailers')">
+        <span class="explore-cat-icon">▶️</span>
+        <span class="explore-cat-text">Trailers</span>
+      </div>
+      <div class="explore-cat-item" onclick="filterCategory('Celebrity News')">
+        <span class="explore-cat-icon">⭐</span>
+        <span class="explore-cat-text">Celebrity News</span>
+      </div>
+      <div class="explore-cat-item" onclick="filterCategory('News')">
+        <span class="explore-cat-icon">📰</span>
+        <span class="explore-cat-text">Entertainment News</span>
+      </div>
+    </div>
+
+    <div class="content-sidebar-layout">
+      
+      <div class="main-column">
+        <div id="home-exclusive-sections">
+          <!-- ✅ Trending Now Section -->
+          <div class="section-title">
+            <span>🔥 Trending Now</span>
+            <span class="section-view-all" onclick="filterCategory('Trending')">View All ›</span>
+          </div>
+          <div id="trending-slider-wrap"></div>
+        </div>
+
+        <div class="section-title" id="posts-list-heading">
+          <span>Latest News & Updates</span>
+        </div>
+        <div class="news-list" id="posts-list-container"></div>
+
+        <div id="pagination-box" class="pagination-container"></div>
+
+        <div class="community-box">
+          <div class="comm-title">Join Our Community</div>
+          <div class="comm-desc">Sabse pehle movie aur OTT updates pane ke liye judiye</div>
+          <a href="https://t.me/+rG_x3BDIdYliNTVl" target="_blank" rel="noopener noreferrer" class="comm-btn">Join Telegram Channel</a>
+        </div>
+      </div>
+
+      <aside class="sidebar">
+        <div class="sidebar-widget">
+          <h3>⭐ EDITOR'S PICK</h3>
+          <div class="editors-pick-box" id="sidebar-editors-pick">
+            <span class="editors-pick-badge">Must Read</span>
+            <div class="editors-pick-title">Loading top story...</div>
+          </div>
+        </div>
+
+        <div class="sidebar-widget">
+          <h3>📌 LATEST NEWS</h3>
+          <div id="sidebar-latest-container"></div>
+        </div>
+
+        <div class="sidebar-widget">
+          <h3>🔥 TRENDING</h3>
+          <div id="sidebar-trending-container"></div>
+        </div>
+
+        <div class="sidebar-widget">
+          <h3>📅 UPCOMING RELEASES</h3>
+          <div class="calendar-list">
+            <div class="calendar-item">
+              <div class="calendar-date">10 Sept 2026</div>
+              <div class="calendar-title">Mirzapur: The Movie (Theatres)</div>
+            </div>
+            <div class="calendar-item">
+              <div class="calendar-date">14 Sept 2026</div>
+              <div class="calendar-title">Vibe Season 2 (Netflix OTT)</div>
+            </div>
+            <div class="calendar-item">
+              <div class="calendar-date">22 Sept 2026</div>
+              <div class="calendar-title">Street Fighter Sequel Teaser</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-widget">
+          <h3>📂 POPULAR CATEGORIES</h3>
+          <div class="sidebar-cats">
+            <span class="sidebar-cat-tag" onclick="filterCategory('Movies')">Movies</span>
+            <span class="sidebar-cat-tag" onclick="filterCategory('Web Series')">Web Series</span>
+            <span class="sidebar-cat-tag" onclick="filterCategory('OTT')">OTT</span>
+            <span class="sidebar-cat-tag" onclick="filterCategory('Trailers')">Trailers</span>
+            <span class="sidebar-cat-tag" onclick="filterCategory('News')">News</span>
+            <span class="sidebar-cat-tag" onclick="filterCategory('Celebrity News')">Celebrity</span>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+
+    <footer>
+      <div class="footer-links">
+        <a href="about.html">About Us</a> •
+        <a href="contact.html">Contact Us</a> •
+        <a href="privacy-policy.html">Privacy Policy</a> •
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+      © 2026 Filmy Khabr.<br>
+      <span class="shiny-author">Managed and Published by Vanrajsinh Vaghela.</span><br>
+      All Rights Reserved.
+    </footer>
+  </div>
+
+  <script>
+    let rawPosts = [];
+    let currentCategory = 'All';
+    const POSTS_PER_PAGE = 8;
+    let currentPage = 1;
+
+    // ✅ FAST RELOAD - Refresh par hamesha Home page khulega
+    function loadSiteData() {
+      currentCategory = 'All';
+      currentPage = 1;
+      
+      fetch('data/posts.json')
+        .then(res => {
+          if (!res.ok) throw new Error('not found');
+          return res.json();
+        })
+        .then(data => {
+          rawPosts = normalizePosts(data);
+          setupBreakingTicker(rawPosts);
+          renderSidebarWidgets(rawPosts);
+          renderAll();
+        })
+        .catch(err => {
+          console.warn('Could not load posts:', err);
+          setupBreakingTicker([]);
+          document.getElementById('posts-list-container').innerHTML = `<div class="no-posts">Abhi tak koi post publish nahi hui.</div>`;
+        });
+    }
+
+    function applyTimeBasedTheme() {
+      const hour = new Date().getHours();
+      const body = document.body;
+      if (hour >= 18 || hour < 6) {
+        body.classList.add('dark-mode');
+      } else {
+        body.classList.remove('dark-mode');
+      }
+      updateThemeIcon();
+    }
+
+    function toggleTheme() {
+      const body = document.body;
+      body.classList.toggle('dark-mode');
+      updateThemeIcon();
+    }
+
+    function updateThemeIcon() {
+      const btn = document.querySelector('.theme-toggle');
+      if (document.body.classList.contains('dark-mode')) {
+        btn.textContent = '☀️';
+      } else {
+        btn.textContent = '🌙';
+      }
+    }
+
+    function safeText(value, fallback = '') { return value === null || value === undefined ? fallback : String(value); }
+    function escapeHtml(value) { return safeText(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;').replace(/'/g, '&#39;'); }
+    function safeUrl(value, fallback = '#') { const raw = safeText(value, '').trim(); if (!raw) return fallback; try { const u = new URL(raw, window.location.href); if (u.protocol === 'http:' || u.protocol === 'https:') return u.href; } catch (_) {} return fallback; }
+    function normalizePosts(data) { if (!Array.isArray(data)) return []; return data.filter(p => p && typeof p === 'object').map(p => ({ ...p, title: safeText(p.title, 'Untitled'), slug: safeText(p.slug, ''), url: safeText(p.url, ''), image: safeText(p.image, ''), summary: safeText(p.summary, ''), category: safeText(p.category, 'News'), platform: safeText(p.platform, 'General'), badge: safeText(p.badge, 'Trending'), date: safeText(p.date, '2026'), trailer: safeText(p.trailer, '') })); }
+    function getYoutubeEmbedUrl(url) { if (!url) return null; let videoId = ''; if (url.includes('youtu.be/')) videoId = url.split('youtu.be/')[1].split(/[?#]/)[0]; else if (url.includes('watch?v=')) videoId = url.split('watch?v=')[1].split('&')[0]; else if (url.includes('/embed/')) videoId = url.split('/embed/')[1].split(/[?#]/)[0]; else if (url.length === 11 && !url.includes('/')) videoId = url; return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0` : null; }
+
+    let isVideoPlaying = false;
+    function playHeroInline(slideIndex, title, videoUrl) { const embedUrl = getYoutubeEmbedUrl(videoUrl); if (!embedUrl) { window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(title + " official trailer")}`, '_blank'); return; } const mediaWrap = document.getElementById(`hero-media-${slideIndex}`); if (mediaWrap) { isVideoPlaying = true; if (heroTimer) clearInterval(heroTimer); const pBar = document.getElementById('hero-progress-bar'); if (pBar) pBar.style.width = '0%'; mediaWrap.innerHTML = `<iframe src="${embedUrl}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`; } }
+
+    let tickerInterval = null; let tickerIndex = 0; let tickerSlides = []; let isTickerPaused = false;
+    function setupBreakingTicker(posts) { const viewport = document.getElementById('ticker-viewport'); let tickerItems = []; if (posts && posts.length > 0) { posts.slice(0, 3).forEach(p => tickerItems.push({ title: p.title, url: p.url || `posts/${p.slug}.html` })); } const fallback = [{ title: "⚡ Top OTT & Web Series Weekly Releases", url: "#" }, { title: "🎬 Bollywood Box Office Updates Live", url: "#" }, { title: "🍿 Latest Movie Trailers Breakdown", url: "#" }]; let fbIdx = 0; while (tickerItems.length < 3) tickerItems.push(fallback[fbIdx++ % fallback.length]); viewport.innerHTML = tickerItems.map((item, idx) => `<a href="${item.url}" class="ticker-slide ${idx === 0 ? 'active' : ''}">• ${item.title}</a>`).join(''); tickerSlides = Array.from(viewport.querySelectorAll('.ticker-slide')); tickerIndex = 0; if (tickerInterval) clearInterval(tickerInterval); tickerInterval = setInterval(() => { if (!isTickerPaused && tickerSlides.length > 1) { const currentSlide = tickerSlides[tickerIndex]; tickerIndex = (tickerIndex + 1) % tickerSlides.length; const nextSlide = tickerSlides[tickerIndex]; currentSlide.className = 'ticker-slide prev'; nextSlide.className = 'ticker-slide active'; setTimeout(() => { if (currentSlide !== tickerSlides[tickerIndex]) currentSlide.className = 'ticker-slide'; }, 500); } }, 3200); }
+    const tickerContainer = document.getElementById('ticker-bar'); tickerContainer.addEventListener('mouseenter', () => { isTickerPaused = true; }); tickerContainer.addEventListener('mouseleave', () => { isTickerPaused = false; });
+
+    let heroTimer = null; let heroCurrentIndex = 0; let heroTotalSlides = 0; let isHeroPaused = false; let heroStartX = 0; const SLIDE_DURATION = 4500; let progressElapsed = 0; const PROGRESS_STEP = 50;
+    function setupHeroSlider(posts) { const heroWrap = document.getElementById('hero-slider-wrap'); const heroPosts = posts.slice(0, 20); heroTotalSlides = heroPosts.length; heroCurrentIndex = 0; progressElapsed = 0; isVideoPlaying = false; if (!heroTotalSlides) { heroWrap.innerHTML = ''; return; } if (heroTimer) clearInterval(heroTimer); const slidesHTML = heroPosts.map((post, idx) => { const trailerUrl = post.trailer || (post.category === 'Trailers' || post.platform === 'YouTube' ? 'https://www.youtube.com' : ''); return `<div class="hero-slide" id="hero-slide-${idx}"><div class="hero-media-wrap" id="hero-media-${idx}"><img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/600x400/eee/999?text=Filmy+Khabr'"></div><div class="hero-content"><div class="hero-meta-row"><span class="hero-platform">${post.platform || post.category}</span><span class="badge-tag">${post.badge || 'Trending'}</span></div><div class="hero-title"><a href="${post.url || `posts/${post.slug}.html`}">${post.title}</a></div><div class="hero-summary">${post.summary || ''}</div><div class="hero-actions"><a href="${post.url || `posts/${post.slug}.html`}" class="hero-btn">Read Article</a><button class="hero-btn hero-btn-trailer" onclick="playHeroInline(${idx}, '${post.title.replace(/'/g, "\\'")}', '${trailerUrl}')">▶ Play Trailer</button></div></div></div>`; }).join(''); let dotsHTML = ''; if (heroTotalSlides > 1) { const dotsCount = Math.min(heroTotalSlides, 10); dotsHTML = `<div class="hero-dots" id="hero-dots">${Array.from({ length: dotsCount }).map((_, i) => `<span class="hero-dot ${i === 0 ? 'active' : ''}" onclick="goToHeroSlide(${i})"></span>`).join('')}</div>`; } let navBtns = ''; if (heroTotalSlides > 1) { navBtns = `<button class="hero-nav-btn prev" onclick="prevHeroSlide(event)">❮</button><button class="hero-nav-btn next" onclick="nextHeroSlide(event)">❯</button>`; } heroWrap.innerHTML = `<div class="hero-slider-container" id="hero-slider-container"><div class="hero-slider-track" id="hero-slider-track">${slidesHTML}</div><div class="hero-progress-track"><div class="hero-progress-bar" id="hero-progress-bar"></div></div>${navBtns}${dotsHTML}</div>`; const container = document.getElementById('hero-slider-container'); if (container) { container.addEventListener('mouseenter', () => { isHeroPaused = true; }); container.addEventListener('mouseleave', () => { isHeroPaused = false; }); container.addEventListener('touchstart', (e) => { isHeroPaused = true; heroStartX = e.touches[0].clientX; }, { passive: true }); container.addEventListener('touchend', (e) => { const diffX = heroStartX - e.changedTouches[0].clientX; if (Math.abs(diffX) > 40) { if (diffX > 0) nextHeroSlide(); else prevHeroSlide(); } setTimeout(() => { isHeroPaused = false; }, 1500); }, { passive: true }); startHeroProgress(); } }
+    function goToHeroSlide(index) { if (index < 0 || index >= heroTotalSlides) return; heroCurrentIndex = index; updateHeroSlide(); }
+    function startHeroProgress() { if (heroTimer) clearInterval(heroTimer); if (isVideoPlaying) return; progressElapsed = 0; heroTimer = setInterval(() => { if (!isHeroPaused && !isVideoPlaying && heroTotalSlides > 1) { progressElapsed += PROGRESS_STEP; const percentage = Math.min((progressElapsed / SLIDE_DURATION) * 100, 100); const pBar = document.getElementById('hero-progress-bar'); if (pBar) pBar.style.width = `${percentage}%`; if (progressElapsed >= SLIDE_DURATION) nextHeroSlide(); } }, PROGRESS_STEP); }
+    function updateHeroSlide() { const track = document.getElementById('hero-slider-track'); if (!track) return; track.style.transform = `translateX(-${heroCurrentIndex * 100}%)`; rawPosts.slice(0, 20).forEach((post, idx) => { const wrap = document.getElementById(`hero-media-${idx}`); if (wrap && wrap.querySelector('iframe')) wrap.innerHTML = `<img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/600x400/eee/999?text=Filmy+Khabr'">`; }); isVideoPlaying = false; const dots = document.querySelectorAll('.hero-dot'); if (dots.length) dots.forEach((dot, idx) => dot.classList.toggle('active', idx === (heroCurrentIndex % dots.length))); progressElapsed = 0; const pBar = document.getElementById('hero-progress-bar'); if (pBar) pBar.style.width = '0%'; startHeroProgress(); }
+    function nextHeroSlide(e) { if (e) e.stopPropagation(); if (heroTotalSlides <= 1) return; heroCurrentIndex = (heroCurrentIndex + 1) % heroTotalSlides; updateHeroSlide(); }
+    function prevHeroSlide(e) { if (e) e.stopPropagation(); if (heroTotalSlides <= 1) return; heroCurrentIndex = (heroCurrentIndex - 1 + heroTotalSlides) % heroTotalSlides; updateHeroSlide(); }
+
+    let trendingTimer = null; let trendingCurrentIndex = 0; let trendingTotalSlides = 0; let isTrendingPaused = false; let trendingStartX = 0;
+    function setupTrendingSlider(posts) { const wrap = document.getElementById('trending-slider-wrap'); const trendingPosts = posts.slice(0, 6); trendingTotalSlides = trendingPosts.length; trendingCurrentIndex = 0; if (!trendingTotalSlides) { wrap.innerHTML = ''; return; } if (trendingTimer) clearInterval(trendingTimer); const slidesHTML = trendingPosts.map((post, idx) => { const articleUrl = post.url || `posts/${post.slug}.html`; const imageUrl = post.image || 'images/default.jpg'; return `<div class="trending-slide" id="trending-slide-${idx}"><div class="trending-slide-img-box"><a href="${articleUrl}"><img class="trending-slide-img" src="${imageUrl}" alt="${escapeHtml(post.title)}" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/600x400/eee/999?text=Post'"></a><div class="trending-slide-rank">${idx + 1}</div></div><div class="trending-slide-content"><div class="trending-slide-platform">${post.platform || post.category}</div><div class="trending-slide-title"><a href="${articleUrl}">${escapeHtml(post.title)}</a></div><div class="trending-slide-date">${post.date || '2026'}</div></div></div>`; }).join(''); let dotsHTML = ''; if (trendingTotalSlides > 1) dotsHTML = `<div class="trending-dots" id="trending-dots">${Array.from({ length: trendingTotalSlides }).map((_, i) => `<span class="trending-dot ${i === 0 ? 'active' : ''}" onclick="goToTrendingSlide(${i})"></span>`).join('')}</div>`; let navBtns = ''; if (trendingTotalSlides > 1) navBtns = `<button class="trending-nav-btn prev" onclick="prevTrendingSlide(event)">❮</button><button class="trending-nav-btn next" onclick="nextTrendingSlide(event)">❯</button>`; wrap.innerHTML = `<div class="trending-slider-container" id="trending-slider-container"><div class="trending-slider-track" id="trending-slider-track">${slidesHTML}</div>${navBtns}${dotsHTML}</div>`; const container = document.getElementById('trending-slider-container'); if (container) { container.addEventListener('mouseenter', () => { isTrendingPaused = true; }); container.addEventListener('mouseleave', () => { isTrendingPaused = false; }); container.addEventListener('touchstart', (e) => { isTrendingPaused = true; trendingStartX = e.touches[0].clientX; }, { passive: true }); container.addEventListener('touchend', (e) => { const diffX = trendingStartX - e.changedTouches[0].clientX; if (Math.abs(diffX) > 40) { if (diffX > 0) nextTrendingSlide(); else prevTrendingSlide(); } setTimeout(() => { isTrendingPaused = false; }, 1500); }, { passive: true }); startTrendingAutoPlay(); } }
+    function goToTrendingSlide(index) { if (index < 0 || index >= trendingTotalSlides) return; trendingCurrentIndex = index; updateTrendingSlide(); }
+    function startTrendingAutoPlay() { if (trendingTimer) clearInterval(trendingTimer); trendingTimer = setInterval(() => { if (!isTrendingPaused && trendingTotalSlides > 1) nextTrendingSlide(); }, 4000); }
+    function updateTrendingSlide() { const track = document.getElementById('trending-slider-track'); if (!track) return; track.style.transform = `translateX(-${trendingCurrentIndex * 100}%)`; const dots = document.querySelectorAll('.trending-dot'); if (dots.length) dots.forEach((dot, idx) => dot.classList.toggle('active', idx === trendingCurrentIndex)); }
+    function nextTrendingSlide(e) { if (e) e.stopPropagation(); if (trendingTotalSlides <= 1) return; trendingCurrentIndex = (trendingCurrentIndex + 1) % trendingTotalSlides; updateTrendingSlide(); }
+    function prevTrendingSlide(e) { if (e) e.stopPropagation(); if (trendingTotalSlides <= 1) return; trendingCurrentIndex = (trendingCurrentIndex - 1 + trendingTotalSlides) % trendingTotalSlides; updateTrendingSlide(); }
+
+    function renderAll() { if (!rawPosts || rawPosts.length === 0) return; setupHeroSlider(rawPosts); setupTrendingSlider(rawPosts); renderPaginatedNewsList(rawPosts); }
+    function renderSidebarWidgets(posts) { const latestContainer = document.getElementById('sidebar-latest-container'); const trendingContainer = document.getElementById('sidebar-trending-container'); const editorsPickContainer = document.getElementById('sidebar-editors-pick'); if (posts && posts.length > 0) { const topPost = posts[0]; editorsPickContainer.innerHTML = `<span class="editors-pick-badge">Must Read</span><a href="${topPost.url || `posts/${topPost.slug}.html`}" class="editors-pick-title" style="display:block; color:var(--text-main); text-decoration:none;">${topPost.title}</a>`; latestContainer.innerHTML = posts.slice(0, 4).map(p => `<a href="${p.url || `posts/${p.slug}.html`}" class="sidebar-news-item"><img class="sidebar-news-thumb" src="${p.image || 'images/default.jpg'}" alt="${escapeHtml(p.title)}" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/100x70/eee/999?text=News'"><div class="sidebar-news-info"><div class="sidebar-news-meta">${escapeHtml(p.category)}</div><div class="sidebar-news-title">${escapeHtml(p.title)}</div></div></a>`).join(''); trendingContainer.innerHTML = posts.slice(0, 5).map((p, idx) => `<a href="${p.url || `posts/${p.slug}.html`}" class="sidebar-trending-item"><span class="sidebar-trending-rank">${idx + 1}</span><span class="sidebar-trending-title">${escapeHtml(p.title)}</span></a>`).join(''); } }
+    function renderPaginatedNewsList(posts) { const container = document.getElementById('posts-list-container'); const paginationEl = document.getElementById('pagination-box'); if (!posts.length) { container.innerHTML = `<div class="no-posts">Is category mein abhi koi post nahi mili.</div>`; paginationEl.innerHTML = ''; return; } const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE); if (currentPage > totalPages) currentPage = totalPages; if (currentPage < 1) currentPage = 1; const startIndex = (currentPage - 1) * POSTS_PER_PAGE; const currentPosts = posts.slice(startIndex, startIndex + POSTS_PER_PAGE); container.innerHTML = currentPosts.map(post => `<a href="${post.url || `posts/${post.slug}.html`}" class="news-card"><img class="news-thumb" src="${post.image || 'images/default.jpg'}" alt="${escapeHtml(post.title)}" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/120x80/eee/999?text=News'"><div style="flex:1; min-width:0;"><div class="news-meta">${escapeHtml(post.category)} • ${escapeHtml(post.date || '')}</div><div class="news-title">${escapeHtml(post.title)}</div></div></a>`).join(''); renderBoxPagination(totalPages); }
+    function renderBoxPagination(totalPages) { const paginationEl = document.getElementById('pagination-box'); if (totalPages <= 1) { paginationEl.innerHTML = ''; return; } let paginationHTML = ''; paginationHTML += currentPage > 1 ? `<button class="page-btn" onclick="changePage(${currentPage - 1})">« Prev</button>` : `<button class="page-btn" disabled>« Prev</button>`; for (let i = 1; i <= totalPages; i++) { if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) { paginationHTML += i === currentPage ? `<button class="page-btn active">${i}</button>` : `<button class="page-btn" onclick="changePage(${i})">${i}</button>`; } else if (i === currentPage - 3 || i === currentPage + 3) paginationHTML += `<span style="color: var(--text-muted); padding: 0 4px;">...</span>`; } paginationHTML += currentPage < totalPages ? `<button class="page-btn" onclick="changePage(${currentPage + 1})">Next »</button>` : `<button class="page-btn" disabled>Next »</button>`; paginationEl.innerHTML = paginationHTML; }
+    function changePage(page) { currentPage = page; if (currentCategory === 'All') renderPaginatedNewsList(rawPosts); else { let filtered = []; if (currentCategory === 'Trending') filtered = rawPosts.filter(p => (p.badge || '').toLowerCase() === 'trending'); else filtered = rawPosts.filter(p => { const c = (p.category || '').toLowerCase(); const t = currentCategory.toLowerCase(); return c.includes(t) || t.includes(c); }); renderPaginatedNewsList(filtered); } window.scrollTo({ top: 400, behavior: 'smooth' }); }
+    function filterCategory(catName, updateUrl = true) { currentCategory = catName; currentPage = 1; document.querySelectorAll('.nav-link').forEach(el => { if (el.textContent.trim().toLowerCase() === catName.toLowerCase()) el.classList.add('active'); else if (catName === 'All' && el.textContent.trim() === 'Home') el.classList.add('active'); else el.classList.remove('active'); }); const homeSections = document.getElementById('home-exclusive-sections'); const filterBanner = document.getElementById('filter-banner'); const filterLabel = document.getElementById('filter-label'); const heading = document.getElementById('posts-list-heading'); if (updateUrl) window.history.pushState({}, '', catName === 'All' ? window.location.pathname : `?cat=${encodeURIComponent(catName)}`); if (catName === 'All') { homeSections.style.display = 'block'; filterBanner.style.display = 'none'; heading.innerHTML = '<span>Latest News & Updates</span>'; renderAll(); } else { homeSections.style.display = 'none'; filterBanner.style.display = 'flex'; filterLabel.textContent = `Browsing Category: ${catName}`; heading.innerHTML = `<span>All ${catName} Articles</span>`; let filtered = []; if (catName === 'Trending') filtered = rawPosts.filter(p => (p.badge || '').toLowerCase() === 'trending'); else filtered = rawPosts.filter(p => { const c = (p.category || '').toLowerCase(); const t = catName.toLowerCase(); return c.includes(t) || t.includes(c); }); renderPaginatedNewsList(filtered); } window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    function toggleSearch() { const box = document.getElementById('search-container'); const input = document.getElementById('search-input'); if (box.style.display === 'block') { box.style.display = 'none'; input.value = ''; if (currentCategory === 'All') renderAll(); else filterCategory(currentCategory, false); } else { box.style.display = 'block'; input.focus(); } }
+    function handleSearch(e) { const query = e.target.value.toLowerCase().trim(); currentPage = 1; if (!query) { if (currentCategory === 'All') renderAll(); else filterCategory(currentCategory, false); return; } const results = rawPosts.filter(p => (p.title && p.title.toLowerCase().includes(query)) || (p.summary && p.summary.toLowerCase().includes(query)) || (p.category && p.category.toLowerCase().includes(query))); document.getElementById('home-exclusive-sections').style.display = 'none'; document.getElementById('filter-banner').style.display = 'flex'; document.getElementById('filter-label').textContent = `Search: "${query}" (${results.length} Found)`; document.getElementById('posts-list-heading').innerHTML = `<span>Search Results</span>`; renderPaginatedNewsList(results); }
+    window.addEventListener('popstate', () => { const params = new URLSearchParams(window.location.search); const cat = params.get('cat') || 'All'; filterCategory(cat, false); });
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      applyTimeBasedTheme();
+      loadSiteData();
+    });
+  </script>
+</body>
+</html>
