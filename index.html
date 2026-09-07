@@ -132,7 +132,7 @@
     .section-title > span:first-child::before { content: ""; display: inline-block; width: 4px; height: 18px; margin-right: 9px; vertical-align: -2px; background: var(--accent); border-radius: 3px; }
     .section-view-all { font-size: 13px; color: var(--accent); font-weight: 700; cursor: pointer; }
 
-    /* Hero Slider - Touch Action Fixed */
+    /* Hero Slider */
     .hero-slider-container { position: relative; background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--card-border); margin-top: 10px; box-shadow: var(--shadow); user-select: none; touch-action: pan-y; }
     .hero-slider-track { display: flex; transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
     .hero-slide { min-width: 100%; display: flex; flex-direction: column; position: relative; background: var(--card-bg); }
@@ -169,7 +169,7 @@
     .explore-cat-icon { font-size: 20px; }
     .explore-cat-text { font-size: 15px; font-weight: 700; color: var(--text-main); white-space: nowrap; }
 
-    /* Trending Slider - Touch Action Fixed */
+    /* Trending Slider */
     .trending-slider-container { position: relative; background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--card-border); box-shadow: var(--shadow); touch-action: pan-y; }
     .trending-slider-track { display: flex; transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
     .trending-slide { min-width: 100%; display: flex; flex-direction: column; background: var(--card-bg); position: relative; }
@@ -444,7 +444,7 @@
         })
         .then(data => {
           rawPosts = normalizePosts(data);
-          // ✅ 1. Hunkkaar aur Yash ki Toxic articles ko pura site se hatao (Main + Sidebar)
+          // Hunkkaar aur Yash ki Toxic filter
           rawPosts = rawPosts.filter(p => {
             const title = (p.title || '').toLowerCase();
             return !title.includes('hunkkaar') && !title.includes('yash ki toxic');
@@ -503,13 +503,32 @@
     let heroTimer = null; let heroCurrentIndex = 0; let heroTotalSlides = 0; let isHeroPaused = false; let heroStartX = 0; const SLIDE_DURATION = 4500; let progressElapsed = 0; const PROGRESS_STEP = 50;
     function setupHeroSlider(posts) { const heroWrap = document.getElementById('hero-slider-wrap'); const heroPosts = posts.slice(0, 20); heroTotalSlides = heroPosts.length; heroCurrentIndex = 0; progressElapsed = 0; isVideoPlaying = false; if (!heroTotalSlides) { heroWrap.innerHTML = ''; return; } if (heroTimer) clearInterval(heroTimer); const slidesHTML = heroPosts.map((post, idx) => { const trailerUrl = post.trailer || (post.category === 'Trailers' || post.platform === 'YouTube' ? 'https://www.youtube.com' : ''); return `<div class="hero-slide" id="hero-slide-${idx}"><div class="hero-media-wrap" id="hero-media-${idx}"><img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/600x400/eee/999?text=Filmy+Khabr'"></div><div class="hero-content"><div class="hero-meta-row"><span class="hero-platform">${post.platform || post.category}</span><span class="badge-tag">${post.badge || 'Trending'}</span></div><div class="hero-title"><a href="${post.url || `posts/${post.slug}.html`}">${post.title}</a></div><div class="hero-summary">${post.summary || ''}</div><div class="hero-actions"><a href="${post.url || `posts/${post.slug}.html`}" class="hero-btn">Read Article</a><button class="hero-btn hero-btn-trailer" onclick="playHeroInline(${idx}, '${post.title.replace(/'/g, "\\'")}', '${trailerUrl}')">▶ Play Trailer</button></div></div></div>`; }).join(''); let dotsHTML = ''; if (heroTotalSlides > 1) { const dotsCount = Math.min(heroTotalSlides, 10); dotsHTML = `<div class="hero-dots" id="hero-dots">${Array.from({ length: dotsCount }).map((_, i) => `<span class="hero-dot ${i === 0 ? 'active' : ''}"></span>`).join('')}</div>`; } let navBtns = ''; if (heroTotalSlides > 1) { navBtns = `<button class="hero-nav-btn prev" onclick="prevHeroSlide(event)">❮</button><button class="hero-nav-btn next" onclick="nextHeroSlide(event)">❯</button>`; } heroWrap.innerHTML = `<div class="hero-slider-container" id="hero-slider-container"><div class="hero-slider-track" id="hero-slider-track">${slidesHTML}</div><div class="hero-progress-track"><div class="hero-progress-bar" id="hero-progress-bar"></div></div>${navBtns}${dotsHTML}</div>`; const container = document.getElementById('hero-slider-container'); if (container) { container.addEventListener('mouseenter', () => { isHeroPaused = true; }); container.addEventListener('mouseleave', () => { isHeroPaused = false; }); 
             
-            // ✅ 2. HERO SLIDER TOUCH/SWIPE FIX
-            let startX = 0; let currentX = 0;
-            container.addEventListener('touchstart', (e) => { isHeroPaused = true; startX = e.changedTouches[0].pageX; }, { passive: true });
-            container.addEventListener('touchmove', (e) => { currentX = e.changedTouches[0].pageX; }, { passive: true });
+            // ✅ FIX: Button tap par slide nahi hoga, sirf manual swipe par slide hoga
+            let startX = 0, startY = 0, currentX = 0, currentY = 0, swiping = false;
+            container.addEventListener('touchstart', (e) => { 
+                isHeroPaused = true; 
+                startX = e.changedTouches[0].pageX; 
+                startY = e.changedTouches[0].pageY; 
+                currentX = startX; currentY = startY;
+                swiping = false;
+            }, { passive: true });
+            container.addEventListener('touchmove', (e) => { 
+                currentX = e.changedTouches[0].pageX; 
+                currentY = e.changedTouches[0].pageY; 
+                if (Math.abs(currentX - startX) > 10 || Math.abs(currentY - startY) > 10) swiping = true;
+            }, { passive: true });
             container.addEventListener('touchend', (e) => { 
+                // Agar touch target button/link hai, to swipe ignore karo
+                if (e.target.closest('a, button')) {
+                    setTimeout(() => { isHeroPaused = false; }, 1500);
+                    return;
+                }
                 const diffX = startX - currentX;
-                if (Math.abs(diffX) > 40) { if (diffX > 0) nextHeroSlide(); else prevHeroSlide(); }
+                const diffY = startY - currentY;
+                // Sirf horizontal swipe par slide karo
+                if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
+                    if (diffX > 0) nextHeroSlide(); else prevHeroSlide();
+                }
                 setTimeout(() => { isHeroPaused = false; }, 1500);
             }, { passive: true });
             startHeroProgress(); } }
@@ -521,13 +540,32 @@
     let trendingTimer = null; let trendingCurrentIndex = 0; let trendingTotalSlides = 0; let isTrendingPaused = false; let trendingStartX = 0;
     function setupTrendingSlider(posts) { const wrap = document.getElementById('trending-slider-wrap'); const trendingPosts = posts.slice(0, 6); trendingTotalSlides = trendingPosts.length; trendingCurrentIndex = 0; if (!trendingTotalSlides) { wrap.innerHTML = ''; return; } if (trendingTimer) clearInterval(trendingTimer); const slidesHTML = trendingPosts.map((post, idx) => { const articleUrl = post.url || `posts/${post.slug}.html`; const imageUrl = post.image || 'images/default.jpg'; return `<div class="trending-slide" id="trending-slide-${idx}"><div class="trending-slide-img-box"><a href="${articleUrl}"><img class="trending-slide-img" src="${imageUrl}" alt="${escapeHtml(post.title)}" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/600x400/eee/999?text=Post'"></a><div class="trending-slide-rank">${idx + 1}</div></div><div class="trending-slide-content"><div class="trending-slide-platform">${post.platform || post.category}</div><div class="trending-slide-title"><a href="${articleUrl}">${escapeHtml(post.title)}</a></div><div class="trending-slide-date">${post.date || '2026'}</div></div></div>`; }).join(''); let dotsHTML = ''; if (trendingTotalSlides > 1) dotsHTML = `<div class="trending-dots" id="trending-dots">${Array.from({ length: trendingTotalSlides }).map((_, i) => `<span class="trending-dot ${i === 0 ? 'active' : ''}"></span>`).join('')}</div>`; let navBtns = ''; if (trendingTotalSlides > 1) navBtns = `<button class="trending-nav-btn prev" onclick="prevTrendingSlide(event)">❮</button><button class="trending-nav-btn next" onclick="nextTrendingSlide(event)">❯</button>`; wrap.innerHTML = `<div class="trending-slider-container" id="trending-slider-container"><div class="trending-slider-track" id="trending-slider-track">${slidesHTML}</div>${navBtns}${dotsHTML}</div>`; const container = document.getElementById('trending-slider-container'); if (container) { container.addEventListener('mouseenter', () => { isTrendingPaused = true; }); container.addEventListener('mouseleave', () => { isTrendingPaused = false; }); 
             
-            // ✅ 2. TRENDING SLIDER TOUCH/SWIPE FIX
-            let startX = 0; let currentX = 0;
-            container.addEventListener('touchstart', (e) => { isTrendingPaused = true; startX = e.changedTouches[0].pageX; }, { passive: true });
-            container.addEventListener('touchmove', (e) => { currentX = e.changedTouches[0].pageX; }, { passive: true });
+            // ✅ FIX: Button tap par slide nahi hoga, sirf manual swipe par slide hoga
+            let startX = 0, startY = 0, currentX = 0, currentY = 0, swiping = false;
+            container.addEventListener('touchstart', (e) => { 
+                isTrendingPaused = true; 
+                startX = e.changedTouches[0].pageX; 
+                startY = e.changedTouches[0].pageY; 
+                currentX = startX; currentY = startY;
+                swiping = false;
+            }, { passive: true });
+            container.addEventListener('touchmove', (e) => { 
+                currentX = e.changedTouches[0].pageX; 
+                currentY = e.changedTouches[0].pageY; 
+                if (Math.abs(currentX - startX) > 10 || Math.abs(currentY - startY) > 10) swiping = true;
+            }, { passive: true });
             container.addEventListener('touchend', (e) => { 
+                // Agar touch target button/link hai, to swipe ignore karo
+                if (e.target.closest('a, button')) {
+                    setTimeout(() => { isTrendingPaused = false; }, 1500);
+                    return;
+                }
                 const diffX = startX - currentX;
-                if (Math.abs(diffX) > 40) { if (diffX > 0) nextTrendingSlide(); else prevTrendingSlide(); }
+                const diffY = startY - currentY;
+                // Sirf horizontal swipe par slide karo
+                if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
+                    if (diffX > 0) nextTrendingSlide(); else prevTrendingSlide();
+                }
                 setTimeout(() => { isTrendingPaused = false; }, 1500);
             }, { passive: true });
             startTrendingAutoPlay(); } }
