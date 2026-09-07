@@ -202,11 +202,17 @@
     .page-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
     .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
+    /* ✅ COMMUNITY BOX (Updated with Social Buttons) */
     .community-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 20px 16px; margin-top: 24px; text-align: center; box-shadow: var(--shadow); }
     .comm-title { font-size: 18px; font-weight: 800; color: var(--text-main); margin-bottom: 4px; }
     .comm-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 12px; }
-    .comm-btn { display: inline-block; background: var(--accent); color: #fff; font-size: 14px; font-weight: 700; padding: 10px 20px; border-radius: 999px; text-decoration: none; }
+    .comm-btn { display: inline-block; background: var(--accent); color: #fff; font-size: 14px; font-weight: 700; padding: 10px 20px; border-radius: 999px; text-decoration: none; margin-bottom: 15px; }
     .comm-btn:hover { background: var(--accent-hover); }
+
+    /* ✅ New Social Buttons inside Community Box */
+    .community-socials { display: flex; flex-direction: column; gap: 10px; max-width: 300px; margin: 0 auto; }
+    .social-btn { display: flex; align-items: center; justify-content: center; gap: 8px; background: #f1f5f9; color: var(--text-main); border: 1px solid var(--card-border); padding: 10px 20px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s; font-size: 14px; }
+    .social-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
 
     /* FOOTER */
     .site-footer { background: #0a0a0a; color: #ffffff; margin-top: 40px; padding: 40px 0 20px; font-size: 14px; }
@@ -216,9 +222,9 @@
     .footer-col ul li { margin-bottom: 8px; }
     .footer-col ul li a { color: #ccc; text-decoration: none; transition: color 0.2s; }
     .footer-col ul li a:hover { color: #fff; }
-    .footer-social { display: flex; flex-direction: column; gap: 8px; }
-    .footer-social a { display: flex; align-items: center; gap: 10px; color: #ccc; text-decoration: none; transition: color 0.2s; }
-    .footer-social a:hover { color: #fff; }
+    .footer-social { display: flex; flex-direction: column; gap: 10px; }
+    .footer-social a { display: flex; align-items: center; justify-content: center; gap: 10px; color: #ffffff; background-color: #1e293b; border: 1px solid #334155; text-decoration: none; padding: 10px 15px; border-radius: 6px; font-weight: 600; transition: all 0.2s; width: 100%; }
+    .footer-social a:hover { background-color: var(--accent); border-color: var(--accent); color: #fff; }
     .footer-social .icon { font-size: 18px; width: 24px; text-align: center; }
     .footer-bottom { border-top: 1px solid #333; margin-top: 30px; padding: 20px 16px; text-align: center; font-size: 13px; color: #999; }
     .footer-bottom a { color: #ccc; text-decoration: none; }
@@ -313,10 +319,17 @@
 
         <div id="pagination-box" class="pagination-container"></div>
 
+        <!-- ✅ COMMUNITY BOX (Updated: Telegram Button + X, Telegram, Gmail Buttons) -->
         <div class="community-box">
           <div class="comm-title">Join Our Community</div>
           <div class="comm-desc">Sabse pehle movie aur OTT updates pane ke liye judiye</div>
           <a href="https://t.me/+rG_x3BDIdYliNTVl" target="_blank" rel="noopener noreferrer" class="comm-btn">Join Telegram Channel</a>
+          
+          <div class="community-socials">
+            <a href="https://x.com/FILMY_KHABR" target="_blank" rel="noopener noreferrer" class="social-btn">𝕏 Follow on X</a>
+            <a href="https://t.me/+rG_x3BDIdYliNTVl" target="_blank" rel="noopener noreferrer" class="social-btn">✈️ Join Telegram</a>
+            <a href="mailto:gujaratfastalert@gmail.com" class="social-btn">📧 Email Us</a>
+          </div>
         </div>
       </div>
 
