@@ -17,18 +17,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Filmy Khabr - Entertainment, Movies, OTT & Web Series News</title>
   <meta name="description" content="Latest Hindi entertainment news, movie reviews, web series updates, OTT releases and trailers.">
-  <meta name="author" content="Vanrajsinh Vaghela">
+  <meta name="author" content="Filmy Khabr">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta property="og:site_name" content="Filmy Khabr">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Filmy Khabr - Entertainment, Movies, OTT & Web Series">
   <meta property="og:description" content="Latest Hindi entertainment news, OTT releases, web series and trailer updates.">
 
-  <!-- Google Fonts (THR Style) -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
 
   <style>
-    /* Theme Variables (Dark - THR / Light - OJAS) */
+    /* CSS Variables: Auto Dark/Light Theme */
     :root {
       --bg: #070809;
       --surface: #0d1013;
@@ -40,24 +40,24 @@
       --text-muted: #a7adb7;
       --text-dim: #9aa1aebf;
       --header-bg: #0a0a0a;
-      --header-border: #252b33;
-      --radius: 10px;
       --font-heading: 'Playfair Display', Georgia, serif;
       --font-body: 'Inter', sans-serif;
     }
 
-    body.light-mode {
-      --bg: #ffffff;
-      --surface: #f5f6f8;
-      --card-bg: #ffffff;
-      --card-border: #e5e7eb;
-      --accent: #2a5ca8; /* OJAS Blue */
-      --accent-hover: #1e4a8c;
-      --text-main: #1a1a1a;
-      --text-muted: #4b5563;
-      --text-dim: #6b7280;
-      --header-bg: #ffffff;
-      --header-border: #e5e7eb;
+    /* Auto Light Mode (OJAS Style - Blue & White) */
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #ffffff;
+        --surface: #f5f6f8;
+        --card-bg: #ffffff;
+        --card-border: #e5e7eb;
+        --accent: #2a5ca8; /* OJAS Blue */
+        --accent-hover: #1e4a8c;
+        --text-main: #1a1a1a;
+        --text-muted: #4b5563;
+        --text-dim: #6b7280;
+        --header-bg: #ffffff;
+      }
     }
 
     * {
@@ -78,10 +78,7 @@
       transition: background 0.3s, color 0.3s;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
     .container {
       max-width: 1200px;
@@ -89,14 +86,13 @@
       padding: 0 16px;
     }
 
-    /* THR Header Style */
+    /* Header - Clean, No Subscribe or 3 dots */
     header {
       background: var(--header-bg);
-      border-bottom: 1px solid var(--header-border);
+      border-bottom: 1px solid var(--card-border);
       position: sticky;
       top: 0;
       z-index: 1000;
-      transition: background 0.3s, border 0.3s;
     }
 
     .top-bar {
@@ -119,50 +115,18 @@
       text-transform: uppercase;
     }
 
-    .top-actions {
-      grid-column: 3;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .theme-toggle {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      color: var(--text-main);
-      cursor: pointer;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      font-size: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-    }
-
-    .theme-toggle:hover {
-      border-color: var(--accent);
-      transform: translateY(-1px);
-    }
-
-    .subscribe-btn {
-      background: var(--accent);
-      color: #fff;
-      font-size: 13px;
-      font-weight: 700;
-      padding: 8px 16px;
-      border-radius: 4px;
+    .menu-btn {
+      grid-column: 1;
+      justify-self: start;
+      background: none;
       border: none;
+      color: var(--text-main);
+      font-size: 24px;
       cursor: pointer;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-    
-    .subscribe-btn:hover {
-      background: var(--accent-hover);
+      display: block; /* Kept for mobile nav */
     }
 
+    /* Nav */
     .main-nav {
       display: flex;
       align-items: center;
@@ -170,7 +134,7 @@
       gap: 14px;
       overflow-x: auto;
       padding: 10px 16px;
-      border-bottom: 1px solid var(--header-border);
+      border-bottom: 1px solid var(--card-border);
       max-width: 1200px;
       margin: 0 auto;
       scrollbar-width: none;
@@ -188,159 +152,113 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-
     .nav-link.active, .nav-link:hover {
       color: #fff;
       background: var(--accent);
       border-color: var(--accent);
     }
-    body.light-mode .nav-link.active, body.light-mode .nav-link:hover {
-      color: #fff;
-    }
 
-    /* Ticker Bar */
+    /* Breaking Ticker - Horizontal Stock Market Style */
     .ticker-bar {
       background: var(--accent);
       color: #fff;
       padding: 8px 0;
-      font-size: 14px;
-      font-weight: 700;
       margin-bottom: 20px;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
     }
-
+    
     .ticker-label {
+      display: inline-block;
       background: rgba(0,0,0,0.2);
       padding: 2px 8px;
       margin-right: 10px;
       font-size: 12px;
       border-radius: 4px;
+      position: absolute;
+      left: 0;
+      z-index: 10;
+      top: 0; bottom: 0;
+      display: flex; align-items: center;
     }
 
-    /* THR "Most Popular" Layout */
-    .most-popular-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-bottom: 32px;
-    }
-    @media (max-width: 768px) {
-      .most-popular-layout { grid-template-columns: 1fr; }
+    .ticker-content {
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker 20s linear infinite;
     }
 
-    .popular-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
     }
 
-    .popular-item {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--card-border);
+    /* Hero Slider - Fixed overlay and Buttons */
+    .hero-slider-wrap {
+      position: relative;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .hero-slide {
+      display: none;
+      position: relative;
     }
 
-    .popular-rank {
+    .hero-media-wrap {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #000;
+    }
+
+    .hero-media-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+      padding: 30px 20px 20px;
+      z-index: 2;
+    }
+
+    .hero-title {
       font-family: var(--font-heading);
       font-size: 32px;
-      font-weight: 900;
-      color: var(--text-dim);
-      line-height: 1;
-    }
-
-    .popular-info {
-      flex: 1;
-    }
-
-    .popular-cat {
-      font-size: 11px;
-      color: var(--accent);
       font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      display: block;
-      margin-bottom: 4px;
+      color: #fff;
+      margin-bottom: 10px;
+      line-height: 1.2;
     }
 
-    .popular-title {
-      font-family: var(--font-heading);
-      font-size: 20px;
+    .hero-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .hero-btn {
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
       font-weight: 800;
-      color: var(--text-main);
-      line-height: 1.3;
+      border: none;
+      cursor: pointer;
+    }
+    .hero-btn-trailer {
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.5);
     }
 
-    .popular-featured img {
-      width: 100%;
-      aspect-ratio: 16/9;
-      object-fit: cover;
-      border-radius: var(--radius);
-      border: 1px solid var(--card-border);
-    }
-
-    /* 3-Column Card Grid (Desktop: 3, Mobile: 2/1) */
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    @media (max-width: 900px) {
-      .card-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 600px) {
-      .card-grid { grid-template-columns: 1fr; }
-    }
-
-    .news-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-
-    .news-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--accent);
-    }
-
-    .news-thumb {
-      width: 100%;
-      aspect-ratio: 16/9;
-      object-fit: cover;
-      display: block;
-      background: #111;
-    }
-
-    .news-card-content {
-      padding: 12px 14px;
-    }
-
-    .news-meta {
-      font-size: 11px;
-      color: var(--accent);
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-      letter-spacing: 1px;
-    }
-
-    .news-title {
-      font-family: var(--font-heading);
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--text-main);
-      line-height: 1.3;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    /* Section Title */
+    /* Most Popular Layout */
     .section-title {
       margin: 32px 0 14px;
       font-family: var(--font-heading);
@@ -351,169 +269,104 @@
       align-items: center;
       gap: 8px;
     }
-
     .section-title::after {
       content: "";
-      display: inline-block;
       width: 4px;
       height: 20px;
       background: var(--accent);
       order: -1;
     }
 
-    /* Ad Banner */
-    .ad-container {
-      background: var(--surface);
-      border: 1px solid var(--card-border);
-      padding: 20px;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 14px;
-      margin: 30px 0;
-      border-radius: var(--radius);
+    .most-popular-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 768px) {
+      .most-popular-layout { grid-template-columns: 1fr; }
     }
 
-    /* Newsletter */
-    .newsletter-box {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 30px;
-      text-align: center;
+    .popular-list { display: flex; flex-direction: column; gap: 12px; }
+    .popular-item { display: flex; gap: 12px; align-items: flex-start; padding-bottom: 12px; border-bottom: 1px solid var(--card-border); }
+    .popular-rank { font-family: var(--font-heading); font-size: 32px; font-weight: 900; color: var(--text-dim); line-height: 1; }
+    .popular-info { flex: 1; }
+    .popular-cat { font-size: 11px; color: var(--accent); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 4px; }
+    .popular-title { font-family: var(--font-heading); font-size: 20px; font-weight: 800; color: var(--text-main); line-height: 1.3; }
+
+    /* 6 Slide Popular Featured Slider */
+    .popular-featured {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+    .pf-slide { display: none; position: relative; }
+    .pf-slide img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+    .pf-content { position: absolute; bottom: 0; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); padding: 20px; width: 100%; }
+
+    /* Explore By Category (6 Buttons - 2x3 Grid) */
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
       margin-top: 20px;
     }
-
-    .newsletter-box h3 {
-      font-family: var(--font-heading);
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    .newsletter-box form {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 15px;
-      flex-wrap: wrap;
-    }
-
-    .newsletter-box input {
-      background: var(--bg);
+    .cat-card {
+      background: var(--card-bg);
       border: 1px solid var(--card-border);
-      color: var(--text-main);
-      padding: 12px;
-      width: 300px;
-      border-radius: 4px;
-    }
-
-    .newsletter-box button {
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-
-    /* Footer */
-    footer {
+      border-radius: 8px;
+      padding: 15px;
       text-align: center;
-      margin-top: 40px;
-      padding: 20px 16px;
-      border-top: 1px solid var(--card-border);
-      font-size: 14px;
-      color: var(--text-muted);
+      cursor: pointer;
+      transition: 0.2s;
     }
+    .cat-card:hover { border-color: var(--accent); background: var(--surface); }
 
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-bottom: 10px;
+    /* 3 Column Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
+    @media (max-width: 900px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .card-grid { grid-template-columns: 1fr; } }
 
-    .footer-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.2s;
+    .news-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: 0.2s;
     }
+    .news-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+    .news-thumb { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+    .news-card-content { padding: 12px 14px; }
+    .news-meta { font-size: 11px; color: var(--accent); font-weight: 700; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 1px; }
+    .news-title { font-family: var(--font-heading); font-size: 18px; font-weight: 800; color: var(--text-main); line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
+    /* Speed Optimizations */
+    img { loading: lazy; }
+    
+    /* Footer */
+    footer { text-align: center; margin-top: 40px; padding: 20px 16px; border-top: 1px solid var(--card-border); font-size: 14px; color: var(--text-muted); }
+    .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 10px; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--accent); }
 
     /* Pagination */
-    .pagination-container {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 30px;
-    }
-
-    .page-btn {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      color: var(--text-main);
-      padding: 8px 14px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .page-btn.active {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
-    }
-
-    .page-btn:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
-
-    /* Mobile Menu */
-    .menu-btn {
-      grid-column: 1;
-      justify-self: start;
-      background: none;
-      border: none;
-      color: var(--text-main);
-      font-size: 24px;
-      cursor: pointer;
-    }
-
-    /* Search box */
-    #search-container {
-      max-width: 1200px;
-      margin: 20px auto;
-      padding: 0 16px;
-    }
-
-    #search-input {
-      width: 100%;
-      padding: 12px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 6px;
-      color: var(--text-main);
-    }
-
-    body.light-mode .brand-logo { color: var(--accent); }
+    .pagination-container { display: flex; justify-content: center; gap: 8px; margin-top: 30px; }
+    .page-btn { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-main); padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 700; }
+    .page-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
   <header>
     <div class="top-bar">
       <button class="menu-btn">☰</button>
       <a href="/" class="brand-logo">Filmy Khabr</a>
-      <div class="top-actions">
-        <button onclick="toggleTheme()" class="theme-toggle" title="Toggle Day/Night Theme">🌓</button>
-        <button class="subscribe-btn">Subscribe</button>
-      </div>
+      <div></div> <!-- Empty to keep grid balanced -->
     </div>
     <nav class="main-nav">
       <span class="nav-link active" onclick="filterCategory('All')">Home</span>
@@ -526,53 +379,43 @@
     </nav>
   </header>
 
-  <!-- Ticker -->
-  <div class="ticker-bar" id="ticker-bar">
-    <span class="ticker-label">BREAKING:</span>
-    <span id="ticker-viewport">Loading latest updates...</span>
-  </div>
-
-  <!-- Search Area -->
-  <div id="search-container" style="display:none;">
-    <input type="text" id="search-input" placeholder="Search movies, series, news..." oninput="handleSearch(event)">
-  </div>
-
   <div class="container">
-    <!-- Hero Slider -->
-    <div id="hero-slider-wrap"></div>
+    <!-- Breaking Ticker -->
+    <div class="ticker-bar">
+      <div class="ticker-label">BREAKING:</div>
+      <div class="ticker-content" id="ticker-viewport">Loading latest updates...</div>
+    </div>
 
-    <!-- Most Popular Section (THR Style) -->
+    <!-- Hero Slider -->
+    <div id="hero-slider-wrap" class="hero-slider-wrap"></div>
+
+    <!-- Explore By Category (6 Buttons - 2x3 Grid) -->
+    <div class="section-title">Explore By Category</div>
+    <div class="cat-grid">
+      <div class="cat-card" onclick="filterCategory('Movies')">🎬 Movies</div>
+      <div class="cat-card" onclick="filterCategory('Web Series')">📺 Web Series</div>
+      <div class="cat-card" onclick="filterCategory('OTT')">🍿 OTT</div>
+      <div class="cat-card" onclick="filterCategory('Trailers')">▶️ Trailers</div>
+      <div class="cat-card" onclick="filterCategory('Celebrity News')">⭐ Celebrity</div>
+      <div class="cat-card" onclick="filterCategory('News')">📰 News</div>
+    </div>
+
+    <!-- Most Popular -->
     <div class="section-title">Most Popular</div>
     <div class="most-popular-layout">
       <div id="popular-list-container" class="popular-list"></div>
       <div id="popular-featured-container" class="popular-featured"></div>
     </div>
 
-    <!-- Latest News Grid (3 / 2 / 1 Columns) -->
+    <!-- Latest News (3/2/1 Columns) -->
     <div class="section-title" id="posts-list-heading">Latest News & Updates</div>
     <div id="posts-list-container" class="card-grid"></div>
     
     <!-- Pagination -->
     <div id="pagination-box" class="pagination-container"></div>
-
-    <!-- Ad Container -->
-    <div class="ad-container">
-      <span>ADVERTISEMENT</span><br><br>
-      Your Ad Here (728x90)
-    </div>
-
-    <!-- Newsletter Sign Up -->
-    <div class="newsletter-box">
-      <h3>Newsletter Sign Up</h3>
-      <p>Sabse pehle movie aur OTT updates pane ke liye judiye</p>
-      <form onsubmit="alert('Subscription successful (Demo)!'); return false;">
-        <input type="email" placeholder="Enter your Email" required>
-        <button type="submit">SUBSCRIBE</button>
-      </form>
-    </div>
   </div>
 
-  <!-- Footer -->
+  <!-- Footer (No Newsletter or Ads) -->
   <footer>
     <div class="footer-links">
       <a href="about.html">About Us</a> •
@@ -580,46 +423,18 @@
       <a href="privacy-policy.html">Privacy Policy</a> •
       <a href="disclaimer.html">Disclaimer</a>
     </div>
-    <div style="font-weight:700; margin-bottom:5px;">Follow Us: [ Facebook ] [ Instagram ] [ YouTube ]</div>
-    <div>© 2026 Filmy Khabr. All Rights Reserved.</div>
-    <div style="margin-top:5px;">Managed and Published by Vanrajsinh Vaghela.</div>
+    <div style="font-weight:700; margin-bottom:5px;">© 2026 Filmy Khabr. All Rights Reserved.</div>
   </footer>
 
   <script>
-    // Theme Toggle Logic
-    function toggleTheme() {
-      const body = document.body;
-      body.classList.toggle('light-mode');
-      localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
-    }
-
-    // Load theme on startup
-    (function initTheme() {
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'light') {
-        document.body.classList.add('light-mode');
-      }
-    })();
-
     let rawPosts = [];
     let currentCategory = 'All';
     const POSTS_PER_PAGE = 6;
     let currentPage = 1;
 
-    function safeText(value, fallback = '') {
-      return value === null || value === undefined ? fallback : String(value);
-    }
-
-    function escapeHtml(value) {
-      return safeText(value)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/\"/g, '&quot;')
-        .replace(/'/g, '&#39;');
-    }
-
-    function safeUrl(value, fallback = '#') {
+    // Helper functions
+    function safeText(value, fallback = '') { return value === null || value === undefined ? fallback : String(value); }
+    function safeUrl(value, fallback = '#') { 
       const raw = safeText(value, '').trim();
       if (!raw) return fallback;
       try {
@@ -627,6 +442,21 @@
         if (u.protocol === 'http:' || u.protocol === 'https:') return u.href;
       } catch (_) {}
       return fallback;
+    }
+
+    function formatDate(dateStr) {
+      if (!dateStr) return "September 7 2026 , 24:00";
+      const date = new Date(dateStr);
+      if (isNaN(date.getTime())) return dateStr; // fallback
+      
+      // Format: September 7 2026 , 24:00
+      const month = date.toLocaleString('en-US', { month: 'long' });
+      const day = date.getDate();
+      const year = date.getFullYear();
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+      
+      return `${month} ${day} ${year} , ${hours}:${minutes}`;
     }
 
     function normalizePosts(data) {
@@ -642,55 +472,54 @@
         platform: safeText(p.platform, 'General'),
         badge: safeText(p.badge, 'Trending'),
         date: safeText(p.date, '2026'),
-        trailer: safeText(p.trailer, '')
+        trailer: safeText(p.trailer, ''),
+        author: 'Filmy Khabr', // Forced to brand name
+        formattedDate: formatDate(safeText(p.date, ''))
       }));
     }
 
     function getYoutubeEmbedUrl(url) {
       if (!url) return null;
       let videoId = '';
-      if (url.includes('youtu.be/')) {
-        videoId = url.split('youtu.be/')[1].split(/[?#]/)[0];
-      } else if (url.includes('watch?v=')) {
-        videoId = url.split('watch?v=')[1].split('&')[0];
-      } else if (url.includes('/embed/')) {
-        videoId = url.split('/embed/')[1].split(/[?#]/)[0];
-      } else if (url.length === 11 && !url.includes('/')) {
-        videoId = url;
-      }
+      if (url.includes('youtu.be/')) videoId = url.split('youtu.be/')[1].split(/[?#]/)[0];
+      else if (url.includes('watch?v=')) videoId = url.split('watch?v=')[1].split('&')[0];
+      else if (url.includes('/embed/')) videoId = url.split('/embed/')[1].split(/[?#]/)[0];
+      else if (url.length === 11 && !url.includes('/')) videoId = url;
       return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0` : null;
     }
 
-    // Ticker Setup
+    function playHeroInline(slideIndex, title, videoUrl) {
+      const embedUrl = getYoutubeEmbedUrl(videoUrl);
+      if (!embedUrl) {
+        const query = encodeURIComponent(title + " official trailer");
+        window.open(`https://www.youtube.com/results?search_query=${query}`, '_blank');
+        return;
+      }
+      const mediaWrap = document.getElementById(`hero-media-${slideIndex}`);
+      if (mediaWrap) {
+        mediaWrap.innerHTML = `<iframe src="${embedUrl}" style="width:100%;height:100%;border:0;" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+      }
+    }
+
+    // Ticker Logic
     function setupBreakingTicker(posts) {
       const viewport = document.getElementById('ticker-viewport');
       let tickerItems = [];
+      if (posts && posts.length > 0) posts.slice(0, 10).forEach(p => tickerItems.push(p.title));
+      if (tickerItems.length === 0) tickerItems = ['Top OTT & Web Series Weekly Updates', 'Bollywood & South Cinema Box Office Updates', 'Latest Movie Trailers & Teasers'];
 
-      if (posts && posts.length > 0) {
-        posts.slice(0, 3).forEach(p => {
-          tickerItems.push(p.title);
-        });
-      }
-
-      if (tickerItems.length === 0) {
-        tickerItems = ['Top OTT & Web Series Weekly Updates', 'Bollywood & South Cinema Box Office Updates', 'Latest Movie Trailers & Teasers'];
-      }
-
-      let index = 0;
-      setInterval(() => {
-        viewport.textContent = `• ${tickerItems[index]}`;
-        index = (index + 1) % tickerItems.length;
-      }, 3000);
+      // Long string for marquee
+      viewport.textContent = tickerItems.join("   •   ") + "   •   ";
     }
 
-    // Hero Slider
+    // Hero Slider Setup
     let heroTimer = null;
     let heroCurrentIndex = 0;
     let heroTotalSlides = 0;
 
     function setupHeroSlider(posts) {
       const heroWrap = document.getElementById('hero-slider-wrap');
-      const heroPosts = posts.slice(0, 20);
+      const heroPosts = posts.slice(0, 10);
       heroTotalSlides = heroPosts.length;
       heroCurrentIndex = 0;
 
@@ -699,63 +528,83 @@
         return;
       }
 
-      const slidesHTML = heroPosts.map((post, idx) => `
-        <div class="hero-slide" id="hero-slide-${idx}" style="min-width:100%; display:none; position:relative;">
-          <img src="${post.image || 'images/default.jpg'}" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:10px;" alt="${post.title}">
-          <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(to top, rgba(0,0,0,0.9), transparent); padding:20px; border-radius:10px;">
-            <span style="color:var(--accent); font-weight:800; text-transform:uppercase; font-size:12px;">${post.platform || post.category}</span>
-            <h2 style="font-family:var(--font-heading); color:#fff; margin-top:5px; font-size:28px;">${post.title}</h2>
+      heroWrap.innerHTML = heroPosts.map((post, idx) => `
+        <div class="hero-slide" id="hero-slide-${idx}" style="${idx === 0 ? 'display:block;' : 'display:none;'}">
+          <div class="hero-media-wrap" id="hero-media-${idx}">
+            <img src="${post.image || 'images/default.jpg'}" alt="${post.title}" loading="lazy">
+          </div>
+          <div class="hero-content">
+            <div class="hero-meta-row" style="color:var(--accent); font-weight:800; text-transform:uppercase; font-size:12px; margin-bottom:5px;">${post.platform || post.category}</div>
+            <h2 class="hero-title">${post.title}</h2>
+            <div class="hero-actions">
+              <a href="${post.url || `posts/${post.slug}.html`}" class="hero-btn">Read Article</a>
+              <button class="hero-btn hero-btn-trailer" onclick="playHeroInline(${idx}, '${post.title.replace(/'/g, "\\'")}', '${post.trailer || 'https://www.youtube.com'}')">▶ Play Trailer</button>
+            </div>
           </div>
         </div>
       `).join('');
 
-      heroWrap.innerHTML = slidesHTML;
-
-      // Show first slide
-      const firstSlide = document.getElementById('hero-slide-0');
-      if (firstSlide) firstSlide.style.display = 'block';
-
       if (heroTotalSlides > 1) {
-        setInterval(() => {
+        if (heroTimer) clearInterval(heroTimer);
+        heroTimer = setInterval(() => {
           const current = document.getElementById(`hero-slide-${heroCurrentIndex}`);
           if (current) current.style.display = 'none';
           heroCurrentIndex = (heroCurrentIndex + 1) % heroTotalSlides;
           const next = document.getElementById(`hero-slide-${heroCurrentIndex}`);
           if (next) next.style.display = 'block';
-        }, 5000);
+        }, 4500);
       }
     }
 
-    // Most Popular Renderer
+    // Most Popular with 6 Slides
+    let pfTimer = null;
+    let pfIndex = 0;
+    let pfTotal = 0;
+
     function renderMostPopular(posts) {
       const popularContainer = document.getElementById('popular-list-container');
       const featuredContainer = document.getElementById('popular-featured-container');
 
       if (!posts.length) return;
 
-      // Featured Post (1st)
-      const topPost = posts[0];
-      featuredContainer.innerHTML = `
-        <a href="${topPost.url || `posts/${topPost.slug}.html`}">
-          <img src="${topPost.image || 'images/default.jpg'}" alt="${topPost.title}">
-        </a>
-        <div style="margin-top:10px;">
-          <span class="popular-cat">${topPost.category}</span>
-          <a href="${topPost.url || `posts/${topPost.slug}.html`}" class="popular-title">${topPost.title}</a>
-        </div>
-      `;
-
       // List (1 to 5)
-      const listPosts = posts.slice(1, 6);
+      const listPosts = posts.slice(0, 5);
       popularContainer.innerHTML = listPosts.map((p, idx) => `
         <div class="popular-item">
-          <span class="popular-rank">${idx + 2}</span>
+          <span class="popular-rank">${idx + 1}</span>
           <div class="popular-info">
             <span class="popular-cat">${p.category}</span>
             <a href="${p.url || `posts/${p.slug}.html`}" class="popular-title">${p.title}</a>
           </div>
         </div>
       `).join('');
+
+      // Featured Slider (6 slides)
+      const featuredPosts = posts.slice(0, 6);
+      pfTotal = featuredPosts.length;
+      pfIndex = 0;
+
+      featuredContainer.innerHTML = featuredPosts.map((p, idx) => `
+        <div class="pf-slide" id="pf-slide-${idx}" style="${idx === 0 ? 'display:block;' : 'display:none;'}">
+          <img src="${p.image || 'images/default.jpg'}" alt="${p.title}" loading="lazy">
+          <div class="pf-content">
+            <span style="color:var(--accent); font-weight:800; text-transform:uppercase; font-size:12px;">${p.category}</span>
+            <h3 style="font-family:var(--font-heading); color:#fff; font-size:24px; margin-top:5px;">${p.title}</h3>
+          </div>
+        </div>
+      `).join('');
+
+      // Auto slide for 6 slides
+      if (pfTotal > 1) {
+        if (pfTimer) clearInterval(pfTimer);
+        pfTimer = setInterval(() => {
+          const current = document.getElementById(`pf-slide-${pfIndex}`);
+          if (current) current.style.display = 'none';
+          pfIndex = (pfIndex + 1) % pfTotal;
+          const next = document.getElementById(`pf-slide-${pfIndex}`);
+          if (next) next.style.display = 'block';
+        }, 3000);
+      }
     }
 
     // 3-Column Grid Renderer
@@ -779,9 +628,9 @@
 
       container.innerHTML = currentPosts.map(post => `
         <a href="${post.url || `posts/${post.slug}.html`}" class="news-card">
-          <img class="news-thumb" src="${post.image || 'images/default.jpg'}" alt="${post.title}" onerror="this.src='https://placehold.co/600x400/171a1e/ffffff?text=Filmy+Khabr'">
+          <img class="news-thumb" src="${post.image || 'images/default.jpg'}" alt="${post.title}" loading="lazy">
           <div class="news-card-content">
-            <div class="news-meta">${post.category} • ${post.date || ''}</div>
+            <div class="news-meta">${post.category} • ${post.formattedDate}</div>
             <div class="news-title">${post.title}</div>
           </div>
         </a>
@@ -792,54 +641,36 @@
 
     function renderBoxPagination(totalPages) {
       const paginationEl = document.getElementById('pagination-box');
-      if (totalPages <= 1) {
-        paginationEl.innerHTML = '';
-        return;
-      }
+      if (totalPages <= 1) { paginationEl.innerHTML = ''; return; }
 
       let paginationHTML = '';
-      if (currentPage > 1) {
-        paginationHTML += `<button class="page-btn" onclick="changePage(${currentPage - 1})">« Prev</button>`;
-      } else {
-        paginationHTML += `<button class="page-btn" disabled>« Prev</button>`;
-      }
+      if (currentPage > 1) paginationHTML += `<button class="page-btn" onclick="changePage(${currentPage - 1})">« Prev</button>`;
+      else paginationHTML += `<button class="page-btn" disabled>« Prev</button>`;
 
       for (let i = 1; i <= totalPages; i++) {
         if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
-          if (i === currentPage) {
-            paginationHTML += `<button class="page-btn active">${i}</button>`;
-          } else {
-            paginationHTML += `<button class="page-btn" onclick="changePage(${i})">${i}</button>`;
-          }
+          if (i === currentPage) paginationHTML += `<button class="page-btn active">${i}</button>`;
+          else paginationHTML += `<button class="page-btn" onclick="changePage(${i})">${i}</button>`;
         } else if (i === currentPage - 3 || i === currentPage + 3) {
           paginationHTML += `<span style="color: var(--text-muted); padding: 0 4px;">...</span>`;
         }
       }
 
-      if (currentPage < totalPages) {
-        paginationHTML += `<button class="page-btn" onclick="changePage(${currentPage + 1})">Next »</button>`;
-      } else {
-        paginationHTML += `<button class="page-btn" disabled>Next »</button>`;
-      }
+      if (currentPage < totalPages) paginationHTML += `<button class="page-btn" onclick="changePage(${currentPage + 1})">Next »</button>`;
+      else paginationHTML += `<button class="page-btn" disabled>Next »</button>`;
 
       paginationEl.innerHTML = paginationHTML;
     }
 
     function changePage(page) {
       currentPage = page;
-      if (currentCategory === 'All') {
-        renderPaginatedNewsList(rawPosts);
-      } else {
-        let filtered = [];
-        if (currentCategory === 'Trending') {
-          filtered = rawPosts.filter(p => (p.badge || '').toLowerCase() === 'trending');
-        } else {
-          filtered = rawPosts.filter(p => {
-            const c = (p.category || '').toLowerCase();
-            const target = currentCategory.toLowerCase();
-            return c.includes(target) || target.includes(c);
-          });
-        }
+      if (currentCategory === 'All') renderPaginatedNewsList(rawPosts);
+      else {
+        let filtered = rawPosts.filter(p => {
+          const c = (p.category || '').toLowerCase();
+          const target = currentCategory.toLowerCase();
+          return c.includes(target) || target.includes(c);
+        });
         renderPaginatedNewsList(filtered);
       }
       window.scrollTo({ top: 400, behavior: 'smooth' });
@@ -878,15 +709,12 @@
         renderAll();
       } else {
         let filtered = [];
-        if (catName === 'Trending') {
-          filtered = rawPosts.filter(p => (p.badge || '').toLowerCase() === 'trending');
-        } else {
-          filtered = rawPosts.filter(p => {
-            const c = (p.category || '').toLowerCase();
-            const target = catName.toLowerCase();
-            return c.includes(target) || target.includes(c);
-          });
-        }
+        if (catName === 'Trending') filtered = rawPosts.filter(p => (p.badge || '').toLowerCase() === 'trending');
+        else filtered = rawPosts.filter(p => {
+          const c = (p.category || '').toLowerCase();
+          const target = catName.toLowerCase();
+          return c.includes(target) || target.includes(c);
+        });
         renderPaginatedNewsList(filtered);
       }
 
@@ -895,7 +723,6 @@
 
     function renderAll() {
       if (!rawPosts || rawPosts.length === 0) return;
-
       setupHeroSlider(rawPosts);
       renderMostPopular(rawPosts);
       renderPaginatedNewsList(rawPosts);
@@ -911,58 +738,14 @@
 
         const params = new URLSearchParams(window.location.search);
         const urlCat = params.get('cat');
-        if (urlCat) {
-          filterCategory(urlCat, false);
-        } else {
-          renderAll();
-        }
+        if (urlCat) filterCategory(urlCat, false);
+        else renderAll();
       } catch (err) {
         console.warn('Could not load posts:', err);
         setupBreakingTicker([]);
         document.getElementById('posts-list-container').innerHTML = `<div style="text-align:center; padding:40px;">Koi post publish nahi hui hai.</div>`;
       }
     }
-
-    function toggleSearch() {
-      const box = document.getElementById('search-container');
-      const input = document.getElementById('search-input');
-      if (box.style.display === 'block') {
-        box.style.display = 'none';
-        input.value = '';
-        if (currentCategory === 'All') renderAll();
-        else filterCategory(currentCategory, false);
-      } else {
-        box.style.display = 'block';
-        input.focus();
-      }
-    }
-
-    function handleSearch(e) {
-      const query = e.target.value.toLowerCase().trim();
-      currentPage = 1;
-      if (!query) {
-        if (currentCategory === 'All') renderAll();
-        else filterCategory(currentCategory, false);
-        return;
-      }
-
-      const results = rawPosts.filter(p => 
-        (p.title && p.title.toLowerCase().includes(query)) ||
-        (p.summary && p.summary.toLowerCase().includes(query)) ||
-        (p.category && p.category.toLowerCase().includes(query))
-      );
-
-      document.getElementById('popular-featured-container').style.display = 'none';
-      document.getElementById('popular-list-container').style.display = 'none';
-      document.getElementById('posts-list-heading').textContent = `Search: "${query}"`;
-      renderPaginatedNewsList(results);
-    }
-
-    window.addEventListener('popstate', () => {
-      const params = new URLSearchParams(window.location.search);
-      const cat = params.get('cat') || 'All';
-      filterCategory(cat, false);
-    });
 
     window.addEventListener('DOMContentLoaded', loadSiteData);
   </script>
