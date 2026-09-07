@@ -13,7 +13,6 @@
   <meta name="google-site-verification" content="BE1aM7twVnliG5WUG9TTrr1KLBu_-SIu_bGY_FjLwyg" />
 
   <meta charset="UTF-8">
-  <!-- ✅ FORCE DESKTOP MODE: Mobile par bhi 1200px width -->
   <meta name="viewport" content="width=1200">
   
   <title>Filmy Khabr - Entertainment, Movies, OTT & Web Series News</title>
@@ -26,16 +25,15 @@
   <meta property="og:description" content="Latest Hindi entertainment news, OTT releases, web series and trailer updates.">
   
   <style>
-    /* ========== BLUE & WHITE THEME ========== */
     :root {
-      --bg: #ffffff;           /* White background */
-      --surface: #f8fafc;      /* Light blue-white */
-      --card-bg: #ffffff;      /* White cards */
-      --card-border: #e2e8f0;  /* Light gray-blue border */
-      --accent: #1d4ed8;       /* Blue accent */
-      --accent-hover: #1e40af; /* Darker blue */
-      --text-main: #0f172a;    /* Dark navy */
-      --text-muted: #475569;   /* Medium slate */
+      --bg: #ffffff;
+      --surface: #f8fafc;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --accent: #1d4ed8;
+      --accent-hover: #1e40af;
+      --text-main: #0f172a;
+      --text-muted: #475569;
       --text-dim: #94a3b8;
       --radius: 8px;
       --shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
@@ -65,7 +63,6 @@
       font-size: 16px;
       line-height: 1.5;
       min-height: 100vh;
-      /* ✅ Force Desktop Width (No mobile view) */
       width: 1200px;
       max-width: 1200px;
       margin: 0 auto;
@@ -76,7 +73,6 @@
     a { color: inherit; text-decoration: none; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 0 48px; }
 
-    /* ✅ Desktop Grid (Sidebar Right, fixed) */
     .content-sidebar-layout { display: grid; grid-template-columns: 1fr 380px; gap: 28px; align-items: start; margin-top: 14px; }
 
     .main-column { min-width: 0; }
@@ -136,7 +132,7 @@
     .section-title > span:first-child::before { content: ""; display: inline-block; width: 4px; height: 18px; margin-right: 9px; vertical-align: -2px; background: var(--accent); border-radius: 3px; }
     .section-view-all { font-size: 13px; color: var(--accent); font-weight: 700; cursor: pointer; }
 
-    /* Hero Slider (Fixed 500px) */
+    /* Hero Slider - Touch Action Fixed */
     .hero-slider-container { position: relative; background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--card-border); margin-top: 10px; box-shadow: var(--shadow); user-select: none; touch-action: pan-y; }
     .hero-slider-track { display: flex; transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
     .hero-slide { min-width: 100%; display: flex; flex-direction: column; position: relative; background: var(--card-bg); }
@@ -163,7 +159,7 @@
     .hero-nav-btn.prev { left: 12px; }
     .hero-nav-btn.next { right: 12px; }
     .hero-dots { position: absolute; bottom: 14px; right: 18px; display: flex; gap: 6px; z-index: 3; align-items: center; }
-    .hero-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(0,0,0,0.3); transition: all 0.25s ease; }
+    .hero-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(0,0,0,0.3); transition: all 0.25s ease; cursor: pointer; }
     .hero-dot.active { background: var(--accent); width: 24px; border-radius: 5px; }
 
     .explore-cat-bar { display: flex; gap: 12px; overflow-x: auto; padding: 16px 0; margin-top: 18px; scrollbar-width: none; -ms-overflow-style: none; }
@@ -173,8 +169,8 @@
     .explore-cat-icon { font-size: 20px; }
     .explore-cat-text { font-size: 15px; font-weight: 700; color: var(--text-main); white-space: nowrap; }
 
-    /* Trending Slider (6 items) */
-    .trending-slider-container { position: relative; background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--card-border); box-shadow: var(--shadow); }
+    /* Trending Slider - Touch Action Fixed */
+    .trending-slider-container { position: relative; background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--card-border); box-shadow: var(--shadow); touch-action: pan-y; }
     .trending-slider-track { display: flex; transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
     .trending-slide { min-width: 100%; display: flex; flex-direction: column; background: var(--card-bg); position: relative; }
     .trending-slide-img-box { width: 100%; aspect-ratio: 16 / 9; position: relative; background: #eee; overflow: hidden; }
@@ -190,10 +186,9 @@
     .trending-nav-btn.prev { left: 10px; }
     .trending-nav-btn.next { right: 10px; }
     .trending-dots { position: absolute; bottom: 14px; right: 16px; display: flex; gap: 5px; z-index: 3; align-items: center; }
-    .trending-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(0,0,0,0.3); transition: all 0.25s ease; }
+    .trending-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(0,0,0,0.3); transition: all 0.25s ease; cursor: pointer; }
     .trending-dot.active { background: var(--accent); width: 20px; border-radius: 5px; }
 
-    /* News List */
     .news-list { display: flex; flex-direction: column; gap: 15px; }
     .news-card { display: flex; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 10px; overflow: hidden; padding: 15px; gap: 20px; align-items: center; transition: 0.2s; box-shadow: var(--shadow); }
     .news-card:hover { border-color: var(--accent); transform: translateY(-2px); }
@@ -207,14 +202,13 @@
     .page-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
     .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-    /* Community */
     .community-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 20px 16px; margin-top: 24px; text-align: center; box-shadow: var(--shadow); }
     .comm-title { font-size: 18px; font-weight: 800; color: var(--text-main); margin-bottom: 4px; }
     .comm-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 12px; }
     .comm-btn { display: inline-block; background: var(--accent); color: #fff; font-size: 14px; font-weight: 700; padding: 10px 20px; border-radius: 999px; text-decoration: none; }
     .comm-btn:hover { background: var(--accent-hover); }
 
-    /* ========== PROFESSIONAL FOOTER ========== */
+    /* FOOTER */
     .site-footer { background: #0a0a0a; color: #ffffff; margin-top: 40px; padding: 40px 0 20px; font-size: 14px; }
     .footer-content { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto; padding: 0 16px; }
     .footer-col h4 { font-size: 16px; font-weight: 800; margin-bottom: 15px; color: #fff; text-transform: uppercase; letter-spacing: 1px; }
@@ -379,7 +373,6 @@
     </div>
   </div>
 
-  <!-- ========== NEW PROFESSIONAL FOOTER ========== -->
   <footer class="site-footer">
     <div class="footer-content">
       <div class="footer-col">
@@ -451,6 +444,12 @@
         })
         .then(data => {
           rawPosts = normalizePosts(data);
+          // ✅ 1. Hunkkaar aur Yash ki Toxic articles ko pura site se hatao (Main + Sidebar)
+          rawPosts = rawPosts.filter(p => {
+            const title = (p.title || '').toLowerCase();
+            return !title.includes('hunkkaar') && !title.includes('yash ki toxic');
+          });
+          
           setupBreakingTicker(rawPosts);
           renderSidebarWidgets(rawPosts);
           renderAll();
@@ -502,14 +501,36 @@
     const tickerContainer = document.getElementById('ticker-bar'); tickerContainer.addEventListener('mouseenter', () => { isTickerPaused = true; }); tickerContainer.addEventListener('mouseleave', () => { isTickerPaused = false; });
 
     let heroTimer = null; let heroCurrentIndex = 0; let heroTotalSlides = 0; let isHeroPaused = false; let heroStartX = 0; const SLIDE_DURATION = 4500; let progressElapsed = 0; const PROGRESS_STEP = 50;
-    function setupHeroSlider(posts) { const heroWrap = document.getElementById('hero-slider-wrap'); const heroPosts = posts.slice(0, 20); heroTotalSlides = heroPosts.length; heroCurrentIndex = 0; progressElapsed = 0; isVideoPlaying = false; if (!heroTotalSlides) { heroWrap.innerHTML = ''; return; } if (heroTimer) clearInterval(heroTimer); const slidesHTML = heroPosts.map((post, idx) => { const trailerUrl = post.trailer || (post.category === 'Trailers' || post.platform === 'YouTube' ? 'https://www.youtube.com' : ''); return `<div class="hero-slide" id="hero-slide-${idx}"><div class="hero-media-wrap" id="hero-media-${idx}"><img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/600x400/eee/999?text=Filmy+Khabr'"></div><div class="hero-content"><div class="hero-meta-row"><span class="hero-platform">${post.platform || post.category}</span><span class="badge-tag">${post.badge || 'Trending'}</span></div><div class="hero-title"><a href="${post.url || `posts/${post.slug}.html`}">${post.title}</a></div><div class="hero-summary">${post.summary || ''}</div><div class="hero-actions"><a href="${post.url || `posts/${post.slug}.html`}" class="hero-btn">Read Article</a><button class="hero-btn hero-btn-trailer" onclick="playHeroInline(${idx}, '${post.title.replace(/'/g, "\\'")}', '${trailerUrl}')">▶ Play Trailer</button></div></div></div>`; }).join(''); let dotsHTML = ''; if (heroTotalSlides > 1) { const dotsCount = Math.min(heroTotalSlides, 10); dotsHTML = `<div class="hero-dots" id="hero-dots">${Array.from({ length: dotsCount }).map((_, i) => `<span class="hero-dot ${i === 0 ? 'active' : ''}"></span>`).join('')}</div>`; } let navBtns = ''; if (heroTotalSlides > 1) { navBtns = `<button class="hero-nav-btn prev" onclick="prevHeroSlide(event)">❮</button><button class="hero-nav-btn next" onclick="nextHeroSlide(event)">❯</button>`; } heroWrap.innerHTML = `<div class="hero-slider-container" id="hero-slider-container"><div class="hero-slider-track" id="hero-slider-track">${slidesHTML}</div><div class="hero-progress-track"><div class="hero-progress-bar" id="hero-progress-bar"></div></div>${navBtns}${dotsHTML}</div>`; const container = document.getElementById('hero-slider-container'); if (container) { container.addEventListener('mouseenter', () => { isHeroPaused = true; }); container.addEventListener('mouseleave', () => { isHeroPaused = false; }); startHeroProgress(); } }
+    function setupHeroSlider(posts) { const heroWrap = document.getElementById('hero-slider-wrap'); const heroPosts = posts.slice(0, 20); heroTotalSlides = heroPosts.length; heroCurrentIndex = 0; progressElapsed = 0; isVideoPlaying = false; if (!heroTotalSlides) { heroWrap.innerHTML = ''; return; } if (heroTimer) clearInterval(heroTimer); const slidesHTML = heroPosts.map((post, idx) => { const trailerUrl = post.trailer || (post.category === 'Trailers' || post.platform === 'YouTube' ? 'https://www.youtube.com' : ''); return `<div class="hero-slide" id="hero-slide-${idx}"><div class="hero-media-wrap" id="hero-media-${idx}"><img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/600x400/eee/999?text=Filmy+Khabr'"></div><div class="hero-content"><div class="hero-meta-row"><span class="hero-platform">${post.platform || post.category}</span><span class="badge-tag">${post.badge || 'Trending'}</span></div><div class="hero-title"><a href="${post.url || `posts/${post.slug}.html`}">${post.title}</a></div><div class="hero-summary">${post.summary || ''}</div><div class="hero-actions"><a href="${post.url || `posts/${post.slug}.html`}" class="hero-btn">Read Article</a><button class="hero-btn hero-btn-trailer" onclick="playHeroInline(${idx}, '${post.title.replace(/'/g, "\\'")}', '${trailerUrl}')">▶ Play Trailer</button></div></div></div>`; }).join(''); let dotsHTML = ''; if (heroTotalSlides > 1) { const dotsCount = Math.min(heroTotalSlides, 10); dotsHTML = `<div class="hero-dots" id="hero-dots">${Array.from({ length: dotsCount }).map((_, i) => `<span class="hero-dot ${i === 0 ? 'active' : ''}"></span>`).join('')}</div>`; } let navBtns = ''; if (heroTotalSlides > 1) { navBtns = `<button class="hero-nav-btn prev" onclick="prevHeroSlide(event)">❮</button><button class="hero-nav-btn next" onclick="nextHeroSlide(event)">❯</button>`; } heroWrap.innerHTML = `<div class="hero-slider-container" id="hero-slider-container"><div class="hero-slider-track" id="hero-slider-track">${slidesHTML}</div><div class="hero-progress-track"><div class="hero-progress-bar" id="hero-progress-bar"></div></div>${navBtns}${dotsHTML}</div>`; const container = document.getElementById('hero-slider-container'); if (container) { container.addEventListener('mouseenter', () => { isHeroPaused = true; }); container.addEventListener('mouseleave', () => { isHeroPaused = false; }); 
+            
+            // ✅ 2. HERO SLIDER TOUCH/SWIPE FIX
+            let startX = 0; let currentX = 0;
+            container.addEventListener('touchstart', (e) => { isHeroPaused = true; startX = e.changedTouches[0].pageX; }, { passive: true });
+            container.addEventListener('touchmove', (e) => { currentX = e.changedTouches[0].pageX; }, { passive: true });
+            container.addEventListener('touchend', (e) => { 
+                const diffX = startX - currentX;
+                if (Math.abs(diffX) > 40) { if (diffX > 0) nextHeroSlide(); else prevHeroSlide(); }
+                setTimeout(() => { isHeroPaused = false; }, 1500);
+            }, { passive: true });
+            startHeroProgress(); } }
     function startHeroProgress() { if (heroTimer) clearInterval(heroTimer); if (isVideoPlaying) return; progressElapsed = 0; heroTimer = setInterval(() => { if (!isHeroPaused && !isVideoPlaying && heroTotalSlides > 1) { progressElapsed += PROGRESS_STEP; const percentage = Math.min((progressElapsed / SLIDE_DURATION) * 100, 100); const pBar = document.getElementById('hero-progress-bar'); if (pBar) pBar.style.width = `${percentage}%`; if (progressElapsed >= SLIDE_DURATION) nextHeroSlide(); } }, PROGRESS_STEP); }
     function updateHeroSlide() { const track = document.getElementById('hero-slider-track'); if (!track) return; track.style.transform = `translateX(-${heroCurrentIndex * 100}%)`; rawPosts.slice(0, 20).forEach((post, idx) => { const wrap = document.getElementById(`hero-media-${idx}`); if (wrap && wrap.querySelector('iframe')) wrap.innerHTML = `<img class="hero-img" src="${post.image || 'images/default.jpg'}" alt="${post.title}" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/600x400/eee/999?text=Filmy+Khabr'">`; }); isVideoPlaying = false; const dots = document.querySelectorAll('.hero-dot'); if (dots.length) dots.forEach((dot, idx) => dot.classList.toggle('active', idx === (heroCurrentIndex % dots.length))); progressElapsed = 0; const pBar = document.getElementById('hero-progress-bar'); if (pBar) pBar.style.width = '0%'; startHeroProgress(); }
     function nextHeroSlide(e) { if (e) e.stopPropagation(); if (heroTotalSlides <= 1) return; heroCurrentIndex = (heroCurrentIndex + 1) % heroTotalSlides; updateHeroSlide(); }
     function prevHeroSlide(e) { if (e) e.stopPropagation(); if (heroTotalSlides <= 1) return; heroCurrentIndex = (heroCurrentIndex - 1 + heroTotalSlides) % heroTotalSlides; updateHeroSlide(); }
 
-    let trendingTimer = null; let trendingCurrentIndex = 0; let trendingTotalSlides = 0; let isTrendingPaused = false;
-    function setupTrendingSlider(posts) { const wrap = document.getElementById('trending-slider-wrap'); const trendingPosts = posts.slice(0, 6); trendingTotalSlides = trendingPosts.length; trendingCurrentIndex = 0; if (!trendingTotalSlides) { wrap.innerHTML = ''; return; } if (trendingTimer) clearInterval(trendingTimer); const slidesHTML = trendingPosts.map((post, idx) => { const articleUrl = post.url || `posts/${post.slug}.html`; const imageUrl = post.image || 'images/default.jpg'; return `<div class="trending-slide" id="trending-slide-${idx}"><div class="trending-slide-img-box"><a href="${articleUrl}"><img class="trending-slide-img" src="${imageUrl}" alt="${escapeHtml(post.title)}" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/600x400/eee/999?text=Post'"></a><div class="trending-slide-rank">${idx + 1}</div></div><div class="trending-slide-content"><div class="trending-slide-platform">${post.platform || post.category}</div><div class="trending-slide-title"><a href="${articleUrl}">${escapeHtml(post.title)}</a></div><div class="trending-slide-date">${post.date || '2026'}</div></div></div>`; }).join(''); let dotsHTML = ''; if (trendingTotalSlides > 1) dotsHTML = `<div class="trending-dots" id="trending-dots">${Array.from({ length: trendingTotalSlides }).map((_, i) => `<span class="trending-dot ${i === 0 ? 'active' : ''}"></span>`).join('')}</div>`; let navBtns = ''; if (trendingTotalSlides > 1) navBtns = `<button class="trending-nav-btn prev" onclick="prevTrendingSlide(event)">❮</button><button class="trending-nav-btn next" onclick="nextTrendingSlide(event)">❯</button>`; wrap.innerHTML = `<div class="trending-slider-container" id="trending-slider-container"><div class="trending-slider-track" id="trending-slider-track">${slidesHTML}</div>${navBtns}${dotsHTML}</div>`; const container = document.getElementById('trending-slider-container'); if (container) { container.addEventListener('mouseenter', () => { isTrendingPaused = true; }); container.addEventListener('mouseleave', () => { isTrendingPaused = false; }); startTrendingAutoPlay(); } }
+    let trendingTimer = null; let trendingCurrentIndex = 0; let trendingTotalSlides = 0; let isTrendingPaused = false; let trendingStartX = 0;
+    function setupTrendingSlider(posts) { const wrap = document.getElementById('trending-slider-wrap'); const trendingPosts = posts.slice(0, 6); trendingTotalSlides = trendingPosts.length; trendingCurrentIndex = 0; if (!trendingTotalSlides) { wrap.innerHTML = ''; return; } if (trendingTimer) clearInterval(trendingTimer); const slidesHTML = trendingPosts.map((post, idx) => { const articleUrl = post.url || `posts/${post.slug}.html`; const imageUrl = post.image || 'images/default.jpg'; return `<div class="trending-slide" id="trending-slide-${idx}"><div class="trending-slide-img-box"><a href="${articleUrl}"><img class="trending-slide-img" src="${imageUrl}" alt="${escapeHtml(post.title)}" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/600x400/eee/999?text=Post'"></a><div class="trending-slide-rank">${idx + 1}</div></div><div class="trending-slide-content"><div class="trending-slide-platform">${post.platform || post.category}</div><div class="trending-slide-title"><a href="${articleUrl}">${escapeHtml(post.title)}</a></div><div class="trending-slide-date">${post.date || '2026'}</div></div></div>`; }).join(''); let dotsHTML = ''; if (trendingTotalSlides > 1) dotsHTML = `<div class="trending-dots" id="trending-dots">${Array.from({ length: trendingTotalSlides }).map((_, i) => `<span class="trending-dot ${i === 0 ? 'active' : ''}"></span>`).join('')}</div>`; let navBtns = ''; if (trendingTotalSlides > 1) navBtns = `<button class="trending-nav-btn prev" onclick="prevTrendingSlide(event)">❮</button><button class="trending-nav-btn next" onclick="nextTrendingSlide(event)">❯</button>`; wrap.innerHTML = `<div class="trending-slider-container" id="trending-slider-container"><div class="trending-slider-track" id="trending-slider-track">${slidesHTML}</div>${navBtns}${dotsHTML}</div>`; const container = document.getElementById('trending-slider-container'); if (container) { container.addEventListener('mouseenter', () => { isTrendingPaused = true; }); container.addEventListener('mouseleave', () => { isTrendingPaused = false; }); 
+            
+            // ✅ 2. TRENDING SLIDER TOUCH/SWIPE FIX
+            let startX = 0; let currentX = 0;
+            container.addEventListener('touchstart', (e) => { isTrendingPaused = true; startX = e.changedTouches[0].pageX; }, { passive: true });
+            container.addEventListener('touchmove', (e) => { currentX = e.changedTouches[0].pageX; }, { passive: true });
+            container.addEventListener('touchend', (e) => { 
+                const diffX = startX - currentX;
+                if (Math.abs(diffX) > 40) { if (diffX > 0) nextTrendingSlide(); else prevTrendingSlide(); }
+                setTimeout(() => { isTrendingPaused = false; }, 1500);
+            }, { passive: true });
+            startTrendingAutoPlay(); } }
     function startTrendingAutoPlay() { if (trendingTimer) clearInterval(trendingTimer); trendingTimer = setInterval(() => { if (!isTrendingPaused && trendingTotalSlides > 1) nextTrendingSlide(); }, 4000); }
     function updateTrendingSlide() { const track = document.getElementById('trending-slider-track'); if (!track) return; track.style.transform = `translateX(-${trendingCurrentIndex * 100}%)`; const dots = document.querySelectorAll('.trending-dot'); if (dots.length) dots.forEach((dot, idx) => dot.classList.toggle('active', idx === trendingCurrentIndex)); }
     function nextTrendingSlide(e) { if (e) e.stopPropagation(); if (trendingTotalSlides <= 1) return; trendingCurrentIndex = (trendingCurrentIndex + 1) % trendingTotalSlides; updateTrendingSlide(); }
@@ -518,12 +539,7 @@
     function renderAll() { if (!rawPosts || rawPosts.length === 0) return; setupHeroSlider(rawPosts); setupTrendingSlider(rawPosts); renderPaginatedNewsList(rawPosts); }
     function renderSidebarWidgets(posts) { const latestContainer = document.getElementById('sidebar-latest-container'); const trendingContainer = document.getElementById('sidebar-trending-container'); const editorsPickContainer = document.getElementById('sidebar-editors-pick'); 
       if (posts && posts.length > 0) { 
-        // ✅ Hunkkaar aur Yash ki Toxic filter karna
-        const filteredPosts = posts.filter(p => {
-          const title = (p.title || '').toLowerCase();
-          return !title.includes('hunkkaar') && !title.includes('yash ki toxic');
-        });
-        const topPost = posts[0]; editorsPickContainer.innerHTML = `<span class="editors-pick-badge">Must Read</span><a href="${topPost.url || `posts/${topPost.slug}.html`}" class="editors-pick-title" style="display:block; color:var(--text-main); text-decoration:none;">${topPost.title}</a>`; latestContainer.innerHTML = filteredPosts.slice(0, 4).map(p => `<a href="${p.url || `posts/${p.slug}.html`}" class="sidebar-news-item"><img class="sidebar-news-thumb" src="${p.image || 'images/default.jpg'}" alt="${escapeHtml(p.title)}" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/100x70/eee/999?text=News'"><div class="sidebar-news-info"><div class="sidebar-news-meta">${escapeHtml(p.category)}</div><div class="sidebar-news-title">${escapeHtml(p.title)}</div></div></a>`).join(''); trendingContainer.innerHTML = filteredPosts.slice(0, 5).map((p, idx) => `<a href="${p.url || `posts/${p.slug}.html`}" class="sidebar-trending-item"><span class="sidebar-trending-rank">${idx + 1}</span><span class="sidebar-trending-title">${escapeHtml(p.title)}</span></a>`).join(''); } }
+        const topPost = posts[0]; editorsPickContainer.innerHTML = `<span class="editors-pick-badge">Must Read</span><a href="${topPost.url || `posts/${topPost.slug}.html`}" class="editors-pick-title" style="display:block; color:var(--text-main); text-decoration:none;">${topPost.title}</a>`; latestContainer.innerHTML = posts.slice(0, 4).map(p => `<a href="${p.url || `posts/${p.slug}.html`}" class="sidebar-news-item"><img class="sidebar-news-thumb" src="${p.image || 'images/default.jpg'}" alt="${escapeHtml(p.title)}" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/100x70/eee/999?text=News'"><div class="sidebar-news-info"><div class="sidebar-news-meta">${escapeHtml(p.category)}</div><div class="sidebar-news-title">${escapeHtml(p.title)}</div></div></a>`).join(''); trendingContainer.innerHTML = posts.slice(0, 5).map((p, idx) => `<a href="${p.url || `posts/${p.slug}.html`}" class="sidebar-trending-item"><span class="sidebar-trending-rank">${idx + 1}</span><span class="sidebar-trending-title">${escapeHtml(p.title)}</span></a>`).join(''); } }
     function renderPaginatedNewsList(posts) { const container = document.getElementById('posts-list-container'); const paginationEl = document.getElementById('pagination-box'); if (!posts.length) { container.innerHTML = `<div class="no-posts">Is category mein abhi koi post nahi mili.</div>`; paginationEl.innerHTML = ''; return; } const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE); if (currentPage > totalPages) currentPage = totalPages; if (currentPage < 1) currentPage = 1; const startIndex = (currentPage - 1) * POSTS_PER_PAGE; const currentPosts = posts.slice(startIndex, startIndex + POSTS_PER_PAGE); container.innerHTML = currentPosts.map(post => `<a href="${post.url || `posts/${post.slug}.html`}" class="news-card"><img class="news-thumb" src="${post.image || 'images/default.jpg'}" alt="${escapeHtml(post.title)}" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/120x80/eee/999?text=News'"><div style="flex:1; min-width:0;"><div class="news-meta">${escapeHtml(post.category)} • ${escapeHtml(post.date || '')}</div><div class="news-title">${escapeHtml(post.title)}</div></div></a>`).join(''); renderBoxPagination(totalPages); }
     function renderBoxPagination(totalPages) { const paginationEl = document.getElementById('pagination-box'); if (totalPages <= 1) { paginationEl.innerHTML = ''; return; } let paginationHTML = ''; paginationHTML += currentPage > 1 ? `<button class="page-btn" onclick="changePage(${currentPage - 1})">« Prev</button>` : `<button class="page-btn" disabled>« Prev</button>`; for (let i = 1; i <= totalPages; i++) { if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) { paginationHTML += i === currentPage ? `<button class="page-btn active">${i}</button>` : `<button class="page-btn" onclick="changePage(${i})">${i}</button>`; } else if (i === currentPage - 3 || i === currentPage + 3) paginationHTML += `<span style="color: var(--text-muted); padding: 0 4px;">...</span>`; } paginationHTML += currentPage < totalPages ? `<button class="page-btn" onclick="changePage(${currentPage + 1})">Next »</button>` : `<button class="page-btn" disabled>Next »</button>`; paginationEl.innerHTML = paginationHTML; }
     function changePage(page) { currentPage = page; if (currentCategory === 'All') renderPaginatedNewsList(rawPosts); else { let filtered = []; if (currentCategory === 'Trending') filtered = rawPosts.filter(p => (p.badge || '').toLowerCase() === 'trending'); else filtered = rawPosts.filter(p => { const c = (p.category || '').toLowerCase(); const t = currentCategory.toLowerCase(); return c.includes(t) || t.includes(c); }); renderPaginatedNewsList(filtered); } window.scrollTo({ top: 400, behavior: 'smooth' }); }
