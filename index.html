@@ -10,9 +10,6 @@
     gtag('config', 'G-E6B67VBEFZ');
   </script>
 
-  <!-- Google Search Console Verification -->
-  <meta name="google-site-verification" content="BE1aM7twVnliG5WUG9TTrr1KLBu_-SIu_bGY_FjLwyg" />
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Filmy Khabr - Entertainment, Movies, OTT & Web Series News</title>
@@ -78,7 +75,7 @@
     /* Slow Ticker */
     .ticker-bar { background: var(--accent); color: #fff; padding: 8px 0; margin-bottom: 20px; overflow: hidden; white-space: nowrap; position: relative; }
     .ticker-label { display: inline-block; background: rgba(0,0,0,0.2); padding: 2px 8px; margin-right: 10px; font-size: 12px; border-radius: 4px; position: absolute; left: 0; z-index: 10; top: 0; bottom: 0; display: flex; align-items: center; }
-    .ticker-content { display: inline-block; padding-left: 100%; animation: ticker 60s linear infinite; } /* 60s slow speed */
+    .ticker-content { display: inline-block; padding-left: 100%; animation: ticker 60s linear infinite; }
     @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
     /* Hero Slider */
@@ -97,9 +94,8 @@
     .section-title { margin: 32px 0 14px; font-family: var(--font-heading); font-size: 24px; font-weight: 800; color: var(--text-main); display: flex; align-items: center; gap: 8px; }
     .section-title::after { content: ""; width: 4px; height: 20px; background: var(--accent); order: -1; }
 
-    /* Most Popular + Category Grid Layout */
+    /* Most Popular Layout */
     .most-popular-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px; }
-    @media (max-width: 768px) { .most-popular-layout { grid-template-columns: 1fr; } }
     
     /* Sidebar for Popular Right Column */
     .featured-sidebar { display: flex; flex-direction: column; gap: 20px; }
@@ -111,27 +107,26 @@
     .popular-cat { font-size: 11px; color: var(--accent); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 4px; }
     .popular-title { font-family: var(--font-heading); font-size: 20px; font-weight: 800; color: var(--text-main); line-height: 1.3; }
 
-    /* 6 Slide Popular Featured Slider */
-    .popular-featured { position: relative; overflow: hidden; border-radius: 10px; width: 100%; }
-    .pf-slide { display: none; position: relative; }
+    /* 6 Slide Popular Featured Slider (No Text Overlay) */
+    .popular-featured { position: relative; overflow: hidden; border-radius: 10px; border: 1px solid var(--card-border); }
+    .pf-slide { display: none; }
     .pf-slide img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
-    .pf-content { position: absolute; bottom: 0; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); padding: 20px; width: 100%; }
+    .pf-content { padding: 12px; background: var(--card-bg); }
+    .pf-content span { color: var(--accent); font-weight: 800; text-transform: uppercase; font-size: 11px; }
+    .pf-content h3 { font-family: var(--font-heading); color: var(--text-main); font-size: 18px; margin-top: 5px; line-height: 1.3; }
 
-    /* Explore By Category (6 Buttons - 2x3 Grid) placed in sidebar */
+    /* Explore By Category */
     .cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .cat-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; padding: 15px; text-align: center; cursor: pointer; transition: 0.2s; }
     .cat-card:hover { border-color: var(--accent); background: var(--surface); }
 
-    /* Latest News Grid */
+    /* Latest News List (Small Thumbnails, Clean Layout) */
     .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    @media (max-width: 900px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 600px) { .card-grid { grid-template-columns: 1fr; } }
-    .news-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; overflow: hidden; transition: 0.2s; }
-    .news-card:hover { transform: translateY(-2px); border-color: var(--accent); }
-    .news-thumb { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
-    .news-card-content { padding: 12px 14px; }
-    .news-meta { font-size: 11px; color: var(--accent); font-weight: 700; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 1px; }
-    .news-title { font-family: var(--font-heading); font-size: 18px; font-weight: 800; color: var(--text-main); line-height: 1.3; }
+    .news-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; padding: 10px; display: flex; gap: 12px; align-items: center; transition: 0.2s; }
+    .news-card:hover { border-color: var(--accent); }
+    .news-thumb { width: 120px; height: 80px; object-fit: cover; border-radius: 6px; flex-shrink: 0; }
+    .news-meta { font-size: 11px; color: var(--accent); font-weight: 700; text-transform: uppercase; margin-bottom: 4px; letter-spacing: 1px; }
+    .news-title { font-family: var(--font-heading); font-size: 16px; font-weight: 800; color: var(--text-main); line-height: 1.3; }
 
     /* Footer */
     footer { text-align: center; margin-top: 40px; padding: 20px 16px; border-top: 1px solid var(--card-border); font-size: 14px; color: var(--text-muted); }
@@ -144,6 +139,30 @@
     .page-btn { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-main); padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 700; }
     .page-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
     .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ====== MOBILE OPTIMIZATION ====== */
+    @media (max-width: 768px) {
+        .brand-logo { font-size: 24px; }
+        .hero-content { padding: 20px 15px 15px; }
+        .hero-title { font-size: 22px; }
+        .hero-actions { flex-wrap: wrap; gap: 8px; }
+        .hero-btn { padding: 8px 12px; font-size: 14px; }
+        
+        /* Most Popular Single Column */
+        .most-popular-layout { grid-template-columns: 1fr; gap: 20px; }
+
+        /* News Grid Single Column */
+        .card-grid { grid-template-columns: 1fr; }
+
+        /* Small Thumbnails for Mobile */
+        .news-thumb { width: 100px; height: 70px; }
+
+        /* Category Grid */
+        .cat-grid { grid-template-columns: repeat(2, 1fr); }
+
+        /* Featured Sidebar */
+        .featured-sidebar { gap: 15px; }
+    }
   </style>
 </head>
 <body>
@@ -166,20 +185,16 @@
   </header>
 
   <div class="container">
-    <!-- Breaking Ticker -->
     <div class="ticker-bar">
       <div class="ticker-label">BREAKING:</div>
       <div class="ticker-content" id="ticker-viewport">Loading latest updates...</div>
     </div>
 
-    <!-- Hero Slider -->
     <div id="hero-slider-wrap" class="hero-slider-wrap"></div>
 
-    <!-- Most Popular + Explore Category Side by Side -->
     <div class="most-popular-layout">
       <div id="popular-list-container" class="popular-list"></div>
       
-      <!-- Right Sidebar: Featured 6-Slider + Category Grid -->
       <div class="featured-sidebar">
         <div id="popular-featured-container" class="popular-featured"></div>
         
@@ -195,7 +210,6 @@
       </div>
     </div>
 
-    <!-- Latest News -->
     <div class="section-title" id="posts-list-heading">Latest News & Updates</div>
     <div id="posts-list-container" class="card-grid"></div>
     
@@ -218,13 +232,11 @@
     const POSTS_PER_PAGE = 6;
     let currentPage = 1;
 
-    // Hero Slider State
     let heroTimer = null;
     let heroCurrentIndex = 0;
     let heroTotalSlides = 0;
     let isHeroPaused = false;
 
-    // Featured 6-Slider State
     let pfTimer = null;
     let pfIndex = 0;
     let pfTotal = 0;
@@ -247,25 +259,15 @@
     function normalizePosts(data) {
       if (!Array.isArray(data)) return [];
       return data.filter(p => p && typeof p === 'object').map(p => ({
-        ...p,
-        title: safeText(p.title, 'Untitled'),
-        slug: safeText(p.slug, ''),
-        url: safeText(p.url, ''),
-        image: safeText(p.image, ''),
-        summary: safeText(p.summary, ''),
-        category: safeText(p.category, 'News'),
-        platform: safeText(p.platform, 'General'),
-        badge: safeText(p.badge, 'Trending'),
-        date: safeText(p.date, '2026'),
-        trailer: safeText(p.trailer, ''),
-        author: 'Filmy Khabr',
-        formattedDate: formatDate(safeText(p.date, ''))
+        ...p, title: safeText(p.title, 'Untitled'), slug: safeText(p.slug, ''), url: safeText(p.url, ''),
+        image: safeText(p.image, ''), summary: safeText(p.summary, ''), category: safeText(p.category, 'News'),
+        platform: safeText(p.platform, 'General'), badge: safeText(p.badge, 'Trending'), date: safeText(p.date, '2026'),
+        trailer: safeText(p.trailer, ''), author: 'Filmy Khabr', formattedDate: formatDate(safeText(p.date, ''))
       }));
     }
 
     function getYoutubeEmbedUrl(url) {
-      if (!url) return null;
-      let videoId = '';
+      if (!url) return null; let videoId = '';
       if (url.includes('youtu.be/')) videoId = url.split('youtu.be/')[1].split(/[?#]/)[0];
       else if (url.includes('watch?v=')) videoId = url.split('watch?v=')[1].split('&')[0];
       else if (url.includes('/embed/')) videoId = url.split('/embed/')[1].split(/[?#]/)[0];
@@ -273,20 +275,13 @@
       return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0` : null;
     }
 
-    // 1. Fix Trailer Play: Pause the hero slider when video plays
     function playHeroInline(slideIndex, title, videoUrl) {
       const embedUrl = getYoutubeEmbedUrl(videoUrl);
-      if (!embedUrl) {
-        const query = encodeURIComponent(title + " official trailer");
-        window.open(`https://www.youtube.com/results?search_query=${query}`, '_blank');
-        return;
-      }
+      if (!embedUrl) { const query = encodeURIComponent(title + " official trailer"); window.open(`https://www.youtube.com/results?search_query=${query}`, '_blank'); return; }
       const mediaWrap = document.getElementById(`hero-media-${slideIndex}`);
       if (mediaWrap) {
-        // Pause auto-slide logic
         isHeroPaused = true;
         if (heroTimer) clearInterval(heroTimer);
-
         mediaWrap.innerHTML = `<iframe src="${embedUrl}" style="width:100%;height:100%;border:0;" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
       }
     }
@@ -302,9 +297,7 @@
     function setupHeroSlider(posts) {
       const heroWrap = document.getElementById('hero-slider-wrap');
       const heroPosts = posts.slice(0, 10);
-      heroTotalSlides = heroPosts.length;
-      heroCurrentIndex = 0;
-
+      heroTotalSlides = heroPosts.length; heroCurrentIndex = 0;
       if (!heroTotalSlides) { heroWrap.innerHTML = ''; return; }
 
       heroWrap.innerHTML = heroPosts.map((post, idx) => `
@@ -326,8 +319,7 @@
       if (heroTotalSlides > 1) {
         if (heroTimer) clearInterval(heroTimer);
         heroTimer = setInterval(() => {
-          if (isHeroPaused) return; // Don't slide if video is playing
-
+          if (isHeroPaused) return;
           const current = document.getElementById(`hero-slide-${heroCurrentIndex}`);
           if (current) current.style.display = 'none';
           heroCurrentIndex = (heroCurrentIndex + 1) % heroTotalSlides;
@@ -340,7 +332,6 @@
     function renderMostPopular(posts) {
       const popularContainer = document.getElementById('popular-list-container');
       const featuredContainer = document.getElementById('popular-featured-container');
-
       if (!posts.length) return;
 
       const listPosts = posts.slice(0, 5);
@@ -356,54 +347,50 @@
 
       const featuredPosts = posts.slice(0, 6);
       pfTotal = featuredPosts.length;
-      pfIndex = 0;
+      pfIndex = pfTotal - 1; // Start from last (Reverse)
 
+      // FIX: No Text Overlay, Text is below Image
       featuredContainer.innerHTML = featuredPosts.map((p, idx) => `
-        <div class="pf-slide" id="pf-slide-${idx}" style="${idx === 0 ? 'display:block;' : 'display:none;'}">
+        <div class="pf-slide" id="pf-slide-${idx}" style="${idx === pfTotal - 1 ? 'display:block;' : 'display:none;'}">
           <img src="${p.image || 'images/default.jpg'}" alt="${p.title}" loading="lazy">
           <div class="pf-content">
-            <span style="color:var(--accent); font-weight:800; text-transform:uppercase; font-size:12px;">${p.category}</span>
-            <h3 style="font-family:var(--font-heading); color:#fff; font-size:24px; margin-top:5px;">${p.title}</h3>
+            <span>${p.category}</span>
+            <h3>${p.title}</h3>
           </div>
         </div>
       `).join('');
 
-      // 2. Slow down the 6-slider to 6000ms (6 seconds)
+      // FIX: Reverse Rotation (6, 5, 4, 3, 2, 1)
       if (pfTotal > 1) {
         if (pfTimer) clearInterval(pfTimer);
         pfTimer = setInterval(() => {
           const current = document.getElementById(`pf-slide-${pfIndex}`);
           if (current) current.style.display = 'none';
-          pfIndex = (pfIndex + 1) % pfTotal;
+          pfIndex = (pfIndex - 1 + pfTotal) % pfTotal; // Decrement logic
           const next = document.getElementById(`pf-slide-${pfIndex}`);
           if (next) next.style.display = 'block';
-        }, 6000); // Changed from 3000
+        }, 6000);
       }
     }
 
     function renderPaginatedNewsList(posts) {
       const container = document.getElementById('posts-list-container');
       const paginationEl = document.getElementById('pagination-box');
-
-      if (!posts.length) {
-        container.innerHTML = `<div style="grid-column:1/-1; text-align:center; color:var(--text-muted); padding:20px;">Is category mein abhi koi post nahi mili.</div>`;
-        paginationEl.innerHTML = '';
-        return;
-      }
+      if (!posts.length) { container.innerHTML = `<div style="grid-column:1/-1; text-align:center; color:var(--text-muted); padding:20px;">Is category mein abhi koi post nahi mili.</div>`; paginationEl.innerHTML = ''; return; }
 
       const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
       if (currentPage > totalPages) currentPage = totalPages;
       if (currentPage < 1) currentPage = 1;
-
       const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
       const endIndex = startIndex + POSTS_PER_PAGE;
       const currentPosts = posts.slice(startIndex, endIndex);
 
+      // FIX: Small Horizontal Thumbnails (News card is now horizontal flex)
       container.innerHTML = currentPosts.map(post => `
         <a href="${post.url || `posts/${post.slug}.html`}" class="news-card">
           <img class="news-thumb" src="${post.image || 'images/default.jpg'}" alt="${post.title}" loading="lazy">
-          <div class="news-card-content">
-            <div class="news-meta">${post.category} • ${post.formattedDate}</div>
+          <div style="flex:1; min-width:0;">
+            <div class="news-meta">${post.category}</div>
             <div class="news-title">${post.title}</div>
           </div>
         </a>
@@ -415,23 +402,17 @@
     function renderBoxPagination(totalPages) {
       const paginationEl = document.getElementById('pagination-box');
       if (totalPages <= 1) { paginationEl.innerHTML = ''; return; }
-
       let paginationHTML = '';
       if (currentPage > 1) paginationHTML += `<button class="page-btn" onclick="changePage(${currentPage - 1})">« Prev</button>`;
       else paginationHTML += `<button class="page-btn" disabled>« Prev</button>`;
-
       for (let i = 1; i <= totalPages; i++) {
         if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
           if (i === currentPage) paginationHTML += `<button class="page-btn active">${i}</button>`;
           else paginationHTML += `<button class="page-btn" onclick="changePage(${i})">${i}</button>`;
-        } else if (i === currentPage - 3 || i === currentPage + 3) {
-          paginationHTML += `<span style="color: var(--text-muted); padding: 0 4px;">...</span>`;
-        }
+        } else if (i === currentPage - 3 || i === currentPage + 3) paginationHTML += `<span style="color: var(--text-muted); padding: 0 4px;">...</span>`;
       }
-
       if (currentPage < totalPages) paginationHTML += `<button class="page-btn" onclick="changePage(${currentPage + 1})">Next »</button>`;
       else paginationHTML += `<button class="page-btn" disabled>Next »</button>`;
-
       paginationEl.innerHTML = paginationHTML;
     }
 
@@ -440,8 +421,7 @@
       if (currentCategory === 'All') renderPaginatedNewsList(rawPosts);
       else {
         let filtered = rawPosts.filter(p => {
-          const c = (p.category || '').toLowerCase();
-          const target = currentCategory.toLowerCase();
+          const c = (p.category || '').toLowerCase(); const target = currentCategory.toLowerCase();
           return c.includes(target) || target.includes(c);
         });
         renderPaginatedNewsList(filtered);
@@ -454,12 +434,9 @@
       currentPage = 1;
 
       document.querySelectorAll('.nav-link').forEach(el => {
-        if (el.textContent.trim().toLowerCase() === catName.toLowerCase() || 
-           (catName === 'All' && el.textContent.trim() === 'Home')) {
+        if (el.textContent.trim().toLowerCase() === catName.toLowerCase() || (catName === 'All' && el.textContent.trim() === 'Home')) {
           el.classList.add('active');
-        } else {
-          el.classList.remove('active');
-        }
+        } else { el.classList.remove('active'); }
       });
 
       const filterBanner = document.getElementById('posts-list-heading');
@@ -478,25 +455,20 @@
         window.history.pushState({}, '', newUrl);
       }
 
-      if (catName === 'All') {
-        renderAll();
-      } else {
+      if (catName === 'All') { renderAll(); }
+      else {
         let filtered = [];
         if (catName === 'Trending') filtered = rawPosts.filter(p => (p.badge || '').toLowerCase() === 'trending');
-        else filtered = rawPosts.filter(p => {
-          const c = (p.category || '').toLowerCase();
-          const target = catName.toLowerCase();
-          return c.includes(target) || target.includes(c);
-        });
+        else filtered = rawPosts.filter(p => { const c = (p.category || '').toLowerCase(); const target = catName.toLowerCase(); return c.includes(target) || target.includes(c); });
         renderPaginatedNewsList(filtered);
       }
 
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // FIX: Removed window.scrollTo({ top: 0, behavior: 'smooth' }); - Category click will not scroll to top now!
     }
 
     function renderAll() {
       if (!rawPosts || rawPosts.length === 0) return;
-      isHeroPaused = false; // Reset on render
+      isHeroPaused = false;
       setupHeroSlider(rawPosts);
       renderMostPopular(rawPosts);
       renderPaginatedNewsList(rawPosts);
@@ -507,9 +479,7 @@
         const res = await fetch(`data/posts.json?_t=${Date.now()}`);
         if (!res.ok) throw new Error('data/posts.json not found');
         rawPosts = await res.json();
-
         setupBreakingTicker(rawPosts);
-
         const params = new URLSearchParams(window.location.search);
         const urlCat = params.get('cat');
         if (urlCat) filterCategory(urlCat, false);
