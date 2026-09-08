@@ -2,7 +2,8 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1200">
+  <!-- ✅ Responsive Viewport (Mobile par bhi fit hoga, zoom-out nahi hoga) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Filmy Khabr - Admin Desk</title>
   <meta name="robots" content="noindex, nofollow">
   <style>
@@ -28,10 +29,11 @@
       color: var(--text-main);
       font-size: 15px;
       line-height: 1.4;
-      width: 1200px;
+      /* ✅ Responsive Width */
+      width: 100%;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 15px;
     }
 
     .container { max-width: 680px; margin: 0 auto; }
@@ -74,16 +76,16 @@
     .card-subtitle { font-size: 12px; color: var(--text-muted); }
     .status-badge { font-size: 11px; color: var(--success); font-weight: 600; }
 
-    /* ✅ HORIZONTAL LAYOUT (Side-by-Side) */
+    /* ✅ HORIZONTAL LAYOUT (Side-by-Side - Mobile par bhi) */
     .form-group { margin-bottom: 10px; }
     .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
 
-    label { display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.4px; }
+    label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.4px; }
     input, select, textarea {
       width: 100%; background: var(--input-bg); border: 1px solid var(--input-border);
-      color: var(--text-main); padding: 9px 12px; border-radius: 6px;
-      font-size: 14px; outline: none; transition: border-color 0.2s;
+      color: var(--text-main); padding: 12px 12px; border-radius: 6px;
+      font-size: 16px; outline: none; transition: border-color 0.2s;
     }
     input:focus, select:focus, textarea:focus { border-color: var(--accent); }
     textarea { resize: vertical; min-height: 120px; line-height: 1.4; }
@@ -93,15 +95,15 @@
       background: #111315; padding: 8px; border-radius: 6px;
       border: 1px dashed var(--card-border); margin-bottom: 8px; align-items: center;
     }
-    .link-helper-box input { padding: 6px 8px; font-size: 12px; }
+    .link-helper-box input { padding: 10px 8px; font-size: 14px; }
 
     /* Buttons */
-    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 15px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; border: none; transition: 0.2s; gap: 4px; text-decoration: none; }
-    .btn-accent { background: var(--accent); color: #fff; width: 100%; padding: 12px; font-size: 15px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 15px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; border: none; transition: 0.2s; gap: 4px; text-decoration: none; }
+    .btn-accent { background: var(--accent); color: #fff; width: 100%; padding: 14px; font-size: 16px; }
     .btn-accent:hover { background: var(--accent-hover); }
     .btn-secondary { background: #2b3036; color: #fff; }
-    .btn-danger { background: #3a1618; color: #fca5a5; border: 1px solid #7f1d1d; padding: 5px 8px; font-size: 12px; }
-    .btn-edit { background: #162a3a; color: #93c5fd; border: 1px solid #1e3a8a; padding: 5px 8px; font-size: 12px; }
+    .btn-danger { background: #3a1618; color: #fca5a5; border: 1px solid #7f1d1d; padding: 6px 8px; font-size: 12px; }
+    .btn-edit { background: #162a3a; color: #93c5fd; border: 1px solid #1e3a8a; padding: 6px 8px; font-size: 12px; }
     .btn-success { background: #065f46; color: #a7f3d0; border: 1px solid #047857; }
 
     /* Manage List & Pagination */
@@ -138,6 +140,8 @@
     .url-copy-box { display: flex; gap: 8px; margin-bottom: 15px; }
     .url-copy-box input { font-size: 14px; padding: 10px; background: #0a0b0d; border: 1px solid #23272d; color: #38bdf8; font-weight: 600; }
     .modal-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+
+    /* ✅ Koi Mobile Media Query Nahi - Isliye Fields Mobile par bhi Horizontal rahenge */
   </style>
 </head>
 <body>
@@ -534,7 +538,6 @@
   <div id="toast" class="notification">Message</div>
 
   <script>
-    // Pura script waisa hi hai jaisa original tha - koi change nahi kiya. Bas copy-paste karein.
     const MASTER_PIN = "1465822";
     let selectedImageBase64 = null;
     let selectedImageExt = "jpg";
@@ -619,9 +622,7 @@
       if (editId) return; 
       const title = document.getElementById('post-title').value;
       const slug = title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-');
-      
       document.getElementById('post-slug').value = slug;
-      
       if (!selectedImageBase64) {
         document.getElementById('post-image-path').value = slug ? `images/${slug}.${selectedImageExt}` : '';
       }
@@ -663,10 +664,7 @@
     function insertArticleLink() {
       const txt = document.getElementById('link-text').value.trim();
       const url = document.getElementById('link-url').value.trim();
-      if (!txt || !url) {
-        alert('Please fill both Link Text and URL');
-        return;
-      }
+      if (!txt || !url) { alert('Please fill both Link Text and URL'); return; }
       const linkTag = `<a href="${url}" target="_blank" rel="noopener noreferrer">${txt}</a>`;
       const textarea = document.getElementById('post-content');
       const start = textarea.selectionStart;
@@ -806,11 +804,303 @@
       return xml;
     }
 
+    // ✅ FULL GeneratePostHTML Function
     function generatePostHTML(post) {
-      // (Pura generatePostHTML function original jaisa hi hai, space bachane ke liye yaha paste nahi kiya. Aapne jo original code diya tha wahi chalega)
-      // Agar zarurat ho toh batao, main pura function bhi de dunga.
-      // Abhi ke liye function stub:
-      return `<!DOCTYPE html><html><head><title>${post.title}</title></head><body></body></html>`;
+      const absoluteUrl = `https://filmykhabr.gujaratfastalert.in/posts/${post.slug}.html`;
+      const absoluteImg = post.image.startsWith('http') 
+        ? post.image 
+        : `https://filmykhabr.gujaratfastalert.in/${post.image}`;
+      
+      const rawSummary = post.summary || post.title;
+      const safeSummary = rawSummary.replace(/"/g, '&quot;');
+      const safeTitle = post.title.replace(/"/g, '&quot;');
+      
+      const publishedAt = post.publishedAt || post.isoDate || new Date().toISOString();
+      const modifiedAt = post.modifiedAt || new Date().toISOString();
+      const displayDate = post.date || new Date().toISOString().split('T')[0];
+
+      const gaId = document.getElementById('ga-id').value.trim() || 'G-E6B67VBEFZ';
+
+      let gtagSnippet = '';
+      if (gaId) {
+        gtagSnippet = `
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=${gaId}"><\/script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${gaId}');
+  <\/script>`;
+      }
+
+      const fontStyle = post.fontStyle || 'noto-sans';
+      let fontImports = '';
+      let headlineFont = '"Noto Sans Devanagari", sans-serif';
+      let bodyFont = '"Noto Sans Devanagari", sans-serif';
+
+      if (fontStyle === 'playfair-lora') {
+        fontImports = `<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">`;
+        headlineFont = '"Playfair Display", serif';
+        bodyFont = '"Lora", serif';
+      } else if (fontStyle === 'roboto-sans') {
+        fontImports = `<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">`;
+        headlineFont = '"Roboto", sans-serif';
+        bodyFont = '"Inter", sans-serif';
+      } else if (fontStyle === 'noto-serif') {
+        fontImports = `<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">`;
+        headlineFont = '"Noto Serif Devanagari", serif';
+        bodyFont = '"Noto Serif Devanagari", serif';
+      } else {
+        fontImports = `<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">`;
+        headlineFont = '"Noto Sans Devanagari", sans-serif';
+        bodyFont = '"Noto Sans Devanagari", sans-serif';
+      }
+
+      const finalArticleBody = processContentWithElements(post.content, post.slug, {
+        extraImage1: post.extraImage1 || '',
+        extraImage2: post.extraImage2 || '',
+        extraImage3: post.extraImage3 || ''
+      }, null, false);
+
+      return `<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${post.title} - Filmy Khabr</title>
+  ${fontImports}
+  ${gtagSnippet}
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="description" content="${safeSummary}">
+  <meta name="author" content="Vanrajsinh Vaghela">
+  <link rel="canonical" href="${absoluteUrl}">
+  
+  <meta property="og:locale" content="hi_IN">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Filmy Khabr">
+  <meta property="og:title" content="${safeTitle}">
+  <meta property="og:description" content="${safeSummary}">
+  <meta property="og:url" content="${absoluteUrl}">
+  <meta property="og:image" content="${absoluteImg}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="675">
+  <meta property="article:published_time" content="${publishedAt}">
+  <meta property="article:modified_time" content="${modifiedAt}">
+  <meta property="article:author" content="Vanrajsinh Vaghela">
+  <meta property="article:section" content="${post.category}">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${safeTitle}">
+  <meta name="twitter:description" content="${safeSummary}">
+  <meta name="twitter:image" content="${absoluteImg}">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "${absoluteUrl}"
+    },
+    "headline": ${JSON.stringify(post.title)},
+    "image": [
+      "${absoluteImg}"
+    ],
+    "datePublished": "${publishedAt}",
+    "dateModified": "${modifiedAt}",
+    "author": {
+      "@type": "Person",
+      "name": "Vanrajsinh Vaghela",
+      "jobTitle": "Editor & Publisher"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Filmy Khabr",
+      "url": "https://filmykhabr.gujaratfastalert.in/"
+    },
+    "description": ${JSON.stringify(rawSummary)}
+  }
+  <\/script>
+
+  <style>
+    :root { 
+      --bg: #f5f5f5; 
+      --card: #ffffff; 
+      --accent: #e50914; 
+      --text: #171717; 
+      --muted: #666666; 
+      --border: #e5e7eb; 
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--text); padding: 12px; line-height: 1.8; font-size: 19px; font-family: ${bodyFont}; }
+    .page-wrapper { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 320px; gap: 24px; align-items: start; }
+    .post-container { background: var(--card); border-radius: 8px; border: 1px solid var(--border); padding: 24px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .sidebar { background: var(--card); border-radius: 8px; border: 1px solid var(--border); padding: 16px; position: sticky; top: 12px; }
+    .nav-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .nav-bar a { color: var(--accent); text-decoration: none; font-weight: 700; font-size: 13px; }
+    .badge { display: inline-block; background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; }
+    .meta { font-size: 13px; color: var(--muted); margin: 8px 0 16px 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .author-tag { color: var(--text); font-weight: 700; }
+    h1 { font-size: 42px; line-height: 1.2; margin: 10px 0 14px 0; color: var(--text); font-weight: 800; font-family: ${headlineFont}; }
+    .featured-img-wrap { width: 100%; border-radius: 8px; overflow: hidden; margin: 16px 0 24px 0; background: #f3f4f6; aspect-ratio: 16/9; }
+    .featured-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    
+    .article-trailer-box { margin: 24px 0; background: #000; border-radius: 8px; overflow: hidden; }
+    .trailer-tag { padding: 8px 12px; font-size: 12px; font-weight: 700; color: #fff; background: #171717; }
+    .video-responsive { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+    .video-responsive iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+    .article-body { font-size: 19px; color: #171717; }
+    .article-body p { margin-bottom: 22px; }
+    .article-body h2, .article-body h3 { color: #171717; margin: 28px 0 12px 0; font-size: 26px; font-family: ${headlineFont}; font-weight: 700; }
+    .article-body ul, .article-body ol { margin: 12px 0 20px 24px; }
+    .article-body li { margin-bottom: 8px; }
+    .article-body a { color: var(--accent); text-decoration: underline; font-weight: 600; }
+
+    /* Movie Details Fact Box */
+    .movie-details-box { background: #fafafa; border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 6px; padding: 16px; margin: 24px 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .movie-details-title { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); margin-bottom: 10px; }
+    .movie-details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px; color: var(--text); }
+
+    /* Related Stories Grid */
+    .related-section { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .related-title { font-size: 18px; font-weight: 800; margin-bottom: 14px; color: var(--text); text-transform: uppercase; letter-spacing: 0.5px; }
+    .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .related-card { background: #fff; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; }
+    .related-card img { width: 100%; height: 100px; object-fit: cover; }
+    .related-card-content { padding: 10px; font-size: 12px; font-weight: 700; color: var(--text); line-height: 1.3; }
+
+    /* Sidebar Widgets */
+    .sidebar-widget { margin-bottom: 20px; }
+    .sidebar-widget h3 { font-size: 14px; font-weight: 800; text-transform: uppercase; border-bottom: 2px solid var(--accent); padding-bottom: 6px; margin-bottom: 12px; color: var(--text); }
+    .sidebar-news-item { display: flex; gap: 10px; margin-bottom: 10px; text-decoration: none; color: inherit; align-items: center; }
+    .sidebar-news-item img { width: 60px; height: 45px; object-fit: cover; border-radius: 4px; }
+    .sidebar-news-title { font-size: 12px; font-weight: 700; line-height: 1.3; color: var(--text); }
+
+    /* Share Buttons Bar */
+    .share-bar { display: flex; gap: 8px; margin: 24px 0 16px 0; flex-wrap: wrap; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .share-btn { flex: 1; min-width: 100px; padding: 10px; text-align: center; border-radius: 6px; font-size: 12px; font-weight: 700; color: #fff; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 5px; }
+    .share-whatsapp { background: #25D366; }
+    .share-telegram { background: #0088cc; }
+    .share-twitter { background: #1da1f2; }
+
+    footer { text-align: center; margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); line-height: 1.6; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; grid-column: 1 / -1; }
+    .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 12px; }
+    .footer-links a:hover { color: var(--accent); }
+
+    @media (max-width: 900px) {
+      .page-wrapper { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      body { font-size: 18px; padding: 4px; }
+      .post-container { padding: 16px; }
+      h1 { font-size: 32px; }
+      .related-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <article class="post-container">
+      <div class="nav-bar">
+        <a href="../index.html">← FILMY KHABR HOME</a>
+        <span class="badge">${post.badge || 'Trending'}</span>
+      </div>
+      <div class="meta">
+        <span class="author-tag">By Vanrajsinh Vaghela</span>
+        <span>•</span>
+        <span>${post.category}</span>
+        <span>•</span>
+        <span>${post.platform || 'General'}</span>
+        <span>•</span>
+        <time datetime="${publishedAt}">${displayDate}</time>
+      </div>
+      <h1>${post.title}</h1>
+      ${post.image ? `<div class="featured-img-wrap"><img class="featured-img" src="../${post.image}" alt="${safeTitle}" width="1200" height="675" loading="eager"></div>` : ''}
+      
+      <div class="article-body">
+        ${finalArticleBody}
+      </div>
+
+      <!-- Movie Details Box -->
+      <div class="movie-details-box">
+        <div class="movie-details-title">🎬 Movie / Series Details</div>
+        <div class="movie-details-grid">
+          <div><strong>Release Date:</strong> ${displayDate}</div>
+          <div><strong>Genre:</strong> ${post.category}</div>
+          <div><strong>Platform:</strong> ${post.platform || 'Theatrical'}</div>
+          <div><strong>Status:</strong> ${post.badge || 'Released'}</div>
+        </div>
+      </div>
+
+      <!-- Related Stories Block -->
+      <div class="related-section">
+        <div class="related-title">Related Stories</div>
+        <div class="related-grid">
+          <a href="../index.html" class="related-card">
+            <img src="../${post.image}" alt="Related">
+            <div class="related-card-content">${post.title}</div>
+          </a>
+          <a href="../index.html" class="related-card">
+            <img src="../${post.image}" alt="Related">
+            <div class="related-card-content">Latest Bollywood & OTT Updates Live Today</div>
+          </a>
+          <a href="../index.html" class="related-card">
+            <img src="../${post.image}" alt="Related">
+            <div class="related-card-content">Upcoming Hollywood & Action Movies 2026</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Direct Share Buttons Bar -->
+      <div class="share-bar">
+        <a href="https://api.whatsapp.com/send?text=${encodeURIComponent(post.title + ' - ' + absoluteUrl)}" target="_blank" rel="noopener noreferrer" class="share-btn share-whatsapp">💬 WhatsApp</a>
+        <a href="https://t.me/share/url?url=${encodeURIComponent(absoluteUrl)}&text=${encodeURIComponent(post.title)}" target="_blank" rel="noopener noreferrer" class="share-btn share-telegram">✈ Telegram</a>
+        <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(absoluteUrl)}&text=${encodeURIComponent(post.title)}" target="_blank" rel="noopener noreferrer" class="share-btn share-twitter">𝕏 Twitter</a>
+      </div>
+    </article>
+
+    <!-- Desktop Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-widget">
+        <h3>🔥 Trending News</h3>
+        <a href="../index.html" class="sidebar-news-item">
+          <img src="../${post.image}" alt="News">
+          <div class="sidebar-news-title">Pushpa 2 Trailer Release Date & Box Office Updates</div>
+        </a>
+        <a href="../index.html" class="sidebar-news-item">
+          <img src="../${post.image}" alt="News">
+          <div class="sidebar-news-title">Kalki 2898 AD Sequel Shooting & Cast Details</div>
+        </a>
+        <a href="../index.html" class="sidebar-news-item">
+          <img src="../${post.image}" alt="News">
+          <div class="sidebar-news-title">Shah Rukh Khan की नई फिल्म पर बड़ा अपडेट सामने आया</div>
+        </a>
+      </div>
+      <div class="sidebar-widget" style="text-align:center;">
+        <h3>Sponsored</h3>
+        <div style="background:#171a1e; color:#fff; padding:20px; border-radius:6px; font-size:12px; font-weight:700;">
+          BIGGEST MOVIES<br>BIGGEST EMOTIONS<br>
+          <span style="color:var(--accent);">FILMY KHABR</span>
+        </div>
+      </div>
+    </aside>
+
+    <footer>
+      <div class="footer-links">
+        <a href="../about.html">About Us</a> •
+        <a href="../contact.html">Contact Us</a> •
+        <a href="../privacy-policy.html">Privacy Policy</a> •
+        <a href="../disclaimer.html">Disclaimer</a>
+      </div>
+      © 2026 Filmy Khabr.<br>
+      <span class="shiny-author">Managed and Published by Vanrajsinh Vaghela.</span><br>
+      All Rights Reserved.
+    </footer>
+  </div>
+</body>
+</html>`;
     }
 
     async function publishPost() {
@@ -829,16 +1119,9 @@
       const editId = document.getElementById('edit-post-id').value;
       const existingPublishedAt = document.getElementById('edit-published-at').value;
 
-      if (!title || !slug || !content) {
-        alert('Please fill Title and Content fields.');
-        return;
-      }
-
+      if (!title || !slug || !content) { alert('Please fill Title and Content fields.'); return; }
       const token = document.getElementById('gh-token').value.trim();
-      if (!token) {
-        alert('GitHub Token required in connection box.');
-        return;
-      }
+      if (!token) { alert('GitHub Token required in connection box.'); return; }
 
       btn.disabled = true;
       btn.textContent = 'Publishing to GitHub...';
@@ -891,12 +1174,8 @@
         let postsList = []; let postsSha = null;
         if (postsJsonFile && postsJsonFile.content) { postsSha = postsJsonFile.sha; try { postsList = JSON.parse(base64ToUtf8(postsJsonFile.content)); } catch(e) { postsList = []; } }
 
-        if (editId) {
-          const idx = postsList.findIndex(p => p.id === editId);
-          if (idx !== -1) { postsList[idx] = postObj; } else { postsList.unshift(postObj); }
-        } else {
-          postsList.unshift(postObj);
-        }
+        if (editId) { const idx = postsList.findIndex(p => p.id === editId); if (idx !== -1) postsList[idx] = postObj; else postsList.unshift(postObj); }
+        else postsList.unshift(postObj);
 
         await ghRequest('data/posts.json', 'PUT', { message: `Update posts.json for ${slug}`, content: utf8ToBase64(JSON.stringify(postsList, null, 2)), sha: postsSha || undefined });
 
@@ -919,12 +1198,8 @@
         document.getElementById('publish-success-modal').style.display = 'flex';
 
         resetForm();
-      } catch (err) {
-        alert('Publish failed: ' + err.message);
-      } finally {
-        btn.disabled = false;
-        btn.textContent = 'Publish Discover-Ready Post';
-      }
+      } catch (err) { alert('Publish failed: ' + err.message); }
+      finally { btn.disabled = false; btn.textContent = 'Publish Discover-Ready Post'; }
     }
 
     function copyPostLink() {
@@ -933,10 +1208,7 @@
       navigator.clipboard.writeText(input.value).then(() => showToast('Link copied to clipboard!'));
     }
 
-    function closeSuccessModal() {
-      document.getElementById('publish-success-modal').style.display = 'none';
-      switchTab('manage');
-    }
+    function closeSuccessModal() { document.getElementById('publish-success-modal').style.display = 'none'; switchTab('manage'); }
 
     async function loadManagePosts() {
       const container = document.getElementById('posts-list-container');
