@@ -2,11 +2,11 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- ✅ FORCE DESKTOP MODE -->
+  <meta name="viewport" content="width=1200">
   <title>Filmy Khabr - Admin Desk</title>
   <meta name="robots" content="noindex, nofollow">
   <style>
-    /* ========== BLUE & WHITE THEME ========== */
     :root {
       --bg: #ffffff;
       --card-bg: #ffffff;
@@ -33,10 +33,13 @@
     body {
       background-color: var(--bg);
       color: var(--text-main);
-      /* ✅ Text thoda bada */
       font-size: 15px;
       line-height: 1.5;
-      padding: 10px;
+      /* ✅ Force Desktop Width */
+      width: 1200px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
     }
 
     .container {
@@ -47,7 +50,7 @@
     /* PIN Lock Screen */
     #pin-gate {
       position: fixed;
-      inset: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
       background: var(--bg);
       display: flex;
       align-items: center;
@@ -160,7 +163,7 @@
       font-weight: 600;
     }
 
-    /* Form Layout */
+    /* ✅ HORIZONTAL LAYOUT (Pehle jaisa) */
     .form-group {
       margin-bottom: 10px;
     }
@@ -179,7 +182,6 @@
 
     label {
       display: block;
-      /* ✅ Label thoda bada */
       font-size: 13px;
       font-weight: 700;
       color: var(--text-muted);
@@ -193,7 +195,6 @@
       background: var(--input-bg);
       border: 1px solid var(--input-border);
       color: var(--text-main);
-      /* ✅ Input thoda bada */
       padding: 10px 12px;
       border-radius: 8px;
       font-size: 16px;
@@ -211,6 +212,7 @@
       line-height: 1.4;
     }
 
+    /* ✅ Horizontal Link Helper */
     .link-helper-box {
       display: grid;
       grid-template-columns: 1fr 1fr auto;
@@ -232,7 +234,6 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      /* ✅ Button thoda bada */
       padding: 10px 15px;
       border-radius: 8px;
       font-size: 14px;
@@ -504,55 +505,7 @@
       margin-bottom: 12px;
     }
 
-    /* ✅ MOBILE OPTIMIZATION (Sirf Mobile ke liye) */
-    @media (max-width: 768px) {
-      body {
-        padding: 5px;
-      }
-      .container {
-        max-width: 100%;
-      }
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-      }
-      .nav-tabs {
-        width: 100%;
-      }
-      .tab-btn {
-        flex: 1;
-        text-align: center;
-        padding: 10px 5px;
-        font-size: 13px;
-      }
-      /* ✅ Fields ab mobile par single column mein honge */
-      .form-row-2, .form-row-3, .link-helper-box {
-        grid-template-columns: 1fr;
-      }
-      /* ✅ Input aur text extra bade taaki zoom na ho */
-      input, select, textarea {
-        font-size: 16px;
-        padding: 12px;
-      }
-      label {
-        font-size: 14px;
-      }
-      .brand-title {
-        font-size: 24px;
-      }
-      .post-item {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .post-actions {
-        width: 100%;
-        justify-content: flex-end;
-      }
-      .modal-actions {
-        grid-template-columns: 1fr;
-      }
-    }
+    /* ✅ REMOVED ANY MOBILE @media QUERIES - TO FORCE HORIZONTAL & DESKTOP VIEW */
   </style>
 </head>
 <body>
@@ -643,7 +596,7 @@
 
         <div class="form-group">
           <label>Article Title (Google Discover Optimized)</label>
-          <input type="text" id="post-title" placeholder="e.g. Mirzapur Season 3 Ending Explained: कालीन भैया की वापसी का सच" oninput="autoGenerateSlug()">
+          <input type="text" id="post-title" placeholder="e.g. Mirzapur Season 3 Ending Explained" oninput="autoGenerateSlug()">
         </div>
 
         <div class="form-row-3">
@@ -688,7 +641,6 @@
           </div>
         </div>
 
-        <!-- Typography / Font Style Selector for Article -->
         <div class="form-group">
           <label style="color: #d97706;">🔤 Article Font Style / Typography</label>
           <select id="post-font-style">
@@ -704,7 +656,6 @@
           <input type="file" id="post-file" accept="image/*" onchange="handleImageFile(event)">
         </div>
 
-        <!-- Dedicated Hero Slider Trailer URL -->
         <div class="form-group">
           <label style="color: #d97706;">🌟 Hero Slider Trailer URL (For Homepage Slider Play)</label>
           <input type="text" id="hero-slider-trailer" placeholder="https://www.youtube.com/watch?v=...">
@@ -873,7 +824,6 @@
           <input type="text" id="post-summary" placeholder="1-2 line summary for search and feed snippet">
         </div>
 
-        <!-- Article Link Helper Tool -->
         <label>Article Content & In-line Links</label>
         <div class="link-helper-box">
           <input type="text" id="link-text" placeholder="Link Text (e.g. Read More)">
@@ -882,7 +832,7 @@
         </div>
 
         <div class="form-group">
-          <textarea id="post-content" placeholder="Type full Hindi article content here. Videos and extra images will automatically be placed based on your dropdown selections."></textarea>
+          <textarea id="post-content" placeholder="Type full Hindi article content here."></textarea>
         </div>
 
         <button class="btn btn-accent" id="publish-btn" onclick="publishPost()">Publish Discover-Ready Post</button>
@@ -902,7 +852,6 @@
         <div id="posts-list-container">
           <div style="text-align: center; padding: 20px; color: var(--text-muted); font-size: 14px;">Loading posts...</div>
         </div>
-        <!-- Manage Pagination Box -->
         <div id="manage-pagination-box" class="pagination-container"></div>
       </div>
     </div>
