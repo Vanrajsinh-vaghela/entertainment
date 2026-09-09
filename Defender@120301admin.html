@@ -10,26 +10,44 @@
       --bg: #0c0d0e; --card-bg: #141618; --card-border: #22262a; --input-bg: #1a1d21;
       --input-border: #2b3036; --text-main: #f3f4f6; --text-muted: #9ca3af;
       --accent: #e50914; --success: #10b981; --danger: #ef4444;
+      --yellow: #f59e0b; --blue: #38bdf8; --green: #10b981;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: var(--bg); color: var(--text-main); font-size: 14px; width: 100%; max-width: 1200px; margin: 0 auto; padding: 10px; }
+    body { background: var(--bg); color: var(--text-main); font-size: 14px; line-height: 1.5; width: 100%; max-width: 1200px; margin: 0 auto; padding: 10px; }
     .container { max-width: 680px; margin: 0 auto; }
-    .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; padding: 15px; margin-bottom: 12px; }
+
+    /* ✅ CARD (Design Box) - Premium Look */
+    .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; padding: 15px; margin-bottom: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
     .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-    .card-title { font-size: 15px; font-weight: 700; color: #fff; }
-    .form-group { margin-bottom: 10px; }
-    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .card-title { font-size: 16px; font-weight: 800; color: #fff; }
+    
+    /* ✅ INPUT (Line Box) - Smooth & Clean */
+    .form-group { margin-bottom: 12px; }
+    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
     .form-row-5 { display: grid; grid-template-columns: 1fr 1fr 1fr auto auto; gap: 8px; }
-    label { display: block; font-size: 11px; font-weight: 700; color: #aaa; text-transform: uppercase; margin-bottom: 4px; }
-    input, select, textarea { width: 100%; background: var(--input-bg); border: 1px solid var(--input-border); color: #fff; padding: 10px; border-radius: 6px; font-size: 14px; }
+    label { display: block; font-size: 11px; font-weight: 700; color: #aaa; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 0.5px; }
+    input, select, textarea { width: 100%; background: var(--input-bg); border: 1px solid var(--input-border); color: #fff; padding: 10px 12px; border-radius: 6px; font-size: 14px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+    input:hover, select:hover, textarea:hover { border-color: #3a404a; }
+    input:focus, select:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(229,9,20,0.15); }
     textarea { min-height: 120px; resize: vertical; }
-    .btn { padding: 9px 15px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; border: none; }
+
+    /* ✅ BUTTONS - Professional */
+    .btn { padding: 9px 15px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; border: none; transition: all 0.2s; }
     .btn-accent { background: var(--accent); color: #fff; width: 100%; padding: 12px; margin-top: 10px; font-size: 15px; }
+    .btn-accent:hover { background: #b80710; transform: translateY(-1px); }
     .btn-secondary { background: #2b3036; color: #fff; }
+    .btn-secondary:hover { background: #3a404a; }
     .btn-danger { background: #3a1618; color: #fca5a5; padding: 6px 10px; font-size: 12px; }
-    .add-link-btn { background: #2b3036; color: #fff; padding: 8px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: 700; margin-top: 5px; }
+    .add-link-btn { background: #2b3036; color: #fff; padding: 8px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: 700; font-size: 12px; margin-top: 5px; transition: 0.2s; }
+    .add-link-btn:hover { background: #3a404a; }
     .insert-all-btn { background: var(--accent); color: #fff; width: 100%; padding: 10px; border: none; border-radius: 6px; font-weight: 700; margin-top: 8px; }
+
+    /* ✅ SECTIONS - Specially Styled */
+    .extra-image-section { background: #1a1e24; border: 1px solid #2a3140; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+    .font-style-section { background: #1a1e24; border: 1px solid #2a3140; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+    .ads-section { background: #1a1e24; border: 1px solid #2a3140; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+
     .hidden { display: none !important; }
     .post-item { display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #191c20; border: 1px solid #23272c; border-radius: 6px; margin-bottom: 8px; }
     .post-item-title { font-size: 13px; font-weight: 600; color: #fff; }
@@ -43,7 +61,6 @@
     .modal-box { background: #14171a; border: 1px solid #2a3038; border-radius: 8px; padding: 20px; width: 100%; max-width: 480px; }
     .url-copy-box { display: flex; gap: 8px; margin-bottom: 12px; }
     .modal-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .extra-image-row { display: grid; grid-template-columns: 1fr 1fr auto auto; gap: 8px; margin-bottom: 8px; align-items: center; }
   </style>
 </head>
 <body>
@@ -143,43 +160,89 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label style="color:#f59e0b;">Font Style</label>
+        <!-- FONT STYLE SECTION (Yellow Highlight) -->
+        <div class="font-style-section">
+          <label style="color: var(--yellow); font-size: 12px; font-weight: 800;">🔤 ARTICLE FONT STYLE / TYPOGRAPHY</label>
           <select id="post-font-style">
-            <option value="noto-sans" selected>Noto Sans Devanagari</option>
-            <option value="noto-serif">Noto Serif Devanagari</option>
-            <option value="playfair-lora">Playfair Display</option>
-            <option value="roboto-sans">Roboto Sans</option>
+            <option value="noto-sans" selected>Noto Sans Devanagari (Clean Hindi Modern)</option>
+            <option value="noto-serif">Noto Serif Devanagari (Traditional Hindi Serif)</option>
+            <option value="playfair-lora">Playfair Display & Lora (Classic Editorial Serif)</option>
+            <option value="roboto-sans">Roboto & Inter (Modern Clean Sans-Serif)</option>
           </select>
         </div>
 
         <!-- FEATURED IMAGE -->
-        <div style="background:#1e1e24; border:1px solid #333; padding:12px; border-radius:6px; margin-bottom:12px;">
-          <label style="color:#ffcc00; font-weight:800;">🎬 Featured Image (Main Banner)</label>
+        <div class="card" style="background:#1a1e24; border:1px solid #2a3140;">
+          <label style="color:#ffcc00; font-weight:800;">🎬 FEATURED IMAGE (MAIN BANNER)</label>
           <input type="file" id="post-file" accept="image/*" onchange="handleImageFile(event)" style="padding:10px;">
         </div>
 
-        <!-- EXTRA IMAGES - DYNAMIC LIKE ADD LINK -->
-        <div style="background:#1e1e24; border:1px solid #333; padding:12px; border-radius:6px; margin-bottom:12px;">
-          <label style="color:#38bdf8; font-weight:800; font-size:14px;">🖼️ Additional Images (Add jitni chahiye)</label>
-          <div id="extra-image-rows">
-            <!-- Initial Row -->
-            <div class="extra-image-row" data-id="extra_1">
-              <input type="file" accept="image/*" onchange="handleExtraImage(this)">
-              <select class="extra-pos">
+        <!-- EXTRA IMAGES SECTION (Blue Highlight) -->
+        <div class="extra-image-section">
+          <label style="color: var(--blue); font-size: 13px; font-weight: 800; margin-bottom: 10px; display: block;">🖼️ ADDITIONAL ARTICLE IMAGES (UP TO 3 EXTRA)</label>
+          
+          <!-- Extra Image 1 -->
+          <div class="form-row-2" style="margin-bottom: 10px;">
+            <div class="form-group">
+              <label>📸 Extra Image 1 File</label>
+              <input type="file" id="extra-img-file-1" accept="image/*" onchange="handleExtraImage(event, 1)">
+              <input type="hidden" id="extra-img-path-1">
+            </div>
+            <div class="form-group">
+              <label>Extra Image 1 Position</label>
+              <select id="extra-img-pos-1">
                 <option value="">-- Do Not Show --</option>
                 <option value="top">Top</option>
                 <option value="upper-middle">Upper Middle</option>
                 <option value="middle">Middle</option>
                 <option value="lower-middle">Lower Middle</option>
-                <option value="before-last" selected>Before Last</option>
+                <option value="before-last" selected>Before Last Section</option>
                 <option value="bottom">Bottom</option>
               </select>
-              <button class="btn btn-secondary" onclick="addExtraImageRow()">+</button>
-              <button class="btn btn-danger" onclick="removeRow(this)">x</button>
             </div>
           </div>
-          <button class="add-link-btn" onclick="addExtraImageRow()">+ Add Extra Image</button>
+
+          <!-- Extra Image 2 -->
+          <div class="form-row-2" style="margin-bottom: 10px;">
+            <div class="form-group">
+              <label>📸 Extra Image 2 File</label>
+              <input type="file" id="extra-img-file-2" accept="image/*" onchange="handleExtraImage(event, 2)">
+              <input type="hidden" id="extra-img-path-2">
+            </div>
+            <div class="form-group">
+              <label>Extra Image 2 Position</label>
+              <select id="extra-img-pos-2">
+                <option value="">-- Do Not Show --</option>
+                <option value="top">Top</option>
+                <option value="upper-middle">Upper Middle</option>
+                <option value="middle">Middle</option>
+                <option value="lower-middle">Lower Middle</option>
+                <option value="before-last">Before Last Section</option>
+                <option value="bottom">Bottom</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Extra Image 3 -->
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>📸 Extra Image 3 File</label>
+              <input type="file" id="extra-img-file-3" accept="image/*" onchange="handleExtraImage(event, 3)">
+              <input type="hidden" id="extra-img-path-3">
+            </div>
+            <div class="form-group">
+              <label>Extra Image 3 Position</label>
+              <select id="extra-img-pos-3">
+                <option value="">-- Do Not Show --</option>
+                <option value="top">Top</option>
+                <option value="upper-middle">Upper Middle</option>
+                <option value="middle">Middle</option>
+                <option value="lower-middle">Lower Middle</option>
+                <option value="before-last">Before Last Section</option>
+                <option value="bottom">Bottom</option>
+              </select>
+            </div>
+          </div>
         </div>
 
         <!-- HERO SLIDER TRAILER -->
@@ -233,8 +296,8 @@
         </div>
 
         <!-- RELATED ARTICLES -->
-        <div style="background:#1e1e24; border:1px solid #333; padding:12px; border-radius:6px; margin-bottom:12px;">
-          <label style="color:#38bdf8; font-weight:800;">🔗 Related Articles (List ke beech dikhenge)</label>
+        <div class="card" style="background:#1a1e24; border:1px solid #2a3140;">
+          <label style="color:var(--blue); font-weight:800;">🔗 Related Articles (List ke beech dikhenge)</label>
           <div id="related-articles-rows">
             <div class="form-row-5">
               <input type="text" class="ra-image" placeholder="Image URL">
@@ -248,8 +311,8 @@
         </div>
 
         <!-- SOURCE CREDIT -->
-        <div style="background:#1e1e24; border:1px solid #333; padding:12px; border-radius:6px; margin-bottom:12px;">
-          <label style="color:#38bdf8; font-weight:800;">🔗 Source / Credit (Article bottom)</label>
+        <div class="card" style="background:#1a1e24; border:1px solid #2a3140;">
+          <label style="color:var(--blue); font-weight:800;">🔗 Source / Credit (Article bottom)</label>
           <div id="source-credit-rows">
             <div class="form-row-2">
               <input type="text" class="sc-name" placeholder="Source Name">
@@ -262,12 +325,12 @@
         </div>
 
         <!-- ADS 8 BOXES -->
-        <div style="background:#1e1e24; border:1px solid #333; padding:12px; border-radius:6px; margin-bottom:12px;">
-          <label style="color:#10b981; font-weight:800;">💰 Direct Ad Code (8 Slots)</label>
+        <div class="ads-section">
+          <label style="color: var(--green); font-size: 13px; font-weight: 800; margin-bottom: 10px; display: block;">💰 DIRECT AD CODE (8 SLOTS)</label>
           <textarea id="ad-code-1" placeholder="Popunder (Ad 1)" style="margin-bottom:8px;"></textarea>
           <textarea id="ad-code-2" placeholder="Native Banner (Ad 2)" style="margin-bottom:8px;"></textarea>
           <textarea id="ad-code-3" placeholder="Banner 728x90 (Ad 3)" style="margin-bottom:8px;"></textarea>
-          <textarea id="ad-code-4" placeholder="Related Articles Beech Ad (Ad 4)" style="margin-bottom:8px; border-color:#38bdf8;"></textarea>
+          <textarea id="ad-code-4" placeholder="Related Articles Beech Ad (Ad 4)" style="margin-bottom:8px; border-color:var(--blue);"></textarea>
           <textarea id="ad-code-5" placeholder="Social Bar (Ad 5)" style="margin-bottom:8px;"></textarea>
           <textarea id="ad-code-6" placeholder="Smartlink (Ad 6)" style="margin-bottom:8px;"></textarea>
           <textarea id="ad-code-7" placeholder="Extra Ad 7" style="margin-bottom:8px;"></textarea>
@@ -333,66 +396,9 @@
   <script>
     const MASTER_PIN = "1465822";
     let selectedImageBase64 = null;
-    let extraImagesData = {}; // id -> {base64, ext, path, pos}
-    let extraImageCounter = 1; // for unique ids
     let allPostsCache = [];
     let manageCurrentPage = 1;
     const MANAGE_PER_PAGE = 15;
-
-    // Dynamic Extra Image Row Functions
-    function addExtraImageRow() {
-      const container = document.getElementById('extra-image-rows');
-      const row = document.createElement('div');
-      row.className = 'extra-image-row';
-      row.setAttribute('data-id', 'extra_' + extraImageCounter);
-      row.innerHTML = `
-        <input type="file" accept="image/*" onchange="handleExtraImage(this)">
-        <select class="extra-pos">
-          <option value="">-- Do Not Show --</option>
-          <option value="top">Top</option>
-          <option value="upper-middle">Upper Middle</option>
-          <option value="middle">Middle</option>
-          <option value="lower-middle">Lower Middle</option>
-          <option value="before-last" selected>Before Last</option>
-          <option value="bottom">Bottom</option>
-        </select>
-        <button class="btn btn-secondary" onclick="addExtraImageRow()">+</button>
-        <button class="btn btn-danger" onclick="removeRow(this)">x</button>
-      `;
-      container.appendChild(row);
-      extraImageCounter++;
-    }
-
-    function removeRow(btn) {
-      const row = btn.parentElement;
-      // If it's the only row, just clear it instead of removing
-      const container = row.parentElement;
-      if (container.children.length === 1) {
-        row.querySelector('input[type="file"]').value = '';
-        row.querySelector('select').selectedIndex = 0;
-      } else {
-        row.remove();
-      }
-    }
-
-    function handleExtraImage(input) {
-      const row = input.closest('.extra-image-row');
-      const file = input.files[0];
-      if (!file) return;
-      const id = row.getAttribute('data-id');
-      const ext = file.name.split('.').pop() || 'jpg';
-      const reader = new FileReader();
-      reader.onload = function(evt) {
-        const base64 = evt.target.result.split(',')[1];
-        const slug = document.getElementById('post-slug').value || ('post-' + Date.now());
-        const path = 'extra-images/' + slug + '-' + id + '.' + ext; // New folder 'extra-images'
-        extraImagesData[id] = { base64, ext, path, pos: row.querySelector('.extra-pos').value };
-        showToast('Extra image added!');
-      };
-      reader.readAsDataURL(file);
-    }
-
-    // Other functions (verifyPin, initAdmin, switchTab, saveCreds, loadCreds, autoGenerateSlug, handleImageFile, addRelatedArticleRow, addSourceCreditRow, showToast, ghRequest, utf8ToBase64, base64ToUtf8, loadManagePosts, renderManageListPaginated, changeManagePage, editPost, deletePost, renderDedicatedPreview, publishPost, generatePostHTML, resetForm, copyPostLink, closeSuccessModal)
 
     function verifyPin() {
       const pin = document.getElementById('admin-pin-input').value.trim();
@@ -461,6 +467,17 @@
       reader.readAsDataURL(file);
     }
 
+    function handleExtraImage(e, index) {
+      const file = e.target.files[0]; if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        localStorage.setItem('extra_img_' + index, evt.target.result.split(',')[1]);
+        document.getElementById('extra-img-path-' + index).value = 'images/' + (document.getElementById('post-slug').value || 'post-' + Date.now()) + '-extra-' + index + '.jpg';
+        showToast('Extra image ' + index + ' loaded!');
+      };
+      reader.readAsDataURL(file);
+    }
+
     function addRelatedArticleRow(btn) {
       const container = document.getElementById('related-articles-rows');
       const row = document.createElement('div');
@@ -478,6 +495,8 @@
       container.appendChild(row);
       if (btn) btn.parentElement.remove();
     }
+
+    function removeRow(btn) { btn.parentElement.remove(); }
 
     function showToast(msg) {
       const t = document.getElementById('toast');
@@ -548,10 +567,6 @@
       document.getElementById('post-badge').value = post.badge;
       document.getElementById('post-summary').value = post.summary;
       document.getElementById('post-content').value = post.content;
-      // Clear extra image rows and re-add existing? For simplicity, just clear and start fresh
-      const extraContainer = document.getElementById('extra-image-rows');
-      extraContainer.innerHTML = '';
-      addExtraImageRow();
       switchTab('new-post');
     }
 
@@ -594,26 +609,21 @@
       btn.textContent = 'Publishing to GitHub...';
 
       try {
-        // Upload main image
         if (selectedImageBase64) {
           const imgPath = 'images/' + slug + '.jpg';
           await ghRequest(imgPath, 'PUT', { message: 'Upload ' + slug, content: selectedImageBase64 });
         }
 
-        // Upload dynamic extra images and collect paths
-        const extraImages = [];
-        for (const id in extraImagesData) {
-          const data = extraImagesData[id];
-          if (data && data.base64) {
-            await ghRequest(data.path, 'PUT', { message: 'Upload extra ' + id, content: data.base64 });
-            extraImages.push({ path: data.path, pos: data.pos });
+        for (let i = 1; i <= 3; i++) {
+          const extraBase64 = localStorage.getItem('extra_img_' + i);
+          if (extraBase64) {
+            const extraPath = 'images/' + slug + '-extra-' + i + '.jpg';
+            await ghRequest(extraPath, 'PUT', { message: 'Upload extra ' + i, content: extraBase64 });
           }
         }
 
-        // Create post object
-        const postObj = { id: 'post_' + Date.now(), title, slug, category, platform, badge, summary, content, date: new Date().toISOString().split('T')[0], extraImages: extraImages };
+        const postObj = { id: 'post_' + Date.now(), title, slug, category, platform, badge, summary, content, date: new Date().toISOString().split('T')[0] };
 
-        // Update posts.json
         let postsFile = await ghRequest('data/posts.json');
         let postsList = [];
         let postsSha = null;
@@ -621,14 +631,17 @@
         postsList.unshift(postObj);
         await ghRequest('data/posts.json', 'PUT', { message: 'Add post ' + slug, content: utf8ToBase64(JSON.stringify(postsList, null, 2)), sha: postsSha });
 
-        // Generate HTML and upload (simple placeholder - aapke real generatePostHTML ko yahan replace karna hoga)
-        const postHTML = `<h1>${title}</h1><p>${content}</p>`;
+        const postHTML = generatePostHTML(postObj);
         await ghRequest('posts/' + slug + '.html', 'PUT', { message: 'Publish ' + slug, content: utf8ToBase64(postHTML) });
 
         alert('Post published!');
         resetForm();
       } catch (err) { alert('Publish failed: ' + err.message); }
       finally { btn.disabled = false; btn.textContent = 'Publish Post'; }
+    }
+
+    function generatePostHTML(post) {
+      return `<!DOCTYPE html><html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${post.title}</title></head><body><h1>${post.title}</h1><p>${post.content}</p></body></html>`;
     }
 
     function resetForm() {
@@ -639,24 +652,11 @@
       document.getElementById('post-content').value = '';
       document.getElementById('post-file').value = '';
       selectedImageBase64 = null;
-      extraImagesData = {};
-      extraImageCounter = 1;
-      // Reset extra image rows to one empty row
-      const extraContainer = document.getElementById('extra-image-rows');
-      extraContainer.innerHTML = `<div class="extra-image-row" data-id="extra_1">
-        <input type="file" accept="image/*" onchange="handleExtraImage(this)">
-        <select class="extra-pos">
-          <option value="">-- Do Not Show --</option>
-          <option value="top">Top</option>
-          <option value="upper-middle">Upper Middle</option>
-          <option value="middle">Middle</option>
-          <option value="lower-middle">Lower Middle</option>
-          <option value="before-last" selected>Before Last</option>
-          <option value="bottom">Bottom</option>
-        </select>
-        <button class="btn btn-secondary" onclick="addExtraImageRow()">+</button>
-        <button class="btn btn-danger" onclick="removeRow(this)">x</button>
-      </div>`;
+      for (let i = 1; i <= 3; i++) {
+        localStorage.removeItem('extra_img_' + i);
+        document.getElementById('extra-img-file-' + i).value = '';
+        document.getElementById('extra-img-path-' + i).value = '';
+      }
       document.getElementById('form-heading').textContent = 'Create New Post';
       document.getElementById('publish-btn').textContent = 'Publish Post';
     }
