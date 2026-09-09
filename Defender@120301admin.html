@@ -16,12 +16,10 @@
     body { background: var(--bg); color: var(--text-main); font-size: 14px; line-height: 1.5; width: 100%; max-width: 1200px; margin: 0 auto; padding: 10px; }
     .container { max-width: 680px; margin: 0 auto; }
 
-    /* ✅ CARD (Design Box) - Premium Look */
     .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; padding: 15px; margin-bottom: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
     .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
     .card-title { font-size: 16px; font-weight: 800; color: #fff; }
     
-    /* ✅ INPUT (Line Box) - Smooth & Clean */
     .form-group { margin-bottom: 12px; }
     .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
@@ -30,9 +28,15 @@
     input, select, textarea { width: 100%; background: var(--input-bg); border: 1px solid var(--input-border); color: #fff; padding: 10px 12px; border-radius: 6px; font-size: 14px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
     input:hover, select:hover, textarea:hover { border-color: #3a404a; }
     input:focus, select:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(229,9,20,0.15); }
-    textarea { min-height: 120px; resize: vertical; }
 
-    /* ✅ BUTTONS - Professional */
+    /* ✅ Article content box bada */
+    #post-content { min-height: 250px; }
+
+    /* ✅ Ads ke boxes chote */
+    #ad-code-1, #ad-code-2, #ad-code-3, #ad-code-4, #ad-code-5, #ad-code-6, #ad-code-7, #ad-code-8 { min-height: 50px; }
+
+    textarea { resize: vertical; }
+
     .btn { padding: 9px 15px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; border: none; transition: all 0.2s; }
     .btn-accent { background: var(--accent); color: #fff; width: 100%; padding: 12px; margin-top: 10px; font-size: 15px; }
     .btn-accent:hover { background: #b80710; transform: translateY(-1px); }
@@ -43,7 +47,6 @@
     .add-link-btn:hover { background: #3a404a; }
     .insert-all-btn { background: var(--accent); color: #fff; width: 100%; padding: 10px; border: none; border-radius: 6px; font-weight: 700; margin-top: 8px; }
 
-    /* ✅ SECTIONS - Specially Styled */
     .extra-image-section { background: #1a1e24; border: 1px solid #2a3140; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
     .font-style-section { background: #1a1e24; border: 1px solid #2a3140; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
     .ads-section { background: #1a1e24; border: 1px solid #2a3140; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
@@ -65,12 +68,15 @@
 </head>
 <body>
 
-  <!-- PIN GATE -->
+  <!-- PIN GATE (Numerical input only) -->
   <div id="pin-gate" style="position:fixed; inset:0; background:var(--bg); display:flex; align-items:center; justify-content:center; z-index:9999;">
     <div class="card" style="text-align:center; max-width:340px;">
       <h2 style="color:#fff; margin-bottom:6px;">FILMY KHABR ADMIN</h2>
       <p style="color:#aaa; font-size:13px; margin-bottom:12px;">Enter Master PIN</p>
-      <input type="password" id="admin-pin-input" placeholder="•••••••" style="text-align:center; font-size:24px; letter-spacing:8px; margin-bottom:12px;" onkeydown="if(event.key==='Enter') verifyPin()">
+      <input type="password" id="admin-pin-input" 
+             inputmode="numeric" pattern="[0-9]*" maxlength="10" 
+             placeholder="•••••••" style="text-align:center; font-size:24px; letter-spacing:8px; margin-bottom:12px;" 
+             onkeydown="if(event.key==='Enter') verifyPin()">
       <button class="btn btn-accent" onclick="verifyPin()">Unlock Desk</button>
     </div>
   </div>
@@ -160,7 +166,7 @@
           </div>
         </div>
 
-        <!-- FONT STYLE SECTION (Yellow Highlight) -->
+        <!-- FONT STYLE SECTION -->
         <div class="font-style-section">
           <label style="color: var(--yellow); font-size: 12px; font-weight: 800;">🔤 ARTICLE FONT STYLE / TYPOGRAPHY</label>
           <select id="post-font-style">
@@ -177,7 +183,7 @@
           <input type="file" id="post-file" accept="image/*" onchange="handleImageFile(event)" style="padding:10px;">
         </div>
 
-        <!-- EXTRA IMAGES SECTION (Blue Highlight) -->
+        <!-- EXTRA IMAGES SECTION -->
         <div class="extra-image-section">
           <label style="color: var(--blue); font-size: 13px; font-weight: 800; margin-bottom: 10px; display: block;">🖼️ ADDITIONAL ARTICLE IMAGES (UP TO 3 EXTRA)</label>
           
@@ -289,7 +295,7 @@
           <input type="text" id="post-summary" placeholder="2-3 line summary">
         </div>
 
-        <!-- ARTICLE CONTENT -->
+        <!-- ARTICLE CONTENT (Bada box) -->
         <div class="form-group">
           <label>Article Content</label>
           <textarea id="post-content" placeholder="Full article yahan likho"></textarea>
@@ -324,7 +330,7 @@
           <button class="add-link-btn" onclick="addSourceCreditRow()">+ Add Source</button>
         </div>
 
-        <!-- ADS 8 BOXES -->
+        <!-- ADS 8 BOXES (Chote) -->
         <div class="ads-section">
           <label style="color: var(--green); font-size: 13px; font-weight: 800; margin-bottom: 10px; display: block;">💰 DIRECT AD CODE (8 SLOTS)</label>
           <textarea id="ad-code-1" placeholder="Popunder (Ad 1)" style="margin-bottom:8px;"></textarea>
