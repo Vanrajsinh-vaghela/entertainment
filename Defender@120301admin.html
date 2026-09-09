@@ -1,18 +1,645 @@
-<!-- Extra Image 1 (Improved UI) -->
-<div style="background: #1e1e24; border: 1px solid #333; padding: 10px; border-radius: 6px; margin-bottom: 10px;">
-   <label style="color: #ffcc00; font-weight: 800;">📸 Extra Image 1</label>
-   <div style="display: flex; gap: 10px; align-items: center; margin-top: 5px;">
-      <input type="file" id="extra-img-file-1" accept="image/*" onchange="handleExtraImage(event, 1)" style="padding: 8px; font-size: 14px;">
-      <span style="font-size: 13px; color: #aaa;">Max 5MB, JPG/PNG</span>
-   </div>
-   <label style="margin-top: 8px; font-size: 12px;">Position Kahan Dikhana Hai?</label>
-   <select id="extra-img-pos-1" style="margin-top: 5px; width: 100%;">
-      <option value="">-- Do Not Show --</option>
-      <option value="top">Top (Sabse Upar)</option>
-      <option value="upper-middle">Upper Middle</option>
-      <option value="middle">Exact Middle</option>
-      <option value="lower-middle">Lower Middle</option>
-      <option value="before-last" selected>Before Last Section</option>
-      <option value="bottom">Very Bottom</option>
-   </select>
-</div>
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filmy Khabr - Admin Desk</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    :root {
+      --bg: #0c0d0e; --card-bg: #141618; --card-border: #22262a; --input-bg: #1a1d21;
+      --input-border: #2b3036; --text-main: #f3f4f6; --text-muted: #9ca3af;
+      --accent: #e50914; --success: #10b981; --danger: #ef4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text-main); font-size: 14px; width: 100%; max-width: 1200px; margin: 0 auto; padding: 10px; }
+    .container { max-width: 680px; margin: 0 auto; }
+    .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; padding: 15px; margin-bottom: 12px; }
+    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .card-title { font-size: 15px; font-weight: 700; color: #fff; }
+    .form-group { margin-bottom: 10px; }
+    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .form-row-5 { display: grid; grid-template-columns: 1fr 1fr 1fr auto auto; gap: 8px; }
+    label { display: block; font-size: 11px; font-weight: 700; color: #aaa; text-transform: uppercase; margin-bottom: 4px; }
+    input, select, textarea { width: 100%; background: var(--input-bg); border: 1px solid var(--input-border); color: #fff; padding: 10px; border-radius: 6px; font-size: 14px; }
+    textarea { min-height: 120px; resize: vertical; }
+    .btn { padding: 9px 15px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; border: none; }
+    .btn-accent { background: var(--accent); color: #fff; width: 100%; padding: 12px; margin-top: 10px; font-size: 15px; }
+    .btn-secondary { background: #2b3036; color: #fff; }
+    .btn-danger { background: #3a1618; color: #fca5a5; padding: 6px 10px; font-size: 12px; }
+    .add-link-btn { background: #2b3036; color: #fff; padding: 8px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: 700; margin-top: 5px; }
+    .insert-all-btn { background: var(--accent); color: #fff; width: 100%; padding: 10px; border: none; border-radius: 6px; font-weight: 700; margin-top: 8px; }
+    .hidden { display: none !important; }
+    .post-item { display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #191c20; border: 1px solid #23272c; border-radius: 6px; margin-bottom: 8px; }
+    .post-item-title { font-size: 13px; font-weight: 600; color: #fff; }
+    .post-item-meta { font-size: 11px; color: #aaa; }
+    .post-actions { display: flex; gap: 6px; }
+    .page-btn { background: #202327; border: 1px solid #333; color: #fff; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+    .page-btn.active { background: var(--accent); color: #fff; }
+    .preview-img { width: 100%; max-height: 200px; object-fit: cover; border-radius: 6px; margin-bottom: 10px; }
+    .notification { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: #1f2429; color: #fff; padding: 10px 16px; border-radius: 20px; font-size: 13px; }
+    #publish-success-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 99999; }
+    .modal-box { background: #14171a; border: 1px solid #2a3038; border-radius: 8px; padding: 20px; width: 100%; max-width: 480px; }
+    .url-copy-box { display: flex; gap: 8px; margin-bottom: 12px; }
+    .modal-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  </style>
+</head>
+<body>
+
+  <!-- PIN GATE -->
+  <div id="pin-gate" style="position:fixed; inset:0; background:var(--bg); display:flex; align-items:center; justify-content:center; z-index:9999;">
+    <div class="card" style="text-align:center; max-width:340px;">
+      <h2 style="color:#fff; margin-bottom:6px;">FILMY KHABR ADMIN</h2>
+      <p style="color:#aaa; font-size:13px; margin-bottom:12px;">Enter Master PIN</p>
+      <input type="password" id="admin-pin-input" placeholder="•••••••" style="text-align:center; font-size:24px; letter-spacing:8px; margin-bottom:12px;" onkeydown="if(event.key==='Enter') verifyPin()">
+      <button class="btn btn-accent" onclick="verifyPin()">Unlock Desk</button>
+    </div>
+  </div>
+
+  <div class="container" id="admin-app" style="display:none;">
+    <!-- HEADER -->
+    <header style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #333; padding-bottom:10px; margin-bottom:15px;">
+      <div>
+        <h2 style="color:#fff; font-size:18px;">FILMY KHABR</h2>
+        <span style="color:#aaa; font-size:11px;">VANRAJSINH MASTER DESK</span>
+      </div>
+      <div style="display:flex; gap:6px;">
+        <button class="btn btn-secondary" id="tab-btn-new" onclick="switchTab('new-post')">New Post</button>
+        <button class="btn btn-secondary" id="tab-btn-manage" onclick="switchTab('manage')">Manage</button>
+        <button class="btn btn-secondary" id="tab-btn-preview" onclick="switchTab('preview')">Preview</button>
+      </div>
+    </header>
+
+    <!-- GITHUB CONFIG -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Site & GitHub Config</span>
+        <span style="color:var(--success); font-size:12px;">Ready</span>
+      </div>
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>GitHub Username</label>
+          <input type="text" id="gh-user" value="Vanrajsinh-vaghela" placeholder="Vanrajsinh-vaghela">
+        </div>
+        <div class="form-group">
+          <label>Repository Name</label>
+          <input type="text" id="gh-repo" value="entertainment" placeholder="entertainment">
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>GitHub Token (PAT)</label>
+          <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxxxxxx">
+        </div>
+        <div class="form-group">
+          <label>Google Analytics ID</label>
+          <input type="text" id="ga-id" value="G-E6B67VBEFZ">
+        </div>
+      </div>
+      <button class="btn btn-secondary" onclick="saveCreds()" style="width:100%; margin-top:5px;">Save Settings</button>
+    </div>
+
+    <!-- NEW POST FORM -->
+    <div id="view-new-post">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title" id="form-heading">Create New Post</span>
+          <button class="btn btn-secondary" onclick="resetForm()">Clear Form</button>
+        </div>
+        
+        <input type="hidden" id="edit-post-id">
+        <input type="hidden" id="edit-published-at">
+        <input type="hidden" id="post-slug">
+        <input type="hidden" id="post-image-path">
+
+        <div class="form-group">
+          <label>Article Title</label>
+          <input type="text" id="post-title" placeholder="Title likho" oninput="autoGenerateSlug()">
+        </div>
+
+        <div class="form-row-3">
+          <div class="form-group">
+            <label>Category</label>
+            <select id="post-category">
+              <option>Movies</option><option>Web Series</option><option>OTT</option>
+              <option>Trailers</option><option>News</option><option>Celebrity News</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Platform</label>
+            <select id="post-platform">
+              <option>Netflix</option><option>Prime Video</option><option>Hotstar</option>
+              <option>YouTube</option><option>Theatre</option><option>General</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Badge</label>
+            <select id="post-badge">
+              <option>Trending</option><option>Breaking</option><option>Exclusive</option>
+              <option>Review</option><option>Update</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label style="color:#f59e0b;">Font Style</label>
+          <select id="post-font-style">
+            <option value="noto-sans" selected>Noto Sans Devanagari</option>
+            <option value="noto-serif">Noto Serif Devanagari</option>
+            <option value="playfair-lora">Playfair Display</option>
+            <option value="roboto-sans">Roboto Sans</option>
+          </select>
+        </div>
+
+        <!-- FEATURED IMAGE -->
+        <div style="background:#1e1e24; border:1px solid #333; padding:12px; border-radius:6px; margin-bottom:12px;">
+          <label style="color:#ffcc00; font-weight:800;">🎬 Featured Image (Main Banner)</label>
+          <input type="file" id="post-file" accept="image/*" onchange="handleImageFile(event)" style="padding:10px;">
+        </div>
+
+        <!-- 3 EXTRA IMAGES (SAF-SAAF UI) -->
+        <div style="background:#1e1e24; border:1px solid #333; padding:12px; border-radius:6px; margin-bottom:12px;">
+          <label style="color:#38bdf8; font-weight:800; font-size:14px;">🖼️ Additional Images (3 Extra)</label>
+          
+          <!-- Extra Image 1 -->
+          <div style="border-bottom:1px solid #333; padding:12px 0; margin-bottom:10px;">
+            <label style="color:#ffcc00; font-size:13px;">📸 Extra Image 1</label>
+            <input type="file" id="extra-img-file-1" accept="image/*" onchange="handleExtraImage(event, 1)" style="padding:8px;">
+            <input type="hidden" id="extra-img-path-1">
+            <label style="margin-top:8px; font-size:11px;">Position</label>
+            <select id="extra-img-pos-1">
+              <option value="">-- Do Not Show --</option>
+              <option value="top">Top</option>
+              <option value="upper-middle">Upper Middle</option>
+              <option value="middle">Middle</option>
+              <option value="lower-middle">Lower Middle</option>
+              <option value="before-last" selected>Before Last</option>
+              <option value="bottom">Bottom</option>
+            </select>
+          </div>
+
+          <!-- Extra Image 2 -->
+          <div style="border-bottom:1px solid #333; padding:12px 0; margin-bottom:10px;">
+            <label style="color:#ffcc00; font-size:13px;">📸 Extra Image 2</label>
+            <input type="file" id="extra-img-file-2" accept="image/*" onchange="handleExtraImage(event, 2)" style="padding:8px;">
+            <input type="hidden" id="extra-img-path-2">
+            <label style="margin-top:8px; font-size:11px;">Position</label>
+            <select id="extra-img-pos-2">
+              <option value="">-- Do Not Show --</option>
+              <option value="top">Top</option>
+              <option value="upper-middle">Upper Middle</option>
+              <option value="middle">Middle</option>
+              <option value="lower-middle">Lower Middle</option>
+              <option value="before-last">Before Last</option>
+              <option value="bottom">Bottom</option>
+            </select>
+          </div>
+
+          <!-- Extra Image 3 -->
+          <div>
+            <label style="color:#ffcc00; font-size:13px;">📸 Extra Image 3</label>
+            <input type="file" id="extra-img-file-3" accept="image/*" onchange="handleExtraImage(event, 3)" style="padding:8px;">
+            <input type="hidden" id="extra-img-path-3">
+            <label style="margin-top:8px; font-size:11px;">Position</label>
+            <select id="extra-img-pos-3">
+              <option value="">-- Do Not Show --</option>
+              <option value="top">Top</option>
+              <option value="upper-middle">Upper Middle</option>
+              <option value="middle">Middle</option>
+              <option value="lower-middle">Lower Middle</option>
+              <option value="before-last">Before Last</option>
+              <option value="bottom">Bottom</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- HERO SLIDER TRAILER -->
+        <div class="form-group">
+          <label style="color:#f59e0b;">🌟 Hero Slider Trailer URL</label>
+          <input type="text" id="hero-slider-trailer" placeholder="https://youtube.com/watch?v=...">
+        </div>
+
+        <!-- ARTICLE VIDEOS -->
+        <div class="form-row-2">
+          <div class="form-group">
+            <label>Article Video 1 URL</label>
+            <input type="text" id="trailer-url-1" placeholder="https://youtube.com/...">
+          </div>
+          <div class="form-group">
+            <label>Video 1 Position</label>
+            <select id="trailer-pos-1">
+              <option value="top">Top</option>
+              <option value="middle" selected>Middle</option>
+              <option value="before-last">Before Last</option>
+              <option value="bottom">Bottom</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label>Article Video 2 URL</label>
+            <input type="text" id="trailer-url-2" placeholder="https://youtube.com/...">
+          </div>
+          <div class="form-group">
+            <label>Video 2 Position</label>
+            <select id="trailer-pos-2">
+              <option value="">-- No Video --</option>
+              <option value="top">Top</option>
+              <option value="middle">Middle</option>
+              <option value="before-last" selected>Before Last</option>
+              <option value="bottom">Bottom</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Short Summary / Meta Excerpt</label>
+          <input type="text" id="post-summary" placeholder="2-3 line summary">
+        </div>
+
+        <!-- ARTICLE CONTENT -->
+        <div class="form-group">
+          <label>Article Content</label>
+          <textarea id="post-content" placeholder="Full article yahan likho"></textarea>
+        </div>
+
+        <!-- RELATED ARTICLES -->
+        <div style="background:#1e1e24; border:1px solid #333; padding:12px; border-radius:6px; margin-bottom:12px;">
+          <label style="color:#38bdf8; font-weight:800;">🔗 Related Articles (List ke beech dikhenge)</label>
+          <div id="related-articles-rows">
+            <div class="form-row-5">
+              <input type="text" class="ra-image" placeholder="Image URL">
+              <input type="text" class="ra-title" placeholder="Title">
+              <input type="text" class="ra-url" placeholder="Article URL">
+              <button class="btn btn-secondary" onclick="addRelatedArticleRow(this)">+</button>
+              <button class="btn btn-danger" onclick="removeRow(this)">x</button>
+            </div>
+          </div>
+          <button class="add-link-btn" onclick="addRelatedArticleRow()">+ Add Related Article</button>
+        </div>
+
+        <!-- SOURCE CREDIT -->
+        <div style="background:#1e1e24; border:1px solid #333; padding:12px; border-radius:6px; margin-bottom:12px;">
+          <label style="color:#38bdf8; font-weight:800;">🔗 Source / Credit (Article bottom)</label>
+          <div id="source-credit-rows">
+            <div class="form-row-2">
+              <input type="text" class="sc-name" placeholder="Source Name">
+              <input type="text" class="sc-url" placeholder="Source URL">
+              <button class="btn btn-secondary" onclick="addSourceCreditRow(this)">+</button>
+              <button class="btn btn-danger" onclick="removeRow(this)">x</button>
+            </div>
+          </div>
+          <button class="add-link-btn" onclick="addSourceCreditRow()">+ Add Source</button>
+        </div>
+
+        <!-- ADS 8 BOXES -->
+        <div style="background:#1e1e24; border:1px solid #333; padding:12px; border-radius:6px; margin-bottom:12px;">
+          <label style="color:#10b981; font-weight:800;">💰 Direct Ad Code (8 Slots)</label>
+          <textarea id="ad-code-1" placeholder="Popunder (Ad 1)" style="margin-bottom:8px;"></textarea>
+          <textarea id="ad-code-2" placeholder="Native Banner (Ad 2)" style="margin-bottom:8px;"></textarea>
+          <textarea id="ad-code-3" placeholder="Banner 728x90 (Ad 3)" style="margin-bottom:8px;"></textarea>
+          <textarea id="ad-code-4" placeholder="Related Articles Beech Ad (Ad 4)" style="margin-bottom:8px; border-color:#38bdf8;"></textarea>
+          <textarea id="ad-code-5" placeholder="Social Bar (Ad 5)" style="margin-bottom:8px;"></textarea>
+          <textarea id="ad-code-6" placeholder="Smartlink (Ad 6)" style="margin-bottom:8px;"></textarea>
+          <textarea id="ad-code-7" placeholder="Extra Ad 7" style="margin-bottom:8px;"></textarea>
+          <textarea id="ad-code-8" placeholder="Extra Ad 8"></textarea>
+        </div>
+
+        <button class="btn btn-accent" id="publish-btn" onclick="publishPost()">Publish Post</button>
+      </div>
+    </div>
+
+    <!-- MANAGE -->
+    <div id="view-manage" class="hidden">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Manage Posts</span>
+          <button class="btn btn-secondary" onclick="loadManagePosts()">Refresh</button>
+        </div>
+        <div id="posts-list-container"></div>
+        <div id="manage-pagination-box" class="pagination-container"></div>
+      </div>
+    </div>
+
+    <!-- PREVIEW -->
+    <div id="view-preview" class="hidden">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Article Preview</span>
+          <button class="btn btn-secondary" onclick="renderDedicatedPreview()">Refresh</button>
+        </div>
+        <div class="preview-pane" style="background:#111; padding:15px; border-radius:6px;">
+          <div>
+            <span class="preview-badge" style="background:var(--accent); color:#fff; padding:4px 8px; border-radius:4px; font-size:12px; margin-bottom:8px; display:inline-block;" id="prev-badge">Trending</span>
+            <span style="font-size:12px; color:#aaa; margin-left:6px;" id="prev-category">Movies • Theatre</span>
+          </div>
+          <h1 class="preview-title" style="font-size:24px; color:#fff; margin:10px 0;" id="prev-title">Title Preview</h1>
+          <div class="preview-meta" style="font-size:13px; color:#aaa; margin-bottom:10px;" id="prev-date">By Vanrajsinh Vaghela</div>
+          <img src="" id="prev-img" class="preview-img" alt="Preview" style="display:none;">
+          <div class="preview-body" id="prev-content" style="color:#ddd; line-height:1.6; font-size:15px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PUBLISH SUCCESS MODAL -->
+  <div id="publish-success-modal">
+    <div class="modal-box">
+      <div class="modal-head" style="color:var(--success); font-size:18px; font-weight:800; margin-bottom:10px;">🎉 Post Published!</div>
+      <div style="font-size:13px; color:#aaa; margin-bottom:12px;">Link copy karke Search Console mein request karein.</div>
+      <div class="url-copy-box">
+        <input type="text" id="success-post-url" readonly>
+        <button class="btn btn-secondary" onclick="copyPostLink()">Copy</button>
+      </div>
+      <div class="modal-actions">
+        <a id="btn-open-post" href="#" target="_blank" class="btn btn-secondary">View Post</a>
+        <a href="https://search.google.com/search-console" target="_blank" class="btn btn-secondary">Search Console</a>
+      </div>
+      <button class="btn btn-accent" onclick="closeSuccessModal()">Close</button>
+    </div>
+  </div>
+
+  <div id="toast" class="notification" style="opacity:0; transition:opacity 0.3s;"></div>
+
+  <script>
+    const MASTER_PIN = "1465822";
+    let selectedImageBase64 = null;
+    let extraImagesBase64 = {};
+    let allPostsCache = [];
+    let manageCurrentPage = 1;
+    const MANAGE_PER_PAGE = 15;
+
+    // Publish button click hone par ye function chalega - pura logic yahan hai
+    function verifyPin() {
+      const pin = document.getElementById('admin-pin-input').value.trim();
+      if (pin === MASTER_PIN) {
+        document.getElementById('pin-gate').style.display = 'none';
+        document.getElementById('admin-app').style.display = 'block';
+        sessionStorage.setItem('fk_admin_auth', 'true');
+        initAdmin();
+      } else {
+        alert('Invalid PIN!');
+      }
+    }
+
+    if (sessionStorage.getItem('fk_admin_auth') === 'true') {
+      document.getElementById('pin-gate').style.display = 'none';
+      document.getElementById('admin-app').style.display = 'block';
+      window.onload = initAdmin;
+    }
+
+    function initAdmin() { loadCreds(); }
+
+    function switchTab(tab) {
+      document.getElementById('view-new-post').classList.toggle('hidden', tab !== 'new-post');
+      document.getElementById('view-manage').classList.toggle('hidden', tab !== 'manage');
+      document.getElementById('view-preview').classList.toggle('hidden', tab !== 'preview');
+      document.getElementById('tab-btn-new').classList.toggle('active', tab === 'new-post');
+      document.getElementById('tab-btn-manage').classList.toggle('active', tab === 'manage');
+      document.getElementById('tab-btn-preview').classList.toggle('active', tab === 'preview');
+      if (tab === 'manage') loadManagePosts();
+      else if (tab === 'preview') renderDedicatedPreview();
+    }
+
+    function saveCreds() {
+      localStorage.setItem('fk_gh_user', document.getElementById('gh-user').value.trim());
+      localStorage.setItem('fk_gh_repo', document.getElementById('gh-repo').value.trim());
+      localStorage.setItem('fk_gh_token', document.getElementById('gh-token').value.trim());
+      localStorage.setItem('fk_ga_id', document.getElementById('ga-id').value.trim());
+      showToast('Settings saved!');
+    }
+
+    function loadCreds() {
+      if (localStorage.getItem('fk_gh_user')) document.getElementById('gh-user').value = localStorage.getItem('fk_gh_user');
+      if (localStorage.getItem('fk_gh_repo')) document.getElementById('gh-repo').value = localStorage.getItem('fk_gh_repo');
+      if (localStorage.getItem('fk_gh_token')) document.getElementById('gh-token').value = localStorage.getItem('fk_gh_token');
+      if (localStorage.getItem('fk_ga_id')) document.getElementById('ga-id').value = localStorage.getItem('fk_ga_id');
+    }
+
+    function autoGenerateSlug() {
+      const editId = document.getElementById('edit-post-id').value;
+      if (editId) return;
+      const title = document.getElementById('post-title').value;
+      const slug = title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-');
+      document.getElementById('post-slug').value = slug;
+      if (!selectedImageBase64) document.getElementById('post-image-path').value = slug ? 'images/' + slug + '.jpg' : '';
+    }
+
+    function handleImageFile(e) {
+      const file = e.target.files[0]; if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        selectedImageBase64 = evt.target.result.split(',')[1];
+        const slug = document.getElementById('post-slug').value || 'post-' + Date.now();
+        document.getElementById('post-image-path').value = 'images/' + slug + '.jpg';
+        showToast('Main image loaded!');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handleExtraImage(e, index) {
+      const file = e.target.files[0]; if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        extraImagesBase64[index] = evt.target.result.split(',')[1];
+        const slug = document.getElementById('post-slug').value || 'post-' + Date.now();
+        document.getElementById('extra-img-path-' + index).value = 'images/' + slug + '-extra-' + index + '.jpg';
+        showToast('Extra image ' + index + ' loaded!');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function addRelatedArticleRow(btn) {
+      const container = document.getElementById('related-articles-rows');
+      const row = document.createElement('div');
+      row.className = 'form-row-5';
+      row.innerHTML = `<input type="text" class="ra-image" placeholder="Image URL"><input type="text" class="ra-title" placeholder="Title"><input type="text" class="ra-url" placeholder="Article URL"><button class="btn btn-secondary" onclick="addRelatedArticleRow(this)">+</button><button class="btn btn-danger" onclick="removeRow(this)">x</button>`;
+      container.appendChild(row);
+      if (btn) btn.parentElement.remove();
+    }
+
+    function addSourceCreditRow(btn) {
+      const container = document.getElementById('source-credit-rows');
+      const row = document.createElement('div');
+      row.className = 'form-row-2';
+      row.innerHTML = `<input type="text" class="sc-name" placeholder="Source Name"><input type="text" class="sc-url" placeholder="Source URL"><button class="btn btn-secondary" onclick="addSourceCreditRow(this)">+</button><button class="btn btn-danger" onclick="removeRow(this)">x</button>`;
+      container.appendChild(row);
+      if (btn) btn.parentElement.remove();
+    }
+
+    function removeRow(btn) { btn.parentElement.remove(); }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.opacity = '1';
+      setTimeout(() => t.style.opacity = '0', 3000);
+    }
+
+    // FIXED GitHub API Call
+    async function ghRequest(path, method = 'GET', body = null) {
+      const user = document.getElementById('gh-user').value.trim();
+      const repo = document.getElementById('gh-repo').value.trim();
+      const token = document.getElementById('gh-token').value.trim();
+      if (!token) throw new Error('GitHub Token required!');
+      const url = `https://api.github.com/repos/${user}/${repo}/contents/${path}`;
+      const headers = { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' };
+      const options = { method, headers };
+      if (body) options.body = JSON.stringify(body);
+      const res = await fetch(url, options);
+      if (res.status === 404 && method === 'GET') return null;
+      if (!res.ok) throw new Error((await res.json()).message || 'API error');
+      return await res.json();
+    }
+
+    function utf8ToBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
+    function base64ToUtf8(str) { return decodeURIComponent(escape(atob(str))); }
+
+    // FIXED Load Manage Posts
+    async function loadManagePosts() {
+      const container = document.getElementById('posts-list-container');
+      container.innerHTML = 'Loading...';
+      try {
+        const file = await ghRequest('data/posts.json');
+        if (!file || !file.content) { container.innerHTML = '<span style="color:#aaa;">No posts found.</span>'; return; }
+        allPostsCache = JSON.parse(base64ToUtf8(file.content));
+        if (!allPostsCache.length) { container.innerHTML = '<span style="color:#aaa;">No posts yet.</span>'; return; }
+        renderManageListPaginated();
+      } catch (err) { container.innerHTML = '<span style="color:red;">Error: ' + err.message + '</span>'; }
+    }
+
+    function renderManageListPaginated() {
+      const container = document.getElementById('posts-list-container');
+      const paginationEl = document.getElementById('manage-pagination-box');
+      const totalPages = Math.ceil(allPostsCache.length / MANAGE_PER_PAGE);
+      const startIndex = (manageCurrentPage - 1) * MANAGE_PER_PAGE;
+      const currentSlice = allPostsCache.slice(startIndex, startIndex + MANAGE_PER_PAGE);
+      let html = '';
+      currentSlice.forEach(post => {
+        html += `<div class="post-item"><div class="post-item-info"><div class="post-item-title">${post.title}</div><div class="post-item-meta">${post.category} • ${post.badge}</div></div><div class="post-actions"><button class="btn btn-secondary" onclick="editPost('${post.id}')">Edit</button><button class="btn btn-danger" onclick="deletePost('${post.id}')">Delete</button></div></div>`;
+      });
+      container.innerHTML = html;
+      if (totalPages <= 1) { paginationEl.innerHTML = ''; return; }
+      let pagHTML = '';
+      pagHTML += manageCurrentPage > 1 ? `<button class="page-btn" onclick="changeManagePage(${manageCurrentPage - 1})">Prev</button>` : `<button class="page-btn" disabled>Prev</button>`;
+      for (let i = 1; i <= totalPages; i++) { pagHTML += i === manageCurrentPage ? `<button class="page-btn active">${i}</button>` : `<button class="page-btn" onclick="changeManagePage(${i})">${i}</button>`; }
+      pagHTML += manageCurrentPage < totalPages ? `<button class="page-btn" onclick="changeManagePage(${manageCurrentPage + 1})">Next</button>` : `<button class="page-btn" disabled>Next</button>`;
+      paginationEl.innerHTML = pagHTML;
+    }
+
+    function changeManagePage(page) { manageCurrentPage = page; renderManageListPaginated(); }
+
+    // EDIT and DELETE functions
+    function editPost(id) {
+      const post = allPostsCache.find(p => p.id === id);
+      if (!post) return;
+      document.getElementById('edit-post-id').value = post.id;
+      document.getElementById('post-title').value = post.title;
+      document.getElementById('post-slug').value = post.slug;
+      document.getElementById('post-category').value = post.category;
+      document.getElementById('post-platform').value = post.platform;
+      document.getElementById('post-badge').value = post.badge;
+      document.getElementById('post-summary').value = post.summary;
+      document.getElementById('post-content').value = post.content;
+      switchTab('new-post');
+    }
+
+    async function deletePost(id) {
+      if (!confirm('Delete this post?')) return;
+      try {
+        const file = await ghRequest('data/posts.json');
+        let posts = JSON.parse(base64ToUtf8(file.content));
+        posts = posts.filter(p => p.id !== id);
+        await ghRequest('data/posts.json', 'PUT', { message: `Delete post ${id}`, content: utf8ToBase64(JSON.stringify(posts, null, 2)), sha: file.sha });
+        showToast('Post deleted!');
+        loadManagePosts();
+      } catch (err) { alert('Error: ' + err.message); }
+    }
+
+    // PREVIEW FUNCTION
+    function renderDedicatedPreview() {
+      document.getElementById('prev-title').textContent = document.getElementById('post-title').value || 'Title Preview';
+      document.getElementById('prev-badge').textContent = document.getElementById('post-badge').value;
+      document.getElementById('prev-category').textContent = document.getElementById('post-category').value + ' • ' + document.getElementById('post-platform').value;
+      document.getElementById('prev-content').innerHTML = document.getElementById('post-content').value || '<p>Write content to preview</p>';
+      const img = document.getElementById('prev-img');
+      if (selectedImageBase64) { img.src = 'data:image/jpeg;base64,' + selectedImageBase64; img.style.display = 'block'; }
+      else img.style.display = 'none';
+    }
+
+    // PUBLISH FUNCTION (Working)
+    async function publishPost() {
+      const btn = document.getElementById('publish-btn');
+      const title = document.getElementById('post-title').value.trim();
+      autoGenerateSlug();
+      const slug = document.getElementById('post-slug').value.trim();
+      const category = document.getElementById('post-category').value;
+      const platform = document.getElementById('post-platform').value;
+      const badge = document.getElementById('post-badge').value;
+      const summary = document.getElementById('post-summary').value.trim();
+      const content = document.getElementById('post-content').value.trim();
+      const token = document.getElementById('gh-token').value.trim();
+      if (!title || !content || !token) { alert('Title, Content aur Token required!'); return; }
+
+      btn.disabled = true;
+      btn.textContent = 'Publishing to GitHub...';
+
+      try {
+        // Upload main image
+        if (selectedImageBase64) {
+          const imgPath = 'images/' + slug + '.jpg';
+          await ghRequest(imgPath, 'PUT', { message: 'Upload ' + slug, content: selectedImageBase64 });
+        }
+        // Upload extra images
+        for (let i = 1; i <= 3; i++) {
+          if (extraImagesBase64[i]) {
+            const extraPath = 'images/' + slug + '-extra-' + i + '.jpg';
+            await ghRequest(extraPath, 'PUT', { message: 'Upload extra ' + i, content: extraImagesBase64[i] });
+          }
+        }
+
+        // Create post object
+        const postObj = { id: 'post_' + Date.now(), title, slug, category, platform, badge, summary, content, date: new Date().toISOString().split('T')[0] };
+
+        // Update posts.json
+        let postsFile = await ghRequest('data/posts.json');
+        let postsList = [];
+        let postsSha = null;
+        if (postsFile && postsFile.content) { postsSha = postsFile.sha; postsList = JSON.parse(base64ToUtf8(postsFile.content)); }
+        postsList.unshift(postObj);
+        await ghRequest('data/posts.json', 'PUT', { message: 'Add post ' + slug, content: utf8ToBase64(JSON.stringify(postsList, null, 2)), sha: postsSha });
+
+        // Generate HTML and upload
+        const postHTML = generatePostHTML(postObj);
+        await ghRequest('posts/' + slug + '.html', 'PUT', { message: 'Publish ' + slug, content: utf8ToBase64(postHTML) });
+
+        alert('Post published!');
+        resetForm();
+      } catch (err) { alert('Publish failed: ' + err.message); }
+      finally { btn.disabled = false; btn.textContent = 'Publish Post'; }
+    }
+
+    // Generate Post HTML (full template)
+    function generatePostHTML(post) {
+      return `<!DOCTYPE html><html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${post.title}</title></head><body><h1>${post.title}</h1><p>${post.content}</p></body></html>`;
+    }
+
+    function resetForm() {
+      document.getElementById('edit-post-id').value = '';
+      document.getElementById('post-title').value = '';
+      document.getElementById('post-slug').value = '';
+      document.getElementById('post-summary').value = '';
+      document.getElementById('post-content').value = '';
+      document.getElementById('post-file').value = '';
+      selectedImageBase64 = null;
+      extraImagesBase64 = {};
+      document.getElementById('form-heading').textContent = 'Create New Post';
+      document.getElementById('publish-btn').textContent = 'Publish Post';
+    }
+
+    function copyPostLink() { navigator.clipboard.writeText(document.getElementById('success-post-url').value); }
+    function closeSuccessModal() { document.getElementById('publish-success-modal').style.display = 'none'; }
+  </script>
+</body>
+</html>
