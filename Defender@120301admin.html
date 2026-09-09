@@ -18,80 +18,97 @@
       --accent-hover: #b80710;
       --success: #10b981;
       --danger: #ef4444;
-      --radius: 8px;
+      --radius: 6px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; -webkit-tap-highlight-color: transparent; }
-    body { background-color: var(--bg); color: var(--text-main); font-size: 15px; line-height: 1.4; width: 100%; max-width: 1200px; margin: 0 auto; padding: 15px; }
-    .container { max-width: 680px; margin: 0 auto; }
+    
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      /* ✅ Font size chhota kiya */
+      font-size: 13px; 
+      line-height: 1.4;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px;
+    }
+    .container { max-width: 600px; margin: 0 auto; }
 
     #pin-gate { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); display: flex; align-items: center; justify-content: center; z-index: 9999; padding: 16px; }
-    .pin-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius); padding: 25px; width: 100%; max-width: 350px; text-align: center; }
-    .pin-box h2 { font-size: 20px; margin-bottom: 8px; color: #fff; }
-    .pin-box p { font-size: 13px; color: var(--text-muted); margin-bottom: 15px; }
+    .pin-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius); padding: 20px; width: 100%; max-width: 320px; text-align: center; }
+    .pin-box h2 { font-size: 16px; margin-bottom: 6px; color: #fff; }
+    .pin-box p { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; }
 
-    header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--card-border); }
-    .brand-title { font-size: 18px; font-weight: 800; letter-spacing: 0.5px; color: #fff; }
-    .brand-sub { font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; }
-    .nav-tabs { display: flex; gap: 6px; }
-    .tab-btn { background: #202327; border: none; color: var(--text-main); padding: 8px 12px; font-size: 12px; font-weight: 700; border-radius: 6px; cursor: pointer; text-transform: uppercase; transition: 0.2s; }
+    header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--card-border); }
+    .brand-title { font-size: 15px; font-weight: 800; letter-spacing: 0.5px; color: #fff; }
+    .brand-sub { font-size: 9px; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; }
+    .nav-tabs { display: flex; gap: 5px; }
+    .tab-btn { background: #202327; border: none; color: var(--text-main); padding: 8px 10px; font-size: 11px; font-weight: 700; border-radius: 5px; cursor: pointer; text-transform: uppercase; transition: 0.2s; }
     .tab-btn.active { background: var(--accent); color: #fff; }
 
-    .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius); padding: 15px; margin-bottom: 12px; }
-    .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-    .card-title { font-size: 15px; font-weight: 700; color: #fff; }
-    .card-subtitle { font-size: 12px; color: var(--text-muted); }
-    .status-badge { font-size: 11px; color: var(--success); font-weight: 600; }
+    .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius); padding: 12px; margin-bottom: 10px; }
+    .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .card-title { font-size: 13px; font-weight: 700; color: #fff; }
+    .card-subtitle { font-size: 11px; color: var(--text-muted); }
+    .status-badge { font-size: 10px; color: var(--success); font-weight: 600; }
 
-    .form-group { margin-bottom: 10px; }
-    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-    label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.4px; }
-    input, select, textarea { width: 100%; background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-main); padding: 12px 12px; border-radius: 6px; font-size: 16px; outline: none; transition: border-color 0.2s; }
+    .form-group { margin-bottom: 8px; }
+    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+    .form-row-5 { display: grid; grid-template-columns: 1fr 1fr 1fr auto auto; gap: 6px; }
+    
+    /* ✅ Labels aur Inputs ka size fix kiya */
+    label { display: block; font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 3px; letter-spacing: 0.3px; }
+    input, select, textarea { width: 100%; background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-main); padding: 8px 10px; border-radius: 5px; font-size: 13px; outline: none; transition: border-color 0.2s; }
     input:focus, select:focus, textarea:focus { border-color: var(--accent); }
-    textarea { resize: vertical; min-height: 120px; line-height: 1.4; }
+    textarea { resize: vertical; min-height: 100px; line-height: 1.4; font-size: 13px; }
 
-    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 15px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; border: none; transition: 0.2s; gap: 4px; text-decoration: none; }
-    .btn-accent { background: var(--accent); color: #fff; width: 100%; padding: 14px; font-size: 16px; margin-top: 10px; }
+    /* ✅ Buttons compact kiye */
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 8px 10px; border-radius: 5px; font-size: 12px; font-weight: 700; cursor: pointer; border: none; transition: 0.2s; gap: 4px; text-decoration: none; }
+    .btn-accent { background: var(--accent); color: #fff; width: 100%; padding: 10px; font-size: 13px; margin-top: 8px; }
     .btn-accent:hover { background: var(--accent-hover); }
-    .btn-secondary { background: #2b3036; color: #fff; }
-    .btn-danger { background: #3a1618; color: #fca5a5; border: 1px solid #7f1d1d; padding: 6px 8px; font-size: 12px; }
-    .btn-edit { background: #162a3a; color: #93c5fd; border: 1px solid #1e3a8a; padding: 6px 8px; font-size: 12px; }
-    .btn-success { background: #065f46; color: #a7f3d0; border: 1px solid #047857; }
+    .btn-secondary { background: #2b3036; color: #fff; font-size: 11px; padding: 6px 8px; }
+    .btn-danger { background: #3a1618; color: #fca5a5; border: 1px solid #7f1d1d; padding: 6px 8px; font-size: 11px; }
+    .btn-edit { background: #162a3a; color: #93c5fd; border: 1px solid #1e3a8a; padding: 6px 8px; font-size: 11px; }
+    .btn-success { background: #065f46; color: #a7f3d0; border: 1px solid #047857; font-size: 11px; padding: 6px 8px; }
 
-    .add-link-btn { background: #2b3036; color: #fff; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-weight: 700; margin-top: 5px; }
-    .insert-all-btn { background: var(--accent); color: #fff; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: 700; width: 100%; margin-top: 10px; }
+    .add-link-btn { background: #2b3036; color: #fff; border: none; padding: 6px 10px; border-radius: 5px; cursor: pointer; font-weight: 700; font-size: 11px; margin-top: 4px; }
+    .insert-all-btn { background: var(--accent); color: #fff; border: none; padding: 8px; border-radius: 5px; cursor: pointer; font-weight: 700; font-size: 12px; width: 100%; margin-top: 8px; }
 
-    .post-item { display: flex; align-items: center; justify-content: space-between; padding: 10px; background: #191c20; border-radius: 6px; margin-bottom: 8px; border: 1px solid #23272c; gap: 8px; }
+    .post-item { display: flex; align-items: center; justify-content: space-between; padding: 8px; background: #191c20; border-radius: 5px; margin-bottom: 6px; border: 1px solid #23272c; gap: 6px; }
     .post-item-info { flex: 1; min-width: 0; }
-    .post-item-title { font-size: 14px; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .post-item-meta { font-size: 12px; color: var(--text-muted); }
-    .post-actions { display: flex; gap: 8px; }
-    .pagination-container { display: flex; justify-content: center; align-items: center; gap: 6px; margin-top: 15px; flex-wrap: wrap; }
-    .page-btn { background: #202327; border: 1px solid var(--card-border); color: var(--text-main); padding: 8px 12px; font-size: 13px; font-weight: 700; border-radius: 6px; cursor: pointer; }
+    .post-item-title { font-size: 12px; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .post-item-meta { font-size: 11px; color: var(--text-muted); }
+    .post-actions { display: flex; gap: 6px; }
+    .pagination-container { display: flex; justify-content: center; align-items: center; gap: 5px; margin-top: 12px; flex-wrap: wrap; }
+    .page-btn { background: #202327; border: 1px solid var(--card-border); color: var(--text-main); padding: 6px 10px; font-size: 11px; font-weight: 700; border-radius: 5px; cursor: pointer; }
     .page-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
     .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-    .preview-pane { background: #111315; border-radius: 6px; padding: 15px; border: 1px solid var(--card-border); }
-    .preview-badge { display: inline-block; background: var(--accent); color: #fff; font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 4px; margin-bottom: 8px; text-transform: uppercase; }
-    .preview-title { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 8px; line-height: 1.3; }
-    .preview-meta { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; }
-    .preview-img { width: 100%; max-height: 240px; object-fit: cover; border-radius: 6px; margin-bottom: 12px; background: #1c1e22; }
-    .preview-body { font-size: 15px; color: #d1d5db; line-height: 1.5; }
+    .preview-pane { background: #111315; border-radius: 6px; padding: 12px; border: 1px solid var(--card-border); }
+    .preview-badge { display: inline-block; background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 6px; border-radius: 4px; margin-bottom: 8px; text-transform: uppercase; }
+    .preview-title { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 6px; line-height: 1.3; }
+    .preview-meta { font-size: 12px; color: var(--text-muted); margin-bottom: 10px; }
+    .preview-img { width: 100%; max-height: 200px; object-fit: cover; border-radius: 6px; margin-bottom: 10px; background: #1c1e22; }
+    .preview-body { font-size: 13px; color: #d1d5db; line-height: 1.5; }
     .preview-body p { margin-bottom: 10px; }
     .preview-body a { color: #38bdf8; text-decoration: underline; }
 
     .hidden { display: none !important; }
-    .notification { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: #1f2429; border: 1px solid #374151; color: #fff; padding: 10px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.5); z-index: 10000; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+    .notification { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: #1f2429; border: 1px solid #374151; color: #fff; padding: 10px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.5); z-index: 10000; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
     .notification.show { opacity: 1; }
-    .helper-txt { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+    .helper-txt { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
 
     #publish-success-modal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; z-index: 99999; padding: 16px; }
-    .modal-box { background: #14171a; border: 1px solid #2a3038; border-radius: var(--radius); padding: 20px; width: 100%; max-width: 480px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
-    .modal-head { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 800; color: var(--success); margin-bottom: 12px; }
-    .modal-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5; }
-    .url-copy-box { display: flex; gap: 8px; margin-bottom: 15px; }
-    .url-copy-box input { font-size: 14px; padding: 10px; background: #0a0b0d; border: 1px solid #23272d; color: #38bdf8; font-weight: 600; }
-    .modal-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+    .modal-box { background: #14171a; border: 1px solid #2a3038; border-radius: var(--radius); padding: 16px; width: 100%; max-width: 480px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+    .modal-head { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 800; color: var(--success); margin-bottom: 10px; }
+    .modal-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5; }
+    .url-copy-box { display: flex; gap: 8px; margin-bottom: 12px; }
+    .url-copy-box input { font-size: 13px; padding: 8px; background: #0a0b0d; border: 1px solid #23272d; color: #38bdf8; font-weight: 600; }
+    .modal-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+    
+    /* Koi Mobile Media Query nahi - Sab Horizontal rahega */
   </style>
 </head>
 <body>
@@ -101,7 +118,7 @@
     <div class="pin-box">
       <h2>FILMY KHABR ADMIN</h2>
       <p>Enter Master PIN to continue</p>
-      <input type="password" inputmode="numeric" pattern="[0-9]*" id="admin-pin-input" placeholder="•••••••" style="text-align: center; font-size: 24px; letter-spacing: 8px; margin-bottom: 15px;" maxlength="10" autocomplete="off" onkeydown="if(event.key === 'Enter') verifyPin()">
+      <input type="password" inputmode="numeric" pattern="[0-9]*" id="admin-pin-input" placeholder="•••••••" style="text-align: center; font-size: 20px; letter-spacing: 6px; margin-bottom: 12px;" maxlength="10" autocomplete="off" onkeydown="if(event.key === 'Enter') verifyPin()">
       <button class="btn btn-accent" onclick="verifyPin()">Unlock Desk</button>
     </div>
   </div>
@@ -162,7 +179,7 @@
             <span class="card-title" id="form-heading">Create New Post</span>
             <div class="card-subtitle">Discover Ready + Auto-Sitemap Engine</div>
           </div>
-          <button class="btn btn-secondary" style="font-size: 11px; padding: 5px 8px;" onclick="resetForm()">Clear Form</button>
+          <button class="btn btn-secondary" onclick="resetForm()">Clear Form</button>
         </div>
 
         <input type="hidden" id="edit-post-id" value="">
@@ -238,10 +255,10 @@
         </div>
 
         <!-- STEP 1: ARTICLE VIDEO -->
-        <div style="background: #111315; border: 1px solid #23272c; border-radius: 6px; padding: 10px; margin-bottom: 12px;">
-          <label style="color: #38bdf8; margin-bottom: 8px;">▶ Article Video 1 & Video 2 Placements</label>
+        <div style="background: #111315; border: 1px solid #23272c; border-radius: 6px; padding: 8px; margin-bottom: 10px;">
+          <label style="color: #38bdf8; margin-bottom: 6px;">▶ Article Video 1 & Video 2 Placements</label>
           
-          <div class="form-row-2" style="margin-bottom: 10px;">
+          <div class="form-row-2" style="margin-bottom: 8px;">
             <div class="form-group">
               <label>Article Video 1 URL</label>
               <input type="text" id="trailer-url-1" placeholder="https://youtube.com/watch?v=...">
@@ -288,10 +305,10 @@
 
         <!-- STEP 3: ARTICLE CONTENT + DYNAMIC LINK INSERT BOX -->
         <label>Article Content / Full Article</label>
-        <div class="link-helper-box">
-          <label style="color: #38bdf8; margin-bottom: 8px;">🔗 In-line Links (1 Box + Add Button - 8 tak links)</label>
+        <div class="link-helper-box" style="background: #111315; border: 1px solid #23272c; border-radius: 6px; padding: 8px; margin-bottom: 10px;">
+          <label style="color: #38bdf8; margin-bottom: 6px;">🔗 In-line Links (1 Box + Add Button - 8 tak links)</label>
           <div id="dynamic-link-rows">
-            <div class="link-row">
+            <div class="link-row" style="display: grid; grid-template-columns: 1fr 1fr auto auto; gap: 6px; margin-bottom: 6px;">
               <input type="text" class="link-text" placeholder="Link Text">
               <input type="text" class="link-url" placeholder="URL">
               <button class="btn btn-secondary" onclick="insertDynamicLink(this)">Insert</button>
@@ -306,9 +323,9 @@
           <textarea id="post-content" placeholder="Type full Hindi article content here."></textarea>
         </div>
 
-        <!-- STEP 4: RELATED ARTICLES (Naya Section) -->
-        <div style="background: #111315; border: 1px solid #23272c; border-radius: 6px; padding: 10px; margin-bottom: 12px;">
-          <label style="color: #38bdf8; margin-bottom: 8px;">🔗 Related Articles (List ke beech mein dikhenge)</label>
+        <!-- STEP 4: RELATED ARTICLES -->
+        <div style="background: #111315; border: 1px solid #23272c; border-radius: 6px; padding: 8px; margin-bottom: 10px;">
+          <label style="color: #38bdf8; margin-bottom: 6px;">🔗 Related Articles (List ke beech mein dikhenge)</label>
           <div id="related-articles-rows">
             <div class="form-row-5">
               <input type="text" class="ra-image" placeholder="Image URL">
@@ -321,12 +338,12 @@
           <button class="add-link-btn" onclick="addRelatedArticleRow()">+ Add Related Article</button>
         </div>
 
-        <!-- STEP 5: SOURCE / CREDIT LINKS (Naya Section) -->
-        <div style="background: #111315; border: 1px solid #23272c; border-radius: 6px; padding: 10px; margin-bottom: 12px;">
-          <label style="color: #38bdf8; margin-bottom: 8px;">🔗 Source / Credit (Article ke bottom mein dikhega)</label>
+        <!-- STEP 5: SOURCE / CREDIT LINKS -->
+        <div style="background: #111315; border: 1px solid #23272c; border-radius: 6px; padding: 8px; margin-bottom: 10px;">
+          <label style="color: #38bdf8; margin-bottom: 6px;">🔗 Source / Credit (Article ke bottom mein dikhega)</label>
           <div id="source-credit-rows">
             <div class="form-row-3">
-              <input type="text" class="sc-name" placeholder="Source Name (e.g. ANI)">
+              <input type="text" class="sc-name" placeholder="Source Name">
               <input type="text" class="sc-url" placeholder="Source URL">
               <button class="btn btn-secondary" onclick="addSourceCreditRow(this)">+</button>
               <button class="btn btn-danger" onclick="removeRow(this)">x</button>
@@ -336,48 +353,48 @@
         </div>
 
         <!-- STEP 6: ADS KE SAARE 8 BOX -->
-        <div style="background: #111315; border: 1px solid #23272c; border-radius: 6px; padding: 10px; margin-bottom: 12px;">
-          <label style="color: #10b981; margin-bottom: 8px;">💰 Direct Ad Code Boxes (8 Slots)</label>
+        <div style="background: #111315; border: 1px solid #23272c; border-radius: 6px; padding: 8px; margin-bottom: 10px;">
+          <label style="color: #10b981; margin-bottom: 6px;">💰 Direct Ad Code Boxes (8 Slots)</label>
           
-          <div class="form-group" style="margin-bottom: 8px;">
-            <label style="font-size: 10px; color: #9ca3af;">Popunder (Ad Slot 1)</label>
-            <textarea id="ad-code-1" placeholder="Paste Popunder code here..." style="min-height: 50px; font-family: monospace; font-size: 12px;"></textarea>
+          <div class="form-group" style="margin-bottom: 6px;">
+            <label style="font-size: 9px; color: #9ca3af;">Popunder (Ad Slot 1)</label>
+            <textarea id="ad-code-1" placeholder="Paste Popunder code here..." style="min-height: 40px; font-family: monospace; font-size: 12px;"></textarea>
           </div>
 
-          <div class="form-group" style="margin-bottom: 8px;">
-            <label style="font-size: 10px; color: #9ca3af;">Native Banner (Ad Slot 2)</label>
-            <textarea id="ad-code-2" placeholder="Paste Native Banner code here..." style="min-height: 50px; font-family: monospace; font-size: 12px;"></textarea>
+          <div class="form-group" style="margin-bottom: 6px;">
+            <label style="font-size: 9px; color: #9ca3af;">Native Banner (Ad Slot 2)</label>
+            <textarea id="ad-code-2" placeholder="Paste Native Banner code here..." style="min-height: 40px; font-family: monospace; font-size: 12px;"></textarea>
           </div>
 
-          <div class="form-group" style="margin-bottom: 8px;">
-            <label style="font-size: 10px; color: #9ca3af;">Banner 728x90 (Ad Slot 3)</label>
-            <textarea id="ad-code-3" placeholder="Paste Banner 728x90 code here..." style="min-height: 50px; font-family: monospace; font-size: 12px;"></textarea>
+          <div class="form-group" style="margin-bottom: 6px;">
+            <label style="font-size: 9px; color: #9ca3af;">Banner 728x90 (Ad Slot 3)</label>
+            <textarea id="ad-code-3" placeholder="Paste Banner 728x90 code here..." style="min-height: 40px; font-family: monospace; font-size: 12px;"></textarea>
           </div>
 
-          <!-- ✅ YAHAN APNA CHANGE HAI - Ad Slot 4 ko Related Articles ke liye mark kiya hai -->
-          <div class="form-group" style="margin-bottom: 8px;">
-            <label style="font-size: 10px; color: #38bdf8; font-weight: 800;">📢 Related Articles Beech Ad (Ad Slot 4)</label>
-            <textarea id="ad-code-4" placeholder="Ye code Related Articles ke beech mein dikhega (3rd aur 6th ke beech)..." style="min-height: 50px; font-family: monospace; font-size: 12px;"></textarea>
+          <!-- ✅ Related Articles Beech Ad -->
+          <div class="form-group" style="margin-bottom: 6px;">
+            <label style="font-size: 9px; color: #38bdf8; font-weight: 800;">📢 Related Articles Beech Ad (Ad Slot 4)</label>
+            <textarea id="ad-code-4" placeholder="Ye code Related Articles ke beech mein dikhega..." style="min-height: 40px; font-family: monospace; font-size: 12px;"></textarea>
           </div>
 
-          <div class="form-group" style="margin-bottom: 8px;">
-            <label style="font-size: 10px; color: #9ca3af;">Social Bar (Ad Slot 5)</label>
-            <textarea id="ad-code-5" placeholder="Paste Social Bar code here..." style="min-height: 50px; font-family: monospace; font-size: 12px;"></textarea>
+          <div class="form-group" style="margin-bottom: 6px;">
+            <label style="font-size: 9px; color: #9ca3af;">Social Bar (Ad Slot 5)</label>
+            <textarea id="ad-code-5" placeholder="Paste Social Bar code here..." style="min-height: 40px; font-family: monospace; font-size: 12px;"></textarea>
           </div>
 
-          <div class="form-group" style="margin-bottom: 8px;">
-            <label style="font-size: 10px; color: #9ca3af;">Smartlink / Extra Ad 6</label>
-            <textarea id="ad-code-6" placeholder="Paste Smartlink code here..." style="min-height: 50px; font-family: monospace; font-size: 12px;"></textarea>
+          <div class="form-group" style="margin-bottom: 6px;">
+            <label style="font-size: 9px; color: #9ca3af;">Smartlink / Extra Ad 6</label>
+            <textarea id="ad-code-6" placeholder="Paste Smartlink code here..." style="min-height: 40px; font-family: monospace; font-size: 12px;"></textarea>
           </div>
 
-          <div class="form-group" style="margin-bottom: 8px;">
-            <label style="font-size: 10px; color: #9ca3af;">Extra Ad Slot 7</label>
-            <textarea id="ad-code-7" placeholder="Paste Ad code here..." style="min-height: 50px; font-family: monospace; font-size: 12px;"></textarea>
+          <div class="form-group" style="margin-bottom: 6px;">
+            <label style="font-size: 9px; color: #9ca3af;">Extra Ad Slot 7</label>
+            <textarea id="ad-code-7" placeholder="Paste Ad code here..." style="min-height: 40px; font-family: monospace; font-size: 12px;"></textarea>
           </div>
 
           <div class="form-group">
-            <label style="font-size: 10px; color: #9ca3af;">Extra Ad Slot 8</label>
-            <textarea id="ad-code-8" placeholder="Paste Ad code here..." style="min-height: 50px; font-family: monospace; font-size: 12px;"></textarea>
+            <label style="font-size: 9px; color: #9ca3af;">Extra Ad Slot 8</label>
+            <textarea id="ad-code-8" placeholder="Paste Ad code here..." style="min-height: 40px; font-family: monospace; font-size: 12px;"></textarea>
           </div>
         </div>
 
@@ -393,10 +410,10 @@
             <span class="card-title">Manage Existing Posts</span>
             <div class="card-subtitle">Edit or Delete from data/posts.json & sitemap.xml</div>
           </div>
-          <button class="btn btn-secondary" style="font-size: 13px; padding: 6px 10px;" onclick="loadManagePosts()">Refresh</button>
+          <button class="btn btn-secondary" onclick="loadManagePosts()">Refresh</button>
         </div>
         <div id="posts-list-container">
-          <div style="text-align: center; padding: 20px; color: var(--text-muted); font-size: 14px;">Loading posts...</div>
+          <div style="text-align: center; padding: 20px; color: var(--text-muted); font-size: 12px;">Loading posts...</div>
         </div>
         <div id="manage-pagination-box" class="pagination-container"></div>
       </div>
@@ -410,13 +427,13 @@
             <span class="card-title">Article Live Preview</span>
             <div class="card-subtitle">Google Discover preview check</div>
           </div>
-          <button class="btn btn-secondary" style="font-size: 13px; padding: 6px 10px;" onclick="renderDedicatedPreview()">Refresh</button>
+          <button class="btn btn-secondary" onclick="renderDedicatedPreview()">Refresh</button>
         </div>
 
         <div class="preview-pane">
           <div>
             <span class="preview-badge" id="prev-badge">Trending</span>
-            <span style="font-size: 13px; color: var(--text-muted); margin-left: 6px;" id="prev-category">Web Series • Netflix</span>
+            <span style="font-size: 11px; color: var(--text-muted); margin-left: 6px;" id="prev-category">Web Series • Netflix</span>
           </div>
           <h1 class="preview-title" id="prev-title">Article Title Preview</h1>
           <div class="preview-meta" id="prev-date">By Vanrajsinh Vaghela • Today • Filmy Khabr</div>
@@ -537,6 +554,7 @@
       const container = document.getElementById('dynamic-link-rows');
       const row = document.createElement('div');
       row.className = 'link-row';
+      row.style.display = 'grid'; row.style.gridTemplateColumns = '1fr 1fr auto auto'; row.style.gap = '6px'; row.style.marginBottom = '6px';
       row.innerHTML = `
         <input type="text" class="link-text" placeholder="Link Text">
         <input type="text" class="link-url" placeholder="URL">
@@ -602,9 +620,7 @@
         <button class="btn btn-danger" onclick="removeRow(this)">x</button>
       `;
       container.appendChild(row);
-      // Agar button click se add ho raha hai, toh us button ko hatao
       if (btn) btn.parentElement.remove();
-      else if (container.children.length > 1) container.children[container.children.length - 1].querySelector('button[onclick*="addRelatedArticleRow"]').remove();
     }
 
     // SOURCE CREDIT ROWS LOGIC
@@ -744,9 +760,8 @@
       return xml;
     }
 
+    // Pura generatePostHTML function yaha paste karein (space bachane ke liye short rakha hai)
     function generatePostHTML(post) {
-      // (Yaha pichla wala generatePostHTML function hai, jo aapke paas already hai)
-      // Space bachane ke liye short likha hai, lekin paste karte waqt pichla wala use karein.
       return `<!DOCTYPE html>...`; 
     }
 
@@ -774,7 +789,6 @@
       btn.textContent = 'Publishing to GitHub...';
 
       try {
-        // ... (Pura logic same hai jo pichle baar tha)
         alert('Publish Logic same hai! Code paste hote hi chalega.');
         resetForm();
       } catch (err) {
@@ -806,17 +820,17 @@
     }
 
     function renderManageListPaginated() {
-      // ... (Same as previous)
+      // ... Same as previous
     }
 
     function changeManagePage(page) { manageCurrentPage = page; renderManageListPaginated(); }
 
     function editPost(id) {
-      // ... (Same as previous)
+      // ... Same as previous
     }
 
     async function deletePost(id) {
-      // ... (Same as previous)
+      // ... Same as previous
     }
 
     function resetForm() {
@@ -834,16 +848,13 @@
       document.getElementById('post-file').value = '';
       selectedImageBase64 = null;
       for (let i = 1; i <= 3; i++) { document.getElementById(`extra-img-file-${i}`).value = ''; document.getElementById(`extra-img-path-${i}`).value = ''; extraImagesBase64[i] = null; }
-      // Clear dynamic links
       const linkContainer = document.getElementById('dynamic-link-rows');
-      linkContainer.innerHTML = `
-        <div class="link-row">
+      linkContainer.innerHTML = `<div class="link-row" style="display: grid; grid-template-columns: 1fr 1fr auto auto; gap: 6px; margin-bottom: 6px;">
           <input type="text" class="link-text" placeholder="Link Text">
           <input type="text" class="link-url" placeholder="URL">
           <button class="btn btn-secondary" onclick="insertDynamicLink(this)">Insert</button>
           <button class="btn btn-danger" onclick="removeLinkRow(this)">x</button>
-        </div>
-      `;
+        </div>`;
       document.getElementById('form-heading').textContent = 'Create New Post';
       document.getElementById('publish-btn').textContent = 'Publish Discover-Ready Post';
     }
