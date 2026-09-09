@@ -29,12 +29,8 @@
     input:hover, select:hover, textarea:hover { border-color: #3a404a; }
     input:focus, select:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(229,9,20,0.15); }
 
-    /* ✅ Article content box bada */
     #post-content { min-height: 250px; }
-
-    /* ✅ Ads ke boxes chote */
     #ad-code-1, #ad-code-2, #ad-code-3, #ad-code-4, #ad-code-5, #ad-code-6, #ad-code-7, #ad-code-8 { min-height: 50px; }
-
     textarea { resize: vertical; }
 
     .btn { padding: 9px 15px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; border: none; transition: all 0.2s; }
@@ -45,7 +41,6 @@
     .btn-danger { background: #3a1618; color: #fca5a5; padding: 6px 10px; font-size: 12px; }
     .add-link-btn { background: #2b3036; color: #fff; padding: 8px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: 700; font-size: 12px; margin-top: 5px; transition: 0.2s; }
     .add-link-btn:hover { background: #3a404a; }
-    .insert-all-btn { background: var(--accent); color: #fff; width: 100%; padding: 10px; border: none; border-radius: 6px; font-weight: 700; margin-top: 8px; }
 
     .extra-image-section { background: #1a1e24; border: 1px solid #2a3140; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
     .font-style-section { background: #1a1e24; border: 1px solid #2a3140; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
@@ -59,7 +54,7 @@
     .page-btn { background: #202327; border: 1px solid #333; color: #fff; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; }
     .page-btn.active { background: var(--accent); color: #fff; }
     .preview-img { width: 100%; max-height: 200px; object-fit: cover; border-radius: 6px; margin-bottom: 10px; }
-    .notification { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: #1f2429; color: #fff; padding: 10px 16px; border-radius: 20px; font-size: 13px; }
+    .notification { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: #1f2429; color: #fff; padding: 10px 16px; border-radius: 20px; font-size: 13px; z-index: 999999; }
     #publish-success-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 99999; }
     .modal-box { background: #14171a; border: 1px solid #2a3038; border-radius: 8px; padding: 20px; width: 100%; max-width: 480px; }
     .url-copy-box { display: flex; gap: 8px; margin-bottom: 12px; }
@@ -68,7 +63,7 @@
 </head>
 <body>
 
-  <!-- PIN GATE (Numerical input only) -->
+  <!-- PIN GATE -->
   <div id="pin-gate" style="position:fixed; inset:0; background:var(--bg); display:flex; align-items:center; justify-content:center; z-index:9999;">
     <div class="card" style="text-align:center; max-width:340px;">
       <h2 style="color:#fff; margin-bottom:6px;">FILMY KHABR ADMIN</h2>
@@ -187,7 +182,6 @@
         <div class="extra-image-section">
           <label style="color: var(--blue); font-size: 13px; font-weight: 800; margin-bottom: 10px; display: block;">🖼️ ADDITIONAL ARTICLE IMAGES (UP TO 3 EXTRA)</label>
           
-          <!-- Extra Image 1 -->
           <div class="form-row-2" style="margin-bottom: 10px;">
             <div class="form-group">
               <label>📸 Extra Image 1 File</label>
@@ -208,7 +202,6 @@
             </div>
           </div>
 
-          <!-- Extra Image 2 -->
           <div class="form-row-2" style="margin-bottom: 10px;">
             <div class="form-group">
               <label>📸 Extra Image 2 File</label>
@@ -229,7 +222,6 @@
             </div>
           </div>
 
-          <!-- Extra Image 3 -->
           <div class="form-row-2">
             <div class="form-group">
               <label>📸 Extra Image 3 File</label>
@@ -295,7 +287,7 @@
           <input type="text" id="post-summary" placeholder="2-3 line summary">
         </div>
 
-        <!-- ARTICLE CONTENT (Bada box) -->
+        <!-- ARTICLE CONTENT -->
         <div class="form-group">
           <label>Article Content</label>
           <textarea id="post-content" placeholder="Full article yahan likho"></textarea>
@@ -303,7 +295,7 @@
 
         <!-- RELATED ARTICLES -->
         <div class="card" style="background:#1a1e24; border:1px solid #2a3140;">
-          <label style="color:var(--blue); font-weight:800;">🔗 Related Articles (List ke beech dikhenge)</label>
+          <label style="color:var(--blue); font-weight:800;">🔗 Related Articles</label>
           <div id="related-articles-rows">
             <div class="form-row-5">
               <input type="text" class="ra-image" placeholder="Image URL">
@@ -318,7 +310,7 @@
 
         <!-- SOURCE CREDIT -->
         <div class="card" style="background:#1a1e24; border:1px solid #2a3140;">
-          <label style="color:var(--blue); font-weight:800;">🔗 Source / Credit (Article bottom)</label>
+          <label style="color:var(--blue); font-weight:800;">🔗 Source / Credit</label>
           <div id="source-credit-rows">
             <div class="form-row-2">
               <input type="text" class="sc-name" placeholder="Source Name">
@@ -330,7 +322,7 @@
           <button class="add-link-btn" onclick="addSourceCreditRow()">+ Add Source</button>
         </div>
 
-        <!-- ADS 8 BOXES (Chote) -->
+        <!-- ADS 8 BOXES -->
         <div class="ads-section">
           <label style="color: var(--green); font-size: 13px; font-weight: 800; margin-bottom: 10px; display: block;">💰 DIRECT AD CODE (8 SLOTS)</label>
           <textarea id="ad-code-1" placeholder="Popunder (Ad 1)" style="margin-bottom:8px;"></textarea>
@@ -473,7 +465,6 @@
       reader.readAsDataURL(file);
     }
 
-    // ✅ Updated: Extra images ab extra-images/ folder mein jayengi
     function handleExtraImage(e, index) {
       const file = e.target.files[0]; if (!file) return;
       const reader = new FileReader();
@@ -574,6 +565,7 @@
       document.getElementById('post-platform').value = post.platform;
       document.getElementById('post-badge').value = post.badge;
       document.getElementById('post-summary').value = post.summary;
+      document.getElementById('hero-slider-trailer').value = post.trailer || '';
       document.getElementById('post-content').value = post.content;
       switchTab('new-post');
     }
@@ -590,7 +582,6 @@
       } catch (err) { alert('Error: ' + err.message); }
     }
 
-    // ✅ Updated: Preview mein ab extra images bhi dikhengi
     function renderDedicatedPreview() {
       document.getElementById('prev-title').textContent = document.getElementById('post-title').value || 'Title Preview';
       document.getElementById('prev-badge').textContent = document.getElementById('post-badge').value;
@@ -598,7 +589,6 @@
       
       let mainContent = document.getElementById('post-content').value || '<p>Write content to preview</p>';
       
-      // Add extra images to preview
       for (let i = 1; i <= 3; i++) {
         const extraBase64 = localStorage.getItem('extra_img_' + i);
         if (extraBase64) {
@@ -614,7 +604,6 @@
       else img.style.display = 'none';
     }
 
-    // ✅ Updated: Publish mein extra images folder 'extra-images/' mein upload karke postObj mein store karna
     async function publishPost() {
       const btn = document.getElementById('publish-btn');
       const title = document.getElementById('post-title').value.trim();
@@ -624,6 +613,7 @@
       const platform = document.getElementById('post-platform').value;
       const badge = document.getElementById('post-badge').value;
       const summary = document.getElementById('post-summary').value.trim();
+      const trailer = document.getElementById('hero-slider-trailer').value.trim(); // ✅ Fixed: Captured trailer URL
       const content = document.getElementById('post-content').value.trim();
       const token = document.getElementById('gh-token').value.trim();
       if (!title || !content || !token) { alert('Title, Content aur Token required!'); return; }
@@ -650,11 +640,11 @@
           }
         }
 
-        // Create Post Object with Extra Images
+        // ✅ Fixed: Added trailer property to postObj
         const postObj = { 
           id: 'post_' + Date.now(), 
-          title, slug, category, platform, badge, summary, content, 
-          extraImages: extraImagesData, // Store the array
+          title, slug, category, platform, badge, summary, trailer, content, 
+          extraImages: extraImagesData,
           date: new Date().toISOString().split('T')[0] 
         };
 
@@ -666,17 +656,21 @@
         postsList.unshift(postObj);
         await ghRequest('data/posts.json', 'PUT', { message: 'Add post ' + slug, content: utf8ToBase64(JSON.stringify(postsList, null, 2)), sha: postsSha });
 
-        // Generate HTML and Upload - Now injecting extra images
+        // Generate HTML and Upload
         const postHTML = generatePostHTML(postObj);
         await ghRequest('posts/' + slug + '.html', 'PUT', { message: 'Publish ' + slug, content: utf8ToBase64(postHTML) });
 
-        alert('Post published! Extra images bhi upload ho gayi!');
+        // Show Success Modal
+        const liveUrl = `https://filmykhabr.gujaratfastalert.in/posts/${slug}.html`;
+        document.getElementById('success-post-url').value = liveUrl;
+        document.getElementById('btn-open-post').href = liveUrl;
+        document.getElementById('publish-success-modal').style.display = 'flex';
         resetForm();
       } catch (err) { alert('Publish failed: ' + err.message); }
       finally { btn.disabled = false; btn.textContent = 'Publish Post'; }
     }
 
-    // ✅ Updated: Article HTML mein extra images inject karna
+    // ✅ Fixed: Cinematic 4:3 Video Player Wrapper and Extra Images in Article HTML
     function generatePostHTML(post) {
       let extraHtml = '';
       if (post.extraImages && post.extraImages.length > 0) {
@@ -684,7 +678,44 @@
           extraHtml += `<div style="margin: 20px 0; text-align:center;"><img src="../${img.path}" style="width:100%; border-radius:8px;" loading="lazy"></div>`;
         });
       }
-      return `<!DOCTYPE html><html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${post.title}</title></head><body><h1>${post.title}</h1><p>${post.content}</p>${extraHtml}</body></html>`;
+
+      // Format plain text content into paragraphs if no HTML tags exist
+      let formattedContent = post.content;
+      if (!formattedContent.includes('<p>') && !formattedContent.includes('<br>')) {
+        formattedContent = formattedContent.split('\n\n').map(p => `<p style="margin-bottom:16px;">${p.replace(/\n/g, '<br>')}</p>`).join('');
+      }
+
+      let trailerEmbed = '';
+      if (post.trailer) {
+        let vId = '';
+        if (post.trailer.includes('youtu.be/')) vId = post.trailer.split('youtu.be/')[1].split(/[?#]/)[0];
+        else if (post.trailer.includes('watch?v=')) vId = post.trailer.split('watch?v=')[1].split('&')[0];
+        if (vId) {
+          trailerEmbed = `<div style="width:100%; aspect-ratio:4/3; max-width:800px; margin:20px auto; background:#000; border-radius:10px; overflow:hidden;"><iframe src="https://www.youtube-nocookie.com/embed/${vId}?autoplay=0&rel=0" style="width:100%; height:100%; border:0;" allowfullscreen></iframe></div>`;
+        }
+      }
+
+      return `<!DOCTYPE html>
+      <html lang="hi">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>${post.title} - Filmy Khabr</title>
+        <style>
+          body { background: #070809; color: #f7f7f8; font-family: sans-serif; line-height: 1.7; max-width: 800px; margin: 0 auto; padding: 20px; }
+          h1 { font-size: 28px; margin-bottom: 15px; color: #fff; }
+          img { max-width: 100%; height: auto; border-radius: 8px; }
+        </style>
+      </head>
+      <body>
+        <span style="background:#e50914; color:#fff; padding:4px 8px; font-size:11px; font-weight:800; border-radius:4px; text-transform:uppercase;">${post.category}</span>
+        <h1>${post.title}</h1>
+        <p style="color:#aaa; font-size:13px; margin-bottom:20px;">Published on ${post.date} • By Vanrajsinh Vaghela</p>
+        ${trailerEmbed}
+        <div style="margin-top:20px; font-size:16px;">${formattedContent}</div>
+        ${extraHtml}
+      </body>
+      </html>`;
     }
 
     function resetForm() {
@@ -692,6 +723,7 @@
       document.getElementById('post-title').value = '';
       document.getElementById('post-slug').value = '';
       document.getElementById('post-summary').value = '';
+      document.getElementById('hero-slider-trailer').value = '';
       document.getElementById('post-content').value = '';
       document.getElementById('post-file').value = '';
       selectedImageBase64 = null;
@@ -704,7 +736,7 @@
       document.getElementById('publish-btn').textContent = 'Publish Post';
     }
 
-    function copyPostLink() { navigator.clipboard.writeText(document.getElementById('success-post-url').value); }
+    function copyPostLink() { navigator.clipboard.writeText(document.getElementById('success-post-url').value); showToast('Link copied!'); }
     function closeSuccessModal() { document.getElementById('publish-success-modal').style.display = 'none'; }
   </script>
 </body>
