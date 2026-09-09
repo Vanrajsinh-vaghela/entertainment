@@ -473,12 +473,14 @@
       reader.readAsDataURL(file);
     }
 
+    // ✅ Updated: Extra images ab extra-images/ folder mein jayengi
     function handleExtraImage(e, index) {
       const file = e.target.files[0]; if (!file) return;
       const reader = new FileReader();
       reader.onload = function(evt) {
         localStorage.setItem('extra_img_' + index, evt.target.result.split(',')[1]);
-        document.getElementById('extra-img-path-' + index).value = 'images/' + (document.getElementById('post-slug').value || 'post-' + Date.now()) + '-extra-' + index + '.jpg';
+        const slug = document.getElementById('post-slug').value || ('post-' + Date.now());
+        document.getElementById('extra-img-path-' + index).value = 'extra-images/' + slug + '-extra-' + index + '.jpg';
         showToast('Extra image ' + index + ' loaded!');
       };
       reader.readAsDataURL(file);
@@ -588,16 +590,31 @@
       } catch (err) { alert('Error: ' + err.message); }
     }
 
+    // ✅ Updated: Preview mein ab extra images bhi dikhengi
     function renderDedicatedPreview() {
       document.getElementById('prev-title').textContent = document.getElementById('post-title').value || 'Title Preview';
       document.getElementById('prev-badge').textContent = document.getElementById('post-badge').value;
       document.getElementById('prev-category').textContent = document.getElementById('post-category').value + ' • ' + document.getElementById('post-platform').value;
-      document.getElementById('prev-content').innerHTML = document.getElementById('post-content').value || '<p>Write content to preview</p>';
+      
+      let mainContent = document.getElementById('post-content').value || '<p>Write content to preview</p>';
+      
+      // Add extra images to preview
+      for (let i = 1; i <= 3; i++) {
+        const extraBase64 = localStorage.getItem('extra_img_' + i);
+        if (extraBase64) {
+          const imgSrc = 'data:image/jpeg;base64,' + extraBase64;
+          mainContent += `<div style="margin-top:15px; border:1px solid #333; padding:10px; border-radius:6px;"><img src="${imgSrc}" style="width:100%; border-radius:4px;"></div>`;
+        }
+      }
+      
+      document.getElementById('prev-content').innerHTML = mainContent;
+      
       const img = document.getElementById('prev-img');
       if (selectedImageBase64) { img.src = 'data:image/jpeg;base64,' + selectedImageBase64; img.style.display = 'block'; }
       else img.style.display = 'none';
     }
 
+    // ✅ Updated: Publish mein extra images folder 'extra-images/' mein upload karke postObj mein store karna
     async function publishPost() {
       const btn = document.getElementById('publish-btn');
       const title = document.getElementById('post-title').value.trim();
@@ -615,21 +632,33 @@
       btn.textContent = 'Publishing to GitHub...';
 
       try {
+        // Upload Main Image
         if (selectedImageBase64) {
           const imgPath = 'images/' + slug + '.jpg';
           await ghRequest(imgPath, 'PUT', { message: 'Upload ' + slug, content: selectedImageBase64 });
         }
 
+        // Upload Extra Images and Collect Paths
+        const extraImagesData = [];
         for (let i = 1; i <= 3; i++) {
           const extraBase64 = localStorage.getItem('extra_img_' + i);
           if (extraBase64) {
-            const extraPath = 'images/' + slug + '-extra-' + i + '.jpg';
+            const extraPath = 'extra-images/' + slug + '-extra-' + i + '.jpg';
             await ghRequest(extraPath, 'PUT', { message: 'Upload extra ' + i, content: extraBase64 });
+            const pos = document.getElementById('extra-img-pos-' + i).value;
+            extraImagesData.push({ path: extraPath, pos: pos });
           }
         }
 
-        const postObj = { id: 'post_' + Date.now(), title, slug, category, platform, badge, summary, content, date: new Date().toISOString().split('T')[0] };
+        // Create Post Object with Extra Images
+        const postObj = { 
+          id: 'post_' + Date.now(), 
+          title, slug, category, platform, badge, summary, content, 
+          extraImages: extraImagesData, // Store the array
+          date: new Date().toISOString().split('T')[0] 
+        };
 
+        // Update posts.json
         let postsFile = await ghRequest('data/posts.json');
         let postsList = [];
         let postsSha = null;
@@ -637,17 +666,25 @@
         postsList.unshift(postObj);
         await ghRequest('data/posts.json', 'PUT', { message: 'Add post ' + slug, content: utf8ToBase64(JSON.stringify(postsList, null, 2)), sha: postsSha });
 
+        // Generate HTML and Upload - Now injecting extra images
         const postHTML = generatePostHTML(postObj);
         await ghRequest('posts/' + slug + '.html', 'PUT', { message: 'Publish ' + slug, content: utf8ToBase64(postHTML) });
 
-        alert('Post published!');
+        alert('Post published! Extra images bhi upload ho gayi!');
         resetForm();
       } catch (err) { alert('Publish failed: ' + err.message); }
       finally { btn.disabled = false; btn.textContent = 'Publish Post'; }
     }
 
+    // ✅ Updated: Article HTML mein extra images inject karna
     function generatePostHTML(post) {
-      return `<!DOCTYPE html><html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${post.title}</title></head><body><h1>${post.title}</h1><p>${post.content}</p></body></html>`;
+      let extraHtml = '';
+      if (post.extraImages && post.extraImages.length > 0) {
+        post.extraImages.forEach(img => {
+          extraHtml += `<div style="margin: 20px 0; text-align:center;"><img src="../${img.path}" style="width:100%; border-radius:8px;" loading="lazy"></div>`;
+        });
+      }
+      return `<!DOCTYPE html><html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${post.title}</title></head><body><h1>${post.title}</h1><p>${post.content}</p>${extraHtml}</body></html>`;
     }
 
     function resetForm() {
