@@ -249,7 +249,7 @@
           <input type="text" id="hero-slider-trailer" placeholder="https://youtube.com/watch?v=...">
         </div>
 
-        <!-- ARTICLE VIDEOS -->
+        <!-- ARTICLE VIDEOS (Updated positions with all options) -->
         <div class="form-row-2">
           <div class="form-group">
             <label>Article Video 1 URL</label>
@@ -258,8 +258,11 @@
           <div class="form-group">
             <label>Video 1 Position</label>
             <select id="trailer-pos-1">
+              <option value="">-- Do Not Show --</option>
               <option value="top">Top</option>
+              <option value="upper-middle">Upper Middle</option>
               <option value="middle" selected>Middle</option>
+              <option value="lower-middle">Lower Middle</option>
               <option value="before-last">Before Last</option>
               <option value="bottom">Bottom</option>
             </select>
@@ -273,9 +276,11 @@
           <div class="form-group">
             <label>Video 2 Position</label>
             <select id="trailer-pos-2">
-              <option value="">-- No Video --</option>
+              <option value="">-- Do Not Show --</option>
               <option value="top">Top</option>
+              <option value="upper-middle">Upper Middle</option>
               <option value="middle">Middle</option>
+              <option value="lower-middle">Lower Middle</option>
               <option value="before-last" selected>Before Last</option>
               <option value="bottom">Bottom</option>
             </select>
@@ -365,6 +370,7 @@
           </div>
           <h1 class="preview-title" style="font-size:24px; color:#fff; margin:10px 0;" id="prev-title">Title Preview</h1>
           <div class="preview-meta" style="font-size:13px; color:#aaa; margin-bottom:10px;" id="prev-date">By Vanrajsinh Vaghela</div>
+          <div id="prev-trailer-wrap" style="margin-bottom:15px; display:none;"></div>
           <img src="" id="prev-img" class="preview-img" alt="Preview" style="display:none;">
           <div class="preview-body" id="prev-content" style="color:#ddd; line-height:1.6; font-size:15px;"></div>
         </div>
@@ -566,6 +572,10 @@
       document.getElementById('post-badge').value = post.badge;
       document.getElementById('post-summary').value = post.summary;
       document.getElementById('hero-slider-trailer').value = post.trailer || '';
+      document.getElementById('trailer-url-1').value = post.video1Url || '';
+      document.getElementById('trailer-pos-1').value = post.video1Pos || 'middle';
+      document.getElementById('trailer-url-2').value = post.video2Url || '';
+      document.getElementById('trailer-pos-2').value = post.video2Pos || 'before-last';
       document.getElementById('post-content').value = post.content;
       switchTab('new-post');
     }
@@ -582,11 +592,31 @@
       } catch (err) { alert('Error: ' + err.message); }
     }
 
+    function getYoutubeEmbed(url) {
+      if (!url) return '';
+      let vId = '';
+      if (url.includes('youtu.be/')) vId = url.split('youtu.be/')[1].split(/[?#]/)[0];
+      else if (url.includes('watch?v=')) vId = url.split('watch?v=')[1].split('&')[0];
+      else if (url.length === 11) vId = url;
+      if (!vId) return '';
+      return `<div style="width:100%; aspect-ratio:4/3; max-width:800px; margin:20px auto; background:#000; border-radius:10px; overflow:hidden;"><iframe src="https://www.youtube-nocookie.com/embed/${vId}?autoplay=0&rel=0" style="width:100%; height:100%; border:0;" allowfullscreen></iframe></div>`;
+    }
+
     function renderDedicatedPreview() {
       document.getElementById('prev-title').textContent = document.getElementById('post-title').value || 'Title Preview';
       document.getElementById('prev-badge').textContent = document.getElementById('post-badge').value;
       document.getElementById('prev-category').textContent = document.getElementById('post-category').value + ' • ' + document.getElementById('post-platform').value;
       
+      const trailerUrl = document.getElementById('hero-slider-trailer').value.trim();
+      const trailerWrap = document.getElementById('prev-trailer-wrap');
+      const trailerEmbedHtml = getYoutubeEmbed(trailerUrl);
+      if (trailerEmbedHtml) {
+        trailerWrap.innerHTML = trailerEmbedHtml;
+        trailerWrap.style.display = 'block';
+      } else {
+        trailerWrap.style.display = 'none';
+      }
+
       let mainContent = document.getElementById('post-content').value || '<p>Write content to preview</p>';
       
       for (let i = 1; i <= 3; i++) {
@@ -613,7 +643,11 @@
       const platform = document.getElementById('post-platform').value;
       const badge = document.getElementById('post-badge').value;
       const summary = document.getElementById('post-summary').value.trim();
-      const trailer = document.getElementById('hero-slider-trailer').value.trim(); // ✅ Fixed: Captured trailer URL
+      const trailer = document.getElementById('hero-slider-trailer').value.trim();
+      const video1Url = document.getElementById('trailer-url-1').value.trim();
+      const video1Pos = document.getElementById('trailer-pos-1').value;
+      const video2Url = document.getElementById('trailer-url-2').value.trim();
+      const video2Pos = document.getElementById('trailer-pos-2').value;
       const content = document.getElementById('post-content').value.trim();
       const token = document.getElementById('gh-token').value.trim();
       if (!title || !content || !token) { alert('Title, Content aur Token required!'); return; }
@@ -622,13 +656,11 @@
       btn.textContent = 'Publishing to GitHub...';
 
       try {
-        // Upload Main Image
         if (selectedImageBase64) {
           const imgPath = 'images/' + slug + '.jpg';
           await ghRequest(imgPath, 'PUT', { message: 'Upload ' + slug, content: selectedImageBase64 });
         }
 
-        // Upload Extra Images and Collect Paths
         const extraImagesData = [];
         for (let i = 1; i <= 3; i++) {
           const extraBase64 = localStorage.getItem('extra_img_' + i);
@@ -640,15 +672,14 @@
           }
         }
 
-        // ✅ Fixed: Added trailer property to postObj
         const postObj = { 
           id: 'post_' + Date.now(), 
-          title, slug, category, platform, badge, summary, trailer, content, 
+          title, slug, category, platform, badge, summary, trailer, 
+          video1Url, video1Pos, video2Url, video2Pos, content, 
           extraImages: extraImagesData,
           date: new Date().toISOString().split('T')[0] 
         };
 
-        // Update posts.json
         let postsFile = await ghRequest('data/posts.json');
         let postsList = [];
         let postsSha = null;
@@ -656,11 +687,9 @@
         postsList.unshift(postObj);
         await ghRequest('data/posts.json', 'PUT', { message: 'Add post ' + slug, content: utf8ToBase64(JSON.stringify(postsList, null, 2)), sha: postsSha });
 
-        // Generate HTML and Upload
         const postHTML = generatePostHTML(postObj);
         await ghRequest('posts/' + slug + '.html', 'PUT', { message: 'Publish ' + slug, content: utf8ToBase64(postHTML) });
 
-        // Show Success Modal
         const liveUrl = `https://filmykhabr.gujaratfastalert.in/posts/${slug}.html`;
         document.getElementById('success-post-url').value = liveUrl;
         document.getElementById('btn-open-post').href = liveUrl;
@@ -670,30 +699,22 @@
       finally { btn.disabled = false; btn.textContent = 'Publish Post'; }
     }
 
-    // ✅ Fixed: Cinematic 4:3 Video Player Wrapper and Extra Images in Article HTML
     function generatePostHTML(post) {
       let extraHtml = '';
       if (post.extraImages && post.extraImages.length > 0) {
         post.extraImages.forEach(img => {
-          extraHtml += `<div style="margin: 20px 0; text-align:center;"><img src="../${img.path}" style="width:100%; border-radius:8px;" loading="lazy"></div>`;
+          extraHtml += `<div style="margin: 20px 0; text-align:center;" data-pos="${img.pos}"><img src="../${img.path}" style="width:100%; border-radius:8px;" loading="lazy"></div>`;
         });
       }
 
-      // Format plain text content into paragraphs if no HTML tags exist
       let formattedContent = post.content;
       if (!formattedContent.includes('<p>') && !formattedContent.includes('<br>')) {
         formattedContent = formattedContent.split('\n\n').map(p => `<p style="margin-bottom:16px;">${p.replace(/\n/g, '<br>')}</p>`).join('');
       }
 
-      let trailerEmbed = '';
-      if (post.trailer) {
-        let vId = '';
-        if (post.trailer.includes('youtu.be/')) vId = post.trailer.split('youtu.be/')[1].split(/[?#]/)[0];
-        else if (post.trailer.includes('watch?v=')) vId = post.trailer.split('watch?v=')[1].split('&')[0];
-        if (vId) {
-          trailerEmbed = `<div style="width:100%; aspect-ratio:4/3; max-width:800px; margin:20px auto; background:#000; border-radius:10px; overflow:hidden;"><iframe src="https://www.youtube-nocookie.com/embed/${vId}?autoplay=0&rel=0" style="width:100%; height:100%; border:0;" allowfullscreen></iframe></div>`;
-        }
-      }
+      let trailerEmbed = getYoutubeEmbed(post.trailer);
+      let v1Embed = post.video1Url ? `<div data-pos="${post.video1Pos}">${getYoutubeEmbed(post.video1Url)}</div>` : '';
+      let v2Embed = post.video2Url ? `<div data-pos="${post.video2Pos}">${getYoutubeEmbed(post.video2Url)}</div>` : '';
 
       return `<!DOCTYPE html>
       <html lang="hi">
@@ -713,6 +734,8 @@
         <p style="color:#aaa; font-size:13px; margin-bottom:20px;">Published on ${post.date} • By Vanrajsinh Vaghela</p>
         ${trailerEmbed}
         <div style="margin-top:20px; font-size:16px;">${formattedContent}</div>
+        ${v1Embed}
+        ${v2Embed}
         ${extraHtml}
       </body>
       </html>`;
@@ -724,6 +747,8 @@
       document.getElementById('post-slug').value = '';
       document.getElementById('post-summary').value = '';
       document.getElementById('hero-slider-trailer').value = '';
+      document.getElementById('trailer-url-1').value = '';
+      document.getElementById('trailer-url-2').value = '';
       document.getElementById('post-content').value = '';
       document.getElementById('post-file').value = '';
       selectedImageBase64 = null;
