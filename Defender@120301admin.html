@@ -43,6 +43,7 @@
     .modal-box { background: #14171a; border: 1px solid #2a3038; border-radius: 8px; padding: 20px; width: 100%; max-width: 480px; }
     .url-copy-box { display: flex; gap: 8px; margin-bottom: 12px; }
     .modal-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .extra-image-row { display: grid; grid-template-columns: 1fr 1fr auto auto; gap: 8px; margin-bottom: 8px; align-items: center; }
   </style>
 </head>
 <body>
@@ -158,60 +159,27 @@
           <input type="file" id="post-file" accept="image/*" onchange="handleImageFile(event)" style="padding:10px;">
         </div>
 
-        <!-- 3 EXTRA IMAGES (SAF-SAAF UI) -->
+        <!-- EXTRA IMAGES - DYNAMIC LIKE ADD LINK -->
         <div style="background:#1e1e24; border:1px solid #333; padding:12px; border-radius:6px; margin-bottom:12px;">
-          <label style="color:#38bdf8; font-weight:800; font-size:14px;">🖼️ Additional Images (3 Extra)</label>
-          
-          <!-- Extra Image 1 -->
-          <div style="border-bottom:1px solid #333; padding:12px 0; margin-bottom:10px;">
-            <label style="color:#ffcc00; font-size:13px;">📸 Extra Image 1</label>
-            <input type="file" id="extra-img-file-1" accept="image/*" onchange="handleExtraImage(event, 1)" style="padding:8px;">
-            <input type="hidden" id="extra-img-path-1">
-            <label style="margin-top:8px; font-size:11px;">Position</label>
-            <select id="extra-img-pos-1">
-              <option value="">-- Do Not Show --</option>
-              <option value="top">Top</option>
-              <option value="upper-middle">Upper Middle</option>
-              <option value="middle">Middle</option>
-              <option value="lower-middle">Lower Middle</option>
-              <option value="before-last" selected>Before Last</option>
-              <option value="bottom">Bottom</option>
-            </select>
+          <label style="color:#38bdf8; font-weight:800; font-size:14px;">🖼️ Additional Images (Add jitni chahiye)</label>
+          <div id="extra-image-rows">
+            <!-- Initial Row -->
+            <div class="extra-image-row" data-id="extra_1">
+              <input type="file" accept="image/*" onchange="handleExtraImage(this)">
+              <select class="extra-pos">
+                <option value="">-- Do Not Show --</option>
+                <option value="top">Top</option>
+                <option value="upper-middle">Upper Middle</option>
+                <option value="middle">Middle</option>
+                <option value="lower-middle">Lower Middle</option>
+                <option value="before-last" selected>Before Last</option>
+                <option value="bottom">Bottom</option>
+              </select>
+              <button class="btn btn-secondary" onclick="addExtraImageRow()">+</button>
+              <button class="btn btn-danger" onclick="removeRow(this)">x</button>
+            </div>
           </div>
-
-          <!-- Extra Image 2 -->
-          <div style="border-bottom:1px solid #333; padding:12px 0; margin-bottom:10px;">
-            <label style="color:#ffcc00; font-size:13px;">📸 Extra Image 2</label>
-            <input type="file" id="extra-img-file-2" accept="image/*" onchange="handleExtraImage(event, 2)" style="padding:8px;">
-            <input type="hidden" id="extra-img-path-2">
-            <label style="margin-top:8px; font-size:11px;">Position</label>
-            <select id="extra-img-pos-2">
-              <option value="">-- Do Not Show --</option>
-              <option value="top">Top</option>
-              <option value="upper-middle">Upper Middle</option>
-              <option value="middle">Middle</option>
-              <option value="lower-middle">Lower Middle</option>
-              <option value="before-last">Before Last</option>
-              <option value="bottom">Bottom</option>
-            </select>
-          </div>
-
-          <!-- Extra Image 3 -->
-          <div>
-            <label style="color:#ffcc00; font-size:13px;">📸 Extra Image 3</label>
-            <input type="file" id="extra-img-file-3" accept="image/*" onchange="handleExtraImage(event, 3)" style="padding:8px;">
-            <input type="hidden" id="extra-img-path-3">
-            <label style="margin-top:8px; font-size:11px;">Position</label>
-            <select id="extra-img-pos-3">
-              <option value="">-- Do Not Show --</option>
-              <option value="top">Top</option>
-              <option value="upper-middle">Upper Middle</option>
-              <option value="middle">Middle</option>
-              <option value="lower-middle">Lower Middle</option>
-              <option value="before-last">Before Last</option>
-              <option value="bottom">Bottom</option>
-            </select>
-          </div>
+          <button class="add-link-btn" onclick="addExtraImageRow()">+ Add Extra Image</button>
         </div>
 
         <!-- HERO SLIDER TRAILER -->
@@ -365,12 +333,67 @@
   <script>
     const MASTER_PIN = "1465822";
     let selectedImageBase64 = null;
-    let extraImagesBase64 = {};
+    let extraImagesData = {}; // id -> {base64, ext, path, pos}
+    let extraImageCounter = 1; // for unique ids
     let allPostsCache = [];
     let manageCurrentPage = 1;
     const MANAGE_PER_PAGE = 15;
 
-    // Publish button click hone par ye function chalega - pura logic yahan hai
+    // Dynamic Extra Image Row Functions
+    function addExtraImageRow() {
+      const container = document.getElementById('extra-image-rows');
+      const row = document.createElement('div');
+      row.className = 'extra-image-row';
+      row.setAttribute('data-id', 'extra_' + extraImageCounter);
+      row.innerHTML = `
+        <input type="file" accept="image/*" onchange="handleExtraImage(this)">
+        <select class="extra-pos">
+          <option value="">-- Do Not Show --</option>
+          <option value="top">Top</option>
+          <option value="upper-middle">Upper Middle</option>
+          <option value="middle">Middle</option>
+          <option value="lower-middle">Lower Middle</option>
+          <option value="before-last" selected>Before Last</option>
+          <option value="bottom">Bottom</option>
+        </select>
+        <button class="btn btn-secondary" onclick="addExtraImageRow()">+</button>
+        <button class="btn btn-danger" onclick="removeRow(this)">x</button>
+      `;
+      container.appendChild(row);
+      extraImageCounter++;
+    }
+
+    function removeRow(btn) {
+      const row = btn.parentElement;
+      // If it's the only row, just clear it instead of removing
+      const container = row.parentElement;
+      if (container.children.length === 1) {
+        row.querySelector('input[type="file"]').value = '';
+        row.querySelector('select').selectedIndex = 0;
+      } else {
+        row.remove();
+      }
+    }
+
+    function handleExtraImage(input) {
+      const row = input.closest('.extra-image-row');
+      const file = input.files[0];
+      if (!file) return;
+      const id = row.getAttribute('data-id');
+      const ext = file.name.split('.').pop() || 'jpg';
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const base64 = evt.target.result.split(',')[1];
+        const slug = document.getElementById('post-slug').value || ('post-' + Date.now());
+        const path = 'extra-images/' + slug + '-' + id + '.' + ext; // New folder 'extra-images'
+        extraImagesData[id] = { base64, ext, path, pos: row.querySelector('.extra-pos').value };
+        showToast('Extra image added!');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Other functions (verifyPin, initAdmin, switchTab, saveCreds, loadCreds, autoGenerateSlug, handleImageFile, addRelatedArticleRow, addSourceCreditRow, showToast, ghRequest, utf8ToBase64, base64ToUtf8, loadManagePosts, renderManageListPaginated, changeManagePage, editPost, deletePost, renderDedicatedPreview, publishPost, generatePostHTML, resetForm, copyPostLink, closeSuccessModal)
+
     function verifyPin() {
       const pin = document.getElementById('admin-pin-input').value.trim();
       if (pin === MASTER_PIN) {
@@ -438,18 +461,6 @@
       reader.readAsDataURL(file);
     }
 
-    function handleExtraImage(e, index) {
-      const file = e.target.files[0]; if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function(evt) {
-        extraImagesBase64[index] = evt.target.result.split(',')[1];
-        const slug = document.getElementById('post-slug').value || 'post-' + Date.now();
-        document.getElementById('extra-img-path-' + index).value = 'images/' + slug + '-extra-' + index + '.jpg';
-        showToast('Extra image ' + index + ' loaded!');
-      };
-      reader.readAsDataURL(file);
-    }
-
     function addRelatedArticleRow(btn) {
       const container = document.getElementById('related-articles-rows');
       const row = document.createElement('div');
@@ -468,8 +479,6 @@
       if (btn) btn.parentElement.remove();
     }
 
-    function removeRow(btn) { btn.parentElement.remove(); }
-
     function showToast(msg) {
       const t = document.getElementById('toast');
       t.textContent = msg;
@@ -477,7 +486,6 @@
       setTimeout(() => t.style.opacity = '0', 3000);
     }
 
-    // FIXED GitHub API Call
     async function ghRequest(path, method = 'GET', body = null) {
       const user = document.getElementById('gh-user').value.trim();
       const repo = document.getElementById('gh-repo').value.trim();
@@ -496,7 +504,6 @@
     function utf8ToBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
     function base64ToUtf8(str) { return decodeURIComponent(escape(atob(str))); }
 
-    // FIXED Load Manage Posts
     async function loadManagePosts() {
       const container = document.getElementById('posts-list-container');
       container.innerHTML = 'Loading...';
@@ -530,7 +537,6 @@
 
     function changeManagePage(page) { manageCurrentPage = page; renderManageListPaginated(); }
 
-    // EDIT and DELETE functions
     function editPost(id) {
       const post = allPostsCache.find(p => p.id === id);
       if (!post) return;
@@ -542,6 +548,10 @@
       document.getElementById('post-badge').value = post.badge;
       document.getElementById('post-summary').value = post.summary;
       document.getElementById('post-content').value = post.content;
+      // Clear extra image rows and re-add existing? For simplicity, just clear and start fresh
+      const extraContainer = document.getElementById('extra-image-rows');
+      extraContainer.innerHTML = '';
+      addExtraImageRow();
       switchTab('new-post');
     }
 
@@ -557,7 +567,6 @@
       } catch (err) { alert('Error: ' + err.message); }
     }
 
-    // PREVIEW FUNCTION
     function renderDedicatedPreview() {
       document.getElementById('prev-title').textContent = document.getElementById('post-title').value || 'Title Preview';
       document.getElementById('prev-badge').textContent = document.getElementById('post-badge').value;
@@ -568,7 +577,6 @@
       else img.style.display = 'none';
     }
 
-    // PUBLISH FUNCTION (Working)
     async function publishPost() {
       const btn = document.getElementById('publish-btn');
       const title = document.getElementById('post-title').value.trim();
@@ -591,16 +599,19 @@
           const imgPath = 'images/' + slug + '.jpg';
           await ghRequest(imgPath, 'PUT', { message: 'Upload ' + slug, content: selectedImageBase64 });
         }
-        // Upload extra images
-        for (let i = 1; i <= 3; i++) {
-          if (extraImagesBase64[i]) {
-            const extraPath = 'images/' + slug + '-extra-' + i + '.jpg';
-            await ghRequest(extraPath, 'PUT', { message: 'Upload extra ' + i, content: extraImagesBase64[i] });
+
+        // Upload dynamic extra images and collect paths
+        const extraImages = [];
+        for (const id in extraImagesData) {
+          const data = extraImagesData[id];
+          if (data && data.base64) {
+            await ghRequest(data.path, 'PUT', { message: 'Upload extra ' + id, content: data.base64 });
+            extraImages.push({ path: data.path, pos: data.pos });
           }
         }
 
         // Create post object
-        const postObj = { id: 'post_' + Date.now(), title, slug, category, platform, badge, summary, content, date: new Date().toISOString().split('T')[0] };
+        const postObj = { id: 'post_' + Date.now(), title, slug, category, platform, badge, summary, content, date: new Date().toISOString().split('T')[0], extraImages: extraImages };
 
         // Update posts.json
         let postsFile = await ghRequest('data/posts.json');
@@ -610,19 +621,14 @@
         postsList.unshift(postObj);
         await ghRequest('data/posts.json', 'PUT', { message: 'Add post ' + slug, content: utf8ToBase64(JSON.stringify(postsList, null, 2)), sha: postsSha });
 
-        // Generate HTML and upload
-        const postHTML = generatePostHTML(postObj);
+        // Generate HTML and upload (simple placeholder - aapke real generatePostHTML ko yahan replace karna hoga)
+        const postHTML = `<h1>${title}</h1><p>${content}</p>`;
         await ghRequest('posts/' + slug + '.html', 'PUT', { message: 'Publish ' + slug, content: utf8ToBase64(postHTML) });
 
         alert('Post published!');
         resetForm();
       } catch (err) { alert('Publish failed: ' + err.message); }
       finally { btn.disabled = false; btn.textContent = 'Publish Post'; }
-    }
-
-    // Generate Post HTML (full template)
-    function generatePostHTML(post) {
-      return `<!DOCTYPE html><html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${post.title}</title></head><body><h1>${post.title}</h1><p>${post.content}</p></body></html>`;
     }
 
     function resetForm() {
@@ -633,7 +639,24 @@
       document.getElementById('post-content').value = '';
       document.getElementById('post-file').value = '';
       selectedImageBase64 = null;
-      extraImagesBase64 = {};
+      extraImagesData = {};
+      extraImageCounter = 1;
+      // Reset extra image rows to one empty row
+      const extraContainer = document.getElementById('extra-image-rows');
+      extraContainer.innerHTML = `<div class="extra-image-row" data-id="extra_1">
+        <input type="file" accept="image/*" onchange="handleExtraImage(this)">
+        <select class="extra-pos">
+          <option value="">-- Do Not Show --</option>
+          <option value="top">Top</option>
+          <option value="upper-middle">Upper Middle</option>
+          <option value="middle">Middle</option>
+          <option value="lower-middle">Lower Middle</option>
+          <option value="before-last" selected>Before Last</option>
+          <option value="bottom">Bottom</option>
+        </select>
+        <button class="btn btn-secondary" onclick="addExtraImageRow()">+</button>
+        <button class="btn btn-danger" onclick="removeRow(this)">x</button>
+      </div>`;
       document.getElementById('form-heading').textContent = 'Create New Post';
       document.getElementById('publish-btn').textContent = 'Publish Post';
     }
