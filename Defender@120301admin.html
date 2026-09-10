@@ -629,7 +629,8 @@
       
       for (let i = 1; i <= 3; i++) {
         const extraBase64 = localStorage.getItem('extra_img_' + i);
-        if (extraBase64) {
+        const pos = document.getElementById('extra-img-pos-' + i).value;
+        if (extraBase64 && pos) {
           const imgSrc = 'data:image/jpeg;base64,' + extraBase64;
           mainContent += `<div style="margin-top:15px; border:1px solid #333; padding:10px; border-radius:6px;"><img src="${imgSrc}" style="width:100%; border-radius:4px;"></div>`;
         }
@@ -672,14 +673,16 @@
         const extraImagesData = [];
         for (let i = 1; i <= 3; i++) {
           const extraBase64 = localStorage.getItem('extra_img_' + i);
-          if (extraBase64) {
+          const pos = document.getElementById('extra-img-pos-' + i).value;
+          // ✅ Fixed: Check if image exists AND position is not empty/do-not-show
+          if (extraBase64 && pos && pos !== "") {
             const extraPath = 'extra-images/' + slug + '-extra-' + i + '.jpg';
             await ghRequest(extraPath, 'PUT', { message: 'Upload extra ' + i, content: extraBase64 });
-            const pos = document.getElementById('extra-img-pos-' + i).value;
             extraImagesData.push({ path: extraPath, pos: pos });
           }
         }
 
+        // ✅ Fixed: Properly mapped video1Url, video1Pos, video2Url, video2Pos in postObj
         const postObj = { 
           id: 'post_' + Date.now(), 
           title, slug, category, platform, badge, summary, trailer, 
@@ -717,8 +720,8 @@
       }
 
       function injectMedia(content, mediaHtml, pos) {
-        if (!mediaHtml) return content;
-        if (!pos || pos === 'bottom') return content + mediaHtml;
+        if (!mediaHtml || !pos || pos === "") return content;
+        if (pos === 'bottom') return content + mediaHtml;
         if (pos === 'top') return mediaHtml + content;
 
         let parts = content.split('</p>');
@@ -737,20 +740,22 @@
 
       let contentWithMedia = formattedContent;
 
-      if (post.video1Url) {
+      if (post.video1Url && post.video1Pos && post.video1Pos !== "") {
         let v1 = getYoutubeEmbed(post.video1Url);
         contentWithMedia = injectMedia(contentWithMedia, v1, post.video1Pos);
       }
 
-      if (post.video2Url) {
+      if (post.video2Url && post.video2Pos && post.video2Pos !== "") {
         let v2 = getYoutubeEmbed(post.video2Url);
         contentWithMedia = injectMedia(contentWithMedia, v2, post.video2Pos);
       }
 
       if (post.extraImages && post.extraImages.length > 0) {
         post.extraImages.forEach(img => {
-          let imgHtml = `<div style="margin: 20px 0; text-align:center;"><img src="../${img.path}" style="width:100%; border-radius:8px;" loading="lazy"></div>`;
-          contentWithMedia = injectMedia(contentWithMedia, imgHtml, img.pos);
+          if (img.pos && img.pos !== "") {
+            let imgHtml = `<div style="margin: 20px 0; text-align:center;"><img src="../${img.path}" style="width:100%; border-radius:8px;" loading="lazy"></div>`;
+            contentWithMedia = injectMedia(contentWithMedia, imgHtml, img.pos);
+          }
         });
       }
 
@@ -785,7 +790,9 @@
       document.getElementById('post-summary').value = '';
       document.getElementById('hero-slider-trailer').value = '';
       document.getElementById('trailer-url-1').value = '';
+      document.getElementById('trailer-pos-1').value = 'middle';
       document.getElementById('trailer-url-2').value = '';
+      document.getElementById('trailer-pos-2').value = 'before-last';
       document.getElementById('post-content').value = '';
       document.getElementById('post-file').value = '';
       selectedImageBase64 = null;
@@ -793,6 +800,7 @@
         localStorage.removeItem('extra_img_' + i);
         document.getElementById('extra-img-file-' + i).value = '';
         document.getElementById('extra-img-path-' + i).value = '';
+        document.getElementById('extra-img-pos-' + i).value = i === 1 ? 'before-last' : '';
       }
       document.getElementById('form-heading').textContent = 'Create New Post';
       document.getElementById('publish-btn').textContent = 'Publish Post';
