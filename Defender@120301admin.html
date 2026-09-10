@@ -592,7 +592,7 @@
       } catch (err) { alert('Error: ' + err.message); }
     }
 
-    // ✅ Robust YouTube URL Parser (100% Reliable for all formats)
+    // ✅ Robust YouTube URL Parser (4:3 Cinematic Container)
     function getYoutubeEmbed(url) {
       if (!url) return '';
       let vId = '';
@@ -707,22 +707,54 @@
       finally { btn.disabled = false; btn.textContent = 'Publish Post'; }
     }
 
+    // ✅ Smart Position-Based HTML Generator for Videos and Extra Images
     function generatePostHTML(post) {
-      let extraHtml = '';
-      if (post.extraImages && post.extraImages.length > 0) {
-        post.extraImages.forEach(img => {
-          extraHtml += `<div style="margin: 20px 0; text-align:center;" data-pos="${img.pos}"><img src="../${img.path}" style="width:100%; border-radius:8px;" loading="lazy"></div>`;
-        });
-      }
-
       let formattedContent = post.content;
       if (!formattedContent.includes('<p>') && !formattedContent.includes('<br>')) {
         formattedContent = formattedContent.split('\n\n').map(p => `<p style="margin-bottom:16px;">${p.replace(/\n/g, '<br>')}</p>`).join('');
+      } else if (!formattedContent.includes('</p>')) {
+        formattedContent = `<p style="margin-bottom:16px;">${formattedContent}</p>`;
+      }
+
+      function injectMedia(content, mediaHtml, pos) {
+        if (!mediaHtml) return content;
+        if (!pos || pos === 'bottom') return content + mediaHtml;
+        if (pos === 'top') return mediaHtml + content;
+
+        let parts = content.split('</p>');
+        parts = parts.map(p => p.trim() ? p + '</p>' : '').filter(Boolean);
+        if (parts.length === 0) return content + mediaHtml;
+
+        let idx = 0;
+        if (pos === 'upper-middle') idx = Math.floor(parts.length * 0.25);
+        else if (pos === 'middle') idx = Math.floor(parts.length * 0.5);
+        else if (pos === 'lower-middle') idx = Math.floor(parts.length * 0.75);
+        else if (pos === 'before-last') idx = Math.max(0, parts.length - 1);
+
+        parts.splice(idx, 0, mediaHtml);
+        return parts.join('');
+      }
+
+      let contentWithMedia = formattedContent;
+
+      if (post.video1Url) {
+        let v1 = getYoutubeEmbed(post.video1Url);
+        contentWithMedia = injectMedia(contentWithMedia, v1, post.video1Pos);
+      }
+
+      if (post.video2Url) {
+        let v2 = getYoutubeEmbed(post.video2Url);
+        contentWithMedia = injectMedia(contentWithMedia, v2, post.video2Pos);
+      }
+
+      if (post.extraImages && post.extraImages.length > 0) {
+        post.extraImages.forEach(img => {
+          let imgHtml = `<div style="margin: 20px 0; text-align:center;"><img src="../${img.path}" style="width:100%; border-radius:8px;" loading="lazy"></div>`;
+          contentWithMedia = injectMedia(contentWithMedia, imgHtml, img.pos);
+        });
       }
 
       let trailerEmbed = getYoutubeEmbed(post.trailer);
-      let v1Embed = post.video1Url ? `<div data-pos="${post.video1Pos}">${getYoutubeEmbed(post.video1Url)}</div>` : '';
-      let v2Embed = post.video2Url ? `<div data-pos="${post.video2Pos}">${getYoutubeEmbed(post.video2Url)}</div>` : '';
 
       return `<!DOCTYPE html>
       <html lang="hi">
@@ -741,10 +773,7 @@
         <h1>${post.title}</h1>
         <p style="color:#aaa; font-size:13px; margin-bottom:20px;">Published on ${post.date} • By Vanrajsinh Vaghela</p>
         ${trailerEmbed}
-        <div style="margin-top:20px; font-size:16px;">${formattedContent}</div>
-        ${v1Embed}
-        ${v2Embed}
-        ${extraHtml}
+        <div style="margin-top:20px; font-size:16px;">${contentWithMedia}</div>
       </body>
       </html>`;
     }
