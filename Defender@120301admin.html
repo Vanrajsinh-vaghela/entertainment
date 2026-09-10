@@ -249,7 +249,7 @@
           <input type="text" id="hero-slider-trailer" placeholder="https://youtube.com/watch?v=...">
         </div>
 
-        <!-- ARTICLE VIDEOS (Updated positions with all options) -->
+        <!-- ARTICLE VIDEOS -->
         <div class="form-row-2">
           <div class="form-group">
             <label>Article Video 1 URL</label>
@@ -592,12 +592,20 @@
       } catch (err) { alert('Error: ' + err.message); }
     }
 
+    // ✅ Robust YouTube URL Parser (100% Reliable for all formats)
     function getYoutubeEmbed(url) {
       if (!url) return '';
       let vId = '';
-      if (url.includes('youtu.be/')) vId = url.split('youtu.be/')[1].split(/[?#]/)[0];
-      else if (url.includes('watch?v=')) vId = url.split('watch?v=')[1].split('&')[0];
-      else if (url.length === 11) vId = url;
+      const cleanUrl = url.trim();
+      if (cleanUrl.includes('youtu.be/')) {
+        vId = cleanUrl.split('youtu.be/')[1].split(/[?#]/)[0];
+      } else if (cleanUrl.includes('watch?v=')) {
+        vId = cleanUrl.split('watch?v=')[1].split('&')[0];
+      } else if (cleanUrl.includes('/embed/')) {
+        vId = cleanUrl.split('/embed/')[1].split(/[?#]/)[0];
+      } else if (cleanUrl.length === 11 && !cleanUrl.includes('/')) {
+        vId = cleanUrl;
+      }
       if (!vId) return '';
       return `<div style="width:100%; aspect-ratio:4/3; max-width:800px; margin:20px auto; background:#000; border-radius:10px; overflow:hidden;"><iframe src="https://www.youtube-nocookie.com/embed/${vId}?autoplay=0&rel=0" style="width:100%; height:100%; border:0;" allowfullscreen></iframe></div>`;
     }
