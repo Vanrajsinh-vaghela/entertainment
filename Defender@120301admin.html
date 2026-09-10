@@ -1,287 +1,823 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
-<title>Filmy Khabr - Admin Desk</title>
-<style>
-:root{--bg:#0c0d0e;--card-bg:#141618;--card-border:#22262a;--input-bg:#1a1d21;--input-border:#2b3036;--text-main:#f3f4f6;--text-muted:#9ca3af;--accent:#e50914;--success:#10b981;--danger:#ef4444;--yellow:#f59e0b;--blue:#38bdf8;--green:#10b981}
-*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-body{background:var(--bg);color:var(--text-main);font-size:14px;line-height:1.5;width:100%;max-width:1200px;margin:0 auto;padding:10px}
-.container{max-width:680px;margin:0 auto}
-.card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:15px;margin-bottom:12px;box-shadow:0 4px 6px rgba(0,0,0,.2)}
-.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.card-title{font-size:16px;font-weight:800;color:#fff}
-.form-group{margin-bottom:12px}
-.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.form-row-5{display:grid;grid-template-columns:1fr 1fr 1fr auto auto;gap:8px}
-.source-row{display:grid;grid-template-columns:1fr 1fr auto auto;gap:8px;margin-bottom:8px}
-label{display:block;font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;margin-bottom:5px;letter-spacing:.5px}
-input,select,textarea{width:100%;background:var(--input-bg);border:1px solid var(--input-border);color:#fff;padding:10px 12px;border-radius:6px;font-size:14px;outline:none;transition:border-color .2s,box-shadow .2s}
-input:hover,select:hover,textarea:hover{border-color:#3a404a}
-input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(229,9,20,.15)}
-#post-content{min-height:300px}
-#ad-code-1,#ad-code-2,#ad-code-3,#ad-code-4,#ad-code-5,#ad-code-6,#ad-code-7,#ad-code-8{min-height:50px}
-textarea{resize:vertical}
-.btn{padding:9px 15px;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;border:none;transition:all .2s}
-.btn-accent{background:var(--accent);color:#fff;width:100%;padding:12px;margin-top:10px;font-size:15px}
-.btn-accent:hover{background:#b80710;transform:translateY(-1px)}
-.btn-secondary{background:#2b3036;color:#fff}.btn-secondary:hover{background:#3a404a}
-.btn-danger{background:#3a1618;color:#fca5a5;padding:6px 10px;font-size:12px}
-.add-link-btn{background:#2b3036;color:#fff;padding:8px 12px;border:none;border-radius:6px;cursor:pointer;font-weight:700;font-size:12px;margin-top:5px}
-.extra-image-section,.font-style-section,.ads-section{background:#1a1e24;border:1px solid #2a3140;border-radius:8px;padding:12px;margin-bottom:12px}
-.hidden{display:none!important}
-.post-item{display:flex;justify-content:space-between;align-items:center;padding:8px;background:#191c20;border:1px solid #23272c;border-radius:6px;margin-bottom:8px;gap:8px}
-.post-item-title{font-size:13px;font-weight:600;color:#fff}.post-item-meta{font-size:11px;color:#aaa}.post-actions{display:flex;gap:6px;flex-shrink:0}
-.page-btn{background:#202327;border:1px solid #333;color:#fff;padding:6px 10px;border-radius:4px;cursor:pointer;font-size:12px}
-.page-btn.active{background:var(--accent)}.page-btn:disabled{opacity:.4;cursor:not-allowed}
-.preview-img{width:100%;max-height:360px;object-fit:cover;border-radius:8px;margin-bottom:10px}
-.notification{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#1f2429;color:#fff;padding:10px 16px;border-radius:20px;font-size:13px;z-index:999999}
-#publish-success-modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:99999}
-.modal-box{background:#14171a;border:1px solid #2a3038;border-radius:8px;padding:20px;width:100%;max-width:480px}
-.url-copy-box{display:flex;gap:8px;margin-bottom:12px}.modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-@media(max-width:600px){.form-row-2,.form-row-3,.form-row-5,.source-row{grid-template-columns:1fr}.post-item{align-items:flex-start;flex-direction:column}.post-actions{width:100%}.post-actions button{flex:1}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filmy Khabr - Admin Desk</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    :root {
+      --bg: #0c0d0e; --card-bg: #141618; --card-border: #22262a; --input-bg: #1a1d21;
+      --input-border: #2b3036; --text-main: #f3f4f6; --text-muted: #9ca3af;
+      --accent: #e50914; --success: #10b981; --danger: #ef4444;
+      --yellow: #f59e0b; --blue: #38bdf8; --green: #10b981;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text-main); font-size: 14px; line-height: 1.5; width: 100%; max-width: 1200px; margin: 0 auto; padding: 10px; }
+    .container { max-width: 680px; margin: 0 auto; }
+
+    .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; padding: 15px; margin-bottom: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .card-title { font-size: 16px; font-weight: 800; color: #fff; }
+    
+    .form-group { margin-bottom: 12px; }
+    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    .form-row-5 { display: grid; grid-template-columns: 1fr 1fr 1fr auto auto; gap: 8px; }
+    label { display: block; font-size: 11px; font-weight: 700; color: #aaa; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 0.5px; }
+    input, select, textarea { width: 100%; background: var(--input-bg); border: 1px solid var(--input-border); color: #fff; padding: 10px 12px; border-radius: 6px; font-size: 14px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+    input:hover, select:hover, textarea:hover { border-color: #3a404a; }
+    input:focus, select:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(229,9,20,0.15); }
+
+    #post-content { min-height: 250px; }
+    #ad-code-1, #ad-code-2, #ad-code-3, #ad-code-4, #ad-code-5, #ad-code-6, #ad-code-7, #ad-code-8 { min-height: 50px; }
+    textarea { resize: vertical; }
+
+    .btn { padding: 9px 15px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; border: none; transition: all 0.2s; }
+    .btn-accent { background: var(--accent); color: #fff; width: 100%; padding: 12px; margin-top: 10px; font-size: 15px; }
+    .btn-accent:hover { background: #b80710; transform: translateY(-1px); }
+    .btn-secondary { background: #2b3036; color: #fff; }
+    .btn-secondary:hover { background: #3a404a; }
+    .btn-danger { background: #3a1618; color: #fca5a5; padding: 6px 10px; font-size: 12px; }
+    .add-link-btn { background: #2b3036; color: #fff; padding: 8px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: 700; font-size: 12px; margin-top: 5px; transition: 0.2s; }
+    .add-link-btn:hover { background: #3a404a; }
+
+    .extra-image-section { background: #1a1e24; border: 1px solid #2a3140; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+    .font-style-section { background: #1a1e24; border: 1px solid #2a3140; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+    .ads-section { background: #1a1e24; border: 1px solid #2a3140; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+
+    .hidden { display: none !important; }
+    .post-item { display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #191c20; border: 1px solid #23272c; border-radius: 6px; margin-bottom: 8px; }
+    .post-item-title { font-size: 13px; font-weight: 600; color: #fff; }
+    .post-item-meta { font-size: 11px; color: #aaa; }
+    .post-actions { display: flex; gap: 6px; }
+    .page-btn { background: #202327; border: 1px solid #333; color: #fff; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+    .page-btn.active { background: var(--accent); color: #fff; }
+    .preview-img { width: 100%; max-height: 200px; object-fit: cover; border-radius: 6px; margin-bottom: 10px; }
+    .notification { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: #1f2429; color: #fff; padding: 10px 16px; border-radius: 20px; font-size: 13px; z-index: 999999; }
+    #publish-success-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 99999; }
+    .modal-box { background: #14171a; border: 1px solid #2a3038; border-radius: 8px; padding: 20px; width: 100%; max-width: 480px; }
+    .url-copy-box { display: flex; gap: 8px; margin-bottom: 12px; }
+    .modal-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  </style>
 </head>
 <body>
 
-<div id="pin-gate" style="position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999">
-<div class="card" style="text-align:center;max-width:340px">
-<h2 style="color:#fff;margin-bottom:6px">FILMY KHABR ADMIN</h2>
-<p style="color:#aaa;font-size:13px;margin-bottom:12px">Enter Master PIN</p>
-<input type="password" id="admin-pin-input" inputmode="numeric" pattern="[0-9]*" maxlength="10" placeholder="•••••••" style="text-align:center;font-size:24px;letter-spacing:8px;margin-bottom:12px" onkeydown="if(event.key==='Enter')verifyPin()">
-<button class="btn btn-accent" onclick="verifyPin()">Unlock Desk</button>
-</div></div>
+  <!-- PIN GATE -->
+  <div id="pin-gate" style="position:fixed; inset:0; background:var(--bg); display:flex; align-items:center; justify-content:center; z-index:9999;">
+    <div class="card" style="text-align:center; max-width:340px;">
+      <h2 style="color:#fff; margin-bottom:6px;">FILMY KHABR ADMIN</h2>
+      <p style="color:#aaa; font-size:13px; margin-bottom:12px;">Enter Master PIN</p>
+      <input type="password" id="admin-pin-input" 
+             inputmode="numeric" pattern="[0-9]*" maxlength="10" 
+             placeholder="•••••••" style="text-align:center; font-size:24px; letter-spacing:8px; margin-bottom:12px;" 
+             onkeydown="if(event.key==='Enter') verifyPin()">
+      <button class="btn btn-accent" onclick="verifyPin()">Unlock Desk</button>
+    </div>
+  </div>
 
-<div class="container" id="admin-app" style="display:none">
-<header style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #333;padding-bottom:10px;margin-bottom:15px">
-<div><h2 style="color:#fff;font-size:18px">FILMY KHABR</h2><span style="color:#aaa;font-size:11px">VANRAJSINH MASTER DESK</span></div>
-<div style="display:flex;gap:6px">
-<button class="btn btn-secondary" id="tab-btn-new" onclick="switchTab('new-post')">New Post</button>
-<button class="btn btn-secondary" id="tab-btn-manage" onclick="switchTab('manage')">Manage</button>
-<button class="btn btn-secondary" id="tab-btn-preview" onclick="switchTab('preview')">Preview</button>
-</div></header>
+  <div class="container" id="admin-app" style="display:none;">
+    <!-- HEADER -->
+    <header style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #333; padding-bottom:10px; margin-bottom:15px;">
+      <div>
+        <h2 style="color:#fff; font-size:18px;">FILMY KHABR</h2>
+        <span style="color:#aaa; font-size:11px;">VANRAJSINH MASTER DESK</span>
+      </div>
+      <div style="display:flex; gap:6px;">
+        <button class="btn btn-secondary" id="tab-btn-new" onclick="switchTab('new-post')">New Post</button>
+        <button class="btn btn-secondary" id="tab-btn-manage" onclick="switchTab('manage')">Manage</button>
+        <button class="btn btn-secondary" id="tab-btn-preview" onclick="switchTab('preview')">Preview</button>
+      </div>
+    </header>
 
-<div class="card">
-<div class="card-header"><span class="card-title">Site & GitHub Config</span><span style="color:var(--success);font-size:12px">Ready</span></div>
-<div class="form-row-2">
-<div class="form-group"><label>GitHub Username</label><input id="gh-user" value="Vanrajsinh-vaghela"></div>
-<div class="form-group"><label>Repository Name</label><input id="gh-repo" value="entertainment"></div>
-</div>
-<div class="form-row-2">
-<div class="form-group"><label>GitHub Token (PAT)</label><input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxxxxxx"></div>
-<div class="form-group"><label>Google Analytics ID</label><input id="ga-id" value="G-E6B67VBEFZ"></div>
-</div>
-<button class="btn btn-secondary" onclick="saveCreds()" style="width:100%;margin-top:5px">Save Settings</button>
-</div>
+    <!-- GITHUB CONFIG -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Site & GitHub Config</span>
+        <span style="color:var(--success); font-size:12px;">Ready</span>
+      </div>
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>GitHub Username</label>
+          <input type="text" id="gh-user" value="Vanrajsinh-vaghela" placeholder="Vanrajsinh-vaghela">
+        </div>
+        <div class="form-group">
+          <label>Repository Name</label>
+          <input type="text" id="gh-repo" value="entertainment" placeholder="entertainment">
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>GitHub Token (PAT)</label>
+          <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxxxxxx">
+        </div>
+        <div class="form-group">
+          <label>Google Analytics ID</label>
+          <input type="text" id="ga-id" value="G-E6B67VBEFZ">
+        </div>
+      </div>
+      <button class="btn btn-secondary" onclick="saveCreds()" style="width:100%; margin-top:5px;">Save Settings</button>
+    </div>
 
-<div id="view-new-post">
-<div class="card">
-<div class="card-header"><span class="card-title" id="form-heading">Create New Post</span><button class="btn btn-secondary" onclick="resetForm()">Clear Form</button></div>
-<input type="hidden" id="edit-post-id"><input type="hidden" id="edit-published-at"><input type="hidden" id="post-slug"><input type="hidden" id="post-image-path">
+    <!-- NEW POST FORM -->
+    <div id="view-new-post">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title" id="form-heading">Create New Post</span>
+          <button class="btn btn-secondary" onclick="resetForm()">Clear Form</button>
+        </div>
+        
+        <input type="hidden" id="edit-post-id">
+        <input type="hidden" id="edit-published-at">
+        <input type="hidden" id="post-slug">
+        <input type="hidden" id="post-image-path">
 
-<div class="form-group"><label>Article Title</label><input id="post-title" placeholder="Title likho" oninput="autoGenerateSlug()"></div>
-<div class="form-row-3">
-<div class="form-group"><label>Category</label><select id="post-category"><option>Movies</option><option>Web Series</option><option>OTT</option><option>Trailers</option><option>News</option><option>Upcoming</option><option>Celebrity News</option></select></div>
-<div class="form-group"><label>Platform</label><select id="post-platform"><option>Netflix</option><option>Prime Video</option><option>Disney+ Hotstar</option><option>JioCinema</option><option>Sony LIV</option><option>Zee5</option><option>YouTube</option><option>Theatre</option><option>General</option></select></div>
-<div class="form-group"><label>Badge</label><select id="post-badge"><option>Trending</option><option>Breaking</option><option>Exclusive</option><option>Review</option><option>Update</option><option>Hot</option></select></div>
-</div>
+        <div class="form-group">
+          <label>Article Title</label>
+          <input type="text" id="post-title" placeholder="Title likho" oninput="autoGenerateSlug()">
+        </div>
 
-<div class="font-style-section">
-<label style="color:var(--yellow);font-size:12px;font-weight:800">🔤 ARTICLE FONT STYLE / TYPOGRAPHY</label>
-<select id="post-font-style"><option value="noto-sans">Noto Sans Devanagari (Clean Hindi Modern)</option><option value="noto-serif">Noto Serif Devanagari (Traditional Hindi Serif)</option><option value="playfair-lora">Playfair Display & Lora (Classic Editorial Serif)</option><option value="roboto-sans" selected>Roboto & Inter (Modern Clean Sans-Serif)</option></select>
-</div>
+        <div class="form-row-3">
+          <div class="form-group">
+            <label>Category</label>
+            <select id="post-category">
+              <option>Movies</option><option>Web Series</option><option>OTT</option>
+              <option>Trailers</option><option>News</option><option>Celebrity News</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Platform</label>
+            <select id="post-platform">
+              <option>Netflix</option><option>Prime Video</option><option>Hotstar</option>
+              <option>YouTube</option><option>Theatre</option><option>General</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Badge</label>
+            <select id="post-badge">
+              <option>Trending</option><option>Breaking</option><option>Exclusive</option>
+              <option>Review</option><option>Update</option>
+            </select>
+          </div>
+        </div>
 
-<div class="card" style="background:#1a1e24;border:1px solid #2a3140">
-<label style="color:#ffcc00;font-weight:800">🎬 FEATURED IMAGE (MAIN BANNER)</label>
-<input type="file" id="post-file" accept="image/*" onchange="handleImageFile(event)" style="padding:10px">
-<div id="main-image-status" style="font-size:11px;color:#aaa;margin-top:6px"></div>
-</div>
+        <!-- FONT STYLE SECTION -->
+        <div class="font-style-section">
+          <label style="color: var(--yellow); font-size: 12px; font-weight: 800;">🔤 ARTICLE FONT STYLE / TYPOGRAPHY</label>
+          <select id="post-font-style">
+            <option value="noto-sans" selected>Noto Sans Devanagari (Clean Hindi Modern)</option>
+            <option value="noto-serif">Noto Serif Devanagari (Traditional Hindi Serif)</option>
+            <option value="playfair-lora">Playfair Display & Lora (Classic Editorial Serif)</option>
+            <option value="roboto-sans">Roboto & Inter (Modern Clean Sans-Serif)</option>
+          </select>
+        </div>
 
-<div class="extra-image-section">
-<label style="color:var(--blue);font-size:13px;font-weight:800;margin-bottom:10px;display:block">🖼️ ADDITIONAL ARTICLE IMAGES (UP TO 3 EXTRA)</label>
-<div class="form-row-2" style="margin-bottom:10px"><div class="form-group"><label>📸 Extra Image 1 File</label><input type="file" id="extra-img-file-1" accept="image/*" onchange="handleExtraImage(event,1)"><input type="hidden" id="extra-img-path-1"></div><div class="form-group"><label>Extra Image 1 Position</label><select id="extra-img-pos-1"><option value="">-- Do Not Show --</option><option value="top">Top</option><option value="upper-middle">Upper Middle</option><option value="middle">Middle</option><option value="lower-middle">Lower Middle</option><option value="before-last" selected>Before Last Section</option><option value="bottom">Bottom</option></select></div></div>
-<div class="form-row-2" style="margin-bottom:10px"><div class="form-group"><label>📸 Extra Image 2 File</label><input type="file" id="extra-img-file-2" accept="image/*" onchange="handleExtraImage(event,2)"><input type="hidden" id="extra-img-path-2"></div><div class="form-group"><label>Extra Image 2 Position</label><select id="extra-img-pos-2"><option value="">-- Do Not Show --</option><option value="top">Top</option><option value="upper-middle">Upper Middle</option><option value="middle">Middle</option><option value="lower-middle">Lower Middle</option><option value="before-last">Before Last Section</option><option value="bottom">Bottom</option></select></div></div>
-<div class="form-row-2"><div class="form-group"><label>📸 Extra Image 3 File</label><input type="file" id="extra-img-file-3" accept="image/*" onchange="handleExtraImage(event,3)"><input type="hidden" id="extra-img-path-3"></div><div class="form-group"><label>Extra Image 3 Position</label><select id="extra-img-pos-3"><option value="">-- Do Not Show --</option><option value="top">Top</option><option value="upper-middle">Upper Middle</option><option value="middle">Middle</option><option value="lower-middle">Lower Middle</option><option value="before-last">Before Last Section</option><option value="bottom">Bottom</option></select></div></div>
-</div>
+        <!-- FEATURED IMAGE -->
+        <div class="card" style="background:#1a1e24; border:1px solid #2a3140;">
+          <label style="color:#ffcc00; font-weight:800;">🎬 FEATURED IMAGE (MAIN BANNER)</label>
+          <input type="file" id="post-file" accept="image/*" onchange="handleImageFile(event)" style="padding:10px;">
+        </div>
 
-<div class="form-group"><label style="color:#f59e0b">🌟 Hero Slider Trailer URL</label><input id="hero-slider-trailer" placeholder="https://youtube.com/watch?v=..."></div>
+        <!-- EXTRA IMAGES SECTION -->
+        <div class="extra-image-section">
+          <label style="color: var(--blue); font-size: 13px; font-weight: 800; margin-bottom: 10px; display: block;">🖼️ ADDITIONAL ARTICLE IMAGES (UP TO 3 EXTRA)</label>
+          
+          <div class="form-row-2" style="margin-bottom: 10px;">
+            <div class="form-group">
+              <label>📸 Extra Image 1 File</label>
+              <input type="file" id="extra-img-file-1" accept="image/*" onchange="handleExtraImage(event, 1)">
+              <input type="hidden" id="extra-img-path-1">
+            </div>
+            <div class="form-group">
+              <label>Extra Image 1 Position</label>
+              <select id="extra-img-pos-1">
+                <option value="">-- Do Not Show --</option>
+                <option value="top">Top</option>
+                <option value="upper-middle">Upper Middle</option>
+                <option value="middle">Middle</option>
+                <option value="lower-middle">Lower Middle</option>
+                <option value="before-last" selected>Before Last Section</option>
+                <option value="bottom">Bottom</option>
+              </select>
+            </div>
+          </div>
 
-<div class="form-row-2"><div class="form-group"><label>Article Video 1 URL</label><input id="trailer-url-1" placeholder="https://youtube.com/..."></div><div class="form-group"><label>Video 1 Position</label><select id="trailer-pos-1"><option value="">-- Do Not Show --</option><option value="top">Top</option><option value="upper-middle">Upper Middle</option><option value="middle" selected>Middle</option><option value="lower-middle">Lower Middle</option><option value="before-last">Before Last</option><option value="bottom">Bottom</option></select></div></div>
-<div class="form-row-2"><div class="form-group"><label>Article Video 2 URL</label><input id="trailer-url-2" placeholder="https://youtube.com/..."></div><div class="form-group"><label>Video 2 Position</label><select id="trailer-pos-2"><option value="">-- Do Not Show --</option><option value="top">Top</option><option value="upper-middle">Upper Middle</option><option value="middle">Middle</option><option value="lower-middle">Lower Middle</option><option value="before-last" selected>Before Last</option><option value="bottom">Bottom</option></select></div></div>
+          <div class="form-row-2" style="margin-bottom: 10px;">
+            <div class="form-group">
+              <label>📸 Extra Image 2 File</label>
+              <input type="file" id="extra-img-file-2" accept="image/*" onchange="handleExtraImage(event, 2)">
+              <input type="hidden" id="extra-img-path-2">
+            </div>
+            <div class="form-group">
+              <label>Extra Image 2 Position</label>
+              <select id="extra-img-pos-2">
+                <option value="">-- Do Not Show --</option>
+                <option value="top">Top</option>
+                <option value="upper-middle">Upper Middle</option>
+                <option value="middle">Middle</option>
+                <option value="lower-middle">Lower Middle</option>
+                <option value="before-last">Before Last Section</option>
+                <option value="bottom">Bottom</option>
+              </select>
+            </div>
+          </div>
 
-<div class="form-group"><label>Short Summary / Meta Excerpt</label><input id="post-summary" placeholder="2-3 line summary"></div>
-<div class="form-group"><label>Article Content</label><textarea id="post-content" placeholder="Har paragraph ko blank line se separate karo."></textarea></div>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>📸 Extra Image 3 File</label>
+              <input type="file" id="extra-img-file-3" accept="image/*" onchange="handleExtraImage(event, 3)">
+              <input type="hidden" id="extra-img-path-3">
+            </div>
+            <div class="form-group">
+              <label>Extra Image 3 Position</label>
+              <select id="extra-img-pos-3">
+                <option value="">-- Do Not Show --</option>
+                <option value="top">Top</option>
+                <option value="upper-middle">Upper Middle</option>
+                <option value="middle">Middle</option>
+                <option value="lower-middle">Lower Middle</option>
+                <option value="before-last">Before Last Section</option>
+                <option value="bottom">Bottom</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
-<div class="card" style="background:#1a1e24;border:1px solid #2a3140">
-<label style="color:var(--blue);font-weight:800">🔗 Related Articles</label>
-<div id="related-articles-rows"><div class="form-row-5"><input class="ra-image" placeholder="Image URL"><input class="ra-title" placeholder="Title"><input class="ra-url" placeholder="Article URL"><button class="btn btn-secondary" onclick="addRelatedArticleRow(this)">+</button><button class="btn btn-danger" onclick="removeRow(this)">x</button></div></div>
-<button class="add-link-btn" onclick="addRelatedArticleRow()">+ Add Related Article</button>
-</div>
+        <!-- HERO SLIDER TRAILER -->
+        <div class="form-group">
+          <label style="color:#f59e0b;">🌟 Hero Slider Trailer URL</label>
+          <input type="text" id="hero-slider-trailer" placeholder="https://youtube.com/watch?v=...">
+        </div>
 
-<div class="card" style="background:#1a1e24;border:1px solid #2a3140">
-<label style="color:var(--blue);font-weight:800">🔗 Source / Credit</label>
-<div id="source-credit-rows"><div class="source-row"><input class="sc-name" placeholder="Source Name"><input class="sc-url" placeholder="Source URL"><button class="btn btn-secondary" onclick="addSourceCreditRow(this)">+</button><button class="btn btn-danger" onclick="removeRow(this)">x</button></div></div>
-<button class="add-link-btn" onclick="addSourceCreditRow()">+ Add Source</button>
-</div>
+        <!-- ARTICLE VIDEOS -->
+        <div class="form-row-2">
+          <div class="form-group">
+            <label>Article Video 1 URL</label>
+            <input type="text" id="trailer-url-1" placeholder="https://youtube.com/...">
+          </div>
+          <div class="form-group">
+            <label>Video 1 Position</label>
+            <select id="trailer-pos-1">
+              <option value="">-- Do Not Show --</option>
+              <option value="top">Top</option>
+              <option value="upper-middle">Upper Middle</option>
+              <option value="middle" selected>Middle</option>
+              <option value="lower-middle">Lower Middle</option>
+              <option value="before-last">Before Last</option>
+              <option value="bottom">Bottom</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label>Article Video 2 URL</label>
+            <input type="text" id="trailer-url-2" placeholder="https://youtube.com/...">
+          </div>
+          <div class="form-group">
+            <label>Video 2 Position</label>
+            <select id="trailer-pos-2">
+              <option value="">-- Do Not Show --</option>
+              <option value="top">Top</option>
+              <option value="upper-middle">Upper Middle</option>
+              <option value="middle">Middle</option>
+              <option value="lower-middle">Lower Middle</option>
+              <option value="before-last" selected>Before Last</option>
+              <option value="bottom">Bottom</option>
+            </select>
+          </div>
+        </div>
 
-<div class="ads-section">
-<label style="color:var(--green);font-size:13px;font-weight:800;margin-bottom:10px;display:block">💰 DIRECT AD CODE (8 SLOTS)</label>
-<textarea id="ad-code-1" placeholder="Popunder (Ad 1)" style="margin-bottom:8px"></textarea><textarea id="ad-code-2" placeholder="Native Banner (Ad 2)" style="margin-bottom:8px"></textarea><textarea id="ad-code-3" placeholder="Banner 728x90 (Ad 3)" style="margin-bottom:8px"></textarea><textarea id="ad-code-4" placeholder="Related Articles Beech Ad (Ad 4)" style="margin-bottom:8px;border-color:var(--blue)"></textarea><textarea id="ad-code-5" placeholder="Social Bar (Ad 5)" style="margin-bottom:8px"></textarea><textarea id="ad-code-6" placeholder="Smartlink (Ad 6)" style="margin-bottom:8px"></textarea><textarea id="ad-code-7" placeholder="Extra Ad 7" style="margin-bottom:8px"></textarea><textarea id="ad-code-8" placeholder="Extra Ad 8"></textarea>
-</div>
-<button class="btn btn-accent" id="publish-btn" onclick="publishPost()">Publish Post</button>
-</div></div>
+        <div class="form-group">
+          <label>Short Summary / Meta Excerpt</label>
+          <input type="text" id="post-summary" placeholder="2-3 line summary">
+        </div>
 
-<div id="view-manage" class="hidden"><div class="card"><div class="card-header"><span class="card-title">Manage Posts</span><button class="btn btn-secondary" onclick="loadManagePosts()">Refresh</button></div><div id="posts-list-container"></div><div id="manage-pagination-box" class="pagination-container"></div></div></div>
+        <!-- ARTICLE CONTENT -->
+        <div class="form-group">
+          <label>Article Content</label>
+          <textarea id="post-content" placeholder="Full article yahan likho"></textarea>
+        </div>
 
-<div id="view-preview" class="hidden"><div class="card"><div class="card-header"><span class="card-title">Article Preview</span><button class="btn btn-secondary" onclick="renderDedicatedPreview()">Refresh</button></div><div class="preview-pane" style="background:#111;padding:15px;border-radius:6px">
-<div><span id="prev-badge" style="background:var(--accent);color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;margin-bottom:8px;display:inline-block">Trending</span><span id="prev-category" style="font-size:12px;color:#aaa;margin-left:6px"></span></div>
-<h1 id="prev-title" style="font-size:24px;color:#fff;margin:10px 0">Title Preview</h1>
-<div id="prev-date" style="font-size:13px;color:#aaa;margin-bottom:10px">By Vanrajsinh Vaghela</div>
-<div id="prev-trailer-wrap" style="margin-bottom:15px;display:none"></div>
-<img id="prev-img" class="preview-img" alt="Featured image preview" style="display:none">
-<div id="prev-content" style="color:#ddd;line-height:1.75;font-size:16px"></div>
-</div></div></div>
-</div>
+        <!-- RELATED ARTICLES -->
+        <div class="card" style="background:#1a1e24; border:1px solid #2a3140;">
+          <label style="color:var(--blue); font-weight:800;">🔗 Related Articles</label>
+          <div id="related-articles-rows">
+            <div class="form-row-5">
+              <input type="text" class="ra-image" placeholder="Image URL">
+              <input type="text" class="ra-title" placeholder="Title">
+              <input type="text" class="ra-url" placeholder="Article URL">
+              <button class="btn btn-secondary" onclick="addRelatedArticleRow(this)">+</button>
+              <button class="btn btn-danger" onclick="removeRow(this)">x</button>
+            </div>
+          </div>
+          <button class="add-link-btn" onclick="addRelatedArticleRow()">+ Add Related Article</button>
+        </div>
 
-<div id="publish-success-modal"><div class="modal-box"><div style="color:var(--success);font-size:18px;font-weight:800;margin-bottom:10px">🎉 Post Published!</div><div style="font-size:13px;color:#aaa;margin-bottom:12px">Link copy karke Search Console mein request karein.</div><div class="url-copy-box"><input id="success-post-url" readonly><button class="btn btn-secondary" onclick="copyPostLink()">Copy</button></div><div class="modal-actions"><a id="btn-open-post" href="#" target="_blank" class="btn btn-secondary">View Post</a><a href="https://search.google.com/search-console" target="_blank" class="btn btn-secondary">Search Console</a></div><button class="btn btn-accent" onclick="closeSuccessModal()">Close</button></div></div>
-<div id="toast" class="notification" style="opacity:0;transition:opacity .3s"></div>
+        <!-- SOURCE CREDIT -->
+        <div class="card" style="background:#1a1e24; border:1px solid #2a3140;">
+          <label style="color:var(--blue); font-weight:800;">🔗 Source / Credit</label>
+          <div id="source-credit-rows">
+            <div class="form-row-2">
+              <input type="text" class="sc-name" placeholder="Source Name">
+              <input type="text" class="sc-url" placeholder="Source URL">
+              <button class="btn btn-secondary" onclick="addSourceCreditRow(this)">+</button>
+              <button class="btn btn-danger" onclick="removeRow(this)">x</button>
+            </div>
+          </div>
+          <button class="add-link-btn" onclick="addSourceCreditRow()">+ Add Source</button>
+        </div>
 
-<script>
-const MASTER_PIN="1465822";
-const SITE_URL="https://entertainment.gujaratfastalert.in";
-let selectedImageBase64=null,allPostsCache=[],manageCurrentPage=1;
-const MANAGE_PER_PAGE=15;
+        <!-- ADS 8 BOXES -->
+        <div class="ads-section">
+          <label style="color: var(--green); font-size: 13px; font-weight: 800; margin-bottom: 10px; display: block;">💰 DIRECT AD CODE (8 SLOTS)</label>
+          <textarea id="ad-code-1" placeholder="Popunder (Ad 1)" style="margin-bottom:8px;"></textarea>
+          <textarea id="ad-code-2" placeholder="Native Banner (Ad 2)" style="margin-bottom:8px;"></textarea>
+          <textarea id="ad-code-3" placeholder="Banner 728x90 (Ad 3)" style="margin-bottom:8px;"></textarea>
+          <textarea id="ad-code-4" placeholder="Related Articles Beech Ad (Ad 4)" style="margin-bottom:8px; border-color:var(--blue);"></textarea>
+          <textarea id="ad-code-5" placeholder="Social Bar (Ad 5)" style="margin-bottom:8px;"></textarea>
+          <textarea id="ad-code-6" placeholder="Smartlink (Ad 6)" style="margin-bottom:8px;"></textarea>
+          <textarea id="ad-code-7" placeholder="Extra Ad 7" style="margin-bottom:8px;"></textarea>
+          <textarea id="ad-code-8" placeholder="Extra Ad 8"></textarea>
+        </div>
 
-function verifyPin(){const p=document.getElementById("admin-pin-input").value.trim();if(p===MASTER_PIN){document.getElementById("pin-gate").style.display="none";document.getElementById("admin-app").style.display="block";sessionStorage.setItem("fk_admin_auth","true");initAdmin()}else alert("Invalid PIN!")}
-if(sessionStorage.getItem("fk_admin_auth")==="true"){document.getElementById("pin-gate").style.display="none";document.getElementById("admin-app").style.display="block";window.addEventListener("load",initAdmin)}
-function initAdmin(){loadCreds();switchTab("new-post")}
-function switchTab(t){["new-post","manage","preview"].forEach(x=>document.getElementById("view-"+x).classList.toggle("hidden",t!==x));["new","manage","preview"].forEach(x=>document.getElementById("tab-btn-"+x).classList.toggle("active",t===("new"===x?"new-post":x)));if(t==="manage")loadManagePosts();if(t==="preview")renderDedicatedPreview()}
-function saveCreds(){localStorage.setItem("fk_gh_user",document.getElementById("gh-user").value.trim());localStorage.setItem("fk_gh_repo",document.getElementById("gh-repo").value.trim());localStorage.setItem("fk_gh_token",document.getElementById("gh-token").value.trim());localStorage.setItem("fk_ga_id",document.getElementById("ga-id").value.trim());showToast("Settings saved!")}
-function loadCreds(){["gh-user","gh-repo","gh-token","ga-id"].forEach((id,i)=>{const k=["fk_gh_user","fk_gh_repo","fk_gh_token","fk_ga_id"][i];const v=localStorage.getItem(k);if(v)document.getElementById(id).value=v})}
-function slugify(t){return t.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9\s-]/g,"").trim().replace(/\s+/g,"-").replace(/-+/g,"-")}
-function autoGenerateSlug(){if(document.getElementById("edit-post-id").value)return;const s=slugify(document.getElementById("post-title").value);document.getElementById("post-slug").value=s;document.getElementById("post-image-path").value=s?"images/"+s+".jpg":""}
-function handleImageFile(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=x=>{selectedImageBase64=x.target.result.split(",")[1];document.getElementById("main-image-status").textContent="✓ Main image ready";autoGenerateSlug();showToast("Main image loaded!")};r.readAsDataURL(f)}
-function handleExtraImage(e,i){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=x=>{localStorage.setItem("extra_img_"+i,x.target.result.split(",")[1]);const s=document.getElementById("post-slug").value||"post-"+Date.now();document.getElementById("extra-img-path-"+i).value="extra-images/"+s+"-extra-"+i+".jpg";showToast("Extra image "+i+" loaded!")};r.readAsDataURL(f)}
-function addRelatedArticleRow(btn){const c=document.getElementById("related-articles-rows"),r=document.createElement("div");r.className="form-row-5";r.innerHTML='<input class="ra-image" placeholder="Image URL"><input class="ra-title" placeholder="Title"><input class="ra-url" placeholder="Article URL"><button class="btn btn-secondary" onclick="addRelatedArticleRow(this)">+</button><button class="btn btn-danger" onclick="removeRow(this)">x</button>';c.appendChild(r);if(btn)btn.parentElement.remove()}
-function addSourceCreditRow(btn){const c=document.getElementById("source-credit-rows"),r=document.createElement("div");r.className="source-row";r.innerHTML='<input class="sc-name" placeholder="Source Name"><input class="sc-url" placeholder="Source URL"><button class="btn btn-secondary" onclick="addSourceCreditRow(this)">+</button><button class="btn btn-danger" onclick="removeRow(this)">x</button>';c.appendChild(r);if(btn)btn.parentElement.remove()}
-function removeRow(b){b.parentElement.remove()}
-function showToast(m){const t=document.getElementById("toast");t.textContent=m;t.style.opacity="1";clearTimeout(window._toast);window._toast=setTimeout(()=>t.style.opacity="0",3000)}
-async function ghRequest(path,method="GET",body=null){const u=document.getElementById("gh-user").value.trim(),r=document.getElementById("gh-repo").value.trim(),tok=document.getElementById("gh-token").value.trim();if(!tok)throw Error("GitHub Token required!");const res=await fetch("https://api.github.com/repos/"+encodeURIComponent(u)+"/"+encodeURIComponent(r)+"/contents/"+path,{method,headers:{Authorization:"Bearer "+tok,Accept:"application/vnd.github.v3+json","Content-Type":"application/json"},body:body?JSON.stringify(body):undefined});if(res.status===404&&method==="GET")return null;const data=await res.json();if(!res.ok)throw Error(data.message||"GitHub API error");return data}
-function utf8ToBase64(s){return btoa(unescape(encodeURIComponent(s)))}function base64ToUtf8(s){return decodeURIComponent(escape(atob(s.replace(/\n/g,""))))}
-function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
-function safeUrl(u){try{const x=new URL(u,SITE_URL);return ["http:","https:"].includes(x.protocol)?x.href:"#"}catch{return"#"}}
+        <button class="btn btn-accent" id="publish-btn" onclick="publishPost()">Publish Post</button>
+      </div>
+    </div>
 
-function formatArticleContent(raw){
- let s=String(raw||"").trim();if(!s)return"<p>Article content not available.</p>";
- if(/<p[\s>]/i.test(s)||/<h[1-6][\s>]/i.test(s)||/<div[\s>]/i.test(s))return s;
- return s.split(/\n\s*\n/).map(p=>{p=p.trim();if(!p)return"";return"<p class=\"article-paragraph\">"+esc(p).replace(/\n/g,"<br>")+"</p>"}).join("");
-}
-function getBlocks(content){
- const matches=content.match(/<(?:p|h[1-6]|div)(?:\s[^>]*)?>[\s\S]*?<\/(?:p|h[1-6]|div)>/gi);
- return matches&&matches.length?matches:[content];
-}
-function mediaSlot(pos,total){if(pos==="top")return 0;if(pos==="upper-middle")return Math.max(1,Math.floor(total*.25));if(pos==="middle")return Math.max(1,Math.floor(total*.5));if(pos==="lower-middle")return Math.max(1,Math.floor(total*.75));if(pos==="before-last")return Math.max(0,total-1);return total}
-function insertMediaByPosition(content,items){
- const blocks=getBlocks(content),total=blocks.length,groups={};
- items.filter(x=>x&&x.html&&x.pos).forEach((x,i)=>{const slot=Math.min(total,mediaSlot(x.pos,total));(groups[slot]||(groups[slot]=[])).push({...x,order:i})});
- let out="";for(let i=0;i<=total;i++){if(groups[i])out+=groups[i].sort((a,b)=>a.order-b.order).map(x=>x.html).join("");if(i<total)out+=blocks[i]}return out
-}
-function getYoutubeId(url){
- const s=String(url||"").trim();if(!s)return"";
- if(/^[A-Za-z0-9_-]{11}$/.test(s))return s;
- try{const u=new URL(s);if(u.hostname==="youtu.be")return u.pathname.split("/").filter(Boolean)[0]||"";if(u.hostname.includes("youtube.com")){if(u.searchParams.get("v"))return u.searchParams.get("v");const m=u.pathname.match(/\/(?:embed|shorts|live)\/([A-Za-z0-9_-]{11})/);if(m)return m[1]}}catch{}
- const m=s.match(/(?:v=|youtu\.be\/|\/embed\/|\/shorts\/|\/live\/)([A-Za-z0-9_-]{11})/);return m?m[1]:""
-}
-function getYoutubeEmbed(url,cls="article-media"){
- const id=getYoutubeId(url);if(!id)return"";
- return '<div class="'+cls+' article-video"><iframe src="https://www.youtube-nocookie.com/embed/'+esc(id)+'?autoplay=0&rel=0&modestbranding=1" title="YouTube video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>'
-}
-function collectFormMedia(preview=false){
- const a=[];
- for(let i=1;i<=3;i++){const b=localStorage.getItem("extra_img_"+i),p=document.getElementById("extra-img-pos-"+i).value;if(b&&p)a.push({pos:p,order:i,html:'<figure class="article-media article-image"><img src="'+(preview?"data:image/jpeg;base64,":"../")+(preview?b:document.getElementById("extra-img-path-"+i).value)+'" alt="Article image '+i+'" loading="lazy"><figcaption>Filmy Khabr</figcaption></figure>'})}
- const v1=document.getElementById("trailer-url-1").value.trim(),p1=document.getElementById("trailer-pos-1").value,v2=document.getElementById("trailer-url-2").value.trim(),p2=document.getElementById("trailer-pos-2").value;
- if(v1&&p1){const h=getYoutubeEmbed(v1);if(h)a.push({pos:p1,order:10,html:h})}if(v2&&p2){const h=getYoutubeEmbed(v2);if(h)a.push({pos:p2,order:11,html:h})}return a
-}
-function renderDedicatedPreview(){
- document.getElementById("prev-title").textContent=document.getElementById("post-title").value||"Title Preview";
- document.getElementById("prev-badge").textContent=document.getElementById("post-badge").value;
- document.getElementById("prev-category").textContent=document.getElementById("post-category").value+" • "+document.getElementById("post-platform").value;
- document.getElementById("prev-date").textContent="By Vanrajsinh Vaghela";
- const hero=getYoutubeEmbed(document.getElementById("hero-slider-trailer").value.trim());
- const tw=document.getElementById("prev-trailer-wrap");tw.innerHTML=hero;tw.style.display=hero?"block":"none";
- const im=document.getElementById("prev-img");if(selectedImageBase64){im.src="data:image/jpeg;base64,"+selectedImageBase64;im.style.display="block"}else im.style.display="none";
- const content=formatArticleContent(document.getElementById("post-content").value);document.getElementById("prev-content").innerHTML=insertMediaByPosition(content,collectFormMedia(true));
- applyPreviewFont()
-}
-function applyPreviewFont(){const v=document.getElementById("post-font-style").value,c=document.getElementById("prev-content");c.style.fontFamily=v==="noto-serif"?"Georgia,'Noto Serif Devanagari',serif":v==="playfair-lora"?"Georgia,'Times New Roman',serif":v==="noto-sans"?"'Noto Sans Devanagari',sans-serif:"Inter,Arial,sans-serif"}
-document.getElementById("post-font-style").addEventListener("change",applyPreviewFont)
+    <!-- MANAGE -->
+    <div id="view-manage" class="hidden">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Manage Posts</span>
+          <button class="btn btn-secondary" onclick="loadManagePosts()">Refresh</button>
+        </div>
+        <div id="posts-list-container"></div>
+        <div id="manage-pagination-box" class="pagination-container"></div>
+      </div>
+    </div>
 
-function getRows(selector){return[...document.querySelectorAll(selector)].map(r=>({image:r.querySelector(".ra-image")?.value.trim()||"",title:r.querySelector(".ra-title")?.value.trim()||"",url:r.querySelector(".ra-url")?.value.trim()||""})).filter(x=>x.title||x.url||x.image)}
-function getSources(){return[...document.querySelectorAll("#source-credit-rows .source-row")].map(r=>({name:r.querySelector(".sc-name")?.value.trim()||"",url:r.querySelector(".sc-url")?.value.trim()||""})).filter(x=>x.name||x.url)}
-function getAds(){return Array.from({length:8},(_,i)=>document.getElementById("ad-code-"+(i+1)).value.trim())}
+    <!-- PREVIEW -->
+    <div id="view-preview" class="hidden">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Article Preview</span>
+          <button class="btn btn-secondary" onclick="renderDedicatedPreview()">Refresh</button>
+        </div>
+        <div class="preview-pane" style="background:#111; padding:15px; border-radius:6px;">
+          <div>
+            <span class="preview-badge" style="background:var(--accent); color:#fff; padding:4px 8px; border-radius:4px; font-size:12px; margin-bottom:8px; display:inline-block;" id="prev-badge">Trending</span>
+            <span style="font-size:12px; color:#aaa; margin-left:6px;" id="prev-category">Movies • Theatre</span>
+          </div>
+          <h1 class="preview-title" style="font-size:24px; color:#fff; margin:10px 0;" id="prev-title">Title Preview</h1>
+          <div class="preview-meta" style="font-size:13px; color:#aaa; margin-bottom:10px;" id="prev-date">By Vanrajsinh Vaghela</div>
+          <div id="prev-trailer-wrap" style="margin-bottom:15px; display:none;"></div>
+          <img src="" id="prev-img" class="preview-img" alt="Preview" style="display:none;">
+          <div class="preview-body" id="prev-content" style="color:#ddd; line-height:1.6; font-size:15px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-async function publishPost(){
- const btn=document.getElementById("publish-btn"),title=document.getElementById("post-title").value.trim();autoGenerateSlug();
- const slug=document.getElementById("post-slug").value.trim(),content=document.getElementById("post-content").value.trim(),token=document.getElementById("gh-token").value.trim();
- if(!title||!content||!token){alert("Title, Content aur Token required!");return}
- btn.disabled=true;btn.textContent="Publishing to GitHub...";
- try{
-  const category=document.getElementById("post-category").value,platform=document.getElementById("post-platform").value,badge=document.getElementById("post-badge").value,summary=document.getElementById("post-summary").value.trim(),trailer=document.getElementById("hero-slider-trailer").value.trim(),fontStyle=document.getElementById("post-font-style").value;
-  if(selectedImageBase64)await ghRequest("images/"+slug+".jpg","PUT",{message:"Upload "+slug,content:selectedImageBase64});
-  const extraImagesData=[];for(let i=1;i<=3;i++){const b=localStorage.getItem("extra_img_"+i),p=document.getElementById("extra-img-pos-"+i).value;if(b&&p){const path="extra-images/"+slug+"-extra-"+i+".jpg";await ghRequest(path,"PUT",{message:"Upload extra "+i+" for "+slug,content:b});extraImagesData.push({path,pos:p})}}
-  const oldId=document.getElementById("edit-post-id").value;
-  let postsFile=await ghRequest("data/posts.json"),posts=[];if(postsFile?.content)posts=JSON.parse(base64ToUtf8(postsFile.content));
-  const old=posts.find(p=>p.id===oldId),postObj={id:oldId||"post_"+Date.now(),title,slug,category,platform,badge,summary,trailer,video1Url:document.getElementById("trailer-url-1").value.trim(),video1Pos:document.getElementById("trailer-pos-1").value,video2Url:document.getElementById("trailer-url-2").value.trim(),video2Pos:document.getElementById("trailer-pos-2").value,content,fontStyle,extraImages:extraImagesData,relatedArticles:getRows("#related-articles-rows .form-row-5"),sources:getSources(),ads:getAds(),featuredImage:"images/"+slug+".jpg",date:old?.date||new Date().toISOString().split("T")[0],updatedAt:new Date().toISOString()};
-  posts=old?posts.map(p=>p.id===oldId?postObj:p):[postObj,...posts];
-  await ghRequest("data/posts.json","PUT",{message:(old?"Update ":"Add post ")+slug,content:utf8ToBase64(JSON.stringify(posts,null,2)),sha:postsFile?.sha});
-  await ghRequest("posts/"+slug+".html","PUT",{message:(old?"Update ":"Publish ")+slug,content:utf8ToBase64(generatePostHTML(postObj))});
-  const live=SITE_URL+"/posts/"+slug+".html";document.getElementById("success-post-url").value=live;document.getElementById("btn-open-post").href=live;document.getElementById("publish-success-modal").style.display="flex";resetForm();showToast(old?"Post updated!":"Post published!")
- }catch(e){alert("Publish failed: "+e.message)}finally{btn.disabled=false;btn.textContent="Publish Post"}
-}
+  <!-- PUBLISH SUCCESS MODAL -->
+  <div id="publish-success-modal">
+    <div class="modal-box">
+      <div class="modal-head" style="color:var(--success); font-size:18px; font-weight:800; margin-bottom:10px;">🎉 Post Published!</div>
+      <div style="font-size:13px; color:#aaa; margin-bottom:12px;">Link copy karke Search Console mein request karein.</div>
+      <div class="url-copy-box">
+        <input type="text" id="success-post-url" readonly>
+        <button class="btn btn-secondary" onclick="copyPostLink()">Copy</button>
+      </div>
+      <div class="modal-actions">
+        <a id="btn-open-post" href="#" target="_blank" class="btn btn-secondary">View Post</a>
+        <a href="https://search.google.com/search-console" target="_blank" class="btn btn-secondary">Search Console</a>
+      </div>
+      <button class="btn btn-accent" onclick="closeSuccessModal()">Close</button>
+    </div>
+  </div>
 
-function fontCSS(v){if(v==="noto-serif")return"Georgia,'Noto Serif Devanagari',serif";if(v==="playfair-lora")return"Georgia,'Times New Roman',serif";if(v==="noto-sans")return"'Noto Sans Devanagari','Nirmala UI',sans-serif";return"Inter,Arial,sans-serif"}
-function generatePostHTML(post){
- const base=formatArticleContent(post.content),media=[];
- (post.extraImages||[]).forEach((x,i)=>{if(x.path&&x.pos)media.push({pos:x.pos,order:i,html:'<figure class="article-media article-image"><img src="../'+esc(x.path)+'" alt="'+esc(post.title)+' - image '+(i+1)+'" loading="lazy"><figcaption>Filmy Khabr</figcaption></figure>'})});
- if(post.video1Url&&post.video1Pos){const h=getYoutubeEmbed(post.video1Url);if(h)media.push({pos:post.video1Pos,order:10,html:h})}
- if(post.video2Url&&post.video2Pos){const h=getYoutubeEmbed(post.video2Url);if(h)media.push({pos:post.video2Pos,order:11,html:h})}
- const content=insertMediaByPosition(base,media),hero=getYoutubeEmbed(post.trailer,"hero-video"),related=(post.relatedArticles||[]).filter(x=>x.title||x.url),sources=(post.sources||[]).filter(x=>x.name||x.url),ads=post.ads||[],font=fontCSS(post.fontStyle);
- const relatedHTML=related.length?'<section class="related"><h2>Related Articles</h2><div class="related-grid">'+related.map(x=>'<a class="related-card" href="'+esc(safeUrl(x.url))+'">'+(x.image?'<img src="'+esc(safeUrl(x.image))+'" alt="'+esc(x.title)+'" loading="lazy">':'')+'<strong>'+esc(x.title)+'</strong></a>').join("")+"</div></section>":"";
- const sourceHTML=sources.length?'<section class="sources"><h3>Sources / Credits</h3><ul>'+sources.map(x=>'<li>'+esc(x.name)+(x.url?' — <a href="'+esc(safeUrl(x.url))+'" rel="nofollow noopener" target="_blank">Source</a>':"")+"</li>").join("")+"</ul></section>":"";
- const adHTML=ads.map((x,i)=>x?'<div class="ad-slot ad-slot-'+(i+1)+'">'+x+"</div>":"").join("");
- const ga=localStorage.getItem("fk_ga_id")||document.getElementById("ga-id").value.trim();
- return '<!DOCTYPE html><html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>'+esc(post.title)+" - Filmy Khabr</title><meta name=\"description\" content=\""+esc(post.summary||post.title)+"\"><meta name=\"robots\" content=\"index, follow, max-image-preview:large\"><link rel=\"canonical\" href=\""+esc(SITE_URL+"/posts/"+post.slug+".html")+'"><meta property="og:type" content="article"><meta property="og:title" content="'+esc(post.title)+'"><meta property="og:description" content="'+esc(post.summary||post.title)+'"><meta property="og:url" content="'+esc(SITE_URL+"/posts/"+post.slug+".html")+'"><meta property="og:image" content="'+esc(SITE_URL+"/"+post.featuredImage)+'"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="'+esc(post.title)+'"><meta name="twitter:description" content="'+esc(post.summary||post.title)+'"><meta name="twitter:image" content="'+esc(SITE_URL+"/"+post.featuredImage)+'">'+(ga?'<script async src="https://www.googletagmanager.com/gtag/js?id='+esc(ga)+'"><\/script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","'+esc(ga)+'")<\/script>':"")+'<style>body{background:#070809;color:#f7f7f8;font-family:'+font+';line-height:1.8;max-width:820px;margin:0 auto;padding:16px}.badge{display:inline-block;background:#e50914;color:#fff;padding:4px 9px;font-size:11px;font-weight:800;border-radius:4px;text-transform:uppercase}.meta{color:#999;font-size:13px;margin:8px 0 20px}.featured{width:100%;height:auto;display:block;border-radius:10px;margin:15px 0 24px}.article-body{font-size:17px}.article-paragraph{margin:0 0 18px}.article-body h2,.article-body h3{line-height:1.35;margin:28px 0 12px;color:#fff}.article-media{width:100%;max-width:800px;margin:26px auto;text-align:center}.article-image img{width:100%;height:auto;display:block;border-radius:10px}.article-image figcaption{font-size:11px;color:#888;margin-top:5px}.article-video{aspect-ratio:16/9;background:#000;border-radius:10px;overflow:hidden}.article-video iframe{width:100%;height:100%;border:0}.hero-video{margin:15px 0 25px}.related{border-top:1px solid #292929;margin-top:35px;padding-top:22px}.related-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.related-card{background:#151719;border:1px solid #292929;border-radius:8px;padding:9px;color:#fff;text-decoration:none;display:block}.related-card img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:6px;margin-bottom:7px}.sources{border-top:1px solid #292929;margin-top:25px;padding-top:18px;color:#aaa}.sources a{color:#38bdf8}.ad-slot{margin:20px 0;text-align:center;overflow:hidden}@media(max-width:600px){body{padding:12px}.article-body{font-size:16px}.related-grid{grid-template-columns:1fr}}</style></head><body><span class="badge">'+esc(post.category)+"</span><h1>"+esc(post.title)+'</h1><div class="meta">Published on '+esc(post.date)+' • By Vanrajsinh Vaghela</div>'+(post.featuredImage?'<img class="featured" src="../'+esc(post.featuredImage)+'" alt="'+esc(post.title)+'" fetchpriority="high">':"")+hero+'<main class="article-body">'+content+"</main>"+adHTML+relatedHTML+sourceHTML+"</body></html>"
-}
+  <div id="toast" class="notification" style="opacity:0; transition:opacity 0.3s;"></div>
 
-async function loadManagePosts(){const c=document.getElementById("posts-list-container");c.innerHTML="Loading...";try{const f=await ghRequest("data/posts.json");if(!f?.content){c.innerHTML='<span style="color:#aaa">No posts found.</span>';return}allPostsCache=JSON.parse(base64ToUtf8(f.content));manageCurrentPage=1;renderManageListPaginated()}catch(e){c.innerHTML='<span style="color:red">Error: '+esc(e.message)+"</span>"}}
-function renderManageListPaginated(){const c=document.getElementById("posts-list-container"),p=document.getElementById("manage-pagination-box"),pages=Math.max(1,Math.ceil(allPostsCache.length/MANAGE_PER_PAGE)),start=(manageCurrentPage-1)*MANAGE_PER_PAGE,slice=allPostsCache.slice(start,start+MANAGE_PER_PAGE);c.innerHTML=slice.length?slice.map(x=>'<div class="post-item"><div><div class="post-item-title">'+esc(x.title)+'</div><div class="post-item-meta">'+esc(x.category)+' • '+esc(x.badge)+' • '+esc(x.date||"")+"</div></div><div class=\"post-actions\"><button class=\"btn btn-secondary\" onclick=\"editPost('"+esc(x.id)+"')\">Edit</button><button class=\"btn btn-danger\" onclick=\"deletePost('"+esc(x.id)+"')\">Delete</button></div></div>").join(""):'<span style="color:#aaa">No posts yet.</span>';let h=(manageCurrentPage>1?'<button class="page-btn" onclick="changeManagePage('+(manageCurrentPage-1)+')">Prev</button>':"");for(let i=1;i<=pages;i++)h+='<button class="page-btn '+(i===manageCurrentPage?"active":"")+'" onclick="changeManagePage('+i+')">'+i+"</button>";if(manageCurrentPage<pages)h+='<button class="page-btn" onclick="changeManagePage('+(manageCurrentPage+1)+')">Next</button>';p.innerHTML=h}
-function changeManagePage(p){manageCurrentPage=p;renderManageListPaginated()}
+  <script>
+    const MASTER_PIN = "1465822";
+    let selectedImageBase64 = null;
+    let allPostsCache = [];
+    let manageCurrentPage = 1;
+    const MANAGE_PER_PAGE = 15;
 
-function clearDynamicRows(containerId,addFn){document.getElementById(containerId).innerHTML="";addFn()}
-function editPost(id){
- const p=allPostsCache.find(x=>x.id===id);if(!p)return;
- document.getElementById("edit-post-id").value=p.id;document.getElementById("post-title").value=p.title||"";document.getElementById("post-slug").value=p.slug||"";document.getElementById("post-category").value=p.category||"Movies";document.getElementById("post-platform").value=p.platform||"General";document.getElementById("post-badge").value=p.badge||"Update";document.getElementById("post-summary").value=p.summary||"";document.getElementById("hero-slider-trailer").value=p.trailer||"";document.getElementById("trailer-url-1").value=p.video1Url||"";document.getElementById("trailer-pos-1").value=p.video1Pos||"middle";document.getElementById("trailer-url-2").value=p.video2Url||"";document.getElementById("trailer-pos-2").value=p.video2Pos||"before-last";document.getElementById("post-content").value=p.content||"";document.getElementById("post-font-style").value=p.fontStyle||"roboto-sans";document.getElementById("post-image-path").value=p.featuredImage||("images/"+(p.slug||"post")+".jpg");
- for(let i=1;i<=3;i++){localStorage.removeItem("extra_img_"+i);document.getElementById("extra-img-file-"+i).value="";document.getElementById("extra-img-path-"+i).value=p.extraImages?.[i-1]?.path||"";document.getElementById("extra-img-pos-"+i).value=p.extraImages?.[i-1]?.pos||""}
- document.getElementById("related-articles-rows").innerHTML="";(p.relatedArticles?.length?p.relatedArticles:[{}]).forEach(x=>{const r=document.createElement("div");r.className="form-row-5";r.innerHTML='<input class="ra-image" placeholder="Image URL" value="'+esc(x.image||"")+'"><input class="ra-title" placeholder="Title" value="'+esc(x.title||"")+'"><input class="ra-url" placeholder="Article URL" value="'+esc(x.url||"")+'"><button class="btn btn-secondary" onclick="addRelatedArticleRow(this)">+</button><button class="btn btn-danger" onclick="removeRow(this)">x</button>';document.getElementById("related-articles-rows").appendChild(r)});
- document.getElementById("source-credit-rows").innerHTML="";(p.sources?.length?p.sources:[{}]).forEach(x=>{const r=document.createElement("div");r.className="source-row";r.innerHTML='<input class="sc-name" placeholder="Source Name" value="'+esc(x.name||"")+'"><input class="sc-url" placeholder="Source URL" value="'+esc(x.url||"")+'"><button class="btn btn-secondary" onclick="addSourceCreditRow(this)">+</button><button class="btn btn-danger" onclick="removeRow(this)">x</button>';document.getElementById("source-credit-rows").appendChild(r)});
- (p.ads||[]).forEach((x,i)=>{const e=document.getElementById("ad-code-"+(i+1));if(e)e.value=x||""});
- document.getElementById("form-heading").textContent="Edit Post";document.getElementById("publish-btn").textContent="Update Post";switchTab("new-post");showToast("Post loaded for editing. Re-select extra image files if you need to re-upload them.")
-}
-async function deletePost(id){if(!confirm("Delete this post?"))return;try{const f=await ghRequest("data/posts.json");let p=JSON.parse(base64ToUtf8(f.content)).filter(x=>x.id!==id);await ghRequest("data/posts.json","PUT",{message:"Delete post "+id,content:utf8ToBase64(JSON.stringify(p,null,2)),sha:f.sha});showToast("Post deleted!");loadManagePosts()}catch(e){alert("Error: "+e.message)}}
+    function verifyPin() {
+      const pin = document.getElementById('admin-pin-input').value.trim();
+      if (pin === MASTER_PIN) {
+        document.getElementById('pin-gate').style.display = 'none';
+        document.getElementById('admin-app').style.display = 'block';
+        try {
+          sessionStorage.setItem('fk_admin_auth', 'true');
+        } catch(e) {}
+        initAdmin();
+      } else {
+        alert('Invalid PIN!');
+      }
+    }
 
-function resetForm(){
- ["edit-post-id","edit-published-at","post-slug","post-image-path","post-title","post-summary","hero-slider-trailer","trailer-url-1","trailer-url-2","post-content"].forEach(id=>document.getElementById(id).value="");
- document.getElementById("post-category").value="Movies";document.getElementById("post-platform").value="General";document.getElementById("post-badge").value="Trending";document.getElementById("post-font-style").value="roboto-sans";document.getElementById("trailer-pos-1").value="middle";document.getElementById("trailer-pos-2").value="before-last";document.getElementById("post-file").value="";document.getElementById("main-image-status").textContent="";selectedImageBase64=null;
- for(let i=1;i<=3;i++){localStorage.removeItem("extra_img_"+i);document.getElementById("extra-img-file-"+i).value="";document.getElementById("extra-img-path-"+i).value="";document.getElementById("extra-img-pos-"+i).value=i===1?"before-last":""}
- document.getElementById("related-articles-rows").innerHTML='<div class="form-row-5"><input class="ra-image" placeholder="Image URL"><input class="ra-title" placeholder="Title"><input class="ra-url" placeholder="Article URL"><button class="btn btn-secondary" onclick="addRelatedArticleRow(this)">+</button><button class="btn btn-danger" onclick="removeRow(this)">x</button></div>';
- document.getElementById("source-credit-rows").innerHTML='<div class="source-row"><input class="sc-name" placeholder="Source Name"><input class="sc-url" placeholder="Source URL"><button class="btn btn-secondary" onclick="addSourceCreditRow(this)">+</button><button class="btn btn-danger" onclick="removeRow(this)">x</button></div>';
- for(let i=1;i<=8;i++)document.getElementById("ad-code-"+i).value="";
- document.getElementById("form-heading").textContent="Create New Post";document.getElementById("publish-btn").textContent="Publish Post"
-}
-function copyPostLink(){navigator.clipboard.writeText(document.getElementById("success-post-url").value).then(()=>showToast("Link copied!"))}
-function closeSuccessModal(){document.getElementById("publish-success-modal").style.display="none"}
-</script>
-</body></html>
+    try {
+      if (sessionStorage.getItem('fk_admin_auth') === 'true') {
+        document.getElementById('pin-gate').style.display = 'none';
+        document.getElementById('admin-app').style.display = 'block';
+        window.onload = initAdmin;
+      }
+    } catch(e) {}
+
+    function initAdmin() { loadCreds(); }
+
+    function switchTab(tab) {
+      document.getElementById('view-new-post').classList.toggle('hidden', tab !== 'new-post');
+      document.getElementById('view-manage').classList.toggle('hidden', tab !== 'manage');
+      document.getElementById('view-preview').classList.toggle('hidden', tab !== 'preview');
+      document.getElementById('tab-btn-new').classList.toggle('active', tab === 'new-post');
+      document.getElementById('tab-btn-manage').classList.toggle('active', tab === 'manage');
+      document.getElementById('tab-btn-preview').classList.toggle('active', tab === 'preview');
+      if (tab === 'manage') loadManagePosts();
+      else if (tab === 'preview') renderDedicatedPreview();
+    }
+
+    function saveCreds() {
+      try {
+        localStorage.setItem('fk_gh_user', document.getElementById('gh-user').value.trim());
+        localStorage.setItem('fk_gh_repo', document.getElementById('gh-repo').value.trim());
+        localStorage.setItem('fk_gh_token', document.getElementById('gh-token').value.trim());
+        localStorage.setItem('fk_ga_id', document.getElementById('ga-id').value.trim());
+        showToast('Settings saved!');
+      } catch(e) {
+        alert('Storage blocked by browser!');
+      }
+    }
+
+    function loadCreds() {
+      try {
+        if (localStorage.getItem('fk_gh_user')) document.getElementById('gh-user').value = localStorage.getItem('fk_gh_user');
+        if (localStorage.getItem('fk_gh_repo')) document.getElementById('gh-repo').value = localStorage.getItem('fk_gh_repo');
+        if (localStorage.getItem('fk_gh_token')) document.getElementById('gh-token').value = localStorage.getItem('fk_gh_token');
+        if (localStorage.getItem('fk_ga_id')) document.getElementById('ga-id').value = localStorage.getItem('fk_ga_id');
+      } catch(e) {}
+    }
+
+    function autoGenerateSlug() {
+      const editId = document.getElementById('edit-post-id').value;
+      if (editId) return;
+      const title = document.getElementById('post-title').value;
+      const slug = title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-');
+      document.getElementById('post-slug').value = slug;
+      if (!selectedImageBase64) document.getElementById('post-image-path').value = slug ? 'images/' + slug + '.jpg' : '';
+    }
+
+    function handleImageFile(e) {
+      const file = e.target.files[0]; if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        selectedImageBase64 = evt.target.result.split(',')[1];
+        const slug = document.getElementById('post-slug').value || 'post-' + Date.now();
+        document.getElementById('post-image-path').value = 'images/' + slug + '.jpg';
+        showToast('Main image loaded!');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handleExtraImage(e, index) {
+      const file = e.target.files[0]; if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        try {
+          localStorage.setItem('extra_img_' + index, evt.target.result.split(',')[1]);
+          const slug = document.getElementById('post-slug').value || ('post-' + Date.now());
+          document.getElementById('extra-img-path-' + index).value = 'extra-images/' + slug + '-extra-' + index + '.jpg';
+          showToast('Extra image ' + index + ' loaded!');
+        } catch(e) {
+          alert('Local storage full or blocked!');
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function addRelatedArticleRow(btn) {
+      const container = document.getElementById('related-articles-rows');
+      const row = document.createElement('div');
+      row.className = 'form-row-5';
+      row.innerHTML = `<input type="text" class="ra-image" placeholder="Image URL"><input type="text" class="ra-title" placeholder="Title"><input type="text" class="ra-url" placeholder="Article URL"><button class="btn btn-secondary" onclick="addRelatedArticleRow(this)">+</button><button class="btn btn-danger" onclick="removeRow(this)">x</button>`;
+      container.appendChild(row);
+      if (btn) btn.parentElement.remove();
+    }
+
+    function addSourceCreditRow(btn) {
+      const container = document.getElementById('source-credit-rows');
+      const row = document.createElement('div');
+      row.className = 'form-row-2';
+      row.innerHTML = `<input type="text" class="sc-name" placeholder="Source Name"><input type="text" class="sc-url" placeholder="Source URL"><button class="btn btn-secondary" onclick="addSourceCreditRow(this)">+</button><button class="btn btn-danger" onclick="removeRow(this)">x</button>`;
+      container.appendChild(row);
+      if (btn) btn.parentElement.remove();
+    }
+
+    function removeRow(btn) { btn.parentElement.remove(); }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.opacity = '1';
+      setTimeout(() => t.style.opacity = '0', 3000);
+    }
+
+    async function ghRequest(path, method = 'GET', body = null) {
+      const user = document.getElementById('gh-user').value.trim();
+      const repo = document.getElementById('gh-repo').value.trim();
+      const token = document.getElementById('gh-token').value.trim();
+      if (!token) throw new Error('GitHub Token required!');
+      const url = `https://api.github.com/repos/${user}/${repo}/contents/${path}`;
+      const headers = { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' };
+      const options = { method, headers };
+      if (body) options.body = JSON.stringify(body);
+      const res = await fetch(url, options);
+      if (res.status === 404 && method === 'GET') return null;
+      if (!res.ok) throw new Error((await res.json()).message || 'API error');
+      return await res.json();
+    }
+
+    function utf8ToBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
+    function base64ToUtf8(str) { return decodeURIComponent(escape(atob(str))); }
+
+    async function loadManagePosts() {
+      const container = document.getElementById('posts-list-container');
+      container.innerHTML = 'Loading...';
+      try {
+        const file = await ghRequest('data/posts.json');
+        if (!file || !file.content) { container.innerHTML = '<span style="color:#aaa;">No posts found.</span>'; return; }
+        allPostsCache = JSON.parse(base64ToUtf8(file.content));
+        if (!allPostsCache.length) { container.innerHTML = '<span style="color:#aaa;">No posts yet.</span>'; return; }
+        renderManageListPaginated();
+      } catch (err) { container.innerHTML = '<span style="color:red;">Error: ' + err.message + '</span>'; }
+    }
+
+    function renderManageListPaginated() {
+      const container = document.getElementById('posts-list-container');
+      const paginationEl = document.getElementById('manage-pagination-box');
+      const totalPages = Math.ceil(allPostsCache.length / MANAGE_PER_PAGE);
+      const startIndex = (manageCurrentPage - 1) * MANAGE_PER_PAGE;
+      const currentSlice = allPostsCache.slice(startIndex, startIndex + MANAGE_PER_PAGE);
+      let html = '';
+      currentSlice.forEach(post => {
+        html += `<div class="post-item"><div class="post-item-info"><div class="post-item-title">${post.title}</div><div class="post-item-meta">${post.category} • ${post.badge}</div></div><div class="post-actions"><button class="btn btn-secondary" onclick="editPost('${post.id}')">Edit</button><button class="btn btn-danger" onclick="deletePost('${post.id}')">Delete</button></div></div>`;
+      });
+      container.innerHTML = html;
+      if (totalPages <= 1) { paginationEl.innerHTML = ''; return; }
+      let pagHTML = '';
+      pagHTML += manageCurrentPage > 1 ? `<button class="page-btn" onclick="changeManagePage(${manageCurrentPage - 1})">Prev</button>` : `<button class="page-btn" disabled>Prev</button>`;
+      for (let i = 1; i <= totalPages; i++) { pagHTML += i === manageCurrentPage ? `<button class="page-btn active">${i}</button>` : `<button class="page-btn" onclick="changeManagePage(${i})">${i}</button>`; }
+      pagHTML += manageCurrentPage < totalPages ? `<button class="page-btn" onclick="changeManagePage(${manageCurrentPage + 1})">Next</button>` : `<button class="page-btn" disabled>Next</button>`;
+      paginationEl.innerHTML = pagHTML;
+    }
+
+    function changeManagePage(page) { manageCurrentPage = page; renderManageListPaginated(); }
+
+    function editPost(id) {
+      const post = allPostsCache.find(p => p.id === id);
+      if (!post) return;
+      document.getElementById('edit-post-id').value = post.id;
+      document.getElementById('post-title').value = post.title;
+      document.getElementById('post-slug').value = post.slug;
+      document.getElementById('post-category').value = post.category;
+      document.getElementById('post-platform').value = post.platform;
+      document.getElementById('post-badge').value = post.badge;
+      document.getElementById('post-summary').value = post.summary;
+      document.getElementById('hero-slider-trailer').value = post.trailer || '';
+      document.getElementById('trailer-url-1').value = post.video1Url || '';
+      document.getElementById('trailer-pos-1').value = post.video1Pos || 'middle';
+      document.getElementById('trailer-url-2').value = post.video2Url || '';
+      document.getElementById('trailer-pos-2').value = post.video2Pos || 'before-last';
+      document.getElementById('post-content').value = post.content;
+      switchTab('new-post');
+    }
+
+    async function deletePost(id) {
+      if (!confirm('Delete this post?')) return;
+      try {
+        const file = await ghRequest('data/posts.json');
+        let posts = JSON.parse(base64ToUtf8(file.content));
+        posts = posts.filter(p => p.id !== id);
+        await ghRequest('data/posts.json', 'PUT', { message: `Delete post ${id}`, content: utf8ToBase64(JSON.stringify(posts, null, 2)), sha: file.sha });
+        showToast('Post deleted!');
+        loadManagePosts();
+      } catch (err) { alert('Error: ' + err.message); }
+    }
+
+    function getYoutubeEmbed(url) {
+      if (!url) return '';
+      let vId = '';
+      const cleanUrl = url.trim();
+      if (cleanUrl.includes('youtu.be/')) {
+        vId = cleanUrl.split('youtu.be/')[1].split(/[?#]/)[0];
+      } else if (cleanUrl.includes('watch?v=')) {
+        vId = cleanUrl.split('watch?v=')[1].split('&')[0];
+      } else if (cleanUrl.includes('/embed/')) {
+        vId = cleanUrl.split('/embed/')[1].split(/[?#]/)[0];
+      } else if (cleanUrl.length === 11 && !cleanUrl.includes('/')) {
+        vId = cleanUrl;
+      }
+      if (!vId) return '';
+      return `<div style="width:100%; aspect-ratio:4/3; max-width:800px; margin:20px auto; background:#000; border-radius:10px; overflow:hidden;"><iframe src="https://www.youtube-nocookie.com/embed/${vId}?autoplay=0&rel=0" style="width:100%; height:100%; border:0;" allowfullscreen></iframe></div>`;
+    }
+
+    function renderDedicatedPreview() {
+      document.getElementById('prev-title').textContent = document.getElementById('post-title').value || 'Title Preview';
+      document.getElementById('prev-badge').textContent = document.getElementById('post-badge').value;
+      document.getElementById('prev-category').textContent = document.getElementById('post-category').value + ' • ' + document.getElementById('post-platform').value;
+      
+      const trailerUrl = document.getElementById('hero-slider-trailer').value.trim();
+      const trailerWrap = document.getElementById('prev-trailer-wrap');
+      const trailerEmbedHtml = getYoutubeEmbed(trailerUrl);
+      if (trailerEmbedHtml) {
+        trailerWrap.innerHTML = trailerEmbedHtml;
+        trailerWrap.style.display = 'block';
+      } else {
+        trailerWrap.style.display = 'none';
+      }
+
+      let mainContent = document.getElementById('post-content').value || '<p>Write content to preview</p>';
+      
+      for (let i = 1; i <= 3; i++) {
+        const extraBase64 = localStorage.getItem('extra_img_' + i);
+        const pos = document.getElementById('extra-img-pos-' + i).value;
+        if (extraBase64 && pos && pos !== "") {
+          const imgSrc = 'data:image/jpeg;base64,' + extraBase64;
+          mainContent += `<div style="margin-top:15px; border:1px solid #333; padding:10px; border-radius:6px;"><img src="${imgSrc}" style="width:100%; border-radius:4px;"></div>`;
+        }
+      }
+      
+      document.getElementById('prev-content').innerHTML = mainContent;
+      
+      const img = document.getElementById('prev-img');
+      if (selectedImageBase64) { img.src = 'data:image/jpeg;base64,' + selectedImageBase64; img.style.display = 'block'; }
+      else img.style.display = 'none';
+    }
+
+    async function publishPost() {
+      const btn = document.getElementById('publish-btn');
+      const title = document.getElementById('post-title').value.trim();
+      autoGenerateSlug();
+      const slug = document.getElementById('post-slug').value.trim();
+      const category = document.getElementById('post-category').value;
+      const platform = document.getElementById('post-platform').value;
+      const badge = document.getElementById('post-badge').value;
+      const summary = document.getElementById('post-summary').value.trim();
+      const trailer = document.getElementById('hero-slider-trailer').value.trim();
+      const video1Url = document.getElementById('trailer-url-1').value.trim();
+      const video1Pos = document.getElementById('trailer-pos-1').value;
+      const video2Url = document.getElementById('trailer-url-2').value.trim();
+      const video2Pos = document.getElementById('trailer-pos-2').value;
+      const content = document.getElementById('post-content').value.trim();
+      const token = document.getElementById('gh-token').value.trim();
+      if (!title || !content || !token) { alert('Title, Content aur Token required!'); return; }
+
+      btn.disabled = true;
+      btn.textContent = 'Publishing to GitHub...';
+
+      try {
+        if (selectedImageBase64) {
+          const imgPath = 'images/' + slug + '.jpg';
+          await ghRequest(imgPath, 'PUT', { message: 'Upload ' + slug, content: selectedImageBase64 });
+        }
+
+        const extraImagesData = [];
+        for (let i = 1; i <= 3; i++) {
+          const extraBase64 = localStorage.getItem('extra_img_' + i);
+          const pos = document.getElementById('extra-img-pos-' + i).value;
+          if (extraBase64 && pos && pos !== "") {
+            const extraPath = 'extra-images/' + slug + '-extra-' + i + '.jpg';
+            await ghRequest(extraPath, 'PUT', { message: 'Upload extra ' + i, content: extraBase64 });
+            extraImagesData.push({ path: extraPath, pos: pos });
+          }
+        }
+
+        const postObj = { 
+          id: 'post_' + Date.now(), 
+          title, slug, category, platform, badge, summary, trailer, 
+          video1Url, video1Pos, video2Url, video2Pos, content, 
+          extraImages: extraImagesData,
+          date: new Date().toISOString().split('T')[0] 
+        };
+
+        let postsFile = await ghRequest('data/posts.json');
+        let postsList = [];
+        let postsSha = null;
+        if (postsFile && postsFile.content) { postsSha = postsFile.sha; postsList = JSON.parse(base64ToUtf8(postsFile.content)); }
+        postsList.unshift(postObj);
+        await ghRequest('data/posts.json', 'PUT', { message: 'Add post ' + slug, content: utf8ToBase64(JSON.stringify(postsList, null, 2)), sha: postsSha });
+
+        const postHTML = generatePostHTML(postObj);
+        await ghRequest('posts/' + slug + '.html', 'PUT', { message: 'Publish ' + slug, content: utf8ToBase64(postHTML) });
+
+        const liveUrl = `https://filmykhabr.gujaratfastalert.in/posts/${slug}.html`;
+        document.getElementById('success-post-url').value = liveUrl;
+        document.getElementById('btn-open-post').href = liveUrl;
+        document.getElementById('publish-success-modal').style.display = 'flex';
+        resetForm();
+      } catch (err) { alert('Publish failed: ' + err.message); }
+      finally { btn.disabled = false; btn.textContent = 'Publish Post'; }
+    }
+
+    function generatePostHTML(post) {
+      let formattedContent = post.content;
+      if (!formattedContent.includes('<p>') && !formattedContent.includes('<br>')) {
+        formattedContent = formattedContent.split('\n\n').map(p => `<p style="margin-bottom:16px;">${p.replace(/\n/g, '<br>')}</p>`).join('');
+      } else if (!formattedContent.includes('</p>')) {
+        formattedContent = `<p style="margin-bottom:16px;">${formattedContent}</p>`;
+      }
+
+      function injectMedia(content, mediaHtml, pos) {
+        if (!mediaHtml || !pos || pos === "") return content;
+        if (pos === 'bottom') return content + mediaHtml;
+        if (pos === 'top') return mediaHtml + content;
+
+        let parts = content.split('</p>');
+        parts = parts.map(p => p.trim() ? p + '</p>' : '').filter(Boolean);
+        if (parts.length === 0) return content + mediaHtml;
+
+        let idx = 0;
+        if (pos === 'upper-middle') idx = Math.floor(parts.length * 0.25);
+        else if (pos === 'middle') idx = Math.floor(parts.length * 0.5);
+        else if (pos === 'lower-middle') idx = Math.floor(parts.length * 0.75);
+        else if (pos === 'before-last') idx = Math.max(0, parts.length - 1);
+
+        parts.splice(idx, 0, mediaHtml);
+        return parts.join('');
+      }
+
+      let contentWithMedia = formattedContent;
+
+      if (post.video1Url && post.video1Pos && post.video1Pos !== "") {
+        let v1 = getYoutubeEmbed(post.video1Url);
+        contentWithMedia = injectMedia(contentWithMedia, v1, post.video1Pos);
+      }
+
+      if (post.video2Url && post.video2Pos && post.video2Pos !== "") {
+        let v2 = getYoutubeEmbed(post.video2Url);
+        contentWithMedia = injectMedia(contentWithMedia, v2, post.video2Pos);
+      }
+
+      if (post.extraImages && post.extraImages.length > 0) {
+        post.extraImages.forEach(img => {
+          if (img.pos && img.pos !== "") {
+            let imgHtml = `<div style="margin: 20px 0; text-align:center;"><img src="../${img.path}" style="width:100%; border-radius:8px;" loading="lazy"></div>`;
+            contentWithMedia = injectMedia(contentWithMedia, imgHtml, img.pos);
+          }
+        });
+      }
+
+      let trailerEmbed = getYoutubeEmbed(post.trailer);
+
+      return `<!DOCTYPE html>
+      <html lang="hi">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>${post.title} - Filmy Khabr</title>
+        <style>
+          body { background: #070809; color: #f7f7f8; font-family: sans-serif; line-height: 1.7; max-width: 800px; margin: 0 auto; padding: 20px; }
+          h1 { font-size: 28px; margin-bottom: 15px; color: #fff; }
+          img { max-width: 100%; height: auto; border-radius: 8px; }
+        </style>
+      </head>
+      <body>
+        <span style="background:#e50914; color:#fff; padding:4px 8px; font-size:11px; font-weight:800; border-radius:4px; text-transform:uppercase;">${post.category}</span>
+        <h1>${post.title}</h1>
+        <p style="color:#aaa; font-size:13px; margin-bottom:20px;">Published on ${post.date} • By Vanrajsinh Vaghela</p>
+        ${trailerEmbed}
+        <div style="margin-top:20px; font-size:16px;">${contentWithMedia}</div>
+      </body>
+      </html>`;
+    }
+
+    function resetForm() {
+      document.getElementById('edit-post-id').value = '';
+      document.getElementById('post-title').value = '';
+      document.getElementById('post-slug').value = '';
+      document.getElementById('post-summary').value = '';
+      document.getElementById('hero-slider-trailer').value = '';
+      document.getElementById('trailer-url-1').value = '';
+      document.getElementById('trailer-pos-1').value = 'middle';
+      document.getElementById('trailer-url-2').value = '';
+      document.getElementById('trailer-pos-2').value = 'before-last';
+      document.getElementById('post-content').value = '';
+      document.getElementById('post-file').value = '';
+      selectedImageBase64 = null;
+      for (let i = 1; i <= 3; i++) {
+        localStorage.removeItem('extra_img_' + i);
+        document.getElementById('extra-img-file-' + i).value = '';
+        document.getElementById('extra-img-path-' + i).value = '';
+        document.getElementById('extra-img-pos-' + i).value = i === 1 ? 'before-last' : '';
+      }
+      document.getElementById('form-heading').textContent = 'Create New Post';
+      document.getElementById('publish-btn').textContent = 'Publish Post';
+    }
+
+    function copyPostLink() { navigator.clipboard.writeText(document.getElementById('success-post-url').value); showToast('Link copied!'); }
+    function closeSuccessModal() { document.getElementById('publish-success-modal').style.display = 'none'; }
+  </script>
+</body>
+</html>
