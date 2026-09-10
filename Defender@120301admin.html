@@ -409,9 +409,7 @@
       if (pin === MASTER_PIN) {
         document.getElementById('pin-gate').style.display = 'none';
         document.getElementById('admin-app').style.display = 'block';
-        try {
-          sessionStorage.setItem('fk_admin_auth', 'true');
-        } catch(e) {}
+        try { sessionStorage.setItem('fk_admin_auth', 'true'); } catch(e) {}
         initAdmin();
       } else {
         alert('Invalid PIN!');
@@ -446,9 +444,7 @@
         localStorage.setItem('fk_gh_token', document.getElementById('gh-token').value.trim());
         localStorage.setItem('fk_ga_id', document.getElementById('ga-id').value.trim());
         showToast('Settings saved!');
-      } catch(e) {
-        alert('Storage blocked by browser!');
-      }
+      } catch(e) { alert('Storage blocked!'); }
     }
 
     function loadCreds() {
@@ -490,9 +486,7 @@
           const slug = document.getElementById('post-slug').value || ('post-' + Date.now());
           document.getElementById('extra-img-path-' + index).value = 'extra-images/' + slug + '-extra-' + index + '.jpg';
           showToast('Extra image ' + index + ' loaded!');
-        } catch(e) {
-          alert('Local storage full or blocked!');
-        }
+        } catch(e) { alert('Storage full!'); }
       };
       reader.readAsDataURL(file);
     }
@@ -623,6 +617,48 @@
       return `<div style="width:100%; aspect-ratio:4/3; max-width:800px; margin:20px auto; background:#000; border-radius:10px; overflow:hidden;"><iframe src="https://www.youtube-nocookie.com/embed/${vId}?autoplay=0&rel=0" style="width:100%; height:100%; border:0;" allowfullscreen></iframe></div>`;
     }
 
+    // ✅ Smart Position Injector for Preview & Live
+    function buildContentWithMedia(rawContent, v1Url, v1Pos, v2Url, v2Pos, extraImagesList) {
+      let paragraphs = rawContent.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
+      if (paragraphs.length === 0) paragraphs = [rawContent];
+
+      let formattedParagraphs = paragraphs.map(p => `<p style="margin-bottom:16px;">${p.replace(/\n/g, '<br>')}</p>`);
+
+      function insertAtPosition(arr, htmlItem, pos) {
+        if (!htmlItem || !pos || pos === "") return;
+        if (pos === 'top') { arr.unshift(htmlItem); return; }
+        if (pos === 'bottom') { arr.push(htmlItem); return; }
+
+        let targetIdx = Math.floor(arr.length / 2);
+        if (pos === 'upper-middle') targetIdx = Math.floor(arr.length * 0.25);
+        else if (pos === 'middle') targetIdx = Math.floor(arr.length * 0.5);
+        else if (pos === 'lower-middle') targetIdx = Math.floor(arr.length * 0.75);
+        else if (pos === 'before-last') targetIdx = Math.max(0, arr.length - 1);
+
+        arr.splice(targetIdx, 0, htmlItem);
+      }
+
+      // Insert Video 1
+      if (v1Url && v1Pos) {
+        insertAtPosition(formattedParagraphs, getYoutubeEmbed(v1Url), v1Pos);
+      }
+      // Insert Video 2
+      if (v2Url && v2Pos) {
+        insertAtPosition(formattedParagraphs, getYoutubeEmbed(v2Url), v2Pos);
+      }
+      // Insert Extra Images
+      if (extraImagesList && extraImagesList.length > 0) {
+        extraImagesList.forEach(img => {
+          if (img.path && img.pos && img.pos !== "") {
+            let imgTag = `<div style="margin: 20px 0; text-align:center;"><img src="${img.isLocal ? '../' : ''}${img.path}" style="width:100%; border-radius:8px;" loading="lazy"></div>`;
+            insertAtPosition(formattedParagraphs, imgTag, img.pos);
+          }
+        });
+      }
+
+      return formattedParagraphs.join('');
+    }
+
     function renderDedicatedPreview() {
       document.getElementById('prev-title').textContent = document.getElementById('post-title').value || 'Title Preview';
       document.getElementById('prev-badge').textContent = document.getElementById('post-badge').value;
@@ -638,18 +674,26 @@
         trailerWrap.style.display = 'none';
       }
 
-      let mainContent = document.getElementById('post-content').value || '<p>Write content to preview</p>';
-      
+      const rawContent = document.getElementById('post-content').value || '<p>Write content to preview</p>';
+      const v1Url = document.getElementById('trailer-url-1').value.trim();
+      const v1Pos = document.getElementById('trailer-pos-1').value;
+      const v2Url = document.getElementById('trailer-url-2').value.trim();
+      const v2Pos = document.getElementById('trailer-pos-2').value;
+
+      let extraImgsForPreview = [];
       for (let i = 1; i <= 3; i++) {
         const extraBase64 = localStorage.getItem('extra_img_' + i);
         const pos = document.getElementById('extra-img-pos-' + i).value;
         if (extraBase64 && pos && pos !== "") {
-          const imgSrc = 'data:image/jpeg;base64,' + extraBase64;
-          mainContent += `<div style="margin-top:15px; border:1px solid #333; padding:10px; border-radius:6px;"><img src="${imgSrc}" style="width:100%; border-radius:4px;"></div>`;
+          extraImgsForPreview.push({
+            path: 'data:image/jpeg;base64,' + extraBase64,
+            pos: pos,
+            isLocal: false
+          });
         }
       }
-      
-      document.getElementById('prev-content').innerHTML = mainContent;
+
+      document.getElementById('prev-content').innerHTML = buildContentWithMedia(rawContent, v1Url, v1Pos, v2Url, v2Pos, extraImgsForPreview);
       
       const img = document.getElementById('prev-img');
       if (selectedImageBase64) { img.src = 'data:image/jpeg;base64,' + selectedImageBase64; img.style.display = 'block'; }
@@ -690,7 +734,7 @@
           if (extraBase64 && pos && pos !== "") {
             const extraPath = 'extra-images/' + slug + '-extra-' + i + '.jpg';
             await ghRequest(extraPath, 'PUT', { message: 'Upload extra ' + i, content: extraBase64 });
-            extraImagesData.push({ path: extraPath, pos: pos });
+            extraImagesData.push({ path: extraPath, pos: pos, isLocal: true });
           }
         }
 
@@ -722,53 +766,7 @@
     }
 
     function generatePostHTML(post) {
-      let formattedContent = post.content;
-      if (!formattedContent.includes('<p>') && !formattedContent.includes('<br>')) {
-        formattedContent = formattedContent.split('\n\n').map(p => `<p style="margin-bottom:16px;">${p.replace(/\n/g, '<br>')}</p>`).join('');
-      } else if (!formattedContent.includes('</p>')) {
-        formattedContent = `<p style="margin-bottom:16px;">${formattedContent}</p>`;
-      }
-
-      function injectMedia(content, mediaHtml, pos) {
-        if (!mediaHtml || !pos || pos === "") return content;
-        if (pos === 'bottom') return content + mediaHtml;
-        if (pos === 'top') return mediaHtml + content;
-
-        let parts = content.split('</p>');
-        parts = parts.map(p => p.trim() ? p + '</p>' : '').filter(Boolean);
-        if (parts.length === 0) return content + mediaHtml;
-
-        let idx = 0;
-        if (pos === 'upper-middle') idx = Math.floor(parts.length * 0.25);
-        else if (pos === 'middle') idx = Math.floor(parts.length * 0.5);
-        else if (pos === 'lower-middle') idx = Math.floor(parts.length * 0.75);
-        else if (pos === 'before-last') idx = Math.max(0, parts.length - 1);
-
-        parts.splice(idx, 0, mediaHtml);
-        return parts.join('');
-      }
-
-      let contentWithMedia = formattedContent;
-
-      if (post.video1Url && post.video1Pos && post.video1Pos !== "") {
-        let v1 = getYoutubeEmbed(post.video1Url);
-        contentWithMedia = injectMedia(contentWithMedia, v1, post.video1Pos);
-      }
-
-      if (post.video2Url && post.video2Pos && post.video2Pos !== "") {
-        let v2 = getYoutubeEmbed(post.video2Url);
-        contentWithMedia = injectMedia(contentWithMedia, v2, post.video2Pos);
-      }
-
-      if (post.extraImages && post.extraImages.length > 0) {
-        post.extraImages.forEach(img => {
-          if (img.pos && img.pos !== "") {
-            let imgHtml = `<div style="margin: 20px 0; text-align:center;"><img src="../${img.path}" style="width:100%; border-radius:8px;" loading="lazy"></div>`;
-            contentWithMedia = injectMedia(contentWithMedia, imgHtml, img.pos);
-          }
-        });
-      }
-
+      let finalBodyContent = buildContentWithMedia(post.content, post.video1Url, post.video1Pos, post.video2Url, post.video2Pos, post.extraImages);
       let trailerEmbed = getYoutubeEmbed(post.trailer);
 
       return `<!DOCTYPE html>
@@ -788,7 +786,7 @@
         <h1>${post.title}</h1>
         <p style="color:#aaa; font-size:13px; margin-bottom:20px;">Published on ${post.date} • By Vanrajsinh Vaghela</p>
         ${trailerEmbed}
-        <div style="margin-top:20px; font-size:16px;">${contentWithMedia}</div>
+        <div style="margin-top:20px; font-size:16px;">${finalBodyContent}</div>
       </body>
       </html>`;
     }
