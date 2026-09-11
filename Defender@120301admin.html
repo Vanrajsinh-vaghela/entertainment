@@ -2,86 +2,100 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>FILMY KHABR - Admin Desk</title>
+<title>FILMY KHABR — Admin Desk</title>
 <style>
 :root{
-  --bg:#090b0f;--surface:#11151b;--card:#151a21;--card2:#1b2129;
-  --border:#29313b;--text:#f7f8fa;--muted:#9aa4b2;--accent:#e50914;
-  --blue:#1687d9;--green:#18c77b;--yellow:#f5b83d;--danger:#ef4444;
+  --bg:#080a0d;--panel:#101318;--card:#151a21;--line:#252c35;
+  --text:#f7f8fa;--muted:#8e98a6;--red:#e50914;--blue:#1989da;
+  --green:#16b979;--yellow:#f2b84b;--danger:#ff5c63
 }
-*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
-html{background:var(--bg)}
-body{background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;padding:10px}
-.container{width:100%;max-width:760px;margin:0 auto}
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px}
-.header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0 14px;border-bottom:1px solid var(--border);margin-bottom:12px}
-.brand{font-weight:900;font-size:18px;letter-spacing:.5px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:1px;margin-top:2px}
-.tabs{display:flex;gap:5px;flex-wrap:wrap}.btn{border:0;border-radius:8px;padding:9px 12px;background:#252c35;color:#fff;font-size:12px;font-weight:800;cursor:pointer}.btn:hover{filter:brightness(1.1)}.btn:disabled{opacity:.55;cursor:not-allowed}
-.btn.active,.btn.accent{background:var(--accent)}.btn.green{background:#087a4c}.btn.danger{background:#35171a;color:#ffb2b5}.btn.blue{background:#0c5f98}
-label{display:block;font-size:10px;font-weight:900;letter-spacing:.7px;text-transform:uppercase;color:#b4bdc9;margin:0 0 5px}
-input,select,textarea{width:100%;border:1px solid var(--border);border-radius:8px;background:#0e1217;color:#fff;padding:10px 11px;font-size:14px;outline:0}
-input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(229,9,20,.12)}
-textarea{resize:vertical;min-height:80px}.content-box{min-height:310px}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.section{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:12px;margin:10px 0}.section h3{font-size:12px;margin-bottom:9px}.yellow{color:var(--yellow)}.blueText{color:#5ebcff}.greenText{color:#44e29d}
-.file-note{font-size:11px;color:var(--muted);margin-top:5px}.status{padding:10px 12px;border-radius:8px;background:#10161c;border:1px solid var(--border);font-size:12px;color:var(--muted);margin-bottom:10px}
-.hidden{display:none!important}.post-item{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px;border:1px solid var(--border);background:#11161c;border-radius:8px;margin-bottom:7px}.post-title{font-weight:800;font-size:13px}.post-meta{font-size:10px;color:var(--muted);margin-top:2px}.actions{display:flex;gap:5px;flex-shrink:0}
-.pagination{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;margin-top:10px}.page{background:#202630;color:#fff;border:1px solid var(--border);padding:6px 9px;border-radius:6px;cursor:pointer}.page.active{background:var(--accent)}
-.preview{background:#fff;border-radius:10px;overflow:hidden}
-.notice{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);background:#161c23;border:1px solid #34404d;color:#fff;padding:10px 15px;border-radius:999px;z-index:10000;opacity:0;pointer-events:none;transition:.2s}.notice.show{opacity:1}
-#pin-gate{position:fixed;inset:0;background:#090b0f;display:flex;align-items:center;justify-content:center;z-index:9999;padding:15px}.pinbox{width:100%;max-width:350px;text-align:center}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;z-index:9998;padding:15px}.modal.show{display:flex}.modalbox{width:100%;max-width:520px;background:#14191f;border:1px solid var(--border);border-radius:12px;padding:18px}.modalbox h3{color:var(--green);margin-bottom:7px}.urlrow{display:flex;gap:7px}.urlrow input{min-width:0}.modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px}
-.source-help,.related-help{font-size:11px;color:var(--muted);margin:5px 0 8px}.source-preview{font-size:11px;color:#cbd5e1;margin-top:7px}
-.related-auto{background:#0d141b;border:1px dashed #344555;border-radius:8px;padding:10px;font-size:11px;color:#b7c3cf}
-.related-auto b{color:#fff}
-@media(max-width:620px){.row3{grid-template-columns:1fr}.row2{grid-template-columns:1fr}.header{align-items:flex-start;flex-direction:column}.tabs{width:100%}.tabs .btn{flex:1}.post-item{align-items:flex-start;flex-direction:column}.actions{width:100%}.actions .btn{flex:1}.urlrow{flex-direction:column}}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+body{font-size:14px}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+.app{width:min(900px,100%);margin:auto;padding:12px}
+.header{position:sticky;top:0;z-index:20;background:rgba(8,10,13,.94);backdrop-filter:blur(10px);padding:10px 0 12px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.header-inner{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-weight:950;letter-spacing:.5px;font-size:18px}.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:1.2px;margin-top:2px}
+.tabs{display:flex;gap:6px}.btn{border:1px solid transparent;border-radius:9px;padding:9px 12px;background:#222933;color:#fff;font-weight:800;font-size:12px}
+.btn:hover{filter:brightness(1.08)}.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn.active,.btn.red{background:var(--red)}.btn.green{background:#08774d}.btn.blue{background:#0c5d96}.btn.danger{background:#32171a;color:#ffb6ba}
+.card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:14px;margin-bottom:12px}
+.status{background:#0e1319;border:1px solid var(--line);border-radius:9px;padding:10px 11px;color:var(--muted);font-size:12px;margin-bottom:10px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+label{display:block;color:#aeb7c3;font-size:10px;font-weight:900;letter-spacing:.7px;text-transform:uppercase;margin:0 0 5px}
+input,select,textarea{width:100%;border:1px solid var(--line);border-radius:9px;background:#0c1015;color:#fff;padding:10px 11px;outline:0}
+input:focus,select:focus,textarea:focus{border-color:var(--red);box-shadow:0 0 0 2px rgba(229,9,20,.12)}
+textarea{resize:vertical;min-height:90px}.content{min-height:320px}
+.section{margin-top:12px;padding:12px;background:#11161c;border:1px solid var(--line);border-radius:11px}
+.section h3{margin:0 0 8px;font-size:12px}.yellow{color:var(--yellow)}.blue-text{color:#59b9ff}.green-text{color:#46dda4}
+.help{color:var(--muted);font-size:11px;line-height:1.5;margin:5px 0 8px}
+.file-note{color:var(--muted);font-size:11px;margin-top:5px}
+.action-row{display:flex;gap:7px;align-items:center}.grow{flex:1}
+.post-item{display:flex;justify-content:space-between;gap:10px;padding:10px;border:1px solid var(--line);background:#10151b;border-radius:9px;margin-bottom:7px}
+.post-title{font-weight:800;font-size:13px}.post-meta{font-size:10px;color:var(--muted);margin-top:3px}.actions{display:flex;gap:5px;flex-shrink:0}
+.pagination{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;margin-top:10px}.page{border:1px solid var(--line);background:#202630;color:#fff;border-radius:7px;padding:6px 9px}.page.active{background:var(--red)}
+.preview{background:#fff;color:#171717;border-radius:10px;overflow:hidden}.preview-body{padding:0}
+.notice{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#171d24;border:1px solid #34404d;color:#fff;padding:10px 15px;border-radius:999px;z-index:10000;opacity:0;pointer-events:none;transition:opacity .18s}.notice.show{opacity:1}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;padding:15px;z-index:9998}.modal.show{display:flex}.modalbox{width:min(520px,100%);background:#14191f;border:1px solid var(--line);border-radius:13px;padding:18px}.modalbox h3{margin:0 0 8px;color:var(--green)}
+.urlrow{display:flex;gap:7px}.urlrow input{min-width:0}.modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px}
+.pin-gate{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:15px;z-index:9999}.pinbox{width:min(350px,100%);text-align:center}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid #ffffff55;border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:-2px;margin-right:6px}@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:650px){
+  .header-inner{align-items:flex-start;flex-direction:column}.tabs{width:100%}.tabs .btn{flex:1}
+  .row2,.row3{grid-template-columns:1fr}.post-item{flex-direction:column}.actions{width:100%}.actions .btn{flex:1}
+  .urlrow{flex-direction:column}.app{padding:9px}
+}
 </style>
 </head>
 <body>
 
-<div id="pin-gate">
+<div id="pin-gate" class="pin-gate">
   <div class="card pinbox">
-    <div style="font-size:21px;font-weight:900">FILMY KHABR</div>
-    <div style="color:#9aa4b2;font-size:12px;margin:3px 0 14px">VANRAJSINH MASTER DESK</div>
+    <div style="font-size:21px;font-weight:950">FILMY KHABR</div>
+    <div style="color:var(--muted);font-size:12px;margin:3px 0 14px">VANRAJSINH MASTER DESK</div>
     <label style="text-align:left">Master PIN</label>
-    <input type="password" id="admin-pin-input" inputmode="numeric" maxlength="10" placeholder="•••••••"
-           style="text-align:center;font-size:24px;letter-spacing:7px;margin-bottom:10px"
-           onkeydown="if(event.key==='Enter')verifyPinUser()">
-    <button type="button" class="btn accent" style="width:100%" onclick="verifyPinUser()">Unlock Desk</button>
+    <input id="admin-pin-input" type="password" inputmode="numeric" maxlength="10" placeholder="•••••••"
+           style="text-align:center;font-size:24px;letter-spacing:7px">
+    <button id="unlock-btn" class="btn red" style="width:100%;margin-top:10px">Unlock Desk</button>
   </div>
 </div>
 
-<div class="container hidden" id="admin-app">
-  <div class="header">
-    <div class="brand">FILMY KHABR<small>VANRAJSINH MASTER DESK</small></div>
-    <div class="tabs">
-      <button type="button" class="btn active" id="tab-new" onclick="switchTab('new')">New Post</button>
-      <button type="button" class="btn" id="tab-manage" onclick="switchTab('manage')">Manage</button>
-      <button type="button" class="btn" id="tab-preview" onclick="switchTab('preview')">Preview</button>
+<main id="admin-app" class="app hidden">
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand">FILMY KHABR<small>VANRAJSINH MASTER DESK</small></div>
+      <nav class="tabs">
+        <button class="btn active" data-tab="new">New Post</button>
+        <button class="btn" data-tab="manage">Manage</button>
+        <button class="btn" data-tab="preview">Preview</button>
+      </nav>
     </div>
-  </div>
+  </header>
 
-  <div class="card">
-    <div class="status" id="github-status">GitHub: configuration required</div>
+  <section class="card">
+    <div id="github-status" class="status">GitHub: configuration required</div>
     <div class="row2">
-      <div><label>GitHub Username</label><input id="gh-user" value="Vanrajsinh-vaghela"></div>
+      <div><label>GitHub Username</label><input id="gh-user" value="Vanrajsinh-vaghela" autocomplete="username"></div>
       <div><label>Repository Name</label><input id="gh-repo" value="entertainment"></div>
     </div>
     <div class="row2" style="margin-top:10px">
-      <div><label>GitHub Token (PAT)</label><input type="password" id="gh-token" placeholder="ghp_ / github_pat_..."></div>
+      <div><label>GitHub Token (PAT)</label><input id="gh-token" type="password" placeholder="github_pat_..." autocomplete="off"></div>
       <div><label>Google Analytics ID</label><input id="ga-id" value="G-E6B67VBEFZ"></div>
     </div>
-    <button type="button" class="btn" style="width:100%;margin-top:10px" onclick="saveCreds()">Save Settings</button>
+    <button id="save-settings" class="btn" style="width:100%;margin-top:10px">Save Settings</button>
     <div class="file-note">Live article URL: https://filmykhabr.gujaratfastalert.in/posts/&lt;slug&gt;.html</div>
-  </div>
+  </section>
 
-  <div id="view-new">
+  <section id="view-new">
     <div class="card">
-      <div style="display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:10px">
-        <b id="form-heading">Create New Post</b>
-        <button type="button" class="btn" onclick="resetForm()">Clear Form</button>
+      <div class="action-row" style="margin-bottom:10px">
+        <b id="form-heading" class="grow">Create New Post</b>
+        <button id="clear-form" class="btn">Clear Form</button>
       </div>
 
       <input type="hidden" id="edit-post-id">
@@ -89,26 +103,21 @@ textarea{resize:vertical;min-height:80px}.content-box{min-height:310px}
       <input type="hidden" id="post-slug">
       <input type="hidden" id="post-image-path">
 
-      <div style="margin-bottom:10px"><label>Article Title</label><input id="post-title" oninput="autoGenerateSlug()" placeholder="Title likho"></div>
+      <div style="margin-bottom:10px">
+        <label>Article Title</label>
+        <input id="post-title" placeholder="Title likho">
+      </div>
 
       <div class="row3">
-        <div><label>Category</label>
-          <select id="post-category">
-            <option>Movies</option><option>Web Series</option><option>OTT</option><option>Trailers</option>
-            <option>News</option><option>Celebrity News</option><option>Upcoming</option>
-          </select>
-        </div>
-        <div><label>Platform</label>
-          <select id="post-platform">
-            <option>Netflix</option><option>Prime Video</option><option>Disney+ Hotstar</option><option>JioCinema</option>
-            <option>Sony LIV</option><option>Zee5</option><option>YouTube</option><option>Theatre</option><option>General</option>
-          </select>
-        </div>
-        <div><label>Badge</label>
-          <select id="post-badge">
-            <option>Trending</option><option>Breaking</option><option>Exclusive</option><option>Review</option><option>Update</option><option>Hot</option>
-          </select>
-        </div>
+        <div><label>Category</label><select id="post-category">
+          <option>Movies</option><option>Web Series</option><option>OTT</option><option>Trailers</option><option>News</option><option>Celebrity News</option><option>Upcoming</option>
+        </select></div>
+        <div><label>Platform</label><select id="post-platform">
+          <option>Netflix</option><option>Prime Video</option><option>Disney+ Hotstar</option><option>JioCinema</option><option>Sony LIV</option><option>Zee5</option><option>YouTube</option><option>Theatre</option><option>General</option>
+        </select></div>
+        <div><label>Badge</label><select id="post-badge">
+          <option>Trending</option><option>Breaking</option><option>Exclusive</option><option>Review</option><option>Update</option><option>Hot</option>
+        </select></div>
       </div>
 
       <div class="section">
@@ -116,25 +125,25 @@ textarea{resize:vertical;min-height:80px}.content-box{min-height:310px}
         <select id="post-font-style">
           <option value="noto-sans">Noto Sans Devanagari (Clean Hindi Modern)</option>
           <option value="noto-serif">Noto Serif Devanagari (Traditional Hindi Serif)</option>
-          <option value="playfair-lora">Playfair Display &amp; Lora (Classic Editorial Serif)</option>
-          <option value="roboto-sans" selected>Roboto &amp; Inter (Modern Clean Sans-Serif)</option>
+          <option value="playfair-lora">Playfair Display & Lora (Classic Editorial Serif)</option>
+          <option value="roboto-sans" selected>Roboto & Inter (Modern Clean Sans-Serif)</option>
         </select>
       </div>
 
       <div class="section">
         <h3 class="yellow">🎬 FEATURED IMAGE (MAIN BANNER)</h3>
-        <input type="file" id="post-file" accept="image/*" onchange="handleImageFile(event)">
-        <div class="file-note">Image automatically resized/compressed before GitHub upload for faster publishing.</div>
+        <input type="file" id="post-file" accept="image/*">
+        <div class="file-note">Image browser me resize/compress hokar JPEG banegi. Upload ke waqt original file nahi bheji jayegi.</div>
       </div>
 
       <div class="section">
-        <h3 class="blueText">🖼️ ADDITIONAL ARTICLE IMAGES (UP TO 3)</h3>
+        <h3 class="blue-text">🖼️ ADDITIONAL ARTICLE IMAGES — UP TO 3</h3>
         <div id="extra-images-wrap"></div>
       </div>
 
-      <div style="margin-bottom:10px"><label>🌟 Hero Slider Trailer URL</label><input id="hero-slider-trailer" placeholder="https://youtube.com/watch?v=..."></div>
+      <div style="margin-top:10px"><label>🌟 Hero Slider Trailer URL</label><input id="hero-slider-trailer" placeholder="https://youtube.com/watch?v=..."></div>
 
-      <div class="row2">
+      <div class="row2" style="margin-top:10px">
         <div><label>Article Video 1 URL</label><input id="trailer-url-1" placeholder="https://youtube.com/..."></div>
         <div><label>Video 1 Position</label><select id="trailer-pos-1"></select></div>
       </div>
@@ -144,70 +153,57 @@ textarea{resize:vertical;min-height:80px}.content-box{min-height:310px}
       </div>
 
       <div style="margin-top:10px"><label>Short Summary / Meta Excerpt</label><input id="post-summary" placeholder="2-3 line summary"></div>
-
-      <div style="margin-top:10px"><label>Article Content</label>
-        <textarea id="post-content" class="content-box" placeholder="Full article yahan likho"></textarea>
-      </div>
+      <div style="margin-top:10px"><label>Article Content</label><textarea id="post-content" class="content" placeholder="Full article yahan likho"></textarea></div>
 
       <div class="section">
-        <h3 class="blueText">🔗 SOURCES / CREDIT — SINGLE BOX</h3>
-        <div class="source-help">Har source alag line me likho. Best format: <b>Source Title | https://example.com/article</b>. Multiple links ek hi box me paste kar sakte ho.</div>
+        <h3 class="blue-text">🔗 SOURCES / CREDIT — SINGLE BOX</h3>
+        <div class="help">Har source alag line me: <b>Source Title | https://example.com/article</b>. Sirf URL bhi paste kar sakte ho.</div>
         <textarea id="source-credit" placeholder="Netflix Official | https://www.netflix.com/...
-The Indian Express | https://indianexpress.com/...
-Official YouTube | https://www.youtube.com/..."></textarea>
-        <div id="source-preview" class="source-preview"></div>
+The Indian Express | https://indianexpress.com/..."></textarea>
+        <div id="source-preview" class="file-note">No sources detected yet</div>
       </div>
 
       <div class="section">
-        <h3 class="greenText">🔗 RELATED STORIES — AUTO FETCH</h3>
-        <div class="related-help">Publish ke waqt GitHub ke <b>data/posts.json</b> se current article ko chhodkar latest 3 posts automatically select honge. Manually related links bharne ki zarurat nahi.</div>
-        <div id="related-auto-preview" class="related-auto">Publish ke waqt latest 3 related stories yahan automatically select hongi.</div>
+        <h3 class="green-text">🔗 RELATED STORIES — AUTO FETCH</h3>
+        <div class="help">Publish ke waqt data/posts.json se current article ko chhodkar latest 3 posts automatically select hongi.</div>
+        <div id="related-auto-preview" class="status" style="margin:0">Publish ke waqt latest 3 related stories select hongi.</div>
       </div>
 
       <div class="section">
-        <h3 class="greenText">💰 DIRECT AD CODE (8 SLOTS)</h3>
-        <textarea id="ad-code-1" placeholder="Popunder (Ad 1)" style="margin-bottom:7px"></textarea>
-        <textarea id="ad-code-2" placeholder="Native Banner (Ad 2)" style="margin-bottom:7px"></textarea>
-        <textarea id="ad-code-3" placeholder="Banner 728x90 (Ad 3)" style="margin-bottom:7px"></textarea>
-        <textarea id="ad-code-4" placeholder="Related Articles Beech Ad (Ad 4)" style="margin-bottom:7px"></textarea>
-        <textarea id="ad-code-5" placeholder="Social Bar (Ad 5)" style="margin-bottom:7px"></textarea>
-        <textarea id="ad-code-6" placeholder="Smartlink (Ad 6)" style="margin-bottom:7px"></textarea>
-        <textarea id="ad-code-7" placeholder="Extra Ad 7" style="margin-bottom:7px"></textarea>
-        <textarea id="ad-code-8" placeholder="Extra Ad 8"></textarea>
+        <h3 class="green-text">💰 DIRECT AD CODE — 8 SLOTS</h3>
+        <div id="ads-wrap"></div>
       </div>
 
-      <button type="button" class="btn accent" id="publish-btn" style="width:100%;padding:13px;font-size:15px" onclick="publishPost()">Publish Post</button>
+      <button id="publish-btn" class="btn red" style="width:100%;padding:13px;font-size:15px;margin-top:12px">Publish Post</button>
     </div>
-  </div>
+  </section>
 
-  <div id="view-manage" class="hidden">
+  <section id="view-manage" class="hidden">
     <div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><b>Manage Posts</b><button type="button" class="btn" onclick="loadManagePosts()">Refresh</button></div>
-      <div id="posts-list-container"></div><div id="pagination" class="pagination"></div>
+      <div class="action-row" style="margin-bottom:10px"><b class="grow">Manage Posts</b><button id="refresh-posts" class="btn">Refresh</button></div>
+      <div id="posts-list-container"></div>
+      <div id="pagination" class="pagination"></div>
     </div>
-  </div>
+  </section>
 
-  <div id="view-preview" class="hidden">
+  <section id="view-preview" class="hidden">
     <div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><b>Article Preview</b><button type="button" class="btn" onclick="renderPreview()">Refresh</button></div>
-      <div class="preview">
-        <iframe id="preview-frame" title="Article preview" sandbox="allow-same-origin"
-                style="width:100%;height:70vh;min-height:520px;border:0;display:block;background:#fff"></iframe>
-      </div>
+      <div class="action-row" style="margin-bottom:10px"><b class="grow">Article Preview</b><button id="refresh-preview" class="btn">Refresh</button></div>
+      <div id="preview-output" class="preview"></div>
     </div>
-  </div>
-</div>
+  </section>
+</main>
 
 <div id="success-modal" class="modal">
   <div class="modalbox">
     <h3>🎉 Post Published!</h3>
     <div style="font-size:12px;color:#aab4c0;margin-bottom:10px">Article live URL:</div>
-    <div class="urlrow"><input id="success-url" readonly><button type="button" class="btn" onclick="copyPostLink()">Copy</button></div>
+    <div class="urlrow"><input id="success-url" readonly><button id="copy-link" class="btn">Copy</button></div>
     <div class="modal-actions">
       <a id="open-post" class="btn blue" target="_blank" rel="noopener" style="text-align:center;text-decoration:none">View Post</a>
       <a class="btn" target="_blank" rel="noopener" href="https://search.google.com/search-console" style="text-align:center;text-decoration:none">Search Console</a>
     </div>
-    <button type="button" class="btn accent" style="width:100%;margin-top:9px" onclick="closeSuccessModal()">Close</button>
+    <button id="close-modal" class="btn red" style="width:100%;margin-top:9px">Close</button>
   </div>
 </div>
 <div id="toast" class="notice"></div>
@@ -215,1171 +211,568 @@ Official YouTube | https://www.youtube.com/..."></textarea>
 <script>
 "use strict";
 
-/* ============================================================
-   CONFIG
-============================================================ */
-var CORRECT_MASTER_PIN = "1465822";
-var LIVE_BASE = "https://filmykhabr.gujaratfastalert.in";
-var API_BASE = "https://api.github.com";
-var REQUEST_TIMEOUT = 25000;
-var PER_PAGE = 15;
+/* =========================
+   FILMY KHABR ADMIN — FIXED
+   ========================= */
+const CONFIG = {
+  PIN: "1465822",
+  LIVE_BASE: "https://filmykhabr.gujaratfastalert.in",
+  API_BASE: "https://api.github.com",
+  TIMEOUT: 20000,
+  PER_PAGE: 15
+};
 
-var selectedImageBase64 = null;
-var selectedImageDataUrl = null;
-var extraImageState = [null, null, null];
-var allPostsCache = [];
-var managePage = 1;
-var adminInitialized = false;
-
-var positions = [
-  ["", "-- Do Not Show --"],
-  ["top", "Top"],
-  ["upper-middle", "Upper Middle"],
-  ["middle", "Middle"],
-  ["lower-middle", "Lower Middle"],
-  ["before-last", "Before Last"],
-  ["bottom", "Bottom"]
+const POSITIONS = [
+  ["","-- Do Not Show --"],["top","Top"],["upper-middle","Upper Middle"],
+  ["middle","Middle"],["lower-middle","Lower Middle"],["before-last","Before Last"],["bottom","Bottom"]
 ];
 
-/* ============================================================
-   PIN GATE
-============================================================ */
-function verifyPinUser() {
-  var pinInput = document.getElementById("admin-pin-input");
-  var pinGate = document.getElementById("pin-gate");
-  var adminApp = document.getElementById("admin-app");
-  if (!pinInput || !pinGate || !adminApp) return;
+let selectedImage = null;
+let extraImageState = [null,null,null];
+let allPostsCache = [];
+let managePage = 1;
 
-  var enteredPin = pinInput.value.trim();
-  if (enteredPin === CORRECT_MASTER_PIN) {
-    pinGate.style.display = "none";
-    adminApp.classList.remove("hidden");
-    try { sessionStorage.setItem("fk_admin_auth", "true"); } catch (e) {}
+const $ = id => document.getElementById(id);
+const text = v => v == null ? "" : String(v);
+
+function esc(v){
+  return text(v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+}
+function safeUrl(v){
+  const s=text(v).trim();
+  if(!s)return "";
+  try{
+    const u=new URL(s,CONFIG.LIVE_BASE);
+    return (u.protocol==="http:"||u.protocol==="https:") ? u.href : "";
+  }catch(e){return ""}
+}
+function slugify(v){
+  return text(v).toLowerCase().normalize("NFKD").replace(/[^\x00-\x7F]/g,"")
+    .replace(/[^a-z0-9\s-]/g,"").trim().replace(/\s+/g,"-").replace(/-+/g,"-");
+}
+function base64Utf8(v){return btoa(unescape(encodeURIComponent(v)))}
+function utf8FromBase64(v){return decodeURIComponent(escape(atob(v)))}
+
+function toast(msg){
+  const el=$("toast"); if(!el)return;
+  el.textContent=msg; el.classList.add("show");
+  clearTimeout(window.__fkToast);
+  window.__fkToast=setTimeout(()=>el.classList.remove("show"),2500);
+}
+
+function setStatus(msg){
+  const el=$("github-status"); if(el)el.textContent=msg;
+}
+
+/* ---------- PIN ---------- */
+function verifyPinUser(){
+  const entered=$("admin-pin-input").value.trim();
+  if(entered===CONFIG.PIN){
+    $("pin-gate").style.display="none";
+    $("admin-app").classList.remove("hidden");
+    try{sessionStorage.setItem("fk_admin_auth","true")}catch(e){}
     initAdmin();
-  } else {
+  }else{
     alert("Invalid PIN! Try again.");
-    pinInput.value = "";
-    pinInput.focus();
+    $("admin-pin-input").value="";
+    $("admin-pin-input").focus();
   }
 }
+window.verifyPinUser=verifyPinUser;
 
-try {
-  if (sessionStorage.getItem("fk_admin_auth") === "true") {
-    window.addEventListener("DOMContentLoaded", function () {
-      var pinGate = document.getElementById("pin-gate");
-      var adminApp = document.getElementById("admin-app");
-      if (pinGate) pinGate.style.display = "none";
-      if (adminApp) adminApp.classList.remove("hidden");
-      initAdmin();
+/* ---------- INITIAL UI ---------- */
+function initPositionSelects(){
+  ["trailer-pos-1","trailer-pos-2"].forEach((id,index)=>{
+    const s=$(id); s.innerHTML="";
+    POSITIONS.forEach(p=>{
+      const o=document.createElement("option");o.value=p[0];o.textContent=p[1];s.appendChild(o);
     });
-  }
-} catch (e) {}
-
-/* ============================================================
-   INIT
-============================================================ */
-function initAdmin() {
-  if (adminInitialized) return;
-  adminInitialized = true;
-  initPositionSelects();
-  initExtraImageRows();
-  loadCreds();
-  updateSourcePreview();
-  bindDelegatedActions();
-  bindPreviewFrameResize();
+    s.value=index===0?"middle":"before-last";
+  });
 }
 
-function initPositionSelects() {
-  var ids = ["trailer-pos-1", "trailer-pos-2"];
-  for (var i = 0; i < ids.length; i++) {
-    var s = document.getElementById(ids[i]);
-    if (!s) continue;
-    s.innerHTML = "";
-    for (var j = 0; j < positions.length; j++) {
-      var o = document.createElement("option");
-      o.value = positions[j][0];
-      o.textContent = positions[j][1];
-      s.appendChild(o);
-    }
-    s.value = (i === 0) ? "middle" : "before-last";
-  }
-}
-
-function initExtraImageRows() {
-  var wrap = document.getElementById("extra-images-wrap");
-  if (!wrap) return;
-  wrap.innerHTML = "";
-  for (var i = 1; i <= 3; i++) {
-    var box = document.createElement("div");
-    box.className = "row2";
-    box.style.marginBottom = (i < 3) ? "10px" : "0";
-    box.innerHTML =
-      '<div><label>📸 Extra Image ' + i + ' File</label>' +
-      '<input type="file" id="extra-img-file-' + i + '" accept="image/*">' +
-      '<input type="hidden" id="extra-img-path-' + i + '"></div>' +
-      '<div><label>Extra Image ' + i + ' Position</label>' +
-      '<select id="extra-img-pos-' + i + '"></select></div>';
+function initExtraImageRows(){
+  const wrap=$("extra-images-wrap");wrap.innerHTML="";
+  for(let i=1;i<=3;i++){
+    const box=document.createElement("div");
+    box.className="row2";box.style.marginBottom=i<3?"10px":"0";
+    box.innerHTML=
+      '<div><label>📸 Extra Image '+i+' File</label>'+
+      '<input type="file" id="extra-img-file-'+i+'" accept="image/*">'+
+      '<input type="hidden" id="extra-img-path-'+i+'"></div>'+
+      '<div><label>Extra Image '+i+' Position</label>'+
+      '<select id="extra-img-pos-'+i+'"></select></div>';
     wrap.appendChild(box);
-
-    var s = box.querySelector("#extra-img-pos-" + i);
-    for (var j = 0; j < positions.length; j++) {
-      var o = document.createElement("option");
-      o.value = positions[j][0];
-      o.textContent = positions[j][1];
-      s.appendChild(o);
-    }
-    s.value = (i === 1) ? "before-last" : "";
-
-    (function (index) {
-      box.querySelector("#extra-img-file-" + index).addEventListener("change", function (e) {
-        handleExtraImage(e, index);
-      });
-    })(i);
+    const s=$("extra-img-pos-"+i);
+    POSITIONS.forEach(p=>{const o=document.createElement("option");o.value=p[0];o.textContent=p[1];s.appendChild(o)});
+    s.value=i===1?"before-last":"";
+    $("extra-img-file-"+i).addEventListener("change",e=>handleExtraImage(e,i));
   }
 }
-
-function bindDelegatedActions() {
-  var list = document.getElementById("posts-list-container");
-  if (!list) return;
-  list.addEventListener("click", function (e) {
-    var btn = e.target.closest("button[data-action]");
-    if (!btn) return;
-    var id = btn.getAttribute("data-id");
-    var action = btn.getAttribute("data-action");
-    if (!id) return;
-    if (action === "edit") editPost(id);
-    else if (action === "delete") deletePost(id);
+function initAds(){
+  const wrap=$("ads-wrap");wrap.innerHTML="";
+  for(let i=1;i<=8;i++){
+    const t=document.createElement("textarea");
+    t.id="ad-code-"+i;t.placeholder="Ad "+i;
+    t.style.marginBottom=i<8?"7px":"0";t.style.minHeight="72px";
+    wrap.appendChild(t);
+  }
+}
+function initAdmin(){
+  initPositionSelects();initExtraImageRows();initAds();loadCreds();updateSourcePreview();
+}
+function switchTab(tab){
+  ["new","manage","preview"].forEach(x=>{
+    $("view-"+x).classList.toggle("hidden",x!==tab);
+    document.querySelector('[data-tab="'+x+'"]').classList.toggle("active",x===tab);
   });
+  if(tab==="manage")loadManagePosts();
+  if(tab==="preview")renderPreview();
 }
 
-function bindPreviewFrameResize() {
-  var frame = document.getElementById("preview-frame");
-  if (!frame) return;
-  frame.addEventListener("load", function () {
-    try {
-      var d = frame.contentDocument;
-      if (d && d.body) {
-        frame.style.height = Math.max(520, d.body.scrollHeight + 40) + "px";
-      }
-    } catch (e) {}
-  });
+/* ---------- SETTINGS ---------- */
+function saveCreds(){
+  try{
+    localStorage.setItem("fk_gh_user",$("gh-user").value.trim());
+    localStorage.setItem("fk_gh_repo",$("gh-repo").value.trim());
+    localStorage.setItem("fk_gh_token",$("gh-token").value.trim());
+    localStorage.setItem("fk_ga_id",$("ga-id").value.trim());
+    updateGithubStatus();
+    toast("Settings saved");
+  }catch(e){alert("Browser storage blocked.")}
 }
-
-function switchTab(tab) {
-  var tabsArr = ["new", "manage", "preview"];
-  for (var i = 0; i < tabsArr.length; i++) {
-    var x = tabsArr[i];
-    var el = document.getElementById("view-" + x);
-    var tabEl = document.getElementById("tab-" + x);
-    if (el) el.classList.toggle("hidden", x !== tab);
-    if (tabEl) tabEl.classList.toggle("active", x === tab);
-  }
-  if (tab === "manage") loadManagePosts();
-  if (tab === "preview") renderPreview();
-}
-
-/* ============================================================
-   CREDENTIALS
-============================================================ */
-function saveCreds() {
-  try {
-    localStorage.setItem("fk_gh_user", document.getElementById("gh-user").value.trim());
-    localStorage.setItem("fk_gh_repo", document.getElementById("gh-repo").value.trim());
-    localStorage.setItem("fk_gh_token", document.getElementById("gh-token").value.trim());
-    localStorage.setItem("fk_ga_id", document.getElementById("ga-id").value.trim());
-    updateGitHubStatus();
-    showToast("Settings saved");
-  } catch (e) { alert("Storage blocked!"); }
-}
-
-function loadCreds() {
-  try {
-    var map = {
-      "gh-user": "fk_gh_user",
-      "gh-repo": "fk_gh_repo",
-      "gh-token": "fk_gh_token",
-      "ga-id": "fk_ga_id"
-    };
-    for (var id in map) {
-      if (!Object.prototype.hasOwnProperty.call(map, id)) continue;
-      var v = localStorage.getItem(map[id]);
-      if (v !== null) {
-        var el = document.getElementById(id);
-        if (el) el.value = v;
-      }
-    }
-  } catch (e) {}
-  updateGitHubStatus();
-}
-
-function updateGitHubStatus() {
-  var u = document.getElementById("gh-user");
-  var r = document.getElementById("gh-repo");
-  var statusEl = document.getElementById("github-status");
-  if (!statusEl || !u || !r) return;
-  var user = u.value.trim(), repo = r.value.trim();
-  statusEl.textContent = (user && repo)
-    ? "GitHub: " + user + "/" + repo + " • Live URL: " + LIVE_BASE
-    : "GitHub: configuration required";
-}
-
-(function () {
-  var ids = ["gh-user", "gh-repo"];
-  for (var i = 0; i < ids.length; i++) {
-    var el = document.getElementById(ids[i]);
-    if (el) el.addEventListener("input", updateGitHubStatus);
-  }
-})();
-
-/* ============================================================
-   HELPERS
-============================================================ */
-function slugify(title) {
-  return String(title || "").toLowerCase().normalize("NFKD")
-    .replace(/[^\x00-\x7F]/g, "")
-    .replace(/[^a-z0-9\s-]/g, "")
-    .trim().replace(/\s+/g, "-").replace(/-+/g, "-");
-}
-
-function autoGenerateSlug() {
-  if (document.getElementById("edit-post-id").value) return;
-  var slug = slugify(document.getElementById("post-title").value);
-  document.getElementById("post-slug").value = slug;
-  syncImagePathsToSlug(slug);
-}
-
-function syncImagePathsToSlug(slug) {
-  if (!slug) return;
-  if (selectedImageBase64) {
-    document.getElementById("post-image-path").value = "images/" + slug + ".jpg";
-  }
-  for (var i = 1; i <= 3; i++) {
-    if (extraImageState[i - 1]) {
-      var p = document.getElementById("extra-img-path-" + i);
-      if (p) p.value = "extra-images/" + slug + "-extra-" + i + ".jpg";
-    }
-  }
-}
-
-function safeText(v) { return v == null ? "" : String(v); }
-
-function escapeHtml(v) {
-  return safeText(v)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
-function safeUrl(v) {
-  var s = safeText(v).trim();
-  if (!s) return "";
-  try {
-    var u = new URL(s, LIVE_BASE);
-    if (u.protocol === "http:" || u.protocol === "https:") return u.href;
-  } catch (e) {}
-  return "";
-}
-
-/* ============================================================
-   IMAGE HANDLING
-============================================================ */
-function readFileAsDataURL(file) {
-  return new Promise(function (resolve, reject) {
-    var r = new FileReader();
-    r.onload = function () { resolve(r.result); };
-    r.onerror = function () { reject(new Error("Image read failed")); };
-    r.readAsDataURL(file);
-  });
-}
-
-function compressImage(file, maxSide, quality) {
-  if (maxSide === undefined) maxSide = 1800;
-  if (quality === undefined) quality = 0.82;
-  return readFileAsDataURL(file).then(function (data) {
-    return new Promise(function (resolve, reject) {
-      var img = new Image();
-      img.onload = function () {
-        try {
-          var scale = Math.min(1, maxSide / Math.max(img.naturalWidth, img.naturalHeight));
-          var w = Math.max(1, Math.round(img.naturalWidth * scale));
-          var h = Math.max(1, Math.round(img.naturalHeight * scale));
-          var c = document.createElement("canvas");
-          c.width = w; c.height = h;
-          var ctx = c.getContext("2d");
-          ctx.fillStyle = "#fff";
-          ctx.fillRect(0, 0, w, h);
-          ctx.drawImage(img, 0, 0, w, h);
-          var out = c.toDataURL("image/jpeg", quality);
-          resolve({ base64: out.split(",")[1], dataUrl: out });
-        } catch (err) { reject(err); }
-      };
-      img.onerror = function () { reject(new Error("Image decode failed")); };
-      img.src = data;
+function loadCreds(){
+  try{
+    const map={"gh-user":"fk_gh_user","gh-repo":"fk_gh_repo","gh-token":"fk_gh_token","ga-id":"fk_ga_id"};
+    Object.keys(map).forEach(id=>{
+      const v=localStorage.getItem(map[id]);if(v!==null)$(id).value=v;
     });
+  }catch(e){}
+  updateGithubStatus();
+}
+function updateGithubStatus(){
+  const u=$("gh-user").value.trim(),r=$("gh-repo").value.trim();
+  setStatus(u&&r?"GitHub: "+u+"/"+r+" • Live: "+CONFIG.LIVE_BASE:"GitHub: configuration required");
+}
+
+/* ---------- IMAGES ---------- */
+function readFile(file){
+  return new Promise((resolve,reject)=>{
+    const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject(new Error("Image read failed"));r.readAsDataURL(file);
   });
 }
-
-function handleImageFile(e) {
-  var file = e.target.files && e.target.files[0];
-  if (!file) return;
-  compressImage(file, 1800, 0.82).then(function (x) {
-    selectedImageBase64 = x.base64;
-    selectedImageDataUrl = x.dataUrl;
-    var slug = document.getElementById("post-slug").value || ("post-" + Date.now());
-    document.getElementById("post-image-path").value = "images/" + slug + ".jpg";
-    showToast("Main image ready");
-  }).catch(function (err) { alert(err.message); });
+async function compressImage(file,maxSide=1800,quality=.82){
+  const data=await readFile(file),img=new Image();
+  await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(new Error("Image decode failed"));img.src=data});
+  const scale=Math.min(1,maxSide/Math.max(img.naturalWidth,img.naturalHeight));
+  const w=Math.max(1,Math.round(img.naturalWidth*scale)),h=Math.max(1,Math.round(img.naturalHeight*scale));
+  const c=document.createElement("canvas");c.width=w;c.height=h;
+  const ctx=c.getContext("2d");ctx.fillStyle="#fff";ctx.fillRect(0,0,w,h);ctx.drawImage(img,0,0,w,h);
+  const out=c.toDataURL("image/jpeg",quality);
+  return {base64:out.split(",")[1],dataUrl:out};
+}
+async function handleMainImage(e){
+  const file=e.target.files[0];if(!file)return;
+  try{
+    selectedImage=await compressImage(file,1800,.82);
+    const slug=$("post-slug").value||slugify($("post-title").value)||("post-"+Date.now());
+    $("post-image-path").value="images/"+slug+".jpg";
+    toast("Main image ready");
+  }catch(err){alert(err.message)}
+}
+async function handleExtraImage(e,index){
+  const file=e.target.files[0];if(!file)return;
+  try{
+    extraImageState[index-1]=await compressImage(file,1600,.80);
+    const slug=$("post-slug").value||slugify($("post-title").value)||("post-"+Date.now());
+    $("extra-img-path-"+index).value="extra-images/"+slug+"-extra-"+index+".jpg";
+    toast("Extra image "+index+" ready");
+  }catch(err){alert(err.message)}
 }
 
-function handleExtraImage(e, index) {
-  var file = e.target.files && e.target.files[0];
-  if (!file) return;
-  compressImage(file, 1600, 0.80).then(function (x) {
-    extraImageState[index - 1] = { base64: x.base64, dataUrl: x.dataUrl };
-    var slug = document.getElementById("post-slug").value || ("post-" + Date.now());
-    document.getElementById("extra-img-path-" + index).value =
-      "extra-images/" + slug + "-extra-" + index + ".jpg";
-    showToast("Extra image " + index + " ready");
-  }).catch(function (err) { alert(err.message); });
+/* ---------- FORM ---------- */
+function autoGenerateSlug(){
+  if($("edit-post-id").value)return;
+  const slug=slugify($("post-title").value);
+  $("post-slug").value=slug;
+  if(!$("post-image-path").value && slug)$("post-image-path").value="images/"+slug+".jpg";
 }
-
-/* ============================================================
-   YOUTUBE
-============================================================ */
-function getYoutubeId(url) {
-  var s = safeText(url).trim();
-  if (!s) return "";
-  if (/^[A-Za-z0-9_-]{11}$/.test(s)) return s;
-  try {
-    var u = new URL(s);
-    if (u.hostname.indexOf("youtu.be") !== -1) return u.pathname.slice(1).split("/")[0];
-    if (u.searchParams.get("v")) return u.searchParams.get("v");
-    var m = u.pathname.match(/\/(?:embed|shorts|live)\/([^/?]+)/);
-    return m ? m[1] : "";
-  } catch (e) { return ""; }
+function setSelect(id,value,fallback){
+  const s=$(id),exists=[...s.options].some(o=>o.value===value);
+  s.value=exists?value:fallback;
 }
-
-function youtubeEmbed(url) {
-  var id = getYoutubeId(url);
-  if (!id) return "";
-  return '<div class="video-box"><iframe src="https://www.youtube-nocookie.com/embed/' +
-    encodeURIComponent(id) +
-    '?rel=0&modestbranding=1" loading="lazy" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;web-share" allowfullscreen></iframe></div>';
-}
-
-/* ============================================================
-   CONTENT POSITIONING  (FIXED ORDER)
-============================================================ */
-function posIndexFor(pos, len) {
-  if (pos === "top") return 0;
-  if (pos === "bottom") return len;
-  if (pos === "upper-middle") return Math.floor(len * 0.25);
-  if (pos === "middle") return Math.floor(len * 0.5);
-  if (pos === "lower-middle") return Math.floor(len * 0.75);
-  if (pos === "before-last") return Math.max(0, len - 1);
-  return -1;
-}
-
-function positionItems(content, v1, p1, v2, p2, extras) {
-  var raw = safeText(content).split(/\n\s*\n/).map(function (x) { return x.trim(); }).filter(Boolean);
-  if (!raw.length) raw = [safeText(content)];
-
-  var paragraphs = raw.map(function (p) {
-    return "<p>" + escapeHtml(p).replace(/\n/g, "<br>") + "</p>";
-  });
-
-  var inserts = [];
-  var y1 = youtubeEmbed(v1);
-  if (y1 && p1) inserts.push({ html: y1, pos: p1 });
-  var y2 = youtubeEmbed(v2);
-  if (y2 && p2) inserts.push({ html: y2, pos: p2 });
-
-  var list = extras || [];
-  for (var k = 0; k < list.length; k++) {
-    var x = list[k];
-    if (x && x.path && x.pos) {
-      inserts.push({
-        html: '<figure><img src="../' + escapeHtml(x.path) +
-              '" loading="lazy" alt="Filmy Khabr article image"></figure>',
-        pos: x.pos
-      });
+function parseSources(raw){
+  return text(raw).split(/\r?\n/).map(x=>x.trim()).filter(Boolean).map(line=>{
+    const parts=line.split("|").map(x=>x.trim());
+    if(parts.length>=2){
+      const url=safeUrl(parts.pop());if(!url)return null;
+      return {name:parts.join(" | ")||"Source",url};
     }
-  }
-
-  var baseLen = paragraphs.length;
-  var out = "";
-  for (var i = 0; i <= baseLen; i++) {
-    for (var n = 0; n < inserts.length; n++) {
-      if (posIndexFor(inserts[n].pos, baseLen) === i) out += inserts[n].html;
-    }
-    if (i < baseLen) out += paragraphs[i];
-  }
-  return out;
+    const url=safeUrl(line);if(!url)return null;
+    let name="Source";try{name=new URL(url).hostname.replace(/^www\./,"")}catch(e){}
+    return {name,url};
+  }).filter(Boolean);
 }
-
-/* ============================================================
-   FONTS + SOURCES
-============================================================ */
-function fontFamily(style) {
-  if (style === "noto-serif") return '"Noto Serif Devanagari",Georgia,serif';
-  if (style === "playfair-lora") return '"Playfair Display","Lora",Georgia,serif';
-  if (style === "roboto-sans") return '"Roboto","Inter",Arial,sans-serif';
-  return '"Noto Sans Devanagari","Nirmala UI",Arial,sans-serif';
+function updateSourcePreview(){
+  const n=parseSources($("source-credit").value).length;
+  $("source-preview").textContent=n?n+" source(s) detected":"No sources detected yet";
 }
-
-function parseSources(text) {
-  return safeText(text).split(/\r?\n/).map(function (x) { return x.trim(); })
-    .filter(Boolean).map(function (line) {
-      var parts = line.split("|").map(function (x) { return x.trim(); });
-      if (parts.length >= 2) {
-        var url = safeUrl(parts.pop());
-        if (!url) return null;
-        var name = parts.join(" | ").trim() || "Source";
-        return { name: name, url: url };
-      }
-      var u = safeUrl(line);
-      if (!u) return null;
-      var host = "Source";
-      try { host = new URL(u).hostname.replace(/^www\./, ""); } catch (e) {}
-      return { name: host, url: u };
-    }).filter(Boolean);
-}
-
-function updateSourcePreview() {
-  var box = document.getElementById("source-credit");
-  var previewEl = document.getElementById("source-preview");
-  if (!box || !previewEl) return;
-  var arr = parseSources(box.value);
-  previewEl.textContent = arr.length
-    ? arr.length + " source(s) detected"
-    : "No sources detected yet";
-}
-
-(function () {
-  var sourceCreditBox = document.getElementById("source-credit");
-  if (sourceCreditBox) sourceCreditBox.addEventListener("input", updateSourcePreview);
-})();
-
-/* ============================================================
-   GITHUB API
-============================================================ */
-function ghRequest(path, method, body, timeout) {
-  method = method || "GET";
-  body = body || null;
-  timeout = timeout || REQUEST_TIMEOUT;
-
-  var user = document.getElementById("gh-user").value.trim();
-  var repo = document.getElementById("gh-repo").value.trim();
-  var token = document.getElementById("gh-token").value.trim();
-
-  if (!user || !repo) return Promise.reject(new Error("GitHub username/repository required"));
-  if (!token) return Promise.reject(new Error("GitHub Token required"));
-
-  var clean = path.split("/").map(encodeURIComponent).join("/");
-  var url = API_BASE + "/repos/" + encodeURIComponent(user) + "/" + encodeURIComponent(repo) + "/contents/" + clean;
-
-  var controller = new AbortController();
-  var timer = setTimeout(function () { controller.abort(); }, timeout);
-
-  var opt = {
-    method: method,
-    headers: {
-      Authorization: "Bearer " + token,
-      Accept: "application/vnd.github+json",
-      "Content-Type": "application/json"
-    },
-    signal: controller.signal
-  };
-  if (body !== null) opt.body = JSON.stringify(body);
-
-  return fetch(url, opt).then(function (res) {
-    return res.text().then(function (text) {
-      var data = null;
-      try { data = text ? JSON.parse(text) : null; } catch (e) {}
-      if (res.status === 404 && method === "GET") return null;
-      if (!res.ok) {
-        var msg = (data && data.message) ? data.message : ("HTTP " + res.status);
-        if (res.status === 401) throw new Error("GitHub token invalid/expired (401).");
-        if (res.status === 403) throw new Error("GitHub permission/rate-limit problem (403).");
-        if (res.status === 409) throw new Error("GitHub conflict (409). Please refresh and publish again.");
-        if (res.status === 422) throw new Error("GitHub rejected the file (422): " + msg);
-        throw new Error("GitHub " + res.status + ": " + msg);
-      }
-      return data;
-    });
-  }).catch(function (err) {
-    if (err && err.name === "AbortError") throw new Error("GitHub request timed out.");
-    if (err instanceof TypeError) throw new Error("Network fetch failed.");
-    throw err;
-  }).finally(function () {
-    clearTimeout(timer);
-  });
-}
-
-/* FIXED: sha sirf tab bhejta hai jab file pehle se exist karti ho */
-function ghPutFile(path, content, message) {
-  return ghRequest(path, "GET").then(function (existing) {
-    var body = { message: message, content: content };
-    if (existing && existing.sha) body.sha = existing.sha;
-    return ghRequest(path, "PUT", body);
-  });
-}
-
-function ghDeleteFile(path, message) {
-  return ghRequest(path, "GET").then(function (existing) {
-    if (!existing || !existing.sha) return null;
-    return ghRequest(path, "DELETE", { message: message, sha: existing.sha });
-  });
-}
-
-function base64Utf8(str) {
-  return btoa(unescape(encodeURIComponent(str)));
-}
-function utf8FromBase64(str) {
-  return decodeURIComponent(escape(atob(str)));
-}
-function getPostsFile() {
-  return ghRequest("data/posts.json", "GET");
-}
-function normalizePosts(arr) {
-  return Array.isArray(arr) ? arr.filter(Boolean) : [];
-}
-
-/* ============================================================
-   MANAGE POSTS
-============================================================ */
-function loadManagePosts() {
-  var box = document.getElementById("posts-list-container");
-  if (!box) return;
-  box.innerHTML = "<div class='status'>Loading posts...</div>";
-  getPostsFile().then(function (f) {
-    allPostsCache = (f && f.content)
-      ? normalizePosts(JSON.parse(utf8FromBase64(f.content)))
-      : [];
-    managePage = 1;
-    renderManageList();
-  }).catch(function (e) {
-    box.innerHTML = '<div style="color:#ff7777">Error: ' + escapeHtml(e.message) + '</div>';
-  });
-}
-
-function renderManageList() {
-  var box = document.getElementById("posts-list-container");
-  var pag = document.getElementById("pagination");
-  if (!box || !pag) return;
-
-  if (!allPostsCache.length) {
-    box.innerHTML = "<div class='status'>No posts found.</div>";
-    pag.innerHTML = "";
-    return;
-  }
-
-  var total = Math.ceil(allPostsCache.length / PER_PAGE);
-  if (managePage > total) managePage = total;
-  if (managePage < 1) managePage = 1;
-
-  var start = (managePage - 1) * PER_PAGE;
-  var sliceArr = allPostsCache.slice(start, start + PER_PAGE);
-  var htmlStr = "";
-
-  for (var i = 0; i < sliceArr.length; i++) {
-    var p = sliceArr[i];
-    var pid = escapeHtml(p.id || "");
-    htmlStr +=
-      '<div class="post-item">' +
-        '<div>' +
-          '<div class="post-title">' + escapeHtml(p.title || "Untitled") + '</div>' +
-          '<div class="post-meta">' + escapeHtml(p.date || "") + ' • ' +
-            escapeHtml(p.category || "") + ' • ' + escapeHtml(p.badge || "") + '</div>' +
-        '</div>' +
-        '<div class="actions">' +
-          '<button type="button" class="btn" data-action="edit" data-id="' + pid + '">Edit</button>' +
-          '<button type="button" class="btn danger" data-action="delete" data-id="' + pid + '">Delete</button>' +
-        '</div>' +
-      '</div>';
-  }
-  box.innerHTML = htmlStr;
-
-  pag.innerHTML = "";
-  if (total <= 1) return;
-  for (var n = 1; n <= total; n++) {
-    (function (pageNum) {
-      var b = document.createElement("button");
-      b.type = "button";
-      b.className = "page" + (pageNum === managePage ? " active" : "");
-      b.textContent = pageNum;
-      b.onclick = function () { managePage = pageNum; renderManageList(); };
-      pag.appendChild(b);
-    })(n);
-  }
-}
-
-function setSelectValue(id, value, fallback) {
-  fallback = fallback || "";
-  var s = document.getElementById(id);
-  if (!s) return;
-  var exists = false;
-  for (var i = 0; i < s.options.length; i++) {
-    if (s.options[i].value === value) { exists = true; break; }
-  }
-  s.value = exists ? value : fallback;
-}
-
-function editPost(id) {
-  var p = null;
-  for (var i = 0; i < allPostsCache.length; i++) {
-    if (allPostsCache[i].id === id) { p = allPostsCache[i]; break; }
-  }
-  if (!p) return;
-
-  document.getElementById("edit-post-id").value = p.id || "";
-  document.getElementById("edit-published-at").value = p.date || "";
-  document.getElementById("post-title").value = p.title || "";
-  document.getElementById("post-slug").value = p.slug || "";
-  setSelectValue("post-category", p.category, "Movies");
-  setSelectValue("post-platform", p.platform, "General");
-  setSelectValue("post-badge", p.badge, "Update");
-  setSelectValue("post-font-style", p.fontStyle, "roboto-sans");
-  document.getElementById("post-summary").value = p.summary || "";
-  document.getElementById("hero-slider-trailer").value = p.trailer || "";
-  document.getElementById("trailer-url-1").value = p.video1Url || "";
-  setSelectValue("trailer-pos-1", p.video1Pos, "middle");
-  document.getElementById("trailer-url-2").value = p.video2Url || "";
-  setSelectValue("trailer-pos-2", p.video2Pos, "before-last");
-  document.getElementById("post-content").value = p.content || "";
-  document.getElementById("post-image-path").value = p.image || p.imagePath || "";
-  selectedImageBase64 = null;
-  selectedImageDataUrl = null;
-  var mainFile = document.getElementById("post-file");
-  if (mainFile) mainFile.value = "";
-
-  for (var j = 1; j <= 3; j++) {
-    extraImageState[j - 1] = null;
-    var fEl = document.getElementById("extra-img-file-" + j);
-    if (fEl) fEl.value = "";
-    var x = (p.extraImages || [])[j - 1];
-    var pEl = document.getElementById("extra-img-path-" + j);
-    if (pEl) pEl.value = (x && x.path) ? x.path : "";
-    setSelectValue("extra-img-pos-" + j, (x && x.pos) ? x.pos : "", "");
-  }
-
-  var srcArr = p.sources || [];
-  var srcText = "";
-  for (var s = 0; s < srcArr.length; s++) {
-    srcText += (srcArr[s].name || "Source") + " | " + (srcArr[s].url || "") + "\n";
-  }
-  document.getElementById("source-credit").value = srcText || safeText(p.sourceCredit || "");
-
-  for (var a = 1; a <= 8; a++) {
-    var adEl = document.getElementById("ad-code-" + a);
-    if (adEl) adEl.value = safeText((p.ads || {})["ad" + a] || "");
-  }
-
-  document.getElementById("form-heading").textContent = "Edit Post";
-  document.getElementById("publish-btn").textContent = "Update Post";
-  updateSourcePreview();
-  renderRelatedPreviewForCurrent(p.relatedArticles || []);
-  switchTab("new");
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-function deletePost(id) {
-  if (!confirm("Delete this post? Ye action undo nahi ho sakta.")) return;
-  getPostsFile().then(function (f) {
-    if (!f) throw new Error("posts.json not found");
-    var posts = normalizePosts(JSON.parse(utf8FromBase64(f.content)));
-    var target = null;
-    for (var i = 0; i < posts.length; i++) {
-      if (posts[i].id === id) { target = posts[i]; break; }
-    }
-    posts = posts.filter(function (x) { return x.id !== id; });
-
-    return ghPutFile(
-      "data/posts.json",
-      base64Utf8(JSON.stringify(posts, null, 2)),
-      "Delete post " + id
-    ).then(function () {
-      if (target && target.slug) {
-        return ghDeleteFile("posts/" + target.slug + ".html", "Delete article " + target.slug)
-          .catch(function (e) { console.warn("Article file delete skipped:", e.message); });
-      }
-      return null;
-    });
-  }).then(function () {
-    showToast("Post deleted");
-    loadManagePosts();
-  }).catch(function (e) {
-    alert("Delete failed: " + e.message);
-  });
-}
-
-/* ============================================================
-   COLLECT FORM DATA
-============================================================ */
-function collectAds() {
-  var ads = {};
-  for (var i = 1; i <= 8; i++) {
-    var el = document.getElementById("ad-code-" + i);
-    if (!el) continue;
-    var v = el.value.trim();
-    if (v) ads["ad" + i] = v;
-  }
+function collectAds(){
+  const ads={};
+  for(let i=1;i<=8;i++){const v=$("ad-code-"+i).value.trim();if(v)ads["ad"+i]=v}
   return ads;
 }
-
-function collectExtraImages() {
-  var arr = [];
-  for (var i = 1; i <= 3; i++) {
-    var pEl = document.getElementById("extra-img-path-" + i);
-    var posEl = document.getElementById("extra-img-pos-" + i);
-    if (!pEl || !posEl) continue;
-    var path = pEl.value.trim();
-    var pos = posEl.value;
-    if (path && pos) arr.push({ path: path, pos: pos, isLocal: true });
+function collectExtraImages(){
+  const arr=[];
+  for(let i=1;i<=3;i++){
+    const path=$("extra-img-path-"+i).value.trim(),pos=$("extra-img-pos-"+i).value;
+    if(path&&pos)arr.push({path,pos,isLocal:true});
   }
   return arr;
 }
-
-function buildPostObject(existing, related) {
-  var base = existing || {};
-  var imagePathEl = document.getElementById("post-image-path");
+function buildPost(existing=null,related=[]){
   return {
-    id: base.id ? base.id : ("post_" + Date.now()),
-    title: document.getElementById("post-title").value.trim(),
-    slug: document.getElementById("post-slug").value.trim(),
-    category: document.getElementById("post-category").value,
-    platform: document.getElementById("post-platform").value,
-    badge: document.getElementById("post-badge").value,
-    fontStyle: document.getElementById("post-font-style").value,
-    summary: document.getElementById("post-summary").value.trim(),
-    trailer: document.getElementById("hero-slider-trailer").value.trim(),
-    video1Url: document.getElementById("trailer-url-1").value.trim(),
-    video1Pos: document.getElementById("trailer-pos-1").value,
-    video2Url: document.getElementById("trailer-url-2").value.trim(),
-    video2Pos: document.getElementById("trailer-pos-2").value,
-    content: document.getElementById("post-content").value.trim(),
-    image: imagePathEl.value.trim() || (base.image || base.imagePath || ""),
-    extraImages: collectExtraImages(),
-    sources: parseSources(document.getElementById("source-credit").value),
-    sourceCredit: document.getElementById("source-credit").value.trim(),
-    relatedArticles: related || [],
-    ads: collectAds(),
-    date: base.date ? base.date : new Date().toISOString().slice(0, 10)
+    id:existing?.id||"post_"+Date.now(),
+    title:$("post-title").value.trim(),
+    slug:$("post-slug").value.trim(),
+    category:$("post-category").value,
+    platform:$("post-platform").value,
+    badge:$("post-badge").value,
+    fontStyle:$("post-font-style").value,
+    summary:$("post-summary").value.trim(),
+    trailer:$("hero-slider-trailer").value.trim(),
+    video1Url:$("trailer-url-1").value.trim(),
+    video1Pos:$("trailer-pos-1").value,
+    video2Url:$("trailer-url-2").value.trim(),
+    video2Pos:$("trailer-pos-2").value,
+    content:$("post-content").value.trim(),
+    image:$("post-image-path").value.trim()||(existing?.image||""),
+    extraImages:collectExtraImages(),
+    sources:parseSources($("source-credit").value),
+    sourceCredit:$("source-credit").value.trim(),
+    relatedArticles:related,
+    ads:collectAds(),
+    date:existing?.date||new Date().toISOString().slice(0,10)
   };
 }
 
-/* FIXED: same category ko priority */
-function relatedFor(posts, currentSlug, category) {
-  var filtered = posts.filter(function (p) { return p && p.slug && p.slug !== currentSlug; });
-  var same = filtered.filter(function (p) { return p.category === category; });
-  var others = filtered.filter(function (p) { return p.category !== category; });
-  var ordered = same.concat(others);
+/* ---------- GITHUB API ---------- */
+async function ghRequest(path,method="GET",body=null){
+  const user=$("gh-user").value.trim(),repo=$("gh-repo").value.trim(),token=$("gh-token").value.trim();
+  if(!user||!repo)throw new Error("GitHub username/repository required");
+  if(!token)throw new Error("GitHub Token required");
 
-  var result = [];
-  for (var i = 0; i < Math.min(3, ordered.length); i++) {
-    var p = ordered[i];
-    result.push({
-      title: p.title || "Filmy Khabr",
-      url: LIVE_BASE + "/posts/" + p.slug + ".html",
-      image: p.image || p.imagePath || ""
-    });
-  }
-  return result;
-}
+  const clean=path.split("/").map(encodeURIComponent).join("/");
+  const url=CONFIG.API_BASE+"/repos/"+encodeURIComponent(user)+"/"+encodeURIComponent(repo)+"/contents/"+clean;
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),CONFIG.TIMEOUT);
 
-function showRelatedPreview(items) {
-  var el = document.getElementById("related-auto-preview");
-  if (!el) return;
-  if (!items || !items.length) {
-    el.innerHTML = "No older posts available yet.";
-    return;
-  }
-  var htmlStr = "";
-  for (var i = 0; i < items.length; i++) {
-    htmlStr += (i + 1) + ". <b>" + escapeHtml(items[i].title) + "</b><br>" +
-      '<span style="color:#7f8c99">' + escapeHtml(items[i].url) + "</span><br><br>";
-  }
-  el.innerHTML = htmlStr;
-}
-
-function renderRelatedPreviewForCurrent(items) {
-  showRelatedPreview(items);
-}
-
-/* ============================================================
-   PUBLISH
-============================================================ */
-function publishPost() {
-  var btn = document.getElementById("publish-btn");
-  var title = document.getElementById("post-title").value.trim();
-
-  autoGenerateSlug();
-  var slug = document.getElementById("post-slug").value.trim();
-  var content = document.getElementById("post-content").value.trim();
-  var isEditing = !!document.getElementById("edit-post-id").value.trim();
-  var originalBtnText = isEditing ? "Update Post" : "Publish Post";
-
-  if (!title || !slug || !content) {
-    alert("Title, Slug aur Content required!");
-    return;
-  }
-  if (!document.getElementById("gh-token").value.trim()) {
-    alert("GitHub Token required! Settings me token daalo.");
-    return;
-  }
-  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
-    alert("Slug sirf lowercase English words + hyphen me hona chahiye (e.g. pushpa-2-review).");
-    return;
-  }
-
-  btn.disabled = true;
-  btn.textContent = "Publishing...";
-
-  var postsRef = [];
-  var editId = document.getElementById("edit-post-id").value.trim();
-  var existingRef = null;
-
-  getPostsFile().then(function (postsFile) {
-    postsRef = (postsFile && postsFile.content)
-      ? normalizePosts(JSON.parse(utf8FromBase64(postsFile.content)))
-      : [];
-
-    if (editId) {
-      for (var i = 0; i < postsRef.length; i++) {
-        if (postsRef[i].id === editId) { existingRef = postsRef[i]; break; }
-      }
-    } else {
-      /* FIXED: duplicate slug block */
-      for (var j = 0; j < postsRef.length; j++) {
-        if (postsRef[j].slug === slug) {
-          throw new Error("Ye slug already exist karta hai. Title thoda change karo.");
-        }
-      }
+  try{
+    const opt={method,signal:controller.signal,headers:{
+      Authorization:"Bearer "+token,
+      Accept:"application/vnd.github+json",
+      "Content-Type":"application/json"
+    }};
+    if(body!==null)opt.body=JSON.stringify(body);
+    const res=await fetch(url,opt),raw=await res.text();
+    let data=null;try{data=raw?JSON.parse(raw):null}catch(e){}
+    if(res.status===404&&method==="GET")return null;
+    if(!res.ok){
+      const msg=data?.message||("HTTP "+res.status);
+      if(res.status===401)throw new Error("GitHub token invalid/expired (401).");
+      if(res.status===403)throw new Error("GitHub permission/rate-limit problem (403).");
+      if(res.status===409)throw new Error("GitHub conflict (409). Refresh and try again.");
+      if(res.status===422)throw new Error("GitHub rejected the request (422): "+msg);
+      throw new Error("GitHub "+res.status+": "+msg);
     }
+    return data;
+  }catch(err){
+    if(err.name==="AbortError")throw new Error("GitHub request timed out. Please retry.");
+    if(err instanceof TypeError)throw new Error("Network fetch failed. Check internet/GitHub access.");
+    throw err;
+  }finally{clearTimeout(timer)}
+}
 
-    var oldSlug = existingRef && existingRef.slug ? existingRef.slug : null;
-    var post = buildPostObject(existingRef, null);
+/* IMPORTANT PERFORMANCE FIX:
+   New files are PUT directly. We only GET the file if GitHub says it
+   already exists and a SHA is required. This removes many unnecessary
+   GET requests during normal publishing. */
+async function putFile(path,content,message){
+  try{
+    return await ghRequest(path,"PUT",{message,content});
+  }catch(err){
+    if(!/422/.test(err.message))throw err;
+    const existing=await ghRequest(path,"GET");
+    if(!existing?.sha)throw err;
+    return await ghRequest(path,"PUT",{message,content,sha:existing.sha});
+  }
+}
+async function putJsonFile(path,obj,message,sha){
+  return ghRequest(path,"PUT",{message,content:base64Utf8(JSON.stringify(obj,null,2)),sha});
+}
+async function deleteFile(path,message){
+  const f=await ghRequest(path,"GET");if(!f)return;
+  return ghRequest(path,"DELETE",{message,sha:f.sha});
+}
+async function getPostsFile(){return ghRequest("data/posts.json","GET")}
 
-    /* 1) Main image upload */
-    var mainUpload = Promise.resolve();
-    if (selectedImageBase64) {
-      post.image = "images/" + slug + ".jpg";
-      document.getElementById("post-image-path").value = post.image;
-      mainUpload = ghPutFile(post.image, selectedImageBase64, "Upload " + slug + " main image");
-    }
-
-    /* 2) Extra images upload */
-    return mainUpload.then(function () {
-      var uploads = [];
-      for (var i = 1; i <= 3; i++) {
-        var st = extraImageState[i - 1];
-        var posEl = document.getElementById("extra-img-pos-" + i);
-        var pos = posEl ? posEl.value : "";
-        if (st && pos) {
-          var path = "extra-images/" + slug + "-extra-" + i + ".jpg";
-          document.getElementById("extra-img-path-" + i).value = path;
-          uploads.push(ghPutFile(path, st.base64, "Upload " + slug + " extra " + i));
-        }
-      }
-      return Promise.all(uploads);
-    }).then(function () {
-      post.extraImages = collectExtraImages();
-
-      /* 3) Related auto-fetch */
-      var withoutCurrent = postsRef.filter(function (p) {
-        return p.id !== editId && p.slug !== slug;
-      });
-      var related = relatedFor(withoutCurrent, slug, post.category);
-      post.relatedArticles = related;
-      showRelatedPreview(related);
-
-      /* 4) Article HTML */
-      var postHTML = generatePostHTML(post);
-      return ghPutFile("posts/" + slug + ".html", base64Utf8(postHTML), "Publish " + slug);
-    }).then(function () {
-      /* 5) posts.json update */
-      if (existingRef) {
-        var idx = -1;
-        for (var i = 0; i < postsRef.length; i++) {
-          if (postsRef[i].id === editId) { idx = i; break; }
-        }
-        if (idx >= 0) postsRef[idx] = post;
-        else postsRef.unshift(post);
-      } else {
-        postsRef.unshift(post);
-      }
-
-      return ghPutFile(
-        "data/posts.json",
-        base64Utf8(JSON.stringify(postsRef, null, 2)),
-        (existingRef ? "Update post " : "Add post ") + slug
-      );
-    }).then(function () {
-      /* 6) Old slug cleanup */
-      if (existingRef && oldSlug && oldSlug !== slug) {
-        return ghDeleteFile("posts/" + oldSlug + ".html", "Remove old slug " + oldSlug)
-          .catch(function (e) { console.warn("Old file delete skipped:", e.message); });
-      }
-      return null;
-    }).then(function () {
-      var live = LIVE_BASE + "/posts/" + slug + ".html";
-      document.getElementById("success-url").value = live;
-      document.getElementById("open-post").href = live;
-      document.getElementById("success-modal").classList.add("show");
-      resetForm();
-    });
-  }).catch(function (e) {
-    alert("Publish failed: " + e.message);
-  }).finally(function () {
-    btn.disabled = false;
-    /* FIXED: edit mode me label wapas "Update Post" hi rahega */
-    btn.textContent = document.getElementById("edit-post-id").value.trim()
-      ? "Update Post"
-      : "Publish Post";
+/* ---------- POSTS ---------- */
+function normalizePosts(arr){return Array.isArray(arr)?arr.filter(Boolean):[]}
+async function loadManagePosts(){
+  const box=$("posts-list-container");box.innerHTML='<div class="status">Loading posts...</div>';
+  try{
+    const f=await getPostsFile();
+    allPostsCache=f?.content?normalizePosts(JSON.parse(utf8FromBase64(f.content))):[];
+    managePage=1;renderManageList();
+  }catch(e){box.innerHTML='<div style="color:#ff7777">Error: '+esc(e.message)+'</div>'}
+}
+function renderManageList(){
+  const box=$("posts-list-container"),pag=$("pagination");
+  if(!allPostsCache.length){box.innerHTML='<div class="status">No posts found.</div>';pag.innerHTML="";return}
+  const total=Math.ceil(allPostsCache.length/CONFIG.PER_PAGE),start=(managePage-1)*CONFIG.PER_PAGE;
+  box.innerHTML="";
+  allPostsCache.slice(start,start+CONFIG.PER_PAGE).forEach(p=>{
+    const item=document.createElement("div");item.className="post-item";
+    const info=document.createElement("div");
+    info.innerHTML='<div class="post-title">'+esc(p.title||"Untitled")+'</div><div class="post-meta">'+esc(p.date||"")+' • '+esc(p.category||"")+' • '+esc(p.badge||"")+'</div>';
+    const actions=document.createElement("div");actions.className="actions";
+    const edit=document.createElement("button");edit.className="btn";edit.textContent="Edit";edit.dataset.id=p.id;edit.dataset.action="edit";
+    const del=document.createElement("button");del.className="btn danger";del.textContent="Delete";del.dataset.id=p.id;del.dataset.action="delete";
+    actions.append(edit,del);item.append(info,actions);box.appendChild(item);
   });
+  pag.innerHTML="";
+  for(let i=1;i<=total;i++){
+    const b=document.createElement("button");b.className="page"+(i===managePage?" active":"");b.textContent=i;
+    b.onclick=()=>{managePage=i;renderManageList()};pag.appendChild(b);
+  }
+}
+function editPost(id){
+  const p=allPostsCache.find(x=>x.id===id);if(!p)return;
+  $("edit-post-id").value=p.id||"";
+  $("edit-published-at").value=p.date||"";
+  $("post-title").value=p.title||"";
+  $("post-slug").value=p.slug||"";
+  setSelect("post-category",p.category,"Movies");setSelect("post-platform",p.platform,"General");setSelect("post-badge",p.badge,"Update");setSelect("post-font-style",p.fontStyle,"roboto-sans");
+  $("post-summary").value=p.summary||"";$("hero-slider-trailer").value=p.trailer||"";
+  $("trailer-url-1").value=p.video1Url||"";setSelect("trailer-pos-1",p.video1Pos,"middle");
+  $("trailer-url-2").value=p.video2Url||"";setSelect("trailer-pos-2",p.video2Pos,"before-last");
+  $("post-content").value=p.content||"";$("post-image-path").value=p.image||p.imagePath||"";
+  $("post-file").value="";selectedImage=null;extraImageState=[null,null,null];
+
+  for(let i=1;i<=3;i++){
+    $("extra-img-file-"+i).value="";
+    const x=(p.extraImages||[])[i-1];
+    $("extra-img-path-"+i).value=x?.path||"";
+    setSelect("extra-img-pos-"+i,x?.pos||"", "");
+  }
+  $("source-credit").value=(p.sources||[]).map(s=>(s.name||"Source")+" | "+(s.url||"")).join("\n")||text(p.sourceCredit);
+  for(let i=1;i<=8;i++)$("ad-code-"+i).value=text((p.ads||{})["ad"+i]||"");
+  $("form-heading").textContent="Edit Post";$("publish-btn").textContent="Update Post";
+  updateSourcePreview();switchTab("new");
+}
+async function deletePost(id){
+  if(!confirm("Delete this post?"))return;
+  try{
+    const f=await getPostsFile();if(!f)throw new Error("data/posts.json not found");
+    const posts=normalizePosts(JSON.parse(utf8FromBase64(f.content)));
+    const p=posts.find(x=>x.id===id);
+    const next=posts.filter(x=>x.id!==id);
+    await putJsonFile("data/posts.json",next,"Delete post "+id,f.sha);
+    if(p?.slug)try{await deleteFile("posts/"+p.slug+".html","Delete article "+p.slug)}catch(e){console.warn(e)}
+    toast("Post deleted");await loadManagePosts();
+  }catch(e){alert("Delete failed: "+e.message)}
 }
 
-/* ============================================================
-   ARTICLE HTML GENERATOR
-============================================================ */
-function generatePostHTML(post) {
-  var style = fontFamily(post.fontStyle);
-  var body = positionItems(
-    post.content,
-    post.video1Url, post.video1Pos,
-    post.video2Url, post.video2Pos,
-    post.extraImages
-  );
-
-  var hero = post.image
-    ? '<img class="hero-image" src="../' + escapeHtml(post.image) + '" alt="' +
-      escapeHtml(post.title) + '" loading="eager">'
-    : "";
-
-  var trailer = youtubeEmbed(post.trailer);
-
-  var sourcesArr = post.sources || [];
-  var sourcesHtml = "";
-  for (var i = 0; i < sourcesArr.length; i++) {
-    sourcesHtml += '<li><a href="' + escapeHtml(sourcesArr[i].url) +
-      '" target="_blank" rel="noopener noreferrer">' +
-      escapeHtml(sourcesArr[i].name) + '</a></li>';
-  }
-
-  var relatedArr = post.relatedArticles || [];
-  var relatedHtml = "";
-  for (var r = 0; r < relatedArr.length; r++) {
-    var rel = relatedArr[r];
-    relatedHtml += '<a class="related-card" href="' + escapeHtml(rel.url) + '">' +
-      (rel.image ? '<img src="../' + escapeHtml(rel.image) + '" alt="' +
-        escapeHtml(rel.title) + '" loading="lazy">' : '') +
-      '<div>' + escapeHtml(rel.title) + '</div></a>';
-  }
-
-  /* FIXED: 8 ad slots apni-apni sahi jagah par */
-  var adsObj = post.ads || {};
-  function ad(n) {
-    var code = adsObj["ad" + n];
-    return code ? '<div class="ad-slot">' + code + '</div>' : "";
-  }
-
-  var details =
-    '<div class="details-box">' +
-      '<div class="details-head">🎬 MOVIE / SERIES DETAILS</div>' +
-      '<div class="details-grid">' +
-        '<b>Release Date:</b><span>' + escapeHtml(post.date) + '</span>' +
-        '<b>Genre:</b><span>' + escapeHtml(post.category) + '</span>' +
-        '<b>Platform:</b><span>' + escapeHtml(post.platform) + '</span>' +
-        '<b>Status:</b><span>' + escapeHtml(post.badge) + '</span>' +
-      '</div>' +
-    '</div>';
-
-  var shareUrl = LIVE_BASE + "/posts/" + post.slug + ".html";
-  var shareTitle = post.title;
-
-  return '<!DOCTYPE html><html lang="hi"><head><meta charset="UTF-8">' +
-    '<meta name="viewport" content="width=device-width,initial-scale=1.0">' +
-    '<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">' +
-    '<meta name="description" content="' + escapeHtml(post.summary || post.title) + '">' +
-    '<meta name="author" content="Vanrajsinh Vaghela">' +
-    '<meta property="og:type" content="article">' +
-    '<meta property="og:site_name" content="Filmy Khabr">' +
-    '<meta property="og:title" content="' + escapeHtml(post.title) + '">' +
-    '<meta property="og:description" content="' + escapeHtml(post.summary || post.title) + '">' +
-    (post.image ? '<meta property="og:image" content="' + LIVE_BASE + '/' + escapeHtml(post.image) + '">' : '') +
-    '<meta name="twitter:card" content="summary_large_image">' +
-    '<link rel="canonical" href="' + shareUrl + '">' +
-    '<title>' + escapeHtml(post.title) + ' - Filmy Khabr</title>' +
-    '<style>' +
-      '*{box-sizing:border-box}html,body{margin:0;padding:0}' +
-      'body{background:#f5f5f5;color:#171717;font-family:' + style + ';line-height:1.75}' +
-      '.wrap{max-width:820px;margin:0 auto;background:#fff;min-height:100vh}.topline{height:4px;background:#e50914}' +
-      '.article{padding:18px 22px 30px}.crumb{font-size:12px;color:#d10b14;font-weight:800;text-transform:uppercase}' +
-      '.badge{display:inline-block;background:#e50914;color:#fff;border-radius:4px;padding:4px 9px;font-size:11px;font-weight:900;margin:7px 0;text-transform:uppercase}' +
-      'h1{font-family:' + style + ';font-weight:900;font-size:34px;line-height:1.22;margin:8px 0 10px;color:#111}' +
-      '.meta{font-size:12px;color:#777;margin-bottom:15px}' +
-      '.hero-image{width:100%;height:auto;display:block;border-radius:8px;margin:10px 0 18px}' +
-      '.summary{font-size:17px;font-weight:700;line-height:1.55;background:#f7f7f7;border-left:4px solid #e50914;padding:12px 14px;margin:16px 0}' +
-      '.article-body{font-size:17px}.article-body p{margin:0 0 17px}' +
-      '.article-body figure{margin:20px 0;text-align:center}.article-body figure img{width:100%;height:auto;border-radius:8px}' +
-      '.video-box{width:100%;aspect-ratio:16/9;background:#000;border-radius:9px;overflow:hidden;margin:22px 0}' +
-      '.video-box iframe{width:100%;height:100%;border:0}' +
-      '.sources{border-top:1px solid #ddd;margin-top:28px;padding-top:18px}' +
-      '.sources h2,.related h2{font-size:20px;margin:0 0 12px}' +
-      '.sources li{margin:8px 0}.sources a{color:#d10b14;font-weight:700;word-break:break-word}' +
-      '.details-box{border:1px solid #e0e0e0;border-left:4px solid #e50914;border-radius:7px;padding:14px;margin:24px 0;background:#fafafa}' +
-      '.details-head{font-size:14px;font-weight:900;color:#c50912;margin-bottom:10px}' +
-      '.details-grid{display:grid;grid-template-columns:130px 1fr 100px 1fr;gap:7px;font-size:13px}' +
-      '.details-grid span{color:#555}' +
-      '.related{border-top:1px solid #ddd;margin-top:25px;padding-top:20px}' +
-      '.related-card{display:block;text-decoration:none;color:#111;border:1px solid #ddd;border-radius:7px;overflow:hidden;margin:12px 0;background:#fff}' +
-      '.related-card img{display:block;width:100%;aspect-ratio:16/7;object-fit:cover}' +
-      '.related-card div{font-size:14px;font-weight:800;padding:10px 11px;line-height:1.4}' +
-      '.share{display:flex;gap:8px;margin-top:22px}' +
-      '.share a{flex:1;text-align:center;padding:10px;border-radius:6px;color:#fff;text-decoration:none;font-size:12px;font-weight:800}' +
-      '.wa{background:#1ecb68}.tg{background:#0c93d1}.x{background:#111}' +
-      '.ad-slot{margin:18px 0;overflow:hidden;text-align:center}' +
-      '.footer{background:#f3f3f3;color:#777;text-align:center;font-size:11px;padding:20px}' +
-      '.footer a{color:#555;text-decoration:none}' +
-      '@media(max-width:600px){.article{padding:15px 14px 25px}h1{font-size:27px}.article-body{font-size:16px}' +
-      '.details-grid{grid-template-columns:110px 1fr}.share a{padding:9px 4px}}' +
-    '</style></head><body>' +
-    '<div class="wrap"><div class="topline"></div>' +
-    '<article class="article">' +
-      ad(1) +
-      '<div class="crumb">FILMY KHABR • ' + escapeHtml(post.category) + '</div>' +
-      '<span class="badge">' + escapeHtml(post.badge) + '</span>' +
-      '<h1>' + escapeHtml(post.title) + '</h1>' +
-      '<div class="meta">Published on ' + escapeHtml(post.date) + ' • By Vanrajsinh Vaghela</div>' +
-      hero +
-      (post.summary ? '<div class="summary">' + escapeHtml(post.summary) + '</div>' : '') +
-      ad(2) +
-      trailer +
-      ad(3) +
-      '<div class="article-body">' + body + '</div>' +
-      ad(4) +
-      details +
-      ad(5) +
-      '<div class="sources"><h2>Sources</h2><ul>' +
-        (sourcesHtml || '<li>Official/verified sources used during research.</li>') +
-      '</ul></div>' +
-      ad(6) +
-      '<div class="related"><h2>RELATED STORIES</h2>' +
-        (relatedHtml || '<p style="color:#777">More stories coming soon.</p>') +
-      '</div>' +
-      ad(7) +
-      '<div class="share">' +
-        '<a class="wa" target="_blank" rel="noopener" href="https://wa.me/?text=' +
-          encodeURIComponent(shareTitle + " " + shareUrl) + '">💬 WhatsApp</a>' +
-        '<a class="tg" target="_blank" rel="noopener" href="https://t.me/share/url?url=' +
-          encodeURIComponent(shareUrl) + '&text=' + encodeURIComponent(shareTitle) + '">✈ Telegram</a>' +
-        '<a class="x" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text=' +
-          encodeURIComponent(shareTitle) + '&url=' + encodeURIComponent(shareUrl) + '">𝕏 X</a>' +
-      '</div>' +
-      ad(8) +
-    '</article>' +
-    '<footer class="footer">© ' + new Date().getFullYear() +
-      ' Filmy Khabr. Managed and Published by Vanrajsinh Vaghela.<br>All Rights Reserved.</footer>' +
-    '</div></body></html>';
+/* ---------- RELATED ---------- */
+function relatedFor(posts,currentSlug){
+  return posts.filter(p=>p?.slug&&p.slug!==currentSlug).slice(0,3).map(p=>({
+    title:p.title||"Filmy Khabr",
+    url:CONFIG.LIVE_BASE+"/posts/"+p.slug+".html",
+    image:p.image||p.imagePath||""
+  }));
+}
+function showRelatedPreview(items){
+  $("related-auto-preview").innerHTML=items.length
+    ?items.map((x,i)=>(i+1)+". <b>"+esc(x.title)+"</b><br><span style='color:#7f8c99'>"+esc(x.url)+"</span>").join("<br><br>")
+    :"No older posts available yet.";
 }
 
-/* ============================================================
-   PREVIEW  (FIXED: sandboxed iframe, original design preserved)
-============================================================ */
-function renderPreview() {
-  var frame = document.getElementById("preview-frame");
-  if (!frame) return;
-  var p = buildPostObject(null, []);
-  var html = generatePostHTML(p);
-  frame.srcdoc = html;
+/* ---------- YOUTUBE / ARTICLE ---------- */
+function youtubeId(url){
+  const s=text(url).trim();if(!s)return "";
+  try{
+    const u=new URL(s);
+    if(u.hostname.includes("youtu.be"))return u.pathname.slice(1).split("/")[0];
+    if(u.searchParams.get("v"))return u.searchParams.get("v");
+    const m=u.pathname.match(/\/(?:embed|shorts|live)\/([^/?]+)/);return m?m[1]:"";
+  }catch(e){return /^[A-Za-z0-9_-]{11}$/.test(s)?s:""}
+}
+function youtubeEmbed(url){
+  const id=youtubeId(url);if(!id)return "";
+  return '<div class="video-box"><iframe src="https://www.youtube-nocookie.com/embed/'+esc(id)+'?rel=0&modestbranding=1" loading="lazy" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;web-share" allowfullscreen></iframe></div>';
+}
+function positionItems(content,v1,p1,v2,p2,extras){
+  let arr=text(content).split(/\n\s*\n/).map(x=>x.trim()).filter(Boolean);
+  if(!arr.length)arr=[text(content)];
+  arr=arr.map(p=>"<p>"+p.replace(/\n/g,"<br>")+"</p>");
+  function insert(item,pos){
+    if(!item||!pos)return;
+    let i=0;
+    if(pos==="top")i=0;else if(pos==="bottom")i=arr.length;else if(pos==="upper-middle")i=Math.floor(arr.length*.25);
+    else if(pos==="middle")i=Math.floor(arr.length*.5);else if(pos==="lower-middle")i=Math.floor(arr.length*.75);else if(pos==="before-last")i=Math.max(0,arr.length-1);
+    arr.splice(i,0,item);
+  }
+  insert(youtubeEmbed(v1),p1);insert(youtubeEmbed(v2),p2);
+  (extras||[]).forEach(x=>{if(x?.path&&x.pos)insert('<figure><img src="../'+esc(x.path)+'" loading="lazy" alt="Filmy Khabr article image"></figure>',x.pos)});
+  return arr.join("");
+}
+function fontFamily(style){
+  if(style==="noto-serif")return '"Noto Serif Devanagari",Georgia,serif';
+  if(style==="playfair-lora")return '"Playfair Display","Lora",Georgia,serif';
+  if(style==="roboto-sans")return '"Roboto","Inter",Arial,sans-serif';
+  return '"Noto Sans Devanagari","Nirmala UI",Arial,sans-serif';
+}
+function generatePostHTML(post){
+  const style=fontFamily(post.fontStyle);
+  const body=positionItems(esc(post.content).replace(/&lt;br&gt;/g,"<br>"),post.video1Url,post.video1Pos,post.video2Url,post.video2Pos,post.extraImages);
+  const hero=post.image?'<img class="hero-image" src="../'+esc(post.image)+'" alt="'+esc(post.title)+'" loading="eager">':"";
+  const trailer=youtubeEmbed(post.trailer);
+  const sources=(post.sources||[]).map(s=>'<li><a href="'+esc(s.url)+'" target="_blank" rel="noopener noreferrer">'+esc(s.name)+'</a></li>').join("");
+  const related=(post.relatedArticles||[]).map(r=>'<a class="related-card" href="'+esc(r.url)+'">'+(r.image?'<img src="../'+esc(r.image)+'" alt="'+esc(r.title)+'" loading="lazy">':"")+'<div>'+esc(r.title)+'</div></a>').join("");
+  const ads=Object.values(post.ads||{}).filter(Boolean).map(a=>'<div class="ad-slot">'+a+"</div>").join("");
+  const details='<div class="details-box"><div class="details-head">🎬 MOVIE / SERIES DETAILS</div><div class="details-grid"><b>Release Date:</b><span>'+esc(post.date)+'</span><b>Genre:</b><span>'+esc(post.category)+'</span><b>Platform:</b><span>'+esc(post.platform)+'</span><b>Status:</b><span>'+esc(post.badge)+'</span></div></div>';
+  return '<!DOCTYPE html><html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">'+
+  '<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">'+
+  '<meta name="description" content="'+esc(post.summary||post.title)+'"><meta name="author" content="Vanrajsinh Vaghela">'+
+  '<meta property="og:type" content="article"><meta property="og:site_name" content="Filmy Khabr">'+
+  '<meta property="og:title" content="'+esc(post.title)+'"><meta property="og:description" content="'+esc(post.summary||post.title)+'">'+
+  (post.image?'<meta property="og:image" content="'+CONFIG.LIVE_BASE+'/'+esc(post.image)+'">':"")+
+  '<link rel="canonical" href="'+CONFIG.LIVE_BASE+'/posts/'+esc(post.slug)+'.html"><title>'+esc(post.title)+' - Filmy Khabr</title>'+
+  '<style>*{box-sizing:border-box}html,body{margin:0;padding:0}body{background:#f5f5f5;color:#171717;font-family:'+style+';line-height:1.75}.wrap{max-width:820px;margin:0 auto;background:#fff;min-height:100vh}.topline{height:4px;background:#e50914}.article{padding:18px 22px 30px}.crumb{font-size:12px;color:#d10b14;font-weight:800;text-transform:uppercase}.badge{display:inline-block;background:#e50914;color:#fff;border-radius:4px;padding:4px 9px;font-size:11px;font-weight:900;margin:7px 0;text-transform:uppercase}h1{font-family:Georgia,"Times New Roman",serif;font-size:34px;line-height:1.22;margin:8px 0 10px;color:#111}.meta{font-size:12px;color:#777;margin-bottom:15px}.hero-image{width:100%;height:auto;display:block;border-radius:8px;margin:10px 0 18px}.summary{font-size:17px;font-weight:700;line-height:1.55;background:#f7f7f7;border-left:4px solid #e50914;padding:12px 14px;margin:16px 0}.article-body{font-size:17px}.article-body p{margin:0 0 17px}.article-body figure{margin:20px 0;text-align:center}.article-body figure img{width:100%;height:auto;border-radius:8px}.video-box{width:100%;aspect-ratio:16/9;background:#000;border-radius:9px;overflow:hidden;margin:22px 0}.video-box iframe{width:100%;height:100%;border:0}.sources{border-top:1px solid #ddd;margin-top:28px;padding-top:18px}.sources h2,.related h2{font-size:20px;margin:0 0 12px}.sources li{margin:8px 0}.sources a{color:#d10b14;font-weight:700}.details-box{border:1px solid #e0e0e0;border-left:4px solid #e50914;border-radius:7px;padding:14px;margin:24px 0;background:#fafafa}.details-head{font-size:14px;font-weight:900;color:#c50912;margin-bottom:10px}.details-grid{display:grid;grid-template-columns:130px 1fr 100px 1fr;gap:7px;font-size:13px}.details-grid span{color:#555}.related{border-top:1px solid #ddd;margin-top:25px;padding-top:20px}.related-card{display:block;text-decoration:none;color:#111;border:1px solid #ddd;border-radius:7px;overflow:hidden;margin:12px 0;background:#fff}.related-card img{display:block;width:100%;aspect-ratio:16/7;object-fit:cover}.related-card div{font-size:14px;font-weight:800;padding:10px 11px;line-height:1.4}.share{display:flex;gap:8px;margin-top:22px}.share a{flex:1;text-align:center;padding:10px;border-radius:6px;color:#fff;text-decoration:none;font-size:12px;font-weight:800}.wa{background:#1ecb68}.tg{background:#0c93d1}.x{background:#111}.ad-slot{margin:18px 0;overflow:hidden;text-align:center}.footer{background:#f3f3f3;color:#777;text-align:center;font-size:11px;padding:20px}.footer a{color:#555;text-decoration:none}@media(max-width:600px){.article{padding:15px 14px 25px}h1{font-size:27px}.article-body{font-size:16px}.details-grid{grid-template-columns:110px 1fr}.share a{padding:9px 4px}}</style></head><body>'+
+  '<div class="wrap"><div class="topline"></div><article class="article"><div class="crumb">FILMY KHABR • '+esc(post.category)+'</div><span class="badge">'+esc(post.badge)+'</span><h1>'+esc(post.title)+'</h1><div class="meta">Published on '+esc(post.date)+' • By Vanrajsinh Vaghela</div>'+hero+(post.summary?'<div class="summary">'+esc(post.summary)+'</div>':"")+trailer+
+  '<div class="article-body">'+body+"</div>"+details+ads+
+  '<div class="sources"><h2>Sources</h2><ul>'+(sources||"<li>Official/verified sources used during research.</li>")+"</ul></div>"+
+  '<div class="related"><h2>RELATED STORIES</h2>'+(related||'<p style="color:#777">More stories coming soon.</p>')+"</div>"+
+  '<div class="share"><a class="wa" target="_blank" href="https://wa.me/?text='+encodeURIComponent(post.title+" "+CONFIG.LIVE_BASE+"/posts/"+post.slug+".html")+'">💬 WhatsApp</a>'+
+  '<a class="tg" target="_blank" href="https://t.me/share/url?url='+encodeURIComponent(CONFIG.LIVE_BASE+"/posts/"+post.slug+".html")+'&text='+encodeURIComponent(post.title)+'">✈ Telegram</a>'+
+  '<a class="x" target="_blank" href="https://twitter.com/intent/tweet?text='+encodeURIComponent(post.title)+'&url='+encodeURIComponent(CONFIG.LIVE_BASE+"/posts/"+post.slug+".html")+'">𝕏 X</a></div>'+
+  '</article><footer class="footer">© '+new Date().getFullYear()+' Filmy Khabr. Managed and Published by Vanrajsinh Vaghela.<br>All Rights Reserved.</footer></div></body></html>';
 }
 
-/* ============================================================
-   RESET
-============================================================ */
-function resetForm() {
-  document.getElementById("edit-post-id").value = "";
-  document.getElementById("edit-published-at").value = "";
+/* ---------- PUBLISH ---------- */
+async function publishPost(){
+  const btn=$("publish-btn");
+  autoGenerateSlug();
+  const title=$("post-title").value.trim(),slug=$("post-slug").value.trim(),content=$("post-content").value.trim(),token=$("gh-token").value.trim();
+  if(!title||!slug||!content||!token){alert("Title, Slug, Content aur GitHub Token required!");return}
+  if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)){alert("Slug sirf lowercase English words + hyphen me hona chahiye.");return}
 
-  var clearIds = [
-    "post-title", "post-slug", "post-summary", "hero-slider-trailer",
-    "trailer-url-1", "trailer-url-2", "post-content", "post-image-path",
-    "source-credit"
-  ];
-  for (var i = 0; i < clearIds.length; i++) {
-    var el = document.getElementById(clearIds[i]);
-    if (el) el.value = "";
-  }
+  btn.disabled=true;btn.innerHTML='<span class="spinner"></span>Publishing...';
+  try{
+    /* One read only: posts.json. */
+    const postsFile=await getPostsFile();
+    const posts=postsFile?.content?normalizePosts(JSON.parse(utf8FromBase64(postsFile.content))):[];
+    const editId=$("edit-post-id").value.trim();
+    const existing=editId?posts.find(p=>p.id===editId)||null:null;
+    const oldSlug=existing?.slug||null;
+    const post=buildPost(existing,[]);
 
-  setSelectValue("post-category", "Movies", "Movies");
-  setSelectValue("post-platform", "Netflix", "Netflix");
-  setSelectValue("post-badge", "Trending", "Trending");
-  setSelectValue("post-font-style", "roboto-sans", "roboto-sans");
-  setSelectValue("trailer-pos-1", "middle", "middle");
-  setSelectValue("trailer-pos-2", "before-last", "before-last");
+    /* Images: direct PUT; no preliminary GET for new files. */
+    if(selectedImage){
+      post.image="images/"+slug+".jpg";
+      await putFile(post.image,selectedImage.base64,"Upload "+slug+" main image");
+    }else if(existing?.image){
+      post.image=existing.image;
+    }
 
-  var fileInput = document.getElementById("post-file");
-  if (fileInput) fileInput.value = "";
+    const extraUploads=[];
+    for(let i=1;i<=3;i++){
+      const st=extraImageState[i-1],pos=$("extra-img-pos-"+i).value;
+      if(st&&pos){
+        const path="extra-images/"+slug+"-extra-"+i+".jpg";
+        $("extra-img-path-"+i).value=path;
+        extraUploads.push(putFile(path,st.base64,"Upload "+slug+" extra "+i));
+      }
+    }
+    if(extraUploads.length)await Promise.all(extraUploads);
+    post.extraImages=collectExtraImages();
 
-  selectedImageBase64 = null;
-  selectedImageDataUrl = null;
-  extraImageState = [null, null, null];
+    const withoutCurrent=posts.filter(p=>p.id!==editId&&p.slug!==slug);
+    const related=relatedFor(withoutCurrent,slug);
+    post.relatedArticles=related;showRelatedPreview(related);
 
-  for (var j = 1; j <= 3; j++) {
-    var f = document.getElementById("extra-img-file-" + j);
-    var pEl = document.getElementById("extra-img-path-" + j);
-    var posEl = document.getElementById("extra-img-pos-" + j);
-    if (f) f.value = "";
-    if (pEl) pEl.value = "";
-    if (posEl) posEl.value = (j === 1) ? "before-last" : "";
-  }
+    /* Article file upload. */
+    await putFile("posts/"+slug+".html",base64Utf8(generatePostHTML(post)),"Publish "+slug);
 
-  for (var a = 1; a <= 8; a++) {
-    var adEl = document.getElementById("ad-code-" + a);
-    if (adEl) adEl.value = "";
-  }
+    /* Update posts.json using the SHA we already fetched. */
+    let nextPosts;
+    if(existing){
+      const idx=posts.findIndex(p=>p.id===editId);
+      nextPosts=[...posts];if(idx>=0)nextPosts[idx]=post;else nextPosts.unshift(post);
+    }else nextPosts=[post,...posts];
 
-  document.getElementById("form-heading").textContent = "Create New Post";
-  document.getElementById("publish-btn").textContent = "Publish Post";
-  document.getElementById("publish-btn").disabled = false;
+    if(!postsFile)await putFile("data/posts.json",base64Utf8(JSON.stringify(nextPosts,null,2)),"Add post "+slug);
+    else await putJsonFile("data/posts.json",nextPosts,(existing?"Update":"Add")+" post "+slug,postsFile.sha);
 
-  showRelatedPreview([]);
-  updateSourcePreview();
-}
+    /* Remove old article only after the new data is safely committed. */
+    if(existing&&oldSlug&&oldSlug!==slug){
+      try{await deleteFile("posts/"+oldSlug+".html","Remove old slug "+oldSlug)}catch(e){console.warn("Old slug delete failed:",e)}
+    }
 
-/* ============================================================
-   MISC UI
-============================================================ */
-function copyPostLink() {
-  var val = document.getElementById("success-url").value;
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(val).then(function () {
-      showToast("Link copied");
-    }).catch(function () {
-      showToast("Copy failed");
-    });
-  } else {
-    var inp = document.getElementById("success-url");
-    inp.select();
-    try { document.execCommand("copy"); showToast("Link copied"); }
-    catch (e) { showToast("Copy failed"); }
+    const live=CONFIG.LIVE_BASE+"/posts/"+slug+".html";
+    $("success-url").value=live;$("open-post").href=live;$("success-modal").classList.add("show");
+    resetForm();
+  }catch(e){
+    alert("Publish failed: "+e.message);
+  }finally{
+    btn.disabled=false;btn.textContent=$("edit-post-id").value?"Update Post":"Publish Post";
   }
 }
 
-function closeSuccessModal() {
-  document.getElementById("success-modal").classList.remove("show");
+/* ---------- PREVIEW / RESET ---------- */
+function renderPreview(){
+  const p=buildPost(null,[]);
+  const html=generatePostHTML(p).replace(/<script[\s\S]*?<\/script>/gi,"");
+  const match=html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+  $("preview-output").innerHTML='<div class="preview-body">'+(match?match[1]:"Preview")+"</div>";
+}
+function resetForm(){
+  ["edit-post-id","edit-published-at","post-title","post-slug","post-summary","hero-slider-trailer","trailer-url-1","trailer-url-2","post-content","post-image-path","source-credit"].forEach(id=>$(id).value="");
+  $("post-category").value="Movies";$("post-platform").value="Netflix";$("post-badge").value="Trending";$("post-font-style").value="roboto-sans";
+  $("trailer-pos-1").value="middle";$("trailer-pos-2").value="before-last";
+  $("post-file").value="";selectedImage=null;extraImageState=[null,null,null];
+  for(let i=1;i<=3;i++){$("extra-img-file-"+i).value="";$("extra-img-path-"+i).value="";$("extra-img-pos-"+i).value=i===1?"before-last":""}
+  for(let i=1;i<=8;i++)$("ad-code-"+i).value="";
+  $("form-heading").textContent="Create New Post";$("publish-btn").textContent="Publish Post";
+  showRelatedPreview([]);updateSourcePreview();
 }
 
-function showToast(msg) {
-  var t = document.getElementById("toast");
-  if (!t) return;
-  t.textContent = msg;
-  t.classList.add("show");
-  clearTimeout(window.__fkToast);
-  window.__fkToast = setTimeout(function () { t.classList.remove("show"); }, 2500);
-}
+/* ---------- EVENTS ---------- */
+document.addEventListener("DOMContentLoaded",()=>{
+  $("unlock-btn").addEventListener("click",verifyPinUser);
+  $("admin-pin-input").addEventListener("keydown",e=>{if(e.key==="Enter")verifyPinUser()});
+  $("post-title").addEventListener("input",autoGenerateSlug);
+  $("post-file").addEventListener("change",handleMainImage);
+  $("source-credit").addEventListener("input",updateSourcePreview);
+  $("save-settings").addEventListener("click",saveCreds);
+  $("clear-form").addEventListener("click",resetForm);
+  $("publish-btn").addEventListener("click",publishPost);
+  $("refresh-posts").addEventListener("click",loadManagePosts);
+  $("refresh-preview").addEventListener("click",renderPreview);
+  $("copy-link").addEventListener("click",()=>{
+    navigator.clipboard?.writeText($("success-url").value).then(()=>toast("Link copied")).catch(()=>toast("Copy failed"));
+  });
+  $("close-modal").addEventListener("click",()=>$("success-modal").classList.remove("show"));
+  document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>switchTab(b.dataset.tab)));
+  $("posts-list-container").addEventListener("click",e=>{
+    const b=e.target.closest("button[data-action]");if(!b)return;
+    if(b.dataset.action==="edit")editPost(b.dataset.id);
+    if(b.dataset.action==="delete")deletePost(b.dataset.id);
+  });
+
+  let auth=false;try{auth=sessionStorage.getItem("fk_admin_auth")==="true"}catch(e){}
+  if(auth){$("pin-gate").style.display="none";$("admin-app").classList.remove("hidden");initAdmin()}
+});
 </script>
 </body>
 </html>
