@@ -464,10 +464,17 @@ async function ghRequest(path,method="GET",body=null,timeout=REQUEST_TIMEOUT){
   }finally{clearTimeout(timer)}
 }
 async function ghPutFile(path,content,message){
-  const existing=await ghRequest(path,"GET");
-  const body={message,content};
-  if(existing&&existing.sha)body.sha=existing.sha;
-  return ghRequest(path,"PUT",body);
+  for(let attempt=0;attempt<3;attempt++){
+    const existing=await ghRequest(path,"GET");
+    const body={message,content};
+    if(existing&&existing.sha)body.sha=existing.sha;
+    try{
+      return await ghRequest(path,"PUT",body);
+    }catch(e){
+      if(!/409/.test(String(e.message||e))||attempt===2)throw e;
+      await new Promise(r=>setTimeout(r,700*(attempt+1)));
+    }
+  }
 }
 async function ghDeleteFile(path,message){
   const existing=await ghRequest(path,"GET");if(!existing)return;
@@ -633,12 +640,28 @@ async function publishPost(){
     const postHTML=generatePostHTML(post);
     await ghPutFile(`posts/${slug}.html`,base64Utf8(postHTML),`Publish ${slug}`);
 
-    if(existing){
-      const idx=posts.findIndex(p=>p.id===editId);if(idx>=0)posts[idx]=post;
-    }else{
-      posts.unshift(post);
+    // IMPORTANT: re-fetch posts.json immediately before saving. This prevents stale-SHA 409 conflicts
+    // and also prevents one browser/tab from overwriting posts published by another tab/user.
+    let saved=false;
+    for(let attempt=0;attempt<3&&!saved;attempt++){
+      const latestFile=await getPostsFile();
+      let latestPosts=latestFile&&latestFile.content?normalizePosts(JSON.parse(utf8FromBase64(latestFile.content))):[];
+      const matchIndex=latestPosts.findIndex(p=>(editId&&p.id===editId)||p.slug===slug);
+      if(matchIndex>=0){
+        const oldEntry=latestPosts[matchIndex];
+        latestPosts[matchIndex]={...oldEntry,...post,id:post.id||oldEntry.id};
+      }else{
+        latestPosts.unshift(post);
+      }
+      try{
+        await ghRequest("data/posts.json","PUT",{message:`${existing?"Update":"Add"} post ${slug}`,content:base64Utf8(JSON.stringify(latestPosts,null,2)),sha:latestFile?latestFile.sha:null});
+        saved=true;
+      }catch(e){
+        if(!/409/.test(String(e.message||e))||attempt===2)throw e;
+        await new Promise(r=>setTimeout(r,900*(attempt+1)));
+      }
     }
-    await ghRequest("data/posts.json","PUT",{message:`${existing?"Update":"Add"} post ${slug}`,content:base64Utf8(JSON.stringify(posts,null,2)),sha:postsFile?postsFile.sha:null});
+    if(!saved)throw new Error("GitHub conflict (409) after 3 retries. Please try again.");
 
     // Old article URL cleanup when an edit changes the slug. Best effort only.
     if(existing&&oldSlug&&oldSlug!==slug){
