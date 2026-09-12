@@ -678,6 +678,18 @@ function generatePostHTML(post,isPreview=false,previewMedia={}){
 <html lang="hi"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+${(() => {
+  const rawGaId = safeText(document.getElementById("ga-id")?.value || "G-E6B67VBEFZ").trim();
+  const gaId = /^G-[A-Za-z0-9_-]+$/.test(rawGaId) ? rawGaId : "";
+  return gaId ? `<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=${gaId}"><\/script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '${gaId}');
+<\/script>` : "";
+})()}
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="description" content="${escapeHtml(post.summary||post.title)}">
 <meta name="author" content="Vanrajsinh Vaghela">
@@ -695,7 +707,7 @@ h1{font-family:Georgia,"Times New Roman",serif;font-size:40px;line-height:1.18;m
 .summary{font-size:18px;font-weight:700;line-height:1.6;background:${post.articleTheme==="cinema-dark"?"#181b22":"#f8f9fb"};border:1px solid ${post.articleTheme==="cinema-dark"?"#2b303a":"#e7e9ee"};border-left:5px solid var(--accent);border-radius:10px;padding:15px 17px;margin:20px 0 24px}
 .article-body{font-size:18px}.article-body p{margin:0 0 19px}.article-body figure{margin:25px 0;text-align:center}.article-body figure img{width:100%;height:auto;border-radius:12px;box-shadow:0 7px 22px rgba(0,0,0,.08)}.video-box{width:100%;aspect-ratio:16/9;background:#000;border-radius:13px;overflow:hidden;margin:25px 0;box-shadow:0 10px 28px rgba(0,0,0,.16);border:1px solid rgba(0,0,0,.12)}.video-box iframe{width:100%;height:100%;border:0;display:block}
 .sources{border-top:1px solid ${post.articleTheme==="cinema-dark"?"#30343c":"#e2e4e8"};margin-top:34px;padding-top:22px}.sources h2,.related h2{font-size:21px;margin:0 0 13px}.sources ul{margin:0;padding-left:20px}.sources li{margin:9px 0}.sources a{color:var(--accent);font-weight:700;text-decoration:none}.sources a:hover{text-decoration:underline}.details-box{border:1px solid ${post.articleTheme==="cinema-dark"?"#30343c":"#e2e4e8"};border-left:5px solid var(--accent);border-radius:10px;padding:16px 17px;margin:28px 0;background:${post.articleTheme==="cinema-dark"?"#181b22":"#fafbfc"}}.details-head{font-size:13px;font-weight:900;color:var(--accent);margin-bottom:12px;letter-spacing:.04em}.details-grid{display:grid;grid-template-columns:120px 1fr 100px 1fr;gap:9px 12px;font-size:13px}.details-grid span{color:${post.articleTheme==="cinema-dark"?"#c2c7d0":"#555"}}.related{border-top:1px solid ${post.articleTheme==="cinema-dark"?"#30343c":"#e2e4e8"};margin-top:30px;padding-top:22px}.related-card{display:block;text-decoration:none;color:${post.articleTheme==="cinema-dark"?"#fff":"#111"};border:1px solid ${post.articleTheme==="cinema-dark"?"#30343c":"#e0e2e6"};border-radius:11px;overflow:hidden;margin:13px 0;background:${post.articleTheme==="cinema-dark"?"#181b22":"#fff"};transition:transform .18s ease,box-shadow .18s ease}.related-card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.08)}.related-card img{display:block;width:100%;aspect-ratio:16/7;object-fit:cover}.related-card div{font-size:15px;font-weight:800;padding:12px 13px;line-height:1.45}.share{display:flex;gap:9px;margin-top:26px}.share a{flex:1;text-align:center;padding:11px;border-radius:8px;color:#fff;text-decoration:none;font-size:12px;font-weight:900}.wa{background:#1ecb68}.tg{background:#0c93d1}.x{background:#111}.ad-slot{margin:22px 0;overflow:hidden;text-align:center}
-.footer{background:${post.articleTheme==="cinema-dark"?"#0d0f13":"#f1f2f4"};color:#777;text-align:center;font-size:11px;padding:22px}.footer a{color:#555;text-decoration:none}
+.footer{background:${post.articleTheme==="cinema-dark"?"#0d0f13":"#f1f2f4"};color:#777;text-align:center;font-size:11px;padding:22px}.footer a{color:#555;text-decoration:none}.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 16px;margin-bottom:12px}.footer-links a{color:inherit;text-decoration:none;font-weight:700}.footer-links a:hover{text-decoration:underline}
 @media(max-width:600px){.article{padding:18px 15px 28px}h1{font-size:29px}.article-body{font-size:16.5px}.summary{font-size:16px}.details-grid{grid-template-columns:105px 1fr}.details-grid b:nth-of-type(2),.details-grid span:nth-of-type(2){margin-top:4px}.share a{padding:10px 4px}}
 </style></head><body>
 <div class="wrap"><div class="topline"></div><article class="article">
@@ -708,7 +720,7 @@ ${adHtml}
 <div class="sources"><h2>Sources</h2><ul>${sources||"<li>Official/verified sources used during research.</li>"}</ul></div>
 <div class="related"><h2>RELATED STORIES</h2>${related||"<p style='color:#777'>More stories coming soon.</p>"}</div>
 <div class="share"><a class="wa" target="_blank" href="https://wa.me/?text=${encodeURIComponent(post.title+" "+LIVE_BASE+"/posts/"+post.slug+".html")}">💬 WhatsApp</a><a class="tg" target="_blank" href="https://t.me/share/url?url=${encodeURIComponent(LIVE_BASE+"/posts/"+post.slug+".html")}&text=${encodeURIComponent(post.title)}">✈ Telegram</a><a class="x" target="_blank" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(LIVE_BASE+"/posts/"+post.slug+".html")}">𝕏 X</a></div>
-</article><footer class="footer">© ${new Date().getFullYear()} Filmy Khabr. Managed and Published by Vanrajsinh Vaghela.<br>All Rights Reserved.</footer></div></body></html>`;
+</article><footer class="footer"><div class="footer-links"><a href="${LIVE_BASE}/about.html">About Us</a><a href="${LIVE_BASE}/contact.html">Contact Us</a><a href="${LIVE_BASE}/disclaimer.html">Disclaimer</a><a href="${LIVE_BASE}/privacy-policy.html">Privacy Policy</a></div>© ${new Date().getFullYear()} Filmy Khabr. Managed and Published by Vanrajsinh Vaghela.<br>All Rights Reserved.</footer></div></body></html>`;
 }
 function renderPreview(){
   const p=buildPostObject(null,[]);
