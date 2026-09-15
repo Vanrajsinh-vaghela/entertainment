@@ -36,7 +36,24 @@ textarea{resize:vertical;min-height:80px}.content-box{min-height:310px}
 .source-help,.related-help{font-size:11px;color:var(--muted);margin:5px 0 8px}.source-preview{font-size:11px;color:#cbd5e1;margin-top:7px}
 .related-auto{background:#0d141b;border:1px dashed #344555;border-radius:8px;padding:10px;font-size:11px;color:#b7c3cf}
 .related-auto b{color:#fff}
-@media(max-width:620px){.row3{grid-template-columns:1fr}.row2{grid-template-columns:1fr}.header{align-items:flex-start;flex-direction:column}.tabs{width:100%}.tabs .btn{flex:1}.post-item{align-items:flex-start;flex-direction:column}.actions{width:100%}.actions .btn{flex:1}.urlrow{flex-direction:column}}
+
+/* SEO Control Center */
+.seo-upgrade{background:linear-gradient(180deg,#151f1b,#151a21);border-color:#24583f}
+.seo-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:9px}
+.seo-copy-row{display:grid;grid-template-columns:1fr auto;gap:7px;align-items:stretch}
+.seo-copy-row input,.seo-copy-row textarea{min-width:0}
+.seo-copy-btn{min-width:62px}
+.seo-count{float:right;text-transform:none;letter-spacing:0;font-weight:800}
+.seo-preview{background:#fff;color:#202124;border-radius:9px;padding:13px;margin-top:10px;border:1px solid #dfe1e5}
+.seo-preview-label{font-size:9px;font-weight:900;color:#5f6368;letter-spacing:.08em;margin-bottom:7px}
+#seo-preview-title{color:#1a0dab;font-size:18px;line-height:1.3;margin-bottom:3px}
+#seo-preview-url{color:#188038;font-size:12px;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#seo-preview-description{color:#4d5156;font-size:12px;line-height:1.45}
+.seo-status{font-size:11px;color:var(--muted);margin-top:7px}
+@media(max-width:620px){
+  .row3{grid-template-columns:1fr}.row2{grid-template-columns:1fr}.header{align-items:flex-start;flex-direction:column}.tabs{width:100%}.tabs .btn{flex:1}.post-item{align-items:flex-start;flex-direction:column}.actions{width:100%}.actions .btn{flex:1}.urlrow{flex-direction:column}
+  .seo-copy-row{grid-template-columns:1fr}.seo-copy-btn{width:100%}
+}
 </style>
 </head>
 <body>
@@ -89,7 +106,7 @@ textarea{resize:vertical;min-height:80px}.content-box{min-height:310px}
       <input type="hidden" id="post-slug">
       <input type="hidden" id="post-image-path">
 
-      <div style="margin-bottom:10px"><label>Article Title</label><input id="post-title" oninput="autoGenerateSlug()" placeholder="Title likho"></div>
+      <div style="margin-bottom:10px"><label>Article Title</label><input id="post-title" oninput="autoGenerateSlug();generateSEO(false)" placeholder="Title likho"></div>
 
       <div class="row3">
         <div><label>Category</label>
@@ -155,6 +172,54 @@ textarea{resize:vertical;min-height:80px}.content-box{min-height:310px}
       </div>
 
       <div style="margin-top:10px"><label>Short Summary / Meta Excerpt</label><input id="post-summary" placeholder="2-3 line summary"></div>
+
+      <!-- SEO CONTROL CENTER -->
+      <div class="section seo-upgrade" id="seo-panel">
+        <div class="seo-head">
+          <h3 class="greenText" style="margin:0">🚀 SEO CONTROL CENTER</h3>
+          <button type="button" class="btn green" onclick="generateSEO(true)">Auto Generate SEO</button>
+        </div>
+
+        <div class="file-note" style="margin-bottom:10px">
+          Article Title + Summary + Content se SEO fields automatically generate honge.
+          Focus Keyword internal SEO workflow ke liye hai; ise article content mein paste karna zaroori nahi.
+        </div>
+
+        <div style="margin-bottom:10px">
+          <label>SEO Title <span id="seo-title-count" class="seo-count">0/60</span></label>
+          <div class="seo-copy-row">
+            <input id="seo-title" maxlength="70" placeholder="SEO optimized title">
+            <button type="button" class="btn blue seo-copy-btn" onclick="copySEOField('seo-title','SEO Title copied')">Copy</button>
+          </div>
+        </div>
+
+        <div style="margin-bottom:10px">
+          <label>SEO Description <span id="seo-desc-count" class="seo-count">0/160</span></label>
+          <div class="seo-copy-row">
+            <textarea id="seo-description" maxlength="180" style="min-height:85px" placeholder="SEO optimized description"></textarea>
+            <button type="button" class="btn blue seo-copy-btn" onclick="copySEOField('seo-description','SEO Description copied')">Copy</button>
+          </div>
+        </div>
+
+        <div style="margin-bottom:10px">
+          <label>Focus Keyword</label>
+          <div class="seo-copy-row">
+            <input id="focus-keyword" placeholder="Main search phrase">
+            <button type="button" class="btn blue seo-copy-btn" onclick="copySEOField('focus-keyword','Focus Keyword copied')">Copy</button>
+          </div>
+        </div>
+
+        <div class="seo-preview">
+          <div class="seo-preview-label">GOOGLE SEARCH PREVIEW</div>
+          <div id="seo-preview-title">Your SEO title will appear here</div>
+          <div id="seo-preview-url">filmykhabr.gujaratfastalert.in/posts/your-slug.html</div>
+          <div id="seo-preview-description">Your SEO description will appear here...</div>
+        </div>
+
+        <div id="seo-status" class="seo-status">SEO fields ready</div>
+
+        <button type="button" class="btn" style="width:100%;margin-top:9px" onclick="copyAllSEO()">📋 Copy All SEO</button>
+      </div>
 
       <div style="margin-top:10px"><label>Article Content</label>
         <textarea id="post-content" class="content-box" placeholder="Full article yahan likho"></textarea>
@@ -280,7 +345,11 @@ try{
 }catch(e){}
 
 function initAdmin(){
-  initPositionSelects(); initExtraImageRows(); loadCreds(); updateSourcePreview();
+  initPositionSelects();
+  initExtraImageRows();
+  loadCreds();
+  updateSourcePreview();
+  initSEO();
 }
 function switchTab(tab){
   ["new","manage","preview"].forEach(x=>{
@@ -325,6 +394,7 @@ function autoGenerateSlug(){
   const slug=slugify(document.getElementById("post-title").value);
   document.getElementById("post-slug").value=slug;
   if(!document.getElementById("post-image-path").value) document.getElementById("post-image-path").value=slug?`images/${slug}.jpg`:"";
+  updateSEOUI();
 }
 function readFileAsDataURL(file){
   return new Promise((resolve,reject)=>{
@@ -535,6 +605,19 @@ function editPost(id){
   }
   document.getElementById("source-credit").value=(p.sources||[]).map(s=>`${s.name||"Source"} | ${s.url||""}`).join("\n") || safeText(p.sourceCredit||"");
   for(let i=1;i<=8;i++)document.getElementById("ad-code-"+i).value=safeText((p.ads||{})["ad"+i]||"");
+
+  /* Load saved SEO fields. Older posts automatically fall back to title/summary. */
+  const seoTitle=document.getElementById("seo-title");
+  const seoDesc=document.getElementById("seo-description");
+  const keyword=document.getElementById("focus-keyword");
+  seoTitle.value=p.seoTitle||p.title||"";
+  seoDesc.value=p.seoDescription||p.summary||"";
+  keyword.value=p.focusKeyword||"";
+  seoTitleManual=!!p.seoTitle;
+  seoDescriptionManual=!!p.seoDescription;
+  focusKeywordManual=!!p.focusKeyword;
+  updateSEOUI();
+
   document.getElementById("form-heading").textContent="Edit Post";
   document.getElementById("publish-btn").textContent="Update Post";
   updateSourcePreview();switchTab("new");
@@ -561,6 +644,134 @@ function collectExtraImages(){
     if(path&&pos)arr.push({path,pos,isLocal:true});
   }return arr;
 }
+
+/* =========================
+   SEO ENGINE
+========================= */
+let seoTitleManual=false;
+let seoDescriptionManual=false;
+let focusKeywordManual=false;
+
+function seoClean(v){
+  return safeText(v).replace(/\s+/g," ").trim();
+}
+function seoTrim(v,max){
+  let s=seoClean(v);
+  if(s.length<=max)return s;
+  let cut=s.slice(0,max-1);
+  const sp=cut.lastIndexOf(" ");
+  if(sp>45)cut=cut.slice(0,sp);
+  return cut.trim()+"…";
+}
+function generateFocusKeyword(){
+  const title=seoClean(document.getElementById("post-title")?.value);
+  if(!title)return "";
+  const stop=[
+    "का","की","के","और","में","से","को","पर","है","हैं","यह","ये","अब","तो","भी",
+    "एक","इस","इसमें","इसका","इसकी","इसके","बड़ा","बड़ी","बड़े","देखें","जानें","क्या",
+    "out","now","latest","breaking","exclusive","update","news","the","a","an","of","and","in","on","for"
+  ];
+  const words=title.replace(/[|,:;!?।"'“”‘’()[\]{}]/g," ").split(/\s+/)
+    .filter(Boolean).filter(w=>!stop.includes(w.toLowerCase()));
+  return words.slice(0,4).join(" ")||title;
+}
+function generateSEO(force=false){
+  const title=seoClean(document.getElementById("post-title")?.value);
+  const summary=seoClean(document.getElementById("post-summary")?.value);
+  const content=seoClean(document.getElementById("post-content")?.value);
+  const seoTitle=document.getElementById("seo-title");
+  const seoDesc=document.getElementById("seo-description");
+  const keyword=document.getElementById("focus-keyword");
+  if(!seoTitle||!seoDesc||!keyword)return;
+
+  if(!title&&!summary&&!content){updateSEOUI();return;}
+
+  if(force||!seoTitleManual){
+    let t=title;
+    if(t.length<35&&summary){
+      const first=summary.split(/[।.!?]/)[0].trim();
+      if(first&&first.toLowerCase()!==t.toLowerCase()&&!t.toLowerCase().includes(first.toLowerCase()))t=t+" | "+first;
+    }
+    seoTitle.value=seoTrim(t,60);
+  }
+  if(force||!seoDescriptionManual){
+    let d=summary;
+    if(!d){
+      const ps=safeText(document.getElementById("post-content")?.value).split(/\n\s*\n/)
+        .map(x=>seoClean(x)).filter(x=>x.length>40);
+      d=ps[0]||title;
+    }
+    seoDesc.value=seoTrim(d,160);
+  }
+  if(force||!focusKeywordManual)keyword.value=generateFocusKeyword();
+  updateSEOUI();
+}
+function updateSEOUI(){
+  const t=document.getElementById("seo-title"),d=document.getElementById("seo-description");
+  if(!t||!d)return;
+  const tc=document.getElementById("seo-title-count"),dc=document.getElementById("seo-desc-count");
+  if(tc)tc.textContent=t.value.length+"/60";
+  if(dc)dc.textContent=d.value.length+"/160";
+  if(tc)tc.style.color=t.value.length>60?"#ef4444":(t.value.length>=50?"#18c77b":"#9aa4b2");
+  if(dc)dc.style.color=d.value.length>160?"#ef4444":(d.value.length>=120?"#18c77b":"#9aa4b2");
+
+  const pt=document.getElementById("seo-preview-title");
+  const pu=document.getElementById("seo-preview-url");
+  const pd=document.getElementById("seo-preview-description");
+  const slug=document.getElementById("post-slug")?.value||"your-slug";
+  if(pt)pt.textContent=t.value.trim()||"Your SEO title will appear here";
+  if(pu)pu.textContent=LIVE_BASE+"/posts/"+slug+".html";
+  if(pd)pd.textContent=d.value.trim()||"Your SEO description will appear here...";
+
+  const status=document.getElementById("seo-status");
+  const k=document.getElementById("focus-keyword")?.value.trim();
+  if(status){
+    if(t.value&&d.value&&k){
+      status.textContent="✓ SEO Title + Description + Focus Keyword ready";
+      status.style.color="#44e29d";
+    }else{
+      status.textContent="SEO fields incomplete";
+      status.style.color="#f5b83d";
+    }
+  }
+}
+function initSEO(){
+  const t=document.getElementById("seo-title"),d=document.getElementById("seo-description"),k=document.getElementById("focus-keyword");
+  if(!t||!d||!k)return;
+  t.addEventListener("input",()=>{seoTitleManual=true;updateSEOUI()});
+  d.addEventListener("input",()=>{seoDescriptionManual=true;updateSEOUI()});
+  k.addEventListener("input",()=>{focusKeywordManual=true;updateSEOUI()});
+  document.getElementById("post-summary")?.addEventListener("input",()=>{if(!seoDescriptionManual)generateSEO(false)});
+  document.getElementById("post-content")?.addEventListener("input",()=>{if(!seoDescriptionManual)generateSEO(false)});
+  generateSEO(false);
+}
+async function copySEOText(text,msg){
+  text=safeText(text).trim();
+  if(!text){showToast("Nothing to copy");return}
+  try{
+    await navigator.clipboard.writeText(text);
+    showToast(msg||"Copied");
+  }catch(e){
+    const ta=document.createElement("textarea");ta.value=text;ta.style.position="fixed";ta.style.left="-9999px";
+    document.body.appendChild(ta);ta.select();
+    try{document.execCommand("copy");showToast(msg||"Copied")}catch(err){showToast("Copy failed")}
+    ta.remove();
+  }
+}
+function copySEOField(id,msg){
+  const el=document.getElementById(id);
+  if(el)copySEOText(el.value,msg);
+}
+function copyAllSEO(){
+  const title=document.getElementById("seo-title")?.value.trim()||"";
+  const desc=document.getElementById("seo-description")?.value.trim()||"";
+  const key=document.getElementById("focus-keyword")?.value.trim()||"";
+  copySEOText(`SEO Title:\n${title}\n\nSEO Description:\n${desc}\n\nFocus Keyword:\n${key}`,"All SEO copied");
+}
+
+/* =========================
+   POST OBJECT WITH SEO DATA
+========================= */
 function buildPostObject(existing,related){
   const title=document.getElementById("post-title").value.trim(),slug=document.getElementById("post-slug").value.trim();
   return {
@@ -573,6 +784,9 @@ function buildPostObject(existing,related){
     fontStyle:document.getElementById("post-font-style").value,
     articleTheme:document.getElementById("post-theme").value,
     summary:document.getElementById("post-summary").value.trim(),
+    seoTitle:document.getElementById("seo-title").value.trim(),
+    seoDescription:document.getElementById("seo-description").value.trim(),
+    focusKeyword:document.getElementById("focus-keyword").value.trim(),
     trailer:document.getElementById("hero-slider-trailer").value.trim(),
     video1Url:document.getElementById("trailer-url-1").value.trim(),
     video1Pos:document.getElementById("trailer-pos-1").value,
@@ -604,6 +818,12 @@ async function publishPost(){
   const slug=document.getElementById("post-slug").value.trim(),content=document.getElementById("post-content").value.trim();
   if(!title||!slug||!content||!document.getElementById("gh-token").value.trim()){alert("Title, Slug, Content aur GitHub Token required!");return}
   if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)){alert("Slug sirf lowercase English words + hyphen me hona chahiye.");return}
+
+  /* Ensure SEO is generated before publish if fields are empty. */
+  if(!document.getElementById("seo-title").value.trim()||!document.getElementById("seo-description").value.trim()||!document.getElementById("focus-keyword").value.trim()){
+    generateSEO(false);
+  }
+
   btn.disabled=true;btn.textContent="Publishing...";
   try{
     const postsFile=await getPostsFile();let posts=postsFile&&postsFile.content?normalizePosts(JSON.parse(utf8FromBase64(postsFile.content))):[];
@@ -612,13 +832,11 @@ async function publishPost(){
     const oldSlug=existing&&existing.slug;
     let post=buildPostObject(existing,null);
 
-    // Main image: upload only when a new image was selected.
     if(selectedImageBase64){
       post.image=`images/${slug}.jpg`;
       await ghPutFile(post.image,selectedImageBase64,`Upload ${slug} main image`);
     }else if(!post.image&&existing&&existing.image){post.image=existing.image}
 
-    // Extra images can be uploaded in parallel.
     const extraUploads=[];
     for(let i=1;i<=3;i++){
       const st=extraImageState[i-1],pos=document.getElementById("extra-img-pos-"+i).value;
@@ -631,17 +849,13 @@ async function publishPost(){
     await Promise.all(extraUploads);
     post.extraImages=collectExtraImages();
 
-    // Auto related: always calculate from GitHub's latest posts, excluding this article.
     const withoutCurrent=posts.filter(p=>p.id!==editId&&p.slug!==slug);
     const related=relatedFor(withoutCurrent,slug);
     post.relatedArticles=related;showRelatedPreview(related);
 
-    // Generate/update the complete article HTML before posts.json, so a failed HTML upload never creates a visible listing entry.
     const postHTML=generatePostHTML(post);
     await ghPutFile(`posts/${slug}.html`,base64Utf8(postHTML),`Publish ${slug}`);
 
-    // IMPORTANT: re-fetch posts.json immediately before saving. This prevents stale-SHA 409 conflicts
-    // and also prevents one browser/tab from overwriting posts published by another tab/user.
     let saved=false;
     for(let attempt=0;attempt<3&&!saved;attempt++){
       const latestFile=await getPostsFile();
@@ -663,7 +877,6 @@ async function publishPost(){
     }
     if(!saved)throw new Error("GitHub conflict (409) after 3 retries. Please try again.");
 
-    // Old article URL cleanup when an edit changes the slug. Best effort only.
     if(existing&&oldSlug&&oldSlug!==slug){
       try{await ghDeleteFile(`posts/${oldSlug}.html`,`Remove old slug ${oldSlug}`)}catch(e){console.warn("Old file cleanup skipped",e)}
     }
@@ -676,6 +889,49 @@ async function publishPost(){
     alert("Publish failed: "+e.message);
   }finally{btn.disabled=false;btn.textContent="Publish Post"}
 }
+
+/* =========================
+   PUBLISHED PAGE SEO
+========================= */
+function buildSeoMeta(post){
+  const seoTitle=seoTrim(post.seoTitle||post.title||"",60);
+  const seoDescription=seoTrim(post.seoDescription||post.summary||post.title||"",160);
+  const canonical=LIVE_BASE+"/posts/"+safeText(post.slug)+".html";
+  const imageUrl=post.image?LIVE_BASE+"/"+safeText(post.image):"";
+
+  const schema={
+    "@context":"https://schema.org",
+    "@type":"NewsArticle",
+    "headline":seoTitle,
+    "description":seoDescription,
+    "url":canonical,
+    "mainEntityOfPage":{"@type":"WebPage","@id":canonical},
+    "datePublished":post.date||"",
+    "dateModified":post.date||"",
+    "author":{"@type":"Person","name":"Vanrajsinh Vaghela"},
+    "publisher":{"@type":"Organization","name":"Filmy Khabr","url":LIVE_BASE}
+  };
+  if(imageUrl)schema.image=[imageUrl];
+
+  return `
+<meta name="description" content="${escapeHtml(seoDescription)}">
+<meta name="author" content="Vanrajsinh Vaghela">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Filmy Khabr">
+<meta property="og:title" content="${escapeHtml(seoTitle)}">
+<meta property="og:description" content="${escapeHtml(seoDescription)}">
+<meta property="og:url" content="${escapeHtml(canonical)}">
+<meta property="og:locale" content="hi_IN">
+${imageUrl?`<meta property="og:image" content="${escapeHtml(imageUrl)}">`:""}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${escapeHtml(seoTitle)}">
+<meta name="twitter:description" content="${escapeHtml(seoDescription)}">
+${imageUrl?`<meta name="twitter:image" content="${escapeHtml(imageUrl)}">`:""}
+<link rel="canonical" href="${escapeHtml(canonical)}">
+<script type="application/ld+json">${JSON.stringify(schema).replace(/</g,"\\u003c")}<\/script>
+<title>${escapeHtml(seoTitle)} | Filmy Khabr</title>`;
+}
+
 function generatePostHTML(post,isPreview=false,previewMedia={}){
   const style=fontFamily(post.fontStyle);
   const imageBase=isPreview?LIVE_BASE+"/":"../";
@@ -697,30 +953,24 @@ function generatePostHTML(post,isPreview=false,previewMedia={}){
   const adHtml=ads.map(x=>`<div class="ad-slot">${x}</div>`).join("");
   const details=`<div class="details-box"><div class="details-head">🎬 ARTICLE DETAILS</div>
     <div class="details-grid"><b>Published:</b><span>${escapeHtml(post.date)}</span><b>Category:</b><span>${escapeHtml(post.category)}</span><b>Platform:</b><span>${escapeHtml(post.platform)}</span><b>Status:</b><span>${escapeHtml(post.badge)}</span></div></div>`;
+
+  const rawGaId=safeText(document.getElementById("ga-id")?.value||"G-E6B67VBEFZ").trim();
+  const gaId=/^G-[A-Za-z0-9_-]+$/.test(rawGaId)?rawGaId:"";
+
+  const seoMeta=buildSeoMeta(post);
+
   return `<!DOCTYPE html>
 <html lang="hi"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-${(() => {
-  const rawGaId = safeText(document.getElementById("ga-id")?.value || "G-E6B67VBEFZ").trim();
-  const gaId = /^G-[A-Za-z0-9_-]+$/.test(rawGaId) ? rawGaId : "";
-  return gaId ? `<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=${gaId}"><\/script>
+${gaId?`<script async src="https://www.googletagmanager.com/gtag/js?id=${gaId}"><\/script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', '${gaId}');
-<\/script>` : "";
-})()}
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','${gaId}');
+<\/script>`:""}
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-<meta name="description" content="${escapeHtml(post.summary||post.title)}">
-<meta name="author" content="Vanrajsinh Vaghela">
-<meta property="og:type" content="article"><meta property="og:site_name" content="Filmy Khabr">
-<meta property="og:title" content="${escapeHtml(post.title)}"><meta property="og:description" content="${escapeHtml(post.summary||post.title)}">
-${post.image?`<meta property="og:image" content="${LIVE_BASE}/${escapeHtml(post.image)}">`:""}
-<link rel="canonical" href="${LIVE_BASE}/posts/${escapeHtml(post.slug)}.html">
-<title>${escapeHtml(post.title)} - Filmy Khabr</title>
+${seoMeta}
 <style>
 *{box-sizing:border-box}html,body{margin:0;padding:0}body{background:${post.articleTheme==="blue-white"?"#eef6ff":post.articleTheme==="cinema-dark"?"#090a0d":post.articleTheme==="magazine-gold"?"#f7f1e5":"#f3f4f6"};color:${post.articleTheme==="cinema-dark"?"#f4f4f4":"#171717"};font-family:${style};line-height:1.78}
 .wrap{--theme:${post.articleTheme||"editorial-red"};--accent:${post.articleTheme==="blue-white"?"#1565c0":post.articleTheme==="cinema-dark"?"#e50914":post.articleTheme==="magazine-gold"?"#b88918":"#e50914"};}
@@ -775,8 +1025,12 @@ function resetForm(){
   document.getElementById("post-file").value="";selectedImageBase64=null;selectedImageDataUrl=null;extraImageState=[null,null,null];
   for(let i=1;i<=3;i++){document.getElementById("extra-img-file-"+i).value="";document.getElementById("extra-img-path-"+i).value="";document.getElementById("extra-img-pos-"+i).value=i===1?"before-last":""}
   for(let i=1;i<=8;i++)document.getElementById("ad-code-"+i).value="";
+  document.getElementById("seo-title").value="";
+  document.getElementById("seo-description").value="";
+  document.getElementById("focus-keyword").value="";
+  seoTitleManual=false;seoDescriptionManual=false;focusKeywordManual=false;
   document.getElementById("form-heading").textContent="Create New Post";document.getElementById("publish-btn").textContent="Publish Post";
-  showRelatedPreview([]);updateSourcePreview();
+  showRelatedPreview([]);updateSourcePreview();updateSEOUI();
 }
 function copyPostLink(){navigator.clipboard.writeText(document.getElementById("success-url").value).then(()=>showToast("Link copied")).catch(()=>showToast("Copy failed"))}
 function closeSuccessModal(){document.getElementById("success-modal").classList.remove("show")}
