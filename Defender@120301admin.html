@@ -119,7 +119,7 @@ textarea{resize:vertical;min-height:80px}
       <input type="hidden" id="post-slug">  
       <input type="hidden" id="post-image-path">  
 
-      <!-- 5 OPTIONS IN COMPACT 2-COLUMN LAYOUT -->  
+      <!-- 5 OPTIONS IN COMPACT 2x2 GRID + 1 BELOW LAYOUT -->  
       <div class="section" style="margin-top:0">  
         <div class="row2" style="margin-bottom:10px">  
           <div>  
@@ -875,7 +875,7 @@ function generateFocusKeyword(){
   if(!title)return "";  
   const stop=[  
     "का","की","के","और","में","से","को","पर","है","हैं","यह","ये","अब","तो","भी",  
-    "एक","इस","इसमें","इसका","इसकी","इसिके","बड़ा","बड़ी","बड़े","देखें","जानें","क्या",  
+    "एक","इस","इसमें","इसका","इसकी","इसके","बड़ा","बड़ी","बड़े","देखें","जानें","क्या",  
     "out","now","latest","breaking","exclusive","update","news","the","a","an","of","and","in","on","for"  
   ];  
   const words=title.replace(/[|,:;!?।"'“”‘’()[\]{}]/g," ").split(/\s+/)  
@@ -1272,4 +1272,4 @@ function closeSuccessModal(){document.getElementById("success-modal").classList.
 function showToast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.classList.remove("show"),2500)}  
 </script>  
 </body>  
-</html>
+</html>  
