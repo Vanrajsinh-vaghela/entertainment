@@ -2,7 +2,7 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <meta name="robots" content="noindex,nofollow">
 <title>FILMY KHABR - Admin Desk</title>
 <style>
@@ -11,35 +11,98 @@
   --border:#29313b;--text:#f7f8fa;--muted:#9aa4b2;--accent:#e50914;
   --blue:#1687d9;--green:#18c77b;--yellow:#f5b83d;--danger:#ef4444;
 }
-*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;-webkit-tap-highlight-color:transparent}
 html{background:var(--bg)}
-body{background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;padding:10px}
+body{background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;padding:10px 10px 90px}
 .container{width:100%;max-width:760px;margin:0 auto}
 .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px}
-.header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0 14px;border-bottom:1px solid var(--border);margin-bottom:12px}
-.brand{font-weight:900;font-size:18px;letter-spacing:.5px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:1px;margin-top:2px}
-.tabs{display:flex;gap:5px;flex-wrap:wrap}.btn{border:0;border-radius:8px;padding:9px 12px;background:#252c35;color:#fff;font-size:12px;font-weight:800;cursor:pointer}.btn:hover{filter:brightness(1.1)}.btn:disabled{opacity:.55;cursor:not-allowed}
-.btn.active,.btn.accent{background:var(--accent)}.btn.green{background:#087a4c}.btn.danger{background:#35171a;color:#ffb2b5}.btn.blue{background:#0c5f98}
+.header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0 14px;border-bottom:1px solid var(--border);margin-bottom:12px;position:sticky;top:0;background:var(--bg);z-index:50}
+.brand{font-weight:900;font-size:18px;letter-spacing:.5px}
+.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:1px;margin-top:2px}
+.tabs{display:flex;gap:5px;flex-wrap:wrap}
+.btn{border:0;border-radius:8px;padding:10px 12px;background:#252c35;color:#fff;font-size:12px;font-weight:800;cursor:pointer;min-height:40px}
+.btn:hover{filter:brightness(1.1)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn.active,.btn.accent{background:var(--accent)}
+.btn.green{background:#087a4c}
+.btn.danger{background:#35171a;color:#ffb2b5}
+.btn.blue{background:#0c5f98}
 label{display:block;font-size:10px;font-weight:900;letter-spacing:.7px;text-transform:uppercase;color:#b4bdc9;margin:0 0 5px}
-input,select,textarea{width:100%;border:1px solid var(--border);border-radius:8px;background:#0e1217;color:#fff;padding:10px 11px;font-size:14px;outline:0}
+input,select,textarea{width:100%;border:1px solid var(--border);border-radius:8px;background:#0e1217;color:#fff;padding:11px;font-size:15px;outline:0;font-family:inherit}
 input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(229,9,20,.12)}
-textarea{resize:vertical;min-height:80px}.content-box{min-height:310px}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.section{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:12px;margin:10px 0}.section h3{font-size:12px;margin-bottom:9px}.yellow{color:var(--yellow)}.blueText{color:#5ebcff}.greenText{color:#44e29d}
-.file-note{font-size:11px;color:var(--muted);margin-top:5px}.status{padding:10px 12px;border-radius:8px;background:#10161c;border:1px solid var(--border);font-size:12px;color:var(--muted);margin-bottom:10px}
-.hidden{display:none!important}.settings-card{display:block}.settings-card.settings-hidden{display:none!important}.post-item{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px;border:1px solid var(--border);background:#11161c;border-radius:8px;margin-bottom:7px}.post-title{font-weight:800;font-size:13px}.post-meta{font-size:10px;color:var(--muted);margin-top:2px}.actions{display:flex;gap:5px;flex-shrink:0}
-.pagination{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;margin-top:10px}.page{background:#202630;color:#fff;border:1px solid var(--border);padding:6px 9px;border-radius:6px;cursor:pointer}.page.active{background:var(--accent)}
-.preview{background:#fff;color:#161616;border-radius:10px;overflow:hidden}.preview .inner{padding:16px}.preview h1{font-family:Georgia,serif;font-size:28px;line-height:1.2;margin:10px 0}.preview img{width:100%;border-radius:7px}.preview .body{font-size:16px;line-height:1.75}.preview .body p{margin:0 0 16px}
-.notice{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);background:#161c23;border:1px solid #34404d;color:#fff;padding:10px 15px;border-radius:999px;z-index:10000;opacity:0;pointer-events:none;transition:.2s}.notice.show{opacity:1}
-#pin-gate{position:fixed;inset:0;background:#090b0f;display:flex;align-items:center;justify-content:center;z-index:9999;padding:15px}.pinbox{width:100%;max-width:350px;text-align:center}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;z-index:9998;padding:15px}.modal.show{display:flex}.modalbox{width:100%;max-width:520px;background:#14191f;border:1px solid var(--border);border-radius:12px;padding:18px}.modalbox h3{color:var(--green);margin-bottom:7px}.urlrow{display:flex;gap:7px}.urlrow input{min-width:0}.modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px}
-.source-help,.related-help{font-size:11px;color:var(--muted);margin:5px 0 8px}.source-preview{font-size:11px;color:#cbd5e1;margin-top:7px}
-.related-auto{background:#0d141b;border:1px dashed #344555;border-radius:8px;padding:10px;font-size:11px;color:#b7c3cf}
-.related-auto b{color:#fff}
-
-/* SEO Control Center */
+textarea{resize:vertical;min-height:80px}
+.content-box{min-height:310px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.control-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.control-grid .control-empty{min-height:1px}
+.section{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:12px;margin:10px 0}
+.section h3{font-size:12px;margin-bottom:9px}
+.yellow{color:var(--yellow)}
+.blueText{color:#5ebcff}
+.greenText{color:#44e29d}
+.file-note{font-size:11px;color:var(--muted);margin-top:5px}
+.status{padding:10px 12px;border-radius:8px;background:#10161c;border:1px solid var(--border);font-size:12px;color:var(--muted);margin-bottom:10px}
+.hidden{display:none!important}
+.settings-card{display:block}
+.settings-card.settings-hidden{display:none!important}
+.post-item{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px;border:1px solid var(--border);background:#11161c;border-radius:8px;margin-bottom:7px}
+.post-title{font-weight:800;font-size:13px}
+.post-meta{font-size:10px;color:var(--muted);margin-top:2px}
+.actions{display:flex;gap:5px;flex-shrink:0}
+.pagination{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;margin-top:10px}
+.page{background:#202630;color:#fff;border:1px solid var(--border);padding:8px 11px;border-radius:6px;cursor:pointer;min-width:38px}
+.page.active{background:var(--accent)}
+.preview{background:#fff;color:#161616;border-radius:10px;overflow:hidden}
+.preview .inner{padding:16px}
+.preview h1{font-family:Georgia,serif;font-size:28px;line-height:1.2;margin:10px 0}
+.preview img{width:100%;border-radius:7px}
+.preview .body{font-size:16px;line-height:1.75}
+.preview .body p{margin:0 0 16px}
+.notice{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);background:#161c23;border:1px solid #34404d;color:#fff;padding:10px 15px;border-radius:999px;z-index:10000;opacity:0;pointer-events:none;transition:.2s;font-size:12px;max-width:90vw;text-align:center}
+.notice.show{opacity:1}
+#pin-gate{position:fixed;inset:0;background:#090b0f;display:flex;align-items:center;justify-content:center;z-index:9999;padding:15px}
+.pinbox{width:100%;max-width:350px;text-align:center}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;z-index:9998;padding:15px}
+.modal.show{display:flex}
+.modalbox{width:100%;max-width:520px;background:#14191f;border:1px solid var(--border);border-radius:12px;padding:18px}
+.modalbox h3{color:var(--green);margin-bottom:7px}
+.urlrow{display:flex;gap:7px}
+.urlrow input{min-width:0}
+.modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px}
+.hero-featured-box{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:12px;margin:10px 0}
+.hero-featured-box h3{font-size:12px;color:var(--yellow);margin-bottom:10px}
+.featured-preview{margin-top:10px;display:none}
+.featured-preview.show{display:block}
+.featured-preview-label{font-size:10px;color:#b4bdc9;font-weight:900;letter-spacing:.7px;text-transform:uppercase;margin-bottom:5px}
+.featured-preview img{width:100%;max-height:350px;object-fit:cover;border-radius:9px;border:1px solid var(--border);display:block}
+.media-row{display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:8px;align-items:end}
+.media-file-wrap{min-width:0}
+.media-position-wrap{min-width:0}
+.media-file-wrap input[type="file"]{min-width:0}
+.media-file-name{font-size:10px;color:var(--muted);margin-top:4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.extra-item{background:#11161c;border:1px solid var(--border);border-radius:9px;padding:10px;margin-bottom:9px}
+.extra-item:last-child{margin-bottom:0}
+.extra-item-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px}
+.extra-item-title{font-size:11px;font-weight:900;color:#d7dee7}
+.extra-preview{margin-top:8px;display:none}
+.extra-preview.show{display:block}
+.extra-preview img{width:100%;max-height:180px;object-fit:cover;border-radius:8px;border:1px solid var(--border)}
+.remove-extra{padding:6px 9px;font-size:10px}
+.video-section{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:12px;margin:10px 0}
+.video-block{background:#11161c;border:1px solid var(--border);border-radius:9px;padding:10px;margin-bottom:9px}
+.video-block:last-child{margin-bottom:0}
+.video-title{font-size:11px;font-weight:900;color:#d7dee7;margin-bottom:7px}
+.ad-section{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:12px;margin:10px 0}
+.ad-section h3{font-size:12px;color:#44e29d;margin-bottom:10px}
+.ad-item{background:#11161c;border:1px solid var(--border);border-radius:9px;padding:10px;margin-bottom:9px}
+.ad-item:last-child{margin-bottom:0}
+.ad-title{font-size:11px;font-weight:900;color:#f0f3f7;margin-bottom:7px}
+.ad-position-row{display:grid;grid-template-columns:120px minmax(0,1fr);gap:8px;align-items:center;margin-bottom:7px}
+.ad-position-row label{margin:0;font-size:9px}
+.ad-code{min-height:90px;resize:vertical}
 .seo-upgrade{background:linear-gradient(180deg,#151f1b,#151a21);border-color:#24583f}
-.seo-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:9px}
+.seo-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:9px;flex-wrap:wrap}
 .seo-copy-row{display:grid;grid-template-columns:1fr auto;gap:7px;align-items:stretch}
 .seo-copy-row input,.seo-copy-row textarea{min-width:0}
 .seo-copy-btn{min-width:62px}
@@ -50,26 +113,110 @@ textarea{resize:vertical;min-height:80px}.content-box{min-height:310px}
 #seo-preview-url{color:#188038;font-size:12px;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #seo-preview-description{color:#4d5156;font-size:12px;line-height:1.45}
 .seo-status{font-size:11px;color:var(--muted);margin-top:7px}
+.related-auto{background:#0d141b;border:1px dashed #344555;border-radius:8px;padding:10px;font-size:11px;color:#b7c3cf}
+.related-auto b{color:#fff}
+.source-help,.related-help{font-size:11px;color:var(--muted);margin:5px 0 8px}
+.source-preview{font-size:11px;color:#cbd5e1;margin-top:7px}
+.position-help{font-size:10px;color:var(--muted);margin-top:5px}
+
+/* ============ RICH EDITOR ============ */
+.editor-wrap{border:1px solid var(--border);border-radius:10px;background:#0e1217;overflow:hidden;margin-top:5px}
+.editor-toolbar{display:flex;gap:3px;padding:6px;background:#151a21;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;position:sticky;top:60px;z-index:20}
+.editor-toolbar::-webkit-scrollbar{display:none}
+.tbtn{flex-shrink:0;min-width:38px;height:38px;padding:0 9px;border:1px solid var(--border);background:#0e1217;color:#d7dee7;border-radius:7px;font-size:13px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;user-select:none;transition:.15s}
+.tbtn:hover,.tbtn.active{background:#212a34;border-color:var(--accent);color:#fff}
+.tbtn.sep{min-width:1px;width:1px;padding:0;background:var(--border);cursor:default;pointer-events:none}
+.tbtn.wide{min-width:auto;padding:0 12px;font-size:12px}
+.editor-area{min-height:400px;padding:14px 16px;color:#e8ecf1;font-size:15.5px;line-height:1.75;outline:0;overflow-wrap:break-word;word-break:break-word;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+.editor-area:empty:before{content:attr(data-placeholder);color:#5c6875;pointer-events:none}
+.editor-area:focus{background:#0c1015}
+.editor-area h1{font-family:Georgia,serif;font-size:26px;margin:16px 0 10px;color:#fff;line-height:1.25}
+.editor-area h2{font-family:Georgia,serif;font-size:22px;margin:15px 0 9px;color:#fff;line-height:1.3}
+.editor-area h3{font-family:Georgia,serif;font-size:19px;margin:13px 0 8px;color:#fff;line-height:1.35}
+.editor-area h4{font-size:17px;margin:11px 0 7px;color:#fff}
+.editor-area p{margin:0 0 12px}
+.editor-area a{color:#5ebcff;text-decoration:underline}
+.editor-area blockquote{border-left:4px solid var(--accent);padding:8px 14px;margin:14px 0;background:#11161c;border-radius:0 6px 6px 0;color:#c1ccd8;font-style:italic}
+.editor-area ul,.editor-area ol{padding-left:26px;margin:0 0 12px}
+.editor-area li{margin:4px 0}
+.editor-area img{max-width:100%;height:auto;border-radius:8px;margin:8px 0;display:block}
+.editor-area hr{border:0;border-top:1px solid var(--border);margin:16px 0}
+.editor-area pre{background:#0a0d11;padding:12px;border-radius:8px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;overflow-x:auto;border:1px solid var(--border);white-space:pre-wrap}
+.editor-area figure{margin:12px 0}
+.editor-area .video-box{width:100%;aspect-ratio:16/9;background:#000;border-radius:10px;overflow:hidden;margin:14px 0}
+.editor-area .video-box iframe{width:100%;height:100%;border:0;display:block}
+
+.editor-footer{display:flex;justify-content:space-between;align-items:center;padding:7px 12px;background:#0e1217;border-top:1px solid var(--border);font-size:11px;color:var(--muted)}
+.editor-footer .stat{display:flex;gap:12px}
+.editor-footer .stat b{color:#e5e9ef;font-weight:800}
+
+/* ============ LIVE PREVIEW BOX ============ */
+.live-preview-box{margin-top:10px;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#fff}
+.live-preview-bar{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#151a21;color:#d7dee7;font-size:11px;font-weight:800}
+.live-preview-bar .dot{width:8px;height:8px;border-radius:50%;background:#18c77b;margin-right:6px;display:inline-block;animation:pulse 1.4s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.live-preview-iframe{width:100%;min-height:520px;border:0;display:block;background:#fff}
+
+/* ============ ACCORDION ============ */
+details.acc{background:var(--card2);border:1px solid var(--border);border-radius:10px;margin:10px 0;overflow:hidden}
+details.acc>summary{list-style:none;padding:12px 14px;cursor:pointer;font-size:12px;font-weight:900;color:#d7dee7;display:flex;align-items:center;justify-content:space-between;user-select:none}
+details.acc>summary::-webkit-details-marker{display:none}
+details.acc>summary:after{content:"▾";color:var(--muted);font-size:12px;transition:.2s}
+details.acc[open]>summary:after{transform:rotate(180deg)}
+details.acc>summary:hover{background:#1f2730}
+details.acc .acc-body{padding:0 12px 12px}
+
+/* ============ STICKY PUBLISH BAR ============ */
+.sticky-publish{position:fixed;left:0;right:0;bottom:0;background:linear-gradient(180deg,rgba(9,11,15,.6),rgba(9,11,15,.98));border-top:1px solid var(--border);padding:10px;z-index:80;backdrop-filter:blur(10px)}
+.sticky-publish-inner{max-width:760px;margin:0 auto;display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center}
+.sticky-publish .mini-stat{font-size:10px;color:var(--muted);line-height:1.3}
+.sticky-publish .mini-stat b{color:#e5e9ef;display:block;font-size:12px}
+.btn-pub{background:var(--accent);color:#fff;border:0;border-radius:10px;padding:12px 20px;font-size:14px;font-weight:900;cursor:pointer;min-height:46px}
+.btn-pub:hover{filter:brightness(1.1)}
+.btn-pub:disabled{opacity:.6;cursor:not-allowed}
+
+/* ============ DRAFT BAR ============ */
+.draft-bar{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:11px;color:var(--muted);margin:8px 0}
+.draft-bar b{color:#44e29d}
+
+/* ============ MOBILE ============ */
 @media(max-width:620px){
-  .row3{grid-template-columns:1fr}.row2{grid-template-columns:1fr}.header{align-items:flex-start;flex-direction:column}.tabs{width:100%}.tabs .btn{flex:1}.post-item{align-items:flex-start;flex-direction:column}.actions{width:100%}.actions .btn{flex:1}.urlrow{flex-direction:column}
-  .seo-copy-row{grid-template-columns:1fr}.seo-copy-btn{width:100%}
+  .row3,.row2,.control-grid{grid-template-columns:1fr}
+  .header{align-items:flex-start;flex-direction:column;position:static}
+  .tabs{width:100%}
+  .tabs .btn{flex:1}
+  .post-item{align-items:flex-start;flex-direction:column}
+  .actions{width:100%}
+  .actions .btn{flex:1}
+  .urlrow{flex-direction:column}
+  .media-row{grid-template-columns:minmax(0,1fr) 135px;gap:6px}
+  .ad-position-row{grid-template-columns:1fr}
+  .seo-copy-row{grid-template-columns:1fr}
+  .seo-copy-btn{width:100%}
+  .editor-area{min-height:60vh;font-size:16px;padding:12px}
+  .editor-toolbar{top:0}
+  .sticky-publish-inner{grid-template-columns:1fr auto}
+  .sticky-publish .mini-stat{display:none}
+}
+@media(max-width:430px){
+  .media-row{grid-template-columns:1fr 125px}
 }
 </style>
 </head>
 <body>
 
+<!-- PIN GATE -->
 <div id="pin-gate">
   <div class="card pinbox">
     <div style="font-size:21px;font-weight:900">FILMY KHABR</div>
     <div style="color:#9aa4b2;font-size:12px;margin:3px 0 14px">VANRAJSINH MASTER DESK</div>
     <label style="text-align:left">Master PIN</label>
-    <input type="password" id="admin-pin-input" inputmode="numeric" maxlength="10" placeholder="•••••••"
-           style="text-align:center;font-size:24px;letter-spacing:7px;margin-bottom:10px"
-           onkeydown="if(event.key==='Enter')verifyPin()">
+    <input type="password" id="admin-pin-input" inputmode="numeric" maxlength="10" pattern="[0-9]*" autocomplete="off" placeholder="•••••••" style="text-align:center;font-size:24px;letter-spacing:7px;margin-bottom:10px" oninput="this.value=this.value.replace(/[^0-9]/g,'')" onkeydown="if(event.key==='Enter')verifyPin()">
     <button class="btn accent" style="width:100%" onclick="verifyPin()">Unlock Desk</button>
   </div>
 </div>
 
+<!-- ADMIN APP -->
 <div class="container hidden" id="admin-app">
   <div class="header">
     <div class="brand">FILMY KHABR<small>VANRAJSINH MASTER DESK</small></div>
@@ -80,6 +227,7 @@ textarea{resize:vertical;min-height:80px}.content-box{min-height:310px}
     </div>
   </div>
 
+  <!-- SETTINGS -->
   <div class="card settings-card">
     <div class="status" id="github-status">GitHub: configuration required</div>
     <div class="row2">
@@ -87,13 +235,14 @@ textarea{resize:vertical;min-height:80px}.content-box{min-height:310px}
       <div><label>Repository Name</label><input id="gh-repo" value="entertainment"></div>
     </div>
     <div class="row2" style="margin-top:10px">
-      <div><label>GitHub Token (PAT)</label><input type="password" id="gh-token" placeholder="ghp_ / github_pat_..."></div>
+      <div><label>GitHub Token (PAT)</label><input type="password" id="gh-token" autocomplete="off" placeholder="ghp_ / github_pat_..."></div>
       <div><label>Google Analytics ID</label><input id="ga-id" value="G-E6B67VBEFZ"></div>
     </div>
     <button class="btn" style="width:100%;margin-top:10px" onclick="saveCreds()">Save Settings</button>
     <div class="file-note">Live article URL: https://filmykhabr.gujaratfastalert.in/posts/&lt;slug&gt;.html</div>
   </div>
 
+  <!-- NEW POST -->
   <div id="view-new">
     <div class="card">
       <div style="display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:10px">
@@ -106,190 +255,304 @@ textarea{resize:vertical;min-height:80px}.content-box{min-height:310px}
       <input type="hidden" id="post-slug">
       <input type="hidden" id="post-image-path">
 
-      <div style="margin-bottom:10px"><label>Article Title</label><input id="post-title" oninput="autoGenerateSlug();generateSEO(false)" placeholder="Title likho"></div>
-
-      <div class="row3">
+      <!-- CONTROL GRID -->
+      <div class="control-grid">
         <div><label>Category</label>
           <select id="post-category">
-            <option>Movies</option><option>Web Series</option><option>OTT</option><option>Trailers</option>
-            <option>News</option><option>Celebrity News</option><option>Upcoming</option>
+            <option>Movies</option><option>Web Series</option><option>OTT</option>
+            <option>Trailers</option><option>News</option><option>Celebrity News</option><option>Upcoming</option>
           </select>
         </div>
         <div><label>Platform</label>
           <select id="post-platform">
-            <option>Netflix</option><option>Prime Video</option><option>Disney+ Hotstar</option><option>JioCinema</option>
-            <option>Sony LIV</option><option>Zee5</option><option>YouTube</option><option>Theatre</option><option>General</option>
+            <option>Netflix</option><option>Prime Video</option><option>Disney+ Hotstar</option>
+            <option>JioCinema</option><option>Sony LIV</option><option>Zee5</option>
+            <option>YouTube</option><option>Theatre</option><option>General</option>
           </select>
         </div>
         <div><label>Badge</label>
           <select id="post-badge">
-            <option>Trending</option><option>Breaking</option><option>Exclusive</option><option>Review</option><option>Update</option><option>Hot</option>
+            <option>Trending</option><option>Breaking</option><option>Exclusive</option>
+            <option>Review</option><option>Update</option><option>Hot</option>
           </select>
         </div>
-      </div>
-
-      <div class="section">
-        <h3 class="yellow">🔤 ARTICLE FONT STYLE / TYPOGRAPHY</h3>
-        <select id="post-font-style">
-          <option value="noto-sans">Noto Sans Devanagari (Clean Hindi Modern)</option>
-          <option value="noto-serif">Noto Serif Devanagari (Traditional Hindi Serif)</option>
-          <option value="playfair-lora">Playfair Display & Lora (Classic Editorial Serif)</option>
-          <option value="roboto-sans" selected>Roboto & Inter (Modern Clean Sans-Serif)</option>
-        </select>
-      </div>
-
-      <div class="section">
-        <h3 class="yellow">🎨 ARTICLE THEME</h3>
-        <select id="post-theme">
-          <option value="editorial-red" selected>Theme 1 — Editorial Red & White ⭐ Recommended</option>
-          <option value="blue-white">Theme 2 — Blue & White News</option>
-          <option value="cinema-dark">Theme 3 — Cinema Dark</option>
-          <option value="magazine-gold">Theme 4 — Magazine Gold</option>
-        </select>
-        <div class="file-note">Ye theme Preview aur published article dono mein same rahega.</div>
-      </div>
-
-      <div class="section">
-        <h3 class="yellow">🎬 FEATURED IMAGE (MAIN BANNER)</h3>
-        <input type="file" id="post-file" accept="image/*" onchange="handleImageFile(event)">
-        <div class="file-note">Image automatically resized/compressed before GitHub upload for faster publishing.</div>
-      </div>
-
-      <div class="section">
-        <h3 class="blueText">🖼️ ADDITIONAL ARTICLE IMAGES (UP TO 3)</h3>
-        <div id="extra-images-wrap"></div>
-      </div>
-
-      <div style="margin-bottom:10px"><label>🌟 Hero Slider Trailer URL</label><input id="hero-slider-trailer" placeholder="https://youtube.com/watch?v=..."></div>
-
-      <div class="row2">
-        <div><label>Article Video 1 URL</label><input id="trailer-url-1" placeholder="https://youtube.com/..."></div>
-        <div><label>Video 1 Position</label><select id="trailer-pos-1"></select></div>
-      </div>
-      <div class="row2" style="margin-top:10px">
-        <div><label>Article Video 2 URL</label><input id="trailer-url-2" placeholder="https://youtube.com/..."></div>
-        <div><label>Video 2 Position</label><select id="trailer-pos-2"></select></div>
-      </div>
-
-      <div style="margin-top:10px"><label>Short Summary / Meta Excerpt</label><input id="post-summary" placeholder="2-3 line summary"></div>
-
-      <!-- SEO CONTROL CENTER -->
-      <div class="section seo-upgrade" id="seo-panel">
-        <div class="seo-head">
-          <h3 class="greenText" style="margin:0">🚀 SEO CONTROL CENTER</h3>
-          <button type="button" class="btn green" onclick="generateSEO(true)">Auto Generate SEO</button>
+        <div><label>Article Font</label>
+          <select id="post-font-style">
+            <option value="noto-sans">Noto Sans Devanagari</option>
+            <option value="noto-serif">Noto Serif Devanagari</option>
+            <option value="playfair-lora">Playfair Display & Lora</option>
+            <option value="roboto-sans" selected>Roboto & Inter</option>
+          </select>
         </div>
-
-        <div class="file-note" style="margin-bottom:10px">
-          Article Title + Summary + Content se SEO fields automatically generate honge.
-          Focus Keyword internal SEO workflow ke liye hai; ise article content mein paste karna zaroori nahi.
+        <div><label>Article Theme</label>
+          <select id="post-theme">
+            <option value="editorial-red" selected>Theme 1 — Editorial Red ⭐</option>
+            <option value="blue-white">Theme 2 — Blue & White</option>
+            <option value="cinema-dark">Theme 3 — Cinema Dark</option>
+            <option value="magazine-gold">Theme 4 — Magazine Gold</option>
+          </select>
         </div>
+        <div class="control-empty"></div>
+      </div>
 
-        <div style="margin-bottom:10px">
-          <label>SEO Title <span id="seo-title-count" class="seo-count">0/60</span></label>
-          <div class="seo-copy-row">
-            <input id="seo-title" maxlength="70" placeholder="SEO optimized title">
-            <button type="button" class="btn blue seo-copy-btn" onclick="copySEOField('seo-title','SEO Title copied')">Copy</button>
+      <!-- TITLE -->
+      <div style="margin-top:10px;margin-bottom:10px">
+        <label>Article Title</label>
+        <input id="post-title" oninput="autoGenerateSlug();generateSEO(false)" placeholder="Title likho">
+      </div>
+
+      <!-- RICH EDITOR -->
+      <div style="margin-top:10px">
+        <label style="display:flex;justify-content:space-between;align-items:center">
+          <span>Article Content</span>
+          <span style="font-size:9px;color:var(--muted);font-weight:700">Rich Editor</span>
+        </label>
+        <div class="editor-wrap">
+          <div class="editor-toolbar" id="editor-toolbar">
+            <button type="button" class="tbtn" data-cmd="bold" title="Bold"><b>B</b></button>
+            <button type="button" class="tbtn" data-cmd="italic" title="Italic"><i>I</i></button>
+            <button type="button" class="tbtn" data-cmd="underline" title="Underline"><u>U</u></button>
+            <button type="button" class="tbtn" data-cmd="strikeThrough" title="Strike"><s>S</s></button>
+            <span class="tbtn sep"></span>
+            <button type="button" class="tbtn wide" data-block="p" title="Paragraph">P</button>
+            <button type="button" class="tbtn wide" data-block="h1" title="Heading 1">H1</button>
+            <button type="button" class="tbtn wide" data-block="h2" title="Heading 2">H2</button>
+            <button type="button" class="tbtn wide" data-block="h3" title="Heading 3">H3</button>
+            <button type="button" class="tbtn wide" data-block="h4" title="Heading 4">H4</button>
+            <span class="tbtn sep"></span>
+            <button type="button" class="tbtn" data-cmd="insertUnorderedList" title="Bullet List">•≡</button>
+            <button type="button" class="tbtn" data-cmd="insertOrderedList" title="Numbered List">1≡</button>
+            <button type="button" class="tbtn" data-block="blockquote" title="Quote">❝</button>
+            <span class="tbtn sep"></span>
+            <button type="button" class="tbtn" id="btn-link" title="Insert Link">🔗</button>
+            <button type="button" class="tbtn" id="btn-image" title="Insert Image">🖼</button>
+            <button type="button" class="tbtn" id="btn-youtube" title="YouTube Embed">▶</button>
+            <button type="button" class="tbtn" id="btn-hr" title="Horizontal Line">—</button>
+            <span class="tbtn sep"></span>
+            <button type="button" class="tbtn" data-cmd="undo" title="Undo">↶</button>
+            <button type="button" class="tbtn" data-cmd="redo" title="Redo">↷</button>
+            <button type="button" class="tbtn" id="btn-clear" title="Clear Format">⌫</button>
+          </div>
+          <div class="editor-area" id="editor-area" contenteditable="true" data-placeholder="Yahan article likho... (Bold ke liye select karo aur B dabao)"></div>
+          <div class="editor-footer">
+            <div class="stat">
+              <span>Words: <b id="word-count">0</b></span>
+              <span>Chars: <b id="char-count">0</b></span>
+            </div>
+            <span id="editor-status">Ready</span>
           </div>
         </div>
+        <div class="file-note">Toolbar ke buttons se Bold, Italic, H1/H2/H3, Link, Image, YouTube embed sab direct daal sakte ho. Word count live update hota hai.</div>
+      </div>
 
-        <div style="margin-bottom:10px">
-          <label>SEO Description <span id="seo-desc-count" class="seo-count">0/160</span></label>
-          <div class="seo-copy-row">
-            <textarea id="seo-description" maxlength="180" style="min-height:85px" placeholder="SEO optimized description"></textarea>
-            <button type="button" class="btn blue seo-copy-btn" onclick="copySEOField('seo-description','SEO Description copied')">Copy</button>
+      <!-- DRAFT BAR -->
+      <div class="draft-bar">
+        <span id="draft-status">Draft: —</span>
+        <div style="display:flex;gap:6px">
+          <button type="button" class="btn" onclick="saveDraft(true)">💾 Save Draft</button>
+          <button type="button" class="btn" onclick="clearDraft()">🗑 Clear</button>
+        </div>
+      </div>
+
+      <!-- LIVE PREVIEW -->
+      <details class="acc" open>
+        <summary>👁️ Live Preview <span style="font-size:10px;color:#18c77b;margin-left:auto;margin-right:14px"><span class="dot" style="width:8px;height:8px;border-radius:50%;background:#18c77b;display:inline-block"></span> Live</span></summary>
+        <div class="acc-body">
+          <div class="live-preview-box">
+            <div class="live-preview-bar">
+              <span>Preview — exact article output</span>
+              <button type="button" class="btn" style="padding:5px 10px;font-size:10px" onclick="refreshLivePreview()">↻ Refresh</button>
+            </div>
+            <iframe class="live-preview-iframe" id="live-preview-frame" title="Live Preview" sandbox="allow-same-origin allow-scripts"></iframe>
           </div>
         </div>
+      </details>
 
+      <!-- HERO + FEATURED -->
+      <div class="hero-featured-box">
+        <h3>🎬 HERO SLIDER & FEATURED IMAGE</h3>
         <div style="margin-bottom:10px">
-          <label>Focus Keyword</label>
-          <div class="seo-copy-row">
-            <input id="focus-keyword" placeholder="Main search phrase">
-            <button type="button" class="btn blue seo-copy-btn" onclick="copySEOField('focus-keyword','Focus Keyword copied')">Copy</button>
+          <label>Hero Slider Trailer URL</label>
+          <input id="hero-slider-trailer" placeholder="https://youtube.com/watch?v=...">
+        </div>
+        <div>
+          <label>Featured Image</label>
+          <input type="file" id="post-file" accept="image/*" onchange="handleImageFile(event)">
+          <div class="file-note">Image auto resize/compress hoke GitHub pe upload hoga.</div>
+        </div>
+        <div id="featured-preview" class="featured-preview">
+          <div class="featured-preview-label">Featured Image Preview</div>
+          <img id="featured-preview-img" alt="Featured image preview">
+        </div>
+      </div>
+
+      <!-- EXTRA IMAGES -->
+      <details class="acc">
+        <summary>🖼️ EXTRA IMAGES (Max 3)</summary>
+        <div class="acc-body">
+          <div class="file-note" style="margin-bottom:9px">Har image ka position choose kar sakte ho.</div>
+          <div id="extra-images-wrap"></div>
+        </div>
+      </details>
+
+      <!-- VIDEOS -->
+      <details class="acc">
+        <summary>🎥 ARTICLE VIDEOS (YouTube — 2 slots)</summary>
+        <div class="acc-body">
+          <div class="video-section" style="margin-top:0">
+            <div class="video-block">
+              <div class="video-title">Article Video 1</div>
+              <div class="media-row">
+                <div class="media-file-wrap"><label>YouTube URL</label><input id="trailer-url-1" placeholder="https://youtube.com/..."></div>
+                <div class="media-position-wrap"><label>Position</label><select id="trailer-pos-1"></select></div>
+              </div>
+            </div>
+            <div class="video-block">
+              <div class="video-title">Article Video 2</div>
+              <div class="media-row">
+                <div class="media-file-wrap"><label>YouTube URL</label><input id="trailer-url-2" placeholder="https://youtube.com/..."></div>
+                <div class="media-position-wrap"><label>Position</label><select id="trailer-pos-2"></select></div>
+              </div>
+            </div>
           </div>
         </div>
+      </details>
 
-        <div class="seo-preview">
-          <div class="seo-preview-label">GOOGLE SEARCH PREVIEW</div>
-          <div id="seo-preview-title">Your SEO title will appear here</div>
-          <div id="seo-preview-url">filmykhabr.gujaratfastalert.in/posts/your-slug.html</div>
-          <div id="seo-preview-description">Your SEO description will appear here...</div>
+      <!-- ADS -->
+      <details class="acc">
+        <summary>💰 ADVERTISEMENT CONTROL — 8 SLOTS</summary>
+        <div class="acc-body">
+          <div id="ads-wrap"></div>
+          <div class="position-help">Position: Top → 0%, Upper Middle → 25%, Middle → 50%, Lower Middle → 75%, Before Last → final block se pehle, Bottom → end mein.</div>
         </div>
+      </details>
 
-        <div id="seo-status" class="seo-status">SEO fields ready</div>
-
-        <button type="button" class="btn" style="width:100%;margin-top:9px" onclick="copyAllSEO()">📋 Copy All SEO</button>
+      <!-- SUMMARY -->
+      <div style="margin-top:10px">
+        <label>Short Summary / Meta Excerpt</label>
+        <input id="post-summary" placeholder="2-3 line summary">
       </div>
 
-      <div style="margin-top:10px"><label>Article Content</label>
-        <textarea id="post-content" class="content-box" placeholder="Full article yahan likho"></textarea>
-      </div>
+      <!-- SOURCES -->
+      <details class="acc">
+        <summary>🔗 SOURCES / CREDIT</summary>
+        <div class="acc-body">
+          <div class="source-help">Har source alag line me: <b>Source Title | https://example.com/article</b></div>
+          <textarea id="source-credit" placeholder="Netflix Official | https://www.netflix.com/..."></textarea>
+          <div id="source-preview" class="source-preview"></div>
+        </div>
+      </details>
 
-      <div class="section">
-        <h3 class="blueText">🔗 SOURCES / CREDIT — SINGLE BOX</h3>
-        <div class="source-help">Har source alag line me likho. Best format: <b>Source Title | https://example.com/article</b>. Multiple links ek hi box me paste kar sakte ho.</div>
-        <textarea id="source-credit" placeholder="Netflix Official | https://www.netflix.com/...
-The Indian Express | https://indianexpress.com/...
-Official YouTube | https://www.youtube.com/..."></textarea>
-        <div id="source-preview" class="source-preview"></div>
-      </div>
+      <!-- SEO -->
+      <details class="acc seo-upgrade" id="seo-panel">
+        <summary>🚀 SEO CONTROL CENTER</summary>
+        <div class="acc-body">
+          <div class="seo-head">
+            <div class="file-note" style="margin:0">Auto-generate from title + content</div>
+            <button type="button" class="btn green" onclick="generateSEO(true)">Auto Generate</button>
+          </div>
+          <div style="margin:10px 0">
+            <label>SEO Title <span id="seo-title-count" class="seo-count">0/60</span></label>
+            <div class="seo-copy-row">
+              <input id="seo-title" maxlength="70" placeholder="SEO optimized title">
+              <button type="button" class="btn blue seo-copy-btn" onclick="copySEOField('seo-title','SEO Title copied')">Copy</button>
+            </div>
+          </div>
+          <div style="margin-bottom:10px">
+            <label>SEO Description <span id="seo-desc-count" class="seo-count">0/160</span></label>
+            <div class="seo-copy-row">
+              <textarea id="seo-description" maxlength="180" style="min-height:85px" placeholder="SEO optimized description"></textarea>
+              <button type="button" class="btn blue seo-copy-btn" onclick="copySEOField('seo-description','SEO Description copied')">Copy</button>
+            </div>
+          </div>
+          <div style="margin-bottom:10px">
+            <label>Focus Keyword</label>
+            <div class="seo-copy-row">
+              <input id="focus-keyword" placeholder="Main search phrase">
+              <button type="button" class="btn blue seo-copy-btn" onclick="copySEOField('focus-keyword','Focus Keyword copied')">Copy</button>
+            </div>
+          </div>
+          <div class="seo-preview">
+            <div class="seo-preview-label">GOOGLE SEARCH PREVIEW</div>
+            <div id="seo-preview-title">Your SEO title will appear here</div>
+            <div id="seo-preview-url">filmykhabr.gujaratfastalert.in/posts/your-slug.html</div>
+            <div id="seo-preview-description">Your SEO description will appear here...</div>
+          </div>
+          <div id="seo-status" class="seo-status">SEO fields ready</div>
+          <button type="button" class="btn" style="width:100%;margin-top:9px" onclick="copyAllSEO()">📋 Copy All SEO</button>
+        </div>
+      </details>
 
-      <div class="section">
-        <h3 class="greenText">🔗 RELATED STORIES — AUTO FETCH</h3>
-        <div class="related-help">Publish ke waqt GitHub ke <b>data/posts.json</b> se current article ko chhodkar latest 3 posts automatically select honge. Manually related links bharne ki zarurat nahi.</div>
-        <div id="related-auto-preview" class="related-auto">Publish ke waqt latest 3 related stories yahan automatically select hongi.</div>
-      </div>
-
-      <div class="section">
-        <h3 class="greenText">💰 DIRECT AD CODE (8 SLOTS)</h3>
-        <textarea id="ad-code-1" placeholder="Popunder (Ad 1)" style="margin-bottom:7px"></textarea>
-        <textarea id="ad-code-2" placeholder="Native Banner (Ad 2)" style="margin-bottom:7px"></textarea>
-        <textarea id="ad-code-3" placeholder="Banner 728x90 (Ad 3)" style="margin-bottom:7px"></textarea>
-        <textarea id="ad-code-4" placeholder="Related Articles Beech Ad (Ad 4)" style="margin-bottom:7px"></textarea>
-        <textarea id="ad-code-5" placeholder="Social Bar (Ad 5)" style="margin-bottom:7px"></textarea>
-        <textarea id="ad-code-6" placeholder="Smartlink (Ad 6)" style="margin-bottom:7px"></textarea>
-        <textarea id="ad-code-7" placeholder="Extra Ad 7" style="margin-bottom:7px"></textarea>
-        <textarea id="ad-code-8" placeholder="Extra Ad 8"></textarea>
-      </div>
-
-      <button class="btn accent" id="publish-btn" style="width:100%;padding:13px;font-size:15px" onclick="publishPost()">Publish Post</button>
+      <!-- RELATED -->
+      <details class="acc">
+        <summary>🔗 RELATED STORIES — AUTO</summary>
+        <div class="acc-body">
+          <div class="related-help">Publish ke waqt <b>data/posts.json</b> se latest 3 posts automatically select honge.</div>
+          <div id="related-auto-preview" class="related-auto">Publish ke waqt latest 3 related stories yahan automatically select hongi.</div>
+        </div>
+      </details>
     </div>
   </div>
 
+  <!-- MANAGE -->
   <div id="view-manage" class="hidden">
     <div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><b>Manage Posts</b><button class="btn" onclick="loadManagePosts(true)">Refresh</button></div>
-      <div id="posts-list-container"></div><div id="pagination" class="pagination"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <b>Manage Posts</b>
+        <button class="btn" onclick="loadManagePosts(true)">Refresh</button>
+      </div>
+      <div id="posts-list-container"></div>
+      <div id="pagination" class="pagination"></div>
     </div>
   </div>
 
+  <!-- PREVIEW TAB -->
   <div id="view-preview" class="hidden">
     <div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><b>Article Preview</b><button class="btn" onclick="renderPreview()">Refresh</button></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <b>Full Article Preview</b>
+        <button class="btn" onclick="renderPreview()">Refresh</button>
+      </div>
       <div id="preview-output" class="preview"></div>
     </div>
   </div>
 </div>
 
+<!-- STICKY PUBLISH -->
+<div class="sticky-publish hidden" id="sticky-publish">
+  <div class="sticky-publish-inner">
+    <div class="mini-stat">Words<b id="sp-words">0</b></div>
+    <div class="mini-stat" style="text-align:center">Status<b id="sp-status">Draft</b></div>
+    <button class="btn-pub" id="publish-btn" onclick="publishPost()">Publish Post</button>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
 <div id="success-modal" class="modal">
   <div class="modalbox">
     <h3>🎉 Post Published!</h3>
     <div style="font-size:12px;color:#aab4c0;margin-bottom:10px">Article live URL:</div>
-    <div class="urlrow"><input id="success-url" readonly><button class="btn" onclick="copyPostLink()">Copy</button></div>
+    <div class="urlrow">
+      <input id="success-url" readonly>
+      <button class="btn" onclick="copyPostLink()">Copy</button>
+    </div>
     <div class="modal-actions">
-      <a id="open-post" class="btn blue" target="_blank" style="text-align:center;text-decoration:none">View Post</a>
-      <a class="btn" target="_blank" href="https://search.google.com/search-console" style="text-align:center;text-decoration:none">Search Console</a>
+      <a id="open-post" class="btn blue" target="_blank" style="text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center">View Post</a>
+      <a class="btn" target="_blank" href="https://search.google.com/search-console" style="text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center">Search Console</a>
     </div>
     <button class="btn accent" style="width:100%;margin-top:9px" onclick="closeSuccessModal()">Close</button>
   </div>
 </div>
+
 <div id="toast" class="notice"></div>
 
 <script>
+/* ============ CORE CONFIG ============ */
 const MASTER_PIN="1465822";
 const LIVE_BASE="https://filmykhabr.gujaratfastalert.in";
 const API_BASE="https://api.github.com";
 const REQUEST_TIMEOUT=25000;
+
 let selectedImageBase64=null;
 let selectedImageDataUrl=null;
 let extraImageState=[null,null,null];
@@ -298,130 +561,114 @@ let managePage=1;
 const PER_PAGE=15;
 
 const positions=[
-  ["","-- Do Not Show --"],["top","Top"],["upper-middle","Upper Middle"],["middle","Middle"],
-  ["lower-middle","Lower Middle"],["before-last","Before Last"],["bottom","Bottom"]
+  ["","Do Not Show"],
+  ["top","Top"],
+  ["upper-middle","Upper Middle"],
+  ["middle","Middle"],
+  ["lower-middle","Lower Middle"],
+  ["before-last","Before Last"],
+  ["bottom","Bottom"]
 ];
 
+/* ============ EDITOR HELPERS ============ */
+function getEditorContent(){
+  const el=document.getElementById("editor-area");
+  return el?el.innerHTML.trim():"";
+}
+function setEditorContent(html){
+  const el=document.getElementById("editor-area");
+  if(el)el.innerHTML=html||"";
+  updateEditorStats();
+}
+function updateEditorStats(){
+  const el=document.getElementById("editor-area");
+  if(!el)return;
+  const text=el.innerText||"";
+  const trimmed=text.trim();
+  const words=trimmed?trimmed.split(/\s+/).length:0;
+  const chars=text.length;
+  const wc=document.getElementById("word-count");
+  const cc=document.getElementById("char-count");
+  const sp=document.getElementById("sp-words");
+  if(wc)wc.textContent=words;
+  if(cc)cc.textContent=chars;
+  if(sp)sp.textContent=words;
+}
+
+/* ============ POSITION SELECTS ============ */
 function initPositionSelects(){
   ["trailer-pos-1","trailer-pos-2"].forEach((id,i)=>{
-    const s=document.getElementById(id); s.innerHTML="";
-    positions.forEach(([v,t])=>{const o=document.createElement("option");o.value=v;o.textContent=t;s.appendChild(o)});
+    const s=document.getElementById(id); if(!s)return;
+    s.innerHTML="";
+    positions.forEach(([v,t])=>{
+      const o=document.createElement("option"); o.value=v; o.textContent=t; s.appendChild(o);
+    });
     s.value=i===0?"middle":"before-last";
   });
+  buildAdsUI();
 }
-function initExtraImageRows(){
-  const wrap=document.getElementById("extra-images-wrap"); wrap.innerHTML="";
-  for(let i=1;i<=3;i++){
-    const box=document.createElement("div"); box.className="row2"; box.style.marginBottom=i<3?"10px":"0";
-    box.innerHTML=`
-      <div><label>📸 Extra Image ${i} File</label>
-        <input type="file" id="extra-img-file-${i}" accept="image/*">
-        <input type="hidden" id="extra-img-path-${i}">
+
+/* ============ ADS UI (built dynamically) ============ */
+const AD_LABELS=["Popunder (Ad 1)","Native Banner (Ad 2)","Banner 728x90 (Ad 3)","Related Articles Beech Ad (Ad 4)","Social Bar (Ad 5)","Smartlink (Ad 6)","Extra Ad 7","Extra Ad 8"];
+function buildAdsUI(){
+  const wrap=document.getElementById("ads-wrap"); if(!wrap)return;
+  wrap.innerHTML="";
+  for(let i=1;i<=8;i++){
+    const div=document.createElement("div");
+    div.className="ad-item";
+    div.innerHTML=`
+      <div class="ad-title">${AD_LABELS[i-1]}</div>
+      <div class="ad-position-row">
+        <label>Position</label>
+        <select id="ad-pos-${i}"></select>
       </div>
-      <div><label>Extra Image ${i} Position</label>
-        <select id="extra-img-pos-${i}"></select>
-      </div>`;
-    wrap.appendChild(box);
-    const s=box.querySelector("#extra-img-pos-"+i);
-    positions.forEach(([v,t])=>{const o=document.createElement("option");o.value=v;o.textContent=t;s.appendChild(o)});
-    s.value=i===1?"before-last":"";
-    box.querySelector("#extra-img-file-"+i).addEventListener("change",e=>handleExtraImage(e,i));
-  }
-}
-function verifyPin(){
-  if(document.getElementById("admin-pin-input").value.trim()===MASTER_PIN){
-    document.getElementById("pin-gate").style.display="none";
-    document.getElementById("admin-app").classList.remove("hidden");
-    try{sessionStorage.setItem("fk_admin_auth","true")}catch(e){}
-    initAdmin();
-  }else alert("Invalid PIN!");
-}
-try{
-  if(sessionStorage.getItem("fk_admin_auth")==="true"){
-    document.getElementById("pin-gate").style.display="none";
-    document.getElementById("admin-app").classList.remove("hidden");
-    window.addEventListener("load",initAdmin);
-  }
-}catch(e){}
-
-function initAdmin(){
-  initPositionSelects();
-  initExtraImageRows();
-  loadCreds();
-  updateSourcePreview();
-  initSEO();
-}
-function switchTab(tab){
-  ["new","manage","preview"].forEach(x=>{
-    document.getElementById("view-"+x).classList.toggle("hidden",x!==tab);
-    document.getElementById("tab-"+x).classList.toggle("active",x===tab);
-  });
-  const settings=document.querySelector(".settings-card");
-  if(settings) settings.classList.toggle("settings-hidden",tab!=="new");
-  if(tab==="manage") loadManagePosts();
-  if(tab==="preview") renderPreview();
-}
-function saveCreds(){
-  try{
-    localStorage.setItem("fk_gh_user",document.getElementById("gh-user").value.trim());
-    localStorage.setItem("fk_gh_repo",document.getElementById("gh-repo").value.trim());
-    localStorage.setItem("fk_gh_token",document.getElementById("gh-token").value.trim());
-    localStorage.setItem("fk_ga_id",document.getElementById("ga-id").value.trim());
-    showToast("Settings saved");
-  }catch(e){alert("Storage blocked!")}
-}
-function loadCreds(){
-  try{
-    ["gh-user","gh-repo","gh-token","ga-id"].forEach((id)=>{
-      const key={ "gh-user":"fk_gh_user","gh-repo":"fk_gh_repo","gh-token":"fk_gh_token","ga-id":"fk_ga_id"}[id];
-      const v=localStorage.getItem(key); if(v!==null) document.getElementById(id).value=v;
+      <textarea id="ad-code-${i}" class="ad-code" placeholder="Ad code yahan paste kare..."></textarea>
+    `;
+    wrap.appendChild(div);
+    const s=document.getElementById("ad-pos-"+i);
+    positions.forEach(([v,t])=>{
+      const o=document.createElement("option"); o.value=v; o.textContent=t; s.appendChild(o);
     });
-    updateGitHubStatus();
-  }catch(e){}
+    s.value="";
+  }
 }
-function updateGitHubStatus(){
-  const u=document.getElementById("gh-user").value.trim(),r=document.getElementById("gh-repo").value.trim();
-  document.getElementById("github-status").textContent=u&&r?`GitHub: ${u}/${r} • Live URL: ${LIVE_BASE}`:"GitHub: configuration required";
-}
-["gh-user","gh-repo"].forEach(id=>document.getElementById(id).addEventListener("input",updateGitHubStatus));
 
-function slugify(title){
-  return title.toLowerCase().normalize("NFKD").replace(/[^\x00-\x7F]/g,"")
-    .replace(/[^a-z0-9\s-]/g,"").trim().replace(/\s+/g,"-").replace(/-+/g,"-");
+/* ============ EXTRA IMAGES ============ */
+function initExtraImageRows(){
+  const wrap=document.getElementById("extra-images-wrap"); if(!wrap)return;
+  wrap.innerHTML="";
+  for(let i=1;i<=3;i++){
+    const box=document.createElement("div");
+    box.className="extra-item"; box.id="extra-item-"+i;
+    box.innerHTML=`
+      <div class="extra-item-head">
+        <div class="extra-item-title">Extra Image ${i}</div>
+        <button type="button" class="btn danger remove-extra" onclick="removeExtraImage(${i})">Remove</button>
+      </div>
+      <div class="media-row">
+        <div class="media-file-wrap">
+          <label>Choose File</label>
+          <input type="file" id="extra-img-file-${i}" accept="image/*">
+          <div class="media-file-name" id="extra-img-name-${i}">No file chosen</div>
+          <input type="hidden" id="extra-img-path-${i}">
+        </div>
+        <div class="media-position-wrap">
+          <label>Position</label>
+          <select id="extra-img-pos-${i}"></select>
+        </div>
+      </div>
+      <div class="extra-preview" id="extra-preview-${i}"><img id="extra-preview-img-${i}" alt="Extra image preview"></div>
+    `;
+    wrap.appendChild(box);
+    const s=document.getElementById("extra-img-pos-"+i);
+    positions.forEach(([v,t])=>{
+      const o=document.createElement("option"); o.value=v; o.textContent=t; s.appendChild(o);
+    });
+    s.value=i===1?"before-last":"";
+    document.getElementById("extra-img-file-"+i).addEventListener("change",e=>handleExtraImage(e,i));
+  }
 }
-function autoGenerateSlug(){
-  if(document.getElementById("edit-post-id").value) return;
-  const slug=slugify(document.getElementById("post-title").value);
-  document.getElementById("post-slug").value=slug;
-  if(!document.getElementById("post-image-path").value) document.getElementById("post-image-path").value=slug?`images/${slug}.jpg`:"";
-  updateSEOUI();
-}
-function readFileAsDataURL(file){
-  return new Promise((resolve,reject)=>{
-    const r=new FileReader(); r.onload=()=>resolve(r.result); r.onerror=()=>reject(new Error("Image read failed")); r.readAsDataURL(file);
-  });
-}
-async function compressImage(file,maxSide=1800,quality=.82){
-  const data=await readFileAsDataURL(file);
-  const img=new Image();
-  await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(new Error("Image decode failed"));img.src=data});
-  const scale=Math.min(1,maxSide/Math.max(img.naturalWidth,img.naturalHeight));
-  const w=Math.max(1,Math.round(img.naturalWidth*scale)),h=Math.max(1,Math.round(img.naturalHeight*scale));
-  const c=document.createElement("canvas");c.width=w;c.height=h;
-  const ctx=c.getContext("2d");ctx.fillStyle="#fff";ctx.fillRect(0,0,w,h);ctx.drawImage(img,0,0,w,h);
-  const out=c.toDataURL("image/jpeg",quality);
-  return {base64:out.split(",")[1],dataUrl:out};
-}
-async function handleImageFile(e){
-  const file=e.target.files[0]; if(!file)return;
-  try{
-    const x=await compressImage(file,1800,.82);
-    selectedImageBase64=x.base64;selectedImageDataUrl=x.dataUrl;
-    const slug=document.getElementById("post-slug").value||("post-"+Date.now());
-    document.getElementById("post-image-path").value=`images/${slug}.jpg`;
-    showToast("Main image ready");
-  }catch(err){alert(err.message)}
-}
+
 async function handleExtraImage(e,index){
   const file=e.target.files[0]; if(!file)return;
   try{
@@ -429,94 +676,246 @@ async function handleExtraImage(e,index){
     extraImageState[index-1]={base64:x.base64,dataUrl:x.dataUrl};
     const slug=document.getElementById("post-slug").value||("post-"+Date.now());
     document.getElementById("extra-img-path-"+index).value=`extra-images/${slug}-extra-${index}.jpg`;
+    const name=document.getElementById("extra-img-name-"+index);
+    if(name)name.textContent=file.name;
+    const preview=document.getElementById("extra-preview-"+index);
+    const previewImg=document.getElementById("extra-preview-img-"+index);
+    if(preview&&previewImg){previewImg.src=x.dataUrl;preview.classList.add("show");}
     showToast("Extra image "+index+" ready");
-  }catch(err){alert(err.message)}
+    scheduleLivePreview();
+  }catch(err){alert(err.message);}
 }
-function safeText(v){return v==null?"":String(v)}
-function escapeHtml(v){return safeText(v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;")}
+function removeExtraImage(index){
+  extraImageState[index-1]=null;
+  const file=document.getElementById("extra-img-file-"+index);
+  const path=document.getElementById("extra-img-path-"+index);
+  const name=document.getElementById("extra-img-name-"+index);
+  const preview=document.getElementById("extra-preview-"+index);
+  const previewImg=document.getElementById("extra-preview-img-"+index);
+  if(file)file.value=""; if(path)path.value=""; if(name)name.textContent="No file chosen";
+  if(preview)preview.classList.remove("show");
+  if(previewImg)previewImg.removeAttribute("src");
+  showToast("Extra image "+index+" removed");
+  scheduleLivePreview();
+}
+
+/* ============ FEATURED PREVIEW ============ */
+function updateFeaturedPreview(src){
+  const box=document.getElementById("featured-preview");
+  const img=document.getElementById("featured-preview-img");
+  if(!box||!img)return;
+  if(src){img.src=src;box.classList.add("show");}
+  else{img.removeAttribute("src");box.classList.remove("show");}
+}
+
+/* ============ PIN ============ */
+function verifyPin(){
+  const value=document.getElementById("admin-pin-input").value.trim();
+  if(value===MASTER_PIN){
+    document.getElementById("pin-gate").style.display="none";
+    document.getElementById("admin-app").classList.remove("hidden");
+    document.getElementById("sticky-publish").classList.remove("hidden");
+    try{sessionStorage.setItem("fk_admin_auth","true");}catch(e){}
+    initAdmin();
+  }else{alert("Invalid PIN!");}
+}
+try{
+  if(sessionStorage.getItem("fk_admin_auth")==="true"){
+    document.getElementById("pin-gate").style.display="none";
+    document.getElementById("admin-app").classList.remove("hidden");
+    document.getElementById("sticky-publish").classList.remove("hidden");
+    window.addEventListener("load",initAdmin);
+  }
+}catch(e){}
+
+/* ============ INIT ============ */
+function initAdmin(){
+  initPositionSelects();
+  initExtraImageRows();
+  loadCreds();
+  updateSourcePreview();
+  initSEO();
+  initEditor();
+  bindAutoSave();
+  initStickyState();
+  setTimeout(()=>loadDraft(false),400);
+}
+
+/* ============ TABS ============ */
+function switchTab(tab){
+  ["new","manage","preview"].forEach(x=>{
+    document.getElementById("view-"+x).classList.toggle("hidden",x!==tab);
+    document.getElementById("tab-"+x).classList.toggle("active",x===tab);
+  });
+  const settings=document.querySelector(".settings-card");
+  if(settings)settings.classList.toggle("settings-hidden",tab!=="new");
+  document.getElementById("sticky-publish").classList.toggle("hidden",tab!=="new");
+  if(tab==="manage")loadManagePosts();
+  if(tab==="preview")renderPreview();
+}
+
+/* ============ CREDS ============ */
+function saveCreds(){
+  try{
+    localStorage.setItem("fk_gh_user",document.getElementById("gh-user").value.trim());
+    localStorage.setItem("fk_gh_repo",document.getElementById("gh-repo").value.trim());
+    localStorage.setItem("fk_gh_token",document.getElementById("gh-token").value.trim());
+    localStorage.setItem("fk_ga_id",document.getElementById("ga-id").value.trim());
+    showToast("Settings saved");
+  }catch(e){alert("Storage blocked!");}
+}
+function loadCreds(){
+  try{
+    [["gh-user","fk_gh_user"],["gh-repo","fk_gh_repo"],["gh-token","fk_gh_token"],["ga-id","fk_ga_id"]].forEach(([id,key])=>{
+      const v=localStorage.getItem(key);
+      if(v!==null)document.getElementById(id).value=v;
+    });
+    updateGitHubStatus();
+  }catch(e){}
+}
+function updateGitHubStatus(){
+  const u=document.getElementById("gh-user").value.trim();
+  const r=document.getElementById("gh-repo").value.trim();
+  document.getElementById("github-status").textContent=u&&r?`GitHub: ${u}/${r} • Live: ${LIVE_BASE}`:"GitHub: configuration required";
+}
+["gh-user","gh-repo"].forEach(id=>{
+  document.getElementById(id).addEventListener("input",updateGitHubStatus);
+});
+
+/* ============ SLUG ============ */
+function slugify(title){
+  return title.toLowerCase().normalize("NFKD")
+    .replace(/[^\x00-\x7F]/g,"")
+    .replace(/[^a-z0-9\s-]/g,"")
+    .trim().replace(/\s+/g,"-").replace(/-+/g,"-");
+}
+function autoGenerateSlug(){
+  if(document.getElementById("edit-post-id").value)return;
+  const slug=slugify(document.getElementById("post-title").value);
+  document.getElementById("post-slug").value=slug;
+  if(!document.getElementById("post-image-path").value){
+    document.getElementById("post-image-path").value=slug?`images/${slug}.jpg`:"";
+  }
+  for(let i=1;i<=3;i++){
+    if(extraImageState[i-1]){
+      document.getElementById("extra-img-path-"+i).value=slug?`extra-images/${slug}-extra-${i}.jpg`:"";
+    }
+  }
+  updateSEOUI();
+}
+
+/* ============ FILE HELPERS ============ */
+function readFileAsDataURL(file){
+  return new Promise((resolve,reject)=>{
+    const r=new FileReader();
+    r.onload=()=>resolve(r.result);
+    r.onerror=()=>reject(new Error("Image read failed"));
+    r.readAsDataURL(file);
+  });
+}
+async function compressImage(file,maxSide=1800,quality=.82){
+  const data=await readFileAsDataURL(file);
+  const img=new Image();
+  await new Promise((resolve,reject)=>{
+    img.onload=resolve;
+    img.onerror=()=>reject(new Error("Image decode failed"));
+    img.src=data;
+  });
+  const scale=Math.min(1,maxSide/Math.max(img.naturalWidth,img.naturalHeight));
+  const w=Math.max(1,Math.round(img.naturalWidth*scale));
+  const h=Math.max(1,Math.round(img.naturalHeight*scale));
+  const c=document.createElement("canvas"); c.width=w; c.height=h;
+  const ctx=c.getContext("2d"); ctx.fillStyle="#fff"; ctx.fillRect(0,0,w,h);
+  ctx.drawImage(img,0,0,w,h);
+  const out=c.toDataURL("image/jpeg",quality);
+  return{base64:out.split(",")[1],dataUrl:out};
+}
+async function handleImageFile(e){
+  const file=e.target.files[0]; if(!file)return;
+  try{
+    const x=await compressImage(file,1800,.82);
+    selectedImageBase64=x.base64; selectedImageDataUrl=x.dataUrl;
+    const slug=document.getElementById("post-slug").value||("post-"+Date.now());
+    document.getElementById("post-image-path").value=`images/${slug}.jpg`;
+    updateFeaturedPreview(x.dataUrl);
+    showToast("Main image ready");
+    scheduleLivePreview();
+  }catch(err){alert(err.message);}
+}
+
+/* ============ SAFE TEXT/URL ============ */
+function safeText(v){return v==null?"":String(v);}
+function escapeHtml(v){
+  return safeText(v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+}
 function safeUrl(v){
-  const s=safeText(v).trim();if(!s)return "";
-  try{const u=new URL(s,LIVE_BASE);if(u.protocol==="http:"||u.protocol==="https:")return u.href}catch(e){}
-  return "";
+  const s=safeText(v).trim(); if(!s)return"";
+  try{
+    const u=new URL(s,LIVE_BASE);
+    if(u.protocol==="http:"||u.protocol==="https:")return u.href;
+  }catch(e){}
+  return"";
 }
+
+/* ============ YOUTUBE ============ */
 function getYoutubeId(url){
-  const s=safeText(url).trim();if(!s)return "";
+  const s=safeText(url).trim(); if(!s)return"";
   try{
     const u=new URL(s);
     if(u.hostname.includes("youtu.be"))return u.pathname.slice(1).split("/")[0];
     if(u.searchParams.get("v"))return u.searchParams.get("v");
-    const m=u.pathname.match(/\/(?:embed|shorts|live)\/([^/?]+)/);return m?m[1]:"";
+    const m=u.pathname.match(/\/(?:embed|shorts|live)\/([^/?]+)/);
+    return m?m[1]:"";
   }catch(e){
     if(/^[A-Za-z0-9_-]{11}$/.test(s))return s;
-    return "";
+    return"";
   }
 }
-function youtubeEmbed(url,previewMode=false){
-  const id=getYoutubeId(url); if(!id)return "";
-  const src=`https://www.youtube.com/embed/${encodeURIComponent(id)}?rel=0&playsinline=1`;
+function youtubeEmbed(url){
+  const id=getYoutubeId(url); if(!id)return"";
+  const src=`https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?rel=0&playsinline=1`;
   return `<div class="video-box"><iframe src="${src}" title="YouTube video" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`;
 }
-function positionItems(content,v1,p1,v2,p2,extras,imageBase="../",previewMode=false){
-  let arr=content.split(/\n\s*\n/).map(x=>x.trim()).filter(Boolean);
-  if(!arr.length)arr=[content];
-  arr=arr.map(p=>`<p>${p.replace(/\n/g,"<br>")}</p>`);
-  function insert(item,pos){
-    if(!item||!pos)return;
-    let i=0;
-    if(pos==="top")i=0;
-    else if(pos==="bottom")i=arr.length;
-    else if(pos==="upper-middle")i=Math.floor(arr.length*.25);
-    else if(pos==="middle")i=Math.floor(arr.length*.5);
-    else if(pos==="lower-middle")i=Math.floor(arr.length*.75);
-    else if(pos==="before-last")i=Math.max(0,arr.length-1);
-    arr.splice(i,0,item);
-  }
-  insert(youtubeEmbed(v1,previewMode),p1);insert(youtubeEmbed(v2,previewMode),p2);
-  (extras||[]).forEach(x=>{
-    if(x&&x.path&&x.pos){
-      const src=x.isData?x.path:(imageBase+escapeHtml(x.path));
-      insert(`<figure><img src="${src}" loading="lazy" alt="Filmy Khabr article image"></figure>`,x.pos);
-    }
-  });
-  return arr.join("");
-}
-function fontFamily(style){
-  if(style==="noto-serif")return `"Noto Serif Devanagari",Georgia,serif`;
-  if(style==="playfair-lora")return `"Playfair Display","Lora",Georgia,serif`;
-  if(style==="roboto-sans")return `"Roboto","Inter",Arial,sans-serif`;
-  return `"Noto Sans Devanagari","Nirmala UI",Arial,sans-serif`;
-}
+
+/* ============ SOURCES ============ */
 function parseSources(text){
   return safeText(text).split(/\r?\n/).map(x=>x.trim()).filter(Boolean).map(line=>{
     const parts=line.split("|").map(x=>x.trim());
     if(parts.length>=2){
-      const url=safeUrl(parts.pop());return url?{name:parts.join(" | "),url}:null;
+      const url=safeUrl(parts.pop());
+      return url?{name:parts.join(" | "),url}:null;
     }
     const url=safeUrl(line); if(!url)return null;
-    let name="Source";try{name=new URL(url).hostname.replace(/^www\./,"")}catch(e){}
-    return {name,url};
+    let name="Source";
+    try{name=new URL(url).hostname.replace(/^www\./,"");}catch(e){}
+    return{name,url};
   }).filter(Boolean);
 }
 function updateSourcePreview(){
-  const box=document.getElementById("source-credit");if(!box)return;
+  const box=document.getElementById("source-credit"); if(!box)return;
   const arr=parseSources(box.value);
   document.getElementById("source-preview").textContent=arr.length?`${arr.length} source(s) detected`:"No sources detected yet";
 }
 document.getElementById("source-credit").addEventListener("input",updateSourcePreview);
 
+/* ============ GITHUB API ============ */
 async function ghRequest(path,method="GET",body=null,timeout=REQUEST_TIMEOUT){
-  const user=document.getElementById("gh-user").value.trim(),repo=document.getElementById("gh-repo").value.trim(),token=document.getElementById("gh-token").value.trim();
+  const user=document.getElementById("gh-user").value.trim();
+  const repo=document.getElementById("gh-repo").value.trim();
+  const token=document.getElementById("gh-token").value.trim();
   if(!user||!repo)throw new Error("GitHub username/repository required");
   if(!token)throw new Error("GitHub Token required");
   const clean=path.split("/").map(encodeURIComponent).join("/");
   const url=`${API_BASE}/repos/${encodeURIComponent(user)}/${encodeURIComponent(repo)}/contents/${clean}`;
-  const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),timeout);
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),timeout);
   try{
     const headers={Authorization:`Bearer ${token}`,Accept:"application/vnd.github+json","Content-Type":"application/json"};
     const opt={method,headers,signal:controller.signal};
     if(body!==null)opt.body=JSON.stringify(body);
     const res=await fetch(url,opt);
-    const text=await res.text();let data=null;try{data=text?JSON.parse(text):null}catch(e){}
+    const text=await res.text();
+    let data=null; try{data=text?JSON.parse(text):null;}catch(e){}
     if(res.status===404&&method==="GET")return null;
     if(!res.ok){
       const msg=data&&data.message?data.message:`HTTP ${res.status}`;
@@ -528,10 +927,10 @@ async function ghRequest(path,method="GET",body=null,timeout=REQUEST_TIMEOUT){
     }
     return data;
   }catch(err){
-    if(err.name==="AbortError")throw new Error("GitHub request timed out. Internet/API response slow.");
-    if(err instanceof TypeError)throw new Error("Network fetch failed. Check internet, GitHub access or browser blocking.");
+    if(err.name==="AbortError")throw new Error("GitHub request timed out.");
+    if(err instanceof TypeError)throw new Error("Network fetch failed. Check internet/GitHub access.");
     throw err;
-  }finally{clearTimeout(timer)}
+  }finally{clearTimeout(timer);}
 }
 async function ghPutFile(path,content,message){
   for(let attempt=0;attempt<3;attempt++){
@@ -547,114 +946,257 @@ async function ghPutFile(path,content,message){
   }
 }
 async function ghDeleteFile(path,message){
-  const existing=await ghRequest(path,"GET");if(!existing)return;
+  const existing=await ghRequest(path,"GET");
+  if(!existing)return;
   return ghRequest(path,"DELETE",{message,sha:existing.sha});
 }
-function base64Utf8(str){return btoa(unescape(encodeURIComponent(str)))}
-function utf8FromBase64(str){return decodeURIComponent(escape(atob(str)))}
-async function getPostsFile(){return ghRequest("data/posts.json","GET")}
-function normalizePosts(arr){return Array.isArray(arr)?arr.filter(Boolean):[]}
+function base64Utf8(str){return btoa(unescape(encodeURIComponent(str)));}
+function utf8FromBase64(str){return decodeURIComponent(escape(atob(str)));}
+async function getPostsFile(){return ghRequest("data/posts.json","GET");}
+function normalizePosts(arr){return Array.isArray(arr)?arr.filter(Boolean):[];}
 
-async function loadManagePosts(force=false){
-  const box=document.getElementById("posts-list-container");box.innerHTML="<div class='status'>Loading posts...</div>";
+/* ============ MANAGE POSTS ============ */
+async function loadManagePosts(){
+  const box=document.getElementById("posts-list-container");
+  box.innerHTML="<div class='status'>Loading posts...</div>";
   try{
-    const f=await getPostsFile();allPostsCache=f&&f.content?normalizePosts(JSON.parse(utf8FromBase64(f.content))):[];
-    managePage=1;renderManageList();
-  }catch(e){box.innerHTML=`<div style="color:#ff7777">Error: ${escapeHtml(e.message)}</div>`}
+    const f=await getPostsFile();
+    allPostsCache=f&&f.content?normalizePosts(JSON.parse(utf8FromBase64(f.content))):[];
+    managePage=1;
+    renderManageList();
+  }catch(e){
+    box.innerHTML=`<div style="color:#ff7777">Error: ${escapeHtml(e.message)}</div>`;
+  }
 }
 function renderManageList(){
-  const box=document.getElementById("posts-list-container"),pag=document.getElementById("pagination");
-  if(!allPostsCache.length){box.innerHTML="<div class='status'>No posts found.</div>";pag.innerHTML="";return}
-  const total=Math.ceil(allPostsCache.length/PER_PAGE),start=(managePage-1)*PER_PAGE;
+  const box=document.getElementById("posts-list-container");
+  const pag=document.getElementById("pagination");
+  if(!allPostsCache.length){
+    box.innerHTML="<div class='status'>No posts found.</div>";
+    pag.innerHTML=""; return;
+  }
+  const total=Math.ceil(allPostsCache.length/PER_PAGE);
+  const start=(managePage-1)*PER_PAGE;
   box.innerHTML=allPostsCache.slice(start,start+PER_PAGE).map(p=>`
     <div class="post-item">
-      <div><div class="post-title">${escapeHtml(p.title||"Untitled")}</div>
-      <div class="post-meta">${escapeHtml(p.date||"")} • ${escapeHtml(p.category||"")} • ${escapeHtml(p.badge||"")}</div></div>
-      <div class="actions"><button class="btn" onclick="editPost('${escapeHtml(p.id)}')">Edit</button><button class="btn danger" onclick="deletePost('${escapeHtml(p.id)}')">Delete</button></div>
-    </div>`).join("");
+      <div>
+        <div class="post-title">${escapeHtml(p.title||"Untitled")}</div>
+        <div class="post-meta">${escapeHtml(p.date||"")} • ${escapeHtml(p.category||"")} • ${escapeHtml(p.badge||"")}</div>
+      </div>
+      <div class="actions">
+        <button class="btn" onclick="editPost('${escapeHtml(p.id)}')">Edit</button>
+        <button class="btn danger" onclick="deletePost('${escapeHtml(p.id)}')">Delete</button>
+      </div>
+    </div>
+  `).join("");
   pag.innerHTML="";
   if(total<=1)return;
-  for(let i=1;i<=total;i++){const b=document.createElement("button");b.className="page"+(i===managePage?" active":"");b.textContent=i;b.onclick=()=>{managePage=i;renderManageList()};pag.appendChild(b)}
+  for(let i=1;i<=total;i++){
+    const b=document.createElement("button");
+    b.className="page"+(i===managePage?" active":"");
+    b.textContent=i;
+    b.onclick=()=>{managePage=i;renderManageList();};
+    pag.appendChild(b);
+  }
 }
 function setSelectValue(id,value,fallback=""){
-  const s=document.getElementById(id);if(!s)return;
+  const s=document.getElementById(id); if(!s)return;
   const exists=[...s.options].some(o=>o.value===value);
   s.value=exists?value:fallback;
 }
+
+/* ============ EDIT POST ============ */
 function editPost(id){
-  const p=allPostsCache.find(x=>x.id===id);if(!p)return;
+  const p=allPostsCache.find(x=>x.id===id); if(!p)return;
   document.getElementById("edit-post-id").value=p.id||"";
   document.getElementById("edit-published-at").value=p.date||"";
   document.getElementById("post-title").value=p.title||"";
   document.getElementById("post-slug").value=p.slug||"";
-  setSelectValue("post-category",p.category,"Movies");setSelectValue("post-platform",p.platform,"General");setSelectValue("post-badge",p.badge,"Update");
-  setSelectValue("post-font-style",p.fontStyle,"roboto-sans");setSelectValue("post-theme",p.articleTheme||p.theme,"editorial-red");
+  setSelectValue("post-category",p.category,"Movies");
+  setSelectValue("post-platform",p.platform,"General");
+  setSelectValue("post-badge",p.badge,"Update");
+  setSelectValue("post-font-style",p.fontStyle,"roboto-sans");
+  setSelectValue("post-theme",p.articleTheme||p.theme,"editorial-red");
   document.getElementById("post-summary").value=p.summary||"";
   document.getElementById("hero-slider-trailer").value=p.trailer||"";
-  document.getElementById("trailer-url-1").value=p.video1Url||"";setSelectValue("trailer-pos-1",p.video1Pos,"middle");
-  document.getElementById("trailer-url-2").value=p.video2Url||"";setSelectValue("trailer-pos-2",p.video2Pos,"before-last");
-  document.getElementById("post-content").value=p.content||"";
+  document.getElementById("trailer-url-1").value=p.video1Url||"";
+  setSelectValue("trailer-pos-1",p.video1Pos,"middle");
+  document.getElementById("trailer-url-2").value=p.video2Url||"";
+  setSelectValue("trailer-pos-2",p.video2Pos,"before-last");
+  setEditorContent(p.content||"");
   document.getElementById("post-image-path").value=p.image||p.imagePath||"";
-  selectedImageBase64=null;selectedImageDataUrl=null;
+  selectedImageBase64=null; selectedImageDataUrl=null;
+  if(p.image||p.imagePath){updateFeaturedPreview(LIVE_BASE+"/"+(p.image||p.imagePath));}
+  else{updateFeaturedPreview("");}
   for(let i=1;i<=3;i++){
     extraImageState[i-1]=null;
-    document.getElementById("extra-img-file-"+i).value="";
+    const file=document.getElementById("extra-img-file-"+i);
+    const path=document.getElementById("extra-img-path-"+i);
+    const name=document.getElementById("extra-img-name-"+i);
+    const preview=document.getElementById("extra-preview-"+i);
+    const previewImg=document.getElementById("extra-preview-img-"+i);
+    if(file)file.value="";
     const x=(p.extraImages||[])[i-1];
-    document.getElementById("extra-img-path-"+i).value=x&&x.path?x.path:"";
+    if(x&&x.path){
+      path.value=x.path;
+      name.textContent=x.path.split("/").pop();
+      previewImg.src=LIVE_BASE+"/"+x.path;
+      preview.classList.add("show");
+    }else{
+      path.value=""; name.textContent="No file chosen";
+      preview.classList.remove("show"); previewImg.removeAttribute("src");
+    }
     setSelectValue("extra-img-pos-"+i,x&&x.pos?x.pos:"","");
   }
-  document.getElementById("source-credit").value=(p.sources||[]).map(s=>`${s.name||"Source"} | ${s.url||""}`).join("\n") || safeText(p.sourceCredit||"");
-  for(let i=1;i<=8;i++)document.getElementById("ad-code-"+i).value=safeText((p.ads||{})["ad"+i]||"");
-
-  /* Load saved SEO fields. Older posts automatically fall back to title/summary. */
-  const seoTitle=document.getElementById("seo-title");
-  const seoDesc=document.getElementById("seo-description");
-  const keyword=document.getElementById("focus-keyword");
-  seoTitle.value=p.seoTitle||p.title||"";
-  seoDesc.value=p.seoDescription||p.summary||"";
-  keyword.value=p.focusKeyword||"";
-  seoTitleManual=!!p.seoTitle;
-  seoDescriptionManual=!!p.seoDescription;
-  focusKeywordManual=!!p.focusKeyword;
+  document.getElementById("source-credit").value=(p.sources||[]).map(s=>`${s.name||"Source"} | ${s.url||""}`).join("\n")||safeText(p.sourceCredit||"");
+  for(let i=1;i<=8;i++){
+    const oldAds=p.ads||{};
+    const item=oldAds["ad"+i];
+    let code="",position="";
+    if(item&&typeof item==="object"){code=safeText(item.code);position=safeText(item.position);}
+    else{code=safeText(item);position=safeText(p["ad"+i+"Position"]||"");}
+    document.getElementById("ad-code-"+i).value=code;
+    setSelectValue("ad-pos-"+i,position,"");
+  }
+  document.getElementById("seo-title").value=p.seoTitle||p.title||"";
+  document.getElementById("seo-description").value=p.seoDescription||p.summary||"";
+  document.getElementById("focus-keyword").value=p.focusKeyword||"";
+  seoTitleManual=!!p.seoTitle; seoDescriptionManual=!!p.seoDescription; focusKeywordManual=!!p.focusKeyword;
   updateSEOUI();
-
   document.getElementById("form-heading").textContent="Edit Post";
   document.getElementById("publish-btn").textContent="Update Post";
-  updateSourcePreview();switchTab("new");
+  updateSourcePreview();
+  switchTab("new");
+  scheduleLivePreview();
 }
+
+/* ============ DELETE POST ============ */
 async function deletePost(id){
   if(!confirm("Delete this post?"))return;
   try{
-    const f=await getPostsFile();if(!f)throw new Error("posts.json not found");
-    let posts=JSON.parse(utf8FromBase64(f.content));const p=posts.find(x=>x.id===id);
+    const f=await getPostsFile();
+    if(!f)throw new Error("posts.json not found");
+    let posts=JSON.parse(utf8FromBase64(f.content));
+    const p=posts.find(x=>x.id===id);
     posts=posts.filter(x=>x.id!==id);
     await ghRequest("data/posts.json","PUT",{message:`Delete post ${id}`,content:base64Utf8(JSON.stringify(posts,null,2)),sha:f.sha});
-    if(p&&p.slug){try{await ghDeleteFile(`posts/${p.slug}.html`,`Delete article ${p.slug}`)}catch(e){console.warn(e)}}
-    showToast("Post deleted");loadManagePosts();
-  }catch(e){alert("Delete failed: "+e.message)}
+    if(p&&p.slug){
+      try{await ghDeleteFile(`posts/${p.slug}.html`,`Delete article ${p.slug}`);}catch(e){console.warn(e);}
+    }
+    showToast("Post deleted");
+    loadManagePosts();
+  }catch(e){alert("Delete failed: "+e.message);}
 }
 
+/* ============ ADS DATA ============ */
 function collectAds(){
-  const ads={};for(let i=1;i<=8;i++){const v=document.getElementById("ad-code-"+i).value.trim();if(v)ads["ad"+i]=v}return ads;
+  const ads={};
+  for(let i=1;i<=8;i++){
+    const code=document.getElementById("ad-code-"+i).value.trim();
+    const position=document.getElementById("ad-pos-"+i).value;
+    if(code)ads["ad"+i]={code,position:position||""};
+  }
+  return ads;
 }
 function collectExtraImages(){
   const arr=[];
   for(let i=1;i<=3;i++){
-    const path=document.getElementById("extra-img-path-"+i).value.trim(),pos=document.getElementById("extra-img-pos-"+i).value;
+    const path=document.getElementById("extra-img-path-"+i).value.trim();
+    const pos=document.getElementById("extra-img-pos-"+i).value;
     if(path&&pos)arr.push({path,pos,isLocal:true});
-  }return arr;
+  }
+  return arr;
 }
 
-/* =========================
-   SEO ENGINE
-========================= */
+/* ============ CONTENT BLOCK PARSER ============ */
+function buildContentBlocks(content){
+  const raw=safeText(content).trim();
+  if(!raw)return[];
+  if(/<\s*(p|h1|h2|h3|h4|h5|h6|ul|ol|li|figure|blockquote|div|img|table|section|article|pre|hr|iframe)\b/i.test(raw)){
+    const parser=new DOMParser();
+    const doc=parser.parseFromString(`<div id="fk-content-root">${raw}</div>`,"text/html");
+    const root=doc.getElementById("fk-content-root");
+    if(root){
+      const blocks=[...root.children].map(el=>el.outerHTML.trim()).filter(Boolean);
+      if(blocks.length)return blocks;
+    }
+  }
+  return raw.split(/\n\s*\n/).map(x=>x.trim()).filter(Boolean).map(x=>`<p>${escapeHtml(x).replace(/&lt;br&gt;/g,"<br>").replace(/\n/g,"<br>")}</p>`);
+}
+
+/* ============ POSITION INDEX ============ */
+function getPositionIndex(position,length){
+  if(!position||position==="none")return null;
+  if(length<=0)return 0;
+  if(position==="top")return 0;
+  if(position==="upper-middle")return Math.floor(length*.25);
+  if(position==="middle")return Math.floor(length*.50);
+  if(position==="lower-middle")return Math.floor(length*.75);
+  if(position==="before-last")return Math.max(0,length-1);
+  if(position==="bottom")return length;
+  return null;
+}
+
+/* ============ POSITIONED CONTENT ENGINE ============ */
+function renderPositionedContent(content,options={}){
+  let blocks=buildContentBlocks(content);
+  if(!blocks.length)blocks=[""];
+  const insertions=[];
+  if(options.video1Url&&options.video1Pos){
+    const html=youtubeEmbed(options.video1Url);
+    if(html)insertions.push({type:"video",position:options.video1Pos,order:10,html});
+  }
+  if(options.video2Url&&options.video2Pos){
+    const html=youtubeEmbed(options.video2Url);
+    if(html)insertions.push({type:"video",position:options.video2Pos,order:20,html});
+  }
+  (options.extraImages||[]).forEach((x,index)=>{
+    if(!x||!x.path||!x.pos)return;
+    let src="";
+    if(x.isData)src=x.path;
+    else{const base=options.imageBase||"../";src=base+escapeHtml(x.path);}
+    insertions.push({type:"image",position:x.pos,order:30+index,html:`<figure><img src="${src}" loading="lazy" alt="Filmy Khabr article image"></figure>`});
+  });
+  const ads=options.ads||{};
+  Object.keys(ads).forEach(key=>{
+    const item=ads[key];
+    if(!item||typeof item!=="object")return;
+    const code=safeText(item.code).trim();
+    const position=safeText(item.position).trim();
+    if(!code||!position)return;
+    insertions.push({type:"ad",position,order:100+Number(key.replace(/\D/g,"")),html:`<div class="ad-slot">${code}</div>`});
+  });
+  insertions.sort((a,b)=>a.order-b.order);
+  const grouped={};
+  insertions.forEach(item=>{
+    if(!grouped[item.position])grouped[item.position]=[];
+    grouped[item.position].push(item);
+  });
+  const result=[];
+  const insertionPlan=[];
+  Object.keys(grouped).forEach(position=>{
+    const index=getPositionIndex(position,blocks.length);
+    if(index===null)return;
+    insertionPlan.push({index,position,items:grouped[position]});
+  });
+  insertionPlan.sort((a,b)=>{
+    if(a.index!==b.index)return a.index-b.index;
+    const pa=["top","upper-middle","middle","lower-middle","before-last","bottom"];
+    return pa.indexOf(a.position)-pa.indexOf(b.position);
+  });
+  for(let i=0;i<=blocks.length;i++){
+    const before=insertionPlan.filter(x=>x.index===i);
+    before.forEach(group=>{group.items.forEach(item=>{result.push(item.html);});});
+    if(i<blocks.length)result.push(blocks[i]);
+  }
+  return result.join("");
+}
+
+/* ============ SEO ENGINE ============ */
 let seoTitleManual=false;
 let seoDescriptionManual=false;
 let focusKeywordManual=false;
-
-function seoClean(v){
-  return safeText(v).replace(/\s+/g," ").trim();
-}
+function seoClean(v){return safeText(v).replace(/\s+/g," ").trim();}
 function seoTrim(v,max){
   let s=seoClean(v);
   if(s.length<=max)return s;
@@ -665,56 +1207,49 @@ function seoTrim(v,max){
 }
 function generateFocusKeyword(){
   const title=seoClean(document.getElementById("post-title")?.value);
-  if(!title)return "";
-  const stop=[
-    "का","की","के","और","में","से","को","पर","है","हैं","यह","ये","अब","तो","भी",
-    "एक","इस","इसमें","इसका","इसकी","इसके","बड़ा","बड़ी","बड़े","देखें","जानें","क्या",
-    "out","now","latest","breaking","exclusive","update","news","the","a","an","of","and","in","on","for"
-  ];
-  const words=title.replace(/[|,:;!?।"'“”‘’()[\]{}]/g," ").split(/\s+/)
-    .filter(Boolean).filter(w=>!stop.includes(w.toLowerCase()));
+  if(!title)return"";
+  const stop=["का","की","के","और","में","से","को","पर","है","हैं","यह","ये","अब","तो","भी","एक","इस","इसमें","इसका","इसकी","इसके","बड़ा","बड़ी","बड़े","देखें","जानें","क्या","out","now","latest","breaking","exclusive","update","news","the","a","an","of","and","in","on","for"];
+  const words=title.replace(/[|,:;!?।"'""''()[\]{}]/g," ").split(/\s+/).filter(Boolean).filter(w=>!stop.includes(w.toLowerCase()));
   return words.slice(0,4).join(" ")||title;
 }
 function generateSEO(force=false){
   const title=seoClean(document.getElementById("post-title")?.value);
   const summary=seoClean(document.getElementById("post-summary")?.value);
-  const content=seoClean(document.getElementById("post-content")?.value);
+  const content=seoClean(document.getElementById("editor-area")?.innerText||"");
   const seoTitle=document.getElementById("seo-title");
   const seoDesc=document.getElementById("seo-description");
   const keyword=document.getElementById("focus-keyword");
   if(!seoTitle||!seoDesc||!keyword)return;
-
   if(!title&&!summary&&!content){updateSEOUI();return;}
-
   if(force||!seoTitleManual){
     let t=title;
     if(t.length<35&&summary){
       const first=summary.split(/[।.!?]/)[0].trim();
-      if(first&&first.toLowerCase()!==t.toLowerCase()&&!t.toLowerCase().includes(first.toLowerCase()))t=t+" | "+first;
+      if(first&&first.toLowerCase()!==t.toLowerCase()&&!t.toLowerCase().includes(first.toLowerCase())){t=t+" | "+first;}
     }
     seoTitle.value=seoTrim(t,60);
   }
   if(force||!seoDescriptionManual){
     let d=summary;
     if(!d){
-      const ps=safeText(document.getElementById("post-content")?.value).split(/\n\s*\n/)
-        .map(x=>seoClean(x)).filter(x=>x.length>40);
+      const ps=safeText(document.getElementById("editor-area")?.innerText||"").split(/\n\s*\n/).map(x=>seoClean(x)).filter(x=>x.length>40);
       d=ps[0]||title;
     }
     seoDesc.value=seoTrim(d,160);
   }
-  if(force||!focusKeywordManual)keyword.value=generateFocusKeyword();
+  if(force||!focusKeywordManual){keyword.value=generateFocusKeyword();}
   updateSEOUI();
 }
 function updateSEOUI(){
-  const t=document.getElementById("seo-title"),d=document.getElementById("seo-description");
+  const t=document.getElementById("seo-title");
+  const d=document.getElementById("seo-description");
   if(!t||!d)return;
-  const tc=document.getElementById("seo-title-count"),dc=document.getElementById("seo-desc-count");
+  const tc=document.getElementById("seo-title-count");
+  const dc=document.getElementById("seo-desc-count");
   if(tc)tc.textContent=t.value.length+"/60";
   if(dc)dc.textContent=d.value.length+"/160";
   if(tc)tc.style.color=t.value.length>60?"#ef4444":(t.value.length>=50?"#18c77b":"#9aa4b2");
   if(dc)dc.style.color=d.value.length>160?"#ef4444":(d.value.length>=120?"#18c77b":"#9aa4b2");
-
   const pt=document.getElementById("seo-preview-title");
   const pu=document.getElementById("seo-preview-url");
   const pd=document.getElementById("seo-preview-description");
@@ -722,46 +1257,36 @@ function updateSEOUI(){
   if(pt)pt.textContent=t.value.trim()||"Your SEO title will appear here";
   if(pu)pu.textContent=LIVE_BASE+"/posts/"+slug+".html";
   if(pd)pd.textContent=d.value.trim()||"Your SEO description will appear here...";
-
   const status=document.getElementById("seo-status");
   const k=document.getElementById("focus-keyword")?.value.trim();
   if(status){
-    if(t.value&&d.value&&k){
-      status.textContent="✓ SEO Title + Description + Focus Keyword ready";
-      status.style.color="#44e29d";
-    }else{
-      status.textContent="SEO fields incomplete";
-      status.style.color="#f5b83d";
-    }
+    if(t.value&&d.value&&k){status.textContent="✓ SEO Title + Description + Focus Keyword ready";status.style.color="#44e29d";}
+    else{status.textContent="SEO fields incomplete";status.style.color="#f5b83d";}
   }
 }
 function initSEO(){
-  const t=document.getElementById("seo-title"),d=document.getElementById("seo-description"),k=document.getElementById("focus-keyword");
+  const t=document.getElementById("seo-title");
+  const d=document.getElementById("seo-description");
+  const k=document.getElementById("focus-keyword");
   if(!t||!d||!k)return;
-  t.addEventListener("input",()=>{seoTitleManual=true;updateSEOUI()});
-  d.addEventListener("input",()=>{seoDescriptionManual=true;updateSEOUI()});
-  k.addEventListener("input",()=>{focusKeywordManual=true;updateSEOUI()});
-  document.getElementById("post-summary")?.addEventListener("input",()=>{if(!seoDescriptionManual)generateSEO(false)});
-  document.getElementById("post-content")?.addEventListener("input",()=>{if(!seoDescriptionManual)generateSEO(false)});
+  t.addEventListener("input",()=>{seoTitleManual=true;updateSEOUI();});
+  d.addEventListener("input",()=>{seoDescriptionManual=true;updateSEOUI();});
+  k.addEventListener("input",()=>{focusKeywordManual=true;updateSEOUI();});
+  document.getElementById("post-summary")?.addEventListener("input",()=>{if(!seoDescriptionManual)generateSEO(false);});
   generateSEO(false);
 }
 async function copySEOText(text,msg){
   text=safeText(text).trim();
-  if(!text){showToast("Nothing to copy");return}
-  try{
-    await navigator.clipboard.writeText(text);
-    showToast(msg||"Copied");
-  }catch(e){
-    const ta=document.createElement("textarea");ta.value=text;ta.style.position="fixed";ta.style.left="-9999px";
-    document.body.appendChild(ta);ta.select();
-    try{document.execCommand("copy");showToast(msg||"Copied")}catch(err){showToast("Copy failed")}
+  if(!text){showToast("Nothing to copy");return;}
+  try{await navigator.clipboard.writeText(text);showToast(msg||"Copied");}
+  catch(e){
+    const ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.left="-9999px";
+    document.body.appendChild(ta); ta.select();
+    try{document.execCommand("copy");showToast(msg||"Copied");}catch(err){showToast("Copy failed");}
     ta.remove();
   }
 }
-function copySEOField(id,msg){
-  const el=document.getElementById(id);
-  if(el)copySEOText(el.value,msg);
-}
+function copySEOField(id,msg){const el=document.getElementById(id);if(el)copySEOText(el.value,msg);}
 function copyAllSEO(){
   const title=document.getElementById("seo-title")?.value.trim()||"";
   const desc=document.getElementById("seo-description")?.value.trim()||"";
@@ -769,11 +1294,281 @@ function copyAllSEO(){
   copySEOText(`SEO Title:\n${title}\n\nSEO Description:\n${desc}\n\nFocus Keyword:\n${key}`,"All SEO copied");
 }
 
-/* =========================
-   POST OBJECT WITH SEO DATA
-========================= */
+/* ============ RICH EDITOR ============ */
+function initEditor(){
+  const area=document.getElementById("editor-area");
+  const toolbar=document.getElementById("editor-toolbar");
+  if(!area||!toolbar)return;
+
+  area.addEventListener("input",()=>{
+    updateEditorStats();
+    markDirty();
+    scheduleLivePreview();
+    if(!seoDescriptionManual)generateSEO(false);
+  });
+
+  // toolbar command buttons
+  toolbar.querySelectorAll("[data-cmd]").forEach(btn=>{
+    btn.addEventListener("mousedown",e=>{
+      e.preventDefault();
+      area.focus();
+      const cmd=btn.dataset.cmd;
+      try{document.execCommand(cmd,false,null);}catch(err){}
+      updateToolbarState();
+      markDirty();
+      scheduleLivePreview();
+    });
+  });
+
+  // block format buttons
+  toolbar.querySelectorAll("[data-block]").forEach(btn=>{
+    btn.addEventListener("mousedown",e=>{
+      e.preventDefault();
+      area.focus();
+      const val=btn.dataset.block;
+      try{document.execCommand("formatBlock",false,val);}catch(err){}
+      updateToolbarState();
+      markDirty();
+      scheduleLivePreview();
+    });
+  });
+
+  // link
+  document.getElementById("btn-link").addEventListener("mousedown",e=>{
+    e.preventDefault();
+    const sel=window.getSelection();
+    const saved=sel&&sel.rangeCount?sel.getRangeAt(0).cloneRange():null;
+    const url=prompt("Link URL (https://...):","https://");
+    if(!url)return;
+    const safe=safeUrl(url);
+    if(!safe){alert("Invalid URL");return;}
+    area.focus();
+    if(saved){sel.removeAllRanges();sel.addRange(saved);}
+    const selText=sel&&sel.toString();
+    if(selText){
+      document.execCommand("createLink",false,safe);
+      // ensure target=_blank on new link
+      const a=sel.anchorNode&&(sel.anchorNode.nodeType===1?sel.anchorNode:sel.anchorNode.parentNode);
+      if(a&&a.tagName==="A"){a.setAttribute("target","_blank");a.setAttribute("rel","noopener noreferrer");}
+    }else{
+      const text=prompt("Link text:",safe)||safe;
+      document.execCommand("insertHTML",false,`<a href="${escapeHtml(safe)}" target="_blank" rel="noopener noreferrer">${escapeHtml(text)}</a>`);
+    }
+    markDirty(); scheduleLivePreview();
+  });
+
+  // image insert (dataURL — replaced at publish)
+  document.getElementById("btn-image").addEventListener("mousedown",e=>{
+    e.preventDefault();
+    const input=document.createElement("input");
+    input.type="file"; input.accept="image/*";
+    input.onchange=async()=>{
+      const file=input.files[0]; if(!file)return;
+      try{
+        const x=await compressImage(file,1200,.82);
+        area.focus();
+        document.execCommand("insertHTML",false,`<figure><img src="${x.dataUrl}" alt="Article image" loading="lazy"></figure><p><br></p>`);
+        markDirty(); scheduleLivePreview();
+      }catch(err){alert(err.message);}
+    };
+    input.click();
+  });
+
+  // youtube embed
+  document.getElementById("btn-youtube").addEventListener("mousedown",e=>{
+    e.preventDefault();
+    const url=prompt("YouTube URL:");
+    if(!url)return;
+    const id=getYoutubeId(url);
+    if(!id){alert("Invalid YouTube URL");return;}
+    area.focus();
+    const embed=`<div class="video-box"><iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?rel=0&playsinline=1" loading="lazy" allowfullscreen></iframe></div><p><br></p>`;
+    document.execCommand("insertHTML",false,embed);
+    markDirty(); scheduleLivePreview();
+  });
+
+  // hr
+  document.getElementById("btn-hr").addEventListener("mousedown",e=>{
+    e.preventDefault(); area.focus();
+    document.execCommand("insertHorizontalRule",false,null);
+    markDirty(); scheduleLivePreview();
+  });
+
+  // clear format
+  document.getElementById("btn-clear").addEventListener("mousedown",e=>{
+    e.preventDefault(); area.focus();
+    document.execCommand("removeFormat",false,null);
+    document.execCommand("formatBlock",false,"p");
+    updateToolbarState();
+    markDirty(); scheduleLivePreview();
+  });
+
+  // keep plain on paste
+  area.addEventListener("paste",e=>{
+    e.preventDefault();
+    const text=(e.clipboardData||window.clipboardData).getData("text/plain");
+    document.execCommand("insertText",false,text);
+    markDirty(); scheduleLivePreview();
+  });
+
+  // toolbar state
+  ["keyup","mouseup","focus"].forEach(ev=>area.addEventListener(ev,updateToolbarState));
+}
+
+function updateToolbarState(){
+  ["bold","italic","underline","strikeThrough","insertUnorderedList","insertOrderedList"].forEach(cmd=>{
+    const btn=document.querySelector(`[data-cmd="${cmd}"]`); if(!btn)return;
+    try{
+      if(document.queryCommandState(cmd))btn.classList.add("active");
+      else btn.classList.remove("active");
+    }catch(e){}
+  });
+}
+
+/* ============ LIVE PREVIEW ============ */
+let livePreviewTimer=null;
+function scheduleLivePreview(){
+  clearTimeout(livePreviewTimer);
+  livePreviewTimer=setTimeout(refreshLivePreview,900);
+}
+function refreshLivePreview(){
+  const frame=document.getElementById("live-preview-frame"); if(!frame)return;
+  const p=buildPostObject(null,[]);
+  const media={};
+  if(selectedImageDataUrl)media.main=selectedImageDataUrl;
+  else if(p.image)media.main=LIVE_BASE+"/"+p.image;
+  for(let i=1;i<=3;i++){
+    if(extraImageState[i-1]?.dataUrl)media["extra"+i]=extraImageState[i-1].dataUrl;
+  }
+  let html;
+  try{
+    html=generatePostHTML(p,true,media).replace(/<script[\s\S]*?<\/script>/gi,"");
+  }catch(e){return;}
+  try{
+    const doc=frame.contentDocument||frame.contentWindow.document;
+    doc.open(); doc.write(html); doc.close();
+  }catch(e){frame.srcdoc=html;}
+}
+
+/* ============ DRAFT (auto-save) ============ */
+let draftTimer=null;
+let isDirty=false;
+const DRAFT_KEY="fk_autosave_draft";
+function markDirty(){isDirty=true; updateDraftStatus("Unsaved changes");}
+function bindAutoSave(){
+  const ids=["post-title","post-summary","hero-slider-trailer","trailer-url-1","trailer-url-2","source-credit"];
+  ids.forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener("input",()=>{markDirty();scheduleLivePreview();});});
+  ["post-category","post-platform","post-badge","post-font-style","post-theme"].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.addEventListener("change",()=>{markDirty();scheduleLivePreview();});
+  });
+  for(let i=1;i<=8;i++){
+    const c=document.getElementById("ad-code-"+i);if(c)c.addEventListener("input",markDirty);
+    const p=document.getElementById("ad-pos-"+i);if(p)p.addEventListener("change",markDirty);
+  }
+  for(let i=1;i<=3;i++){
+    const p=document.getElementById("extra-img-pos-"+i);if(p)p.addEventListener("change",()=>{markDirty();scheduleLivePreview();});
+  }
+  ["trailer-pos-1","trailer-pos-2"].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener("change",()=>{markDirty();scheduleLivePreview();});});
+  // auto-save every 20s
+  draftTimer=setInterval(()=>{if(isDirty)saveDraft(false);},20000);
+  window.addEventListener("beforeunload",e=>{if(isDirty){e.preventDefault();e.returnValue="";}});
+}
+function collectFormState(){
+  return {
+    title:document.getElementById("post-title").value,
+    content:getEditorContent(),
+    summary:document.getElementById("post-summary").value,
+    category:document.getElementById("post-category").value,
+    platform:document.getElementById("post-platform").value,
+    badge:document.getElementById("post-badge").value,
+    fontStyle:document.getElementById("post-font-style").value,
+    articleTheme:document.getElementById("post-theme").value,
+    trailer:document.getElementById("hero-slider-trailer").value,
+    video1Url:document.getElementById("trailer-url-1").value,
+    video1Pos:document.getElementById("trailer-pos-1").value,
+    video2Url:document.getElementById("trailer-url-2").value,
+    video2Pos:document.getElementById("trailer-pos-2").value,
+    sourceCredit:document.getElementById("source-credit").value,
+    seoTitle:document.getElementById("seo-title").value,
+    seoDescription:document.getElementById("seo-description").value,
+    focusKeyword:document.getElementById("focus-keyword").value,
+    ads:collectAds(),
+    extraImages:collectExtraImages(),
+    imagePath:document.getElementById("post-image-path").value,
+    savedAt:new Date().toISOString()
+  };
+}
+function saveDraft(showMsg){
+  try{
+    localStorage.setItem(DRAFT_KEY,JSON.stringify(collectFormState()));
+    isDirty=false;
+    updateDraftStatus("Saved "+new Date().toLocaleTimeString());
+    if(showMsg)showToast("Draft saved");
+  }catch(e){if(showMsg)alert("Draft save failed");}
+}
+function loadDraft(showMsg){
+  try{
+    const d=JSON.parse(localStorage.getItem(DRAFT_KEY)||"null");
+    if(!d)return false;
+    if(!d.title&&!d.content)return false;
+    if(showMsg||confirm("📝 Draft mile — restore karein?")){
+      setFieldValue("post-title",d.title);
+      setEditorContent(d.content||"");
+      setFieldValue("post-summary",d.summary);
+      setSelectValue("post-category",d.category,"Movies");
+      setSelectValue("post-platform",d.platform,"Netflix");
+      setSelectValue("post-badge",d.badge,"Trending");
+      setSelectValue("post-font-style",d.fontStyle,"roboto-sans");
+      setSelectValue("post-theme",d.articleTheme,"editorial-red");
+      setFieldValue("hero-slider-trailer",d.trailer);
+      setFieldValue("trailer-url-1",d.video1Url);
+      setSelectValue("trailer-pos-1",d.video1Pos,"middle");
+      setFieldValue("trailer-url-2",d.video2Url);
+      setSelectValue("trailer-pos-2",d.video2Pos,"before-last");
+      setFieldValue("source-credit",d.sourceCredit);
+      setFieldValue("seo-title",d.seoTitle);
+      setFieldValue("seo-description",d.seoDescription);
+      setFieldValue("focus-keyword",d.focusKeyword);
+      setFieldValue("post-image-path",d.imagePath||"");
+      updateSourcePreview();
+      updateSEOUI();
+      updateDraftStatus("Restored");
+      scheduleLivePreview();
+      return true;
+    }
+  }catch(e){}
+  return false;
+}
+function clearDraft(){
+  if(!confirm("Draft delete karein?"))return;
+  try{localStorage.removeItem(DRAFT_KEY);}catch(e){}
+  updateDraftStatus("—");
+  showToast("Draft cleared");
+}
+function updateDraftStatus(txt){
+  const el=document.getElementById("draft-status");
+  if(el)el.innerHTML="Draft: <b>"+escapeHtml(txt)+"</b>";
+}
+function setFieldValue(id,v){
+  const el=document.getElementById(id);
+  if(el)el.value=v||"";
+}
+
+/* ============ STICKY STATE ============ */
+function initStickyState(){
+  setInterval(()=>{
+    const words=document.getElementById("word-count")?.textContent||"0";
+    const sp=document.getElementById("sp-words");
+    if(sp)sp.textContent=words;
+    const st=document.getElementById("sp-status");
+    if(st)st.textContent=isDirty?"Unsaved":"Saved";
+  },2000);
+}
+
+/* ============ BUILD POST OBJECT ============ */
 function buildPostObject(existing,related){
-  const title=document.getElementById("post-title").value.trim(),slug=document.getElementById("post-slug").value.trim();
+  const title=document.getElementById("post-title").value.trim();
+  const slug=document.getElementById("post-slug").value.trim();
   return {
     ...(existing||{}),
     id:existing&&existing.id?existing.id:"post_"+Date.now(),
@@ -792,8 +1587,8 @@ function buildPostObject(existing,related){
     video1Pos:document.getElementById("trailer-pos-1").value,
     video2Url:document.getElementById("trailer-url-2").value.trim(),
     video2Pos:document.getElementById("trailer-pos-2").value,
-    content:document.getElementById("post-content").value.trim(),
-    image:document.getElementById("post-image-path").value.trim() || (existing?existing.image:""),
+    content:getEditorContent(),
+    image:document.getElementById("post-image-path").value.trim()||(existing?existing.image:""),
     extraImages:collectExtraImages(),
     sources:parseSources(document.getElementById("source-credit").value),
     sourceCredit:document.getElementById("source-credit").value.trim(),
@@ -802,6 +1597,8 @@ function buildPostObject(existing,related){
     date:existing&&existing.date?existing.date:new Date().toISOString().slice(0,10)
   };
 }
+
+/* ============ RELATED ============ */
 function relatedFor(posts,currentSlug){
   return posts.filter(p=>p&&p.slug&&p.slug!==currentSlug).slice(0,3).map(p=>({
     title:p.title||"Filmy Khabr",
@@ -810,36 +1607,73 @@ function relatedFor(posts,currentSlug){
   }));
 }
 function showRelatedPreview(items){
-  document.getElementById("related-auto-preview").innerHTML=items.length?items.map((x,i)=>`${i+1}. <b>${escapeHtml(x.title)}</b><br><span style="color:#7f8c99">${escapeHtml(x.url)}</span>`).join("<br><br>"):"No older posts available yet.";
+  document.getElementById("related-auto-preview").innerHTML=items.length
+    ?items.map((x,i)=>`${i+1}. <b>${escapeHtml(x.title)}</b><br><span style="color:#7f8c99">${escapeHtml(x.url)}</span>`).join("<br><br>")
+    :"No older posts available yet.";
 }
+
+/* ============ INLINE IMAGE UPLOAD ============ */
+async function processInlineImages(content,slug){
+  const parser=new DOMParser();
+  const doc=parser.parseFromString(`<div id="fk-inline-root">${content}</div>`,"text/html");
+  const root=doc.getElementById("fk-inline-root");
+  if(!root)return content;
+  const imgs=root.querySelectorAll('img[src^="data:image"]');
+  const uploads=[];
+  let idx=0;
+  imgs.forEach(img=>{
+    idx++;
+    const src=img.getAttribute("src")||"";
+    const m=src.match(/^data:image\/(\w+);base64,(.+)$/);
+    if(!m)return;
+    const ext=m[1]==="jpeg"?"jpg":m[1];
+    const b64=m[2];
+    const path=`inline-images/${slug}-inline-${idx}.${ext}`;
+    uploads.push(ghPutFile(path,b64,`Upload inline image ${idx} for ${slug}`));
+    img.setAttribute("src","../"+path);
+    img.setAttribute("loading","lazy");
+  });
+  if(uploads.length)await Promise.all(uploads);
+  return root.innerHTML;
+}
+
+/* ============ PUBLISH ============ */
 async function publishPost(){
   const btn=document.getElementById("publish-btn");
-  const title=document.getElementById("post-title").value.trim();autoGenerateSlug();
-  const slug=document.getElementById("post-slug").value.trim(),content=document.getElementById("post-content").value.trim();
-  if(!title||!slug||!content||!document.getElementById("gh-token").value.trim()){alert("Title, Slug, Content aur GitHub Token required!");return}
-  if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)){alert("Slug sirf lowercase English words + hyphen me hona chahiye.");return}
-
-  /* Ensure SEO is generated before publish if fields are empty. */
+  const title=document.getElementById("post-title").value.trim();
+  autoGenerateSlug();
+  const slug=document.getElementById("post-slug").value.trim();
+  const content=getEditorContent();
+  if(!title||!slug||!content||!document.getElementById("gh-token").value.trim()){
+    alert("Title, Slug, Content aur GitHub Token required!"); return;
+  }
+  if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)){
+    alert("Slug sirf lowercase English words + hyphen me hona chahiye."); return;
+  }
   if(!document.getElementById("seo-title").value.trim()||!document.getElementById("seo-description").value.trim()||!document.getElementById("focus-keyword").value.trim()){
     generateSEO(false);
   }
-
-  btn.disabled=true;btn.textContent="Publishing...";
+  btn.disabled=true; btn.textContent="Publishing...";
   try{
-    const postsFile=await getPostsFile();let posts=postsFile&&postsFile.content?normalizePosts(JSON.parse(utf8FromBase64(postsFile.content))):[];
+    const postsFile=await getPostsFile();
+    let posts=postsFile&&postsFile.content?normalizePosts(JSON.parse(utf8FromBase64(postsFile.content))):[];
     const editId=document.getElementById("edit-post-id").value.trim();
     const existing=editId?posts.find(p=>p.id===editId):null;
     const oldSlug=existing&&existing.slug;
+
     let post=buildPostObject(existing,null);
 
+    // main image
     if(selectedImageBase64){
       post.image=`images/${slug}.jpg`;
       await ghPutFile(post.image,selectedImageBase64,`Upload ${slug} main image`);
-    }else if(!post.image&&existing&&existing.image){post.image=existing.image}
+    }else if(!post.image&&existing&&existing.image){post.image=existing.image;}
 
+    // extra images
     const extraUploads=[];
     for(let i=1;i<=3;i++){
-      const st=extraImageState[i-1],pos=document.getElementById("extra-img-pos-"+i).value;
+      const st=extraImageState[i-1];
+      const pos=document.getElementById("extra-img-pos-"+i).value;
       if(st&&pos){
         const path=`extra-images/${slug}-extra-${i}.jpg`;
         document.getElementById("extra-img-path-"+i).value=path;
@@ -849,13 +1683,22 @@ async function publishPost(){
     await Promise.all(extraUploads);
     post.extraImages=collectExtraImages();
 
+    // inline images inside content
+    const processedContent=await processInlineImages(post.content,slug);
+    post.content=processedContent;
+
+    // related
     const withoutCurrent=posts.filter(p=>p.id!==editId&&p.slug!==slug);
     const related=relatedFor(withoutCurrent,slug);
-    post.relatedArticles=related;showRelatedPreview(related);
+    post.relatedArticles=related;
+    showRelatedPreview(related);
 
+    // generate article html
     const postHTML=generatePostHTML(post);
+
     await ghPutFile(`posts/${slug}.html`,base64Utf8(postHTML),`Publish ${slug}`);
 
+    // update posts.json with retry
     let saved=false;
     for(let attempt=0;attempt<3&&!saved;attempt++){
       const latestFile=await getPostsFile();
@@ -868,51 +1711,53 @@ async function publishPost(){
         latestPosts.unshift(post);
       }
       try{
-        await ghRequest("data/posts.json","PUT",{message:`${existing?"Update":"Add"} post ${slug}`,content:base64Utf8(JSON.stringify(latestPosts,null,2)),sha:latestFile?latestFile.sha:null});
+        await ghRequest("data/posts.json","PUT",{
+          message:`${existing?"Update":"Add"} post ${slug}`,
+          content:base64Utf8(JSON.stringify(latestPosts,null,2)),
+          sha:latestFile?latestFile.sha:null
+        });
         saved=true;
       }catch(e){
         if(!/409/.test(String(e.message||e))||attempt===2)throw e;
         await new Promise(r=>setTimeout(r,900*(attempt+1)));
       }
     }
-    if(!saved)throw new Error("GitHub conflict (409) after 3 retries. Please try again.");
+    if(!saved)throw new Error("GitHub conflict (409) after 3 retries.");
 
     if(existing&&oldSlug&&oldSlug!==slug){
-      try{await ghDeleteFile(`posts/${oldSlug}.html`,`Remove old slug ${oldSlug}`)}catch(e){console.warn("Old file cleanup skipped",e)}
+      try{await ghDeleteFile(`posts/${oldSlug}.html`,`Remove old slug ${oldSlug}`);}catch(e){console.warn(e);}
     }
 
     const live=`${LIVE_BASE}/posts/${slug}.html`;
-    document.getElementById("success-url").value=live;document.getElementById("open-post").href=live;
+    document.getElementById("success-url").value=live;
+    document.getElementById("open-post").href=live;
     document.getElementById("success-modal").classList.add("show");
+    try{localStorage.removeItem(DRAFT_KEY);}catch(e){}
+    isDirty=false;
     resetForm();
   }catch(e){
     alert("Publish failed: "+e.message);
-  }finally{btn.disabled=false;btn.textContent="Publish Post"}
+  }finally{
+    btn.disabled=false;
+    btn.textContent=document.getElementById("edit-post-id").value.trim()?"Update Post":"Publish Post";
+  }
 }
 
-/* =========================
-   PUBLISHED PAGE SEO
-========================= */
+/* ============ SEO META ============ */
 function buildSeoMeta(post){
   const seoTitle=seoTrim(post.seoTitle||post.title||"",60);
   const seoDescription=seoTrim(post.seoDescription||post.summary||post.title||"",160);
   const canonical=LIVE_BASE+"/posts/"+safeText(post.slug)+".html";
   const imageUrl=post.image?LIVE_BASE+"/"+safeText(post.image):"";
-
   const schema={
-    "@context":"https://schema.org",
-    "@type":"NewsArticle",
-    "headline":seoTitle,
-    "description":seoDescription,
-    "url":canonical,
+    "@context":"https://schema.org","@type":"NewsArticle",
+    "headline":seoTitle,"description":seoDescription,"url":canonical,
     "mainEntityOfPage":{"@type":"WebPage","@id":canonical},
-    "datePublished":post.date||"",
-    "dateModified":post.date||"",
+    "datePublished":post.date||"","dateModified":post.date||"",
     "author":{"@type":"Person","name":"Vanrajsinh Vaghela"},
     "publisher":{"@type":"Organization","name":"Filmy Khabr","url":LIVE_BASE}
   };
   if(imageUrl)schema.image=[imageUrl];
-
   return `
 <meta name="description" content="${escapeHtml(seoDescription)}">
 <meta name="author" content="Vanrajsinh Vaghela">
@@ -932,6 +1777,15 @@ ${imageUrl?`<meta name="twitter:image" content="${escapeHtml(imageUrl)}">`:""}
 <title>${escapeHtml(seoTitle)} | Filmy Khabr</title>`;
 }
 
+/* ============ FONT FAMILY ============ */
+function fontFamily(style){
+  if(style==="noto-sans")return `"Noto Sans Devanagari",-apple-system,"Segoe UI",Roboto,sans-serif`;
+  if(style==="noto-serif")return `"Noto Serif Devanagari",Georgia,serif`;
+  if(style==="playfair-lora")return `"Playfair Display","Lora",Georgia,serif`;
+  return `"Roboto","Inter",-apple-system,"Segoe UI",Arial,sans-serif`;
+}
+
+/* ============ GENERATE ARTICLE HTML ============ */
 function generatePostHTML(post,isPreview=false,previewMedia={}){
   const style=fontFamily(post.fontStyle);
   const imageBase=isPreview?LIVE_BASE+"/":"../";
@@ -940,101 +1794,34 @@ function generatePostHTML(post,isPreview=false,previewMedia={}){
     const data=previewMedia["extra"+(i+1)];
     return data?{...x,path:data,isData:true}:x;
   });
-  const body=positionItems(
-    escapeHtml(post.content).replace(/&lt;br&gt;/g,"<br>"),
-    post.video1Url,post.video1Pos,post.video2Url,post.video2Pos,
-    previewExtras,isPreview?"":imageBase,isPreview
-  );
+  const body=renderPositionedContent(post.content,{
+    video1Url:post.video1Url,video1Pos:post.video1Pos,
+    video2Url:post.video2Url,video2Pos:post.video2Pos,
+    extraImages:previewExtras,ads:post.ads||{},
+    imageBase:isPreview?"":imageBase
+  });
   const hero=mainImageSrc?`<img class="hero-image" src="${escapeHtml(mainImageSrc)}" alt="${escapeHtml(post.title)}" loading="eager">`:"";
-  const trailer=youtubeEmbed(post.trailer,isPreview);
+  const trailer=youtubeEmbed(post.trailer);
   const sources=(post.sources||[]).map(s=>`<li><a href="${escapeHtml(s.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(s.name)}</a></li>`).join("");
-  const related=(post.relatedArticles||[]).map(r=>`<a class="related-card" href="${escapeHtml(r.url)}">${r.image?`<img src="${imageBase}${escapeHtml(r.image)}" alt="${escapeHtml(r.title)}" loading="lazy">`:""}<div>${escapeHtml(r.title)}</div></a>`).join("");
-  const ads=Object.values(post.ads||{}).filter(Boolean);
-  const adHtml=ads.map(x=>`<div class="ad-slot">${x}</div>`).join("");
-  const details=`<div class="details-box"><div class="details-head">🎬 ARTICLE DETAILS</div>
-    <div class="details-grid"><b>Published:</b><span>${escapeHtml(post.date)}</span><b>Category:</b><span>${escapeHtml(post.category)}</span><b>Platform:</b><span>${escapeHtml(post.platform)}</span><b>Status:</b><span>${escapeHtml(post.badge)}</span></div></div>`;
-
+  const related=(post.relatedArticles||[]).map(r=>`
+    <a class="related-card" href="${escapeHtml(r.url)}">
+      ${r.image?`<img src="${imageBase}${escapeHtml(r.image)}" alt="${escapeHtml(r.title)}" loading="lazy">`:""}
+      <div>${escapeHtml(r.title)}</div>
+    </a>`).join("");
+  const details=`
+    <div class="details-box">
+      <div class="details-head">🎬 ARTICLE DETAILS</div>
+      <div class="details-grid">
+        <b>Published:</b><span>${escapeHtml(post.date)}</span>
+        <b>Category:</b><span>${escapeHtml(post.category)}</span>
+        <b>Platform:</b><span>${escapeHtml(post.platform)}</span>
+        <b>Status:</b><span>${escapeHtml(post.badge)}</span>
+      </div>
+    </div>`;
   const rawGaId=safeText(document.getElementById("ga-id")?.value||"G-E6B67VBEFZ").trim();
   const gaId=/^G-[A-Za-z0-9_-]+$/.test(rawGaId)?rawGaId:"";
-
   const seoMeta=buildSeoMeta(post);
-
-  return `<!DOCTYPE html>
-<html lang="hi"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="referrer" content="strict-origin-when-cross-origin">
-${gaId?`<script async src="https://www.googletagmanager.com/gtag/js?id=${gaId}"><\/script>
-<script>
-window.dataLayer=window.dataLayer||[];
-function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config','${gaId}');
-<\/script>`:""}
-<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-${seoMeta}
-<style>
-*{box-sizing:border-box}html,body{margin:0;padding:0}body{background:${post.articleTheme==="blue-white"?"#eef6ff":post.articleTheme==="cinema-dark"?"#090a0d":post.articleTheme==="magazine-gold"?"#f7f1e5":"#f3f4f6"};color:${post.articleTheme==="cinema-dark"?"#f4f4f4":"#171717"};font-family:${style};line-height:1.78}
-.wrap{--theme:${post.articleTheme||"editorial-red"};--accent:${post.articleTheme==="blue-white"?"#1565c0":post.articleTheme==="cinema-dark"?"#e50914":post.articleTheme==="magazine-gold"?"#b88918":"#e50914"};}
-.wrap{max-width:900px;margin:0 auto;background:${post.articleTheme==="cinema-dark"?"#111318":post.articleTheme==="magazine-gold"?"#fffdf8":"#fff"};min-height:100vh;box-shadow:0 0 35px rgba(0,0,0,.06)}.topline{height:5px;background:linear-gradient(90deg,var(--accent),transparent)}
-.article{padding:24px 30px 38px}.crumb{font-size:11px;color:var(--accent);font-weight:900;letter-spacing:.08em;text-transform:uppercase}.badge{display:inline-block;background:var(--accent);color:#fff;border-radius:999px;padding:5px 11px;font-size:10px;font-weight:900;margin:9px 0 7px;text-transform:uppercase;letter-spacing:.04em}
-h1{font-family:Georgia,"Times New Roman",serif;font-size:40px;line-height:1.18;margin:7px 0 9px;color:${post.articleTheme==="cinema-dark"?"#fff":"#111"};letter-spacing:-.02em}.meta{font-size:12px;color:${post.articleTheme==="cinema-dark"?"#aeb4bf":"#777"};margin-bottom:19px}.hero-image{width:100%;height:auto;display:block;border-radius:14px;margin:12px 0 22px;box-shadow:0 10px 28px rgba(0,0,0,.10)}
-.summary{font-size:18px;font-weight:700;line-height:1.6;background:${post.articleTheme==="cinema-dark"?"#181b22":"#f8f9fb"};border:1px solid ${post.articleTheme==="cinema-dark"?"#2b303a":"#e7e9ee"};border-left:5px solid var(--accent);border-radius:10px;padding:15px 17px;margin:20px 0 24px}
-.article-body{font-size:18px}.article-body p{margin:0 0 19px}.article-body figure{margin:25px 0;text-align:center}.article-body figure img{width:100%;height:auto;border-radius:12px;box-shadow:0 7px 22px rgba(0,0,0,.08)}.video-box{width:100%;aspect-ratio:16/9;background:#000;border-radius:13px;overflow:hidden;margin:25px 0;box-shadow:0 10px 28px rgba(0,0,0,.16);border:1px solid rgba(0,0,0,.12)}.video-box iframe{width:100%;height:100%;border:0;display:block}
-.sources{border-top:1px solid ${post.articleTheme==="cinema-dark"?"#30343c":"#e2e4e8"};margin-top:34px;padding-top:22px}.sources h2,.related h2{font-size:21px;margin:0 0 13px}.sources ul{margin:0;padding-left:20px}.sources li{margin:9px 0}.sources a{color:var(--accent);font-weight:700;text-decoration:none}.sources a:hover{text-decoration:underline}.details-box{border:1px solid ${post.articleTheme==="cinema-dark"?"#30343c":"#e2e4e8"};border-left:5px solid var(--accent);border-radius:10px;padding:16px 17px;margin:28px 0;background:${post.articleTheme==="cinema-dark"?"#181b22":"#fafbfc"}}.details-head{font-size:13px;font-weight:900;color:var(--accent);margin-bottom:12px;letter-spacing:.04em}.details-grid{display:grid;grid-template-columns:120px 1fr 100px 1fr;gap:9px 12px;font-size:13px}.details-grid span{color:${post.articleTheme==="cinema-dark"?"#c2c7d0":"#555"}}.related{border-top:1px solid ${post.articleTheme==="cinema-dark"?"#30343c":"#e2e4e8"};margin-top:30px;padding-top:22px}.related-card{display:block;text-decoration:none;color:${post.articleTheme==="cinema-dark"?"#fff":"#111"};border:1px solid ${post.articleTheme==="cinema-dark"?"#30343c":"#e0e2e6"};border-radius:11px;overflow:hidden;margin:13px 0;background:${post.articleTheme==="cinema-dark"?"#181b22":"#fff"};transition:transform .18s ease,box-shadow .18s ease}.related-card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.08)}.related-card img{display:block;width:100%;aspect-ratio:16/7;object-fit:cover}.related-card div{font-size:15px;font-weight:800;padding:12px 13px;line-height:1.45}.share{display:flex;gap:9px;margin-top:26px}.share a{flex:1;text-align:center;padding:11px;border-radius:8px;color:#fff;text-decoration:none;font-size:12px;font-weight:900}.wa{background:#1ecb68}.tg{background:#0c93d1}.x{background:#111}.ad-slot{margin:22px 0;overflow:hidden;text-align:center}
-.footer{background:${post.articleTheme==="cinema-dark"?"#0d0f13":"#f1f2f4"};color:#777;text-align:center;font-size:11px;padding:22px}.footer a{color:#555;text-decoration:none}.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 16px;margin-bottom:12px}.footer-links a{color:inherit;text-decoration:none;font-weight:700}.footer-links a:hover{text-decoration:underline}
-@media(max-width:600px){.article{padding:18px 15px 28px}h1{font-size:29px}.article-body{font-size:16.5px}.summary{font-size:16px}.details-grid{grid-template-columns:105px 1fr}.details-grid b:nth-of-type(2),.details-grid span:nth-of-type(2){margin-top:4px}.share a{padding:10px 4px}}
-</style></head><body>
-<div class="wrap"><div class="topline"></div><article class="article">
-<div class="crumb">FILMY KHABR • ${escapeHtml(post.category)}</div><span class="badge">${escapeHtml(post.badge)}</span>
-<h1>${escapeHtml(post.title)}</h1><div class="meta">Published on ${escapeHtml(post.date)} • By Vanrajsinh Vaghela</div>
-${hero}${post.summary?`<div class="summary">${escapeHtml(post.summary)}</div>`:""}${trailer}
-<div class="article-body">${body}</div>
-${details}
-${adHtml}
-<div class="sources"><h2>Sources</h2><ul>${sources||"<li>Official/verified sources used during research.</li>"}</ul></div>
-<div class="related"><h2>RELATED STORIES</h2>${related||"<p style='color:#777'>More stories coming soon.</p>"}</div>
-<div class="share"><a class="wa" target="_blank" href="https://wa.me/?text=${encodeURIComponent(post.title+" "+LIVE_BASE+"/posts/"+post.slug+".html")}">💬 WhatsApp</a><a class="tg" target="_blank" href="https://t.me/share/url?url=${encodeURIComponent(LIVE_BASE+"/posts/"+post.slug+".html")}&text=${encodeURIComponent(post.title)}">✈ Telegram</a><a class="x" target="_blank" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(LIVE_BASE+"/posts/"+post.slug+".html")}">𝕏 X</a></div>
-</article><footer class="footer"><div class="footer-links"><a href="${LIVE_BASE}/about.html">About Us</a><a href="${LIVE_BASE}/contact.html">Contact Us</a><a href="${LIVE_BASE}/disclaimer.html">Disclaimer</a><a href="${LIVE_BASE}/privacy-policy.html">Privacy Policy</a></div>© ${new Date().getFullYear()} Filmy Khabr. Managed and Published by Vanrajsinh Vaghela.<br>All Rights Reserved.</footer></div></body></html>`;
-}
-function renderPreview(){
-  const p=buildPostObject(null,[]);
-  const media={};
-  if(selectedImageDataUrl)media.main=selectedImageDataUrl;
-  for(let i=1;i<=3;i++){
-    if(extraImageState[i-1]?.dataUrl)media["extra"+i]=extraImageState[i-1].dataUrl;
-  }
-  const html=generatePostHTML(p,true,media).replace(/<script[\s\S]*?<\/script>/gi,"");
-  const out=document.getElementById("preview-output");
-  out.innerHTML="";
-  const frame=document.createElement("iframe");
-  frame.title="Filmy Khabr Article Preview";
-  frame.style.width="100%";frame.style.minHeight="1100px";frame.style.border="0";frame.style.display="block";frame.style.background="#fff";
-  frame.referrerPolicy="strict-origin-when-cross-origin";
-  out.appendChild(frame);
-  try{
-    const doc=frame.contentDocument || frame.contentWindow.document;
-    doc.open();doc.write(html);doc.close();
-  }catch(e){
-    frame.srcdoc=html;
-  }
-}
-function resetForm(){
-  document.getElementById("edit-post-id").value="";document.getElementById("edit-published-at").value="";
-  ["post-title","post-slug","post-summary","hero-slider-trailer","trailer-url-1","trailer-url-2","post-content","post-image-path","source-credit"].forEach(id=>document.getElementById(id).value="");
-  document.getElementById("post-category").value="Movies";document.getElementById("post-platform").value="Netflix";document.getElementById("post-badge").value="Trending";document.getElementById("post-font-style").value="roboto-sans";document.getElementById("post-theme").value="editorial-red";
-  document.getElementById("trailer-pos-1").value="middle";document.getElementById("trailer-pos-2").value="before-last";
-  document.getElementById("post-file").value="";selectedImageBase64=null;selectedImageDataUrl=null;extraImageState=[null,null,null];
-  for(let i=1;i<=3;i++){document.getElementById("extra-img-file-"+i).value="";document.getElementById("extra-img-path-"+i).value="";document.getElementById("extra-img-pos-"+i).value=i===1?"before-last":""}
-  for(let i=1;i<=8;i++)document.getElementById("ad-code-"+i).value="";
-  document.getElementById("seo-title").value="";
-  document.getElementById("seo-description").value="";
-  document.getElementById("focus-keyword").value="";
-  seoTitleManual=false;seoDescriptionManual=false;focusKeywordManual=false;
-  document.getElementById("form-heading").textContent="Create New Post";document.getElementById("publish-btn").textContent="Publish Post";
-  showRelatedPreview([]);updateSourcePreview();updateSEOUI();
-}
-function copyPostLink(){navigator.clipboard.writeText(document.getElementById("success-url").value).then(()=>showToast("Link copied")).catch(()=>showToast("Copy failed"))}
-function closeSuccessModal(){document.getElementById("success-modal").classList.remove("show")}
-function showToast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.classList.remove("show"),2500)}
-</script>
-</body>
-</html>
+  const bodyBg=post.articleTheme==="blue-white"?"#eef6ff":post.articleTheme==="cinema-dark"?"#090a0d":post.articleTheme==="magazine-gold"?"#f7f1e5":"#f3f4f6";
+  const bodyColor=post.articleTheme==="cinema-dark"?"#f4f4f4":"#171717";
+  const accent=post.articleTheme==="blue-white"?"#1565c0":post.articleTheme==="cinema-dark"?"#e50914":post.articleTheme==="magazine-gold"?"#b88918":"#e50914";
+  const wrapBg=post.articleTheme==="cinema-dark"?"#111318":post
